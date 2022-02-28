@@ -1,7 +1,7 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-  './dae/world/world.dae'
+  '../dae/world/world.dae'
 ];
 
 // init method for the video
