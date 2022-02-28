@@ -1,13 +1,11 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-  './dae/obj/obj.dae'
+  './dae/world/world.dae'
 ];
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
-    // GRID HELPER
-    scene.add(new THREE.GridHelper(12, 12));
 
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
@@ -15,10 +13,9 @@ VIDEO.init = function(sm, scene, camera){
         new THREE.MeshStandardMaterial({
             emissive: 0xffffff
         }));
-    light.add(new THREE.PointLight());
-    light.position.set(0, 5, -5);
+    light.add(new THREE.PointLight(0xafafaf, 1));
+    light.position.set(0, 50, -50);
     scene.add(light);
-
 
     let obj = utils.DAE.getMesh( VIDEO.daeResults[0] );
     scene.add(obj);
@@ -27,7 +24,7 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    camera.position.z = -10 + 20 * sm.bias;
-    camera.lookAt(0,0,0);
+    camera.position.z = -30 + 30 * sm.bias;
+    camera.lookAt(0, 0, 0);
 };
 
