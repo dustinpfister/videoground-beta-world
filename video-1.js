@@ -17,14 +17,14 @@ VIDEO.init = function(sm, scene, camera){
     light.position.set(0, 50, -50);
     scene.add(light);
 
-    let obj = utils.DAE.getMesh( VIDEO.daeResults[0] );
-    scene.add(obj);
+    let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
+    scene.add(world);
 
 };
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    camera.position.z = -30 + 30 * sm.bias;
-    camera.lookAt(0, 0, 0);
+    let world = scene.userData.world;
+    world.rotation.y = Math.PI * 2 * sm.per
 };
 
