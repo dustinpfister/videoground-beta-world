@@ -17,11 +17,16 @@ VIDEO.init = function(sm, scene, camera){
         new THREE.MeshStandardMaterial({
             emissive: 0xffffff
         }));
-    light.add(new THREE.PointLight(0xafafaf, 1));
+    light.add(new THREE.PointLight(0xdfdfdf, 0.8));
     light.position.set(0, 50, -50);
     scene.add(light);
 
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
+    world.material = new THREE.MeshPhongMaterial({
+        color: new THREE.Color('#00ff00'),
+        emissive: new THREE.Color('#5a5a5a'),
+        emissiveIntensity: 0.1
+    });
     scene.add(world);
 
 };
