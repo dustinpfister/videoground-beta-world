@@ -6,6 +6,10 @@ VIDEO.daePaths = [
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
+    // CAMERA
+    camera.position.set(0, 0, -35);
+    camera.lookAt(0,0,0)
+
 
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
@@ -25,6 +29,6 @@ VIDEO.init = function(sm, scene, camera){
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world;
-    world.rotation.y = Math.PI * 2 * sm.per
+    world.rotation.y = Math.PI * 2 * sm.per;
 };
 
