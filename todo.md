@@ -1,5 +1,8 @@
 # VideoGround-beta-world video files todo list
 
+## () - tree2
+* have a tree2 dea file that is a bunch of cones
+
 ## () - bed dae file
 
 ## () - desk dae file
@@ -11,9 +14,8 @@
 * I will want a new guy dae file like thagt of my guy one threejs module
 * new world test video with world, tree1, tree2, and guy dae files
 
-## () - tree1, and tree2 dae files
-* have a tree1 dae file that is just a box and a sphere
-* have a tree2 dea file that is a bunch of cones
+## ( done 03/01/2022 ) - tree1 dae file
+* (done) have a tree1 dae file that is just a box and a sphere
 
 ## ( done 02/28/2022 ) - world dae file started
 * (done) start a world dae file
