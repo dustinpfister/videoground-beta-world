@@ -7,8 +7,9 @@ VIDEO.daePaths = [
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
     // CAMERA
-    camera.position.set(0, 30, -35);
-    camera.lookAt(0,0,0)
+    camera.position.set(15, 15, -15);
+    camera.lookAt(0,3,0);
+    scene.add(new THREE.GridHelper(10, 10))
 
 
     // LIGHT
@@ -21,17 +22,16 @@ VIDEO.init = function(sm, scene, camera){
     light.position.set(0, 50, -50);
     scene.add(light);
 
-    let tree = scene.userData.tree = VIDEO.daeResults[0].scene;
-/*
-    tree.material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color('#00ff00'),
-        emissive: new THREE.Color('#5a5a5a'),
-        emissiveIntensity: 0.1
+    let tree = scene.userData.tree = VIDEO.daeResults[0].scene.children[2];
+    tree.children.forEach(function(mesh){
+        mesh.material = new THREE.MeshPhongMaterial({
+            color: new THREE.Color('#00ff00'),
+            emissive: new THREE.Color('#5a5a5a'),
+            emissiveIntensity: 0.1
+        });
     });
-*/
-
-
-console.log(VIDEO.daeResults[0]);
+    tree.rotation.x = -1.57;
+    console.log(tree);
 
     scene.add(tree);
 
