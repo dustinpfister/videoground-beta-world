@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     var bg_canvasObj = CanvasMod.createCanvasObject(sm);
     bg_canvasObj.draw({drawMethod: 'randomGrid', gRange:[32,64], bRange:[128, 200]});
     scene.background = bg_canvasObj.texture;
-    camera.position.set(25, 25, 25);
+    camera.position.set(2, 25, 25);
 
     // ---------- ----------
     // GUY1 OBJECT
@@ -67,38 +67,39 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // START POSITION OF GUY1
     // ---------- ----------
-    guy1.group.position.set(0, 15, 0);
+    guy1.group.position.set(10, 15, 0);
     guy1.group.lookAt(world.position);
 
-    guy1.group.rotation.x = 0;
-
-
+    // !!! I am thinking that I just need to fix the deal with lookAT here
 
 
     var raycaster = new THREE.Raycaster();
     raycaster.near = 0;
 
+    // direction (I think this is working at least)
     var dir = new THREE.Vector3(0, -1, 0);
-
+    dir.applyEuler(guy1.group.rotation);
     dir.normalize();
 
-const origin = new THREE.Vector3( 0, 0, 0 );
-const length = 4;
-const hex = 0x00ff00;
+    const origin = new THREE.Vector3( 0, 0, 0 );
+    const length = 4;
+    const hex = 0x00ff00;
+    const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+    guy1.group.add( arrowHelper );
 
-const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
-guy1.group.add( arrowHelper );
-
+    // set the raycaster from guy1 position to direction
     raycaster.set(guy1.group.position, dir);
 
 
-    //console.log(guy1.group.position, ori);
     var objects = raycaster.intersectObjects(scene.children);
-    console.log(objects);
     objects.forEach((result) => {
-        result.object.material = new THREE.MeshNormalMaterial()
+
+        if(result.object.type === 'Mesh'){
+            result.object.material = new THREE.MeshNormalMaterial()
         
-        console.log(result.object.userData.isWorld)
+            console.log(result.object.userData.isWorld)
+
+        }
 
     });
 
