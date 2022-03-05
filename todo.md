@@ -2,7 +2,10 @@
 
 ## () - world-position.js
 * (done) rename guy1.js test video to guy-position.js
-* try to work out a solution for getting a interesting area with raycaster in guy-posiiton.js
+* (done) try to work out a solution for getting a interesting area with raycaster in guy-posiiton.js
+
+* I am going to want to work out a simple test threejs demo of what I am trying to do with raycaster
+
 <!-- js/world-position.js -->
 * start a world-position.js file in the js folder
 * make world-position.js part of the collection of javaScript files use with guy-position.js test video
