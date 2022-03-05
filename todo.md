@@ -1,7 +1,8 @@
 # VideoGround-beta-world video files todo list
 
 ## () - world-position.js
-* rename guy1.js test video to guy-position.js
+* (done) rename guy1.js test video to guy-position.js
+* try to work out a solution for getting a interesting area with raycaster in guy-posiiton.js
 <!-- js/world-position.js -->
 * start a world-position.js file in the js folder
 * make world-position.js part of the collection of javaScript files use with guy-position.js test video
