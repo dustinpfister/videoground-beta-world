@@ -1,18 +1,7 @@
 # VideoGround-beta-world video files todo list
 
-## () - tree2
-* have a tree2 dea file that is a bunch of cones
-
-## () - bed dae file
-
-## () - desk dae file
-
-## () - house1 dea, file
-* start a dae file for a house in which at least two guy models can live
-
-## () - guy, 
-* I will want a new guy dae file like thagt of my guy one threejs module
-* new world test video with world, tree1, tree2, and guy dae files
+## () - js folder
+* start a js folder and copy over what I have so far that will work with r3 of the videoground prototype
 
 ## ( done 03/01/2022 ) - tree1 dae file
 * (done) have a tree1 dae file that is just a box and a sphere
