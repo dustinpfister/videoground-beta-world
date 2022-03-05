@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     var bg_canvasObj = CanvasMod.createCanvasObject(sm);
     bg_canvasObj.draw({drawMethod: 'randomGrid', gRange:[32,64], bRange:[128, 200]});
     scene.background = bg_canvasObj.texture;
-    camera.position.set(15,15,15);
+    camera.position.set(25, 25, 25);
 
     // ---------- ----------
     // GUY1 OBJECT
@@ -61,6 +61,7 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.1,
         side: THREE.DoubleSide
     });
+    world.userData.isWorld = true;
     scene.add(world);
 
     // ---------- ----------
@@ -68,23 +69,37 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     guy1.group.position.set(0, 15, 0);
     guy1.group.lookAt(world.position);
+
     guy1.group.rotation.x = 0;
+
+
+
+
     var raycaster = new THREE.Raycaster();
-    var ori = new THREE.Vector3()
-    //ori.copy(guy1.group.position);
-    ori.y -= 3; 
-    var dir = new THREE.Vector3();
-    dir.copy(ori);
-    dir.y -= 100;
-    raycaster.set(ori, dir);
+    raycaster.near = 0;
+
+    var dir = new THREE.Vector3(0, -1, 0);
+
+    dir.normalize();
+
+const origin = new THREE.Vector3( 0, 0, 0 );
+const length = 4;
+const hex = 0x00ff00;
+
+const arrowHelper = new THREE.ArrowHelper( dir, origin, length, hex );
+guy1.group.add( arrowHelper );
+
+    raycaster.set(guy1.group.position, dir);
 
 
-    console.log(guy1.group.position, ori);
+    //console.log(guy1.group.position, ori);
     var objects = raycaster.intersectObjects(scene.children);
     console.log(objects);
     objects.forEach((result) => {
         result.object.material = new THREE.MeshNormalMaterial()
-        console.log(result) 
+        
+        console.log(result.object.userData.isWorld)
+
     });
 
 
