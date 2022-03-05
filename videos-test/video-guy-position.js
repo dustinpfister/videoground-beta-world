@@ -85,14 +85,11 @@ VIDEO.update = function(sm, scene, camera, per, bias){
    // move legs
    guy1.moveLegs(sm.per, 16);
 
-   // move arms
-   var swingPer = sm.per * 4 % 1,
-   swingBias = 1 - Math.abs(0.5 - swingPer) / 0.5,
-   swing = -0.25 + 0.25 * swingBias;
-   guy1.moveArm('arm_left', swing, 0.75);
-   guy1.moveArm('arm_right', swing, 0.75);
+   // arms
+   guy1.moveArm('arm_left', 0, 0.75);
+   guy1.moveArm('arm_right', 0, 0.75);
 
-   // move head
+   // head
    guy1.moveHead(0);
 
    // over all position and heading of guy
