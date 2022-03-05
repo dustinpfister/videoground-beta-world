@@ -19,6 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     bg_canvasObj.draw({drawMethod: 'randomGrid', gRange:[32,64], bRange:[128, 200]});
     scene.background = bg_canvasObj.texture;
     camera.position.set(15,15,15);
+
     // ---------- ----------
     // GUY1 OBJECT
     // ---------- ----------
@@ -48,6 +49,8 @@ VIDEO.init = function(sm, scene, camera){
     guy1.arm_right.material = hatMaterial;
     guy1.arm_left.material = hatMaterial;
 
+
+
     // ---------- ----------
     // WORLD
     // ---------- ----------
@@ -59,6 +62,31 @@ VIDEO.init = function(sm, scene, camera){
         side: THREE.DoubleSide
     });
     scene.add(world);
+
+    // ---------- ----------
+    // START POSITION OF GUY1
+    // ---------- ----------
+    guy1.group.position.set(0, 15, 0);
+    guy1.group.lookAt(world.position);
+    guy1.group.rotation.x = 0;
+    var raycaster = new THREE.Raycaster();
+    var ori = new THREE.Vector3()
+    //ori.copy(guy1.group.position);
+    ori.y -= 3; 
+    var dir = new THREE.Vector3();
+    dir.copy(ori);
+    dir.y -= 100;
+    raycaster.set(ori, dir);
+
+
+    console.log(guy1.group.position, ori);
+    var objects = raycaster.intersectObjects(scene.children);
+    console.log(objects);
+    objects.forEach((result) => {
+        result.object.material = new THREE.MeshNormalMaterial()
+        console.log(result) 
+    });
+
 
     // ---------- ----------
     // LIGHT
@@ -93,8 +121,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
    guy1.moveHead(0);
 
    // over all position and heading of guy
-   guy1.group.position.set(0, 14, 0);
-   guy1.group.lookAt(100, 0, 0);
+   //guy1.group.position.set(0, 14, 0);
+   //guy1.group.lookAt(100, 0, 0);
 
    camera.lookAt(guy1.group.position);
 };
