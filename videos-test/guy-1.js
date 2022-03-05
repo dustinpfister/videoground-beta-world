@@ -1,3 +1,9 @@
+
+// the dae files to use for this video
+VIDEO.daePaths = [
+  '../dae/world/world.dae'
+];
+
 // using guy scripts
 VIDEO.scripts = [
   '../js/canvas.js',
@@ -12,6 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     var bg_canvasObj = CanvasMod.createCanvasObject(sm);
     bg_canvasObj.draw({drawMethod: 'randomGrid', gRange:[32,64], bRange:[128, 200]});
     scene.background = bg_canvasObj.texture;
+    camera.position.set(15,15,15);
     // ---------- ----------
     // GUY1 OBJECT
     // ---------- ----------
@@ -40,22 +47,19 @@ VIDEO.init = function(sm, scene, camera){
     guy1.body.material = hatMaterial;
     guy1.arm_right.material = hatMaterial;
     guy1.arm_left.material = hatMaterial;
+
     // ---------- ----------
-    // GRASS
+    // WORLD
     // ---------- ----------
-    var grass_canvasObj = CanvasMod.createCanvasObject(sm);
-    grass_canvasObj.draw({
-        drawClass: 'def', drawMethod: 'randomGrid',
-        gridWidth: 25, gridHeight: 25,
-        gRange: [100, 220], bRange: [32, 100]
+    let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
+    world.material = new THREE.MeshPhongMaterial({
+        color: new THREE.Color('#00ff00'),
+        emissive: new THREE.Color('#5a5a5a'),
+        emissiveIntensity: 0.1,
+        side: THREE.DoubleSide
     });
-    var grass = new THREE.Mesh(
-        new THREE.BoxGeometry(55, 1, 55),
-        new THREE.MeshStandardMaterial({
-            map: grass_canvasObj.texture
-        })
-    );
-    scene.add(grass);
+    scene.add(world);
+
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -80,23 +84,21 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 
    // move legs
    guy1.moveLegs(sm.per, 16);
+
    // move arms
    var swingPer = sm.per * 4 % 1,
    swingBias = 1 - Math.abs(0.5 - swingPer) / 0.5,
    swing = -0.25 + 0.25 * swingBias;
    guy1.moveArm('arm_left', swing, 0.75);
    guy1.moveArm('arm_right', swing, 0.75);
-   // move head
-   guy1.moveHead(0.9 + 0.2 * sm.bias);
-   // over all position and heading of guy
-   guy1.group.position.set(-8 + 16 * sm.per, 4, 10 * sm.bias);
-   guy1.group.lookAt(100, 10 - 80 * sm.bias, 200 * sm.bias);
 
-   var v = new THREE.Vector3();
-   v.copy(guy1.group.position);
-   v.x += 10;
-   v.z += 5;
-   camera.position.copy(v)
+   // move head
+   guy1.moveHead(0);
+
+   // over all position and heading of guy
+   guy1.group.position.set(0, 14, 0);
+   guy1.group.lookAt(100, 0, 0);
+
    camera.lookAt(guy1.group.position);
 };
 
