@@ -37,24 +37,28 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(world);
 
     // OBJECT 1 MESH
-    var obj1 = scene.userData.obj1 = new THREE.Mesh(new THREE.BoxGeometry(3, 1, 3), new THREE.MeshNormalMaterial());
+    var obj1 = scene.userData.obj1 = new THREE.Mesh(
+        new THREE.BoxGeometry(1, 5, 1), 
+        new THREE.MeshNormalMaterial());
+    obj1.geometry.rotateX(1.57);
     scene.add(obj1);
 
 };
-
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     obj1 = scene.userData.obj1;
 
-    var lat = 0, 
-    lon = sm.bias, //0.999999 * sm.bias,
+    var lat = sm.per,
+    lon = 0.25 + 0.5 * sm.bias,
     alt = 10;
 
     var v = WorldPos.fromSea(world, lat, lon, alt);
     obj1.position.copy(v);
+    obj1.lookAt(world.position);
 
+    camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
     camera.lookAt(obj1.position);
 };
 
