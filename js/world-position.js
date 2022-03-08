@@ -12,9 +12,14 @@ var WorldPos = (function () {
         alt = alt === undefined ? 0 : alt;
         lat = lat === undefined ? 0 : lat;
         lon = lon === undefined ? 0 : lon;
+        // special case for lon >= 1
+        if(lon >= 1 ){
+            lon = lon * 0.99999999;
+        }
         // lat and lon values in 0-1 form
         lat = THREE.MathUtils.euclideanModulo(lat, 1);
         lon = THREE.MathUtils.euclideanModulo(lon, 1);
+        
         // set and return position of vector
         var phi = Math.PI * lon;
         var theta = Math.PI * 2 * lat;

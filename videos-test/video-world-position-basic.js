@@ -48,12 +48,11 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     obj1 = scene.userData.obj1;
 
-    // up and down lon
-    var lon = 0.999999 * sm.bias;
-    //var v = WorldPos.fromSea(world, 0.5, lon, 10);
+    var lat = 0, 
+    lon = sm.bias, //0.999999 * sm.bias,
+    alt = 10;
 
-    var v = WorldPos.fromSea(world, sm.per, 0.5, 10);
-
+    var v = WorldPos.fromSea(world, lat, lon, alt);
     obj1.position.copy(v);
 
     camera.lookAt(obj1.position);
