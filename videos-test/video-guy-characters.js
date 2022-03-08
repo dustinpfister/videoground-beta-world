@@ -1,4 +1,4 @@
-/* world-position-obj-adjust.js - working out a standard for adjusting an object
+/* video-guy-characters.js - new guy-characters javaScript lib test
  *
  */
 // the dae files to use for this video
@@ -15,13 +15,10 @@ VIDEO.scripts = [
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
-
     scene.background = new THREE.Color(0x00afaf)
-
     // CAMERA
     camera.position.set(30, 10, -20);
     camera.lookAt(0, 5, 0);
-
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
         new THREE.SphereGeometry(0.25, 20, 20),
@@ -41,7 +38,6 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.2
     });
     scene.add(world);
-
     // Guy 1 obj
     var guy1 = new Guy();
     guy1.moveArm('arm_right', 0.75, 0);
@@ -49,7 +45,6 @@ VIDEO.init = function(sm, scene, camera){
     scene.userData.guy1 = guy1;
     scene.userData.obj1 = guy1.group;
     scene.add(guy1.group);
-
     var guy1_canvasObj = scene.userData.guy1_canvasObj = CanvasMod.createCanvasObject(sm, GuyCanvasMethods);
     guy1_canvasObj.draw({
        drawClass: 'face',
@@ -76,11 +71,9 @@ VIDEO.init = function(sm, scene, camera){
     guy1.body.material = hatMaterial;
     guy1.arm_right.material = hatMaterial;
     guy1.arm_left.material = hatMaterial;
-
     guy1.group.add(camera);
     camera.position.set(7,4,7);
     camera.lookAt(0,0,0);
-
 };
 
 // update method for the video
