@@ -29,6 +29,7 @@ VIDEO.init = function(sm, scene, camera){
     light.add(new THREE.PointLight(0xdfdfdf, 0.8));
     light.position.set(0, 50, -50);
     scene.add(light);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2))
 
     // WORLD MESH
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
@@ -47,6 +48,17 @@ VIDEO.init = function(sm, scene, camera){
     scene.userData.obj1 = guy1.group;
     scene.add(guy1.group);
 
+    var guy1_canvasObj = scene.userData.guy1_canvasObj = CanvasMod.createCanvasObject(sm, GuyCanvasMethods);
+   guy1_canvasObj.draw({
+       drawClass: 'face',
+       drawMethod: 'talk',
+       mouthPer: 1,
+       leftEyeXPer: 0.5, rightEyeXPer: 0.5
+   });
+    guy1.head.material[1] = guy1.head.material[1] = new THREE.MeshStandardMaterial({ 
+        map:  guy1_canvasObj.texture
+    });
+
 };
 
 // update method for the video
@@ -64,7 +76,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     //alt = 10,
     //heading = 1.57;
 
-    var radian = Math.PI * 2 * sm.per, 
+    var radian = Math.PI * 2 * sm.per * -1, 
     lat = 0.25 + Math.cos(radian) * 0.10, 
     lon = 0.25 + Math.sin(radian) * 0.10, 
     alt = 10, 
