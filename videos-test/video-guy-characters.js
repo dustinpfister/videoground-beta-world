@@ -71,9 +71,6 @@ VIDEO.init = function(sm, scene, camera){
     guy1.body.material = hatMaterial;
     guy1.arm_right.material = hatMaterial;
     guy1.arm_left.material = hatMaterial;
-    guy1.group.add(camera);
-    camera.position.set(7,4,7);
-    camera.lookAt(0,0,0);
 };
 
 // update method for the video
