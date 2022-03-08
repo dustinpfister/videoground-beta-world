@@ -55,19 +55,27 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     obj1 = scene.userData.obj1;
 
     guy1.moveLegs(sm.per, 4);
+    guy1.moveArms(sm.per, 4);
 
     // update guy position
-    var lat = 0.1,
-    lon = 0.01 + 0.98 * sm.bias,
+
+    //var lat = 0.1,
+    //lon = 0.01 + 0.98 * sm.bias,
+
+    var lat = 1 - sm.per,
+    lon = 0.25,
     alt = 10;
     var v = WorldPos.fromSea(world, lat, lon, alt);
     obj1.position.copy(v);
+
     // look at world position
     obj1.lookAt(world.position);
     // adjust so guy is standing up
     obj1.rotateX(-1.57);
+    // set heading of guy
+    obj1.rotateY(1.57);
 
-    //camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
+    camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
     camera.lookAt(obj1.position);
 };
 
