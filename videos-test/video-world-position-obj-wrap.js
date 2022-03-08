@@ -40,7 +40,9 @@ VIDEO.init = function(sm, scene, camera){
 
     // Guy 1 obj
     var guy1 = new Guy();
-    guy1.moveArms(0.5)
+    guy1.moveArm('arm_right', 0.75, 0);
+    guy1.moveArm('arm_left', 0.75, 0);
+    scene.userData.guy1 = guy1;
     scene.userData.obj1 = guy1.group;
     scene.add(guy1.group);
 
@@ -49,12 +51,15 @@ VIDEO.init = function(sm, scene, camera){
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
+    guy1 = scene.userData.guy1,
     obj1 = scene.userData.obj1;
 
+    guy1.moveLegs(sm.per, 4);
+
+    // update guy position
     var lat = 0.1,
     lon = 0.01 + 0.98 * sm.bias,
     alt = 10;
-
     var v = WorldPos.fromSea(world, lat, lon, alt);
     obj1.position.copy(v);
     // look at world position
