@@ -17,7 +17,7 @@ var WorldPos = (function () {
         lon = THREE.MathUtils.euclideanModulo(lon, 1);
         // set and return position of vector
         var phi = Math.PI * lon;
-        var theta = Math.PI * lat;
+        var theta = Math.PI * 2 * lat;
         v.setFromSphericalCoords(seaLevel + alt, phi, theta );
         return v;
     };
