@@ -15,7 +15,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
 
     // CAMERA
-    camera.position.set(0, 0, -35);
+    camera.position.set(0, 0, 35);
 
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
@@ -24,7 +24,7 @@ VIDEO.init = function(sm, scene, camera){
             emissive: 0xffffff
         }));
     light.add(new THREE.PointLight(0xdfdfdf, 0.8));
-    light.position.set(0, 50, -50);
+    light.position.set(0, 50, 50);
     scene.add(light);
 
     // WORLD MESH
@@ -39,8 +39,6 @@ VIDEO.init = function(sm, scene, camera){
     // OBJECT 1 MESH
     var obj1 = scene.userData.obj1 = new THREE.Mesh(new THREE.BoxGeometry(3, 1, 3), new THREE.MeshNormalMaterial());
     scene.add(obj1);
-    var v = WorldPos.fromSea(world, 0, 0, 8);
-    console.log( obj1.position.copy(v) );
 
 };
 
@@ -48,7 +46,12 @@ VIDEO.init = function(sm, scene, camera){
 VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     obj1 = scene.userData.obj1;
-    world.rotation.y = Math.PI * 2 * sm.per;
+
+    //world.rotation.y = Math.PI * 2 * sm.per;
+
+    // up and down lon
+    var v = WorldPos.fromSea(world, 0.5, sm.bias, 8);
+    obj1.position.copy(v);
 
     camera.lookAt(obj1.position);
 };
