@@ -18,6 +18,7 @@ VIDEO.init = function(sm, scene, camera){
 
     // CAMERA
     camera.position.set(0, 0, 35);
+    camera.lookAt(0, 5, 0);
 
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
@@ -63,7 +64,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     //lon = 0.01 + 0.98 * sm.bias,
 
     var lat = 1 - sm.per,
-    lon = 0.25,
+    lon = 0.35,
     alt = 10;
     var v = WorldPos.fromSea(world, lat, lon, alt);
     obj1.position.copy(v);
@@ -75,7 +76,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     // set heading of guy
     obj1.rotateY(1.57);
 
-    camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
-    camera.lookAt(obj1.position);
+    //camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
+    //camera.lookAt(obj1.position);
 };
 
