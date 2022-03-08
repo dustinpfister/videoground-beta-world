@@ -11,14 +11,9 @@
 * canvas textures are not working with world.dae, see about fixing that ( see what the deal is with uvs first ).
 
 ## () - guy-characters.js
-* start a guy-characters.js file to quickly create custom guy objects with textures and addtional mesh objects
-* have a GuyCharacter.create method to create one of two guy characaters
-```
-var guy1 = GuyCharacter.create('guy1');
-var guy2 = GuyCharacter.create('guy2');
-scene.add(guy1);
-scene.add(guy2);
-```
+* (done) start a guy-characters.js file to quickly create custom guy objects with textures and addtional mesh objects
+* (done) have a GuyCharacter.create method to create one of two guy characaters
+
 * maybe also a single createGuys method that can then be used like this:
 ```
 GuyCharacter.createGuys(scene);
