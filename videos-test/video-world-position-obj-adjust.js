@@ -77,6 +77,10 @@ VIDEO.init = function(sm, scene, camera){
     guy1.arm_right.material = hatMaterial;
     guy1.arm_left.material = hatMaterial;
 
+    guy1.group.add(camera);
+    camera.position.set(7,4,7);
+    camera.lookAt(0,0,0);
+
 };
 
 // update method for the video
@@ -84,17 +88,13 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     guy1 = scene.userData.guy1,
     obj1 = scene.userData.obj1;
-
-    guy1.moveLegs(sm.per, 4);
-    guy1.moveArms(sm.per, 4);
-
+    guy1.moveLegs(sm.per, 8);
+    guy1.moveArms(sm.per, 8);
     var radian = Math.PI * 2 * sm.per * -1, 
     lat = 0.25 + Math.cos(radian) * 0.10, 
     lon = 0.25 + Math.sin(radian) * 0.10, 
     alt = 10, 
     heading = radian * -1;
-
     WorldPos.adjustObject(world, guy1.group, lat, lon, heading, alt, 'fromSea');
-
 };
 
