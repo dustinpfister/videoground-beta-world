@@ -1,4 +1,6 @@
-
+/* world-position-basic.js - testing out some things with positioning of object in the world.dae file
+ *
+ */
 // the dae files to use for this video
 VIDEO.daePaths = [
   '../dae/world/world.dae'
@@ -13,7 +15,6 @@ VIDEO.init = function(sm, scene, camera){
     // CAMERA
     camera.position.set(0, 0, -35);
     camera.lookAt(0,0,0)
-
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
         new THREE.SphereGeometry(0.25, 20, 20),
@@ -23,18 +24,14 @@ VIDEO.init = function(sm, scene, camera){
     light.add(new THREE.PointLight(0xdfdfdf, 0.8));
     light.position.set(0, 50, -50);
     scene.add(light);
-
-    let world_canvasObj = CanvasMod.createCanvasObject({});
-    world_canvasObj.draw({drawMethod:'randomGrid', gRange:[28,200]});
+    // WORLD MESH
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
     world.material = new THREE.MeshPhongMaterial({
-        //color: new THREE.Color('#00ff00'),
+        color: new THREE.Color('#00ff00'),
         emissive: new THREE.Color('#ffffff'),
-        emissiveMap: world_canvasObj.texture,
-        emissiveIntensity: 2
+        emissiveIntensity: 0.2
     });
     scene.add(world);
-
 };
 
 // update method for the video
