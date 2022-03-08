@@ -4,7 +4,7 @@ var GuyCharacters = (function () {
 
     var create = {};
 
-    create.guy1 = function(){
+    create.guy1 = function(scene){
         var guy1 = new Guy();
         scene.userData.guy1 = guy1;
         scene.userData.obj1 = guy1.group;
