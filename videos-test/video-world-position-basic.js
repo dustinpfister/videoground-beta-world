@@ -4,12 +4,15 @@ VIDEO.daePaths = [
   '../dae/world/world.dae'
 ];
 
+VIDEO.scripts = [
+  '../js/canvas.js'
+];
+
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
     // CAMERA
     camera.position.set(0, 0, -35);
     camera.lookAt(0,0,0)
-
 
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
@@ -21,11 +24,14 @@ VIDEO.init = function(sm, scene, camera){
     light.position.set(0, 50, -50);
     scene.add(light);
 
+    let world_canvasObj = CanvasMod.createCanvasObject({});
+    world_canvasObj.draw({drawMethod:'randomGrid', gRange:[28,200]});
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
     world.material = new THREE.MeshPhongMaterial({
-        color: new THREE.Color('#00ff00'),
-        emissive: new THREE.Color('#5a5a5a'),
-        emissiveIntensity: 0.1
+        //color: new THREE.Color('#00ff00'),
+        emissive: new THREE.Color('#ffffff'),
+        emissiveMap: world_canvasObj.texture,
+        emissiveIntensity: 2
     });
     scene.add(world);
 
