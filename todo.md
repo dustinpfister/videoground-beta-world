@@ -11,8 +11,8 @@
 * (done) start world-position.js file
 
 * (done) start a worldPos.fromSea method
-* start an obj1 mesh that will have the position set with worldPos.fromSea
-
+* (done) start an obj1 mesh that will have the position set with worldPos.fromSea
+* there seems to be a bug when lon value is 1
 
 * start a worldPos.objectWrap method
 * use worldPos.objectWrap with the two objects in the video
