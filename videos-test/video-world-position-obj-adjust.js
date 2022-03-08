@@ -17,7 +17,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
 
     // CAMERA
-    camera.position.set(0, 0, 35);
+    camera.position.set(30, 10, -20);
     camera.lookAt(0, 5, 0);
 
     // LIGHT
@@ -27,7 +27,7 @@ VIDEO.init = function(sm, scene, camera){
             emissive: 0xffffff
         }));
     light.add(new THREE.PointLight(0xdfdfdf, 0.8));
-    light.position.set(0, 50, 50);
+    light.position.set(0, 50, -50);
     scene.add(light);
 
     // WORLD MESH
@@ -59,10 +59,17 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     guy1.moveArms(sm.per, 4);
 
     // testing out the adjust object method
-    var lat = 1 - sm.per,
-    lon = 0.35,
-    alt = 10,
-    heading = 1.57;
+    //var lat = 1 - sm.per,
+    //lon = 0.35,
+    //alt = 10,
+    //heading = 1.57;
+
+    var radian = Math.PI * 2 * sm.per, 
+    lat = 0.25 + Math.cos(radian) * 0.10, 
+    lon = 0.25 + Math.sin(radian) * 0.10, 
+    alt = 10, 
+    heading = radian * -1; //Math.PI * 0 - Math.PI * 2 * sm.per;
+
     WorldPos.adjustObject(world, guy1.group, lat, lon, heading, alt, 'fromSea');
 
 };

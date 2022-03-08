@@ -1,5 +1,8 @@
 # VideoGround-beta-world video files todo list
 
+## () - worldPos.objectWrap and video-world-position-obj-wrap.js
+* (done) start a video-world-position-obj-wrap.js video
+
 ## () - canvas textures for world.dae
 * canvas textures are not working with world.dae, see about fixing that ( see what the deal is with uvs first ).
 
@@ -7,10 +10,12 @@
 
 * start a worldPos.fromLand method
 
-## () - worldPos.objectWrap and video-world-position-obj-wrap.js
-* (done) start a video-world-position-obj-wrap.js video
-* start a worldPos.objectWrap method
-* use worldPos.objectWrap with an instance of the guy.js model
+## () - worldPos.adjustObject and video-world-position-obj-adjust.js
+* (done) start a worldPos.adjustObject method
+* (done) use worldPos.adjustObject with an instance of the guy.js model in a new test video for this
+* have lat and long values cause the guy to move around in a circle on the surface
+* have heading adjust as it should
+
 
 ## ( done 03/08/2022 ) - world-position.js and video-world-position-basic.js 
 * (done) rename guy1.js test video to guy-position.js
@@ -18,7 +23,6 @@
 * (done) delete video-guy-position
 * (done) start new video-world-position video file
 * (done) start world-position.js file
-
 * (done) start a worldPos.fromSea method
 * (done) start an obj1 mesh that will have the position set with worldPos.fromSea
 * (done) there seems to be a bug when lon value is 1 see about fixing that
