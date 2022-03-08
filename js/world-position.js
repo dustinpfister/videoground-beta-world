@@ -18,6 +18,7 @@ var WorldPos = (function () {
         // set and return position of vector
         var phi = Math.PI * lon;
         var theta = Math.PI * lat;
+console.log('phi: ' + phi)
         v.setFromSphericalCoords(seaLevel + alt, phi, theta );
         return v;
     };
