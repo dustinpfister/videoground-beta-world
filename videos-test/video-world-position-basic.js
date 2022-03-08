@@ -13,9 +13,10 @@ VIDEO.scripts = [
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
+
     // CAMERA
     camera.position.set(0, 0, -35);
-    camera.lookAt(0,0,0)
+
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
         new THREE.SphereGeometry(0.25, 20, 20),
@@ -25,6 +26,7 @@ VIDEO.init = function(sm, scene, camera){
     light.add(new THREE.PointLight(0xdfdfdf, 0.8));
     light.position.set(0, 50, -50);
     scene.add(light);
+
     // WORLD MESH
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
     world.material = new THREE.MeshPhongMaterial({
@@ -33,11 +35,21 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.2
     });
     scene.add(world);
+
+    // OBJECT 1 MESH
+    var obj1 = scene.userData.obj1 = new THREE.Mesh(new THREE.BoxGeometry(3, 1, 3), new THREE.MeshNormalMaterial());
+    scene.add(obj1);
+    var v = WorldPos.fromSea(world, 0, 0, 8);
+    console.log( obj1.position.copy(v) );
+
 };
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    let world = scene.userData.world;
+    let world = scene.userData.world,
+    obj1 = scene.userData.obj1;
     world.rotation.y = Math.PI * 2 * sm.per;
+
+    camera.lookAt(obj1.position);
 };
 
