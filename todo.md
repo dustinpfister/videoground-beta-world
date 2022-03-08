@@ -10,12 +10,11 @@
 
 * start a worldPos.fromLand method
 
-## () - worldPos.adjustObject and video-world-position-obj-adjust.js
+## ( done 03/08/2022 ) - worldPos.adjustObject and video-world-position-obj-adjust.js
 * (done) start a worldPos.adjustObject method
 * (done) use worldPos.adjustObject with an instance of the guy.js model in a new test video for this
-* have lat and long values cause the guy to move around in a circle on the surface
-* have heading adjust as it should
-
+* (done) have lat and long values cause the guy to move around in a circle on the surface
+* (done) have heading adjust as it should
 
 ## ( done 03/08/2022 ) - world-position.js and video-world-position-basic.js 
 * (done) rename guy1.js test video to guy-position.js
