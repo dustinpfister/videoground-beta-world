@@ -8,15 +8,15 @@
 * (done) try to work out a solution for getting a interesting area with raycaster in guy-posiiton.js
 * (done) delete video-guy-position
 * (done) start new video-world-position video file
-* start world-position.js file
+* (done) start world-position.js file
 
-* start a worldPos.fromSea method
-* start a worldPos.fromLand method
+* (done) start a worldPos.fromSea method
+* start an obj1 mesh that will have the position set with worldPos.fromSea
 
 
-* in world-position.js have two object that show worldPos.fromSea and worldPos.fromLand working
 * start a worldPos.objectWrap method
 * use worldPos.objectWrap with the two objects in the video
+* start a worldPos.fromLand method
 
 
 ## ( done 03/05/2022 ) - js folder
