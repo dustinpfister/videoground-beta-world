@@ -7,8 +7,8 @@
 * canvas textures are not working with world.dae, see about fixing that ( see what the deal is with uvs first ).
 
 ## () - worldPos.fromLand
-
 * start a worldPos.fromLand method
+* the from land method will use rayCaster and should be based off of what I worked out for video8
 
 ## ( done 03/08/2022 ) - worldPos.adjustObject and video-world-position-obj-adjust.js
 * (done) start a worldPos.adjustObject method
