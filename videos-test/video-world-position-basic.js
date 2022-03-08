@@ -7,6 +7,7 @@ VIDEO.daePaths = [
 ];
 
 VIDEO.scripts = [
+  '../js/world-position.js',
   '../js/canvas.js'
 ];
 
