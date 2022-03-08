@@ -8,8 +8,8 @@
 * start a worldPos.fromLand method
 
 ## () - worldPos.objectWrap and video-world-position-obj-wrap.js
+* (done) start a video-world-position-obj-wrap.js video
 * start a worldPos.objectWrap method
-* start a video-world-position-obj-wrap.js text video
 * use worldPos.objectWrap with an instance of the guy.js model
 
 ## ( done 03/08/2022 ) - world-position.js and video-world-position-basic.js 
