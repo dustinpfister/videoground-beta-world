@@ -42,6 +42,7 @@ VIDEO.init = function(sm, scene, camera){
 
 };
 
+
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
@@ -49,8 +50,11 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 
     //world.rotation.y = Math.PI * 2 * sm.per;
 
+
     // up and down lon
-    var v = WorldPos.fromSea(world, 0.5, sm.bias, 8);
+    console.log(sm.bias);
+    var lon = 0.999999 * sm.bias;
+    var v = WorldPos.fromSea(world, 0.5, lon, 8);
     obj1.position.copy(v);
 
     camera.lookAt(obj1.position);
