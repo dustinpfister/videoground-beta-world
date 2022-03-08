@@ -3,13 +3,8 @@
 ## () - world-position.js
 * (done) rename guy1.js test video to guy-position.js
 * (done) try to work out a solution for getting a interesting area with raycaster in guy-posiiton.js
-
-* I am going to want to work out a simple test threejs demo of what I am trying to do with raycaster
-
-<!-- js/world-position.js -->
-* start a world-position.js file in the js folder
-* make world-position.js part of the collection of javaScript files use with guy-position.js test video
-* use ray casting to find the proper alt value to use to position the guy to the surface of the world
+* delete video-guy-position
+* start new video-world-position video file
 
 ## ( done 03/05/2022 ) - js folder
 * (done) start a js folder and copy over what I have so far that will work with r3 of the videoground prototype
