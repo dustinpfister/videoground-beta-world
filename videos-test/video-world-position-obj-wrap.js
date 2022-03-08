@@ -40,16 +40,9 @@ VIDEO.init = function(sm, scene, camera){
 
     // Guy 1 obj
     var guy1 = new Guy();
+    guy1.moveArms(0.5)
     scene.userData.obj1 = guy1.group;
-    guy1.group.rotateX(1.57);
     scene.add(guy1.group);
-/*
-    var obj1 = scene.userData.obj1 = new THREE.Mesh(
-        new THREE.BoxGeometry(1, 5, 1), 
-        new THREE.MeshNormalMaterial());
-    obj1.geometry.rotateX(1.57);
-    scene.add(obj1);
-*/
 
 };
 
@@ -58,15 +51,18 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     obj1 = scene.userData.obj1;
 
-    var lat = sm.per,
-    lon = 0.25 + 0.5 * sm.bias,
+    var lat = 0.1,
+    lon = 0.01 + 0.98 * sm.bias,
     alt = 10;
 
     var v = WorldPos.fromSea(world, lat, lon, alt);
     obj1.position.copy(v);
+    // look at world position
     obj1.lookAt(world.position);
+    // adjust so guy is standing up
+    obj1.rotateX(-1.57);
 
-    camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
+    //camera.position.copy(v.clone().add(new THREE.Vector3(3,0,0)).normalize().multiplyScalar(25));
     camera.lookAt(obj1.position);
 };
 
