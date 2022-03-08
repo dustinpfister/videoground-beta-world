@@ -10,7 +10,8 @@ VIDEO.scripts = [
   '../js/world-position.js',
   '../js/canvas.js',
   '../js/guy.js',
-  '../js/guy-canvas.js'
+  '../js/guy-canvas.js',
+  '../js/guy-characters.js'
 ];
 
 // init method for the video
@@ -19,6 +20,7 @@ VIDEO.init = function(sm, scene, camera){
     // CAMERA
     camera.position.set(30, 10, -20);
     camera.lookAt(0, 5, 0);
+
     // LIGHT
     let light = scene.userData.light = new THREE.Mesh(
         new THREE.SphereGeometry(0.25, 20, 20),
@@ -38,10 +40,9 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.2
     });
     scene.add(world);
+
     // Guy 1 obj
     var guy1 = new Guy();
-    guy1.moveArm('arm_right', 0.75, 0);
-    guy1.moveArm('arm_left', 0.75, 0);
     scene.userData.guy1 = guy1;
     scene.userData.obj1 = guy1.group;
     scene.add(guy1.group);
@@ -87,4 +88,3 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     heading = radian * -1;
     WorldPos.adjustObject(world, guy1.group, lat, lon, heading, alt, 'fromSea');
 };
-
