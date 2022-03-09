@@ -8,4 +8,4 @@ This is then the collection of files to use with videoground to create frames th
 
 ## The general idea of 'Beta World'
 
-The term Beta is a reference to Beta Software, so in other words the Beta World is a world the is feature compleate, but will contain a lot of problems, or for on reason or another not feel like a finihsed product.
+The term Beta is a reference to Beta Software, so in other words the Beta World is a world the is feature compleate, but will contain a lot of problems, or for on reason or another not feel like a finihsed product. In the beta world there are just two characters, 'guy1', and 'guy2' and a world of objects in which they can interact with for a series of videos. All of the various assets should be in place at least when I start the very first video, although much of the fine deatils of everything might only be refined as needed from one video project to the next.
