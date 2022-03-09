@@ -45,6 +45,9 @@ VIDEO.init = function(sm, scene, camera){
     // Guy 1 obj
     GuyCharacters.create(scene, 'guy1');
 
+    WorldPos.adjustObject(world, scene.userData.guy1.group, 0, 0, 1.8, 9.5, 'fromSea');
+
+
 };
 
 // update method for the video
@@ -52,14 +55,40 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     guy1 = scene.userData.guy1;
 
-    // moving legs
-    guy1.moveLegs(sm.per, 8);
+var seq = Sequences.create({
+    sm: sm,
+    part : [
+        {
+           per: 0,
+           init: function(sm){
+           },
+           update: function(sm, scene, camera, partPer, partBias){
+               WorldPos.adjustObject(world, guy1.group, 0, 0, 1.8, 9.5, 'fromSea');
+           }
+        },
+        {
+           per: 0.5,
+           init: function(sm){},
+           update: function(sm, scene, camera, partPer, partBias){
+               // moving legs
+               guy1.moveLegs(sm.per, 8);
+               // changing guy position
+               var radian = Math.PI * 2 * sm.per * -1, 
+               lat = 0.25 + Math.cos(radian) * 0.10, 
+               lon = 0.25 + Math.sin(radian) * 0.10, 
+               alt = 10, 
+               heading = radian * -1;
+               WorldPos.adjustObject(world, guy1.group, lat, lon, heading, alt, 'fromSea');
+           }
+        }
+    ]
+});
 
     // setting world position for guy1
-    var radian = Math.PI * 2 * sm.per * -1, 
-    lat = 0.25 + Math.cos(radian) * 0.10, 
-    lon = 0.25 + Math.sin(radian) * 0.10, 
-    alt = 10, 
-    heading = radian * -1;
-    WorldPos.adjustObject(world, guy1.group, lat, lon, heading, alt, 'fromSea');
+    //var radian = Math.PI * 2 * sm.per * -1, 
+    //lat = 0.25 + Math.cos(radian) * 0.10, 
+    //lon = 0.25 + Math.sin(radian) * 0.10, 
+    //alt = 10, 
+    //heading = radian * -1;
+    //WorldPos.adjustObject(world, guy1.group, lat, lon, heading, alt, 'fromSea');
 };
