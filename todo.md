@@ -1,20 +1,7 @@
 # VideoGround-beta-world video files todo list
 
-## () - worldPos.objectWrap and video-world-position-obj-wrap.js
-* (done) start a video-world-position-obj-wrap.js video
-
-## () - worldPos.fromLand
-* start a worldPos.fromLand method
-* the from land method will use rayCaster and should be based off of what I worked out for video8
-
-## () - canvas textures for world.dae
-* canvas textures are not working with world.dae, see about fixing that ( see what the deal is with uvs first ).
-
-## () - guy-characters.js
-* (done) start a guy-characters.js file to quickly create custom guy objects with textures and addtional mesh objects
-* (done) have a GuyCharacter.create method to create one of two guy characaters
-
-* maybe also a single createGuys method that can then be used like this:
+## () - guy-characters.js - createGuys method  
+* have a single createGuys method that can then be used like this:
 ```
 GuyCharacter.createGuys(scene);
 var guy1 = scene.userData.guy1;
@@ -25,6 +12,20 @@ guy1.userData.canvasObj_face.draw({
    leftEyeXPer: 0.5, rightEyeXPer: 0.5
 });
 ```
+
+## () - worldPos.objectWrap and video-world-position-obj-wrap.js
+* (done) start a video-world-position-obj-wrap.js video
+
+## () - worldPos.fromLand
+* start a worldPos.fromLand method
+* the from land method will use rayCaster and should be based off of what I worked out for video8
+
+## () - canvas textures for world.dae
+* canvas textures are not working with world.dae, see about fixing that ( see what the deal is with uvs first ).
+
+## ( done 03/08/2022 ) - guy-characters.js started
+* (done) start a guy-characters.js file to quickly create custom guy objects with textures and addtional mesh objects
+* (done) have a GuyCharacter.create method to create one of two guy characaters
 
 ## ( done 03/08/2022 ) - worldPos.adjustObject and video-world-position-obj-adjust.js
 * (done) start a worldPos.adjustObject method
