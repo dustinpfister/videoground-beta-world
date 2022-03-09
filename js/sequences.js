@@ -13,6 +13,13 @@ var Sequences = (function () {
            sm: opt.sm || {},
            part: opt.part || []
         };
+        seq.part.forEach(function(partObj, i){
+            var nextPerObj = seq.part[i + 1] || null;
+            partObj.endPer = 1;
+            if(nextPerObj){
+                partObj.endPer = nextPerObj.per;
+            }
+        });
         return seq;
     };
  
@@ -33,6 +40,7 @@ var Sequences = (function () {
     };
 
     api.update = function(seq, sm){
+        var sm = seq.sm;
         // get the current index
         var currentIndex = getCurrentPartIndex(seq);
         // if currentIndex equals partIndex then just call update of current part
@@ -44,7 +52,8 @@ var Sequences = (function () {
             var partObj = seq.part[sm.partIndex];
             partObj.init(sm);
         }
-        partObj.update(sm, sm.scene, sm.camera, 0, 0);
+        var partPer = (sm.per - partObj.per) / (partObj.endPer - partObj.per);
+        partObj.update(sm, sm.scene, sm.camera, partPer, 0);
     };
     return api;
 }

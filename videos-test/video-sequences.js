@@ -76,11 +76,13 @@ var seq = Sequences.create({
            },
            update: function(sm, scene, camera, partPer, partBias){
                //console.log('update for part 1');
+//console.log(partPer);
+
                // moving legs
                guy1.moveLegs(sm.per, 8);
                guy1.moveArms(sm.per, 8);
                // changing guy position
-               var radian = Math.PI * 2 * sm.per * -1, 
+               var radian = Math.PI * 2 * partPer * -1, 
                lat = 0.25 + Math.cos(radian) * 0.10, 
                lon = 0.25 + Math.sin(radian) * 0.10, 
                alt = 10, 
