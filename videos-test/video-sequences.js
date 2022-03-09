@@ -64,7 +64,9 @@ var seq = Sequences.create({
                console.log('init for part 0');
            },
            update: function(sm, scene, camera, partPer, partBias){
-               //console.log('update for part 0', sm.frame);
+               camera.position.set(30, 10, 20 - 40 * partBias);
+               camera.lookAt(0, 5, 0);
+
                guy1.moveArms(sm.per, 8);
                WorldPos.adjustObject(world, guy1.group, 0, 0, 1.8, 9.5, 'fromSea');
            }
@@ -73,11 +75,10 @@ var seq = Sequences.create({
            per: 0.5,
            init: function(sm){
                console.log('init for part 1');
+               camera.position.set(30, 10, -20);
+               camera.lookAt(0, 5, 0);
            },
            update: function(sm, scene, camera, partPer, partBias){
-               //console.log('update for part 1');
-//console.log(partPer);
-
                // moving legs
                guy1.moveLegs(sm.per, 8);
                guy1.moveArms(sm.per, 8);
