@@ -1,5 +1,7 @@
 # VideoGround-beta-world video files todo list
 
+<!-- I MIGHT ALSO WANT THIS DONE -->
+
 ## () - guy-characters.js - createGuys method  
 * have a single createGuys method that can then be used like this:
 ```
@@ -18,10 +20,42 @@ guy1.userData.canvasObj_face.draw({
 
 ## () - worldPos.fromLand
 * start a worldPos.fromLand method
-* the from land method will use rayCaster and should be based off of what I worked out for video8
+* the from land method will use rayCaster and should be based off of what I worked out for 'video8 vg start video'
+
+<!-- FIRST VIDEO -->
+
+<!-- I WILL NEED THIS DONE TO START MAKING VIDEOS -->
+
+## () - start at least place holder daes for all other aspects of 'beta-world'
+* at this point there should be enough to make e1 at least
+
+## () - add guy2 to guy-characters.js
+* add guy2 to guy-characters
+
+## () - create crude models for airport, add to world-scene
+* there needs to be a hanger
+* there shoud be a control tower
+* I will want a biplain model
+* add these to world-scene
+
+## () - start models for house1 and house2, add to world-scene
+* have a quick house1.dae file for guy1
+* have a house2.dae for guy2
+* add these to world-scene
+
+## () - finish the two tree dae files, start world-scene
+* have tree1.dae looking good
+* have tree2.dae
+* start a world-scene.dae file that will be a scene of the base world object, and trees.
+
+## () - start a new world.dae this is larger
+* figure out what the final size of the world should be
 
 ## () - canvas textures for world.dae
-* canvas textures are not working with world.dae, see about fixing that ( see what the deal is with uvs first ).
+* canvas textures are not working with world.dae, see about fixing that
+
+## () - sequeneces.js
+* start a js file to help create a sequence object from a given over all per value in update.
 
 ## ( done 03/08/2022 ) - guy-characters.js started
 * (done) start a guy-characters.js file to quickly create custom guy objects with textures and addtional mesh objects
