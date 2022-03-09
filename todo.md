@@ -27,6 +27,9 @@ guy1.userData.canvasObj_face.draw({
 <!-- I WILL NEED THIS DONE TO START MAKING VIDEOS -->
 
 ## () - start at least place holder daes for all other aspects of 'beta-world'
+* at least start a cow dae file
+* at least start a billboard dae file
+* dae files for a farm house, city areas, town hall
 * at this point there should be enough to make e1 at least
 
 ## () - add guy2 to guy-characters.js
