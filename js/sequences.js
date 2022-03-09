@@ -12,7 +12,7 @@ var Sequences = (function () {
         return seq;
     };
 
-    api.update = function(seq, ){
+    api.update = function(seq, sm){
 
     };
 

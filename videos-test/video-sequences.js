@@ -84,6 +84,8 @@ var seq = Sequences.create({
     ]
 });
 
+Sequences.update(seq, sm);
+
     // setting world position for guy1
     //var radian = Math.PI * 2 * sm.per * -1, 
     //lat = 0.25 + Math.cos(radian) * 0.10, 
