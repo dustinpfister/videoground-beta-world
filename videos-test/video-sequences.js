@@ -55,6 +55,9 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world,
     guy1 = scene.userData.guy1;
 
+               camera.position.set(30, 10, 20 - 40 * bias);
+               camera.lookAt(0, 5, 0);
+
 var seq = Sequences.create({
     sm: sm,
     part : [
@@ -64,8 +67,8 @@ var seq = Sequences.create({
                console.log('init for part 0');
            },
            update: function(sm, scene, camera, partPer, partBias){
-               camera.position.set(30, 10, 20 - 40 * partBias);
-               camera.lookAt(0, 5, 0);
+               //camera.position.set(30, 10, 20 - 40 * partBias);
+               //camera.lookAt(0, 5, 0);
 
                guy1.moveArms(sm.per, 8);
                WorldPos.adjustObject(world, guy1.group, 0, 0, 1.8, 9.5, 'fromSea');
