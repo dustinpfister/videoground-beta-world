@@ -52,8 +52,9 @@ var Sequences = (function () {
             var partObj = seq.part[sm.partIndex];
             partObj.init(sm);
         }
-        var partPer = (sm.per - partObj.per) / (partObj.endPer - partObj.per);
-        partObj.update(sm, sm.scene, sm.camera, partPer, 0);
+        var partPer = (sm.per - partObj.per) / (partObj.endPer - partObj.per),
+        partBias = 1 - Math.abs(0.5 - partPer) / 0.5;
+        partObj.update(sm, sm.scene, sm.camera, partPer, partBias);
     };
     return api;
 }
