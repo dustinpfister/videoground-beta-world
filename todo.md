@@ -57,8 +57,8 @@ guy1.userData.canvasObj_face.draw({
 ## () - canvas textures for world.dae
 * canvas textures are not working with world.dae, see about fixing that
 
-## () - sequeneces.js
-* start a js file to help create a sequence object from a given over all per value in update.
+## ( done 03/09/2022 ) - sequeneces.js
+* (done) start a js file to help create a sequence object from a given over all per value in update.
 
 ## ( done 03/08/2022 ) - guy-characters.js started
 * (done) start a guy-characters.js file to quickly create custom guy objects with textures and addtional mesh objects
