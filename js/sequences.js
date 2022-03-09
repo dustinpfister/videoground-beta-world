@@ -37,16 +37,14 @@ var Sequences = (function () {
         var currentIndex = getCurrentPartIndex(seq);
         // if currentIndex equals partIndex then just call update of current part
         // else update sm.partIndex and call init
-        if(currentIndex === sm.partIndex && sm.frame != 0){
-            var partObj = seq.part[sm.partIndex];
-            partObj.update(sm, sm.scene, sm.camera, 0, 0);
-        }else{
+        var partObj = seq.part[sm.partIndex];
+        if(!(currentIndex === sm.partIndex && sm.frame != 0)){
             // else set sm.partIndex
             sm.partIndex = currentIndex;
             var partObj = seq.part[sm.partIndex];
             partObj.init(sm);
-            partObj.update(sm, sm.scene, sm.camera, 0, 0);
         }
+        partObj.update(sm, sm.scene, sm.camera, 0, 0);
     };
     return api;
 }

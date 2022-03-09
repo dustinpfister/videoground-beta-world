@@ -61,17 +61,24 @@ var seq = Sequences.create({
         {
            per: 0,
            init: function(sm){
+               console.log('init for part 0');
            },
            update: function(sm, scene, camera, partPer, partBias){
+               //console.log('update for part 0', sm.frame);
+               guy1.moveArms(sm.per, 8);
                WorldPos.adjustObject(world, guy1.group, 0, 0, 1.8, 9.5, 'fromSea');
            }
         },
         {
            per: 0.5,
-           init: function(sm){},
+           init: function(sm){
+               console.log('init for part 1');
+           },
            update: function(sm, scene, camera, partPer, partBias){
+               //console.log('update for part 1');
                // moving legs
                guy1.moveLegs(sm.per, 8);
+               guy1.moveArms(sm.per, 8);
                // changing guy position
                var radian = Math.PI * 2 * sm.per * -1, 
                lat = 0.25 + Math.cos(radian) * 0.10, 
