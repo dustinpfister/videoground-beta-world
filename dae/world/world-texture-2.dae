@@ -102,21 +102,21 @@
     </light>
   </library_lights>
   <library_images>
-    <image id="world-texture-grass-1_png" name="world-texture-grass-1_png">
-      <init_from>world-texture-grass-1.png</init_from>
+    <image id="world-texture-water-1_png" name="world-texture-water-1_png">
+      <init_from>world-texture-water-1.png</init_from>
     </image>
   </library_images>
   <library_effects>
     <effect id="water-effect">
       <profile_COMMON>
-        <newparam sid="world-texture-grass-1_png-surface">
+        <newparam sid="world-texture-water-1_png-surface">
           <surface type="2D">
-            <init_from>world-texture-grass-1_png</init_from>
+            <init_from>world-texture-water-1_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="world-texture-grass-1_png-sampler">
+        <newparam sid="world-texture-water-1_png-sampler">
           <sampler2D>
-            <source>world-texture-grass-1_png-surface</source>
+            <source>world-texture-water-1_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -128,7 +128,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <texture texture="world-texture-grass-1_png-sampler"/>
+              <texture texture="world-texture-water-1_png-sampler"/>
             </diffuse>
             <specular>
               <color sid="specular">0.5 0.5 0.5 1</color>
