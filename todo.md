@@ -59,7 +59,7 @@ guy1.userData.canvasObj_face.draw({
 * (done) start a world-texture-1 test video and use world-texture-1.dae in it
 * (done) I might want more than one texture, grass and water for now
 
-* I am running into too many problems using blender, so for now I am thinking that I should just see if I can use blender to edit uvs at least
+* Lets see about creating and editing a uvs attibute in blender at least
 
 
 ## ( done 03/09/2022 ) - sequeneces.js
