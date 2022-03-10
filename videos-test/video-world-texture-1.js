@@ -1,7 +1,7 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-  '../dae/world/world-texture-1.dae'
+  '../dae/world/world-texture-2.dae'
 ];
 
 // init method for the video
@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
             emissive: 0xffffff
         }));
     light.add(new THREE.PointLight(0xdfdfdf, 0.8));
-    light.position.set(0, 50, -50);
+    light.position.set(-80, 150, -50);
     scene.add(light);
 
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
