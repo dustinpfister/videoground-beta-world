@@ -54,13 +54,18 @@ guy1.userData.canvasObj_face.draw({
 ## () - start a new world.dae this is larger
 * figure out what the final size of the world should be
 
-## () - textures for world.dae
+
+## () - start with uv for world-geo-groups.dae
+* There should be a way to export a mesh that makes use of more than one material
+* There should be a way to define groups for a geometry in blender
+
+## () - start with uv for world-uv.dae
+* see about creating and editing a uvs attibutes in blender
+
+## () - start with textures for world-texture.dae
 * (done) textures are not working with world.dae, see about fixing that in a new dae file world-texture-1.dae
 * (done) start a world-texture-1 test video and use world-texture-1.dae in it
 * (done) I might want more than one texture, grass and water for now
-
-* Lets see about creating and editing a uvs attibute in blender at least
-
 
 ## ( done 03/09/2022 ) - sequeneces.js
 * (done) start a js file to help create a sequence object from a given over all per value in update.
