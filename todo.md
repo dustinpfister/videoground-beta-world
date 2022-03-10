@@ -54,8 +54,9 @@ guy1.userData.canvasObj_face.draw({
 ## () - start a new world.dae this is larger
 * figure out what the final size of the world should be
 
-## () - canvas textures for world.dae
-* canvas textures are not working with world.dae, see about fixing that
+## () - textures for world.dae
+* textures are not working with world.dae, see about fixing that
+* I might want more than one texture (grass, water, road, ect)
 
 ## ( done 03/09/2022 ) - sequeneces.js
 * (done) start a js file to help create a sequence object from a given over all per value in update.
