@@ -1,7 +1,7 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-  '../dae/world/world-texture-2.dae'
+  '../dae/world/world-texture-1.dae'
 ];
 
 // init method for the video
