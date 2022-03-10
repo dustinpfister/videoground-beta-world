@@ -55,7 +55,8 @@ guy1.userData.canvasObj_face.draw({
 * figure out what the final size of the world should be
 
 ## () - textures for world.dae
-* textures are not working with world.dae, see about fixing that in a new dae file world-texture-1.dae
+* (done) textures are not working with world.dae, see about fixing that in a new dae file world-texture-1.dae
+* start a world-texture-1 test video and use world-texture-1.dae in it
 * I might want more than one texture (grass, water, road, ect)
 
 ## ( done 03/09/2022 ) - sequeneces.js
