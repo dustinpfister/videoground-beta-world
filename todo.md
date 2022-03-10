@@ -56,8 +56,11 @@ guy1.userData.canvasObj_face.draw({
 
 ## () - textures for world.dae
 * (done) textures are not working with world.dae, see about fixing that in a new dae file world-texture-1.dae
-* start a world-texture-1 test video and use world-texture-1.dae in it
-* I might want more than one texture (grass, water, road, ect)
+* (done) start a world-texture-1 test video and use world-texture-1.dae in it
+* (done) I might want more than one texture, grass and water for now
+
+* I am running into too many problems using blender, so for now I am thinking that I should just see if I can use blender to edit uvs at least
+
 
 ## ( done 03/09/2022 ) - sequeneces.js
 * (done) start a js file to help create a sequence object from a given over all per value in update.
