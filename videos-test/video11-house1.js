@@ -9,12 +9,12 @@ VIDEO.init = function(sm, scene, camera){
 
     scene.add(new THREE.GridHelper(10, 10));
     // CAMERA
-    camera.position.set(-10, 10, -10);
-    camera.lookAt(0, 0, 0)
+    camera.position.set(0, 0, 0);
+    camera.lookAt(0.2, 0.0, 0.5);
 
     // LIGHT
-    var light = new THREE.DirectionalLight(0xffffff, 0.5);
-    light.position.set(-5, 10, -5)
+    var light = new THREE.PointLight(0xffffff, 0.5);
+    light.position.set(0, 0, 0)
     scene.add(light);
 
     // loading home1
@@ -36,7 +36,6 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    //let home1 = scene.userData.home1;
-    //home1.rotation.z = Math.PI * 2 * sm.per;
+
 };
 
