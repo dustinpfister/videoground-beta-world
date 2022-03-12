@@ -10,18 +10,12 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set(0, 0, -3);
     camera.lookAt(0,0,0)
 
-
-    // LIGHT
-    let light = scene.userData.light = new THREE.Mesh(
-        new THREE.SphereGeometry(0.25, 20, 20),
-        new THREE.MeshStandardMaterial({
-            emissive: 0xffffff
-        }));
-    light.add(new THREE.PointLight(0xdfdfdf, 0.8));
-    light.position.set(-80, 150, -50);
-    scene.add(light);
-
+    // loading world
     let world = scene.userData.world = utils.DAE.getMesh( VIDEO.daeResults[0] );
+    var map = world.material.map;
+    world.material = new THREE.MeshBasicMaterial({
+        map: map
+    })
     scene.add(world);
 
 };
