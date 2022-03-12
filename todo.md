@@ -41,18 +41,6 @@ guy1.userData.canvasObj_face.draw({
 * I will want a biplain model
 * add these to world-scene
 
-<!-- HOUSE 2 DAE -->
-
-## () - HOUSE 2 
-* start a house2.dae for guy2
-* house 2 is a tinay house design that is just say 16 * 10 feet
-
-<!-- HOUSE 1 DAE -->
-
-## () - start model for house1
-* have a quick house1.dae file for guy1
-* the 'house' for starters can just be a room and a hallway
-
 
 <!-- WORLD DAE FILE -->
 
@@ -67,6 +55,23 @@ guy1.userData.canvasObj_face.draw({
 ## () - start with uv for world-geo-groups.dae
 * There should be a way to export a mesh that makes use of more than one material
 * There should be a way to define groups for a geometry in blender
+
+
+<!-- HOUSE 2 DAE -->
+
+## () - HOUSE 2 
+* start a house2.dae for guy2
+* the 'house' for starters can just be a room and a hallway
+
+<!-- HOUSE 1 DAE -->
+
+## () - start model for house1
+<!-- guy.js -->
+* get a final idea of what the size of a guy model should be such as 1, 6, 1
+<!-- house1 dae folder -->
+* have a house1.dae file that will be the house for 'guy1'
+* house 1 is a tiany house design that is just say 16 * 10 feet
+
 
 <!-- DONE -->
 
