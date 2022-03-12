@@ -71,7 +71,8 @@ guy1.userData.canvasObj_face.draw({
 <!-- DONE -->
 
 ## ( done 03/12/2022 ) - test-ico dae, and test video 10
-* Start a test test ico dae in the world folder where the aim is to just apply a texture to an ico sphere
+* (done) Start a test test ico dae in the world folder where the aim is to just apply a texture to an ico sphere
+* start video10 that will just show the end result if a dae export
 
 ## ( done 03/10/2022 ) - start with textures for world-texture.dae
 * (done) textures are not working with world.dae, see about fixing that in a new dae file world-texture-1.dae
