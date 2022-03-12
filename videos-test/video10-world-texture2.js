@@ -8,7 +8,7 @@ VIDEO.daePaths = [
 VIDEO.init = function(sm, scene, camera){
     // CAMERA
     camera.position.set(0, 0, -4);
-    camera.lookAt(0,0,0)
+    camera.lookAt(0, 0, 0)
 
     // LIGHT
     var light = new THREE.DirectionalLight(0xffffff, 0.5);
@@ -24,12 +24,13 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.4
     });
     scene.add(world);
+    world.rotateX(1.57)
 
 };
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     let world = scene.userData.world;
-    world.rotation.y = Math.PI * 2 * sm.per;
+    world.rotation.z = Math.PI * 2 * sm.per;
 };
 
