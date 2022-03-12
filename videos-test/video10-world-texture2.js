@@ -1,13 +1,13 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-  '../dae/world/world-texture-1.dae'
+  '../dae/world/test-ico-1.dae'
 ];
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
     // CAMERA
-    camera.position.set(0, 0, -35);
+    camera.position.set(0, 0, -3);
     camera.lookAt(0,0,0)
 
 
