@@ -41,10 +41,20 @@ guy1.userData.canvasObj_face.draw({
 * I will want a biplain model
 * add these to world-scene
 
-## () - start models for house1 and house2, add to world-scene
+<!-- HOUSE 2 DAE -->
+
+## () - HOUSE 2 
+* start a house2.dae for guy2
+* house 2 is a tinay house design that is just say 16 * 10 feet
+
+<!-- HOUSE 1 DAE -->
+
+## () - start model for house1
 * have a quick house1.dae file for guy1
-* have a house2.dae for guy2
-* add these to world-scene
+* the 'house' for starters can just be a room and a hallway
+
+
+<!-- WORLD DAE FILE -->
 
 ## () - finish the two tree dae files, start world-scene
 * have tree1.dae looking good
@@ -54,15 +64,16 @@ guy1.userData.canvasObj_face.draw({
 ## () - start a new world.dae this is larger
 * figure out what the final size of the world should be
 
-
 ## () - start with uv for world-geo-groups.dae
 * There should be a way to export a mesh that makes use of more than one material
 * There should be a way to define groups for a geometry in blender
 
-## () - start with uv for world-uv.dae
-* see about creating and editing a uvs attibutes in blender
+<!-- DONE -->
 
-## () - start with textures for world-texture.dae
+## ( done 03/12/2022 ) - test-ico dae, and test video 10
+* Start a test test ico dae in the world folder where the aim is to just apply a texture to an ico sphere
+
+## ( done 03/10/2022 ) - start with textures for world-texture.dae
 * (done) textures are not working with world.dae, see about fixing that in a new dae file world-texture-1.dae
 * (done) start a world-texture-1 test video and use world-texture-1.dae in it
 * (done) I might want more than one texture, grass and water for now
