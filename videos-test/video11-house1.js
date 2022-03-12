@@ -1,7 +1,7 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-  '../dae/world/test-ico-1.dae'
+  '../dae/house1/cone.dae'
 ];
 
 // init method for the video
@@ -24,7 +24,6 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.4
     });
     scene.add(world);
-    world.rotateX(1.57)
 
 };
 
