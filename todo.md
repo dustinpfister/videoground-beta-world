@@ -66,6 +66,8 @@ guy1.userData.canvasObj_face.draw({
 <!-- HOUSE 1 DAE -->
 
 ## () - start model for house1
+<!-- video11 -->
+* start video11 then that will be the test video for this house model and the guy model
 <!-- guy.js -->
 * get a final idea of what the size of a guy model should be such as 1, 6, 1
 <!-- house1 dae folder -->
