@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-13T12:59:08</created>
-    <modified>2022-03-13T12:59:08</modified>
+    <created>2022-03-13T13:09:35</created>
+    <modified>2022-03-13T13:09:35</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -205,7 +205,7 @@
         <instance_light url="#Lamp-light"/>
       </node>
       <node id="babyray" name="babyray" type="NODE">
-        <matrix sid="transform">1 0 0 0 0 -4.37114e-8 -1 0 0 1 -4.37114e-8 0 0 0 0 1</matrix>
+        <matrix sid="transform">-1 -6.60024e-15 -1.50996e-7 0 -1.50996e-7 4.37114e-8 1 0 0 1 -4.37114e-8 0 0 0 0 1</matrix>
         <instance_geometry url="#babyray-geo-mesh" name="babyray">
           <bind_material>
             <technique_common>
