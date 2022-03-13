@@ -4,6 +4,11 @@ VIDEO.daePaths = [
   '../../dae/sweet-baby-rays/sweet-baby-rays.dae'
 ];
 
+VIDEO.scripts = [
+   '../../js/canvas.js',
+   '../../js/sequences.js'
+];
+
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
     // SCENE
@@ -20,11 +25,43 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 1
     });
     scene.add(sweet);
+    // SET UP SEQ OBJECT
+    sm.seq = Sequences.create({
+        sm: sm,
+        part : [
+            {
+                per: 0,
+                init: function(sm){
+                    camera.position.set(0, 0, 5); 
+                    sweet.rotation.set(Math.PI / 180 * 300,0,0)
+                },
+                update: function(sm, scene, camera, partPer, partBias){
+                    let sweet = scene.userData.sweet;
+                    sweet.rotation.z = Math.PI - Math.PI * 2 * partPer;
+                }
+            },
+            {
+                per: 0.5,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    let sweet = scene.userData.sweet;
+                    sweet.rotation.y = Math.PI * partPer;
+                }
+            },
+            {
+                per: 0.9,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(0, 0, 5 + 50 * partPer); 
+                }
+            }
+        ]
+    });
 };
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    let sweet = scene.userData.sweet;
-    sweet.rotation.z = Math.PI - Math.PI * 2 * sm.per;
+    // sequences
+    Sequences.update(sm.seq, sm);
 };
 
