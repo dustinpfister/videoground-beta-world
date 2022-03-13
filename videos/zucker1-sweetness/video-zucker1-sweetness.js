@@ -6,6 +6,8 @@ VIDEO.daePaths = [
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
+    // SCENE
+    scene.background = new THREE.Color('#00afaf');
     // CAMERA
     camera.position.set(0, 0, 5);
     camera.lookAt(0,0.25,0);
