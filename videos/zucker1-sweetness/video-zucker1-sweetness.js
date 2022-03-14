@@ -16,6 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     // CAMERA
     camera.position.set(0, 0, 5);
     camera.lookAt(0,0.25,0);
+
     // SWEETNESS
     let sweet = scene.userData.sweet = utils.DAE.getMesh( VIDEO.daeResults[0] );
     let map = sweet.material.map;
@@ -25,6 +26,15 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 1
     });
     scene.add(sweet);
+
+    var sweetCollection = scene.userData.sweetCollection = new THREE.Group();
+    var i = 0, len = 10;
+    while(i < len){
+        sweetCollection.add(sweet.clone());
+        i += 1;
+    }
+    scene.add(sweetCollection);
+
     // SET UP SEQ OBJECT
     sm.seq = Sequences.create({
         sm: sm,
@@ -32,8 +42,14 @@ VIDEO.init = function(sm, scene, camera){
             {
                 per: 0,
                 init: function(sm){
-                    camera.position.set(0, 0, 5); 
-                    sweet.rotation.set(Math.PI / 180 * 300,0,0)
+                    camera.position.set(0, 0, 5);
+                    
+                    // start position for sweet collection group
+                    sweetCollection.position.set(0, 0, -3);
+
+                    // set starting rotation for main sweet mesh
+                    sweet.rotation.set(Math.PI / 180 * 300, 0, 0);
+
                 },
                 update: function(sm, scene, camera, partPer, partBias){
                     let sweet = scene.userData.sweet;
