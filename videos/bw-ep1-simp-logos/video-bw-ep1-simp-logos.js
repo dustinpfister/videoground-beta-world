@@ -2,7 +2,7 @@
 // the dae files to use for this video
 VIDEO.daePaths = [
     '../../dae/house1/house1.dae',
-    '../../dae/desk/desk.dae'
+    '../../dae/desk/desk2.dae'
 ];
 
 // THIS SHOULD BE PART OF A NEW JAVASCRIPT FILE
@@ -57,7 +57,7 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    camera.position.set(-4, 4, -5 + 8 * sm.bias);
-    camera.lookAt(2, 2, 2);
+    camera.position.set(-1, 4, -5 + 8 * sm.bias);
+    camera.lookAt(2, 2.5, 2);
 };
 
