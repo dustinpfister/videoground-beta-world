@@ -88,7 +88,21 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
+
+    var sweetCollection = scene.userData.sweetCollection;
+
     // sequences
     Sequences.update(sm.seq, sm);
+
+/*
+    var len = sweetCollection.children.length;
+    sweetCollection.children.forEach(function(mesh, i){
+        var per = i / len,
+        a = sm.per * 2 % 1,
+        b = 1 - Math.abs((0.5 - a)) / 0.5,
+        c = (b + (i / len) * 2);
+        mesh.position.y = -1 + c;
+    });
+*/
 };
 
