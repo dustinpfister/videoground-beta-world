@@ -45,7 +45,14 @@ VIDEO.init = function(sm, scene, camera){
                     camera.position.set(0, 0, 5);
                     
                     // start position for sweet collection group
-                    sweetCollection.position.set(0, 0, -3);
+                    sweetCollection.position.set(0, 0, -10);
+
+                    // starting positions for each child mesh of the sweetCollection
+                    var len = sweetCollection.children.length;
+                    sweetCollection.children.forEach(function(mesh, i){
+                        var per = i / len;
+                        mesh.position.x = -9 + 20 * per;
+                    });
 
                     // set starting rotation for main sweet mesh
                     sweet.rotation.set(Math.PI / 180 * 300, 0, 0);
