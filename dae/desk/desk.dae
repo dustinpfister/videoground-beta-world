@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-14T14:18:57</created>
-    <modified>2022-03-14T14:18:57</modified>
+    <created>2022-03-14T15:22:44</created>
+    <modified>2022-03-14T15:22:44</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -113,6 +113,9 @@
     </image>
     <image id="desk-leg_png" name="desk-leg_png">
       <init_from>desk-leg.png</init_from>
+    </image>
+    <image id="screen_png" name="screen_png">
+      <init_from>screen.png</init_from>
     </image>
     <image id="desk-surface_png" name="desk-surface_png">
       <init_from>desk-surface.png</init_from>
@@ -263,6 +266,42 @@
         </technique>
       </profile_COMMON>
     </effect>
+    <effect id="screen-material-effect">
+      <profile_COMMON>
+        <newparam sid="screen_png-surface">
+          <surface type="2D">
+            <init_from>screen_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="screen_png-sampler">
+          <sampler2D>
+            <source>screen_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="screen_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
     <effect id="desk-surface-material-effect">
       <profile_COMMON>
         <newparam sid="desk-surface_png-surface">
@@ -312,6 +351,9 @@
     </material>
     <material id="leg-material-material" name="leg-material">
       <instance_effect url="#leg-material-effect"/>
+    </material>
+    <material id="screen-material-material" name="screen-material">
+      <instance_effect url="#screen-material-effect"/>
     </material>
     <material id="desk-surface-material-material" name="desk-surface-material">
       <instance_effect url="#desk-surface-material-effect"/>
@@ -486,6 +528,48 @@
         </triangles>
       </mesh>
     </geometry>
+    <geometry id="screen-geo-mesh" name="screen-geo">
+      <mesh>
+        <source id="screen-geo-mesh-positions">
+          <float_array id="screen-geo-mesh-positions-array" count="108">0.8530154 -0.482899 0.5 0.8530154 -0.482899 1.5 0.8530154 1.017101 0.5 0.8530154 1.017101 1.5 0.9530154 -0.482899 0.5 0.9530154 -0.482899 1.5 0.9530154 1.017101 0.5 0.9530154 1.017101 1.5 1.04679 0.6831777 0.2499999 1.04679 0.6831777 0.35 1.290298 0.4929277 0.2499999 1.290298 0.4929277 0.35 1.375475 0.1958815 0.2499999 1.375475 0.1958815 0.35 1.269785 -0.09449946 0.2499999 1.269785 -0.09449946 0.35 1.013598 -0.2672997 0.2499999 1.013598 -0.2672997 0.35 0.7047695 -0.2565151 0.2499999 0.7047695 -0.2565151 0.35 0.4612607 -0.06626516 0.2499999 0.4612607 -0.06626516 0.35 0.3760842 0.2307809 0.2499999 0.3760842 0.2307809 0.35 0.4817742 0.5211621 0.2499999 0.4817742 0.5211621 0.35 0.7379611 0.6939622 0.2499999 0.7379611 0.6939622 0.35 0.6835227 0.1236804 0.35 0.6835227 0.1236804 0.5 0.7861288 0.4055882 0.35 0.7861288 0.4055882 0.5 0.9654305 0.02107429 0.35 0.9654305 0.02107429 0.5 1.068037 0.3029821 0.35 1.068037 0.3029821 0.5</float_array>
+          <technique_common>
+            <accessor source="#screen-geo-mesh-positions-array" count="36" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="screen-geo-mesh-normals">
+          <float_array id="screen-geo-mesh-normals-array" count="129">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1 0.6156612 0.788011 0 0.9612616 0.2756379 0 0.9396924 -0.3420211 0 0.5591935 -0.8290372 0 -0.03489953 -0.9993909 0 -0.6156616 -0.7880107 0 -0.9612618 -0.2756373 0 -0.9396926 0.3420203 0 0 0 1 -0.5591928 0.8290378 0 0.03489959 0.9993909 0 0 0 -1 -0.9396926 0.3420202 0 0.3420203 0.9396926 0 0.9396928 -0.34202 0 -0.3420202 -0.9396926 0 0.6156618 0.7880105 0 0.9396924 -0.3420209 0 0.5591931 -0.8290374 0 -0.03489953 -0.9993909 0 -0.9396928 0.3420199 0 0 0 1 0 0 1 1.25344e-7 0 1 0 0 1 0 0 1 0 0 1 -0.5591925 0.8290378 0 0.03489959 0.9993909 0 0 0 -1 -1.32741e-7 0 -1 0 0 -1 -0.9396927 0.3420202 0 0.3420202 0.9396927 0 0.9396927 -0.3420202 0 -0.34202 -0.9396927 0 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#screen-geo-mesh-normals-array" count="43" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="screen-geo-mesh-map-0">
+          <float_array id="screen-geo-mesh-map-0-array" count="360">3.4595e-4 0.3848547 0.5760713 0.7686715 3.4595e-4 0.7686715 0.9996541 0.3841622 0.9612721 3.4595e-4 0.9996541 3.4595e-4 0.5760713 0.3841628 3.4595e-4 3.45995e-4 0.5760713 3.4595e-4 0.999654 0.7686711 0.9612721 0.3848547 0.9996539 0.3848547 0.5760709 0.8077451 3.4595e-4 0.7693634 0.5760709 0.7693634 0.5760709 0.8468188 3.4595e-4 0.808437 0.5760709 0.808437 0.8153589 0.8664154 0.933965 0.9047971 0.815359 0.9047971 0.9270431 0.8280338 0.8084372 0.7896519 0.9270431 0.789652 0.933965 0.9438709 0.8153591 0.9054892 0.933965 0.9054892 0.6953692 0.9438709 0.5767633 0.9054892 0.6953692 0.9054892 0.6953693 0.9047971 0.5767633 0.8664156 0.6953692 0.8664153 0.2382497 0.9441568 0.1196437 0.9057752 0.2382497 0.9057751 3.4595e-4 0.9057752 0.1189518 0.9441568 3.45955e-4 0.9441568 0.8084371 0.7505784 0.9270431 0.78896 0.8084371 0.78896 0.9239287 0.07006055 0.9605802 0.1828615 0.6134147 0.2956631 0.6960611 0.9054892 0.8146671 0.9438709 0.6960611 0.9438709 0.6960611 0.8664153 0.8146671 0.9047971 0.6960611 0.9047971 0.8279744 0.7498864 0.6134144 0.6801713 0.6134147 0.4545694 3.4595e-4 0.8475107 0.115491 0.9050832 3.4595e-4 0.9050832 0.3478569 0.8475106 0.463002 0.9050832 0.3478569 0.9050832 0.347165 0.9050832 0.2320199 0.8475106 0.347165 0.8475106 0.231328 0.9050832 0.1161829 0.8475106 0.231328 0.8475107 0.8077453 0.8657234 0.6926002 0.7505784 0.8077453 0.7505784 0.5767633 0.8657234 0.6919084 0.7505784 0.6919084 0.8657234 3.4595e-4 0.3848547 0.5760713 0.3848547 0.5760713 0.7686715 0.9996541 0.3841622 0.9612724 0.3841623 0.9612721 3.4595e-4 0.5760713 0.3841628 3.4595e-4 0.3841628 3.4595e-4 3.45995e-4 0.999654 0.7686711 0.9612722 0.7686711 0.9612721 0.3848547 0.5760709 0.8077451 3.4595e-4 0.8077451 3.4595e-4 0.7693634 0.5760709 0.8468188 3.4595e-4 0.8468188 3.4595e-4 0.808437 0.8153589 0.8664154 0.933965 0.8664153 0.933965 0.9047971 0.9270431 0.8280338 0.8084371 0.8280338 0.8084372 0.7896519 0.933965 0.9438709 0.815359 0.9438709 0.8153591 0.9054892 0.6953692 0.9438709 0.5767633 0.9438709 0.5767633 0.9054892 0.6953693 0.9047971 0.5767633 0.9047973 0.5767633 0.8664156 0.2382497 0.9441568 0.1196438 0.9441568 0.1196437 0.9057752 3.4595e-4 0.9057752 0.1189518 0.9057751 0.1189518 0.9441568 0.8084371 0.7505784 0.9270431 0.7505784 0.9270431 0.78896 0.9605802 0.1828615 0.9239292 0.2956625 0.6134147 0.2956631 0.9239292 0.2956625 0.827975 0.3653776 0.6134147 0.2956631 0.827975 0.3653776 0.7093692 0.3653777 0.6134147 0.2956631 0.6134147 0.2956631 0.5767633 0.1828622 0.8279743 3.4595e-4 0.5767633 0.1828622 0.6134143 0.0700612 0.8279743 3.4595e-4 0.6134143 0.0700612 0.7093684 3.4619e-4 0.8279743 3.4595e-4 0.8279743 3.4595e-4 0.9239287 0.07006055 0.6134147 0.2956631 0.6960611 0.9054892 0.8146672 0.9054892 0.8146671 0.9438709 0.6960611 0.8664153 0.8146671 0.8664155 0.8146671 0.9047971 0.8279749 0.3848548 0.923929 0.4545697 0.9605802 0.5673708 0.9605802 0.5673708 0.9239289 0.6801717 0.8279744 0.7498864 0.8279744 0.7498864 0.7093685 0.7498863 0.6134144 0.6801713 0.6134144 0.6801713 0.5767633 0.5673704 0.6134147 0.4545694 0.6134147 0.4545694 0.709369 0.3848547 0.8279749 0.3848548 0.8279749 0.3848548 0.9605802 0.5673708 0.6134147 0.4545694 0.9605802 0.5673708 0.8279744 0.7498864 0.6134147 0.4545694 3.4595e-4 0.8475107 0.115491 0.8475106 0.115491 0.9050832 0.3478569 0.8475106 0.463002 0.8475106 0.463002 0.9050832 0.347165 0.9050832 0.2320199 0.9050832 0.2320199 0.8475106 0.231328 0.9050832 0.1161829 0.9050832 0.1161829 0.8475106 0.8077453 0.8657234 0.6926002 0.8657234 0.6926002 0.7505784 0.5767633 0.8657234 0.5767633 0.7505784 0.6919084 0.7505784</float_array>
+          <technique_common>
+            <accessor source="#screen-geo-mesh-map-0-array" count="180" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="screen-geo-mesh-vertices">
+          <input semantic="POSITION" source="#screen-geo-mesh-positions"/>
+        </vertices>
+        <triangles material="screen-material-material" count="60">
+          <input semantic="VERTEX" source="#screen-geo-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#screen-geo-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#screen-geo-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 9 6 18 10 6 19 8 6 20 11 7 21 12 7 22 10 7 23 13 8 24 14 8 25 12 8 26 15 9 27 16 9 28 14 9 29 17 10 30 18 10 31 16 10 32 19 11 33 20 11 34 18 11 35 21 12 36 22 12 37 20 12 38 23 13 39 24 13 40 22 13 41 15 14 42 13 14 43 25 14 44 25 15 45 26 15 46 24 15 47 27 16 48 8 16 49 26 16 50 14 17 51 18 17 52 22 17 53 29 18 54 30 18 55 28 18 56 31 19 57 34 19 58 30 19 59 35 20 60 32 20 61 34 20 62 33 21 63 28 21 64 32 21 65 34 4 66 28 4 67 30 4 68 31 5 69 33 5 70 35 5 71 1 0 72 3 0 73 2 0 74 3 1 75 7 1 76 6 1 77 7 2 78 5 2 79 4 2 80 5 3 81 1 3 82 0 3 83 6 4 84 4 4 85 0 4 86 3 5 87 1 5 88 5 5 89 9 22 90 11 22 91 10 22 92 11 7 93 13 7 94 12 7 95 13 23 96 15 23 97 14 23 98 15 24 99 17 24 100 16 24 101 17 25 102 19 25 103 18 25 104 19 11 105 21 11 106 20 11 107 21 12 108 23 12 109 22 12 110 23 26 111 25 26 112 24 26 113 13 27 114 11 27 115 25 27 116 11 28 117 9 28 118 25 28 119 9 5 120 27 5 121 25 5 122 25 29 123 23 29 124 17 29 125 23 30 126 21 30 127 17 30 128 21 31 129 19 31 130 17 31 131 17 32 132 15 32 133 25 32 134 25 33 135 27 33 136 26 33 137 27 34 138 9 34 139 8 34 140 26 4 141 8 4 142 10 4 143 10 4 144 12 4 145 14 4 146 14 35 147 16 35 148 18 35 149 18 4 150 20 4 151 22 4 152 22 36 153 24 36 154 26 36 155 26 4 156 10 4 157 22 4 158 10 37 159 14 37 160 22 37 161 29 38 162 31 38 163 30 38 164 31 39 165 35 39 166 34 39 167 35 40 168 33 40 169 32 40 170 33 41 171 29 41 172 28 41 173 34 4 174 32 4 175 28 4 176 31 42 177 29 42 178 33 42 179</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="desk-surface-geo-mesh" name="desk-surface-geo">
       <mesh>
         <source id="desk-surface-geo-mesh-positions">
@@ -541,7 +625,7 @@
         <instance_light url="#Lamp-light"/>
       </node>
       <node id="desk-surface" name="desk-surface" type="NODE">
-        <matrix sid="transform">1 0 0 -1.03998e-7 0 -4.37114e-8 1 2 0 -1 -4.37114e-8 -0.05000007 0 0 0 1</matrix>
+        <matrix sid="transform">-4.37114e-8 1 4.37114e-8 -1.03998e-7 0 -4.37114e-8 1 1.95 1 4.37114e-8 1.91069e-15 -0.05000007 0 0 0 1</matrix>
         <instance_geometry url="#desk-surface-geo-mesh" name="desk-surface">
           <bind_material>
             <technique_common>
@@ -550,7 +634,7 @@
           </bind_material>
         </instance_geometry>
         <node id="leg_003" name="leg_003" type="NODE">
-          <matrix sid="transform">1 0 0 -0.9499999 0 1 8.7055e-10 -0.9500001 0 0 1 -0.9999999 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 -0.9499999 0 1 0 -0.9500001 0 3.55271e-15 1 -0.9999999 0 0 0 1</matrix>
           <instance_geometry url="#leg-geo_003-mesh" name="leg_003">
             <bind_material>
               <technique_common>
@@ -560,7 +644,7 @@
           </instance_geometry>
         </node>
         <node id="leg_002" name="leg_002" type="NODE">
-          <matrix sid="transform">1 0 0 -0.9499999 0 1 8.7055e-10 0.9499999 0 0 1 -1 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 -0.9499999 0 1 0 0.9499999 0 3.55271e-15 1 -0.9999999 0 0 0 1</matrix>
           <instance_geometry url="#leg-geo_002-mesh" name="leg_002">
             <bind_material>
               <technique_common>
@@ -570,7 +654,7 @@
           </instance_geometry>
         </node>
         <node id="leg_001" name="leg_001" type="NODE">
-          <matrix sid="transform">1 0 0 0.9500001 0 1 8.7055e-10 0.9499999 0 0 1 -1 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 0.9500001 0 1 0 0.9499999 0 3.55271e-15 1 -0.9999999 0 0 0 1</matrix>
           <instance_geometry url="#leg-geo_001-mesh" name="leg_001">
             <bind_material>
               <technique_common>
@@ -580,11 +664,21 @@
           </instance_geometry>
         </node>
         <node id="leg" name="leg" type="NODE">
-          <matrix sid="transform">1 0 0 0.9500001 0 1 8.7055e-10 -0.9500001 0 0 1 -0.9999999 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 0.9500001 0 1 0 -0.9500001 0 3.55271e-15 1 -0.9999999 0 0 0 1</matrix>
           <instance_geometry url="#leg-geo-mesh" name="leg">
             <bind_material>
               <technique_common>
                 <instance_material symbol="leg-material-material" target="#leg-material-material"/>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+        <node id="screen" name="screen" type="NODE">
+          <matrix sid="transform">0.9396926 -0.3420201 0 -0.2999999 0.3420201 0.9396926 0 -0.4000001 1.79546e-15 2.89922e-15 1 -0.1999999 0 0 0 1</matrix>
+          <instance_geometry url="#screen-geo-mesh" name="screen">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="screen-material-material" target="#screen-material-material"/>
               </technique_common>
             </bind_material>
           </instance_geometry>
