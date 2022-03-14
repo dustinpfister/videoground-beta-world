@@ -56,6 +56,7 @@ VIDEO.init = function(sm, scene, camera){
 
                     // set starting rotation for main sweet mesh
                     sweet.rotation.set(Math.PI / 180 * 300, 0, 0);
+                    sweet.position.set(0, 0, 0);
 
                 },
                 update: function(sm, scene, camera, partPer, partBias){
@@ -75,7 +76,8 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.9,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(0, 0, 5 + 50 * partPer); 
+                    //camera.position.set(0, 0, 5 + 50 * partPer);
+                    sweet.position.set(0, 5 * partPer, 0);
                 }
             }
         ]
