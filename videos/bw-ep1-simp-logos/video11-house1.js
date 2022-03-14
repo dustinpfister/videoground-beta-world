@@ -5,6 +5,17 @@ VIDEO.daePaths = [
     '../../dae/desk/desk.dae'
 ];
 
+var reMapGroup = function(group){
+    group.children.forEach(function(mesh){
+        var map = mesh.material.map;
+        mesh.material = new THREE.MeshStandardMaterial({
+            emissive: 0xffffff,
+            emissiveMap: map,
+            emissiveIntensity: 1
+        });
+    });
+};
+
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
 
@@ -24,7 +35,10 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(home1);
 
     let desk = scene.userData.desk = VIDEO.daeResults[1].scene.children[2];
-    desk.position.set(2.5,2,3)
+    desk.position.set(2.5,2,3);
+
+    reMapGroup(desk);
+
     scene.add(desk);
 
 /*
