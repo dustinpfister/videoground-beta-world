@@ -12,7 +12,9 @@ VIDEO.scripts = [
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
     // SCENE
-    scene.background = new THREE.Color('#00afaf');
+    var canvasObj = CanvasMod.createCanvasObject(sm);
+    canvasObj.draw({ drawClass: 'def', drawMethod: 'randomGrid', gridWidth:85, gridHeight: 48, gRange: [128, 200], bRange:[128, 200]});
+    scene.background = canvasObj.texture; //new THREE.Color('#00afaf');
     // CAMERA
     camera.position.set(0, 0, 5);
     camera.lookAt(0,0.25,0);
