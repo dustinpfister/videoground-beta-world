@@ -1,7 +1,7 @@
 
 // sweet-baby-rays baby...ohhhh yeahhhh
 VIDEO.daePaths = [
-  '../../dae/sweet-baby-rays/sweet-baby-rays.dae'
+  '../../dae/sweet-baby-rays/sweet-baby-rays-2.dae'
 ];
 
 VIDEO.scripts = [
