@@ -1,16 +1,15 @@
 # desk dae todo list
 
-## () - video file screen cube
-* To have control over what is shown on the screen in the desk, just have a screen cube in the video file
-
 ## () - add a chair mesh object
 * have a chair for the desk and add that as a child of surface
 
-## () - add keyboard and mouse mesh objects
-* have a keyboad and mouse mesh objects and add them as childre of the root surface mesh
+## () - skin raspberry pee amd mouse mesh objects
+* skin the raspberry pee
+* skin the mouse
 
-## () - add a raspberry pee mesh
-* add a raspberry pee mesh object
+## ( done 03/14/2022 ) - add keyboard, mouse and raspberry pee mesh objects
+* (done) have a keyboad and mouse mesh objects and add them as childre of the root surface mesh
+* (done) add a raspberry pee mesh object
 
 ## ( done 03/14/2022 ) - Add a screen mesh
 * (done) start a screen mesh that will be a child of the main surface mesh
