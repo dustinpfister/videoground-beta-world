@@ -3,13 +3,13 @@
 ## () - add a chair mesh object
 * have a chair for the desk and add that as a child of surface
 
-## () - add a raspberry pee mesh
-* add a raspberry pee mesh object
-
 ## () - add keyboard and mouse mesh objects
 * have a keyboad and mouse mesh objects and add them as childre of the root surface mesh
 
-## () - Add a screen mesh
+## () - add a raspberry pee mesh
+* add a raspberry pee mesh object
+
+## () - Add a computer mesh
 * start a screen mesh that will be a child of the main surface mesh
 * this screen mesh might need more than one child but can also be very simple like the desk
 * work out the situation with uvs
