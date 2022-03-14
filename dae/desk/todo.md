@@ -1,5 +1,8 @@
 # desk dae todo list
 
+## () - video file screen cube
+* To have control over what is shown on the screen in the desk, just have a screen cube in the video file
+
 ## () - add a chair mesh object
 * have a chair for the desk and add that as a child of surface
 
@@ -9,12 +12,10 @@
 ## () - add a raspberry pee mesh
 * add a raspberry pee mesh object
 
-## () - Add a computer mesh
-* start a screen mesh that will be a child of the main surface mesh
-* this screen mesh might need more than one child but can also be very simple like the desk
-* work out the situation with uvs
-* have more than one image for the content of the screen in the texture
-* in the video file of ep1 see about switching out what the content on the screen is by changing uv values
+## ( done 03/14/2022 ) - Add a screen mesh
+* (done) start a screen mesh that will be a child of the main surface mesh
+* (done) this screen mesh might need more than one child but can also be very simple like the desk
+* (done) work out the situation with uvs
 
 ## ( done 03/14/2022 ) - start with just a simple desk made of a few box mesh objects
 * (done) I will want to start out with a single box mesh that is the surface
