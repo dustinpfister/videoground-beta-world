@@ -41,6 +41,7 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-
+    camera.position.set(-4, 4, -5 + 8 * sm.bias);
+    camera.lookAt(2, 2, 2);
 };
 
