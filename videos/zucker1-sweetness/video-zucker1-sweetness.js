@@ -76,8 +76,10 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.9,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    //camera.position.set(0, 0, 5 + 50 * partPer);
+                    // move main sweet up
                     sweet.position.set(0, 5 * partPer, 0);
+                    // move collection forward
+                    sweetCollection.position.set(0, 0, -10 + 16 * partPer);
                 }
             }
         ]
