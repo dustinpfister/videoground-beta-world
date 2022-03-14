@@ -5,6 +5,8 @@ VIDEO.daePaths = [
     '../../dae/desk/desk.dae'
 ];
 
+// THIS SHOULD BE PART OF A NEW JAVASCRIPT FILE
+// call it somehting like dae-helpers.js
 var reMapGroup = function(group){
     group.children.forEach(function(mesh){
         var map = mesh.material.map;
