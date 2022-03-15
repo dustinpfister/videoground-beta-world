@@ -6,6 +6,7 @@ VIDEO.daePaths = [
 ];
 
 VIDEO.scripts = [
+  '../js/dae-helpers.js',
   '../js/canvas.js',
   '../js/guy.js',
   '../js/guy-canvas.js',
@@ -31,6 +32,7 @@ VIDEO.init = function(sm, scene, camera){
     // loading home1
     let guyDAE = scene.userData.guyDAE = VIDEO.daeResults[0].scene.children[2];
     guyDAE.position.set(0, 0.25, 0);
+    DAEHelpers.reMapGroup(guyDAE);
     scene.add(guyDAE);
 
     // Guy 1 obj
