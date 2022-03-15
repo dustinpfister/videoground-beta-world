@@ -36,12 +36,15 @@ VIDEO.init = function(sm, scene, camera){
     //DAEHelpers.reMapGroup(guyDAE);
     scene.add(guyDAE);
 
-    guyDAE.children[3].rotation.z = Math.PI / 180 * 45;
+    // get by name works
+    var head = guyDAE.getObjectByName('head'); 
+    head.rotation.z = Math.PI / 180 * 120;
+    console.log(head);
 
     // Guy 1 obj
     GuyCharacters.create(scene, 'guy1');
     var guy1 = scene.userData.guy1;
-    guy1.group.position.set(2.5,0,0)
+    guy1.group.position.set(2.5,0,0);
 
 };
 
