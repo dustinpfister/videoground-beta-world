@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(new THREE.GridHelper(10, 10));
 
     // CAMERA
-    camera.position.set(1, 5, 5);
+    camera.position.set(0, 0, 5);
     camera.lookAt(0, 0, 0);
 
     // LIGHT
@@ -29,8 +29,13 @@ VIDEO.init = function(sm, scene, camera){
 
     // loading home1
     let guyDAE = scene.userData.guyDAE = VIDEO.daeResults[0].scene.children[2];
-    guyDAE.position.set(0,0,0);
+    guyDAE.position.set(0, 0.25, 0);
     scene.add(guyDAE);
+
+    // Guy 1 obj
+    GuyCharacters.create(scene, 'guy1');
+    var guy1 = scene.userData.guy1;
+    guy1.group.position.set(2.5,0,0)
 
 };
 
