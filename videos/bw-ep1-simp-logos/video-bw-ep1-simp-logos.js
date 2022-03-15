@@ -43,24 +43,15 @@ VIDEO.init = function(sm, scene, camera){
 
     scene.add(desk);
 
-/*
-    //var map = world.material.map;
-    world.material = new THREE.MeshStandardMaterial({
-        emissive: 0xffffff,
-        emissiveMap: map,
-        emissiveIntensity: 0.4
-    });
-*/
-
 
 };
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    camera.position.set(0, 4, 0);
-    var radian = Math.PI * 2 * sm.per,
+    camera.position.set(0, 6, 0);
+    var radian = Math.PI / 180 * 30 + Math.PI * 2 * sm.per,
     x = 2 * Math.cos(radian),
     z = 2 * Math.sin(radian);
-    camera.lookAt(x, 3, z);
+    camera.lookAt(x, 3.7, z);
 };
 
