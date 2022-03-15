@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-15T16:44:20</created>
-    <modified>2022-03-15T16:44:20</modified>
+    <created>2022-03-15T17:26:38</created>
+    <modified>2022-03-15T17:26:38</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -138,7 +138,7 @@
     <geometry id="Cube_006-mesh" name="Cube.006">
       <mesh>
         <source id="Cube_006-mesh-positions">
-          <float_array id="Cube_006-mesh-positions-array" count="24">-0.25 -0.25 -1 -0.25 -0.25 1 -0.25 0.25 -1 -0.25 0.25 1 0.25 -0.25 -1 0.25 -0.25 1 0.25 0.25 -1 0.25 0.25 1</float_array>
+          <float_array id="Cube_006-mesh-positions-array" count="24">-0.25 -0.25 -2 -0.25 -0.25 1.19209e-7 -0.25 0.25 -2 -0.25 0.25 1.19209e-7 0.25 -0.25 -2 0.25 -0.25 1.19209e-7 0.25 0.25 -2 0.25 0.25 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#Cube_006-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -170,7 +170,7 @@
     <geometry id="Cube_004-mesh" name="Cube.004">
       <mesh>
         <source id="Cube_004-mesh-positions">
-          <float_array id="Cube_004-mesh-positions-array" count="24">-0.25 -0.25 -1 -0.25 -0.25 1 -0.25 0.25 -1 -0.25 0.25 1 0.25 -0.25 -1 0.25 -0.25 1 0.25 0.25 -1 0.25 0.25 1</float_array>
+          <float_array id="Cube_004-mesh-positions-array" count="24">-0.25 -0.25 -2 -0.25 -0.25 1.19209e-7 -0.25 0.25 -2 -0.25 0.25 1.19209e-7 0.25 -0.25 -2 0.25 -0.25 1.19209e-7 0.25 0.25 -2 0.25 0.25 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#Cube_004-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -315,11 +315,11 @@
           <instance_geometry url="#Cube_000-mesh" name="arm2"/>
         </node>
         <node id="leg2" name="leg2" type="NODE">
-          <matrix sid="transform">1 0 0 -0.35 0 1 0 0 0 0 1 -2.1 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 -0.35 0 1 0 0 0 0 1 -1.1 0 0 0 1</matrix>
           <instance_geometry url="#Cube_006-mesh" name="leg2"/>
         </node>
         <node id="leg1" name="leg1" type="NODE">
-          <matrix sid="transform">1 0 0 0.35 0 1 0 0 0 0 1 -2.1 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 0.35 0 1 0 0 0 0 1 -1.1 0 0 0 1</matrix>
           <instance_geometry url="#Cube_004-mesh" name="leg1"/>
         </node>
         <node id="head" name="head" type="NODE">

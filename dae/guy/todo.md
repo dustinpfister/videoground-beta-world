@@ -9,8 +9,8 @@
 ## () - hand, and forarm mesh objects
 * add hand and forarm mesh obejcts for each arm
 
-## () - orgins for legs
-* change the origin for the legs so that they can eaisly be rotaed like that of the arms
+## ( done 03/15/2022 ) - orgins for legs
+* (done) change the origin for the legs so that they can eaisly be rotaed like that of the arms
 
-## ( done 05/19/2022 ) - start guy folder
+## ( done 03/15/2022 ) - start guy folder
 * (done) start the guy folder
