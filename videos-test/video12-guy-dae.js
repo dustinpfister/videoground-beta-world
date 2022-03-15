@@ -32,8 +32,11 @@ VIDEO.init = function(sm, scene, camera){
     // loading home1
     let guyDAE = scene.userData.guyDAE = VIDEO.daeResults[0].scene.children[2];
     guyDAE.position.set(0, 0.25, 0);
-    DAEHelpers.reMapGroup(guyDAE);
+    // !!! if guy has textures then use this to make them emmisve maps with the standard material
+    //DAEHelpers.reMapGroup(guyDAE);
     scene.add(guyDAE);
+
+    guyDAE.children[3].rotation.z = Math.PI / 180 * 45;
 
     // Guy 1 obj
     GuyCharacters.create(scene, 'guy1');
