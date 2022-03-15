@@ -2,7 +2,7 @@
 // the dae files to use for this video
 VIDEO.daePaths = [
     '../../dae/house1/house1.dae',
-    '../../dae/desk/desk2.dae'
+    '../../dae/desk/deskset.dae'
 ];
 
 // THIS SHOULD BE PART OF A NEW JAVASCRIPT FILE
@@ -36,7 +36,7 @@ VIDEO.init = function(sm, scene, camera){
     home1.position.set(-4, 4,0)
     scene.add(home1);
 
-    let desk = scene.userData.desk = VIDEO.daeResults[1].scene.children[2];
+    let desk = scene.userData.desk = VIDEO.daeResults[1].scene.children[0];
     desk.position.set(2.5,2,3);
 
     reMapGroup(desk);
