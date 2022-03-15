@@ -1,7 +1,7 @@
 # desk dae todo list
 
-## () - add a chair mesh object
-* have a chair for the desk and add that as a child of surface
+## () - add a desk-chair mesh object
+* start a chair for the desk as a new blender file
 
 ## () - skin raspberry pee amd mouse mesh objects
 * skin the raspberry pee
