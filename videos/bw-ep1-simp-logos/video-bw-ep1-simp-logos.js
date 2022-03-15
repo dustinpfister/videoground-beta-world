@@ -57,7 +57,10 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    camera.position.set(-1, 4, -5 + 8 * sm.bias);
-    camera.lookAt(2, 2.5, 2);
+    camera.position.set(0, 4, 0);
+    var radian = Math.PI * 2 * sm.per,
+    x = 2 * Math.cos(radian),
+    z = 2 * Math.sin(radian);
+    camera.lookAt(x, 3, z);
 };
 
