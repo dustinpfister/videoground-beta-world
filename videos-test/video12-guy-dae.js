@@ -41,8 +41,8 @@ VIDEO.init = function(sm, scene, camera){
     head.rotation.z = Math.PI / 180 * 120;
     console.log(guyDAE);
 
-    var arm2 = guyDAE.getObjectByName('arm-2'); 
-    arm2.rotation.x = Math.PI / 180 * 120;
+    var arm2 = guyDAE.getObjectByName('arm2'); 
+    arm2.rotation.x = Math.PI / 180 * -45;
 
     // Guy 1 obj
     GuyCharacters.create(scene, 'guy1');
