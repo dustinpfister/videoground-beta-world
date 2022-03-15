@@ -15,12 +15,13 @@ VIDEO.scripts = [
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
 
-    // gird helper
+    // GRID HELPER AND BACKGROUND
+    scene.background = new THREE.Color('cyan');
     scene.add(new THREE.GridHelper(10, 10));
 
     // CAMERA
-    camera.position.set(0, 0, 5);
-    camera.lookAt(0, 0, 0);
+    //camera.position.set(1, 2, 9);
+    //camera.lookAt(0, 0, 0);
 
     // LIGHT
     var light = new THREE.PointLight(0xffffff, 0.5);
@@ -41,6 +42,7 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-
+    camera.position.set(-4 + 8 * sm.bias, 2, 9);
+    camera.lookAt(1, 0, 0);
 };
 
