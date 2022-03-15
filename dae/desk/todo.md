@@ -6,11 +6,11 @@
 * skin the raspberry pee
 * skin the mouse
 
-## () - start a deskset blender file
-* start a new deskset blender file for just quickly bring in the whole set in terms of desk and chair
+## ( done 03/15/2022 ) - start a deskset blender file
+* (done) start a new deskset blender file for just quickly bring in the whole set in terms of desk and chair
 
 ## ( done 03/15/2022 ) - add a desk-chair mesh object
-* start a chair for the desk as a new blender file
+* (done) start a chair for the desk as a new blender file
 
 ## ( done 03/14/2022 ) - add keyboard, mouse and raspberry pee mesh objects
 * (done) have a keyboad and mouse mesh objects and add them as childre of the root surface mesh
