@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-18T15:32:19</created>
-    <modified>2022-03-18T15:32:19</modified>
+    <created>2022-03-18T15:37:26</created>
+    <modified>2022-03-18T15:37:26</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -102,6 +102,15 @@
     </light>
   </library_lights>
   <library_images>
+    <image id="arm-hand_png_001" name="arm-hand_png_001">
+      <init_from>arm-hand.png.001.png</init_from>
+    </image>
+    <image id="arm-tri_png_001" name="arm-tri_png_001">
+      <init_from>arm-tri.png.001.png</init_from>
+    </image>
+    <image id="arm-base_png_001" name="arm-base_png_001">
+      <init_from>arm-base.png.001.png</init_from>
+    </image>
     <image id="head_png" name="head_png">
       <init_from>head.png</init_from>
     </image>
@@ -119,6 +128,114 @@
     </image>
   </library_images>
   <library_effects>
+    <effect id="arm2-hand-material-effect">
+      <profile_COMMON>
+        <newparam sid="arm-hand_png_001-surface">
+          <surface type="2D">
+            <init_from>arm-hand_png_001</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="arm-hand_png_001-sampler">
+          <sampler2D>
+            <source>arm-hand_png_001-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="arm-hand_png_001-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="arm2-tri-material-effect">
+      <profile_COMMON>
+        <newparam sid="arm-tri_png_001-surface">
+          <surface type="2D">
+            <init_from>arm-tri_png_001</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="arm-tri_png_001-sampler">
+          <sampler2D>
+            <source>arm-tri_png_001-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="arm-tri_png_001-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="arm2-material-effect">
+      <profile_COMMON>
+        <newparam sid="arm-base_png_001-surface">
+          <surface type="2D">
+            <init_from>arm-base_png_001</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="arm-base_png_001-sampler">
+          <sampler2D>
+            <source>arm-base_png_001-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="arm-base_png_001-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
     <effect id="Material-effect">
       <profile_COMMON>
         <newparam sid="head_png-surface">
@@ -301,6 +418,15 @@
     </effect>
   </library_effects>
   <library_materials>
+    <material id="arm2-hand-material-material" name="arm2-hand-material">
+      <instance_effect url="#arm2-hand-material-effect"/>
+    </material>
+    <material id="arm2-tri-material-material" name="arm2-tri-material">
+      <instance_effect url="#arm2-tri-material-effect"/>
+    </material>
+    <material id="arm2-material-material" name="arm2-material">
+      <instance_effect url="#arm2-material-effect"/>
+    </material>
     <material id="Material-material" name="Material">
       <instance_effect url="#Material-effect"/>
     </material>
@@ -318,6 +444,132 @@
     </material>
   </library_materials>
   <library_geometries>
+    <geometry id="arm2-hand-geo-mesh" name="arm2-hand-geo">
+      <mesh>
+        <source id="arm2-hand-geo-mesh-positions">
+          <float_array id="arm2-hand-geo-mesh-positions-array" count="24">-0.25 -0.25 -0.1999999 -0.25 -0.25 0.1999999 -0.25 0.25 -0.1999999 -0.25 0.25 0.1999999 0.25 -0.25 -0.1999999 0.25 -0.25 0.1999999 0.25 0.25 -0.1999999 0.25 0.25 0.1999999</float_array>
+          <technique_common>
+            <accessor source="#arm2-hand-geo-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm2-hand-geo-mesh-normals">
+          <float_array id="arm2-hand-geo-mesh-normals-array" count="18">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#arm2-hand-geo-mesh-normals-array" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm2-hand-geo-mesh-map-0">
+          <float_array id="arm2-hand-geo-mesh-map-0-array" count="72">1.98966e-4 0.7144278 0.3569155 0.999801 1.99002e-4 0.999801 0.3573134 1.98966e-4 0.71403 0.2855722 0.3573135 0.2855722 0.71403 0.9284577 0.3573134 0.6430845 0.7140299 0.6430845 0.71403 0.6426866 0.3573135 0.3573134 0.71403 0.3573134 0.3569155 0.7140299 1.98966e-4 0.3573134 0.3569155 0.3573134 1.98966e-4 0.3569155 0.3569155 1.98966e-4 0.3569155 0.3569155 1.98966e-4 0.7144278 0.3569155 0.7144278 0.3569155 0.999801 0.3573134 1.98966e-4 0.71403 1.99013e-4 0.71403 0.2855722 0.71403 0.9284577 0.3573134 0.9284577 0.3573134 0.6430845 0.71403 0.6426866 0.3573134 0.6426866 0.3573135 0.3573134 0.3569155 0.7140299 1.98966e-4 0.7140299 1.98966e-4 0.3573134 1.98966e-4 0.3569155 1.98966e-4 1.98978e-4 0.3569155 1.98966e-4</float_array>
+          <technique_common>
+            <accessor source="#arm2-hand-geo-mesh-map-0-array" count="36" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="arm2-hand-geo-mesh-vertices">
+          <input semantic="POSITION" source="#arm2-hand-geo-mesh-positions"/>
+        </vertices>
+        <triangles material="arm2-hand-material-material" count="12">
+          <input semantic="VERTEX" source="#arm2-hand-geo-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#arm2-hand-geo-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#arm2-hand-geo-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 1 0 18 3 0 19 2 0 20 3 1 21 7 1 22 6 1 23 7 2 24 5 2 25 4 2 26 5 3 27 1 3 28 0 3 29 6 4 30 4 4 31 0 4 32 3 5 33 1 5 34 5 5 35</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="arm2-tri-geo-mesh" name="arm2-tri-geo">
+      <mesh>
+        <source id="arm2-tri-geo-mesh-positions">
+          <float_array id="arm2-tri-geo-mesh-positions-array" count="24">-0.25 -0.25 -0.75 -0.25 -0.25 0.25 -0.25 0.25 -0.75 -0.25 0.25 0.25 0.25 -0.25 -0.75 0.25 -0.25 0.25 0.25 0.25 -0.75 0.25 0.25 0.25</float_array>
+          <technique_common>
+            <accessor source="#arm2-tri-geo-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm2-tri-geo-mesh-normals">
+          <float_array id="arm2-tri-geo-mesh-normals-array" count="18">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#arm2-tri-geo-mesh-normals-array" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm2-tri-geo-mesh-map-0">
+          <float_array id="arm2-tri-geo-mesh-map-0-array" count="72">0.2497771 0.7488859 2.22807e-4 2.22807e-4 0.2497772 2.22869e-4 0.7497773 0.7488858 0.5002229 2.22807e-4 0.7497773 2.22807e-4 0.4997771 0.7488859 0.2502229 2.22807e-4 0.4997773 2.22869e-4 0.9997772 0.7488857 0.7502229 2.22807e-4 0.9997772 2.22807e-4 0.9999001 9.998e-5 9.998e-5 0.9999001 9.998e-5 9.998e-5 2.22807e-4 0.9988858 0.2497771 0.7493315 0.2497771 0.9988858 0.2497771 0.7488859 2.22807e-4 0.7488859 2.22807e-4 2.22807e-4 0.7497773 0.7488858 0.500223 0.7488859 0.5002229 2.22807e-4 0.4997771 0.7488859 0.2502229 0.7488859 0.2502229 2.22807e-4 0.9997772 0.7488857 0.7502229 0.7488857 0.7502229 2.22807e-4 0.9999001 9.998e-5 0.9999001 0.9999001 9.998e-5 0.9999001 2.22807e-4 0.9988858 2.22807e-4 0.7493315 0.2497771 0.7493315</float_array>
+          <technique_common>
+            <accessor source="#arm2-tri-geo-mesh-map-0-array" count="36" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="arm2-tri-geo-mesh-vertices">
+          <input semantic="POSITION" source="#arm2-tri-geo-mesh-positions"/>
+        </vertices>
+        <triangles material="arm2-tri-material-material" count="12">
+          <input semantic="VERTEX" source="#arm2-tri-geo-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#arm2-tri-geo-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#arm2-tri-geo-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 1 0 18 3 0 19 2 0 20 3 1 21 7 1 22 6 1 23 7 2 24 5 2 25 4 2 26 5 3 27 1 3 28 0 3 29 6 4 30 4 4 31 0 4 32 3 5 33 1 5 34 5 5 35</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="arm2-geo-mesh" name="arm2-geo">
+      <mesh>
+        <source id="arm2-geo-mesh-positions">
+          <float_array id="arm2-geo-mesh-positions-array" count="24">-0.25 -0.25 -0.75 -0.25 -0.25 0.25 -0.25 0.25 -0.75 -0.25 0.25 0.25 0.25 -0.25 -0.75 0.25 -0.25 0.25 0.25 0.25 -0.75 0.25 0.25 0.25</float_array>
+          <technique_common>
+            <accessor source="#arm2-geo-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm2-geo-mesh-normals">
+          <float_array id="arm2-geo-mesh-normals-array" count="18">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#arm2-geo-mesh-normals-array" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm2-geo-mesh-map-0">
+          <float_array id="arm2-geo-mesh-map-0-array" count="72">0.2497771 0.7488859 2.22807e-4 2.22807e-4 0.2497772 2.22869e-4 0.7497773 0.7488858 0.5002229 2.22807e-4 0.7497773 2.22807e-4 0.4997771 0.7488859 0.2502229 2.22807e-4 0.4997773 2.22869e-4 0.9997772 0.7488857 0.7502229 2.22807e-4 0.9997772 2.22807e-4 0.9999001 9.998e-5 9.998e-5 0.9999001 9.998e-5 9.998e-5 2.22807e-4 0.9988858 0.2497771 0.7493315 0.2497771 0.9988858 0.2497771 0.7488859 2.22807e-4 0.7488859 2.22807e-4 2.22807e-4 0.7497773 0.7488858 0.500223 0.7488859 0.5002229 2.22807e-4 0.4997771 0.7488859 0.2502229 0.7488859 0.2502229 2.22807e-4 0.9997772 0.7488857 0.7502229 0.7488857 0.7502229 2.22807e-4 0.9999001 9.998e-5 0.9999001 0.9999001 9.998e-5 0.9999001 2.22807e-4 0.9988858 2.22807e-4 0.7493315 0.2497771 0.7493315</float_array>
+          <technique_common>
+            <accessor source="#arm2-geo-mesh-map-0-array" count="36" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="arm2-geo-mesh-vertices">
+          <input semantic="POSITION" source="#arm2-geo-mesh-positions"/>
+        </vertices>
+        <triangles material="arm2-material-material" count="12">
+          <input semantic="VERTEX" source="#arm2-geo-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#arm2-geo-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#arm2-geo-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 1 0 18 3 0 19 2 0 20 3 1 21 7 1 22 6 1 23 7 2 24 5 2 25 4 2 26 5 3 27 1 3 28 0 3 29 6 4 30 4 4 31 0 4 32 3 5 33 1 5 34 5 5 35</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="leg1-geo-mesh" name="leg1-geo">
       <mesh>
         <source id="leg1-geo-mesh-positions">
@@ -574,6 +826,36 @@
   <library_controllers/>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
+      <node id="arm2" name="arm2" type="NODE">
+        <matrix sid="transform">1 0 0 -0.8999999 0 1 0 0 0 0 1 0.75 0 0 0 1</matrix>
+        <instance_geometry url="#arm2-geo-mesh" name="arm2">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="arm2-material-material" target="#arm2-material-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <node id="arm2-tri" name="arm2-tri" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 -1.05 0 0 0 1</matrix>
+          <instance_geometry url="#arm2-tri-geo-mesh" name="arm2-tri">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="arm2-tri-material-material" target="#arm2-tri-material-material"/>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+          <node id="arm2-hand" name="arm2-hand" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 -0.9999999 0 0 0 1</matrix>
+            <instance_geometry url="#arm2-hand-geo-mesh" name="arm2-hand">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="arm2-hand-material-material" target="#arm2-hand-material-material"/>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+        </node>
+      </node>
       <node id="Camera" name="Camera" type="NODE">
         <matrix sid="transform">0.6859207 -0.3240135 0.6515582 7.481132 0.7276763 0.3054208 -0.6141704 -6.50764 0 0.8953956 0.4452714 5.343665 0 0 0 1</matrix>
         <instance_camera url="#Camera-camera"/>
