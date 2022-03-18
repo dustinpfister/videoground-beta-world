@@ -1,8 +1,12 @@
 # guy2 dae folder todo list
 
 ## () - have more than one set of textures
-* have a arm-g2, body-g2, leg-g2, and head-g2, ect files for 'guy2'
+* I will want two sets of textures and make two dae files
+* have a guy2-g1.dae for 'guy1' character
+* have a guy2-g2.dae for 'guy2' character
 
-## () - start a guy2 folder based off of this one
-* add caff and foor mesh objects for each leg
-* add hand and forarm mesh obejcts for each arm
+## () - legs
+* have just thigh and caff mesh objects for each leg for now
+
+## ( done 03/18/2022 ) - start a guy2 folder based off of this one
+* (done) add hand and forarm mesh obejcts for each arm
