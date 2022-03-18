@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-18T15:58:29</created>
-    <modified>2022-03-18T15:58:29</modified>
+    <created>2022-03-18T16:11:26</created>
+    <modified>2022-03-18T16:11:26</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -102,6 +102,12 @@
     </light>
   </library_lights>
   <library_images>
+    <image id="leg-caff_png" name="leg-caff_png">
+      <init_from>leg-caff.png</init_from>
+    </image>
+    <image id="leg-base_png" name="leg-base_png">
+      <init_from>leg-base.png</init_from>
+    </image>
     <image id="arm-hand_png" name="arm-hand_png">
       <init_from>arm-hand.png</init_from>
     </image>
@@ -114,20 +120,155 @@
     <image id="head_png" name="head_png">
       <init_from>head.png</init_from>
     </image>
-    <image id="arm-hand_png_001" name="arm-hand_png_001">
-      <init_from>arm-hand.png.001.png</init_from>
-    </image>
-    <image id="arm-tri_png_001" name="arm-tri_png_001">
-      <init_from>arm-tri.png.001.png</init_from>
-    </image>
-    <image id="arm-base_png_001" name="arm-base_png_001">
-      <init_from>arm-base.png.001.png</init_from>
-    </image>
     <image id="body_png" name="body_png">
       <init_from>body.png</init_from>
     </image>
   </library_images>
   <library_effects>
+    <effect id="leg1-caff-material-effect">
+      <profile_COMMON>
+        <newparam sid="leg-caff_png-surface">
+          <surface type="2D">
+            <init_from>leg-caff_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="leg-caff_png-sampler">
+          <sampler2D>
+            <source>leg-caff_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="leg-caff_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="leg1-material-effect">
+      <profile_COMMON>
+        <newparam sid="leg-base_png-surface">
+          <surface type="2D">
+            <init_from>leg-base_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="leg-base_png-sampler">
+          <sampler2D>
+            <source>leg-base_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="leg-base_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="lg2-caff-material-effect">
+      <profile_COMMON>
+        <newparam sid="leg-caff_png-surface">
+          <surface type="2D">
+            <init_from>leg-caff_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="leg-caff_png-sampler">
+          <sampler2D>
+            <source>leg-caff_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="leg-caff_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="leg2-material-effect">
+      <profile_COMMON>
+        <newparam sid="leg-base_png-surface">
+          <surface type="2D">
+            <init_from>leg-base_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="leg-base_png-sampler">
+          <sampler2D>
+            <source>leg-base_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="leg-base_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
     <effect id="arm2-hand-material-effect">
       <profile_COMMON>
         <newparam sid="arm-hand_png-surface">
@@ -274,14 +415,14 @@
     </effect>
     <effect id="arm1-hand-material-effect">
       <profile_COMMON>
-        <newparam sid="arm-hand_png_001-surface">
+        <newparam sid="arm-hand_png-surface">
           <surface type="2D">
-            <init_from>arm-hand_png_001</init_from>
+            <init_from>arm-hand_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="arm-hand_png_001-sampler">
+        <newparam sid="arm-hand_png-sampler">
           <sampler2D>
-            <source>arm-hand_png_001-surface</source>
+            <source>arm-hand_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -293,7 +434,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <texture texture="arm-hand_png_001-sampler"/>
+              <texture texture="arm-hand_png-sampler"/>
             </diffuse>
             <specular>
               <color sid="specular">0.5 0.5 0.5 1</color>
@@ -310,14 +451,14 @@
     </effect>
     <effect id="arm1-tri-material-effect">
       <profile_COMMON>
-        <newparam sid="arm-tri_png_001-surface">
+        <newparam sid="arm-tri_png-surface">
           <surface type="2D">
-            <init_from>arm-tri_png_001</init_from>
+            <init_from>arm-tri_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="arm-tri_png_001-sampler">
+        <newparam sid="arm-tri_png-sampler">
           <sampler2D>
-            <source>arm-tri_png_001-surface</source>
+            <source>arm-tri_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -329,7 +470,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <texture texture="arm-tri_png_001-sampler"/>
+              <texture texture="arm-tri_png-sampler"/>
             </diffuse>
             <specular>
               <color sid="specular">0.5 0.5 0.5 1</color>
@@ -346,14 +487,14 @@
     </effect>
     <effect id="arm1-material-effect">
       <profile_COMMON>
-        <newparam sid="arm-base_png_001-surface">
+        <newparam sid="arm-base_png-surface">
           <surface type="2D">
-            <init_from>arm-base_png_001</init_from>
+            <init_from>arm-base_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="arm-base_png_001-sampler">
+        <newparam sid="arm-base_png-sampler">
           <sampler2D>
-            <source>arm-base_png_001-surface</source>
+            <source>arm-base_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -365,7 +506,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <texture texture="arm-base_png_001-sampler"/>
+              <texture texture="arm-base_png-sampler"/>
             </diffuse>
             <specular>
               <color sid="specular">0.5 0.5 0.5 1</color>
@@ -418,6 +559,18 @@
     </effect>
   </library_effects>
   <library_materials>
+    <material id="leg1-caff-material-material" name="leg1-caff-material">
+      <instance_effect url="#leg1-caff-material-effect"/>
+    </material>
+    <material id="leg1-material-material" name="leg1-material">
+      <instance_effect url="#leg1-material-effect"/>
+    </material>
+    <material id="lg2-caff-material-material" name="lg2-caff-material">
+      <instance_effect url="#lg2-caff-material-effect"/>
+    </material>
+    <material id="leg2-material-material" name="leg2-material">
+      <instance_effect url="#leg2-material-effect"/>
+    </material>
     <material id="arm2-hand-material-material" name="arm2-hand-material">
       <instance_effect url="#arm2-hand-material-effect"/>
     </material>
@@ -478,7 +631,7 @@
         <vertices id="leg1-caff-mesh-vertices">
           <input semantic="POSITION" source="#leg1-caff-mesh-positions"/>
         </vertices>
-        <triangles count="12">
+        <triangles material="leg1-caff-material-material" count="12">
           <input semantic="VERTEX" source="#leg1-caff-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#leg1-caff-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#leg1-caff-mesh-map-0" offset="2" set="0"/>
@@ -520,7 +673,7 @@
         <vertices id="leg1-geo-mesh-vertices">
           <input semantic="POSITION" source="#leg1-geo-mesh-positions"/>
         </vertices>
-        <triangles count="12">
+        <triangles material="leg1-material-material" count="12">
           <input semantic="VERTEX" source="#leg1-geo-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#leg1-geo-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#leg1-geo-mesh-map-0" offset="2" set="0"/>
@@ -562,7 +715,7 @@
         <vertices id="leg2-caff-mesh-vertices">
           <input semantic="POSITION" source="#leg2-caff-mesh-positions"/>
         </vertices>
-        <triangles count="12">
+        <triangles material="lg2-caff-material-material" count="12">
           <input semantic="VERTEX" source="#leg2-caff-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#leg2-caff-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#leg2-caff-mesh-map-0" offset="2" set="0"/>
@@ -604,7 +757,7 @@
         <vertices id="leg2-geo-mesh-vertices">
           <input semantic="POSITION" source="#leg2-geo-mesh-positions"/>
         </vertices>
-        <triangles count="12">
+        <triangles material="leg2-material-material" count="12">
           <input semantic="VERTEX" source="#leg2-geo-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#leg2-geo-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#leg2-geo-mesh-map-0" offset="2" set="0"/>
@@ -961,7 +1114,7 @@
         <instance_light url="#Lamp-light"/>
       </node>
       <node id="body" name="body" type="NODE">
-        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <matrix sid="transform">1 0 0 0 0 -4.37114e-8 1 0 0 -1 -4.37114e-8 0 0 0 0 1</matrix>
         <instance_geometry url="#body-geo-mesh" name="body">
           <bind_material>
             <technique_common>
@@ -971,18 +1124,42 @@
         </instance_geometry>
         <node id="leg1" name="leg1" type="NODE">
           <matrix sid="transform">1 0 0 0.25 0 1 0 0 0 0 1 -1.1 0 0 0 1</matrix>
-          <instance_geometry url="#leg1-geo-mesh" name="leg1"/>
+          <instance_geometry url="#leg1-geo-mesh" name="leg1">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="leg1-material-material" target="#leg1-material-material"/>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
           <node id="leg1-caff" name="leg1-caff" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 -1.25 0 0 0 1</matrix>
-            <instance_geometry url="#leg1-caff-mesh" name="leg1-caff"/>
+            <matrix sid="transform">1 -8.88178e-16 0 0 0 1 0 0 0 0 1 -1.25 0 0 0 1</matrix>
+            <instance_geometry url="#leg1-caff-mesh" name="leg1-caff">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="leg1-caff-material-material" target="#leg1-caff-material-material"/>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
           </node>
         </node>
         <node id="leg2" name="leg2" type="NODE">
           <matrix sid="transform">1 0 0 -0.25 0 1 0 0 0 0 1 -1.1 0 0 0 1</matrix>
-          <instance_geometry url="#leg2-geo-mesh" name="leg2"/>
+          <instance_geometry url="#leg2-geo-mesh" name="leg2">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="leg2-material-material" target="#leg2-material-material"/>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
           <node id="leg2-caff" name="leg2-caff" type="NODE">
             <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 -1.25 0 0 0 1</matrix>
-            <instance_geometry url="#leg2-caff-mesh" name="leg2-caff"/>
+            <instance_geometry url="#leg2-caff-mesh" name="leg2-caff">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="lg2-caff-material-material" target="#lg2-caff-material-material"/>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
           </node>
         </node>
         <node id="arm2" name="arm2" type="NODE">
