@@ -5,8 +5,8 @@
 * have a guy2-g1.dae for 'guy1' character
 * have a guy2-g2.dae for 'guy2' character
 
-## () - legs
-* have just thigh and caff mesh objects for each leg for now
+## ( done 03/18/2022 ) - legs
+* (done) have just thigh and caff mesh objects for each leg for now
 
 ## ( done 03/18/2022 ) - start a guy2 folder based off of this one
 * (done) add hand and forarm mesh obejcts for each arm
