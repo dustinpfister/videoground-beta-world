@@ -1,18 +1,26 @@
 # VideoGround-beta-world video files todo list
 
-<!-- HOUSE 1 DAE FOLDER -->
+<!-- HOUSE 1 -->
 
-## () - start a guy dae folder
-* have a guy1 blend file that is just a blender version of guy.js
-* have a guy2 blend that is a slighly more advanced guy.js with three mesh objects for each arm and leg rather than just one
+## () - house1-bedroom dae file
+* 'house1' might have to be a few files actually, some of which are just an outer shell, while others are more detailed
+* start a house1-bedroom blend project that will be a full bedroom scene of house1
+* start house1-bedroom with just the walls, celling, and floor.
+* there will be one doorway in the bedroom
+* there will be one window in the bedroom.
+* have a bed in the room
+* have the desk in the room
 
-## () - bedroom dae file
-* start a bedroom blend project that will be a full bedroom scene
+<!-- ITEMS -->
+
+## () - bed dae folder
+* create a bed dae folder
+* just have a simple box area for this and move on for now
+
+<!-- DONE -->
 
 ## ( done 03/12/2022) - start model for house1
 * (done) start the house1 folder
-
-<!-- DONE -->
 
 ## ( done 03/12/2022 ) - test-ico dae, and test video 10
 * (done) Start a test test ico dae in the world folder where the aim is to just apply a texture to an ico sphere
