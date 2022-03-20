@@ -1,23 +1,33 @@
 # VideoGround-beta-world video files todo list
 
+# Some things to keep in mind here
+* follow a ruff scale of 1 = US foot
+
+<!-- GUY -->
+
+## () - guy2 adjust scale
+* adjust over all scale of guy so that the size is 6 units high, 2 units wide, and 1 unit deep
+* bottom of foot to knee should be 1.5
+* knee to waste should also be about 1.5 ( 1.5 + 1.5 = 3)
+* sense bottom of foot to waste is 3 the remainign distance to the top of the head should be 3 for a total of 6
+
 <!-- HOUSE 1 -->
 
 ## () - house1-bedroom dae file
-* 'house1' might have to be a few files actually, some of which are just an outer shell, while others are more detailed
-* start a house1-bedroom blend project that will be a full bedroom scene of house1
-* start house1-bedroom with just the walls, celling, and floor.
-* there will be one doorway in the bedroom
-* there will be one window in the bedroom.
-* have a bed in the room
-* have the desk in the room
+* (done) start a house1-bedroom project that will be a full 'bedroom only' scene of house1
+* (done) start house1-bedroom with just the walls, and floor.
+* (done) have a bed in the room
+* (done) have the desk in the room
+* () there will be one doorway in the bedroom
+* () there will be one window in the bedroom, with no view of outside for now.
 
 <!-- ITEMS -->
 
-## () - bed dae folder
-* create a bed dae folder
-* just have a simple box area for this and move on for now
-
 <!-- DONE -->
+
+## ( done 03/19/2022 ) - bed dae folder
+* (done) create a bed dae folder
+* (done) just have a simple box area for this and move on for now
 
 ## ( done 03/12/2022) - start model for house1
 * (done) start the house1 folder
