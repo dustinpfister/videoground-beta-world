@@ -3,6 +3,13 @@
 # Some things to keep in mind here
 * follow a ruff scale of 1 = US foot
 
+
+<!-- ITEMS -->
+
+## () - make any needed adjustments to chair and desk models for new guy2 model
+* height of chair from bottom to area that the guy sits on should be about 1.5, but adjust so that the feet are on the ground
+* height of desk legs should be maybe 2.5? Adjust this figure as needed until it just looks okay
+
 <!-- GUY -->
 
 ## () - guy2 adjust scale
@@ -20,8 +27,6 @@
 * (done) have the desk in the room
 * () there will be one doorway in the bedroom
 * () there will be one window in the bedroom, with no view of outside for now.
-
-<!-- ITEMS -->
 
 <!-- DONE -->
 
