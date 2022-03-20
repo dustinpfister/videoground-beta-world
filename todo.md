@@ -25,6 +25,7 @@
 * (done) start house1-bedroom with just the walls, and floor.
 * (done) have a bed in the room
 * (done) have the desk in the room
+* () floor should be 12x9
 * () there will be one doorway in the bedroom
 * () there will be one window in the bedroom, with no view of outside for now.
 
