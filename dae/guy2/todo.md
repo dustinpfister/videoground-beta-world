@@ -1,9 +1,14 @@
 # guy2 dae folder todo list
 
-## () - have more than one set of textures
-* I will want two sets of textures and make two dae files
-* have a guy2-g1.dae for 'guy1' character
-* have a guy2-g2.dae for 'guy2' character
+## () - have a final zucker1 set of textures
+* have a zucker1 set of textures
+
+## () - have a final guy2 set of textures
+* have a guy2 set of textures
+
+## () - have a final guy1 set of textures
+* (done) start guy1 set of textures started with the head
+* have a guy1 set of textures
 
 ## ( done 03/22/2022 ) - size fix to 6 'feet'
 * (done) updated height of guy to 6 'feet' scale where 1 unit is a foot
