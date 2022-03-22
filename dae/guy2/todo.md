@@ -5,6 +5,9 @@
 * have a guy2-g1.dae for 'guy1' character
 * have a guy2-g2.dae for 'guy2' character
 
+## ( done 03/22/2022 ) - size fix to 6 'feet'
+* (done) updated height of guy to 6 'feet' scale where 1 unit is a foot
+
 ## ( done 03/18/2022 ) - legs
 * (done) have just thigh and caff mesh objects for each leg for now
 
