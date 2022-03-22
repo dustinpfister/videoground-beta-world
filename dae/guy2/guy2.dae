@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-18T16:11:26</created>
-    <modified>2022-03-18T16:11:26</modified>
+    <created>2022-03-22T18:23:47</created>
+    <modified>2022-03-22T18:23:47</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -600,7 +600,7 @@
     <geometry id="leg1-caff-mesh" name="leg1-caff">
       <mesh>
         <source id="leg1-caff-mesh-positions">
-          <float_array id="leg1-caff-mesh-positions-array" count="24">-0.25 -0.25 -0.7499998 -0.25 -0.25 1.19209e-7 -0.25 0.25 -0.7499998 -0.25 0.25 1.19209e-7 0.25 -0.25 -0.7499998 0.25 -0.25 1.19209e-7 0.25 0.25 -0.7499998 0.25 0.25 1.19209e-7</float_array>
+          <float_array id="leg1-caff-mesh-positions-array" count="24">-0.25 -0.25 -1.5 -0.25 -0.25 1.19209e-7 -0.25 0.25 -1.5 -0.25 0.25 1.19209e-7 0.25 -0.25 -1.5 0.25 -0.25 1.19209e-7 0.25 0.25 -1.5 0.25 0.25 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#leg1-caff-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -642,7 +642,7 @@
     <geometry id="leg1-geo-mesh" name="leg1-geo">
       <mesh>
         <source id="leg1-geo-mesh-positions">
-          <float_array id="leg1-geo-mesh-positions-array" count="24">-0.25 -0.25 -1.2 -0.25 -0.25 1.19209e-7 -0.25 0.25 -1.2 -0.25 0.25 1.19209e-7 0.25 -0.25 -1.2 0.25 -0.25 1.19209e-7 0.25 0.25 -1.2 0.25 0.25 1.19209e-7</float_array>
+          <float_array id="leg1-geo-mesh-positions-array" count="24">-0.25 -0.25 -1.5 -0.25 -0.25 1.19209e-7 -0.25 0.25 -1.5 -0.25 0.25 1.19209e-7 0.25 -0.25 -1.5 0.25 -0.25 1.19209e-7 0.25 0.25 -1.5 0.25 0.25 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#leg1-geo-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -684,7 +684,7 @@
     <geometry id="leg2-caff-mesh" name="leg2-caff">
       <mesh>
         <source id="leg2-caff-mesh-positions">
-          <float_array id="leg2-caff-mesh-positions-array" count="24">-0.25 -0.25 -0.7499998 -0.25 -0.25 1.19209e-7 -0.25 0.25 -0.7499998 -0.25 0.25 1.19209e-7 0.25 -0.25 -0.7499998 0.25 -0.25 1.19209e-7 0.25 0.25 -0.7499998 0.25 0.25 1.19209e-7</float_array>
+          <float_array id="leg2-caff-mesh-positions-array" count="24">-0.25 -0.25 -1.5 -0.25 -0.25 1.19209e-7 -0.25 0.25 -1.5 -0.25 0.25 1.19209e-7 0.25 -0.25 -1.5 0.25 -0.25 1.19209e-7 0.25 0.25 -1.5 0.25 0.25 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#leg2-caff-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -704,7 +704,7 @@
           </technique_common>
         </source>
         <source id="leg2-caff-mesh-map-0">
-          <float_array id="leg2-caff-mesh-map-0-array" count="72">0.2000399 0.7995603 1.9984e-4 1.9984e-4 0.2000398 1.9984e-4 0.4002798 0.7995603 0.2004396 1.9984e-4 0.4002797 1.9984e-4 0.6005196 0.7995603 0.4006794 1.9984e-4 0.6005195 1.9984e-4 0.8007594 0.7995603 0.6009193 1.9984e-4 0.8007594 1.9984e-4 0.9998999 9.998e-5 9.998e-5 0.9999001 9.998e-5 1.00218e-4 0.2004396 0.9998 0.4002798 0.79996 0.4002797 0.9998 0.2000399 0.7995603 1.9984e-4 0.7995603 1.9984e-4 1.9984e-4 0.4002798 0.7995603 0.2004396 0.7995603 0.2004396 1.9984e-4 0.6005196 0.7995603 0.4006794 0.7995603 0.4006794 1.9984e-4 0.8007594 0.7995603 0.6009193 0.7995602 0.6009193 1.9984e-4 0.9998999 9.998e-5 0.9998999 0.9999001 9.998e-5 0.9999001 0.2004396 0.9998 0.2004396 0.79996 0.4002798 0.79996</float_array>
+          <float_array id="leg2-caff-mesh-map-0-array" count="72">0.7497771 0.7488859 0.5002228 2.22931e-4 0.7497771 2.22807e-4 0.9997771 0.7488857 0.7502229 2.22869e-4 0.9997771 2.22807e-4 0.4997771 0.7488859 0.2502228 2.22931e-4 0.4997771 2.22807e-4 0.2497771 0.7488859 2.22884e-4 2.22869e-4 0.2497771 2.22807e-4 0.2502228 0.9988858 0.4997771 0.7493315 0.4997771 0.9988858 2.22807e-4 0.9988858 0.2497771 0.7493315 0.2497771 0.9988858 0.7497771 0.7488859 0.5002228 0.7488859 0.5002228 2.22931e-4 0.9997771 0.7488857 0.7502228 0.7488857 0.7502229 2.22869e-4 0.4997771 0.7488859 0.2502228 0.7488859 0.2502228 2.22931e-4 0.2497771 0.7488859 2.22807e-4 0.7488858 2.22884e-4 2.22869e-4 0.2502228 0.9988858 0.2502228 0.7493315 0.4997771 0.7493315 2.22807e-4 0.9988858 2.22815e-4 0.7493315 0.2497771 0.7493315</float_array>
           <technique_common>
             <accessor source="#leg2-caff-mesh-map-0-array" count="36" stride="2">
               <param name="S" type="float"/>
@@ -726,7 +726,7 @@
     <geometry id="leg2-geo-mesh" name="leg2-geo">
       <mesh>
         <source id="leg2-geo-mesh-positions">
-          <float_array id="leg2-geo-mesh-positions-array" count="24">-0.25 -0.25 -1.2 -0.25 -0.25 1.19209e-7 -0.25 0.25 -1.2 -0.25 0.25 1.19209e-7 0.25 -0.25 -1.2 0.25 -0.25 1.19209e-7 0.25 0.25 -1.2 0.25 0.25 1.19209e-7</float_array>
+          <float_array id="leg2-geo-mesh-positions-array" count="24">-0.25 -0.25 -1.5 -0.25 -0.25 1.19209e-7 -0.25 0.25 -1.5 -0.25 0.25 1.19209e-7 0.25 -0.25 -1.5 0.25 -0.25 1.19209e-7 0.25 0.25 -1.5 0.25 0.25 1.19209e-7</float_array>
           <technique_common>
             <accessor source="#leg2-geo-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -746,7 +746,7 @@
           </technique_common>
         </source>
         <source id="leg2-geo-mesh-map-0">
-          <float_array id="leg2-geo-mesh-map-0-array" count="72">0.2000399 0.7995603 1.9984e-4 1.9984e-4 0.2000398 1.9984e-4 0.4002798 0.7995603 0.2004396 1.9984e-4 0.4002797 1.9984e-4 0.6005196 0.7995603 0.4006794 1.9984e-4 0.6005195 1.9984e-4 0.8007594 0.7995603 0.6009193 1.9984e-4 0.8007594 1.9984e-4 0.9999001 9.998e-5 9.998e-5 0.9999001 9.998e-5 9.998e-5 0.2004396 0.9998 0.4002798 0.79996 0.4002797 0.9998 0.2000399 0.7995603 1.9984e-4 0.7995603 1.9984e-4 1.9984e-4 0.4002798 0.7995603 0.2004396 0.7995603 0.2004396 1.9984e-4 0.6005196 0.7995603 0.4006794 0.7995603 0.4006794 1.9984e-4 0.8007594 0.7995603 0.6009193 0.7995602 0.6009193 1.9984e-4 0.9999001 9.998e-5 0.9999001 0.9999001 9.998e-5 0.9999001 0.2004396 0.9998 0.2004396 0.79996 0.4002798 0.79996</float_array>
+          <float_array id="leg2-geo-mesh-map-0-array" count="72">0.7497771 0.7488859 0.5002228 2.22931e-4 0.7497771 2.22807e-4 0.9997771 0.7488857 0.7502229 2.22869e-4 0.9997771 2.22807e-4 0.4997771 0.7488859 0.2502228 2.22931e-4 0.4997771 2.22807e-4 0.2497771 0.7488859 2.22884e-4 2.22869e-4 0.2497771 2.22807e-4 0.2502228 0.9988858 0.4997771 0.7493315 0.4997771 0.9988858 2.22807e-4 0.9988858 0.2497771 0.7493315 0.2497771 0.9988858 0.7497771 0.7488859 0.5002228 0.7488859 0.5002228 2.22931e-4 0.9997771 0.7488857 0.7502228 0.7488857 0.7502229 2.22869e-4 0.4997771 0.7488859 0.2502228 0.7488859 0.2502228 2.22931e-4 0.2497771 0.7488859 2.22807e-4 0.7488858 2.22884e-4 2.22869e-4 0.2502228 0.9988858 0.2502228 0.7493315 0.4997771 0.7493315 2.22807e-4 0.9988858 2.22815e-4 0.7493315 0.2497771 0.7493315</float_array>
           <technique_common>
             <accessor source="#leg2-geo-mesh-map-0-array" count="36" stride="2">
               <param name="S" type="float"/>
@@ -894,7 +894,7 @@
     <geometry id="head-geo-mesh" name="head-geo">
       <mesh>
         <source id="head-geo-mesh-positions">
-          <float_array id="head-geo-mesh-positions-array" count="24">-0.5 -0.5 -0.5 -0.5 -0.5 0.5 -0.5 0.5 -0.5 -0.5 0.5 0.5 0.5 -0.5 -0.5 0.5 -0.5 0.5 0.5 0.5 -0.5 0.5 0.5 0.5</float_array>
+          <float_array id="head-geo-mesh-positions-array" count="24">-0.4 -0.4 -0.5 -0.4 -0.4 0.3 -0.4 0.4 -0.5 -0.4 0.4 0.3 0.4 -0.4 -0.5 0.4 -0.4 0.3 0.4 0.4 -0.5 0.4 0.4 0.3</float_array>
           <technique_common>
             <accessor source="#head-geo-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -914,7 +914,7 @@
           </technique_common>
         </source>
         <source id="head-geo-mesh-map-0">
-          <float_array id="head-geo-mesh-map-0-array" count="72">0.6668664 1.9976e-4 0.9998002 0.3331335 0.6668664 0.3331335 1.9976e-4 0.6668664 0.3331335 0.9998002 1.99771e-4 0.9998002 0.6664669 0.6664669 0.3335331 0.3335331 0.6664668 0.3335331 0.3331335 0.6664669 1.9976e-4 0.3335331 0.3331335 0.3335331 0.3335331 0.3331336 0.6664669 1.9976e-4 0.6664669 0.3331335 1.9976e-4 0.3331336 0.3331335 1.9976e-4 0.3331335 0.3331336 0.6668664 1.9976e-4 0.9998002 1.9976e-4 0.9998002 0.3331335 1.9976e-4 0.6668664 0.3331335 0.6668665 0.3331335 0.9998002 0.6664669 0.6664669 0.3335331 0.6664669 0.3335331 0.3335331 0.3331335 0.6664669 1.99771e-4 0.6664669 1.9976e-4 0.3335331 0.3335331 0.3331336 0.3335331 1.9976e-4 0.6664669 1.9976e-4 1.9976e-4 0.3331336 1.9976e-4 1.99782e-4 0.3331335 1.9976e-4</float_array>
+          <float_array id="head-geo-mesh-map-0-array" count="72">1.9976e-4 0.6668664 0.3331335 0.9998002 1.99787e-4 0.9998002 1.9976e-4 0.3335331 0.3331336 0.6664669 1.99787e-4 0.6664669 0.666467 0.3331335 0.3335331 1.9976e-4 0.666467 1.9976e-4 0.3331336 0.3331335 1.9976e-4 1.9976e-4 0.3331335 1.9976e-4 0.6668665 0.3331335 0.9998002 1.9976e-4 0.9998002 0.3331335 0.3335331 0.6664669 0.6664669 0.3335331 0.666467 0.6664669 1.9976e-4 0.6668664 0.3331335 0.6668664 0.3331335 0.9998002 1.9976e-4 0.3335331 0.3331336 0.3335331 0.3331336 0.6664669 0.666467 0.3331335 0.3335331 0.3331335 0.3335331 1.9976e-4 0.3331336 0.3331335 1.99774e-4 0.3331335 1.9976e-4 1.9976e-4 0.6668665 0.3331335 0.6668665 1.9976e-4 0.9998002 1.9976e-4 0.3335331 0.6664669 0.3335331 0.3335331 0.6664669 0.3335331</float_array>
           <technique_common>
             <accessor source="#head-geo-mesh-map-0-array" count="36" stride="2">
               <param name="S" type="float"/>
@@ -1123,7 +1123,7 @@
           </bind_material>
         </instance_geometry>
         <node id="leg1" name="leg1" type="NODE">
-          <matrix sid="transform">1 0 0 0.25 0 1 0 0 0 0 1 -1.1 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 0.25 0 1 0 0 0 0 1 -1.05 0 0 0 1</matrix>
           <instance_geometry url="#leg1-geo-mesh" name="leg1">
             <bind_material>
               <technique_common>
@@ -1132,7 +1132,7 @@
             </bind_material>
           </instance_geometry>
           <node id="leg1-caff" name="leg1-caff" type="NODE">
-            <matrix sid="transform">1 -8.88178e-16 0 0 0 1 0 0 0 0 1 -1.25 0 0 0 1</matrix>
+            <matrix sid="transform">1 -8.88178e-16 0 0 0 1 0 0 0 0 1 -1.55 0 0 0 1</matrix>
             <instance_geometry url="#leg1-caff-mesh" name="leg1-caff">
               <bind_material>
                 <technique_common>
@@ -1143,7 +1143,7 @@
           </node>
         </node>
         <node id="leg2" name="leg2" type="NODE">
-          <matrix sid="transform">1 0 0 -0.25 0 1 0 0 0 0 1 -1.1 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 -0.25 0 1 0 0 0 0 1 -1.05 0 0 0 1</matrix>
           <instance_geometry url="#leg2-geo-mesh" name="leg2">
             <bind_material>
               <technique_common>
@@ -1152,7 +1152,7 @@
             </bind_material>
           </instance_geometry>
           <node id="leg2-caff" name="leg2-caff" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 -1.25 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 -1.55 0 0 0 1</matrix>
             <instance_geometry url="#leg2-caff-mesh" name="leg2-caff">
               <bind_material>
                 <technique_common>
@@ -1163,7 +1163,7 @@
           </node>
         </node>
         <node id="arm2" name="arm2" type="NODE">
-          <matrix sid="transform">1 0 0 -0.8999999 0 1 0 0 0 0 1 0.75 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 -0.7999999 0 1 0 0 0 0 1 0.75 0 0 0 1</matrix>
           <instance_geometry url="#arm2-geo-mesh" name="arm2">
             <bind_material>
               <technique_common>
@@ -1193,7 +1193,7 @@
           </node>
         </node>
         <node id="head" name="head" type="NODE">
-          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 1.6 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 1.55 0 0 0 1</matrix>
           <instance_geometry url="#head-geo-mesh" name="head">
             <bind_material>
               <technique_common>
@@ -1203,7 +1203,7 @@
           </instance_geometry>
         </node>
         <node id="arm1" name="arm1" type="NODE">
-          <matrix sid="transform">1 0 0 0.9 0 1 0 0 0 0 1 0.75 0 0 0 1</matrix>
+          <matrix sid="transform">1 0 0 0.8 0 1 0 0 0 0 1 0.75 0 0 0 1</matrix>
           <instance_geometry url="#arm1-geo-mesh" name="arm1">
             <bind_material>
               <technique_common>
