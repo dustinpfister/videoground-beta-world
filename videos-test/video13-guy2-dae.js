@@ -14,15 +14,8 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
 
     // GRID HELPER AND BACKGROUND
-    scene.background = new THREE.Color('cyan');
+    scene.background = new THREE.Color('black');
     scene.add(new THREE.GridHelper(10, 10));
-
-
-
-    // LIGHT
-    //var light = new THREE.PointLight(0xffffff, 0.5);
-    //light.position.set(2, 3, 2)
-    //scene.add(light);
 
     // loading home1
     let guyDAE = scene.userData.guyDAE = VIDEO.daeResults[0].scene.children[2];
@@ -31,23 +24,13 @@ VIDEO.init = function(sm, scene, camera){
     DAEHelpers.reMapGroup(guyDAE);
     scene.add(guyDAE);
 
-    // get by name works
+    // get by name
 /*
     var head = guyDAE.getObjectByName('head'); 
     head.rotation.z = Math.PI / 180 * 120;
     console.log(guyDAE);
-
-    var arm2 = guyDAE.getObjectByName('arm2'); 
-    arm2.rotation.x = Math.PI / 180 * -45;
-
-    var leg2 = guyDAE.getObjectByName('leg2'); 
-    leg2.rotation.x = Math.PI / 180 * -45;
 */
 
-    // Guy 1 obj
-    //GuyCharacters.create(scene, 'guy1');
-    //var guy1 = scene.userData.guy1;
-    //guy1.group.position.set(2.5,0,0);
 
 };
 
