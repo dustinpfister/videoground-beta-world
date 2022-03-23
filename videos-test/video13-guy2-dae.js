@@ -20,15 +20,15 @@ VIDEO.init = function(sm, scene, camera){
 
 
     // LIGHT
-    var light = new THREE.PointLight(0xffffff, 0.5);
-    light.position.set(2, 3, 2)
-    scene.add(light);
+    //var light = new THREE.PointLight(0xffffff, 0.5);
+    //light.position.set(2, 3, 2)
+    //scene.add(light);
 
     // loading home1
     let guyDAE = scene.userData.guyDAE = VIDEO.daeResults[0].scene.children[2];
     guyDAE.position.set(0, 0.25, 0);
     // !!! if guy has textures then use this to make them emmisve maps with the standard material
-    //DAEHelpers.reMapGroup(guyDAE);
+    DAEHelpers.reMapGroup(guyDAE);
     scene.add(guyDAE);
 
     // get by name works
