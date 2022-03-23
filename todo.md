@@ -12,12 +12,6 @@
 
 <!-- GUY -->
 
-## () - guy2 adjust scale
-* adjust over all scale of guy so that the size is 6 units high, 2 units wide, and 1 unit deep
-* bottom of foot to knee should be 1.5
-* knee to waste should also be about 1.5 ( 1.5 + 1.5 = 3)
-* sense bottom of foot to waste is 3 the remainign distance to the top of the head should be 3 for a total of 6
-
 <!-- HOUSE 1 -->
 
 ## () - house1-bedroom dae file
@@ -30,6 +24,9 @@
 * () there will be one window in the bedroom, with no view of outside for now.
 
 <!-- DONE -->
+
+## ( done 03/23/2022 ) - guy2 adjust scale
+* (done) adjust over all scale of guy so that the size is 6 units high
 
 ## ( done 03/19/2022 ) - bed dae folder
 * (done) create a bed dae folder
