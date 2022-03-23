@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-03-22T18:23:47</created>
-    <modified>2022-03-22T18:23:47</modified>
+    <created>2022-03-23T13:54:26</created>
+    <modified>2022-03-23T13:54:26</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -117,8 +117,8 @@
     <image id="arm-base_png" name="arm-base_png">
       <init_from>arm-base.png</init_from>
     </image>
-    <image id="head_png" name="head_png">
-      <init_from>head.png</init_from>
+    <image id="guy1-head_png" name="guy1-head_png">
+      <init_from>guy1-head.png</init_from>
     </image>
     <image id="body_png" name="body_png">
       <init_from>body.png</init_from>
@@ -379,14 +379,14 @@
     </effect>
     <effect id="Material-effect">
       <profile_COMMON>
-        <newparam sid="head_png-surface">
+        <newparam sid="guy1-head_png-surface">
           <surface type="2D">
-            <init_from>head_png</init_from>
+            <init_from>guy1-head_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="head_png-sampler">
+        <newparam sid="guy1-head_png-sampler">
           <sampler2D>
-            <source>head_png-surface</source>
+            <source>guy1-head_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -398,7 +398,7 @@
               <color sid="ambient">0 0 0 1</color>
             </ambient>
             <diffuse>
-              <texture texture="head_png-sampler"/>
+              <texture texture="guy1-head_png-sampler"/>
             </diffuse>
             <specular>
               <color sid="specular">0.5 0.5 0.5 1</color>
@@ -914,7 +914,7 @@
           </technique_common>
         </source>
         <source id="head-geo-mesh-map-0">
-          <float_array id="head-geo-mesh-map-0-array" count="72">1.9976e-4 0.6668664 0.3331335 0.9998002 1.99787e-4 0.9998002 1.9976e-4 0.3335331 0.3331336 0.6664669 1.99787e-4 0.6664669 0.666467 0.3331335 0.3335331 1.9976e-4 0.666467 1.9976e-4 0.3331336 0.3331335 1.9976e-4 1.9976e-4 0.3331335 1.9976e-4 0.6668665 0.3331335 0.9998002 1.9976e-4 0.9998002 0.3331335 0.3335331 0.6664669 0.6664669 0.3335331 0.666467 0.6664669 1.9976e-4 0.6668664 0.3331335 0.6668664 0.3331335 0.9998002 1.9976e-4 0.3335331 0.3331336 0.3335331 0.3331336 0.6664669 0.666467 0.3331335 0.3335331 0.3331335 0.3335331 1.9976e-4 0.3331336 0.3331335 1.99774e-4 0.3331335 1.9976e-4 1.9976e-4 0.6668665 0.3331335 0.6668665 1.9976e-4 0.9998002 1.9976e-4 0.3335331 0.6664669 0.3335331 0.3335331 0.6664669 0.3335331</float_array>
+          <float_array id="head-geo-mesh-map-0-array" count="72">0.9960938 0.3310547 0.6679688 0 0.9960938 0 0.3300781 0.9960938 0.002929687 0.6689453 0.3300781 0.6689453 0.666467 0.3331335 0.3335331 1.9976e-4 0.666467 1.9976e-4 0.3331336 0.3331335 1.9976e-4 1.9976e-4 0.3331335 1.9976e-4 0.335547 0.6626955 0.6612805 0.3337381 0.6615906 0.6617112 0.002929687 0.6640625 0.3300781 0.3369141 0.3300781 0.6640625 0.9960938 0.3310547 0.6679688 0.3310547 0.6679688 0 0.3300781 0.9960938 0.002929687 0.9960938 0.002929687 0.6689453 0.666467 0.3331335 0.3335331 0.3331335 0.3335331 1.9976e-4 0.3331336 0.3331335 1.99774e-4 0.3331335 1.9976e-4 1.9976e-4 0.335547 0.6626955 0.3352369 0.3347224 0.6612805 0.3337381 0.002929687 0.6640625 0.002929687 0.3369141 0.3300781 0.3369141</float_array>
           <technique_common>
             <accessor source="#head-geo-mesh-map-0-array" count="36" stride="2">
               <param name="S" type="float"/>
