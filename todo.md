@@ -15,7 +15,7 @@
 ## () - guy2 pelvis
 * (done) add a pelvix mesh for the guy2 model
 * (done) update body uvs
-* () update guy2-body texture
+* (done) update guy2-body texture
 * () new pelvis.png
 * () new guy2-pelvis.png
 
