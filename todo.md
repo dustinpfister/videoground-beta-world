@@ -13,7 +13,11 @@
 <!-- GUY -->
 
 ## () - guy2 pelvis
-* add a pelvix mesh for the guy2 model
+* (done) add a pelvix mesh for the guy2 model
+* (done) update body uvs
+* () update guy2-body texture
+* () new pelvis.png
+* () new guy2-pelvis.png
 
 <!-- HOUSE 1 -->
 
