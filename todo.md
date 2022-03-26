@@ -12,6 +12,9 @@
 
 <!-- GUY -->
 
+## () - guy2 pelvis
+* add a pelvix mesh for the guy2 model
+
 <!-- HOUSE 1 -->
 
 ## () - house1-bedroom dae file
