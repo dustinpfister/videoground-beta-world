@@ -1,5 +1,7 @@
 # guy2 dae folder todo list
 
+<!-- optional -->
+
 ## () - one image for skin
 * I would like to have everything as one image for all objects
 * start a guy1-skin gimp file
@@ -7,16 +9,23 @@
 ## () - have a set of zucker1 textures
 * have a zucker1 set of textures
 
-## () - have a set of guy2 textures
-* have a guy2 set of textures
+<!-- MUST DO FOR FIRST VIDEO -->
 
-## () - pelvis object
-* I think the main body object should be broken down into two mesh objects
-* leave body as body, but make it smaller to allow room for a pelvis mesh
-* add a pelvis mesh
-* legs should be children of the pelvis mesh
-* update base textures
-* update guy1 textures
+## () -have final set of textures for 'mrguy1' and 'mrguy2'
+* have final set of textures for 'mrguy1'
+* have final set of textures for 'mrguy2'
+
+## () - have a set of guy2 textures
+* rename guy1 files to 'mrguy1' to help address confusion with this over all folder 'guy2'
+* have a mrguy2 set of textures
+
+## ( done 03/26/2022 ) - pelvis object
+* (done) I think the main body object should be broken down into two mesh objects
+* (done) leave body as body, but make it smaller to allow room for a pelvis mesh
+* (done) add a pelvis mesh
+* (done) legs should be children of the pelvis mesh
+* (done) update base textures
+* (done) update guy1 textures
 
 ## ( done 03/23/2022 ) - have a set of guy1 textures
 * (done) start guy1 set of textures started with the head

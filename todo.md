@@ -12,12 +12,9 @@
 
 <!-- GUY -->
 
-## () - guy2 pelvis
-* (done) add a pelvix mesh for the guy2 model
-* (done) update body uvs
-* (done) update guy2-body texture
-* () new pelvis.png
-* () new guy2-pelvis.png
+## () - final set of textures for mrguy1, and mrguy2
+
+## () - start mrguy2 textures
 
 <!-- HOUSE 1 -->
 
@@ -31,6 +28,13 @@
 * () there will be one window in the bedroom, with no view of outside for now.
 
 <!-- DONE -->
+
+## ( done 03/26/2022 ) - guy2 pelvis
+* (done) add a pelvix mesh for the guy2 model
+* (done) update body uvs
+* (done) update guy2-body texture
+* (done) new pelvis.png
+* (done) new guy2-pelvis.png
 
 ## ( done 03/23/2022 ) - guy2 adjust scale
 * (done) adjust over all scale of guy so that the size is 6 units high
