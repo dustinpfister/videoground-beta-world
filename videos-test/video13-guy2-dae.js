@@ -17,6 +17,11 @@ VIDEO.init = function(sm, scene, camera){
     scene.background = new THREE.Color('black');
     scene.add(new THREE.GridHelper(10, 10));
 
+    // LIGHT
+    var light = new THREE.PointLight(0xffffff, 0.5);
+    light.position.set(0, 2, 0)
+    scene.add(light);
+
     // loading home1
     let guyDAE = scene.userData.guyDAE = VIDEO.daeResults[0].scene.children[2];
     guyDAE.position.set(0, 0.25, 0);
