@@ -38,7 +38,26 @@ VIDEO.init = function(sm, scene, camera){
     caff2.rotation.set(1.57, 0, 0);
 
     console.log(mrg1);
-    console.log(pelvis); 
+    console.log(pelvis);
+
+// SET UP SEQ OBJECT
+    sm.seq = Sequences.create({
+        sm: sm,
+        part : [
+            // move camera to see that guy2 is in background
+            {
+                per: 0,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    var x = 4 - 7 * partPer,
+                    z = 5.0 - 11 * partPer;
+                    camera.position.set(x, 4.0, z);
+                    camera.lookAt(-4 + 2 * partPer, 3, -4 + 4 * partPer);
+                }
+            }
+        ]
+    });
+
 };
 
 // update method for the video
@@ -48,7 +67,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     //camera.lookAt(-4, 2, -4 + 4 * bias);
 
     // good start position maybe  
-    camera.position.set(4.0, 4.0, 5.0);
-    camera.lookAt(-4, 3, -4 + 4 * bias);
+    //camera.position.set(4.0, 4.0, 5.0);
+    //camera.lookAt(-4, 3, -4 + 4 * bias);
+    Sequences.update(sm.seq, sm);
 };
 
