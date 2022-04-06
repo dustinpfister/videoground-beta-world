@@ -202,12 +202,19 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.70,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(-2.0, 2.75, -4.0);
-
-                    //camera.lookAt(-3.2, 2.75, -6);
-camera.position.set(-2.0, 4, -6.0);
-camera.lookAt(-3.2, 3.7, 6);
-
+                    camera.position.set(-2.0, 2.75 + 1.25 * partPer, -4.0 - 2 * partPer);
+                    camera.lookAt(-3.2, 2.75 + 0.95 * partPer, -6 + 12 * partPer);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // seq13 - camera moves around to look at guy1 and guy2
+            {
+                per: 0.75,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-2.0, 4, -6.0);
+                    camera.lookAt(-3.2, 3.7, 6);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
