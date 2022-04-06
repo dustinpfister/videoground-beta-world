@@ -196,6 +196,21 @@ VIDEO.init = function(sm, scene, camera){
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
+            },
+            // seq13 - camera moves around to look at guy1 and guy2
+            {
+                per: 0.70,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-2.0, 2.75, -4.0);
+
+                    //camera.lookAt(-3.2, 2.75, -6);
+camera.position.set(-2.0, 4, -6.0);
+camera.lookAt(-3.2, 3.7, 6);
+
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
             }
         ]
     });
