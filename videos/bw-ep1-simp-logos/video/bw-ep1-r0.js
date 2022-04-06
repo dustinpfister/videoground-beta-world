@@ -4,6 +4,11 @@ VIDEO.daePaths = [
     '../../../dae/house1-bedroom/h1-b1-full.dae'
 ];
 
+VIDEO.scripts = [
+   '../../../js/canvas.js',
+   '../../../js/dae-helpers.js',
+   '../../../js/sequences.js'
+];
 
 // THIS SHOULD BE PART OF A NEW JAVASCRIPT FILE
 // call it somehting like dae-helpers.js
@@ -27,13 +32,14 @@ VIDEO.init = function(sm, scene, camera){
     camera.lookAt(0, 2, 0);
 
     // LIGHT
-    var light = new THREE.PointLight(0xffffff, 0.5);
-    light.position.set(0, 2, 0)
-    scene.add(light);
+    //var light = new THREE.PointLight(0xffffff, 0.5);
+    //light.position.set(0, 2, 0)
+    //scene.add(light);
 
     // loading home1-bedroom
     let home1 = scene.userData.home1 = VIDEO.daeResults[0].scene.children[0];
-    home1.position.set(0, 0,0)
+DAEHelpers.reMapGroup(home1);
+    home1.position.set(0, 0,0);
     scene.add(home1);
 
 
