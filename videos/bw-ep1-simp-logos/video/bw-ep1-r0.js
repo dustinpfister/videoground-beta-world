@@ -44,15 +44,33 @@ VIDEO.init = function(sm, scene, camera){
     sm.seq = Sequences.create({
         sm: sm,
         part : [
+            // open showing guy1 and computer
+            {
+                per: 0.0,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(4, 4.0, 5);
+                    camera.lookAt(-4, 3, -4);
+                }
+            },
             // move camera to see that guy2 is in background
             {
-                per: 0,
+                per: 0.1,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     var x = 4 - 7 * partPer,
                     z = 5.0 - 11 * partPer;
                     camera.position.set(x, 4.0, z);
                     camera.lookAt(-4 + 2 * partPer, 3, -4 + 4 * partPer);
+                }
+            },
+            // guy2 moves closer to guy1, camera moves up a little
+            {
+                per: 0.15,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-3.0, 4.0 + 2 * partBias, -6.0);
+                    camera.lookAt(-2, 3, 0);
                 }
             }
         ]
