@@ -112,9 +112,42 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.75, 4.0, -1.0);
                     camera.lookAt(-2.75, 3.5, -4);
-
-head1.rotation.set(0,0,3.14 * partPer);
-
+                    head1.rotation.set(0,0,3.14 * partPer);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // sq6 - mrguy1 says 'I am making a video...'
+            {
+                per: 0.35,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-2.75, 4.0, -1.0);
+                    camera.lookAt(-2.75, 3.5, -4);
+                    head1.rotation.set(0, 0, 3.14);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // sq7 - mrguy1 rotates another 180 to compleate a full 360 rotation of head
+            {
+                per: 0.40,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-2.75, 4.0, -1.0);
+                    camera.lookAt(-2.75, 3.5, -4);
+                    head1.rotation.set(0, 0, 3.14 + 3.14 * partPer);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // seq8
+            {
+                per: 0.45,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-2.75, 4.0, -1.0);
+                    camera.lookAt(-2.75, 3.5, -4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
