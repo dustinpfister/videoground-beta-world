@@ -46,7 +46,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.seq = Sequences.create({
         sm: sm,
         part : [
-            // open showing guy1 and computer
+            // sq0 - open showing guy1 and computer
             {
                 per: 0.0,
                 init: function(sm){},
@@ -57,7 +57,7 @@ VIDEO.init = function(sm, scene, camera){
                     mrg2.position.set(-2, 4, 4);
                 }
             },
-            // move camera to see that guy2 is in background
+            // sq1 - move camera to see that guy2 is in background
             {
                 per: 0.1,
                 init: function(sm){},
@@ -70,7 +70,7 @@ VIDEO.init = function(sm, scene, camera){
                     mrg2.position.set(-2, 4, 4);
                 }
             },
-            // guy2 moves closer to guy1, camera moves up a little
+            // sq2 - guy2 moves closer to guy1, camera moves up a little
             {
                 per: 0.15,
                 init: function(sm){},
@@ -78,7 +78,18 @@ VIDEO.init = function(sm, scene, camera){
                     camera.position.set(-4.0, 4.0 + 3 * partPer, -6.0);
                     camera.lookAt(-2, 3 + 1 * partPer, 0);
                     // mr guy2
-                    mrg2.position.set(-2, 4, 4);
+                    mrg2.position.set(-2, 4, 4 - 4 * partPer);
+                }
+            },
+            // sq3 - guy2 says 'what are you doing?'
+            {
+                per: 0.20,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-4.0, 7.0, -6.0);
+                    camera.lookAt(-2, 4.0, 0);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
                 }
             }
         ]
