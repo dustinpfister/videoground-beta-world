@@ -32,6 +32,7 @@ VIDEO.init = function(sm, scene, camera){
     mrg1.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
     // adjusting fixed pose for mrguy1
     var pelvis = mrg1.getObjectByName('pelvis');
+    var head1 = scene.userData.head1 = mrg1.getObjectByName('head');
     // rotate pelvis and caff
     pelvis.rotation.set(-1.57, 0, 0);
     var caff1 = pelvis.children[0].children[0];
@@ -98,23 +99,21 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.25,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-
                     camera.position.set(-4.0 + 1.25 * partPer, 7.0 - 3 * partPer, -6.0 + 5 * partPer);
                     camera.lookAt(-2 - 0.75 * partPer, 4.0 - 0.5 * partPer, 0 - 4 * partPer);
-
-//camera.position.set(-2.75, 4.0, -1.0);
-//camera.lookAt(-2.75, 3.5, -4);
-
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
             },
+            // sq5 - head of mrguy1 rotates first 180
             {
                 per: 0.30,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-camera.position.set(-2.75, 4.0, -1.0);
-camera.lookAt(-2.75, 3.5, -4);
+                    camera.position.set(-2.75, 4.0, -1.0);
+                    camera.lookAt(-2.75, 3.5, -4);
+
+head1.rotation.set(0,0,3.14 * partPer);
 
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
@@ -127,6 +126,9 @@ camera.lookAt(-2.75, 3.5, -4);
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
+
+    var head1 = scene.userData.head1;
+    head1.rotation.set(0,0,0);
 
     Sequences.update(sm.seq, sm);
 };
