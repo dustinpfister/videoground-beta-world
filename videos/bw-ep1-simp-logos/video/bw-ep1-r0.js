@@ -208,7 +208,7 @@ VIDEO.init = function(sm, scene, camera){
                     mrg2.position.set(-2, 4, 0);
                 }
             },
-            // seq13 - camera moves around to look at guy1 and guy2
+            // seq14 - mr guy2 says 'it does not look overly simplified to me'
             {
                 per: 0.75,
                 init: function(sm){},
