@@ -54,9 +54,12 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(4, 4.0, 5);
                     camera.lookAt(-4, 3, -4);
-
                     // mr guy2
                     mrg2.position.set(-2, 4, 4);
+
+
+
+
                 }
             },
             // sq1 - move camera to see that guy2 is in background
@@ -146,8 +149,20 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.45,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(-2.75, 4.0, -1.0);
+                    camera.position.set(-2.75 + 6.75 * partPer, 4.0, -1.0);
                     camera.lookAt(-2.75, 3.5, -4);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // seq9 - mrguy2 moves arm to point at sceen
+            {
+                per: 0.50,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(4.0, 4.0, -1.0);
+                    camera.lookAt(-2.75, 3.5, -4);
+
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
