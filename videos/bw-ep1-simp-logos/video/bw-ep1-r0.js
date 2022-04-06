@@ -22,23 +22,25 @@ VIDEO.init = function(sm, scene, camera){
     // loading mrguy1 as a guy2 model
     let mrg1 = scene.userData.mrg1 = VIDEO.daeResults[1].scene.children[2];
     DAEHelpers.reMapGroup(mrg1);
-    mrg1.position.set(-2.75, 2.25, -3.0);
-
-    mrg1.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
     scene.add(mrg1);
+    // mr guy2 (clone of mrguy1 for now)
+    let mrg2 = scene.userData.mrg2 = mrg1.clone();
+    scene.add(mrg2);
 
+    // fixed pos for mrguy1
+    mrg1.position.set(-2.75, 2.25, -3.0);
+    mrg1.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
     // adjusting fixed pose for mrguy1
     var pelvis = mrg1.getObjectByName('pelvis');
     // rotate pelvis and caff
     pelvis.rotation.set(-1.57, 0, 0);
-
     var caff1 = pelvis.children[0].children[0];
     caff1.rotation.set(1.57, 0, 0);
     var caff2 = pelvis.children[1].children[0];
     caff2.rotation.set(1.57, 0, 0);
 
-    console.log(mrg1);
-    console.log(pelvis);
+    // fixed pos for mrguy2
+    mrg2.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
 
 // SET UP SEQ OBJECT
     sm.seq = Sequences.create({
@@ -51,6 +53,8 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(4, 4.0, 5);
                     camera.lookAt(-4, 3, -4);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 4);
                 }
             },
             // move camera to see that guy2 is in background
@@ -58,10 +62,12 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.1,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    var x = 4 - 7 * partPer,
+                    var x = 4 - 8 * partPer,
                     z = 5.0 - 11 * partPer;
                     camera.position.set(x, 4.0, z);
                     camera.lookAt(-4 + 2 * partPer, 3, -4 + 4 * partPer);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 4);
                 }
             },
             // guy2 moves closer to guy1, camera moves up a little
@@ -69,8 +75,10 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.15,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(-3.0, 4.0 + 2 * partBias, -6.0);
-                    camera.lookAt(-2, 3, 0);
+                    camera.position.set(-4.0, 4.0 + 3 * partPer, -6.0);
+                    camera.lookAt(-2, 3 + 1 * partPer, 0);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 4);
                 }
             }
         ]
@@ -80,13 +88,7 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    // camera
-    //camera.position.set(0.5, 2.0, 2.5 - 8 * bias);
-    //camera.lookAt(-4, 2, -4 + 4 * bias);
 
-    // good start position maybe  
-    //camera.position.set(4.0, 4.0, 5.0);
-    //camera.lookAt(-4, 3, -4 + 4 * bias);
     Sequences.update(sm.seq, sm);
 };
 
