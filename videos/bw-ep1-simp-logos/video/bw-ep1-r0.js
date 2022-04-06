@@ -31,6 +31,11 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set(-3, 3, -5);
     camera.lookAt(0, 2, 0);
 
+    // LIGHT
+    //var light = new THREE.PointLight(0xffffff, 0.5);
+    //light.position.set(0, 2, 0)
+    //scene.add(light);
+
     // loading home1-bedroom
     let home1 = scene.userData.home1 = VIDEO.daeResults[0].scene.children[0];
     DAEHelpers.reMapGroup(home1);
@@ -41,9 +46,9 @@ VIDEO.init = function(sm, scene, camera){
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     camera.position.set(0, 4, 0);
-    var radian = Math.PI / 180 * 30 + Math.PI * 2 * sm.per,
+    var radian = Math.PI / 180 * 220 + Math.PI * 2 * sm.per,
     x = 2 * Math.cos(radian),
     z = 2 * Math.sin(radian);
-    camera.lookAt(x, 2, z);
+    camera.lookAt(x, 3, z);
 };
 
