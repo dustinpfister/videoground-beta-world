@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq1 - move camera to see that guy2 is in background
             {
-                per: 0.1,
+                per: 0.12,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     var x = 4 - 8 * partPer,
@@ -73,7 +73,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq2 - guy2 moves closer to guy1, camera moves up a little
             {
-                per: 0.15,
+                per: 0.17,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-4.0, 4.0 + 3 * partPer, -6.0);
@@ -84,7 +84,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq3 - guy2 says 'what are you doing?'
             {
-                per: 0.20,
+                per: 0.22,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-4.0, 7.0, -6.0);
@@ -95,7 +95,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq4 - camera moves to back of head of mrguy1
             {
-                per: 0.25,
+                per: 0.27,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-4.0 + 1.25 * partPer, 7.0 - 3 * partPer, -6.0 + 5 * partPer);
@@ -106,7 +106,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq5 - head of mrguy1 rotates first 180
             {
-                per: 0.30,
+                per: 0.32,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.75, 4.0, -1.0);
@@ -118,7 +118,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq6 - mrguy1 says 'I am making a video...'
             {
-                per: 0.35,
+                per: 0.37,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.75, 4.0, -1.0);
@@ -130,7 +130,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq7 - mrguy1 rotates another 180 to compleate a full 360 rotation of head
             {
-                per: 0.40,
+                per: 0.42,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.75, 4.0, -1.0);
@@ -142,7 +142,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq8 - move camera to show both mrguy1, mrguy2 and have computer screen in view
             {
-                per: 0.45,
+                per: 0.47,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.75 + 6.75 * partPer, 4.0, -1.0);
@@ -153,7 +153,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq9 - mrguy2 moves arm to point at sceen
             {
-                per: 0.50,
+                per: 0.52,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(4.0, 4.0, -1.0);
@@ -165,7 +165,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq10 - mrguy2 says 'what is that?'
             {
-                per: 0.55,
+                per: 0.57,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(4.0, 4.0, -1.0);
@@ -177,7 +177,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq11 - camera moves into position of computer screen
             {
-                per: 0.60,
+                per: 0.62,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(4.0 - 6 * partPer, 4.0 - 1.25 * partPer, -1.0 - 3 * partPer);
@@ -188,7 +188,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq12 - mrguy1 says 'its is an overly simplified logo'
             {
-                per: 0.65,
+                per: 0.67,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.0, 2.75, -4.0);
@@ -199,7 +199,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq13 - camera moves around to look at guy1 and guy2
             {
-                per: 0.70,
+                per: 0.72,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.0, 2.75 + 1.25 * partPer, -4.0 - 2 * partPer);
@@ -210,7 +210,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // seq14 - mr guy2 says 'it does not look overly simplified to me'
             {
-                per: 0.75,
+                per: 0.77,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.0, 4, -6.0);
