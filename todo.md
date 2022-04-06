@@ -18,16 +18,20 @@
 
 <!-- HOUSE 1 -->
 
-## () - house1-bedroom dae file
+## ( ) - house1-bedroom - fix face normals
+* looks like the front side of the floor is facing out from the room, see about fixing that
+
+<!-- DONE -->
+
+## ( done 04/06/2022 ) - house1-bedroom dae file
 * (done) start a house1-bedroom project that will be a full 'bedroom only' scene of house1
 * (done) start house1-bedroom with just the walls, and floor.
 * (done) have a bed in the room
 * (done) have the desk in the room
 * (done) floor should be 12x9
-* () there will be one doorway in the bedroom (0.5 from corner and 1 from ceiling)
-* () there will be one window in the bedroom, with no view of outside for now.
-
-<!-- DONE -->
+* (done) there will be one doorway in the bedroom (0.5 from corner and 1 from ceiling)
+* (done) there will be one window in the bedroom, with no view of outside for now.
+* (done) export first dae for this
 
 ## ( done 03/26/2022 ) - guy2 pelvis
 * (done) add a pelvix mesh for the guy2 model
