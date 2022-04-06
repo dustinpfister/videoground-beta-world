@@ -1,8 +1,8 @@
 
 // the dae files to use for this video
 VIDEO.daePaths = [
-    '../../dae/house1/house1.dae',
-    '../../dae/desk/deskset.dae'
+    '../../../dae/house1/house1.dae',
+    '../../../dae/desk/deskset.dae'
 ];
 
 // THIS SHOULD BE PART OF A NEW JAVASCRIPT FILE
