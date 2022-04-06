@@ -141,7 +141,7 @@ VIDEO.init = function(sm, scene, camera){
                     mrg2.position.set(-2, 4, 0);
                 }
             },
-            // seq8
+            // seq8 - move camera to show both mrguy1, mrguy2 and have computer screen in view
             {
                 per: 0.45,
                 init: function(sm){},
