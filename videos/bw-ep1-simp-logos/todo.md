@@ -12,6 +12,7 @@
 * (done) have a bed dea
 * (done) ahve house-bedroom dae
 * (done) have a guy2 model
+* add guy2 models in
 * have all the sequences worked out for this.
 * To have control over what is shown on the screen in the desk, just have a screen cube in the video file
 
