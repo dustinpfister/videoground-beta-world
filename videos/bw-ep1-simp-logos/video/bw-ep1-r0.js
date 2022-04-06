@@ -180,6 +180,21 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.60,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
+
+                    camera.position.set(4.0 - 6 * partPer, 4.0 - 1.25 * partPer, -1.0 - 3 * partPer);
+                    camera.lookAt(-2.75 - 0.45 * partPer, 3.5 - 0.75 * partPer, -4 - 2 * partPer);
+
+                    //camera.position.set(-2.0, 2.75, -4.0);
+                    //camera.lookAt(-3.2, 2.75, -6);
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // seq12 - camera moves into position of computer screen
+            {
+                per: 0.65,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.0, 2.75, -4.0);
                     camera.lookAt(-3.2, 2.75, -6);
                     // mr guy2
