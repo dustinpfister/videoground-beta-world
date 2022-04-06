@@ -12,7 +12,8 @@ var DAEHelpers = (function () {
                     child.material = new THREE.MeshStandardMaterial({
                         emissive: 0xffffff,
                         emissiveMap: map,
-                        emissiveIntensity: 1
+                        emissiveIntensity: 1,
+                        side: THREE.DoubleSide
                     });
                 }
             }else{

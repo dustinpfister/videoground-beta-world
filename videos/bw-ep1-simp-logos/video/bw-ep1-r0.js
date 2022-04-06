@@ -31,18 +31,11 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set(-3, 3, -5);
     camera.lookAt(0, 2, 0);
 
-    // LIGHT
-    //var light = new THREE.PointLight(0xffffff, 0.5);
-    //light.position.set(0, 2, 0)
-    //scene.add(light);
-
     // loading home1-bedroom
     let home1 = scene.userData.home1 = VIDEO.daeResults[0].scene.children[0];
-DAEHelpers.reMapGroup(home1);
+    DAEHelpers.reMapGroup(home1);
     home1.position.set(0, 0,0);
     scene.add(home1);
-
-
 };
 
 // update method for the video
