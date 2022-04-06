@@ -56,10 +56,6 @@ VIDEO.init = function(sm, scene, camera){
                     camera.lookAt(-4, 3, -4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 4);
-
-
-
-
                 }
             },
             // sq1 - move camera to see that guy2 is in background
@@ -163,6 +159,29 @@ VIDEO.init = function(sm, scene, camera){
                     camera.position.set(4.0, 4.0, -1.0);
                     camera.lookAt(-2.75, 3.5, -4);
 
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // seq10 - mrguy2 says 'what is that?'
+            {
+                per: 0.55,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(4.0, 4.0, -1.0);
+                    camera.lookAt(-2.75, 3.5, -4);
+
+                    // mr guy2
+                    mrg2.position.set(-2, 4, 0);
+                }
+            },
+            // seq11 - camera moves into position of computer screen
+            {
+                per: 0.60,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    camera.position.set(-2.0, 2.75, -4.0);
+                    camera.lookAt(-3.2, 2.75, -6);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
