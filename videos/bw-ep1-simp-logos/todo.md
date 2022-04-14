@@ -1,10 +1,14 @@
 
-## () - r2 of video - all final textures done
+## () - r4 of video - all final textures done
 * have all final textures done for all models used
 * make any additional changes needed at this time that might come up
 * this should be the final revision if all goes well.
 
-## () - r1 of video - have taking synced up
+## () - r3 video - hallway and outside view
+* there should be a hallway view in the doorway
+* there should be an outside view in the window
+
+## () - r2 video - have taking synced up
 * have animation of mouths synced up with what is being said
 
 ## () - r1 video - simple logo, arm movement
