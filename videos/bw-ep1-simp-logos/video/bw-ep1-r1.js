@@ -26,10 +26,20 @@ VIDEO.init = function(sm, scene, camera){
     var DRAW_METHODS = {};
     DRAW_METHODS.dispBox = {};
     DRAW_METHODS.dispBox.simpLogo = (ctx, canvas, sm, opt) => {
-        ctx.fillStyle = 'red';
+        // black background
+        ctx.fillStyle = 'black';
         ctx.fillRect(-1, -1, canvas.width + 2, canvas.height + 2);
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+
+        // drawing box on screen
+        ctx.beginPath();
+        ctx.rect(16 - 8, 16 - 8, 16, 16);
+        ctx.closePath();
+
+        ctx.stroke();
     };
-    var canvasObj = CanvasMod.createCanvasObject(sm, DRAW_METHODS);
+    var canvasObj = CanvasMod.createCanvasObject(sm, DRAW_METHODS, { width: 32, height: 32});
     canvasObj.draw({
        drawClass: 'dispBox',
        drawMethod: 'simpLogo'
