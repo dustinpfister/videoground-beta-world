@@ -1,5 +1,5 @@
-
-// the dae files to use for this video
+// r1 of bw ep1
+// just moving the arm, and showing a logo on the screen
 VIDEO.daePaths = [
     '../../../dae/house1-bedroom/h1-b1-full.dae',
     '../../../dae/guy2/guy2.dae'
@@ -18,6 +18,13 @@ VIDEO.init = function(sm, scene, camera){
     DAEHelpers.reMapGroup(home1);
     home1.position.set(0, 0, 0);
     scene.add(home1);
+
+    // append display box for screen
+    var screen = home1.getObjectByName('screen');
+    var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.25, 1.00, 0.25), new THREE.MeshNormalMaterial() );
+    dispBox.position.set(0.00, 0.00, 1.00);
+    screen.add(dispBox);
+    console.log(screen);
 
     // loading mrguy1 as a guy2 model
     let mrg1 = scene.userData.mrg1 = VIDEO.daeResults[1].scene.children[2];
@@ -56,8 +63,11 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.0,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(4, 4.0, 5);
-                    camera.lookAt(-4, 3, -4);
+                    camera.position.set(0, 4.0, -5);
+                    camera.lookAt(-4, 2, -5);
+                    
+                    //camera.position.set(4, 4.0, 5);
+                    //camera.lookAt(-4, 3, -4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 4);
                 }
