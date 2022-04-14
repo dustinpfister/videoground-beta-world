@@ -21,11 +21,32 @@ VIDEO.init = function(sm, scene, camera){
 
     // append display box for screen
     var screen = home1.getObjectByName('screen');
+/*
     var dispMaterial = new THREE.MeshStandardMaterial({
-        color: 0x8a8a8a
+            emissive: 0xffffff,
+            emissiveIntensity: 1
+        })
+*/
+
+    var dispMaterial = [
+        new THREE.MeshStandardMaterial({ // sides of disp box
+            emissive: 0x4a4a4a,
+            emissiveIntensity: 1
+        }),
+        new THREE.MeshStandardMaterial({ // display side of box
+            emissive: 0xffffff,
+            emissiveIntensity: 1
+        })
+    ];
+
+    var dispGeo = new THREE.BoxGeometry(0.1, 1.30, 0.90);
+    dispGeo.groups.forEach(function(gr){
+        gr.materialIndex = 0;
     });
-    var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.1, 1.30, 0.90), dispMaterial );
-    
+    dispGeo.groups[1].materialIndex = 1;
+    console.log(dispGeo);
+
+    var dispBox = new THREE.Mesh( dispGeo, dispMaterial );
     dispBox.position.set(0.87, 0.26, 1.00);
     screen.add(dispBox);
 
