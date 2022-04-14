@@ -22,28 +22,19 @@ VIDEO.init = function(sm, scene, camera){
     // append display box for screen
     var screen = home1.getObjectByName('screen');
 
+    // canvas obj for disp object
     var DRAW_METHODS = {};
-
-DRAW_METHODS.dispBox = {};
-
-DRAW_METHODS.dispBox.simpLogo = (ctx, canvas, sm, opt) => {
-
-console.log('yes');
-
+    DRAW_METHODS.dispBox = {};
+    DRAW_METHODS.dispBox.simpLogo = (ctx, canvas, sm, opt) => {
         ctx.fillStyle = 'red';
         ctx.fillRect(-1, -1, canvas.width + 2, canvas.height + 2);
-
-};
-
-
-    // canvas obj for disp object
+    };
     var canvasObj = CanvasMod.createCanvasObject(sm, DRAW_METHODS);
-
-        canvasObj.draw({
-           drawClass: 'dispBox',
-           drawMethod: 'simpLogo'
-        });
-
+    canvasObj.draw({
+       drawClass: 'dispBox',
+       drawMethod: 'simpLogo'
+    });
+    // disp materials
     var dispMaterial = [
         new THREE.MeshStandardMaterial({ // sides of disp box
             emissive: 0x202020,
@@ -55,14 +46,13 @@ console.log('yes');
             emissiveMap: canvasObj.texture
         })
     ];
-
+    // disp geo
     var dispGeo = new THREE.BoxGeometry(0.1, 1.30, 0.90);
     dispGeo.groups.forEach(function(gr){
         gr.materialIndex = 0;
     });
     dispGeo.groups[1].materialIndex = 1;
-    console.log(dispGeo);
-
+    // disp mesh
     var dispBox = new THREE.Mesh( dispGeo, dispMaterial );
     dispBox.position.set(0.87, 0.26, 1.00);
     screen.add(dispBox);
