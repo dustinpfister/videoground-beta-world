@@ -44,9 +44,7 @@ VIDEO.init = function(sm, scene, camera){
     // fixed pos for mrguy2
     mrg2.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
 
-                    var arm2 = mrg2.getObjectByName('arm2')
-                    console.log(arm2);
-arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40;
+
 
 
     // SET UP SEQ OBJECT
@@ -167,6 +165,8 @@ arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40;
 
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
+                    var arm2 = mrg2.getObjectByName('arm2');
+                    arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40 * partPer;
                     
                 }
             },
@@ -180,6 +180,8 @@ arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40;
 
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
+                    var arm2 = mrg2.getObjectByName('arm2');
+                    arm2.rotation.x = Math.PI * 1.60;
                 }
             },
             // seq11 - camera moves into position of computer screen
@@ -191,6 +193,9 @@ arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40;
                     camera.lookAt(-2.75 - 0.45 * partPer, 3.5 - 0.75 * partPer, -4 - 2 * partPer);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
+                    var arm2 = mrg2.getObjectByName('arm2');
+                    arm2.rotation.x = Math.PI * 1.60 + 0.40 * partPer;
+
                 }
             },
             // seq12 - mrguy1 says 'its is an overly simplified logo'
@@ -224,6 +229,7 @@ arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40;
                     camera.lookAt(-3.2, 3.7, 6);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
+
                 }
             }
         ]
@@ -236,6 +242,10 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     // defaults
     var head1 = scene.userData.head1;
     head1.rotation.set(0,0,0);
+    // defauls for guy2
+    var mrg2 = scene.userData.mrg2;
+    var arm2 = mrg2.getObjectByName('arm2')
+    arm2.rotation.x = Math.PI * 2; //Math.PI * 2 - Math.PI * 0.40;
     // call sequences
     Sequences.update(sm.seq, sm);
 };
