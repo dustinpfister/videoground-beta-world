@@ -22,14 +22,37 @@ VIDEO.init = function(sm, scene, camera){
     // append display box for screen
     var screen = home1.getObjectByName('screen');
 
+    var DRAW_METHODS = {};
+
+DRAW_METHODS.dispBox = {};
+
+DRAW_METHODS.dispBox.simpLogo = (ctx, canvas, sm, opt) => {
+
+console.log('yes');
+
+        ctx.fillStyle = 'red';
+        ctx.fillRect(-1, -1, canvas.width + 2, canvas.height + 2);
+
+};
+
+
+    // canvas obj for disp object
+    var canvasObj = CanvasMod.createCanvasObject(sm, DRAW_METHODS);
+
+        canvasObj.draw({
+           drawClass: 'dispBox',
+           drawMethod: 'simpLogo'
+        });
+
     var dispMaterial = [
         new THREE.MeshStandardMaterial({ // sides of disp box
             emissive: 0x202020,
             emissiveIntensity: 1
         }),
         new THREE.MeshStandardMaterial({ // display side of box
-            emissive: 0x202020,
-            emissiveIntensity: 1
+            emissive: 0xafafaf,
+            emissiveIntensity: 1,
+            emissiveMap: canvasObj.texture
         })
     ];
 
