@@ -23,6 +23,7 @@ VIDEO.init = function(sm, scene, camera){
     let mrg1 = scene.userData.mrg1 = VIDEO.daeResults[1].scene.children[2];
     DAEHelpers.reMapGroup(mrg1);
     scene.add(mrg1);
+
     // mr guy2 (clone of mrguy1 for now)
     let mrg2 = scene.userData.mrg2 = mrg1.clone();
     scene.add(mrg2);
@@ -43,7 +44,12 @@ VIDEO.init = function(sm, scene, camera){
     // fixed pos for mrguy2
     mrg2.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
 
-// SET UP SEQ OBJECT
+                    var arm2 = mrg2.getObjectByName('arm2')
+                    console.log(arm2);
+arm2.rotation.x = Math.PI * 2 - Math.PI * 0.40;
+
+
+    // SET UP SEQ OBJECT
     sm.seq = Sequences.create({
         sm: sm,
         part : [
@@ -161,6 +167,7 @@ VIDEO.init = function(sm, scene, camera){
 
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
+                    
                 }
             },
             // seq10 - mrguy2 says 'what is that?'
@@ -226,10 +233,10 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-
+    // defaults
     var head1 = scene.userData.head1;
     head1.rotation.set(0,0,0);
-
+    // call sequences
     Sequences.update(sm.seq, sm);
 };
 

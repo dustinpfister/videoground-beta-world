@@ -9,7 +9,7 @@
 
 ## () - r1 video - simple logo, arm movement
 * To have control over what is shown on the screen in the desk, just have a screen cube in the video file
-* guy2 should point to the computer screen
+* guy2 should point to the computer screen in sq9
 
 ## ( done 04/06/2022 ) - r0 video - crude starting point at least
 * (done) have a desk dea
