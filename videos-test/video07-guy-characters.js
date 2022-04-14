@@ -42,7 +42,7 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(world);
 
     // Guy 1 obj
-    GuyCharacters.create(scene, 'guy1')
+    GuyCharacters.create(scene, 'guy1');
 
 };
 

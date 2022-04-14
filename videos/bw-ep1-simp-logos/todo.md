@@ -7,12 +7,15 @@
 ## () - r1 of video - have taking synced up
 * have animation of mouths synced up with what is being said
 
-## () - r0 of video - crude starting point at least
+## () - r1 video - simple logo, arm movement
+* To have control over what is shown on the screen in the desk, just have a screen cube in the video file
+* guy2 should point to the computer screen
+
+## ( done 04/06/2022 ) - r0 video - crude starting point at least
 * (done) have a desk dea
 * (done) have a bed dea
 * (done) ahve house-bedroom dae
 * (done) have a guy2 model
-* add guy2 models in
-* have all the sequences worked out for this.
-* To have control over what is shown on the screen in the desk, just have a screen cube in the video file
+* (done) add guy2 models in
+* (done) have all the sequences worked out for this.
 
