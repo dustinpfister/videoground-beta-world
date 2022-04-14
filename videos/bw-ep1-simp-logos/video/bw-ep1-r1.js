@@ -21,20 +21,14 @@ VIDEO.init = function(sm, scene, camera){
 
     // append display box for screen
     var screen = home1.getObjectByName('screen');
-/*
-    var dispMaterial = new THREE.MeshStandardMaterial({
-            emissive: 0xffffff,
-            emissiveIntensity: 1
-        })
-*/
 
     var dispMaterial = [
         new THREE.MeshStandardMaterial({ // sides of disp box
-            emissive: 0x4a4a4a,
+            emissive: 0x202020,
             emissiveIntensity: 1
         }),
         new THREE.MeshStandardMaterial({ // display side of box
-            emissive: 0xffffff,
+            emissive: 0x202020,
             emissiveIntensity: 1
         })
     ];
