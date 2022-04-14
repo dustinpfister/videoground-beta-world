@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     // append display box for screen
     var screen = home1.getObjectByName('screen');
     var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.1, 1.30, 0.90), new THREE.MeshNormalMaterial() );
-    dispBox.position.set(0.87, 0.30, 1.00);
+    dispBox.position.set(0.87, 0.26, 1.00);
 
 
     screen.add(dispBox);
@@ -65,7 +65,7 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.0,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(0, 4.0, -5);
+                    camera.position.set(0, 4.0, -6);
                     camera.lookAt(-4, 2, -5);
                     
                     //camera.position.set(4, 4.0, 5);
