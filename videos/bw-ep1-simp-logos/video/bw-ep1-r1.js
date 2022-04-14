@@ -21,8 +21,10 @@ VIDEO.init = function(sm, scene, camera){
 
     // append display box for screen
     var screen = home1.getObjectByName('screen');
-    var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.25, 1.00, 0.25), new THREE.MeshNormalMaterial() );
-    dispBox.position.set(0.00, 0.00, 1.00);
+    var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.1, 1.30, 0.90), new THREE.MeshNormalMaterial() );
+    dispBox.position.set(0.87, 0.30, 1.00);
+
+
     screen.add(dispBox);
     console.log(screen);
 
