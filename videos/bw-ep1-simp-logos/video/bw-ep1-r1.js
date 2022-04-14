@@ -21,12 +21,10 @@ VIDEO.init = function(sm, scene, camera){
 
     // append display box for screen
     var screen = home1.getObjectByName('screen');
-    var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.1, 1.30, 0.90), new THREE.MeshNormalMaterial() );
+    var dispMaterial = new THREE.MeshNormalMaterial();
+    var dispBox = new THREE.Mesh( new THREE.BoxGeometry(0.1, 1.30, 0.90), dispMaterial );
     dispBox.position.set(0.87, 0.26, 1.00);
-
-
     screen.add(dispBox);
-    console.log(screen);
 
     // loading mrguy1 as a guy2 model
     let mrg1 = scene.userData.mrg1 = VIDEO.daeResults[1].scene.children[2];
@@ -65,11 +63,11 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.0,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    camera.position.set(0, 4.0, -6);
-                    camera.lookAt(-4, 2, -5);
+                    //camera.position.set(0, 4.0, -6);
+                    //camera.lookAt(-4, 2, -5);
                     
-                    //camera.position.set(4, 4.0, 5);
-                    //camera.lookAt(-4, 3, -4);
+                    camera.position.set(4, 4.0, 5);
+                    camera.lookAt(-4, 3, -4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 4);
                 }
