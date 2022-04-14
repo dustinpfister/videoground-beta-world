@@ -29,17 +29,34 @@ VIDEO.init = function(sm, scene, camera){
         // black background
         ctx.fillStyle = 'black';
         ctx.fillRect(-1, -1, canvas.width + 2, canvas.height + 2);
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 3;
-
         // drawing box on screen
+        //ctx.strokeStyle = 'white';
+        //ctx.lineWidth = 1;
+        //ctx.beginPath();
+        //ctx.rect(32 - 16, 32 - 16, 32, 32);
+        //ctx.closePath();
+        //ctx.stroke();
+        // drawing line from center to top point that I want
+        //ctx.strokeStyle = 'lime';
+        //ctx.lineWidth = 3;
+        //ctx.beginPath();
+        //ctx.moveTo(32, 32);
+        //ctx.lineTo(55, 32);
+        //ctx.closePath();
+        //ctx.stroke();
+        // drawing the triangle that I wanted
+        ctx.strokeStyle = 'red';
+        ctx.fillStyle = 'rgba(255,128,0,0.5)';
+        ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.rect(16 - 8, 16 - 8, 16, 16);
+        ctx.moveTo(55, 32);
+        ctx.lineTo(16, 16);
+        ctx.lineTo(16, 48);
         ctx.closePath();
-
         ctx.stroke();
+        ctx.fill();
     };
-    var canvasObj = CanvasMod.createCanvasObject(sm, DRAW_METHODS, { width: 32, height: 32});
+    var canvasObj = CanvasMod.createCanvasObject(sm, DRAW_METHODS, { width: 64, height: 64});
     canvasObj.draw({
        drawClass: 'dispBox',
        drawMethod: 'simpLogo'
