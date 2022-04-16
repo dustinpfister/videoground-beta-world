@@ -113,8 +113,9 @@ VIDEO.init = function(sm, scene, camera){
     *********** *********/
 
     var lips2 = lipCubes.create();
-    lips2.position.set(0.0, -0.5, -0.35);
+    lips2.position.set(0.0, -0.45, -0.35);
     head2.add(lips2);
+
 
     console.log('lips2: ', lips2);
 
@@ -139,8 +140,16 @@ VIDEO.init = function(sm, scene, camera){
                     //camera.lookAt(-4, 3, -4);
 
                     // DEBUG CAMERA POS
-                    camera.position.copy(mrg2.position).add( new THREE.Vector3(0, 1.0, -2) );
-                    camera.lookAt( mrg2.position.clone().add( new THREE.Vector3(0, 1.5, 0) ) );
+                    var vecHead = new THREE.Vector3(0, 0, 0);
+                    head2.getWorldPosition(vecHead);
+                    camera.position.copy(vecHead).add( new THREE.Vector3(-2.0, 0.0, -0.5) );
+
+                    var lav = new THREE.Vector3(0, 0, 0);
+                    head2.getWorldPosition(lav);
+                    camera.lookAt( lav );
+
+                    //camera.position.copy(mrg2.position).add( new THREE.Vector3(-2, 1.0, -2) );
+                    //camera.lookAt( head2.position.clone().add( new THREE.Vector3(0, 0, 0) ) );
 
                 }
             },
