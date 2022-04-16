@@ -127,13 +127,17 @@ VIDEO.init = function(sm, scene, camera){
                 per: 0.0,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
-                    //camera.position.set(0, 4.0, -6);
-                    //camera.lookAt(-4, 2, -5);
-                    
-                    camera.position.set(4, 4.0, 5);
-                    camera.lookAt(-4, 3, -4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 4);
+
+                    // ACTUAL CAMERA POS FOR SEQ0
+                    //camera.position.set(4, 4.0, 5);
+                    //camera.lookAt(-4, 3, -4);
+
+                    // DEBUG CAMERA POS
+                    camera.position.copy(mrg2.position).add( new THREE.Vector3(-2, 1.0, -2) );
+                    camera.lookAt( mrg2.position.clone().add( new THREE.Vector3(0, 1.5, 0) ) );
+
                 }
             },
             // sq1 - move camera to see that guy2 is in background
