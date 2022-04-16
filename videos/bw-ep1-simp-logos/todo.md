@@ -7,10 +7,11 @@
 ## () - r3 video - hallway and outside view
 * there should be a hallway view in the doorway
 * there should be an outside view in the window
+* walk cycle for guy2
 
 ## () - r2 video - have taking synced up
+* start the video file for this 
 * have animation of mouths synced up with what is being said
-* walk cycle for guy2
 
 ## ( done 04/14/2022 ) - r1 video - simple logo, arm movement
 * (done) To have control over what is shown on the screen in the desk, just have a screen cube in the video file
