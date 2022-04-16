@@ -108,6 +108,13 @@ VIDEO.init = function(sm, scene, camera){
     mrg2.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
 
     /********** **********
+    * LIP CUBES FOR MRGUY1 and MRGUY2
+    *********** *********/
+
+    var lips1 = lipCubes.create();
+    console.log('lips: ', lips1);
+
+    /********** **********
     * SEQUNCES
     *********** *********/
 
