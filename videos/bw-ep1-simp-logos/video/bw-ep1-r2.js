@@ -142,7 +142,10 @@ VIDEO.init = function(sm, scene, camera){
                     // DEBUG CAMERA POS
                     var vecHead = new THREE.Vector3(0, 0, 0);
                     head2.getWorldPosition(vecHead);
-                    camera.position.copy(vecHead).add( new THREE.Vector3(-2.0, 0.0, -0.5) );
+                    
+                    //camera.position.copy(vecHead).add( new THREE.Vector3(-2.0, 0.0, -0.5) ); // side view
+                    camera.position.copy(vecHead).add( new THREE.Vector3(0.0, -0.5, -2.0) );    // front view
+
 
                     var lav = new THREE.Vector3(0, 0, 0);
                     head2.getWorldPosition(lav);
