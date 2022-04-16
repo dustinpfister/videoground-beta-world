@@ -9,16 +9,25 @@ VIDEO.daePaths = [
 VIDEO.scripts = [
    '../../../js/canvas.js',
    '../../../js/dae-helpers.js',
-   '../../../js/sequences.js'
+   '../../../js/sequences.js',
+   '../js/lipcubes.js'
 ];
 
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
-    // loading home1-bedroom
+
+    /********** **********
+    * USING HOME1 MODEL
+    *********** *********/
+
     let home1 = scene.userData.home1 = VIDEO.daeResults[0].scene.children[0];
     DAEHelpers.reMapGroup(home1);
     home1.position.set(0, 0, 0);
     scene.add(home1);
+
+    /********** **********
+    * SETTING UP DISP CUBE FOR COMPUTER SCREEN
+    *********** *********/
 
     // append display box for screen
     var screen = home1.getObjectByName('screen');
@@ -70,7 +79,11 @@ VIDEO.init = function(sm, scene, camera){
     dispBox.position.set(0.87, 0.26, 1.00);
     screen.add(dispBox);
 
-    // loading mrguy1 as a guy2 model
+    /********** **********
+    * SETTING UP MRGUY1 and MRGUY2 using GUY2 MODEL
+    *********** *********/
+
+    // using guy2 model for this one
     let mrg1 = scene.userData.mrg1 = VIDEO.daeResults[1].scene.children[2];
     DAEHelpers.reMapGroup(mrg1);
     scene.add(mrg1);
@@ -91,12 +104,12 @@ VIDEO.init = function(sm, scene, camera){
     caff1.rotation.set(1.57, 0, 0);
     var caff2 = pelvis.children[1].children[0];
     caff2.rotation.set(1.57, 0, 0);
-
     // fixed pos for mrguy2
     mrg2.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
 
-
-
+    /********** **********
+    * SEQUNCES
+    *********** *********/
 
     // SET UP SEQ OBJECT
     sm.seq = Sequences.create({
