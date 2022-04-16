@@ -11,7 +11,10 @@
 
 ## () - r2 video - have taking synced up
 * (done) start the video file for this
-* at least start a system for having mouth movement in the form of 'lipcubes'
+* (done) start a system for having mouth movement in the form of 'lipcubes'
+
+* a set of lip cubes can be just two mesh objects using box geometry
+
 * I will want to have two sets of a 'lipcubes' object one gor guy1 and another for guy2
 * have animation of mouths synced up with what is being said
 
