@@ -1,4 +1,4 @@
-// r1 of bw ep1
+// r1 of beta world episode 1
 // just moving the arm, and showing a logo on the screen
 VIDEO.daePaths = [
     '../../../dae/house1-bedroom/h1-b1-full.dae',

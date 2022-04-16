@@ -1,5 +1,8 @@
-
-// the dae files to use for this video
+// r0 of beta world episode 1
+// For this first revision of episode 1 I all ready got a whole lot looking good
+// and from this post forward there is just a little that needs to be fixed here and
+// there before making chnages with textures which should be fairly easy once all the
+// hard stuff is worked out.
 VIDEO.daePaths = [
     '../../../dae/house1-bedroom/h1-b1-full.dae',
     '../../../dae/guy2/guy2.dae'
