@@ -10,7 +10,9 @@
 * walk cycle for guy2
 
 ## () - r2 video - have taking synced up
-* start the video file for this 
+* (done) start the video file for this
+* at least start a system for having mouth movement in the form of 'lipcubes'
+* I will want to have two sets of a 'lipcubes' object one gor guy1 and another for guy2
 * have animation of mouths synced up with what is being said
 
 ## ( done 04/14/2022 ) - r1 video - simple logo, arm movement
