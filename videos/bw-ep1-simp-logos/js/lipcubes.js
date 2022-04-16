@@ -11,6 +11,13 @@ var lipCubes = (function(){
             new THREE.MeshNormalMaterial()
         );
         lips.add(upper);
+        // lower lip
+        var lower = new THREE.Mesh(
+            new THREE.BoxGeometry(0.35, 0.10, 0.05),
+            new THREE.MeshNormalMaterial()
+        );
+        lower.position.set(0, 0, -0.05);
+        lips.add(lower);
         return lips;
     };
 
