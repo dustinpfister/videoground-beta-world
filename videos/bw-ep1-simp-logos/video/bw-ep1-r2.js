@@ -86,18 +86,19 @@ VIDEO.init = function(sm, scene, camera){
     // using guy2 model for this one
     let mrg1 = scene.userData.mrg1 = VIDEO.daeResults[1].scene.children[2];
     DAEHelpers.reMapGroup(mrg1);
+    var pelvis = mrg1.getObjectByName('pelvis');
+    var head1 = scene.userData.head1 = mrg1.getObjectByName('head');
     scene.add(mrg1);
 
     // mr guy2 (clone of mrguy1 for now)
     let mrg2 = scene.userData.mrg2 = mrg1.clone();
+    var head2 = scene.userData.head2 = mrg2.getObjectByName('head');
     scene.add(mrg2);
 
     // fixed pos for mrguy1
     mrg1.position.set(-2.75, 2.25, -3.0);
     mrg1.rotation.set(Math.PI * 1.5, 0, Math.PI * 1.0);
     // adjusting fixed pose for mrguy1
-    var pelvis = mrg1.getObjectByName('pelvis');
-    var head1 = scene.userData.head1 = mrg1.getObjectByName('head');
     // rotate pelvis and caff
     pelvis.rotation.set(-1.57, 0, 0);
     var caff1 = pelvis.children[0].children[0];
@@ -111,8 +112,11 @@ VIDEO.init = function(sm, scene, camera){
     * LIP CUBES FOR MRGUY1 and MRGUY2
     *********** *********/
 
-    var lips1 = lipCubes.create();
-    console.log('lips: ', lips1);
+    var lips2 = lipCubes.create();
+    lips2.position.set(0.0, -0.5, -0.35);
+    head2.add(lips2);
+
+    console.log('lips2: ', lips2);
 
     /********** **********
     * SEQUNCES
@@ -135,7 +139,7 @@ VIDEO.init = function(sm, scene, camera){
                     //camera.lookAt(-4, 3, -4);
 
                     // DEBUG CAMERA POS
-                    camera.position.copy(mrg2.position).add( new THREE.Vector3(-2, 1.0, -2) );
+                    camera.position.copy(mrg2.position).add( new THREE.Vector3(0, 1.0, -2) );
                     camera.lookAt( mrg2.position.clone().add( new THREE.Vector3(0, 1.5, 0) ) );
 
                 }
