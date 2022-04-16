@@ -113,7 +113,7 @@ VIDEO.init = function(sm, scene, camera){
     *********** *********/
 
     var lips2 = lipCubes.create();
-    lips2.position.set(0.0, -0.45, -0.35);
+    lips2.position.set(0.0, -0.425, -0.35);
     head2.add(lips2);
 
 
@@ -143,9 +143,8 @@ VIDEO.init = function(sm, scene, camera){
                     var vecHead = new THREE.Vector3(0, 0, 0);
                     head2.getWorldPosition(vecHead);
                     
-                    //camera.position.copy(vecHead).add( new THREE.Vector3(-2.0, 0.0, -0.5) ); // side view
+                    //camera.position.copy(vecHead).add( new THREE.Vector3(-2.0, 0.0, -1.5) ); // side view
                     camera.position.copy(vecHead).add( new THREE.Vector3(0.0, -0.5, -2.0) );    // front view
-
 
                     var lav = new THREE.Vector3(0, 0, 0);
                     head2.getWorldPosition(lav);
