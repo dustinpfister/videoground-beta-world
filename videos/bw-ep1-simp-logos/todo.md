@@ -13,11 +13,12 @@
 * (done) start the video file for this
 * (done) start a system for having mouth movement in the form of 'lipcubes'
 * (done) a set of lip cubes can be just two mesh objects using box geometry
+* (done) I will then want a lipCubes.talk method that will set the talk state of the lips
+* (done) I will want to have two sets of a 'lipcubes' object one gor guy1 and another for guy2
+* (done) have animation of mouths synced up with what is being said
+* set final texture for lips
+* have lips group start position pulled out of video and into lips module
 
-* I will then want a lipCubes.talk method that will set the talk state of the lips
-
-* I will want to have two sets of a 'lipcubes' object one gor guy1 and another for guy2
-* have animation of mouths synced up with what is being said
 
 ## ( done 04/14/2022 ) - r1 video - simple logo, arm movement
 * (done) To have control over what is shown on the screen in the desk, just have a screen cube in the video file
