@@ -189,6 +189,8 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-4.0, 7.0, -6.0);
                     camera.lookAt(-2, 4.0, 0);
+                    // move lips for mrguy2
+                    lipCubes.talk(lips2, partPer, 4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
@@ -224,9 +226,8 @@ VIDEO.init = function(sm, scene, camera){
                     camera.position.set(-2.75, 4.0, -1.0);
                     camera.lookAt(-2.75, 3.5, -4);
                     head1.rotation.set(0, 0, 3.14);
-
+                    // move lips for mrguy1
                     lipCubes.talk(lips1, partPer, 4);
-
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
@@ -276,7 +277,8 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(4.0, 4.0, -1.0);
                     camera.lookAt(-2.75, 3.5, -4);
-
+                    // move lips for mrguy2
+                    lipCubes.talk(lips2, partPer, 4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                     var arm2 = mrg2.getObjectByName('arm2');
@@ -304,6 +306,8 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.0, 2.75, -4.0);
                     camera.lookAt(-3.2, 2.75, -6);
+                    // move lips for mrguy1
+                    lipCubes.talk(lips1, partPer, 4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
@@ -326,6 +330,8 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     camera.position.set(-2.0, 4, -6.0);
                     camera.lookAt(-3.2, 3.7, 6);
+                    // move lips for mrguy2
+                    lipCubes.talk(lips2, partPer, 4);
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
 
