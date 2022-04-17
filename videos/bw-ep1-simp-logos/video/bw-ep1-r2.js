@@ -112,6 +112,10 @@ VIDEO.init = function(sm, scene, camera){
     * LIP CUBES FOR MRGUY1 and MRGUY2
     *********** *********/
 
+    var lips1 = lipCubes.create();
+    lips1.position.set(0.0, -0.425, -0.35);
+    head1.add(lips1);
+
     var lips2 = lipCubes.create();
     lips2.position.set(0.0, -0.425, -0.35);
     head2.add(lips2);
