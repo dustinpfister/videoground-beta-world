@@ -13,29 +13,36 @@ var lipCubes = (function(){
     });
 
     // Create a set of lip cubes to use with a guy model that does not have them
-    api.create = function(){
+    api.create = function(opt){
+        opt = opt || {};
+        opt.per = opt.per === undefined ? 0 : opt.per;
         var lips = new THREE.Group();
         // upper lip
         var upper = new THREE.Mesh(
             new THREE.BoxGeometry(0.35, 0.05, 0.05),
             lipMaterial
         );
-        upper.position.copy( VEC_UPPER_HOME ).add(VEC_UPPER_TRANS);
+        //upper.position.copy( VEC_UPPER_HOME ).add(VEC_UPPER_TRANS);
         lips.add(upper);
         // lower lip
         var lower = new THREE.Mesh(
             new THREE.BoxGeometry(0.35, 0.05, 0.05),
             lipMaterial
         );
-        lower.position.copy( VEC_LOWER_HOME ).add(VEC_LOWER_TRANS);
+        //lower.position.copy( VEC_LOWER_HOME ).add(VEC_LOWER_TRANS);
         lips.add(lower);
+        // call talk for first time
+        api.talk(lips, 1);
         return lips;
     };
 
     // Set the talk state of the given lips Group object
     // per: 0 - closed, 1 - open
     api.talk = function(lips, per){
-
+        var upper = lips.children[0],
+        lower = lips.children[1];
+        upper.position.copy( VEC_UPPER_HOME ).add( VEC_UPPER_TRANS.multiplyScalar(per) );
+        lower.position.copy( VEC_LOWER_HOME ).add( VEC_LOWER_TRANS.multiplyScalar(per) );
     };
 
     return api;
