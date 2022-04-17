@@ -112,14 +112,13 @@ VIDEO.init = function(sm, scene, camera){
     * LIP CUBES FOR MRGUY1 and MRGUY2
     *********** *********/
 
-    var lips1 = lipCubes.create();
+    var lips1 = scene.userData.lips1 = lipCubes.create();
     lips1.position.set(0.0, -0.425, -0.35);
     head1.add(lips1);
 
-    var lips2 = lipCubes.create();
+    var lips2 = scene.userData.lips2 = lipCubes.create();
     lips2.position.set(0.0, -0.425, -0.35);
     head2.add(lips2);
-
 
     console.log('lips2: ', lips2);
 
@@ -225,6 +224,9 @@ VIDEO.init = function(sm, scene, camera){
                     camera.position.set(-2.75, 4.0, -1.0);
                     camera.lookAt(-2.75, 3.5, -4);
                     head1.rotation.set(0, 0, 3.14);
+
+                    lipCubes.talk(lips1, partPer, 4);
+
                     // mr guy2
                     mrg2.position.set(-2, 4, 0);
                 }
@@ -338,6 +340,10 @@ VIDEO.init = function(sm, scene, camera){
 VIDEO.update = function(sm, scene, camera, per, bias){
     // defaults
     var head1 = scene.userData.head1;
+    var lips1 = scene.userData.lips1
+    var lips2 = scene.userData.lips2
+    lipCubes.talk(lips1, 0);
+    lipCubes.talk(lips2, 0);
     head1.rotation.set(0,0,0);
     // defauls for guy2
     var mrg2 = scene.userData.mrg2;

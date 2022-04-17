@@ -38,12 +38,15 @@ var lipCubes = (function(){
 
     // Set the talk state of the given lips Group object
     // per: 0 - closed, 1 - open
-    api.talk = function(lips, per){
-        per = per === undefined ? 0 : per;
+    api.talk = function(lips, talkPer, talkCount){
+        talkPer = talkPer === undefined ? 0 : talkPer;
+        talkCount = talkCount === undefined ? 1 : talkCount;
         var upper = lips.children[0],
         lower = lips.children[1];
-        upper.position.copy( VEC_UPPER_HOME ).add( VEC_UPPER_TRANS.multiplyScalar(per) );
-        lower.position.copy( VEC_LOWER_HOME ).add( VEC_LOWER_TRANS.multiplyScalar(per) );
+        var per = talkPer * talkCount % 1;
+        var bias = 1 - Math.abs(0.5 - per) / 0.5;
+        upper.position.copy( VEC_UPPER_HOME ).add( VEC_UPPER_TRANS.clone().multiplyScalar(bias) );
+        lower.position.copy( VEC_LOWER_HOME ).add( VEC_LOWER_TRANS.clone().multiplyScalar(bias) );
     };
 
     return api;
