@@ -136,19 +136,19 @@ VIDEO.init = function(sm, scene, camera){
                     mrg2.position.set(-2, 4, 4);
 
                     // ACTUAL CAMERA POS FOR SEQ0
-                    //camera.position.set(4, 4.0, 5);
-                    //camera.lookAt(-4, 3, -4);
+                    camera.position.set(4, 4.0, 5);
+                    camera.lookAt(-4, 3, -4);
 
                     // DEBUG CAMERA POS
-                    var vecHead = new THREE.Vector3(0, 0, 0);
-                    head2.getWorldPosition(vecHead);
+                    //var vecHead = new THREE.Vector3(0, 0, 0);
+                    //head2.getWorldPosition(vecHead);
                     
                     //camera.position.copy(vecHead).add( new THREE.Vector3(-2.0, 0.0, -1.5) ); // side view
-                    camera.position.copy(vecHead).add( new THREE.Vector3(0.0, -0.5, -2.0) );    // front view
+                    //camera.position.copy(vecHead).add( new THREE.Vector3(0.0, -0.5, -2.0) );    // front view
 
-                    var lav = new THREE.Vector3(0, 0, 0);
-                    head2.getWorldPosition(lav);
-                    camera.lookAt( lav );
+                    //var lav = new THREE.Vector3(0, 0, 0);
+                    //head2.getWorldPosition(lav);
+                    //camera.lookAt( lav );
 
                     //camera.position.copy(mrg2.position).add( new THREE.Vector3(-2, 1.0, -2) );
                     //camera.lookAt( head2.position.clone().add( new THREE.Vector3(0, 0, 0) ) );

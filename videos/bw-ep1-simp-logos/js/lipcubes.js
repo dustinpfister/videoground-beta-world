@@ -32,13 +32,14 @@ var lipCubes = (function(){
         //lower.position.copy( VEC_LOWER_HOME ).add(VEC_LOWER_TRANS);
         lips.add(lower);
         // call talk for first time
-        api.talk(lips, 1);
+        api.talk(lips, opt.per);
         return lips;
     };
 
     // Set the talk state of the given lips Group object
     // per: 0 - closed, 1 - open
     api.talk = function(lips, per){
+        per = per === undefined ? 0 : per;
         var upper = lips.children[0],
         lower = lips.children[1];
         upper.position.copy( VEC_UPPER_HOME ).add( VEC_UPPER_TRANS.multiplyScalar(per) );
