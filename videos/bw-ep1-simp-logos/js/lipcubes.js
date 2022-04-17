@@ -1,9 +1,10 @@
 var lipCubes = (function(){
 
     var VEC_UPPER_HOME = new THREE.Vector3(0, 0, 0),  // home vectors for upper and lower lips
-    VEC_LOWER_HOME = new THREE.Vector3(0, 0, -0.05);
-    //VEC_UPPER_TRANS = new THREE.Vector3(1, 1, 0.50);           // translate vectors for upper and lower lips
-
+    VEC_LOWER_HOME = new THREE.Vector3(0, 0, -0.05),
+    VEC_UPPER_TRANS = new THREE.Vector3(0, 0, 0.04),           // translate vectors for upper and lower lips
+    VEC_LOWER_TRANS = new THREE.Vector3(0, 0, -0.04);
+    
     var api = {};
 
     var lipMaterial = new THREE.MeshNormalMaterial({
@@ -19,14 +20,14 @@ var lipCubes = (function(){
             new THREE.BoxGeometry(0.35, 0.05, 0.05),
             lipMaterial
         );
-        upper.position.copy( VEC_UPPER_HOME );
+        upper.position.copy( VEC_UPPER_HOME ).add(VEC_UPPER_TRANS);
         lips.add(upper);
         // lower lip
         var lower = new THREE.Mesh(
             new THREE.BoxGeometry(0.35, 0.05, 0.05),
             lipMaterial
         );
-        lower.position.copy( VEC_LOWER_HOME );
+        lower.position.copy( VEC_LOWER_HOME ).add(VEC_LOWER_TRANS);
         lips.add(lower);
         return lips;
     };
