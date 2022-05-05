@@ -112,9 +112,24 @@ VIDEO.init = function(sm, scene, camera){
                     setGuyFacing(3, 0, 0);
                 }
             },
-            // sq3 - 
+            // sq3 - a pause looking at guy1 
             {
                 per: 0.15,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    // camera
+                    camera.position.set(5, 5, 5);
+                    camera.lookAt(guy1Obj.position);
+                    // guy1
+                    box.setFromObject(guy1Obj);
+                    bbox.setFromObject(guy1Obj);
+                    setGuyPos(0, 0);
+                    setGuyFacing(3, 0, 0);
+                }
+            },
+            // sq4 - guy1 says: 'if this is a dream, that means I can fly' 
+            {
+                per: 0.20,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
