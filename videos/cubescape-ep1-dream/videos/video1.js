@@ -32,6 +32,7 @@ VIDEO.init = function(sm, scene, camera){
     // GUY1
     // ********** **********
     GuyCharacters.create(scene, 'guy1');
+    var guy1 = ud.guy1;
     var guy1Obj = ud.obj1;
     camera.lookAt(guy1Obj.position);
     // box helper ( set box.visible = true to see )
@@ -59,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     var soPalette = [
         { boxCount: 0 },
-        { boxCount: 15 }
+        { boxCount: 0 }
     ];
     var sopArray = [
        1,1,1,1,1,
@@ -94,6 +95,8 @@ VIDEO.init = function(sm, scene, camera){
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
                     setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 0, 0);
+                    guy1.moveArm('arm_right', 0, 0);
                 }
             },
             // sq2 - zoom into location of guy1
@@ -110,6 +113,8 @@ VIDEO.init = function(sm, scene, camera){
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
                     setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 0, 0);
+                    guy1.moveArm('arm_right', 0, 0);
                 }
             },
             // sq3 - a pause looking at guy1 
@@ -125,6 +130,8 @@ VIDEO.init = function(sm, scene, camera){
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
                     setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 0, 0);
+                    guy1.moveArm('arm_right', 0, 0);
                 }
             },
             // sq4 - guy1 says: 'if this is a dream, that means I can fly' 
@@ -140,6 +147,8 @@ VIDEO.init = function(sm, scene, camera){
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
                     setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 0, 0);
+                    guy1.moveArm('arm_right', 0, 0);
                 }
             },
             // sq5 - guy1 raises his arms up
@@ -155,6 +164,25 @@ VIDEO.init = function(sm, scene, camera){
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
                     setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 1 - 0.5 * partPer, 0.1 * partPer );
+                    guy1.moveArm('arm_right', 1 - 0.5 * partPer, 0.1 * partPer );
+                }
+            },
+            // sq6 - 
+            {
+                per: 0.30,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    // camera
+                    camera.position.set(5, 5, 0);
+                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 1, 0)));
+                    // guy1
+                    box.setFromObject(guy1Obj);
+                    bbox.setFromObject(guy1Obj);
+                    setGuyPos(0, 0);
+                    setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 0.5, 0.1);
+                    guy1.moveArm('arm_right', 0.5, 0.1);
                 }
             }
         ]
