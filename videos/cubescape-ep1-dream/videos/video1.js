@@ -33,6 +33,7 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     GuyCharacters.create(scene, 'guy1');
     var guy1Obj = ud.obj1;
+    camera.lookAt(guy1Obj.position);
     // box helper ( set box.visible = true to see )
     var box = new THREE.BoxHelper( guy1Obj, 0xffff00 );
     box.visible = false;
@@ -77,12 +78,13 @@ VIDEO.init = function(sm, scene, camera){
     sm.seq = Sequences.create({
         sm: sm,
         part : [
+            // sq1 - open with sky view of whole city scape scene
             {
                 per: 0,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
-                    camera.position.set(10, 10, 10);
+                    camera.position.set(20, 20, 20);
                     camera.lookAt(guy1Obj.position);
                     // guy1
                     box.setFromObject(guy1Obj);
@@ -91,18 +93,35 @@ VIDEO.init = function(sm, scene, camera){
                     setGuyFacing(3, 0, 0);
                 }
             },
+            // sq2 - zoom into location of guy1
             {
                 per: 0.10,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
-                    camera.position.set(10, 10, 10);
+                    var s = 20 - 15 * partPer;
+                    camera.position.set(s, s, s);
                     camera.lookAt(guy1Obj.position);
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    setGuyPos(0, 0, 0);
-                    setGuyFacing(3 - 6 * partPer, 0, -6 * partBias);
+                    setGuyPos(0, 0);
+                    setGuyFacing(3, 0, 0);
+                }
+            },
+            // sq3 - 
+            {
+                per: 0.15,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    // camera
+                    camera.position.set(5, 5, 5 - 5 * partPer);
+                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0,1 * partPer,0)));
+                    // guy1
+                    box.setFromObject(guy1Obj);
+                    bbox.setFromObject(guy1Obj);
+                    setGuyPos(0, 0);
+                    setGuyFacing(3, 0, 0);
                 }
             }
         ]
