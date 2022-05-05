@@ -40,7 +40,7 @@ VIDEO.init = function(sm, scene, camera){
     var setGuyPos = function(x, z, alt){
         alt = alt === undefined ? 0 : alt;
         bbox.getSize(bSize);
-        guy1Obj.position.y = bSize.y / 2 + alt;
+        guy1Obj.position.set(z, bSize.y / 2 + alt, z);
     };
 
     // SET UP SEQ OBJECT
@@ -58,6 +58,7 @@ VIDEO.init = function(sm, scene, camera){
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
+                    guy1Obj.lookAt(-3, guy1Obj.position.y, 0);
                 }
             },
             {
@@ -71,6 +72,7 @@ VIDEO.init = function(sm, scene, camera){
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0, 3 * partBias);
+                    guy1Obj.lookAt(3, guy1Obj.position.y, 0);
                 }
             }
         ]
