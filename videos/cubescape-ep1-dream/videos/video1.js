@@ -158,7 +158,7 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
                     camera.position.set(5, 5, 0);
-                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 1, 0)));
+                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 1 - partPer, 0)));
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
@@ -168,18 +168,35 @@ VIDEO.init = function(sm, scene, camera){
                     guy1.moveArm('arm_right', 1 - 0.5 * partPer, 0.1 * partPer );
                 }
             },
-            // sq6 - 
+            // sq6 - guy one takes off
             {
                 per: 0.30,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
-                    camera.position.set(5, 5, 0);
-                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 1, 0)));
+                    camera.position.set(5 + 5 * partPer, 5 + 10 * partPer, 0);
+                    camera.lookAt(0, 3 + 6 * partPer, 0);
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    setGuyPos(0, 0);
+                    setGuyPos(0, 0, 10 * partPer);
+                    setGuyFacing(3, 0, 0);
+                    guy1.moveArm('arm_left', 0.5, 0.1);
+                    guy1.moveArm('arm_right', 0.5, 0.1);
+                }
+            },
+            // sq7 - 
+            {
+                per: 0.50,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    // camera
+                    camera.position.set(10, 15, 0);
+                    camera.lookAt(0, 9, 0);
+                    // guy1
+                    box.setFromObject(guy1Obj);
+                    bbox.setFromObject(guy1Obj);
+                    setGuyPos(0, 0, 10);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
