@@ -141,6 +141,21 @@ VIDEO.init = function(sm, scene, camera){
                     setGuyPos(0, 0);
                     setGuyFacing(3, 0, 0);
                 }
+            },
+            // sq5 - guy1 raises his arms up
+            {
+                per: 0.25,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    // camera
+                    camera.position.set(5, 5, 0);
+                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 1, 0)));
+                    // guy1
+                    box.setFromObject(guy1Obj);
+                    bbox.setFromObject(guy1Obj);
+                    setGuyPos(0, 0);
+                    setGuyFacing(3, 0, 0);
+                }
             }
         ]
     });
