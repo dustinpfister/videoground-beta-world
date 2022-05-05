@@ -43,6 +43,12 @@ VIDEO.init = function(sm, scene, camera){
         guy1Obj.position.set(z, bSize.y / 2 + alt, z);
     };
 
+    // set guy facing helper that is alomst just a wrapper for lookAt
+    // just treating y as a delta from the y position of the guy group object
+    var setGuyFacing = function(x, y, z){
+        guy1Obj.lookAt(x, guy1Obj.position.y + y, z);
+    };
+
     // SET UP SEQ OBJECT
     sm.seq = Sequences.create({
         sm: sm,
@@ -58,7 +64,7 @@ VIDEO.init = function(sm, scene, camera){
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0);
-                    guy1Obj.lookAt(-3, guy1Obj.position.y, 0);
+                    setGuyFacing(3, 0, 0);
                 }
             },
             {
@@ -71,8 +77,8 @@ VIDEO.init = function(sm, scene, camera){
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    setGuyPos(0, 0, 3 * partBias);
-                    guy1Obj.lookAt(3, guy1Obj.position.y, 0);
+                    setGuyPos(0, 0, 0);
+                    setGuyFacing(3 - 6 * partPer, 0, -6 * partBias);
                 }
             }
         ]
