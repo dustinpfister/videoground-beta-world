@@ -59,18 +59,21 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     var soPalette = [
         { boxCount: 0 },
-        { boxCount: 20 },
-        { boxCount: 60 },
-        { boxCount: 120, colors: [ [1,0,0, [64, 255]], [1,1,0, [64, 255]] ] },
-        { boxCount: 80, colors: [ [1,0,0, [64, 255]], [1,1,0, [64, 255]] ] }
+        { boxCount: 15 }
     ];
     var sopArray = [
-       1,1,1,
-       1,0,1,
-       1,1,1
+       1,1,1,1,1,
+       1,1,1,1,1,
+       1,1,0,1,1,
+       1,1,1,1,1,
+       1,1,1,1,1
     ];
-    var csg = CubeStackGrid.create({ gw: 3, gh: 3, stackGW: 5, stackGH: 5, stackOptionPalette: soPalette, sopArray: sopArray});
+    var csg = CubeStackGrid.create({ 
+        gw: 5, gh: 5, space: 1, stackGW: 7, stackGH: 5, 
+        stackOptionPalette: soPalette, sopArray: sopArray});
     scene.add(csg);
+    // scale the csg
+    csg.scale.set(16, 16, 16);
 
     // ********** **********
     // SEQUENCES
@@ -84,7 +87,7 @@ VIDEO.init = function(sm, scene, camera){
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
-                    camera.position.set(20, 20, 20);
+                    camera.position.set(200, 200, 200);
                     camera.lookAt(guy1Obj.position);
                     // guy1
                     box.setFromObject(guy1Obj);
@@ -99,7 +102,7 @@ VIDEO.init = function(sm, scene, camera){
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // camera
-                    var s = 20 - 15 * partPer;
+                    var s = 200 - 195 * partPer;
                     camera.position.set(s, s, s);
                     camera.lookAt(guy1Obj.position);
                     // guy1
