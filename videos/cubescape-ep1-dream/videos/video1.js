@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     var soPalette = [
         { boxCount: 0 },
-        { boxCount: 30 }
+        { boxCount: 0 } //{ boxCount: 30 }
     ];
     var sopArray = [
        1,1,1,1,1,
@@ -181,12 +181,12 @@ VIDEO.init = function(sm, scene, camera){
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
                     // camera
-                    camera.position.set(5 + 5 * partPer, 5 + 10 * partPer, 0);
+                    camera.position.set(5 + 5 * partPer, 5 + 30 * partPer, 0);
                     camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 0, 0)));
                     //camera.lookAt(0, 3 + 6 * partPer, 0);
                 }
             },
-            // sq7 - 
+            // sq7 - guy rotates camera moves to a behind view
             {
                 per: 0.50,
                 init: function(sm){},
@@ -195,11 +195,11 @@ VIDEO.init = function(sm, scene, camera){
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
                     setGuyPos(0, 0, 30);
-                    setGuyFacing(3, 0, 0);
+                    setGuyFacing(3 - 3 * partPer, -3 * partPer, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
                     // camera
-                    camera.position.set(10, 15, 0);
+                    camera.position.set(10 - 20 * partPer, 35, 10 * partBias);
                     camera.lookAt(guy1Obj.position);
                     //camera.lookAt(0, 9, 0);
                 }

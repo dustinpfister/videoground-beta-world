@@ -3,6 +3,10 @@
 # Some things to keep in mind here
 * follow a ruff scale of 1 = US foot
 
+<!-- cubescape-->
+
+## () - cubescape-ep1-dream
+* (done) start first 'cubescape' video
 
 <!-- ITEMS -->
 
