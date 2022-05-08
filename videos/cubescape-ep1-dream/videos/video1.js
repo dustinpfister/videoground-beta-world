@@ -218,7 +218,8 @@ VIDEO.init = function(sm, scene, camera){
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
                     // camera
-                    camera.position.set(-10, 35, 0);
+                    //camera.position.set(-10, 35, 0);
+                    camera.position.copy( guy1Obj.position.clone().add( new THREE.Vector3(-10, 5, 0) ) );
                     camera.lookAt(guy1Obj.position);
                     //camera.lookAt(0, 9, 0);
                 }
