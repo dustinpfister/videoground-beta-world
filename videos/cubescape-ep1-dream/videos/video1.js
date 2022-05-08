@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     var soPalette = [
         { boxCount: 0 },
-        { boxCount: 0 } //{ boxCount: 30 }
+        { boxCount: 15 } //{ boxCount: 30 }
     ];
     var sopArray = [
        1,1,1,1,1,
@@ -212,7 +212,7 @@ VIDEO.init = function(sm, scene, camera){
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    var x = 100 * partPer;
+                    var x = 200 * partPer;
                     setGuyPos(x, 0, 30);
                     setGuyFacing(x + 0.001, -3, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
