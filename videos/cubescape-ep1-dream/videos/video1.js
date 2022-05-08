@@ -47,7 +47,7 @@ VIDEO.init = function(sm, scene, camera){
     var setGuyPos = function(x, z, alt){
         alt = alt === undefined ? 0 : alt;
         bbox.getSize(bSize);
-        guy1Obj.position.set(z, bSize.y / 2 + alt, z);
+        guy1Obj.position.set(x, bSize.y / 2 + alt, z);
     };
     // set guy facing helper that is alomst just a wrapper for lookAt
     // just treating y as a delta from the y position of the guy group object
@@ -212,8 +212,9 @@ VIDEO.init = function(sm, scene, camera){
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    setGuyPos(0, 0, 30);
-                    setGuyFacing(0.001, -3, 0);
+                    var x = 100 * partPer;
+                    setGuyPos(x, 0, 30);
+                    setGuyFacing(x + 0.001, -3, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
                     // camera
