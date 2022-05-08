@@ -203,6 +203,24 @@ VIDEO.init = function(sm, scene, camera){
                     camera.lookAt(guy1Obj.position);
                     //camera.lookAt(0, 9, 0);
                 }
+            },
+            // sq8 - guy starts to fly
+            {
+                per: 0.65,
+                init: function(sm){},
+                update: function(sm, scene, camera, partPer, partBias){
+                    // guy1
+                    box.setFromObject(guy1Obj);
+                    bbox.setFromObject(guy1Obj);
+                    setGuyPos(0, 0, 30);
+                    setGuyFacing(0.001, -3, 0);
+                    guy1.moveArm('arm_left', 0.5, 0.1);
+                    guy1.moveArm('arm_right', 0.5, 0.1);
+                    // camera
+                    camera.position.set(-10, 35, 0);
+                    camera.lookAt(guy1Obj.position);
+                    //camera.lookAt(0, 9, 0);
+                }
             }
         ]
     });
