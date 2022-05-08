@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     var soPalette = [
         { boxCount: 0 },
-        { boxCount: 0 }
+        { boxCount: 30 }
     ];
     var sopArray = [
        1,1,1,1,1,
@@ -70,7 +70,7 @@ VIDEO.init = function(sm, scene, camera){
        1,1,1,1,1
     ];
     var csg = CubeStackGrid.create({ 
-        gw: 5, gh: 5, space: 1, stackGW: 7, stackGH: 5, 
+        gw: 5, gh: 5, space: 0, stackGW: 7, stackGH: 5, 
         stackOptionPalette: soPalette, sopArray: sopArray});
     scene.add(csg);
     // scale the csg
@@ -176,7 +176,7 @@ VIDEO.init = function(sm, scene, camera){
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    setGuyPos(0, 0, 10 * partPer);
+                    setGuyPos(0, 0, 30 * partPer);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
@@ -194,7 +194,7 @@ VIDEO.init = function(sm, scene, camera){
                     // guy1
                     box.setFromObject(guy1Obj);
                     bbox.setFromObject(guy1Obj);
-                    setGuyPos(0, 0, 10);
+                    setGuyPos(0, 0, 30);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
