@@ -100,6 +100,7 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     // SEQUENCES
     // ********** **********
+    // 0, 0.1, 0.1667, 0.2334, 0.4001, 0.4668, 0.5668, 0.6668
     sm.seq = Sequences.create({
         sm: sm,
         part : [
@@ -123,7 +124,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq2 - zoom into location of guy1
             {
-                per: 0.10,
+                per: 0.1000,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -142,7 +143,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq3 - a pause looking at guy1, camera adjusts
             {
-                per: 0.15,
+                per: 0.1667,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -160,7 +161,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq4 - guy1 says: 'if this is a dream, that means I can fly' 
             {
-                per: 0.20,
+                per: 0.2334,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -178,7 +179,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq5 - guy1 raises his arms up
             {
-                per: 0.48,
+                per: 0.4001,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -196,7 +197,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq6 - guy one takes off
             {
-                per: 0.50,
+                per: 0.4668,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -215,7 +216,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq7 - guy rotates camera moves to a behind view
             {
-                per: 0.60,
+                per: 0.5668,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -234,7 +235,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             // sq8 - guy starts to fly
             {
-                per: 0.70,
+                per: 0.6668,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
