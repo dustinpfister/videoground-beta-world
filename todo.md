@@ -7,6 +7,11 @@
 
 ## () - cubescape-ep1-dream
 * (done) start first 'cubescape' video
+* () move mouth for seq where the guy is talking
+* () figure out how man frames I am going to want for each sequence
+* () custom data for cube stacks around the guy in terms of where the cubes are
+* () custom colors for cube srtacks
+* () work out a custom effect for this video
 
 <!-- ITEMS -->
 
