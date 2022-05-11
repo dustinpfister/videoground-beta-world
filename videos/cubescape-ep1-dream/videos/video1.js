@@ -60,21 +60,22 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     var soPalette = [
         { boxCount: 0 },
-        { boxCount: 15 } //{ boxCount: 30 }
+        { boxCount: 15 }, //{ boxCount: 30 }
+        { boxCount: 3 }
     ];
     var sopArray = [
-       1,1,1,1,1,
-       1,1,1,1,1,
-       1,1,0,1,1,
-       1,1,1,1,1,
-       1,1,1,1,1
+       2,2,2,2,2,
+       2,1,1,1,2,
+       2,1,0,1,2,
+       2,1,1,1,2,
+       2,2,2,2,2
     ];
     var csg = CubeStackGrid.create({ 
-        gw: 5, gh: 5, space: 0, stackGW: 7, stackGH: 5, 
+        gw: 5, gh: 5, space: 0.5, stackGW: 7, stackGH: 5, 
         stackOptionPalette: soPalette, sopArray: sopArray});
     scene.add(csg);
     // scale the csg
-    csg.scale.set(16, 16, 16);
+    csg.scale.set(20, 20, 20);
 
     // ********** **********
     // SEQUENCES
