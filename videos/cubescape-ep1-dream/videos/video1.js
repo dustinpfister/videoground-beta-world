@@ -140,7 +140,7 @@ VIDEO.init = function(sm, scene, camera){
                     camera.lookAt(guy1Obj.position);
                 }
             },
-            // sq3 - a pause looking at guy1 
+            // sq3 - a pause looking at guy1, camera adjusts
             {
                 per: 0.15,
                 init: function(sm){},
