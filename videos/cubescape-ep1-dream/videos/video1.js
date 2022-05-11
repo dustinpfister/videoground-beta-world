@@ -170,7 +170,7 @@ VIDEO.init = function(sm, scene, camera){
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0, 0);
                     guy1.moveArm('arm_right', 0, 0);
-                    guyTalk(0.5 + Math.cos( Math.PI * 4 * partBias / Math.PI)  );
+                    guyTalk(0.5 + Math.cos( Math.PI * 8 * partBias )  );
                     // camera
                     camera.position.set(5, 5, 0);
                     camera.lookAt( guy1Obj.position.clone().add(new THREE.Vector3(0, 1, 0)) );
