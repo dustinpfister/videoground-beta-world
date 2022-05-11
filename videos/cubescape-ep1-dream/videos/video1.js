@@ -35,6 +35,7 @@ VIDEO.init = function(sm, scene, camera){
     GuyCharacters.create(scene, 'guy1');
     var guy1 = ud.guy1;
     var guy1Obj = ud.obj1;
+    var guy1_canvasObj = scene.userData.guy1_canvasObj;
     camera.lookAt(guy1Obj.position);
     // box helper ( set box.visible = true to see )
     var box = new THREE.BoxHelper( guy1Obj, 0xffff00 );
@@ -42,7 +43,10 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(box);
     // bounding box - ( trying this out for help with setting y position )
     var bbox = new THREE.Box3().setFromObject(guy1Obj);
-    var bSize = new THREE.Vector3(); 
+    var bSize = new THREE.Vector3();
+    // ********** **********
+    // GUY HELPER FUNCTIONS
+    // ********** **********
     // set guy position in trems of x and z, and 
     // optional alt if I want him going up into the sky for some reason
     var setGuyPos = function(x, z, alt){
@@ -55,6 +59,17 @@ VIDEO.init = function(sm, scene, camera){
     var setGuyFacing = function(x, y, z){
         guy1Obj.lookAt(x, guy1Obj.position.y + y, z);
     };
+    // guy talk helper
+    var guyTalk = function(mouthPer){
+        guy1_canvasObj.draw({
+           drawClass: 'face',
+           drawMethod: 'talk',
+           mouthPer: mouthPer,
+           leftEyeXPer: 0.5, rightEyeXPer: 0.5
+        });
+    };
+
+guyTalk(1);
 
     // ********** **********
     // CUBE STACK GRID
