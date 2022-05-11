@@ -25,8 +25,9 @@ VIDEO.init = function(sm, scene, camera){
     // LIGHT
     // ********** **********
     var dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set(1, 3, 1);
+    dl.position.set(1, 3, -2);
     scene.add(dl);
+    scene.add( new THREE.AmbientLight(0xffffff, 0.05) );
 
     // ********** **********
     // GUY1
@@ -58,17 +59,24 @@ VIDEO.init = function(sm, scene, camera){
     // ********** **********
     // CUBE STACK GRID
     // ********** **********
+    var colors1 = [ [0,1,0, [64, 200]], [1,0,0,[200, 255]], [0,1,1,[128, 200]], [1,0,1,[32, 255]] ];
     var soPalette = [
-        { boxCount: 0 },
-        { boxCount: 15 }, //{ boxCount: 30 }
-        { boxCount: 3 }
+        { boxCount: 0, colors: colors1 },
+        { boxCount: 3, colors: colors1 }, //{ boxCount: 30 }
+        { boxCount: 15, colors: colors1 },
+        // back
+        { boxCount: 30, 
+          colors: colors1,
+          posArray: [6,6,6,6,13,13,20,20,27,27,34,34,34,34,34],
+          planeColor: 1
+        }
     ];
     var sopArray = [
-       2,2,2,2,2,
-       2,1,1,1,2,
-       2,1,0,1,2,
-       2,1,1,1,2,
-       2,2,2,2,2
+       1,1,1,1,1,
+       1,0,0,0,1,
+       1,3,0,0,1,
+       1,0,0,0,1,
+       1,1,1,1,1
     ];
     var csg = CubeStackGrid.create({ 
         gw: 5, gh: 5, space: 0.5, stackGW: 7, stackGH: 5, 
