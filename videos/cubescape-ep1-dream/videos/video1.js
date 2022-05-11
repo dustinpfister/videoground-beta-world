@@ -68,9 +68,6 @@ VIDEO.init = function(sm, scene, camera){
            leftEyeXPer: 0.5, rightEyeXPer: 0.5
         });
     };
-
-guyTalk(1);
-
     // ********** **********
     // CUBE STACK GRID
     // ********** **********
@@ -118,6 +115,7 @@ guyTalk(1);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0, 0);
                     guy1.moveArm('arm_right', 0, 0);
+                    guyTalk(0.5);
                     // camera
                     camera.position.set(200, 200, 200);
                     camera.lookAt(guy1Obj.position);
@@ -135,6 +133,7 @@ guyTalk(1);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0, 0);
                     guy1.moveArm('arm_right', 0, 0);
+                    guyTalk(0.5);
                     // camera
                     var s = 200 - 195 * partPer;
                     camera.position.set(s, s, s);
@@ -153,9 +152,10 @@ guyTalk(1);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0, 0);
                     guy1.moveArm('arm_right', 0, 0);
+                    guyTalk(0.5);
                     // camera
-                    camera.position.set(5, 5, 5);
-                    camera.lookAt(guy1Obj.position);
+                    camera.position.set(5, 5, 5 - 5 * partPer);
+                    camera.lookAt( guy1Obj.position.clone().add(new THREE.Vector3(0, 1 * partPer, 0)) );
                 }
             },
             // sq4 - guy1 says: 'if this is a dream, that means I can fly' 
@@ -170,14 +170,15 @@ guyTalk(1);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0, 0);
                     guy1.moveArm('arm_right', 0, 0);
+                    guyTalk(0.5 + Math.cos( Math.PI * 4 * partBias / Math.PI)  );
                     // camera
-                    camera.position.set(5, 5, 5 - 5 * partPer);
-                    camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0,1 * partPer,0)));
+                    camera.position.set(5, 5, 0);
+                    camera.lookAt( guy1Obj.position.clone().add(new THREE.Vector3(0, 1, 0)) );
                 }
             },
             // sq5 - guy1 raises his arms up
             {
-                per: 0.25,
+                per: 0.48,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -187,6 +188,7 @@ guyTalk(1);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 1 - 0.5 * partPer, 0.1 * partPer );
                     guy1.moveArm('arm_right', 1 - 0.5 * partPer, 0.1 * partPer );
+                    guyTalk(0.5);
                     // camera
                     camera.position.set(5, 5, 0);
                     camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 1 - partPer, 0)));
@@ -194,7 +196,7 @@ guyTalk(1);
             },
             // sq6 - guy one takes off
             {
-                per: 0.30,
+                per: 0.50,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -204,6 +206,7 @@ guyTalk(1);
                     setGuyFacing(3, 0, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
+                    guyTalk(0.5);
                     // camera
                     camera.position.set(5 + 5 * partPer, 5 + 30 * partPer, 0);
                     camera.lookAt(guy1Obj.position.clone().add(new THREE.Vector3(0, 0, 0)));
@@ -212,7 +215,7 @@ guyTalk(1);
             },
             // sq7 - guy rotates camera moves to a behind view
             {
-                per: 0.50,
+                per: 0.60,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -222,6 +225,7 @@ guyTalk(1);
                     setGuyFacing(3 - 3 * partPer, -3 * partPer, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
+                    guyTalk(0.5);
                     // camera
                     camera.position.set(10 - 20 * partPer, 35, 10 * partBias);
                     camera.lookAt(guy1Obj.position);
@@ -230,7 +234,7 @@ guyTalk(1);
             },
             // sq8 - guy starts to fly
             {
-                per: 0.65,
+                per: 0.70,
                 init: function(sm){},
                 update: function(sm, scene, camera, partPer, partBias){
                     // guy1
@@ -241,6 +245,7 @@ guyTalk(1);
                     setGuyFacing(x + 0.001, -3, 0);
                     guy1.moveArm('arm_left', 0.5, 0.1);
                     guy1.moveArm('arm_right', 0.5, 0.1);
+                    guyTalk(0.5);
                     // camera
                     //camera.position.set(-10, 35, 0);
                     camera.position.copy( guy1Obj.position.clone().add( new THREE.Vector3(-10, 5, 0) ) );
