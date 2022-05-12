@@ -10,6 +10,8 @@
 * (done) move mouth for seq where the guy is talking
 * (done) figure out how many frames I am going to want for each sequence
 * (done) custom colors for cube srtacks
+* () ground mesh
+* () cyan background color
 * () custom data for cube stacks around the guy in terms of where the cubes are
 * () work out a custom effect for this video
 
