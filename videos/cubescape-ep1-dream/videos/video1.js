@@ -89,14 +89,20 @@ VIDEO.init = function(sm, scene, camera){
         { boxCount: 30, 
           colors: colors1,
           posArray: [6,6,6,6,13,13,20,20,27,27,34,34,34,34,34],
-          planeColor: 1
+          planeColor: 0
+        },
+        // forward
+        { boxCount: 30, 
+          colors: colors1,
+          posArray: [0,0,0,7,7,7],
+          planeColor: 0
         }
     ];
     var sopArray = [
        1,1,1,1,1,
-       1,0,0,0,1,
-       1,3,0,0,1,
-       1,0,0,0,1,
+       1,2,2,2,1,
+       1,3,0,4,4,
+       1,2,2,2,1,
        1,1,1,1,1
     ];
     var csg = CubeStackGrid.create({ 
