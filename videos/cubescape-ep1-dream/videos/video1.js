@@ -45,6 +45,15 @@ VIDEO.init = function(sm, scene, camera){
     var bbox = new THREE.Box3().setFromObject(guy1Obj);
     var bSize = new THREE.Vector3();
     // ********** **********
+    // CUBE STACK GRID
+    // ********** **********
+    var ground = new THREE.Mesh(
+        new THREE.BoxGeometry(900, 1, 700),
+        new THREE.MeshStandardMaterial({color: new THREE.Color(0.1 , 0.1, 0.1)})
+    );
+    ground.position.set(0, -11, 0)
+    scene.add(ground);
+    // ********** **********
     // GUY HELPER FUNCTIONS
     // ********** **********
     // set guy position in trems of x and z, and 
