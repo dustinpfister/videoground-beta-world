@@ -5,15 +5,19 @@
 
 <!-- cubescape-->
 
-## () - cubescape-ep1-dream
+## () - cubescape-ep2-
+
+## () - cubescape-ep1-dream final-revision
+* () custom data for cube stacks around the guy in terms of where the cubes are
+* () work out a custom effect for this video
+
+## (done 05/14/2022) - cubescape-ep1-dream video started
 * (done) start first 'cubescape' video
 * (done) move mouth for seq where the guy is talking
 * (done) figure out how many frames I am going to want for each sequence
 * (done) custom colors for cube srtacks
-* () ground mesh
-* () cyan background color
-* () custom data for cube stacks around the guy in terms of where the cubes are
-* () work out a custom effect for this video
+* (done) ground mesh
+* (done) cyan background color
 
 <!-- ITEMS -->
 
