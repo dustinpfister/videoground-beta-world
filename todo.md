@@ -7,8 +7,8 @@
 
 ## () - cubescape-ep2-
 
-## () - cubescape-ep1-dream final-revision
-* () custom data for cube stacks around the guy in terms of where the cubes are
+## () - cubescape-ep1-dream - video2 custom effect
+* () Add a simple CubeStack.loadEffect method for cube-stack.js
 * () work out a custom effect for this video
 
 ## (done 05/14/2022) - cubescape-ep1-dream video started
@@ -18,6 +18,7 @@
 * (done) custom colors for cube srtacks
 * (done) ground mesh
 * (done) cyan background color
+* (done) custom data for cube stacks around the guy in terms of where the cubes are
 
 <!-- ITEMS -->
 

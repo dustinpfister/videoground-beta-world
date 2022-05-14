@@ -113,6 +113,9 @@ VIDEO.init = function(sm, scene, camera){
     // scale the csg
     csg.scale.set(20, 20, 20);
 
+    // apply effect
+CubeStack.applyEffect()
+
     // ********** **********
     // SEQUENCES
     // ********** **********

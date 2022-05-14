@@ -1,4 +1,6 @@
-// Cube Stack example for s3-compare-to-perspective example in threejs-camera-orthographic
+// Cube Stack example for beta world cubscale videos
+// This is a stand alone version for the first eposode ep1-dream
+
 var CubeStack = (function () {
     // the public api
     var api = {};
@@ -167,11 +169,29 @@ var CubeStack = (function () {
         });
     };
 
-
     // apply effect method
     api.applyEffect = function(stack, effectKey, opt){
         EFFECTS[effectKey](stack, opt);
     };
+
+    // load effect method
+    api.loadEffect = function(effectObj){
+        effectObj = effectObj || {};
+        effectObj.key = effectObj.key || '';
+        effectObj.beforeGroups = effectObj.beforeGroups || function(stack, opt){};
+        effectObj.forCube = effectObj.forCube || function(cube, cubeStack, stack, opt){}; 
+        EFFECTS[effectObj.key] = function(stack, opt){
+            opt = opt || {};
+            effectObj.beforeGroups(stack, opt);
+            stack.userData.cubeGroups.children.forEach(function(cubeStack){
+                var len = cubeStack.children.length;
+                cubeStack.children.forEach(function(cube, i){
+                    effectObj.forCube(cube, cubeStack, stack, opt);
+                });
+            });
+        };
+    };
+
     // return public api
     return api;
 }
