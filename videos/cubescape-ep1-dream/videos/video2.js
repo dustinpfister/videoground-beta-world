@@ -114,7 +114,17 @@ VIDEO.init = function(sm, scene, camera){
     csg.scale.set(20, 20, 20);
 
     // apply effect
-CubeStack.applyEffect()
+
+    CubeStack.loadEffect({
+        key: 'dreamRotate',
+        beforeGroups: function(){},
+        forCube: function(cube){
+             cube.rotation.y = Math.PI / 180 * 45;
+        }
+    });
+
+
+    CubeStack.applyEffect(csg.children[11], 'dreamRotate', {} )
 
     // ********** **********
     // SEQUENCES
