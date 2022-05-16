@@ -112,6 +112,8 @@ var CubeStack = (function () {
                         map: datatex.seededRandom.apply(null, [8,8].concat( cubeColor ) ),
                         emissive: 0x1a1a1a
                     }));
+                box.userData.boxIndex = boxIndex;
+                box.userData.i = cubeStack.children.length;
                 box.position.set(0, y , 0);
                 cubeStack.add(box);    
             }

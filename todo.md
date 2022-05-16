@@ -7,9 +7,13 @@
 
 ## () - cubescape-ep2-
 
+## () - cubescape-ep1-dream - video3 custom textures
+* I will want to have a way to make it so that textures are part of an effect
+
 ## () - cubescape-ep1-dream - video2 custom effect
 * (done) Add a simple CubeStack.loadEffect method for cube-stack.js
-* () work out a custom effect for this video that has to do with rotation
+* (done) work out a custom effect for this video that has to do with rotation
+* () use the custom effect for all cube stacks
 
 ## (done 05/14/2022) - cubescape-ep1-dream video started
 * (done) start first 'cubescape' video

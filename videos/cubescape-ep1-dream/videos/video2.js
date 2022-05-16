@@ -106,7 +106,7 @@ VIDEO.init = function(sm, scene, camera){
        1,2,2,2,1,
        1,1,1,1,1
     ];
-    var csg = CubeStackGrid.create({ 
+    var csg = scene.userData.csg = CubeStackGrid.create({ 
         gw: 5, gh: 5, space: 0.5, stackGW: 7, stackGH: 5, 
         stackOptionPalette: soPalette, sopArray: sopArray});
     scene.add(csg);
@@ -118,13 +118,14 @@ VIDEO.init = function(sm, scene, camera){
     CubeStack.loadEffect({
         key: 'dreamRotate',
         beforeGroups: function(){},
-        forCube: function(cube){
-             cube.rotation.y = Math.PI / 180 * 45;
+        forCube: function(cube, cubeStack, stack, opt){
+             opt.degDelta = opt.degDelta || 0;
+             opt.per = opt.per || 0;
+             var rStart = Math.PI / 180 * ( opt.degDelta * ( cube.userData.i + 1) );
+             cube.rotation.y = rStart + Math.PI * 2 * opt.per;
+             cube.scale.set(0.70, 0.95, 0.70);
         }
     });
-
-
-    CubeStack.applyEffect(csg.children[11], 'dreamRotate', {} )
 
     // ********** **********
     // SEQUENCES
@@ -289,6 +290,12 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
+
+    var csg = scene.userData.csg;
+
+    csg.children.forEach(function(cubeStack, i){
+        CubeStack.applyEffect(csg.children[i], 'dreamRotate', { degDelta: 20, per: per } );
+    });
     // sequences
     Sequences.update(sm.seq, sm);
 };
