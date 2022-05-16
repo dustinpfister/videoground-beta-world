@@ -113,6 +113,12 @@ VIDEO.init = function(sm, scene, camera){
     // scale the csg
     csg.scale.set(20, 20, 20);
 
+    csg.traverse(function(obj){
+       if(obj.type === 'Mesh'){
+           obj.userData.rStager = THREE.MathUtils.seededRandom();
+       }
+    });
+
     // apply effect
 
     CubeStack.loadEffect({
@@ -131,7 +137,7 @@ VIDEO.init = function(sm, scene, camera){
              opt.degDelta = opt.degDelta || 0;
              opt.per = opt.per || 0;
              var rStart = Math.PI / 180 * ( opt.degDelta * ( cube.userData.i + 1) );
-             cube.rotation.y = rStart + Math.PI * 2 * opt.per;
+             cube.rotation.y = rStart + Math.PI * ( 2 + 4 * cube.userData.rStager ) * opt.per;
              cube.scale.set(0.70, 0.95, 0.70);
         }
     });
@@ -299,11 +305,9 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-
     var csg = scene.userData.csg;
-
     csg.children.forEach(function(cubeStack, i){
-        CubeStack.applyEffect(csg.children[i], 'dreamRotate', { degDelta: 20, per: per } );
+        CubeStack.applyEffect(csg.children[i], 'dreamRotate', { degDelta: 20 , per: per } );
     });
     // sequences
     Sequences.update(sm.seq, sm);

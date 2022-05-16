@@ -180,7 +180,9 @@ var CubeStack = (function () {
         effectObj = effectObj || {};
         effectObj.key = effectObj.key || '';
         effectObj.beforeGroups = effectObj.beforeGroups || function(stack, opt){};
-        effectObj.forCube = effectObj.forCube || function(cube, cubeStack, stack, opt){}; 
+        effectObj.forCube = effectObj.forCube || function(cube, cubeStack, stack, opt){};
+
+        // the effect function
         EFFECTS[effectObj.key] = function(stack, opt){
             opt = opt || {};
             effectObj.beforeGroups(stack, opt);
