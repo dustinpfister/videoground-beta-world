@@ -118,6 +118,15 @@ VIDEO.init = function(sm, scene, camera){
     CubeStack.loadEffect({
         key: 'dreamRotate',
         beforeGroups: function(){},
+/*
+        genTexture: function(){
+            return datatex.forEachPix(8, 8, function(x, y, w, h, i, stride, data){
+                var obj = {};
+                obj.r = 155;
+                return obj;
+            });
+        },
+*/
         forCube: function(cube, cubeStack, stack, opt){
              opt.degDelta = opt.degDelta || 0;
              opt.per = opt.per || 0;

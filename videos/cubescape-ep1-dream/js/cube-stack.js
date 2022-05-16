@@ -89,7 +89,6 @@ var CubeStack = (function () {
         }
         var boxIndex = 0;
         while (boxIndex < opt.boxCount) {
-
             // get the cube stack group to place the new mesh by checking the posArray first
             var a = opt.posArray[boxIndex], pos;
             if(typeof a === 'number'){
@@ -189,6 +188,9 @@ var CubeStack = (function () {
                 var len = cubeStack.children.length;
                 cubeStack.children.forEach(function(cube, i){
                     effectObj.forCube(cube, cubeStack, stack, opt);
+                    if(effectObj.genTexture){
+                        cube.material.map = effectObj.genTexture(cube, cubeStack, stack, opt); 
+                    }
                 });
             });
         };
