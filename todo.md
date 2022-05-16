@@ -8,8 +8,8 @@
 ## () - cubescape-ep2-
 
 ## () - cubescape-ep1-dream - video2 custom effect
-* () Add a simple CubeStack.loadEffect method for cube-stack.js
-* () work out a custom effect for this video
+* (done) Add a simple CubeStack.loadEffect method for cube-stack.js
+* () work out a custom effect for this video that has to do with rotation
 
 ## (done 05/14/2022) - cubescape-ep1-dream video started
 * (done) start first 'cubescape' video
