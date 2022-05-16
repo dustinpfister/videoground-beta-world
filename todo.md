@@ -8,7 +8,7 @@
 ## () - cubescape-ep2-
 
 
-## () - cubescape-ep1-dream - video2 custom effect
+## ( done 05/15/2022 ) - cubescape-ep1-dream - video2 custom effect
 * (done) Add a simple CubeStack.loadEffect method for cube-stack.js
 * (done) work out a custom effect for this video that has to do with rotation
 * (done) use the custom effect for all cube stacks
