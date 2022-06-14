@@ -1,27 +1,16 @@
 # VideoGround-beta-world video files todo list
 
+<!-- general ideas -->
+
 # Some things to keep in mind here
-* follow a ruff scale of 1 = US foot
+* follow a ruff scale of 1 = US Standard foot
+* explore more than one idea for a collection of video content, do not get fixed on a single idea
+* if you feel traped with one idea shift the focus to another idea
 
 <!-- cubescape-->
 
 ## () - cubescape-ep2-
 
-
-## ( done 05/15/2022 ) - cubescape-ep1-dream - video2 custom effect
-* (done) Add a simple CubeStack.loadEffect method for cube-stack.js
-* (done) work out a custom effect for this video that has to do with rotation
-* (done) use the custom effect for all cube stacks
-* (done) I will want to have a way to make it so that textures are part of an effect
-
-## (done 05/14/2022) - cubescape-ep1-dream video started
-* (done) start first 'cubescape' video
-* (done) move mouth for seq where the guy is talking
-* (done) figure out how many frames I am going to want for each sequence
-* (done) custom colors for cube srtacks
-* (done) ground mesh
-* (done) cyan background color
-* (done) custom data for cube stacks around the guy in terms of where the cubes are
 
 <!-- ITEMS -->
 
@@ -41,6 +30,21 @@
 * looks like the front side of the floor is facing out from the room, see about fixing that
 
 <!-- DONE -->
+
+## ( done 05/15/2022 ) - cubescape-ep1-dream - video2 custom effect
+* (done) Add a simple CubeStack.loadEffect method for cube-stack.js
+* (done) work out a custom effect for this video that has to do with rotation
+* (done) use the custom effect for all cube stacks
+* (done) I will want to have a way to make it so that textures are part of an effect
+
+## (done 05/14/2022) - cubescape-ep1-dream video started
+* (done) start first 'cubescape' video
+* (done) move mouth for seq where the guy is talking
+* (done) figure out how many frames I am going to want for each sequence
+* (done) custom colors for cube srtacks
+* (done) ground mesh
+* (done) cyan background color
+* (done) custom data for cube stacks around the guy in terms of where the cubes are
 
 ## ( done 04/06/2022 ) - house1-bedroom dae file
 * (done) start a house1-bedroom project that will be a full 'bedroom only' scene of house1
