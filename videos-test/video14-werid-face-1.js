@@ -14,7 +14,7 @@ VIDEO.init = function(sm, scene, camera){
 
     // GRID HELPER AND BACKGROUND
     scene.background = new THREE.Color('black');
-    scene.add(new THREE.GridHelper(10, 10));
+    //scene.add(new THREE.GridHelper(10, 10));
 
     // LIGHT
     var light = new THREE.DirectionalLight(0xffffff, 1);
@@ -42,7 +42,7 @@ VIDEO.init = function(sm, scene, camera){
 
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-    camera.position.set(2, 0, 2 - 4 * bias);
+    camera.position.set(2 - 4 * bias, 0, 2);
     camera.lookAt(0, 0, 0);
 };
 
