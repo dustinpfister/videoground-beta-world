@@ -10,10 +10,16 @@
 
 <!-- weird face one collection -->
 
-## () - weird-face-one start working on dae file folder
-* start first dae file for a new dae folder
-* first edae file export for weird face one
-* start a new test video for weird face one
+## ( done 06/17/2022 ) - weird-face-one start working on dae file folder
+* (done) start first dae file for a new dae folder
+* (done) first dae file export for weird face one
+* (done) start a new video14-weird-face-1 text video
+
+## () - see about fixing mouth normals
+* () fix isshues with mouth geometry
+
+## () - update mouth geometry
+* See about making a mouth talk animation cycle that has to do with mutation of the position atribute
 
 
 <!-- cubescape-->
