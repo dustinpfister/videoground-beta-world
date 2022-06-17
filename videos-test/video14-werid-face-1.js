@@ -31,11 +31,11 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(wf);
 
     // get by name
-/*
-    var head = guyDAE.getObjectByName('head'); 
-    head.rotation.z = Math.PI / 180 * 120;
-    console.log(guyDAE);
-*/
+    var mouth = wf.getObjectByName('mouth');
+    // !!! doing the quick temp fix for messed up normals on the mouth
+    mouth.material.side = THREE.DoubleSide;
+    console.log(mouth);
+
 
 
 };
