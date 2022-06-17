@@ -7,6 +7,15 @@
 * explore more than one idea for a collection of video content, do not get fixed on a single idea
 * if you feel traped with one idea shift the focus to another idea
 
+
+<!-- weird face one collection -->
+
+## () - weird-face-one start working on dae file folder
+* start first dae file for a new dae folder
+* first edae file export for weird face one
+* start a new test video for weird face one
+
+
 <!-- cubescape-->
 
 ## () - cubescape-ep2-
