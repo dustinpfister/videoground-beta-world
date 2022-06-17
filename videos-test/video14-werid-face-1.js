@@ -33,7 +33,7 @@ VIDEO.init = function(sm, scene, camera){
     // get by name
     var mouth = wf.getObjectByName('mouth');
     // !!! doing the quick temp fix for messed up normals on the mouth
-    mouth.material.side = THREE.DoubleSide;
+    //mouth.material.side = THREE.DoubleSide;
     console.log(mouth);
 
 
