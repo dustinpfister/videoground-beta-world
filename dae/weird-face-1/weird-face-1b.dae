@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2022-06-18T18:03:59</created>
-    <modified>2022-06-18T18:03:59</modified>
+    <created>2022-06-18T18:16:20</created>
+    <modified>2022-06-18T18:16:20</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -512,26 +512,6 @@
   <library_controllers/>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
-      <node id="eye1_001" name="eye1_001" type="NODE">
-        <matrix sid="transform">1 0 0 0.4 0 -4.37114e-8 1 0.1 0 -1 -4.37114e-8 -0.25 0 0 0 1</matrix>
-        <instance_geometry url="#eye1-geo_004-mesh" name="eye1_001">
-          <bind_material>
-            <technique_common>
-              <instance_material symbol="Material_008-material" target="#Material_008-material"/>
-            </technique_common>
-          </bind_material>
-        </instance_geometry>
-        <node id="pupil1_001" name="pupil1_001" type="NODE">
-          <matrix sid="transform">1 0 0 0 0 1.19249e-8 -1 -0.2 0 1 1.19249e-8 -1.49012e-8 0 0 0 1</matrix>
-          <instance_geometry url="#Sphere_005-mesh" name="pupil1_001">
-            <bind_material>
-              <technique_common>
-                <instance_material symbol="Material_007-material" target="#Material_007-material"/>
-              </technique_common>
-            </bind_material>
-          </instance_geometry>
-        </node>
-      </node>
       <node id="Camera" name="Camera" type="NODE">
         <matrix sid="transform">0.6859207 -0.3240135 0.6515582 7.481132 0.7276763 0.3054208 -0.6141704 -6.50764 0 0.8953956 0.4452714 5.343665 0 0 0 1</matrix>
         <instance_camera url="#Camera-camera"/>
@@ -543,6 +523,26 @@
       <node id="nose" name="nose" type="NODE">
         <matrix sid="transform">1.5 0 0 0 0 1.75 -5.56363e-8 0 0 9.73635e-8 1 0 0 0 0 1</matrix>
         <instance_geometry url="#Plane-mesh" name="nose"/>
+        <node id="eye1_001" name="eye1_001" type="NODE">
+          <matrix sid="transform">0.6666667 0 0 0.2666667 0 -5.67701e-8 0.5714286 0.05714285 0 -1 -9.93477e-8 -0.25 0 0 0 1</matrix>
+          <instance_geometry url="#eye1-geo_004-mesh" name="eye1_001">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="Material_008-material" target="#Material_008-material"/>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+          <node id="pupil1_001" name="pupil1_001" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1.19249e-8 -1 -0.2 0 1 1.19249e-8 -1.49012e-8 0 0 0 1</matrix>
+            <instance_geometry url="#Sphere_005-mesh" name="pupil1_001">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="Material_007-material" target="#Material_007-material"/>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+        </node>
         <node id="eye1" name="eye1" type="NODE">
           <matrix sid="transform">0.6666667 0 0 -0.2666667 0 -2.49779e-8 0.5714286 0.05714286 0 -1 -4.37114e-8 -0.25 0 0 0 1</matrix>
           <instance_geometry url="#eye1-geo-mesh" name="eye1">
