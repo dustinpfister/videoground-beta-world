@@ -32,13 +32,18 @@ VIDEO.init = function(sm, scene, camera){
     let m1 = VIDEO.daeResults[0].scene.getObjectByName('mouth-1');
 
     let nose = scene.userData.wf = VIDEO.daeResults[1].scene.getObjectByName('nose');
+    // get mouth from nose group
+    let mouth = nose.getObjectByName('mouth');
 
-    console.log(m0, m1);
-
-//console.log(nose)
+    //console.log(m0, m1);
+    //console.log(nose);
+    console.log(mouth)
 
     scene.add(nose);
 
+
+
+    
 
 
 /*
