@@ -2,7 +2,7 @@
  */
 // the dae files to use for this video
 VIDEO.daePaths = [
-  '../dae/weird-face-1/weird-face-1.dae'
+  '../dae/weird-face-1/weird-face-1b.dae'
 ];
 
 VIDEO.scripts = [
