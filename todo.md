@@ -15,11 +15,12 @@
 * (done) first dae file export for weird face one
 * (done) start a new video14-weird-face-1 text video
 
-## () - see about fixing mouth normals
-* () fix isshues with mouth geometry
+## ( done 06/18/2022 ) - see about fixing mouth normals
+* (done) fix isshues with mouth geometry
 
 ## () - update mouth geometry
-* See about making a mouth talk animation cycle that has to do with mutation of the position atribute
+* See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
+* The process might involve creating a few dae file for mouths and use the position attriburtes of each mouth as a position state to lerp to
 
 
 <!-- cubescape-->
