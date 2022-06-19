@@ -10,6 +10,7 @@ VIDEO.scripts = [
   '../js/dae-helpers.js'
 ];
 
+
 // init method for the video
 VIDEO.init = function(sm, scene, camera){
 
@@ -25,21 +26,37 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(ambient);
 
     // getting weird face one assets
-
-    console.log( VIDEO.daeResults );
-
     let m0 = VIDEO.daeResults[0].scene.getObjectByName('mouth-0');
     let m1 = VIDEO.daeResults[0].scene.getObjectByName('mouth-1');
-
     let nose = scene.userData.wf = VIDEO.daeResults[1].scene.getObjectByName('nose');
     // get mouth from nose group
     let mouth = nose.getObjectByName('mouth');
-
-    //console.log(m0, m1);
-    //console.log(nose);
-    console.log(mouth)
-
+    // add just main 'nose' group to scene, m0 and m1 are used to update geo of mouth
     scene.add(nose);
+
+    console.log(mouth.geometry)
+
+    let geo = mouth.geometry;
+    // pos, and new pos
+    let pos = geo.getAttribute('position');
+    let posA = m0.geometry.getAttribute('position');
+    let posB = m1.geometry.getAttribute('position');
+    var i = 0, len = pos.array.length;
+    while(i < len){
+        var v = new THREE.Vector3(posA.array[i], posA.array[i + 1], posA.array[i + 2]);
+        var v2 = new THREE.Vector3(posB.array[i], posB.array[i + 1], posB.array[i + 2]);
+        v.lerp(v2, 1);
+        //pos.array[i] = posA.array[i];
+        pos.array[i] = v.x;
+        pos.array[i + 1] = v.y;
+        pos.array[i + 2] = v.z;
+
+        i += 3;
+    }
+    pos.needsUpdate = true;
+
+console.log(geo)
+    
 
 
 
