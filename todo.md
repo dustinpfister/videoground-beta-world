@@ -18,11 +18,11 @@
 ## ( done 06/18/2022 ) - see about fixing mouth normals
 * (done) fix isshues with mouth geometry
 
-## () - update mouth geometry
+## ( done 06/19/2022 ) - update mouth geometry
 * (done) See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
 * (done) start a mouths dae file that will contain a collection of mouse states
 * (done) load both mouths and werid face 1 dae files in text video 14
-* () see about setting the geometry of mouth to lerps between mouth-0 and mouth-1 
+* (done) see about setting the geometry of mouth to lerps between mouth-0 and mouth-1 
 
 
 <!-- cubescape-->
