@@ -28,12 +28,15 @@ VIDEO.init = function(sm, scene, camera){
 
     console.log( VIDEO.daeResults );
 
+    let m0 = VIDEO.daeResults[0].scene.getObjectByName('mouth-0');
     let m1 = VIDEO.daeResults[0].scene.getObjectByName('mouth-1');
-    let m2 = VIDEO.daeResults[0].scene.getObjectByName('mouth-2');
 
     let nose = scene.userData.wf = VIDEO.daeResults[1].scene.getObjectByName('nose');
 
-    console.log(m1, m2, nose);
+    console.log(m0, m1);
+
+//console.log(nose)
+
     scene.add(nose);
 
 

@@ -19,8 +19,10 @@
 * (done) fix isshues with mouth geometry
 
 ## () - update mouth geometry
-* See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
-* The process might involve creating a few dae file for mouths and use the position attriburtes of each mouth as a position state to lerp to
+* (done) See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
+* (done) start a mouths dae file that will contain a collection of mouse states
+* (done) load both mouths and werid face 1 dae files in text video 14
+* () see about setting the geometry of mouth to lerps between mouth-0 and mouth-1 
 
 
 <!-- cubescape-->
