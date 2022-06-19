@@ -68,6 +68,11 @@ VIDEO.init = function(sm, scene, camera){
     let nose = scene.userData.wf = VIDEO.daeResults[1].scene.getObjectByName('nose');
     // get mouth from nose group
     let mouth = ud.mouth = nose.getObjectByName('mouth');
+
+mouth.material.side = THREE.DoubleSide;
+
+console.log(mouth.material.side)
+
     // add just main 'nose' group to scene, m0 and m1 are used to update geo of mouth
     scene.add(nose);
 
