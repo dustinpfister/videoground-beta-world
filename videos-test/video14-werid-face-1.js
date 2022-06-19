@@ -2,6 +2,7 @@
  */
 // the dae files to use for this video
 VIDEO.daePaths = [
+  '../dae/weird-face-1/mouths-1b.dae',
   '../dae/weird-face-1/weird-face-1b.dae'
 ];
 
@@ -23,8 +24,22 @@ VIDEO.init = function(sm, scene, camera){
     var ambient = new THREE.AmbientLight(0xffffff, 0.15);
     scene.add(ambient);
 
-    // loading werid face one
-    let wf = scene.userData.wf = VIDEO.daeResults[0].scene.children[2];
+    // getting weird face one assets
+
+    console.log( VIDEO.daeResults );
+
+    let m1 = VIDEO.daeResults[0].scene.getObjectByName('mouth-1');
+    let m2 = VIDEO.daeResults[0].scene.getObjectByName('mouth-2');
+
+    let nose = scene.userData.wf = VIDEO.daeResults[1].scene.getObjectByName('nose');
+
+    console.log(m1, m2, nose);
+    scene.add(nose);
+
+
+
+/*
+    let wf = scene.userData.wf = VIDEO.daeResults[0].scene.children[0];
     wf.position.set(0, 0.25, 0);
     // !!! if werid face one has textures then use this to make them emmisve maps with the standard material
     //DAEHelpers.reMapGroup(guyDAE);
@@ -35,6 +50,7 @@ VIDEO.init = function(sm, scene, camera){
     // !!! doing the quick temp fix for messed up normals on the mouth
     //mouth.material.side = THREE.DoubleSide;
     console.log(mouth);
+*/
 
 
 
@@ -43,6 +59,6 @@ VIDEO.init = function(sm, scene, camera){
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     camera.position.set(2 - 4 * bias, 0, 2);
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(0, -0.25, 0);
 };
 
