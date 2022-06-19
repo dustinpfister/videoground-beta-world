@@ -22,7 +22,11 @@
 * (done) See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
 * (done) start a mouths dae file that will contain a collection of mouse states
 * (done) load both mouths and werid face 1 dae files in text video 14
-* (done) see about setting the geometry of mouth to lerps between mouth-0 and mouth-1 
+* (done) see about setting the geometry of mouth to lerps between mouth-0 and mouth-1
+
+## () - new mouth geo update method
+* sense the method of lerping position attributes from one to another has failed, the next step is to try a new method for this
+* look into how to go about doing this with 'bones' or any other kind of method that will work
 
 
 <!-- cubescape-->

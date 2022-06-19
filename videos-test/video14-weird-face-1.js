@@ -110,7 +110,7 @@ lerpGeo(mouth.geometry, m0.geometry, m1.geometry, 0.5)
 VIDEO.update = function(sm, scene, camera, per, bias){
     let ud = scene.userData;
 
-    lerpGeo(ud.mouth.geometry, ud.m0.geometry, ud.m1.geometry, bias);
+    lerpGeo(ud.mouth.geometry, ud.m0.geometry, ud.m1.geometry, 1);
 
     camera.position.set(2 - 4 * bias, 0, 2);
     camera.lookAt(0, -0.25, 0);
