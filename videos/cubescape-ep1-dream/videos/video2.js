@@ -8,7 +8,7 @@ VIDEO.scripts = [
   '../../../js/canvas/r0/canvas.js',
   '../../../js/guy/r0/guy.js',
   '../../../js/guy/r0/guy-canvas.js',
-  '../../../js/guy/r0/guy-characters.js'
+  '../../../js/guy/r0/guy-characters.js',
   '../../../js/datatex/r0/datatex.js',
   '../js/cube-stack.js',
   '../js/cube-stack-grid.js'
