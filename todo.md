@@ -1,5 +1,13 @@
 # VideoGround-beta-world video files todo list
 
+<!-- FRINK -->
+
+## ( ) - video2 done for frink1
+* () make object grid wrap part of the stack
+* () have a grids of cubes moving around on the top and bottom of the sphere
+* () have the sphere always have a little bit of an effect going on
+* () work out cool camera movements
+
 <!-- general ideas -->
 
 # Some things to keep in mind here
@@ -35,6 +43,9 @@
 * looks like the front side of the floor is facing out from the room, see about fixing that
 
 <!-- DONE -->
+
+## ( 10/27/2022 ) - video1 done for frink1
+* (done) have video1 for frink1 done
 
 ## ( done 10/27/2022 ) - new javaScript folders, template3
 * (done) cleaned up thigns with main javaScript folders
