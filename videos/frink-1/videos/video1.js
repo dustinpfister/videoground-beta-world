@@ -89,9 +89,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GRID
     //-------- ----------
-    const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
-    grid.material.linewidth = 3;
-    scene.add( grid );
+    //const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
+    //grid.material.linewidth = 3;
+    //scene.add( grid );
     //-------- ----------
     // A MAIN SEQ OBJECT
     //-------- ----------
@@ -101,16 +101,17 @@ VIDEO.init = function(sm, scene, camera){
         [-8,4,0, 8,8,8,     0,0,0,      50]
     ]);
     // PATH DEBUG POINTS
-    const points_debug = new THREE.Points(
-        new THREE.BufferGeometry().setFromPoints(v3Array_campos),
-        new THREE.PointsMaterial({size: 0.25, color: new THREE.Color(0,1,0)})
-    );
-    scene.add(points_debug);
+    //const points_debug = new THREE.Points(
+    //    new THREE.BufferGeometry().setFromPoints(v3Array_campos),
+    //    new THREE.PointsMaterial({size: 0.25, color: new THREE.Color(0,1,0)})
+    //);
+    //scene.add(points_debug);
     // start options for main seq object
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-            camera.position.set(8, 8, 8);
+            camera.position.set(6, 6, 6);
+            camera.lookAt(0, 0, 0);
             camera.zoom = 1;
         },
         afterObjects: function(seq){
@@ -119,59 +120,58 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ 0 - ...
+    // SEQ 0 - three seconds of silence, frink mesh is a sphere
     opt_seq.objects[0] = {
-        secs: 5,
+        secs: 3,
         update: function(seq, partPer, partBias){
-            // camera
-            camera.position.set(8, 8, 8);
-            camera.lookAt(0, 0, 0);
-            frinkAdjust(mesh1, partPer, 1 - partPer);
+            // frink
+            frinkAdjust(mesh1, 0, 1);
         }
     };
-    // SEQ 1 - ...
+    // SEQ 1 - 2 seconds for frink noise1, sphere gets pointy and back down
     opt_seq.objects[1] = {
-        secs: 5,
+        secs: 2,
         update: function(seq, partPer, partBias){
-            // camera
-            camera.position.set(8, 8, 8);
-            camera.lookAt(0, 0, 0);
-            frinkAdjust(mesh1, 1, 0);
+            // frink
+            let a = seq.getSinBias(1, true);
+            frinkAdjust(mesh1, a, 1 - a);
         }
     };
-    // SEQ 2 - ...
+    // SEQ 2 - 7 secs, silence
     opt_seq.objects[2] = {
-        secs: 5,
+        secs: 7,
         update: function(seq, partPer, partBias){
-            // camera
-            camera.position.set(8, 8, 8);
-            camera.lookAt(0, 0, 0);
-            frinkAdjust(mesh1, 1 - partPer, partPer);
+            // frink
+            frinkAdjust(mesh1, 0, 1);
         }
     };
-/*
-    // SEQ 2 - ...
-    opt_seq.objects[2] = {
-        secs: 5,
-        update: function(seq, partPer, partBias){
-            // camera
-            camera.position.set(8, 8, 8);
-            camera.lookAt(0, 0, 0);
-            frinkAdjust(mesh1, 1, 0);
-        }
-    };
-    // SEQ 3 - ...
+    // SEQ 3 - 3 secs, frink unexspected sound
     opt_seq.objects[3] = {
-        secs: 5,
+        secs: 3,
         update: function(seq, partPer, partBias){
-            // camera
-            camera.position.set(8, 8, 8);
-            camera.lookAt(0, 0, 0);
-            frinkAdjust(mesh1, 1 - partPer, 0);
+            // frink
+            let a = seq.getSinBias(1, true);
+            frinkAdjust(mesh1, a, 1 - a);
         }
     };
-*/
-    // SEQ 1 - ...
+    // SEQ 4 - 8 secs, silence
+    opt_seq.objects[4] = {
+        secs: 8,
+        update: function(seq, partPer, partBias){
+            // frink
+            frinkAdjust(mesh1, 0, 1);
+        }
+    };
+    // SEQ 5 - 7 secs, frink custom 7 sec sound
+    opt_seq.objects[5] = {
+        secs: 7,
+        update: function(seq, partPer, partBias){
+            // frink
+            let a = seq.getSinBias(1, true);
+            frinkAdjust(mesh1, a, 1 - a);
+        }
+    };
+
 /*
     opt_seq.objects[1] = {
         secs: 7,
