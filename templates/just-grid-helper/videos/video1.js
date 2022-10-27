@@ -2,7 +2,7 @@
  
 // scripts
 VIDEO.scripts = [
-   '../../../js/sequences.js'
+   '../../../js/sequences/r0/sequences.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
