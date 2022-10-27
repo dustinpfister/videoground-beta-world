@@ -9,7 +9,7 @@ VIDEO.daePaths = [
 VIDEO.scripts = [
    '../../../js/canvas/r0/canvas.js',
    '../../../js/dae-helpers/r0/dae-helpers.js',
-   '../../../js/sequences/r0/sequences.js'
+   '../../../js/sequences/r0/sequences.js',
    '../js/lipcubes.js'
 ];
 
