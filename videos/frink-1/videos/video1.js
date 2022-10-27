@@ -1,8 +1,10 @@
-// 'frink1'
+// 'frink1' - 
+// 
 // scripts
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
-   '../../../js/canvas/r1/canvas.js'
+   '../../../js/canvas/r1/canvas.js',
+   '../../../js/sphere-mutate/r2/sphere-mutate.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -44,6 +46,43 @@ VIDEO.init = function(sm, scene, camera){
         return v3Array.flat();
     };
     //-------- ----------
+    //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
+    //-------- ----------
+    // frink adjust helper
+    const frinkAdjust = function(mesh, uls, uld){
+        const mud = mesh.userData;
+        mud.uls = uls;
+        mud.uld = uld;
+    };
+    const updateOpt1 = {
+        forPoint : function(vs, i, x, y, mesh, alpha){
+            const mud = mesh.userData;
+            const state = mud.state = mud.state === undefined ? [] : mud.state;
+            const size = mesh.geometry.parameters.radius;
+            const muld = mud.muld === undefined ? 2 : mud.muld;
+            const uls = mud.uls === undefined ? 1 : mud.uls; // Unit Length Speed
+            const uld = mud.uld === undefined ? 0 : mud.uld; // Unit Length Damp
+            if(!state[i]){
+                state[i] = {
+                    v: vs.clone().normalize().multiplyScalar(size + muld * Math.random()),
+                    count: 16 + Math.floor( Math.random() * 32 ),
+                    offset: Math.random()
+                };
+            }
+            const alpha2 = (state[i].offset + (state[i].count) * alpha) % 1;
+            const alpha3 = 1 - Math.abs(0.5 - alpha2) / 0.5  * uls;
+            return vs.lerp(state[i].v, alpha3 * ( 1- uld) );
+        }
+    };
+    const material_sphere = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide, transparent: true, opacity:0.8 });
+    const mesh1 = sphereMutate.create({
+        size: 2, w: 40, h: 40, material: material_sphere
+    });
+    //mesh1.userData.muld = 2; // 'Max Unit Length Delta'
+    //mesh1.userData.uls = 0.25;
+    scene.add(mesh1);
+    sphereMutate.update(mesh1, 1, updateOpt1);
+    //-------- ----------
     // BACKGROUND
     //-------- ----------
     scene.background = new THREE.Color('#2a2a2a');
@@ -75,20 +114,65 @@ VIDEO.init = function(sm, scene, camera){
             camera.zoom = 1;
         },
         afterObjects: function(seq){
+            sphereMutate.update(mesh1, seq.per, updateOpt1);
             camera.updateProjectionMatrix();
         },
         objects: []
     };
     // SEQ 0 - ...
     opt_seq.objects[0] = {
-        secs: 3,
+        secs: 5,
         update: function(seq, partPer, partBias){
             // camera
-            //camera.position.set(5, 18, 14);
+            camera.position.set(8, 8, 8);
             camera.lookAt(0, 0, 0);
+            frinkAdjust(mesh1, partPer, 1 - partPer);
         }
-     };
+    };
     // SEQ 1 - ...
+    opt_seq.objects[1] = {
+        secs: 5,
+        update: function(seq, partPer, partBias){
+            // camera
+            camera.position.set(8, 8, 8);
+            camera.lookAt(0, 0, 0);
+            frinkAdjust(mesh1, 1, 0);
+        }
+    };
+    // SEQ 2 - ...
+    opt_seq.objects[2] = {
+        secs: 5,
+        update: function(seq, partPer, partBias){
+            // camera
+            camera.position.set(8, 8, 8);
+            camera.lookAt(0, 0, 0);
+            frinkAdjust(mesh1, 1 - partPer, partPer);
+        }
+    };
+/*
+    // SEQ 2 - ...
+    opt_seq.objects[2] = {
+        secs: 5,
+        update: function(seq, partPer, partBias){
+            // camera
+            camera.position.set(8, 8, 8);
+            camera.lookAt(0, 0, 0);
+            frinkAdjust(mesh1, 1, 0);
+        }
+    };
+    // SEQ 3 - ...
+    opt_seq.objects[3] = {
+        secs: 5,
+        update: function(seq, partPer, partBias){
+            // camera
+            camera.position.set(8, 8, 8);
+            camera.lookAt(0, 0, 0);
+            frinkAdjust(mesh1, 1 - partPer, 0);
+        }
+    };
+*/
+    // SEQ 1 - ...
+/*
     opt_seq.objects[1] = {
         secs: 7,
         v3Paths: [
@@ -99,18 +183,8 @@ VIDEO.init = function(sm, scene, camera){
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
         }
-     };
-    // SEQ 2 - ...
-    opt_seq.objects[2] = {
-        secs: 20,
-        update: function(seq, partPer, partBias){
-            // camera
-            camera.position.set(8 - 16 * partBias, 8, 8);
-            camera.lookAt(0, 0, 0);
-            const b2 = seq.getSinBias(1, true);
-            camera.zoom = 1 + 7 * b2;
-        }
     };
+*/
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
     console.log('frameMax for main seq: ' + seq.frameMax);
     sm.frameMax = seq.frameMax;
