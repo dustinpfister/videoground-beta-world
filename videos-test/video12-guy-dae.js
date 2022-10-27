@@ -6,11 +6,11 @@ VIDEO.daePaths = [
 ];
 
 VIDEO.scripts = [
-  '../js/dae-helpers.js',
-  '../js/canvas.js',
-  '../js/guy.js',
-  '../js/guy-canvas.js',
-  '../js/guy-characters.js'
+  '../js/dae-helpers/r0/dae-helpers.js',
+  '../js/canvas/r0/canvas.js',
+  '../js/guy/r0/guy.js',
+  '../js/guy/r0/guy-canvas.js'
+  '../js/guy/r0/guy-characters.js'
 ];
 
 // init method for the video

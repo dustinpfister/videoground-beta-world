@@ -5,8 +5,8 @@ VIDEO.daePaths = [
 ];
 
 VIDEO.scripts = [
-   '../../js/canvas.js',
-   '../../js/sequences.js'
+   '../../js/canvas/r0/canvas.js',
+   '../../js/sequences/r0/sequences.js'
 ];
 
 // init method for the video

@@ -7,7 +7,7 @@ VIDEO.daePaths = [
 ];
 
 VIDEO.scripts = [
-  '../js/dae-helpers.js'
+  '../js/dae-helpers/r0/dae-helpers.js'
 ];
 
 var lerpGeo = function(geo, geoA, geoB, alpha){
