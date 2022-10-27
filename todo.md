@@ -7,32 +7,15 @@
 * explore more than one idea for a collection of video content, do not get fixed on a single idea
 * if you feel traped with one idea shift the focus to another idea
 
-
 <!-- weird face one collection -->
-
-## ( done 06/17/2022 ) - weird-face-one start working on dae file folder
-* (done) start first dae file for a new dae folder
-* (done) first dae file export for weird face one
-* (done) start a new video14-weird-face-1 text video
-
-## ( done 06/18/2022 ) - see about fixing mouth normals
-* (done) fix isshues with mouth geometry
-
-## ( done 06/19/2022 ) - update mouth geometry
-* (done) See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
-* (done) start a mouths dae file that will contain a collection of mouse states
-* (done) load both mouths and werid face 1 dae files in text video 14
-* (done) see about setting the geometry of mouth to lerps between mouth-0 and mouth-1
 
 ## () - new mouth geo update method
 * sense the method of lerping position attributes from one to another has failed, the next step is to try a new method for this
 * look into how to go about doing this with 'bones' or any other kind of method that will work
 
-
 <!-- cubescape-->
 
 ## () - cubescape-ep2-
-
 
 <!-- ITEMS -->
 
@@ -52,6 +35,25 @@
 * looks like the front side of the floor is facing out from the room, see about fixing that
 
 <!-- DONE -->
+
+## ( done 10/27/2022 ) - new javaScript folders, template3
+* (done) cleaned up thigns with main javaScript folders
+* (done) added sequence-hooks and sphere mutate project folders
+* (done) new template3 that with video3 file that is a great starting point with r2 of sequnce-hooks
+
+## ( done 06/17/2022 ) - weird-face-one start working on dae file folder
+* (done) start first dae file for a new dae folder
+* (done) first dae file export for weird face one
+* (done) start a new video14-weird-face-1 text video
+
+## ( done 06/18/2022 ) - see about fixing mouth normals
+* (done) fix isshues with mouth geometry
+
+## ( done 06/19/2022 ) - update mouth geometry
+* (done) See about making a mouth talk animation cycle that has to do with mutation of the position atribute of the mouth
+* (done) start a mouths dae file that will contain a collection of mouse states
+* (done) load both mouths and werid face 1 dae files in text video 14
+* (done) see about setting the geometry of mouth to lerps between mouth-0 and mouth-1
 
 ## ( done 05/15/2022 ) - cubescape-ep1-dream - video2 custom effect
 * (done) Add a simple CubeStack.loadEffect method for cube-stack.js
