@@ -35,11 +35,11 @@ VIDEO.init = function(sm, scene, camera){
                 }
             },
             {
-                secs: 2,
+                secs: 7,
                 v3Paths: [
                     {
                         key: 'campos',
-                        array: [8,1,0, 8,8,8],
+                        array: [8,1,0,-8,1,0,-8,1,-5,-8,8,0,8,8,8],
                         lerp: true
                     }
                 ],
@@ -50,7 +50,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
             },
             {
-                secs: 25,
+                secs: 20,
                 update: function(seq, partPer, partBias){
                     // camera
                     camera.position.set(8, 8, 8);
