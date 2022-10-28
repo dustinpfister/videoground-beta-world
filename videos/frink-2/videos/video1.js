@@ -3,58 +3,12 @@
 // scripts
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
-   //'../../../js/canvas/r1/canvas.js',
    '../../../js/sphere-mutate/r2/sphere-mutate.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
    '../../../js/object-grid-wrap/r2/effects/opacity2.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
-    //-------- ----------
-    // GRID OPTIONS
-    //-------- ----------
-    var tw = 9,
-    th = 9,
-    space = 12;
-    // Make box method used for object grid wrap source objects
-    var mkBox = function(yd){
-        var mesh = new THREE.Mesh(
-            new THREE.BoxGeometry( 5, 1 + yd, 5),
-            new THREE.MeshNormalMaterial() );
-        return mesh;
-    };
-    var array_source_objects = [
-        mkBox(0),
-        mkBox(1),
-        mkBox(2),
-        mkBox(3)
-    ];
-    var array_oi = [
-        0,0,0,0,0,3,3,0,0,
-        0,0,0,0,3,2,3,0,0,
-        0,0,0,3,2,3,3,0,0,
-        0,0,3,2,2,2,3,0,0,
-        0,3,2,2,1,2,3,0,0,
-        3,2,3,2,2,2,2,3,0,
-        0,3,0,3,3,3,2,3,0,
-        0,0,0,0,0,0,3,3,0,
-        0,0,0,0,0,0,0,0,0
-    ];
-    //-------- ----------
-    // CREATE GRID
-    //-------- ----------
-    var grid = ObjectGridWrap.create({
-        spaceW: space,
-        spaceH: space,
-        tw: tw,
-        th: th,
-        dAdjust: 1.25,
-        effects: ['opacity2'],
-        sourceObjects: array_source_objects,
-        objectIndices: array_oi
-    });
-    scene.add(grid);
-    grid.position.y = -5;
     //-------- ----------
     // HELPERS - helper functions from sequence hook demos
     //   ( see https://dustinpfister.github.io/2022/05/12/threejs-examples-sequence-hooks/ )
@@ -98,6 +52,13 @@ VIDEO.init = function(sm, scene, camera){
         mud.uls = uls;
         mud.uld = uld;
     };
+    // Make box method used for object grid wrap source objects
+    var mkBox = function(yd){
+        var mesh = new THREE.Mesh(
+            new THREE.BoxGeometry( 5, 1 + yd, 5),
+            new THREE.MeshNormalMaterial() );
+        return mesh;
+    };
     //-------- ----------
     //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
     //-------- ----------
@@ -128,11 +89,45 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(mesh1);
     sphereMutate.update(mesh1, 1, updateOpt1);
     //-------- ----------
-    // BACKGROUND
+    // GRID OPTIONS
     //-------- ----------
-    scene.background = new THREE.Color('#2a2a2a');
+    var tw = 9,
+    th = 9,
+    space = 12;
+    var array_source_objects = [
+        mkBox(0),
+        mkBox(1),
+        mkBox(2),
+        mkBox(3)
+    ];
+    var array_oi = [
+        0,0,0,0,0,3,3,0,0,
+        0,0,0,0,3,2,3,0,0,
+        0,0,0,3,2,3,3,0,0,
+        0,0,3,2,2,2,3,0,0,
+        0,3,2,2,1,2,3,0,0,
+        3,2,3,2,2,2,2,3,0,
+        0,3,0,3,3,3,2,3,0,
+        0,0,0,0,0,0,3,3,0,
+        0,0,0,0,0,0,0,0,0
+    ];
     //-------- ----------
-    // A MAIN SEQ OBJECT
+    // CREATE GRID
+    //-------- ----------
+    var grid = ObjectGridWrap.create({
+        spaceW: space,
+        spaceH: space,
+        tw: tw,
+        th: th,
+        dAdjust: 1.25,
+        effects: ['opacity2'],
+        sourceObjects: array_source_objects,
+        objectIndices: array_oi
+    });
+    scene.add(grid);
+    grid.position.y = -5;
+    //-------- ----------
+    // CAMERA PATHS
     //-------- ----------
 /*
     const v3Array_campos = QBV3Array([
@@ -147,17 +142,21 @@ VIDEO.init = function(sm, scene, camera){
     //    new THREE.PointsMaterial({size: 0.25, color: new THREE.Color(0,1,0)})
     //);
     //scene.add(points_debug);
+    //-------- ----------
+    // BACKGROUND
+    //-------- ----------
+    scene.background = new THREE.Color('#2a2a2a');
+    //-------- ----------
+    // A MAIN SEQ OBJECT
+    //-------- ----------
     // start options for main seq object
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-
-
             // set position of the grid
             ObjectGridWrap.setPos(grid, 0, seq.per );
             // update grid by current alphas and effects
             ObjectGridWrap.update(grid);
-
             camera.position.set(0, 5, 10);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
