@@ -46,6 +46,28 @@ VIDEO.init = function(sm, scene, camera){
         })
         return v3Array.flat();
     };
+    // Glaven Points are random points used for camera pos
+    const GlavinPoints = (count, origin, mvul ) => {
+        count = count === undefined ? 50 : count;
+        origin = origin === undefined ? new THREE.Vector3() : origin;
+        mvul = mvul === undefined ? 5 : mvul;
+        const v3Array = [];
+        let i  = 0;
+        while(i < count){
+            // random euler
+            const e = new THREE.Euler();
+            e.x = Math.PI * 2 * THREE.MathUtils.seededRandom();
+            e.y = Math.PI * 2 * THREE.MathUtils.seededRandom();
+            e.z = Math.PI * 2 * THREE.MathUtils.seededRandom();
+            // random unit length
+            const ul = mvul * THREE.MathUtils.seededRandom();
+            // v3 is a random dir and unit length from origin
+            const v = origin.clone().add( new THREE.Vector3( 0, 0, 1).applyEuler(e).multiplyScalar(ul) )
+            v3Array.push(v);
+            i += 1;
+        }
+        return v3Array;
+    };
     // frink adjust helper
     const frinkAdjust = function(mesh, uls, uld){
         const mud = mesh.userData;
@@ -129,13 +151,13 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CAMERA PATHS
     //-------- ----------
-
     const v3Array_campos = [ 
         // seq 0
         QBV3Array([
             [-8,6,0, 0,6,12,    0,0,10,      60],
             [0,6,12, 0,5,10,    0,0,0,      30]
-        ])
+        ]),
+        GlavinPoints(15, new THREE.Vector3(0,5,10), 2)
     ];
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
@@ -178,20 +200,26 @@ VIDEO.init = function(sm, scene, camera){
             // FRINK
             frinkAdjust(mesh1, 0, 1);
             // CAMERA
+            seq.copyPos('campos', camera);
+            camera.lookAt(0, 0, 0);
             //!!! DEBUG CAM POS
             //camera.position.set(15, 15, 15);
             //camera.lookAt(0, 0, 0);
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
         }
     };
     // SEQ 1 - 2 seconds for frink noise1, sphere gets pointy and back down
     opt_seq.objects[1] = {
         secs: 2,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[1], lerp: true }
+        ],
         update: function(seq, partPer, partBias){
-            // frink
+            // FRINK
             let a = seq.getSinBias(1, true);
             frinkAdjust(mesh1, a, 1 - a);
+            // CAMERA
+            seq.copyPos('campos', camera);
+            camera.lookAt(0, 0, 0);
         }
     };
     // SEQ 2 - 7 secs, silence
