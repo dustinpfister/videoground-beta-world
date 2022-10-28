@@ -129,16 +129,17 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CAMERA PATHS
     //-------- ----------
-/*
-    const v3Array_campos = QBV3Array([
-        [8,8,8, 7,-2,-7,    2,0,0,      20],
-        [7,-2,-7, -8,4,0,   0,0,0,      25],
-        [-8,4,0, 8,8,8,     0,0,0,      50]
-    ]);
-*/
+
+    const v3Array_campos = [ 
+        // seq 0
+        QBV3Array([
+            [-8,6,0, 0,6,12,    0,0,10,      60],
+            [0,6,12, 0,5,10,    0,0,0,      30]
+        ])
+    ];
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
-    //    new THREE.BufferGeometry().setFromPoints(v3Array_campos),
+    //    new THREE.BufferGeometry().setFromPoints(v3Array_campos.flat()),
     //    new THREE.PointsMaterial({size: 0.25, color: new THREE.Color(0,1,0)})
     //);
     //scene.add(points_debug);
@@ -170,9 +171,18 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ 0 - three seconds of silence, frink mesh is a sphere
     opt_seq.objects[0] = {
         secs: 3,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[0], lerp: true }
+        ],
         update: function(seq, partPer, partBias){
-            // frink
+            // FRINK
             frinkAdjust(mesh1, 0, 1);
+            // CAMERA
+            //!!! DEBUG CAM POS
+            //camera.position.set(15, 15, 15);
+            //camera.lookAt(0, 0, 0);
+            seq.copyPos('campos', camera);
+            camera.lookAt(0, 0, 0);
         }
     };
     // SEQ 1 - 2 seconds for frink noise1, sphere gets pointy and back down
