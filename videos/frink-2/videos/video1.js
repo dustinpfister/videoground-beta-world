@@ -11,6 +11,51 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // GRID OPTIONS
+    //-------- ----------
+    var tw = 9,
+    th = 9,
+    space = 12;
+    // Make box method used for object grid wrap source objects
+    var mkBox = function(yd){
+        var mesh = new THREE.Mesh(
+            new THREE.BoxGeometry( 5, 1 + yd, 5),
+            new THREE.MeshNormalMaterial() );
+        return mesh;
+    };
+    var array_source_objects = [
+        mkBox(0),
+        mkBox(1),
+        mkBox(2),
+        mkBox(3)
+    ];
+    var array_oi = [
+        0,0,0,0,0,3,3,0,0,
+        0,0,0,0,3,2,3,0,0,
+        0,0,0,3,2,3,3,0,0,
+        0,0,3,2,2,2,3,0,0,
+        0,3,2,2,1,2,3,0,0,
+        3,2,3,2,2,2,2,3,0,
+        0,3,0,3,3,3,2,3,0,
+        0,0,0,0,0,0,3,3,0,
+        0,0,0,0,0,0,0,0,0
+    ];
+    //-------- ----------
+    // CREATE GRID
+    //-------- ----------
+    var grid = ObjectGridWrap.create({
+        spaceW: space,
+        spaceH: space,
+        tw: tw,
+        th: th,
+        dAdjust: 1.25,
+        effects: ['opacity2'],
+        sourceObjects: array_source_objects,
+        objectIndices: array_oi
+    });
+    scene.add(grid);
+    grid.position.y = -5;
+    //-------- ----------
     // HELPERS - helper functions from sequence hook demos
     //   ( see https://dustinpfister.github.io/2022/05/12/threejs-examples-sequence-hooks/ )
     //-------- ----------
@@ -76,12 +121,10 @@ VIDEO.init = function(sm, scene, camera){
             return vs.lerp(state[i].v, alpha3 * ( 1- uld) );
         }
     };
-    const material_sphere = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide, transparent: true, opacity:0.8 });
+    const material_sphere = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide, transparent: true, opacity:1 });
     const mesh1 = sphereMutate.create({
         size: 2, w: 40, h: 40, material: material_sphere
     });
-    //mesh1.userData.muld = 2; // 'Max Unit Length Delta'
-    //mesh1.userData.uls = 0.25;
     scene.add(mesh1);
     sphereMutate.update(mesh1, 1, updateOpt1);
     //-------- ----------
@@ -89,19 +132,15 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     scene.background = new THREE.Color('#2a2a2a');
     //-------- ----------
-    // GRID
-    //-------- ----------
-    //const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
-    //grid.material.linewidth = 3;
-    //scene.add( grid );
-    //-------- ----------
     // A MAIN SEQ OBJECT
     //-------- ----------
+/*
     const v3Array_campos = QBV3Array([
         [8,8,8, 7,-2,-7,    2,0,0,      20],
         [7,-2,-7, -8,4,0,   0,0,0,      25],
         [-8,4,0, 8,8,8,     0,0,0,      50]
     ]);
+*/
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
     //    new THREE.BufferGeometry().setFromPoints(v3Array_campos),
@@ -112,7 +151,14 @@ VIDEO.init = function(sm, scene, camera){
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-            camera.position.set(6, 6, 6);
+
+
+            // set position of the grid
+            ObjectGridWrap.setPos(grid, 0, seq.per );
+            // update grid by current alphas and effects
+            ObjectGridWrap.update(grid);
+
+            camera.position.set(0, 5, 10);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
         },
@@ -173,7 +219,6 @@ VIDEO.init = function(sm, scene, camera){
             frinkAdjust(mesh1, a, 1 - a);
         }
     };
-
 /*
     opt_seq.objects[1] = {
         secs: 7,
