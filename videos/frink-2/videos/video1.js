@@ -157,7 +157,16 @@ VIDEO.init = function(sm, scene, camera){
             [-8,6,0, 0,6,12,    0,0,10,      60],
             [0,6,12, 0,5,10,    0,0,0,      30]
         ]),
-        GlavinPoints(15, new THREE.Vector3(0,5,10), 2)
+        // seq 1
+        GlavinPoints(15, new THREE.Vector3(0,5,10), 2),
+        // seq 2
+        [],
+        // seq 3
+        GlavinPoints(23, new THREE.Vector3(0,5,10), 2),
+        // seq 4
+        [],
+        // seq 5
+        GlavinPoints(53, new THREE.Vector3(0,5,10), 2)
     ];
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
@@ -233,10 +242,16 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ 3 - 3 secs, frink unexspected sound
     opt_seq.objects[3] = {
         secs: 3,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[3], lerp: true }
+        ],
         update: function(seq, partPer, partBias){
             // frink
             let a = seq.getSinBias(1, true);
             frinkAdjust(mesh1, a, 1 - a);
+            // CAMERA
+            seq.copyPos('campos', camera);
+            camera.lookAt(0, 0, 0);
         }
     };
     // SEQ 4 - 8 secs, silence
@@ -250,25 +265,18 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ 5 - 7 secs, frink custom 7 sec sound
     opt_seq.objects[5] = {
         secs: 7,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[5], lerp: true }
+        ],
         update: function(seq, partPer, partBias){
             // frink
             let a = seq.getSinBias(1, true);
             frinkAdjust(mesh1, a, 1 - a);
-        }
-    };
-/*
-    opt_seq.objects[1] = {
-        secs: 7,
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos, lerp: true }
-        ],
-        update: function(seq, partPer, partBias){
-            // camera
+            // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
         }
     };
-*/
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
     console.log('frameMax for main seq: ' + seq.frameMax);
     sm.frameMax = seq.frameMax;
