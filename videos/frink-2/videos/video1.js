@@ -167,10 +167,10 @@ VIDEO.init = function(sm, scene, camera){
         GlavinPoints(23, new THREE.Vector3(10,0,0), 2),
         // seq 4
         QBV3Array([
-            [10,0,0, 0,0,-5,    6,0,-6,      120]
+            [10,0,0, 0,0,-7,    6,0,-6,      120]
         ]),
         // seq 5
-        GlavinPoints(53, new THREE.Vector3(0,0,-5), 2)
+        GlavinPoints(53, new THREE.Vector3(0,0,-7), 2)
     ];
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
@@ -211,7 +211,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // FRINK
-            frinkAdjust(mesh1, 0, 1);
+            frinkAdjust(mesh1, 0.4, 0.8);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -243,7 +243,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            frinkAdjust(mesh1, 0, 1);
+            frinkAdjust(mesh1, 0.4, 0.8);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -272,7 +272,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            frinkAdjust(mesh1, 0, 1);
+            frinkAdjust(mesh1, 0.4, 0.8);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
