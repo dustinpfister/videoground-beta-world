@@ -160,13 +160,17 @@ VIDEO.init = function(sm, scene, camera){
         // seq 1
         GlavinPoints(15, new THREE.Vector3(0,5,10), 2),
         // seq 2
-        [],
+        QBV3Array([
+            [0,5,10, 10,0,0,    6,2,9,      210]
+        ]),
         // seq 3
-        GlavinPoints(23, new THREE.Vector3(0,5,10), 2),
+        GlavinPoints(23, new THREE.Vector3(10,0,0), 2),
         // seq 4
-        [],
+        QBV3Array([
+            [10,0,0, 0,0,-5,    6,0,-6,      120]
+        ]),
         // seq 5
-        GlavinPoints(53, new THREE.Vector3(0,5,10), 2)
+        GlavinPoints(53, new THREE.Vector3(0,0,-5), 2)
     ];
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
@@ -234,9 +238,15 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ 2 - 7 secs, silence
     opt_seq.objects[2] = {
         secs: 7,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[2], lerp: true }
+        ],
         update: function(seq, partPer, partBias){
             // frink
             frinkAdjust(mesh1, 0, 1);
+            // CAMERA
+            seq.copyPos('campos', camera);
+            camera.lookAt(0, 0, 0);
         }
     };
     // SEQ 3 - 3 secs, frink unexspected sound
@@ -257,9 +267,15 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ 4 - 8 secs, silence
     opt_seq.objects[4] = {
         secs: 8,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[4], lerp: true }
+        ],
         update: function(seq, partPer, partBias){
             // frink
             frinkAdjust(mesh1, 0, 1);
+            // CAMERA
+            seq.copyPos('campos', camera);
+            camera.lookAt(0, 0, 0);
         }
     };
     // SEQ 5 - 7 secs, frink custom 7 sec sound
