@@ -2,47 +2,20 @@
 
 <!-- FRINK -->
 
-## ( ) - video2 done for frink1
-* () make object grid wrap part of the stack
-* () have a grids of cubes moving around on the top and bottom of the sphere
-* () have the sphere always have a little bit of an effect going on
-* () work out cool camera movements
-
-<!-- general ideas -->
-
-# Some things to keep in mind here
-* follow a ruff scale of 1 = US Standard foot
-* explore more than one idea for a collection of video content, do not get fixed on a single idea
-* if you feel traped with one idea shift the focus to another idea
-
-<!-- weird face one collection -->
-
-## () - new mouth geo update method
-* sense the method of lerping position attributes from one to another has failed, the next step is to try a new method for this
-* look into how to go about doing this with 'bones' or any other kind of method that will work
-
-<!-- cubescape-->
-
-## () - cubescape-ep2-
-
-<!-- ITEMS -->
-
-## () - make any needed adjustments to chair and desk models for new guy2 model
-* height of chair from bottom to area that the guy sits on should be about 1.5, but adjust so that the feet are on the ground
-* height of desk legs should be maybe 2.5? Adjust this figure as needed until it just looks okay
-
-<!-- GUY -->
-
-## () - final set of textures for mrguy1, and mrguy2
-
-## () - start mrguy2 textures
-
-<!-- HOUSE 1 -->
-
-## ( ) - house1-bedroom - fix face normals
-* looks like the front side of the floor is facing out from the room, see about fixing that
+## ( ) - frink3
+* () use the phong material
+* () add light sources at least directional and ambient
+* () use canvas textures by adding canvas.js r1 as an addtional module
+* () have more than one layer like with the text plane project
 
 <!-- DONE -->
+
+## ( done 10/28/2022 ) - frink2
+* (done) make object grid wrap part of the stack
+* (done) have a grids of cubes moving around on the bottom of the sphere
+* (done) have the sphere always have a little bit of an effect going on
+* (done) work out cool camera movements
+
 
 ## ( 10/27/2022 ) - video1 done for frink1
 * (done) have video1 for frink1 done

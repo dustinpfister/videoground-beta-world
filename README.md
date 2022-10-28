@@ -2,6 +2,16 @@
 
 I have made an electron.js powered program that I aim to use to make little video projects that for now I am just simply calling [videoground](https://github.com/dustinpfister/videoground). I am now thinking that I should start making at least some actual content with what I have together rather than putting this off until a later revision is done. This is then the collection of files to use with videoground to create frames that can then be used with a program like ffmpeg to create a final video file. Additional tools like espeak, aduacity, musesocre and so forth can then be used to create audio tracks for a finished product as well.
 
+
+<div align="center">
+    <a href="https://www.youtube.com/watch?v=XVToFw-pdK4">
+        <img src="https://img.youtube.com/vi/XVToFw-pdK4/0.jpg" style="width:50%;">
+    </a><br>
+    <p>
+        Frink 2
+    </p>
+</div>
+
 ## The current idea of 'Beta World'
 
 The current idea for this beta world collection of content is to just use this is a general collection of experimental content to gain a better sense of what I like to make with videoground. I have a lot of general ideas for content and as such I just need a place to park what I have together with these ideas.
