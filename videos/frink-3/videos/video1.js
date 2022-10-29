@@ -34,7 +34,6 @@ VIDEO.init = function(sm, scene, camera){
     const dl = new THREE.DirectionalLight(0xffffff, 1);
     dl.position.set( 1, 1, 0 );
     scene.add(dl);
-
     //-------- ----------
     // HELPERS
     //-------- ----------
@@ -100,12 +99,13 @@ VIDEO.init = function(sm, scene, camera){
         mud.uld = uld;
     };
     // Make box method used for object grid wrap source objects
-    var mkBox = function(yd){
+    var mkBox = function(yd, material){
         var mesh = new THREE.Mesh(
             new THREE.BoxGeometry( 5, 1 + yd, 5),
-            new THREE.MeshNormalMaterial() );
+            material || new THREE.MeshPhongMaterial() );
         return mesh;
     };
+
     //-------- ----------
     //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
     //-------- ----------
@@ -135,7 +135,6 @@ VIDEO.init = function(sm, scene, camera){
         emissive: new THREE.Color(1, 1, 1),
         emissiveMap: texture_frink_emissive,
         emissiveIntensity: 0.75
-    //    side: THREE.DoubleSide, transparent: true, opacity:1
     });
     const mesh1 = sphereMutate.create({
         size: 2, w: 40, h: 40, material: material_sphere
@@ -148,11 +147,18 @@ VIDEO.init = function(sm, scene, camera){
     var tw = 9,
     th = 9,
     space = 12;
+    const m1 = new THREE.MeshPhongMaterial({
+        color: new THREE.Color(0.5, 0.5, 0.5),
+        //map: texture_frink_map,
+        emissive: new THREE.Color(1, 1, 1),
+        emissiveMap: texture_frink_emissive,
+        emissiveIntensity: 1
+    })
     var array_source_objects = [
-        mkBox(0),
-        mkBox(1),
-        mkBox(2),
-        mkBox(3)
+        mkBox(0, m1),
+        mkBox(1, m1),
+        mkBox(2, m1),
+        mkBox(3, m1)
     ];
     var array_oi = [
         0,0,0,0,0,3,3,0,0,
