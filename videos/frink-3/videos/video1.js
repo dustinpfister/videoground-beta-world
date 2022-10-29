@@ -5,13 +5,13 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/sphere-mutate/r2/sphere-mutate.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
-   '../../../js/object-grid-wrap/r2/effects/opacity2.js'
+   '../../../js/object-grid-wrap/r2/effects/opacity2.js',
+   '../../../js/canvas/r1/canvas.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
-    // HELPERS - helper functions from sequence hook demos
-    //   ( see https://dustinpfister.github.io/2022/05/12/threejs-examples-sequence-hooks/ )
+    // HELPERS
     //-------- ----------
     // just a short hand for THREE.QuadraticBezierCurve3
     const QBC3 = function(x1, y1, z1, x2, y2, z2, x3, y3, z3){
@@ -82,6 +82,19 @@ VIDEO.init = function(sm, scene, camera){
         return mesh;
     };
     //-------- ----------
+    // CANVAS, TEXTURES
+    //-------- ----------
+    const cObj_frink_emissive = canvasMod.create({
+        size: 128,
+        palette: ['#000000', '#0f0f0f', '#111111', '#1f1f1f', '#222222'],
+        update_mode: 'dual',
+        state: { gSize: 100 },
+        draw : 'rnd'});
+    // textures
+    texture_frink_emissive = cObj_frink_emissive.texture_data;
+
+
+    //-------- ----------
     //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
     //-------- ----------
     const updateOpt1 = {
@@ -104,7 +117,11 @@ VIDEO.init = function(sm, scene, camera){
             return vs.lerp(state[i].v, alpha3 * ( 1- uld) );
         }
     };
-    const material_sphere = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide, transparent: true, opacity:1 });
+    const material_sphere = new THREE.MeshPhongMaterial({
+        emissive: new THREE.Color(1,1,1),
+        emissiveMap: texture_frink_emissive
+    //    side: THREE.DoubleSide, transparent: true, opacity:1
+    });
     const mesh1 = sphereMutate.create({
         size: 2, w: 40, h: 40, material: material_sphere
     });
