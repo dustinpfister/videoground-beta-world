@@ -2,20 +2,29 @@
 
 <!-- FRINK -->
 
-## ( ) - frink3
-* () use the phong material
-* () add light sources at least directional and ambient
-* () use canvas textures by adding canvas.js r1 as an addtional module
+## ( ) - frink5
 * () have more than one layer like with the text plane project
+* () make all textures animated
+
+## ( ) - frink4
+* () glaven points helper improved with unit length and range ranges
+* () new path worked out for camera position making use of new glaven points helper
+* () get path alpha helper
+* () using get path alpha helper for set frank argument that has to do with unit length max
+* () still use get head tail alpha method for speed set frank argument
 
 <!-- DONE -->
+
+## ( done 10/29/2022 ) - frink3
+* (done) use the phong material
+* (done) add light sources at least directional and ambient
+* (done) use canvas textures by adding canvas.js r1 as an addtional module
 
 ## ( done 10/28/2022 ) - frink2
 * (done) make object grid wrap part of the stack
 * (done) have a grids of cubes moving around on the bottom of the sphere
 * (done) have the sphere always have a little bit of an effect going on
 * (done) work out cool camera movements
-
 
 ## ( 10/27/2022 ) - video1 done for frink1
 * (done) have video1 for frink1 done
