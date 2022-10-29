@@ -70,6 +70,26 @@ VIDEO.init = function(sm, scene, camera){
         })
         return v3Array.flat();
     };
+    // get head tail alpha
+    const getHTAlpha = (alpha, sa1, ea1, sa2, ea2) => {
+        sa1 = sa1 === undefined ? 0 : sa1;
+        ea1 = ea1 === undefined ? 0.15 : ea1;
+        sa2 = sa2 === undefined ? 0.85 : sa2;
+        ea2 = ea2 === undefined ? 1 : ea2;
+        if(alpha > sa1 && alpha < ea1){
+            const a = alpha - sa1;
+            return a / (ea1 - sa1);
+        }
+        if(alpha > sa2 && alpha < ea2){
+            const a = alpha - sa2;
+            return 1 - a / (ea2 - sa2);
+        }
+        if(alpha >= ea1 && alpha <= sa2){ return 1; }
+        // default return value is 0
+        return 0;
+    };
+
+
     // Glaven Points are random points used for camera pos
     const GlavinPoints = (count, origin, mvul ) => {
         count = count === undefined ? 50 : count;
@@ -99,12 +119,14 @@ VIDEO.init = function(sm, scene, camera){
         mud.uld = uld;
     };
     // Make box method used for object grid wrap source objects
-    var mkBox = function(yd, material){
-        var mesh = new THREE.Mesh(
+    const mkBox = function(yd, material){
+        const mesh = new THREE.Mesh(
             new THREE.BoxGeometry( 5, 1 + yd, 5),
             material || new THREE.MeshPhongMaterial() );
         return mesh;
     };
+    
+
 
     //-------- ----------
     //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
@@ -266,8 +288,8 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // FRINK
-            let a = seq.getSinBias(1, true);
-            frinkAdjust(mesh1, a, 1 - a);
+            let a = getHTAlpha(partPer, 0, 0.1, 0.9, 1);
+            frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -295,8 +317,8 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            let a = seq.getSinBias(1, true);
-            frinkAdjust(mesh1, a, 1 - a);
+            let a = getHTAlpha(partPer, 0, 0.15, 0.85, 1);
+            frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -324,8 +346,8 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            let a = seq.getSinBias(1, true);
-            frinkAdjust(mesh1, a, 1 - a);
+            let a = getHTAlpha(partPer, 0, 0.2, 0.8, 1);
+            frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
