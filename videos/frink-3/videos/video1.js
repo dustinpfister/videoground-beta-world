@@ -11,6 +11,31 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // CANVAS, TEXTURES
+    //-------- ----------
+    const cObj_frink_map = canvasMod.create({
+        size: 64,
+        palette: ['#cf0000','#00cf00','#0000cf','#00cfcf','#cf00cf','#cfcf00'],
+        update_mode: 'dual',
+        state: { gSize: 30 },
+        draw : 'rnd'});
+    const cObj_frink_emissive = canvasMod.create({
+        size: 64,
+        palette: ['#000000', '#0f0f0f', '#111111', '#1f1f1f', '#222222'],
+        update_mode: 'dual',
+        state: { gSize: 30 },
+        draw : 'rnd'});
+    // textures
+    texture_frink_map = cObj_frink_map.texture_data;
+    texture_frink_emissive = cObj_frink_emissive.texture_data;
+    //-------- ----------
+    // LIGHT
+    //-------- ----------
+    const dl = new THREE.DirectionalLight(0xffffff, 1);
+    dl.position.set( 1, 1, 0 );
+    scene.add(dl);
+
+    //-------- ----------
     // HELPERS
     //-------- ----------
     // just a short hand for THREE.QuadraticBezierCurve3
@@ -82,19 +107,6 @@ VIDEO.init = function(sm, scene, camera){
         return mesh;
     };
     //-------- ----------
-    // CANVAS, TEXTURES
-    //-------- ----------
-    const cObj_frink_emissive = canvasMod.create({
-        size: 128,
-        palette: ['#000000', '#0f0f0f', '#111111', '#1f1f1f', '#222222'],
-        update_mode: 'dual',
-        state: { gSize: 100 },
-        draw : 'rnd'});
-    // textures
-    texture_frink_emissive = cObj_frink_emissive.texture_data;
-
-
-    //-------- ----------
     //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
     //-------- ----------
     const updateOpt1 = {
@@ -118,8 +130,11 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
     const material_sphere = new THREE.MeshPhongMaterial({
-        emissive: new THREE.Color(1,1,1),
-        emissiveMap: texture_frink_emissive
+        color: new THREE.Color(1, 1, 1),
+        map: texture_frink_map,
+        emissive: new THREE.Color(1, 1, 1),
+        emissiveMap: texture_frink_emissive,
+        emissiveIntensity: 0.75
     //    side: THREE.DoubleSide, transparent: true, opacity:1
     });
     const mesh1 = sphereMutate.create({
