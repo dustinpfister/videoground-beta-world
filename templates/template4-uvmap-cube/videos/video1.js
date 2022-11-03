@@ -3,7 +3,7 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
    '../../../js/canvas-uvmap-cube/r0/uvmap-cube.js',
-   '../../../js/list-loader/r0/list-loader.js',
+   '../../../js/texture/r0/texture.js',
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -114,7 +114,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.frameMax = seq.frameMax;
 
     // load images
-    return listLoader.load({
+    return textureMod.load({
         URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../img/smile/'),
         URLS: ['smile_base_128.png']
     }).then( (textureObj) => {
