@@ -8,7 +8,7 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
-    // HELPERS - helper functions
+    // HELPERS
     //-------- ----------
     // just a short hand for THREE.QuadraticBezierCurve3
     const QBC3 = function(x1, y1, z1, x2, y2, z2, x3, y3, z3){
@@ -43,6 +43,24 @@ VIDEO.init = function(sm, scene, camera){
         })
         return v3Array.flat();
     };
+    // draw cell helper
+    const drawCell = (mesh, drawto, i, x, y, size) => {
+        i = i === undefined ? 0: i;
+        x = x === undefined ? 0: x;
+        y = y === undefined ? 0: y;
+        size = size === undefined ? 32: size;
+        uvMapCube.drawFace(mesh, drawto, {i:i, sx: x * size, sy: y * size, sw: size, sh: size});
+    };
+    // ---------- ----------
+    // LIGHT
+    // ---------- ----------
+    const dl = new THREE.DirectionalLight(0xffffff, 0.5);
+    dl.position.set(1, 2, 3);
+    scene.add(dl)
+    //-------- ----------
+    // UVMAP CUBE
+    //-------- ----------
+    let mesh = null;
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -57,7 +75,7 @@ VIDEO.init = function(sm, scene, camera){
     // A MAIN SEQ OBJECT
     //-------- ----------
     const v3Array_campos = QBV3Array([
-        [0,0,0, 5,2,-5,    0,0,0,      20]
+        [8,8,8, 5,2,-5,    0,0,0,      20]
     ]);
     // PATH DEBUG POINTS
     const points_debug = new THREE.Points(
@@ -121,7 +139,30 @@ VIDEO.init = function(sm, scene, camera){
 
         console.log(textureObj);
 
-        scene.background = textureObj['smile_base_128'];
+
+        // ---------- ---------- ----------
+        // CREATE AND UPDATE MESH
+        // ---------- ---------- ----------
+        // create the mesh object
+        mesh = uvMapCube.create({
+            pxa: 1.42,
+            images: [
+                textureObj['smile_base_128'].image,
+                //textureObj['smile_creepy_128'].image
+            ]
+        });
+        mesh.scale.set(5, 5, 5);
+        mesh.material.emissiveIntensity = 0.15;
+        scene.add(mesh);
+        drawCell(mesh, 'front', 0, 0, 0);
+        drawCell(mesh, 'back', 0, 2, 0);
+        drawCell(mesh, 'top', 0, 0, 1);
+        drawCell(mesh, 'bottom', 0, 1, 1);
+        drawCell(mesh, 'left', 0, 1, 0);
+        drawCell(mesh, 'right', 0, 3, 0);
+
+
+        //scene.background = textureObj['smile_base_128'];
 
         return Promise.resolve('list loaded')
     })
