@@ -71,7 +71,7 @@
         mud.cellIndices = cellIndices;
         mud.drawto = 'front';
         mud.pxa = opt.pxa === undefined ? 0.4 : opt.pxa;
-        // images array and argumets used to set current index as well as offsets
+        // images array and arguments used to set current index as well as offsets
         mud.images = opt.images || [ 
             canvasMod.create({ draw: 'rnd', size: 128, state:{ gSize: 16} } ).canvas
         ];
@@ -88,7 +88,8 @@
         mud.canObj = canvasMod.create({
             size: opt.canvasSize === undefined ? 256 : opt.canvasSize,
             state: mud,
-            palette: ['red','white'],
+            update_mode: opt.update_mode || 'canvas',
+            palette: opt.palette || ['white', 'black'],
             draw: function(canObj, ctx, canvas, mud){
                  // get current ci value
                  const ci = mud.cellIndices[mud.cellNames[mud.drawto]];
@@ -111,9 +112,9 @@
         // MATERIAL
         const material = new THREE.MeshPhongMaterial({
             color: new THREE.Color(1, 1, 1),
-            map: mud.canObj.texture_data,
+            map: mud.canObj.texture,
             emissive: new THREE.Color(1, 1, 1),
-            emissiveMap: mud.canObj.texture_data
+            emissiveMap: mud.canObj.texture
         });
         // MESH OBJECT
         const mesh = new THREE.Mesh(geo, material);
