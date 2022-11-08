@@ -165,7 +165,7 @@ VIDEO.init = function(sm, scene, camera){
         emissiveIntensity: 0.75
     });
     const mesh1 = sphereMutate.create({
-        size: 2, w: 40, h: 40, material: material_sphere
+        size: 3, w: 40, h: 40, material: material_sphere
     });
     scene.add(mesh1);
     sphereMutate.update(mesh1, 1, updateOpt1);
@@ -273,7 +273,7 @@ VIDEO.init = function(sm, scene, camera){
 
             const a1 = sampleAlpha.getByAlpha(samples, 'frink4-bass', seq.per);
             const a2 = sampleAlpha.getByAlpha(samples, 'frink4-voice', seq.per);
-            frinkAdjust(mesh1, 0.6, 1 - (0.25 * a1 + 0.75 * a2) );
+            frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
 
         },
         afterObjects: function(seq){
