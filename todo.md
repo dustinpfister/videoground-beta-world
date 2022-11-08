@@ -12,9 +12,9 @@
 * (done) get audio sample mod working
 * (done) use audio sample alpha values for voice and base to effect sphere mutate
 * (done) use drums audio sample data to effect scale of grid wrap objects
+* (done) create new sample files, this time at least 900 samples.
 
 * () I am thinking that I should have voice alone effect sphere muation
-* () create new sample files, this time at least 900 samples.
 * () check the range of the samples
 * () lower the y scale max
 

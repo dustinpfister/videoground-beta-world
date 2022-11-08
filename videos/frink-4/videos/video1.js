@@ -148,7 +148,7 @@ VIDEO.init = function(sm, scene, camera){
             if(!state[i]){
                 state[i] = {
                     v: vs.clone().normalize().multiplyScalar(size + muld * Math.random()),
-                    count: 16 + Math.floor( Math.random() * 32 ),
+                    count: 2 + Math.floor( Math.random() * 4 ),
                     offset: Math.random()
                 };
             }
@@ -274,10 +274,12 @@ VIDEO.init = function(sm, scene, camera){
             const a1 = sampleAlpha.getByAlpha(samples, 'frink4-bass', seq.per);
             const a2 = sampleAlpha.getByAlpha(samples, 'frink4-voice', seq.per);
             const a3 = sampleAlpha.getByAlpha(samples, 'frink4-drums', seq.per);
-            frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
+
+            //frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
+            frinkAdjust(mesh1, 1, 1 - 1 * a2 );
 
 grid.children.forEach((child)=>{
-const y = 0.1 + 0.25 * a1 + 2.75 * a3;
+const y = 0.2 + 0.5 * a1 + 1.25 * a3;
 child.scale.set(1, y, 1);
 child.position.y += y / 2;
 
