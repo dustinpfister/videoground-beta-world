@@ -217,7 +217,14 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CAMERA PATHS
     //-------- ----------
-    const v3Array_campos = [ 
+    const v3Array_campos = [
+        QBV3Array([
+            [-8,6,0, 0,6,12,    0,0,10,      60],
+            [0,6,12, 0,5,10,    0,0,0,      30]
+        ])
+
+
+/*
         // seq 0
         QBV3Array([
             [-8,6,0, 0,6,12,    0,0,10,      60],
@@ -237,6 +244,7 @@ VIDEO.init = function(sm, scene, camera){
         ]),
         // seq 5
         GlavinPoints(53, new THREE.Vector3(0,0,-7), 2)
+*/
     ];
     // PATH DEBUG POINTS
     //const points_debug = new THREE.Points(
@@ -276,7 +284,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // SEQ 0 - three seconds of silence, frink mesh is a sphere
     opt_seq.objects[0] = {
-        secs: 3,
+        secs: 30,
         v3Paths: [
             { key: 'campos', array: v3Array_campos[0], lerp: true }
         ],
@@ -289,79 +297,6 @@ VIDEO.init = function(sm, scene, camera){
             //!!! DEBUG CAM POS
             //camera.position.set(15, 15, 15);
             //camera.lookAt(0, 0, 0);
-        }
-    };
-    // SEQ 1 - 2 seconds for frink noise1, sphere gets pointy and back down
-    opt_seq.objects[1] = {
-        secs: 2,
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos[1], lerp: true }
-        ],
-        update: function(seq, partPer, partBias){
-            // FRINK
-            //let a = getHTAlpha(partPer, 0, 0.1, 0.9, 1);
-            //frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
-            // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
-        }
-    };
-    // SEQ 2 - 7 secs, silence
-    opt_seq.objects[2] = {
-        secs: 7,
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos[2], lerp: true }
-        ],
-        update: function(seq, partPer, partBias){
-            // frink
-            //frinkAdjust(mesh1, 0.4, 0.8);
-            // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
-        }
-    };
-    // SEQ 3 - 3 secs, frink unexspected sound
-    opt_seq.objects[3] = {
-        secs: 3,
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos[3], lerp: true }
-        ],
-        update: function(seq, partPer, partBias){
-            // frink
-            //let a = getHTAlpha(partPer, 0, 0.15, 0.85, 1);
-            //frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
-            // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
-        }
-    };
-    // SEQ 4 - 8 secs, silence
-    opt_seq.objects[4] = {
-        secs: 8,
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos[4], lerp: true }
-        ],
-        update: function(seq, partPer, partBias){
-            // frink
-            //frinkAdjust(mesh1, 0.4, 0.8);
-            // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
-        }
-    };
-    // SEQ 5 - 7 secs, frink custom 7 sec sound
-    opt_seq.objects[5] = {
-        secs: 7,
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos[5], lerp: true }
-        ],
-        update: function(seq, partPer, partBias){
-            // frink
-            //let a = getHTAlpha(partPer, 0, 0.2, 0.8, 1);
-            //frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
-            // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
         }
     };
 
