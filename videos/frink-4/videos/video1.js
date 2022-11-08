@@ -360,17 +360,18 @@ VIDEO.init = function(sm, scene, camera){
 
 
     return sampleAlpha.load({
-        URLS_BASE: videoAPI.pathJoin(videoAPI.dir_root, '../../../sample_data/'),
-        URLS: []
+        URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../sample_data/'),
+        URLS: ['frink4-drums.html']
     })
     .then( ( result ) => {
 
          console.log('we have a audio sample alphas result object!');
-         console(result);
+         console.log(result);
 
          return Promise.resolve();
 
      });
+
 
 
 };
