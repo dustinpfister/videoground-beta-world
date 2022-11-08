@@ -5,13 +5,16 @@
 ## ( ) - frink5
 * () have more than one layer like with the text plane project
 * () make all textures animated
-
-## ( ) - frink4
 * () glaven points helper improved with unit length and range ranges
 * () new path worked out for camera position making use of new glaven points helper
-* () get path alpha helper
-* () using get path alpha helper for set frank argument that has to do with unit length max
-* () still use get head tail alpha method for speed set frank argument
+
+## ( ) - frink4
+* (done) get audio sample mod working
+* (done) use audio sample alpha values for voice and base to effect sphere mutate
+
+* () use drums audio sample data to effect scale of grid wrap objects
+* () new canvas textures for sphere as well as objects
+
 
 <!-- DONE -->
 
