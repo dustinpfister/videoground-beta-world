@@ -13,12 +13,14 @@
 * (done) use audio sample alpha values for voice and base to effect sphere mutate
 * (done) use drums audio sample data to effect scale of grid wrap objects
 * (done) create new sample files, this time at least 900 samples.
+* (done) I am thinking that I should have voice alone effect sphere muation
+* (done) check the range of the samples
+* (done) lower the y scale max
 
-* () I am thinking that I should have voice alone effect sphere muation
-* () check the range of the samples
-* () lower the y scale max
+* () animated canvas texture map for sphere
+* () have the base line effect the canvas texture
 
-* () animated canvas textures
+
 * () new canvas textures for sphere as well as objects
 * () new seq objects and paths
 * () use glavin points
