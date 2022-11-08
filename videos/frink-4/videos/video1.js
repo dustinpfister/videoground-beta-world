@@ -12,6 +12,11 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // Samples
+    //-------- ----------
+    let samples = {};
+
+    //-------- ----------
     // CANVAS, TEXTURES
     //-------- ----------
     const cObj_frink_map = canvasMod.create({
@@ -257,6 +262,11 @@ VIDEO.init = function(sm, scene, camera){
             camera.position.set(0, 5, 10);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
+
+
+            const a2 = sampleAlpha.getByAlpha(samples, 'frink4-voice', seq.per);
+            frinkAdjust(mesh1, 0.6, 1 - a2);
+
         },
         afterObjects: function(seq){
             sphereMutate.update(mesh1, seq.per, updateOpt1);
@@ -272,7 +282,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // FRINK
-            frinkAdjust(mesh1, 0.4, 0.8);
+            //frinkAdjust(mesh1, 0.4, 0.8);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -289,8 +299,8 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // FRINK
-            let a = getHTAlpha(partPer, 0, 0.1, 0.9, 1);
-            frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
+            //let a = getHTAlpha(partPer, 0, 0.1, 0.9, 1);
+            //frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -304,7 +314,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            frinkAdjust(mesh1, 0.4, 0.8);
+            //frinkAdjust(mesh1, 0.4, 0.8);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -318,8 +328,8 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            let a = getHTAlpha(partPer, 0, 0.15, 0.85, 1);
-            frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
+            //let a = getHTAlpha(partPer, 0, 0.15, 0.85, 1);
+            //frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -333,7 +343,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            frinkAdjust(mesh1, 0.4, 0.8);
+            //frinkAdjust(mesh1, 0.4, 0.8);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
@@ -347,16 +357,14 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // frink
-            let a = getHTAlpha(partPer, 0, 0.2, 0.8, 1);
-            frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
+            //let a = getHTAlpha(partPer, 0, 0.2, 0.8, 1);
+            //frinkAdjust(mesh1, 0.4 + 0.6 * a, 0.8 - 0.8 * a);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(0, 0, 0);
         }
     };
-    const seq = scene.userData.seq = seqHooks.create(opt_seq);
-    console.log('frameMax for main seq: ' + seq.frameMax);
-    sm.frameMax = seq.frameMax;
+
 
 
     return sampleAlpha.load({
@@ -365,7 +373,13 @@ VIDEO.init = function(sm, scene, camera){
     })
     .then( ( result ) => {
          console.log('we have a audio sample alphas result object!');
-         console.log(result);
+         // set samples to the value of the result object from this load of smaple data files
+         samples = result;
+
+    const seq = scene.userData.seq = seqHooks.create(opt_seq);
+    console.log('frameMax for main seq: ' + seq.frameMax);
+    sm.frameMax = seq.frameMax;
+
          return Promise.resolve();
      });
 };
