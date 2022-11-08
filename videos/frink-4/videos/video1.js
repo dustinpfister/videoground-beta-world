@@ -271,9 +271,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
 
-
+            const a1 = sampleAlpha.getByAlpha(samples, 'frink4-bass', seq.per);
             const a2 = sampleAlpha.getByAlpha(samples, 'frink4-voice', seq.per);
-            frinkAdjust(mesh1, 0.6, 1 - a2);
+            frinkAdjust(mesh1, 0.6, 1 - (0.25 * a1 + 0.75 * a2) );
 
         },
         afterObjects: function(seq){
