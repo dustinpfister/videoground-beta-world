@@ -15,6 +15,9 @@
 * () use drums audio sample data to effect scale of grid wrap objects
 * () new canvas textures for sphere as well as objects
 
+* () new seq objects and paths
+* () use glavin points
+
 
 <!-- DONE -->
 

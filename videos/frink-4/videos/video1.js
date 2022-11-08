@@ -174,7 +174,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     var tw = 9,
     th = 9,
-    space = 12;
+    space = 6;
     const m1 = new THREE.MeshPhongMaterial({
         color: new THREE.Color(0.5, 0.5, 0.5),
         //map: texture_frink_map,
@@ -273,7 +273,17 @@ VIDEO.init = function(sm, scene, camera){
 
             const a1 = sampleAlpha.getByAlpha(samples, 'frink4-bass', seq.per);
             const a2 = sampleAlpha.getByAlpha(samples, 'frink4-voice', seq.per);
+            const a3 = sampleAlpha.getByAlpha(samples, 'frink4-drums', seq.per);
             frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
+
+grid.children.forEach((child)=>{
+const y = 0.1 + 0.25 * a1 + 2.75 * a3;
+child.scale.set(1, y, 1);
+child.position.y += y / 2;
+
+//child.position.set(0,0,0);
+
+});
 
         },
         afterObjects: function(seq){
