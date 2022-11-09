@@ -16,15 +16,13 @@
 * (done) I am thinking that I should have voice alone effect sphere muation
 * (done) check the range of the samples
 * (done) lower the y scale max
+* (done) using new get sample alpha mean helper to smooth things out better
 
 * () animated canvas texture map for sphere
-* () have the base line effect the canvas texture
+* () have the base line effect the canvas texture of the sphere
 
-
-* () new canvas textures for sphere as well as objects
-* () new seq objects and paths
-* () use glavin points
-
+* () new seq objects for camera movement
+* () use the glavin points for certian seq objects again
 
 <!-- DONE -->
 
