@@ -43,6 +43,39 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // HELPERS
     //-------- ----------
+    // get a sample alpha by a given sample index and a backCount that is
+    // the max number of samples back to go to create a mean to use.
+    const getByIndexMean = (result, key, csi, backCount) => {
+        backCount = backCount === undefined ? 3 : backCount;
+        const sampleObj = result[key];
+        // current sample index
+        const bsi = csi - backCount;
+        // by default just use the
+        let samples = [];
+        // if csi is bellow backCount
+        if(bsi < 0){
+            samples = sampleObj.abs.slice( 0, csi + 1 );
+        }
+        // we have at least the back count
+        if(bsi >= 0){
+            samples = sampleObj.abs.slice( bsi + 1, csi + 1 );
+        }
+        let absNum = 0; //sampleObj.abs[ csi ];
+        const sampCount = samples.length;
+        if(sampCount > 0){
+            const sum = samples.reduce((acc, n) => { return acc + n;  }, 0);
+            absNum = sum / sampCount;
+        }
+        const alphaSamp = absNum / sampleObj.maxABS;
+        return alphaSamp;
+    };
+    // get a sample alpha by a given alpha value and a backCount that is
+    // the max number of samples back to go to create a mean to use.
+    const getByAlphaMean = (result, key, alpha, backCount) => {
+        const sampleObj = result[key];
+        const csi = Math.round( ( sampleObj.abs.length - 1) * alpha);
+        return getByIndexMean(result, key, csi, backCount);
+    };
     // just a short hand for THREE.QuadraticBezierCurve3
     const QBC3 = function(x1, y1, z1, x2, y2, z2, x3, y3, z3){
         let vs = x1;
@@ -131,9 +164,6 @@ VIDEO.init = function(sm, scene, camera){
             material || new THREE.MeshPhongMaterial() );
         return mesh;
     };
-    
-
-
     //-------- ----------
     //  SPHERE MUTATE MESH OBJECTS, UPDATE OPTIONS
     //-------- ----------
@@ -142,19 +172,19 @@ VIDEO.init = function(sm, scene, camera){
             const mud = mesh.userData;
             const state = mud.state = mud.state === undefined ? [] : mud.state;
             const size = mesh.geometry.parameters.radius;
-            const muld = mud.muld === undefined ? 2 : mud.muld;
+            const muld = mud.muld === undefined ? 8 : mud.muld;
             const uls = mud.uls === undefined ? 1 : mud.uls; // Unit Length Speed
             const uld = mud.uld === undefined ? 0 : mud.uld; // Unit Length Damp
             if(!state[i]){
                 state[i] = {
                     v: vs.clone().normalize().multiplyScalar(size + muld * Math.random()),
-                    count: 2 + Math.floor( Math.random() * 4 ),
+                    count: 8 + Math.floor( Math.random() * 32 ),
                     offset: Math.random()
                 };
             }
             const alpha2 = (state[i].offset + (state[i].count) * alpha) % 1;
             const alpha3 = 1 - Math.abs(0.5 - alpha2) / 0.5  * uls;
-            return vs.lerp(state[i].v, alpha3 * ( 1- uld) );
+            return vs.lerp(state[i].v, alpha3 * ( 1 - uld) );
         }
     };
     const material_sphere = new THREE.MeshPhongMaterial({
@@ -271,9 +301,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
 
-            const a1 = sampleAlpha.getByAlpha(samples, 'frink4-bass', seq.per);
-            const a2 = sampleAlpha.getByAlpha(samples, 'frink4-voice', seq.per);
-            const a3 = sampleAlpha.getByAlpha(samples, 'frink4-drums', seq.per);
+            const a1 = getByAlphaMean(samples, 'frink4-bass', seq.per, 7);
+            const a2 = getByAlphaMean(samples, 'frink4-voice', seq.per, 15);
+            const a3 = getByAlphaMean(samples, 'frink4-drums', seq.per, 7);
 
             //frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
             frinkAdjust(mesh1, 1, 1 - 1 * a2 );
