@@ -302,7 +302,7 @@ VIDEO.init = function(sm, scene, camera){
             camera.zoom = 1;
 
             const a1 = getByAlphaMean(samples, 'frink4-bass', seq.per, 7);
-            const a2 = getByAlphaMean(samples, 'frink4-voice', seq.per, 15);
+            const a2 = getByAlphaMean(samples, 'frink4-voice', seq.per, 7);
             const a3 = getByAlphaMean(samples, 'frink4-drums', seq.per, 7);
 
             //frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
