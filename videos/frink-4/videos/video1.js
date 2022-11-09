@@ -19,12 +19,51 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CANVAS, TEXTURES
     //-------- ----------
+    const rndCIndex = (gSize, palSize) => {
+        const cIndex = [];
+        const len = gSize * gSize;
+        let i = 0;
+        while(i < len){
+            cIndex.push(Math.floor( palSize * Math.random() ));
+            i += 1;
+        }
+        return cIndex;
+    };
+
     const cObj_frink_map = canvasMod.create({
         size: 64,
-        palette: ['#cf0000','#00cf00','#0000cf','#00cfcf','#cf00cf','#cfcf00'],
+        palette: [
+            'red', 'green', 'blue'
+        ],
         update_mode: 'dual',
-        state: { gSize: 30 },
-        draw : 'rnd'});
+        state: {
+            gSize: 10,
+            cIndex: rndCIndex(10, 3),
+            a1: 0.01
+        },
+        draw : function(canObj, ctx, canvas, state){
+            let i = 0;
+            const gSize =  state.gSize === undefined ? 5 : state.gSize;
+            const len = gSize * gSize;
+            const pxSize = canObj.size / gSize;
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            //ctx.globalAlpha = state.a1;
+            while(i < len){
+                const ci = Math.floor( state.cIndex[i]);
+                const x = i % gSize;
+                const y = Math.floor(i / gSize);
+
+                ctx.fillStyle = canObj.palette[ci];
+                const pxs2 = pxSize * state.a1;
+                const px = x * pxSize + pxSize / 2 - pxs2 / 2;
+                const py = y * pxSize + pxSize / 2 - pxs2 / 2;
+                ctx.fillRect(px, py, pxs2, pxs2);
+                i += 1;
+            }
+        }
+    });
+
+
     const cObj_frink_emissive = canvasMod.create({
         size: 64,
         palette: ['#000000', '#0f0f0f', '#111111', '#1f1f1f', '#222222'],
@@ -207,7 +246,7 @@ VIDEO.init = function(sm, scene, camera){
     space = 6;
     const m1 = new THREE.MeshPhongMaterial({
         color: new THREE.Color(0.5, 0.5, 0.5),
-        //map: texture_frink_map,
+        map: texture_frink_map,
         emissive: new THREE.Color(1, 1, 1),
         emissiveMap: texture_frink_emissive,
         emissiveIntensity: 1
@@ -316,6 +355,12 @@ child.position.y += y / 2;
 //child.position.set(0,0,0);
 
 });
+
+let a4 = 0.25 + a1 * 1.25 * 0.75;
+a4 = a4 > 1 ? 1 : a4;
+cObj_frink_map.state.a1 = a4
+canvasMod.update(cObj_frink_map);
+
 
         },
         afterObjects: function(seq){
