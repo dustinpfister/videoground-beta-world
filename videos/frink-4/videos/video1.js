@@ -324,7 +324,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-    scene.background = new THREE.Color('#a0a0a0');
+    scene.background = new THREE.Color('#d0d0d0');
     //-------- ----------
     // A MAIN SEQ OBJECT
     //-------- ----------
