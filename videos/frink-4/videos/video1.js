@@ -289,7 +289,7 @@ VIDEO.init = function(sm, scene, camera){
     const v3Array_campos = [
         // path for seq0
         QBV3Array([
-            [-8,6,0, 0,6,12,    0,0,0,      330]
+            [-16,0,6, -8, 6, 0,    0,0,0,      330]
         ]),
         GlavinPoints(150, new THREE.Vector3(0,5,10), 2),
         QBV3Array([
@@ -299,27 +299,6 @@ VIDEO.init = function(sm, scene, camera){
         QBV3Array([
             [-8,6,0, 0,6,12,    0,0,0,      180]
         ])
-/*
-        // seq 0
-        QBV3Array([
-            [-8,6,0, 0,6,12,    0,0,10,      60],
-            [0,6,12, 0,5,10,    0,0,0,      30]
-        ]),
-        // seq 1
-        GlavinPoints(15, new THREE.Vector3(0,5,10), 2),
-        // seq 2
-        QBV3Array([
-            [0,5,10, 10,0,0,    6,2,9,      210]
-        ]),
-        // seq 3
-        GlavinPoints(23, new THREE.Vector3(10,0,0), 2),
-        // seq 4
-        QBV3Array([
-            [10,0,0, 0,0,-7,    6,0,-6,      120]
-        ]),
-        // seq 5
-        GlavinPoints(53, new THREE.Vector3(0,0,-7), 2)
-*/
     ];
     // PATH DEBUG POINTS
     const points_debug = new THREE.Points(
