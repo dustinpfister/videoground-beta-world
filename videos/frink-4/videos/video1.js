@@ -358,7 +358,6 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             //seq.copyPos('campos', camera);
-            //camera.lookAt(0, 0, 0);
             //!!! DEBUG CAM POS
             camera.position.set(15, 15, 15);
         }
