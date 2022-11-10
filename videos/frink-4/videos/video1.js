@@ -168,8 +168,6 @@ VIDEO.init = function(sm, scene, camera){
         // default return value is 0
         return 0;
     };
-
-
     // Glaven Points are random points used for camera pos
     const GlavinPoints = (count, origin, mvul ) => {
         count = count === undefined ? 50 : count;
@@ -289,6 +287,7 @@ VIDEO.init = function(sm, scene, camera){
     // CAMERA PATHS
     //-------- ----------
     const v3Array_campos = [
+        // path for seq0
         QBV3Array([
             [-8,6,0, 0,6,12,    0,0,10,      60],
             [0,6,12, 0,5,10,    0,0,0,      30]
@@ -318,11 +317,11 @@ VIDEO.init = function(sm, scene, camera){
 */
     ];
     // PATH DEBUG POINTS
-    //const points_debug = new THREE.Points(
-    //    new THREE.BufferGeometry().setFromPoints(v3Array_campos.flat()),
-    //    new THREE.PointsMaterial({size: 0.25, color: new THREE.Color(0,1,0)})
-    //);
-    //scene.add(points_debug);
+    const points_debug = new THREE.Points(
+        new THREE.BufferGeometry().setFromPoints(v3Array_campos.flat()),
+        new THREE.PointsMaterial({size: 0.5, color: new THREE.Color(0,0.5,0)})
+    );
+    scene.add(points_debug);
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -366,21 +365,18 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ 0 - three seconds of silence, frink mesh is a sphere
+    // SEQ 0 - 
     opt_seq.objects[0] = {
         secs: 30,
         v3Paths: [
             { key: 'campos', array: v3Array_campos[0], lerp: true }
         ],
         update: function(seq, partPer, partBias){
-            // FRINK
-            //frinkAdjust(mesh1, 0.4, 0.8);
-            // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
-            //!!! DEBUG CAM POS
-            //camera.position.set(15, 15, 15);
+            //seq.copyPos('campos', camera);
             //camera.lookAt(0, 0, 0);
+            //!!! DEBUG CAM POS
+            camera.position.set(15, 15, 15);
+            camera.lookAt(0, 0, 0);
         }
     };
 
