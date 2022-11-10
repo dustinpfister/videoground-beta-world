@@ -347,6 +347,7 @@ VIDEO.init = function(sm, scene, camera){
             camera.zoom = 1;
             // update the sphere
             frinkAdjust(mesh1, 1, 1 - 1 * a2 );
+            mesh1.rotation.y = Math.PI / 180 * 360 * seq.getSinBias(1, false);
             // update the state of
             grid.children.forEach( (child) => {
                 const y = 0.2 + 0.6 * a1 + 1.35 * a3;
