@@ -79,6 +79,8 @@ VIDEO.init = function(sm, scene, camera){
     const dl = new THREE.DirectionalLight(0xffffff, 1);
     dl.position.set( 1, 1, 0 );
     scene.add(dl);
+    const al = new THREE.AmbientLight(0xffffff, 0.08);
+    scene.add(al);
     //-------- ----------
     // HELPERS
     //-------- ----------
