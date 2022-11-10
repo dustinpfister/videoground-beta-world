@@ -29,7 +29,9 @@ VIDEO.init = function(sm, scene, camera){
         return cIndex;
     };
     const palette1 = [
-        'red', 'green', 'blue'
+        'red', 'green', 'blue',
+        'orange', 'lime', 'cyan',
+        'purple', 'yellow'
     ];
     const gSize1 = 20;
     const cObj_frink_map = canvasMod.create({
