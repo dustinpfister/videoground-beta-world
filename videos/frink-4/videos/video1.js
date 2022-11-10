@@ -28,15 +28,17 @@ VIDEO.init = function(sm, scene, camera){
         }
         return cIndex;
     };
+    const palette1 = [
+        'red', 'green', 'blue'
+    ];
+    const gSize1 = 20;
     const cObj_frink_map = canvasMod.create({
         size: 512,
-        palette: [
-            'red', 'green', 'blue'
-        ],
+        palette: palette1,
         update_mode: 'dual',
         state: {
-            gSize: 20,
-            cIndex: rndCIndex(20, 3),
+            gSize: gSize1,
+            cIndex: rndCIndex(gSize1, palette1.length),
             a1: 0.01
         },
         draw : function(canObj, ctx, canvas, state){
