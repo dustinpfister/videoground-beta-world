@@ -65,10 +65,10 @@ VIDEO.init = function(sm, scene, camera){
     });
     // emissive map
     const cObj_frink_emissive = canvasMod.create({
-        size: 64,
+        size: 512,
         palette: ['#000000', '#0f0f0f', '#111111', '#1f1f1f', '#222222'],
         update_mode: 'dual',
-        state: { gSize: 30 },
+        state: { gSize: gSize1 * 4 },
         draw : 'rnd'});
     // textures
     texture_frink_map = cObj_frink_map.texture_data;
