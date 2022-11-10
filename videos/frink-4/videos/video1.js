@@ -15,7 +15,6 @@ VIDEO.init = function(sm, scene, camera){
     // Samples
     //-------- ----------
     let samples = {};
-
     //-------- ----------
     // CANVAS, TEXTURES
     //-------- ----------
@@ -29,16 +28,15 @@ VIDEO.init = function(sm, scene, camera){
         }
         return cIndex;
     };
-
     const cObj_frink_map = canvasMod.create({
-        size: 64,
+        size: 512,
         palette: [
             'red', 'green', 'blue'
         ],
         update_mode: 'dual',
         state: {
-            gSize: 10,
-            cIndex: rndCIndex(10, 3),
+            gSize: 20,
+            cIndex: rndCIndex(20, 3),
             a1: 0.01
         },
         draw : function(canObj, ctx, canvas, state){
@@ -52,7 +50,6 @@ VIDEO.init = function(sm, scene, camera){
                 const ci = Math.floor( state.cIndex[i]);
                 const x = i % gSize;
                 const y = Math.floor(i / gSize);
-
                 ctx.fillStyle = canObj.palette[ci];
                 const pxs2 = pxSize * state.a1;
                 const px = x * pxSize + pxSize / 2 - pxs2 / 2;
@@ -62,8 +59,7 @@ VIDEO.init = function(sm, scene, camera){
             }
         }
     });
-
-
+    // emissive map
     const cObj_frink_emissive = canvasMod.create({
         size: 64,
         palette: ['#000000', '#0f0f0f', '#111111', '#1f1f1f', '#222222'],
@@ -332,6 +328,10 @@ VIDEO.init = function(sm, scene, camera){
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
+            // get sample alphas
+            const a1 = getByAlphaMean(samples, 'frink4-bass', seq.per, 7);
+            const a2 = getByAlphaMean(samples, 'frink4-voice', seq.per, 7);
+            const a3 = getByAlphaMean(samples, 'frink4-drums', seq.per, 7);
             // set position of the grid
             ObjectGridWrap.setPos(grid, 0, seq.per );
             // update grid by current alphas and effects
@@ -339,29 +339,19 @@ VIDEO.init = function(sm, scene, camera){
             camera.position.set(0, 5, 10);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
-
-            const a1 = getByAlphaMean(samples, 'frink4-bass', seq.per, 7);
-            const a2 = getByAlphaMean(samples, 'frink4-voice', seq.per, 7);
-            const a3 = getByAlphaMean(samples, 'frink4-drums', seq.per, 7);
-
-            //frinkAdjust(mesh1, 1, 1 - (0.25 * a1 + 0.75 * a2) );
+            // update the sphere
             frinkAdjust(mesh1, 1, 1 - 1 * a2 );
-
-grid.children.forEach((child)=>{
-const y = 0.2 + 0.5 * a1 + 1.25 * a3;
-child.scale.set(1, y, 1);
-child.position.y += y / 2;
-
-//child.position.set(0,0,0);
-
-});
-
-let a4 = 0.25 + a1 * 1.25 * 0.75;
-a4 = a4 > 1 ? 1 : a4;
-cObj_frink_map.state.a1 = a4
-canvasMod.update(cObj_frink_map);
-
-
+            // update the state of
+            grid.children.forEach( (child) => {
+                const y = 0.2 + 0.6 * a1 + 1.35 * a3;
+                child.scale.set(1, y, 1);
+                child.position.y += y / 2;
+            });
+            // update state of canvas texture
+            let a4 = 0.2 + 0.8 * (a1 * 1.5 ) ; //0.25 + a1 * 1.1 * 0.75;
+            a4 = a4 > 1 ? 1 : a4;
+            cObj_frink_map.state.a1 = a4
+            canvasMod.update(cObj_frink_map);
         },
         afterObjects: function(seq){
             sphereMutate.update(mesh1, seq.per, updateOpt1);
