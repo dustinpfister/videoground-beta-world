@@ -289,11 +289,16 @@ VIDEO.init = function(sm, scene, camera){
     const v3Array_campos = [
         // path for seq0
         QBV3Array([
-            [-8,6,0, 0,6,12,    0,0,10,      60],
-            [0,6,12, 0,5,10,    0,0,0,      30]
+            [-8,6,0, 0,6,12,    0,0,0,      330]
+        ]),
+        GlavinPoints(150, new THREE.Vector3(0,5,10), 2),
+        QBV3Array([
+            [-8,6,0, 0,6,12,    0,0,0,      60]
+        ]),
+        GlavinPoints(180, new THREE.Vector3(0,5,10), 2),
+        QBV3Array([
+            [-8,6,0, 0,6,12,    0,0,0,      180]
         ])
-
-
 /*
         // seq 0
         QBV3Array([
@@ -362,12 +367,13 @@ VIDEO.init = function(sm, scene, camera){
         afterObjects: function(seq){
             sphereMutate.update(mesh1, seq.per, updateOpt1);
             camera.updateProjectionMatrix();
+            camera.lookAt(0, 0, 0);
         },
         objects: []
     };
     // SEQ 0 - 
     opt_seq.objects[0] = {
-        secs: 30,
+        secs: 11,
         v3Paths: [
             { key: 'campos', array: v3Array_campos[0], lerp: true }
         ],
@@ -376,10 +382,48 @@ VIDEO.init = function(sm, scene, camera){
             //camera.lookAt(0, 0, 0);
             //!!! DEBUG CAM POS
             camera.position.set(15, 15, 15);
-            camera.lookAt(0, 0, 0);
         }
     };
-
+    // SEQ 1 - glavin points
+    opt_seq.objects[1] = {
+        secs: 5,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[1], lerp: true }
+        ],
+        update: function(seq, partPer, partBias){
+            seq.copyPos('campos', camera);
+        }
+    };
+    // SEQ 2 - 
+    opt_seq.objects[2] = {
+        secs: 2,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[2], lerp: true }
+        ],
+        update: function(seq, partPer, partBias){
+            seq.copyPos('campos', camera);
+        }
+    };
+    // SEQ 3 - glavin points
+    opt_seq.objects[1] = {
+        secs: 6,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[3], lerp: true }
+        ],
+        update: function(seq, partPer, partBias){
+            seq.copyPos('campos', camera);
+        }
+    };
+    // SEQ 4 - 
+    opt_seq.objects[2] = {
+        secs: 6,
+        v3Paths: [
+            { key: 'campos', array: v3Array_campos[4], lerp: true }
+        ],
+        update: function(seq, partPer, partBias){
+            seq.copyPos('campos', camera);
+        }
+    };
 
 
     return sampleAlpha.load({
