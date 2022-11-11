@@ -77,7 +77,7 @@ VIDEO.init = function(sm, scene, camera){
     // LIGHT
     //-------- ----------
     const dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set( 1, 1, 0 );
+    dl.position.set( -4, 1, 3 );
     scene.add(dl);
     const al = new THREE.AmbientLight(0xffffff, 0.08);
     scene.add(al);
@@ -289,13 +289,13 @@ VIDEO.init = function(sm, scene, camera){
     const v3Array_campos = [
         // path for seq0
         QBV3Array([
-            [-14,0,-14, -5, 0, 0,    2,0,-6,      330]
+            [-14,0,-14, -7, 0, 0,    2,0,-6,      330]
         ]),
-        GlavinPoints(150, new THREE.Vector3(-5,0,0), 0.1),
+        GlavinPoints(150, new THREE.Vector3(-7,0,0), 0.1),
         QBV3Array([
-            [-5,0,0, -5,0,12,    -8,0,-2,      60]
+            [-5,0,0, -7,0,12,    -8,0,-2,      60]
         ]),
-        GlavinPoints(180, new THREE.Vector3(-5,0,12), 0.1),
+        GlavinPoints(180, new THREE.Vector3(-7,0,12), 0.1),
         QBV3Array([
             [-5,0,12, 10,0,2,    1,0,10,      180]
         ])
