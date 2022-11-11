@@ -1,4 +1,4 @@
-// video1 for 'frink4' - 
+// video1 for 'frink4' - using sample_alphas.js to load audio sample data
 // 
 // scripts
 VIDEO.scripts = [
@@ -289,15 +289,15 @@ VIDEO.init = function(sm, scene, camera){
     const v3Array_campos = [
         // path for seq0
         QBV3Array([
-            [-16,0,6, -8, 6, 0,    0,0,0,      330]
+            [-14,0,-14, -5, 0, 0,    2,0,-6,      330]
         ]),
-        GlavinPoints(150, new THREE.Vector3(0,5,10), 2),
+        GlavinPoints(150, new THREE.Vector3(-5,0,0), 0.1),
         QBV3Array([
-            [-8,6,0, 0,6,12,    0,0,0,      60]
+            [-5,0,0, -5,0,12,    -8,0,-2,      60]
         ]),
-        GlavinPoints(180, new THREE.Vector3(0,5,10), 2),
+        GlavinPoints(180, new THREE.Vector3(-5,0,12), 0.1),
         QBV3Array([
-            [-8,6,0, 0,6,12,    0,0,0,      180]
+            [-5,0,12, 10,0,2,    1,0,10,      180]
         ])
     ];
     // PATH DEBUG POINTS
@@ -305,7 +305,7 @@ VIDEO.init = function(sm, scene, camera){
         new THREE.BufferGeometry().setFromPoints(v3Array_campos.flat()),
         new THREE.PointsMaterial({size: 0.5, color: new THREE.Color(0,0.5,0)})
     );
-    scene.add(points_debug);
+    //scene.add(points_debug);
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -357,9 +357,9 @@ VIDEO.init = function(sm, scene, camera){
             { key: 'campos', array: v3Array_campos[0], lerp: true }
         ],
         update: function(seq, partPer, partBias){
-            //seq.copyPos('campos', camera);
+            seq.copyPos('campos', camera);
             //!!! DEBUG CAM POS
-            camera.position.set(15, 15, 15);
+            //camera.position.set(15, 15, 15);
         }
     };
     // SEQ 1 - glavin points
@@ -383,7 +383,7 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
     // SEQ 3 - glavin points
-    opt_seq.objects[1] = {
+    opt_seq.objects[3] = {
         secs: 6,
         v3Paths: [
             { key: 'campos', array: v3Array_campos[3], lerp: true }
@@ -393,7 +393,7 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
     // SEQ 4 - 
-    opt_seq.objects[2] = {
+    opt_seq.objects[4] = {
         secs: 6,
         v3Paths: [
             { key: 'campos', array: v3Array_campos[4], lerp: true }
