@@ -2,13 +2,18 @@
 
 <!-- FRINK -->
 
+## ( ) - guy1
+* () start a guy1 video folder
+
 ## ( ) - frink5
 * () have more than one layer like with the text plane project
 * () make all textures animated
 * () glaven points helper improved with unit length and range ranges
 * () new path worked out for camera position making use of new glaven points helper
 
-## ( ) - frink4
+<!-- DONE -->
+
+## ( 11/11/2022 ) - frink4
 * (done) get audio sample mod working
 * (done) use audio sample alpha values for voice and base to effect sphere mutate
 * (done) use drums audio sample data to effect scale of grid wrap objects
@@ -17,14 +22,10 @@
 * (done) check the range of the samples
 * (done) lower the y scale max
 * (done) using new get sample alpha mean helper to smooth things out better
-
-* () animated canvas texture map for sphere
-* () have the base line effect the canvas texture of the sphere
-
-* () new seq objects for camera movement
-* () use the glavin points for certian seq objects again
-
-<!-- DONE -->
+* (done) animated canvas texture map for sphere
+* (done) have the base line effect the canvas texture of the sphere
+* (done) new seq objects for camera movement
+* (done) use the glavin points for certian seq objects again
 
 ## ( done 10/29/2022 ) - frink3
 * (done) use the phong material
