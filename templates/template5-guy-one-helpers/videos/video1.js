@@ -84,6 +84,32 @@ VIDEO.init = function(sm, scene, camera){
         URLS: ['smile_sheet_128.png','smile_creepy_128.png']
     }).then( (textureObj) => {
         console.log(textureObj);
+
+
+        const drawFromSheet = (canObj, ctx, canvas, state) => {
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            const img = state.textureObj[state.key].image;
+            const sx = state.xi * 32;
+            const sy = state.yi * 32;
+            ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
+        };
+
+        const canObj_face = canvasMod.create({
+            size: 32,
+            update_mode: 'canvas',
+            state: {
+                textureObj: textureObj,
+                key: 'smile_sheet_128',
+                xi: 0, yi: 0
+            },
+            draw: drawFromSheet
+        });
+
+        const texture = canObj_face.texture;
+
+
+
         //-------- ----------
         // MATERIALS
         //-------- ----------
@@ -92,7 +118,7 @@ VIDEO.init = function(sm, scene, camera){
         material.head = [
             // 0 used for the face
             new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide
+                color: 0xffffff, side: THREE.DoubleSide, map: texture
             }),
             // 1 
             new THREE.MeshLambertMaterial({
