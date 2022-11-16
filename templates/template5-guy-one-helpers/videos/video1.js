@@ -12,7 +12,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GUY
     //-------- ----------
-    const guy1 = helper.createGuyHScale(3, 5, 8);
+    const material = helper.createMaterials();
+    material.body.color = new THREE.Color(1, 1, 1);
+    const guy1 = helper.createGuyHScale(3, 5, 8, material);
     scene.add(guy1.group);
     //-------- ----------
     // LIGHT

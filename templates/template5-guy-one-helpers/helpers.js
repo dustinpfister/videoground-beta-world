@@ -2,34 +2,38 @@
     //-------- ----------
     // MATERIALS
     //-------- ----------
-    const material = {};
-    material.leg = new THREE.MeshLambertMaterial({
-            color: 0x00aaff, side: THREE.DoubleSide
-    });
-    // material used for the arms
-    material.arm = new THREE.MeshLambertMaterial({
-            color: 0x00ff88, side: THREE.DoubleSide
+    api.createMaterials = () => {
+        const material = {};
+        material.leg = new THREE.MeshLambertMaterial({
+                color: 0x00aaff, side: THREE.DoubleSide
         });
-    // material used for the body
-    material.body = new THREE.MeshLambertMaterial({
-            color: 0x00ff88, side: THREE.DoubleSide
-        });
-    // array of materials used for the head
-    material.head = [
-        // 0 default material
-        new THREE.MeshLambertMaterial({
-            color: 0xffaf00, side: THREE.DoubleSide
-        }),
-        // 1 used for the face
-        new THREE.MeshLambertMaterial({
-            color: 0xffffff, side: THREE.DoubleSide
-        })
-    ];
+        // material used for the arms
+        material.arm = new THREE.MeshLambertMaterial({
+                color: 0x00ff88, side: THREE.DoubleSide
+            });
+        // material used for the body
+        material.body = new THREE.MeshLambertMaterial({
+                color: 0x00ff88, side: THREE.DoubleSide
+            });
+        // array of materials used for the head
+        material.head = [
+            // 0 default material
+            new THREE.MeshLambertMaterial({
+                color: 0xffaf00, side: THREE.DoubleSide
+            }),
+            // 1 used for the face
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff, side: THREE.DoubleSide
+            })
+        ];
+        return material;
+    };
     //-------- ----------
     // GUY ONE R0 HELPERS
     //-------- ----------
     // create guy helper
-    api.createGuy = (scale, maxUnitDelta, maxRotation) => {
+    api.createGuy = (scale, maxUnitDelta, maxRotation, material) => {
+        material = material || api.createMaterials();
         const guy = new Guy();
         const gud =  guy.group.userData;
         gud.scale = scale;
@@ -61,9 +65,9 @@
         return guy;
     };
     // create a guy by way of a hight scale value
-    api.createGuyHScale = (HScale, maxUnitDelta, maxRotation) => {
+    api.createGuyHScale = (HScale, maxUnitDelta, maxRotation, materials) => {
         const scale_h1 = 1 / api.getGuySize( api.createGuy(1) ).y;
-        const guy = api.createGuy(HScale * scale_h1, maxUnitDelta, maxRotation);
+        const guy = api.createGuy(HScale * scale_h1, maxUnitDelta, maxRotation, materials);
         return guy;
     };
     // get guy size helper
