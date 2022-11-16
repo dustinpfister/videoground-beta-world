@@ -83,9 +83,8 @@ VIDEO.init = function(sm, scene, camera){
         URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../img/smile/'),
         URLS: ['smile_sheet_128.png','smile_creepy_128.png']
     }).then( (textureObj) => {
-        console.log(textureObj);
 
-
+        // draw from sheet method
         const drawFromSheet = (canObj, ctx, canvas, state) => {
             ctx.fillStyle = 'black';
             ctx.fillRect(0,0, canvas.width, canvas.height);
@@ -94,7 +93,7 @@ VIDEO.init = function(sm, scene, camera){
             const sy = state.yi * 32;
             ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
         };
-
+        // create the canvas object
         const canObj_face = canvasMod.create({
             size: 32,
             update_mode: 'canvas',
@@ -105,11 +104,8 @@ VIDEO.init = function(sm, scene, camera){
             },
             draw: drawFromSheet
         });
-
+        // texture to use
         const texture = canObj_face.texture;
-
-
-
         //-------- ----------
         // MATERIALS
         //-------- ----------
