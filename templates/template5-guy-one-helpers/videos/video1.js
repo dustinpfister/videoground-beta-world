@@ -38,14 +38,14 @@ VIDEO.init = function(sm, scene, camera){
     // A MAIN SEQ OBJECT
     //-------- ----------
     const v3Array_campos = helper.QBV3Array([
-        [8,8,8, 7,2,-7,    0,0,0,      100]
+        [5,5,5, 4,2,-4,    1,0,1,      100]
     ]);
-    scene.add( helper.QBDebugV3Array(v3Array_campos, 0.1, new THREE.Color(0, 1, 1)) );
+    //scene.add( helper.QBDebugV3Array(v3Array_campos, 0.1, new THREE.Color(0, 1, 1)) );
     // start options for main seq object
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-            camera.position.set(8, 8, 8);
+            camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
         },
