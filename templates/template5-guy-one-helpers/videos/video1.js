@@ -3,10 +3,24 @@
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
+   '../../../js/guy/r0/guy.js',
    '../helpers.js' // <== Using a Video folder level helpers file
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
+    //-------- ----------
+    // GUY
+    //-------- ----------
+    const guy1 = helper.createGuyHScale(3);
+    scene.add(guy1.group);
+    //-------- ----------
+    // LIGHT
+    //-------- ----------
+    const pl = new THREE.PointLight(0xffffff, 1);
+    pl.position.set(3, 2, 1);
+    scene.add(pl);
+    const al = new THREE.AmbientLight(0xffffff, 0.15);
+    scene.add(al);
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -21,9 +35,7 @@ VIDEO.init = function(sm, scene, camera){
     // A MAIN SEQ OBJECT
     //-------- ----------
     const v3Array_campos = helper.QBV3Array([
-        [8,8,8, 7,-2,-7,    2,0,0,      100],
-        [7,-2,-7, -8,4,0,   0,0,0,      100],
-        [-8,4,0, 8,8,8,     0,0,0,      100]
+        [8,8,8, 7,2,-7,    0,0,0,      100]
     ]);
     scene.add( helper.QBDebugV3Array(v3Array_campos, 0.1, new THREE.Color(0, 1, 1)) );
     // start options for main seq object
@@ -31,7 +43,7 @@ VIDEO.init = function(sm, scene, camera){
         fps: 30,
         beforeObjects: function(seq){
             camera.position.set(8, 8, 8);
-            camera.lookAt(0, 0, 0);
+            camera.lookAt(guy1.group.position);
             camera.zoom = 1;
         },
         afterObjects: function(seq){
@@ -55,7 +67,7 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             // camera
             seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
+            camera.lookAt(guy1.group.position);
         }
     };
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
