@@ -82,7 +82,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // update guy1
-            helper.updateGuyEffect(guy1, partBias);
+            helper.updateGuyEffect(guy1, seq.getSinBias(1));
             // camera
             seq.copyPos('campos', camera);
             camera.lookAt(guy1.group.position);
