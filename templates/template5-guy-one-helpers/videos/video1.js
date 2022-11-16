@@ -11,7 +11,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GUY
     //-------- ----------
-    const guy1 = helper.createGuyHScale(3);
+    const guy1 = helper.createGuyHScale(3, 5, 8);
     scene.add(guy1.group);
     //-------- ----------
     // LIGHT
@@ -55,7 +55,8 @@ VIDEO.init = function(sm, scene, camera){
     opt_seq.objects[0] = {
         secs: 3,
         update: function(seq, partPer, partBias){
-
+            // update guy1
+            helper.updateGuyEffect(guy1, 0);
         }
      };
     // SEQ 1 - ...
@@ -65,6 +66,8 @@ VIDEO.init = function(sm, scene, camera){
             { key: 'campos', array: v3Array_campos, lerp: true }
         ],
         update: function(seq, partPer, partBias){
+            // update guy1
+            helper.updateGuyEffect(guy1, partBias);
             // camera
             seq.copyPos('campos', camera);
             camera.lookAt(guy1.group.position);
