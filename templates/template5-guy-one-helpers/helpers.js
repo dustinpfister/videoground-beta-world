@@ -17,11 +17,27 @@
             });
         // array of materials used for the head
         material.head = [
-            // 0 default material
+            // 0 face
             new THREE.MeshLambertMaterial({
                 color: 0xffaf00, side: THREE.DoubleSide
             }),
-            // 1 used for the face
+            // 1
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff, side: THREE.DoubleSide
+            }),
+            // 2
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff, side: THREE.DoubleSide
+            }),
+            // 3
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff, side: THREE.DoubleSide
+            }),
+            // 4
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff, side: THREE.DoubleSide
+            }),
+            // 5
             new THREE.MeshLambertMaterial({
                 color: 0xffffff, side: THREE.DoubleSide
             })
@@ -53,6 +69,13 @@
                 mud.pos_home = pos.clone();
             }
         });
+        // set index values for head
+        guy.head.geometry.groups[0].materialIndex = 2;
+        guy.head.geometry.groups[1].materialIndex = 3;
+        guy.head.geometry.groups[2].materialIndex = 4;
+        guy.head.geometry.groups[3].materialIndex = 5;
+        guy.head.geometry.groups[4].materialIndex = 0; // face
+        guy.head.geometry.groups[5].materialIndex = 1;
         // use materials in this file
         guy.head.material = material.head.map( (m) => { return m.clone(); });
         guy.body.material = material.body.clone();
