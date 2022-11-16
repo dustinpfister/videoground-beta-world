@@ -58,7 +58,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: 3,
         update: function(seq, partPer, partBias){
             // update guy1
-            helper.updateGuyEffect(guy1, 0);
+            //helper.updateGuyEffect(guy1, 0);
         }
      };
     // SEQ 1 - ...
@@ -69,10 +69,10 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // update guy1
-            helper.updateGuyEffect(guy1, seq.getSinBias(1));
+            //helper.updateGuyEffect(guy1, seq.getSinBias(1));
             // camera
-            seq.copyPos('campos', camera);
-            camera.lookAt(guy1.group.position);
+            //seq.copyPos('campos', camera);
+            //camera.lookAt(guy1.group.position);
         }
     };
 
@@ -83,7 +83,9 @@ VIDEO.init = function(sm, scene, camera){
         URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../img/smile/'),
         URLS: ['smile_sheet_128.png','smile_creepy_128.png']
     }).then( (textureObj) => {
-
+        //-------- ----------
+        // TEXTURES
+        //-------- ----------
         // draw from sheet method
         const drawFromSheet = (canObj, ctx, canvas, state) => {
             ctx.fillStyle = 'black';
@@ -100,12 +102,28 @@ VIDEO.init = function(sm, scene, camera){
             state: {
                 textureObj: textureObj,
                 key: 'smile_sheet_128',
-                xi: 0, yi: 0
+                xi: 1, yi: 0
             },
             draw: drawFromSheet
         });
-        // texture to use
-        const texture = canObj_face.texture;
+        // create a new canvas texture from the current state of the given canvas element
+        const copyCanvas = (canvas_source) => {
+             const canvas_new = document.createElement('canvas');
+             const ctx = canvas_new.getContext('2d');
+             canvas_new.width = canvas_source.width;
+             canvas_new.height = canvas_source.height;
+             ctx.drawImage(canvas_source, 0, 0, canvas_new.width, canvas_new.height);
+             return new THREE.CanvasTexture(canvas_new);
+        };
+        // create textures from canvas
+        // HEAD LEFT
+        canObj_face.state.xi = 1;
+        canvasMod.update(canObj_face);
+        const texture_head_left = copyCanvas(canObj_face.canvas);
+        // HEAD FACE
+        canObj_face.state.xi = 0;
+        canvasMod.update(canObj_face);
+        const texture_head_face = canObj_face.texture;
         //-------- ----------
         // MATERIALS
         //-------- ----------
@@ -114,7 +132,7 @@ VIDEO.init = function(sm, scene, camera){
         material.head = [
             // 0 used for the face
             new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_face
             }),
             // 1 
             new THREE.MeshLambertMaterial({
@@ -122,7 +140,7 @@ VIDEO.init = function(sm, scene, camera){
             }),
             // 2 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide
+                color: 0xffaf00, side: THREE.DoubleSide, map: texture_head_left
             }),
             // 3 
             new THREE.MeshLambertMaterial({
