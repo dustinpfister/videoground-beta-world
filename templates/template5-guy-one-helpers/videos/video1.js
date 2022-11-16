@@ -12,22 +12,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GUY
     //-------- ----------
-    const material = helper.createMaterials();
-    material.body.color = new THREE.Color(1, 1, 1);
-/*
-    materals.head = [
-        // 0 default material
-        new THREE.MeshLambertMaterial({
-            color: 0xffaf00, side: THREE.DoubleSide
-        }),
-        // 1 used for the face
-        new THREE.MeshLambertMaterial({
-            color: 0xffffff, side: THREE.DoubleSide
-        })
-    ];
-*/
-    const guy1 = helper.createGuyHScale(3, 5, 8, material);
-    scene.add(guy1.group);
+    let guy1 = {}; 
+
+
     //-------- ----------
     // LIGHT
     //-------- ----------
@@ -88,9 +75,7 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(guy1.group.position);
         }
     };
-    const seq = scene.userData.seq = seqHooks.create(opt_seq);
-    console.log('frameMax for main seq: ' + seq.frameMax);
-    sm.frameMax = seq.frameMax;
+
     //-------- ----------
     // LOAD IMAGES
     //-------- ----------
@@ -99,6 +84,48 @@ VIDEO.init = function(sm, scene, camera){
         URLS: ['smile_sheet_128.png','smile_creepy_128.png']
     }).then( (textureObj) => {
         console.log(textureObj);
+        //-------- ----------
+        // MATERIALS
+        //-------- ----------
+        const material = helper.createMaterials();
+        material.body.color = new THREE.Color(1, 1, 1);
+        material.head = [
+            // 0 used for the face
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff, side: THREE.DoubleSide
+            }),
+            // 1 
+            new THREE.MeshLambertMaterial({
+                color: 0xffaf00, side: THREE.DoubleSide
+            }),
+            // 2 
+            new THREE.MeshLambertMaterial({
+                color: 0xffaf00, side: THREE.DoubleSide
+            }),
+            // 3 
+            new THREE.MeshLambertMaterial({
+                color: 0xffaf00, side: THREE.DoubleSide
+            }),
+            // 4 
+            new THREE.MeshLambertMaterial({
+                color: 0xffaf00, side: THREE.DoubleSide
+            }),
+            // 5 
+            new THREE.MeshLambertMaterial({
+                color: 0xffaf00, side: THREE.DoubleSide
+            })
+        ];
+        //-------- ----------
+        // create guy1
+        //-------- ----------
+        guy1 = helper.createGuyHScale(3, 5, 8, material);
+        scene.add(guy1.group);
+        //-------- ----------
+        // create main seq object
+        //-------- ----------
+        const seq = scene.userData.seq = seqHooks.create(opt_seq);
+        console.log('frameMax for main seq: ' + seq.frameMax);
+        sm.frameMax = seq.frameMax;
         return Promise.resolve('image list loaded!');
     });
 };
