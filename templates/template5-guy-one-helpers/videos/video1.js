@@ -4,6 +4,7 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
    '../../../js/guy/r0/guy.js',
+   '../../../js/texture/r0/texture.js',
    '../helpers.js' // <== Using a Video folder level helpers file
 ];
 // init
@@ -76,6 +77,16 @@ VIDEO.init = function(sm, scene, camera){
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
     console.log('frameMax for main seq: ' + seq.frameMax);
     sm.frameMax = seq.frameMax;
+    //-------- ----------
+    // LOAD IMAGES
+    //-------- ----------
+    return textureMod.load({
+        URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../img/smile/'),
+        URLS: ['smile_sheet_128.png','smile_creepy_128.png']
+    }).then( (textureObj) => {
+        console.log(textureObj);
+        return Promise.resolve('image list loaded!');
+    });
 };
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
