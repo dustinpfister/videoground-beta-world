@@ -2,26 +2,27 @@
     //-------- ----------
     // MATERIALS
     //-------- ----------
-    const material_leg = new THREE.MeshLambertMaterial({
-            color: 0x000000, emissive: 0x00001a, side: THREE.DoubleSide
-        });
+    const material = {};
+    material.leg = new THREE.MeshLambertMaterial({
+            color: 0x00aaff, side: THREE.DoubleSide
+    });
     // material used for the arms
-    const material_arm = new THREE.MeshLambertMaterial({
-            color: 0x00ffff, emissive: 0x001a00, side: THREE.DoubleSide
+    material.arm = new THREE.MeshLambertMaterial({
+            color: 0x00ff88, side: THREE.DoubleSide
         });
     // material used for the body
-    const material_body = new THREE.MeshLambertMaterial({
-            color: 0x00ffff, emissive: 0x001a00, side: THREE.DoubleSide
+    material.body = new THREE.MeshLambertMaterial({
+            color: 0x00ff88, side: THREE.DoubleSide
         });
     // array of materials used for the head
-    const material_head = [
+    material.head = [
         // 0 default material
         new THREE.MeshLambertMaterial({
-            color: 0xffaf00, emissive: 0x1a1a00, side: THREE.DoubleSide
+            color: 0xffaf00, side: THREE.DoubleSide
         }),
         // 1 used for the face
         new THREE.MeshLambertMaterial({
-            color: 0xffffff, emissive: 0x1a1a1a, side: THREE.DoubleSide
+            color: 0xffffff, side: THREE.DoubleSide
         })
     ];
     //-------- ----------
@@ -49,12 +50,12 @@
             }
         });
         // use materials in this file
-        guy.head.material = material_head.map( (m) => { return m.clone(); });
-        guy.body.material = material_body.clone();
-        guy.arm_left.material = material_arm.clone();
-        guy.arm_right.material = material_arm.clone();
-        guy.leg_right.material = material_leg.clone();
-        guy.leg_left.material = material_leg.clone();
+        guy.head.material = material.head.map( (m) => { return m.clone(); });
+        guy.body.material = material.body.clone();
+        guy.arm_left.material = material.arm.clone();
+        guy.arm_right.material = material.arm.clone();
+        guy.leg_right.material = material.leg.clone();
+        guy.leg_left.material = material.leg.clone();
         // using set to plain surface
         api.setGuyPos(guy);
         return guy;
