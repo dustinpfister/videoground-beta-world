@@ -14,7 +14,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const material = helper.createMaterials();
     material.body.color = new THREE.Color(1, 1, 1);
-
+/*
     materals.head = [
         // 0 default material
         new THREE.MeshLambertMaterial({
@@ -25,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
             color: 0xffffff, side: THREE.DoubleSide
         })
     ];
-
+*/
     const guy1 = helper.createGuyHScale(3, 5, 8, material);
     scene.add(guy1.group);
     //-------- ----------
