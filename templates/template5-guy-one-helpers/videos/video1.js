@@ -149,14 +149,16 @@ VIDEO.init = function(sm, scene, camera){
         const material = helper.createMaterials();
         material.body.color = new THREE.Color(1, 1, 1);
         // set up the head textures
-        setHeadTextures(canObj_head, [ 
+        setHeadTextures(canObj_head, [
+            ['face',   0, 0, 0, true],
             ['back',   2, 0, 1, false],
             ['left',   1, 0, 2, false], 
             ['right',  3, 0, 3, false],
             ['top',    0, 1, 4, false],
-            ['bottom', 1, 1, 5, false],
-            ['face',   0, 0, 0, true]
+            ['bottom', 1, 1, 5, false]
         ], 'smile_sheet_128');
+        // set face
+        setHeadCanvasTo(canObj_head, 1, 3, 'smile_sheet_128');
         //-------- ----------
         // create guy1
         //-------- ----------

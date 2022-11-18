@@ -3,11 +3,11 @@
 ## video1
 * (done) using sequence hooks r2, canvas r1, guyjs r0 and texture r0 
 * (done) using a helpers.js to put a lot of code that I am not going to want to repleat in each video file
+* (done) better methods for setting the texture of a face of the head cube
 
 * () use text-plane r0
 * () have a text plane in the scene
 
-* () better methods for setting the texture of a face of the head cube
 * () use creepy sheet and have a seq object in which it is used
 * () have a seq in which the guy is talking
 
