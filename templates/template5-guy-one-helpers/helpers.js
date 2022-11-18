@@ -45,7 +45,33 @@
         return material;
     };
     //-------- ----------
-    // GUY ONE R0 HELPERS
+    // CANVAS HEAD
+    //-------- ----------
+        // draw from sheet method
+        const drawFromSheet = (canObj, ctx, canvas, state) => {
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            const img = state.textureObj[state.key].image;
+            const sx = state.xi * 32;
+            const sy = state.yi * 32;
+            ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
+        };
+    api.createCanvasHead = (textureObj) => {
+        // create the canvas object
+        const canObj_head = canvasMod.create({
+            size: 32,
+            update_mode: 'canvas',
+            state: {
+                textureObj: textureObj,
+                key: 'smile_sheet_128',
+                xi: 1, yi: 0
+            },
+            draw: drawFromSheet
+        });
+        return canObj_head;
+    };
+    //-------- ----------
+    // CREATE A GUY
     //-------- ----------
     // create guy helper
     api.createGuy = (scale, maxUnitDelta, maxRotation, material) => {
@@ -93,6 +119,9 @@
         const guy = api.createGuy(HScale * scale_h1, maxUnitDelta, maxRotation, materials);
         return guy;
     };
+    //-------- ----------
+    // GET SIZE, SET POS AND ROTATION
+    //-------- ----------
     // get guy size helper
     api.getGuySize = (guy) => {
         const b3 = new THREE.Box3();
@@ -121,6 +150,9 @@
         }
         guy.group.lookAt( v3 );
     };
+    //-------- ----------
+    // EFFECTS
+    //-------- ----------
     // update guy method
     // EFFECT 1
     const EFFECT1 = (ti, pi, v_pos_home, globalAlpha, mesh, group, mud, gud, v_delta) => {

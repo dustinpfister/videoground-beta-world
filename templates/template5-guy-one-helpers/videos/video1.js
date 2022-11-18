@@ -93,27 +93,9 @@ VIDEO.init = function(sm, scene, camera){
     }).then( (textureObj) => {
         //-------- ----------
         // TEXTURES
-        //-------- ----------
-        // draw from sheet method
-        const drawFromSheet = (canObj, ctx, canvas, state) => {
-            ctx.fillStyle = 'black';
-            ctx.fillRect(0,0, canvas.width, canvas.height);
-            const img = state.textureObj[state.key].image;
-            const sx = state.xi * 32;
-            const sy = state.yi * 32;
-            ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
-        };
-        // create the canvas object
-        const canObj_head = canvasMod.create({
-            size: 32,
-            update_mode: 'canvas',
-            state: {
-                textureObj: textureObj,
-                key: 'smile_sheet_128',
-                xi: 1, yi: 0
-            },
-            draw: drawFromSheet
-        });
+        //-------- ---------
+        const canObj_head = helper.createCanvasHead(textureObj);
+
         // create a new canvas texture from the current state of the given canvas element
         const copyCanvas = (canvas_source) => {
              const canvas_new = document.createElement('canvas');
@@ -123,6 +105,7 @@ VIDEO.init = function(sm, scene, camera){
              ctx.drawImage(canvas_source, 0, 0, canvas_new.width, canvas_new.height);
              return new THREE.CanvasTexture(canvas_new);
         };
+
         //-------- ----------
         // MATERIALS
         //-------- ----------
