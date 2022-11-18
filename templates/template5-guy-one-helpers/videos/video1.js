@@ -18,9 +18,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // LIGHT
     //-------- ----------
-    const pl = new THREE.PointLight(0xffffff, 1);
-    pl.position.set(3, 1, 2);
-    scene.add(pl);
+    const dl = new THREE.DirectionalLight(0xffffff, 1);
+    dl.position.set(3, 1, 2);
+    scene.add(dl);
     const al = new THREE.AmbientLight(0xffffff, 0.25);
     scene.add(al);
     //-------- ----------
@@ -91,8 +91,8 @@ guy1.moveHead(seq.per * 4)
         //-------- ----------
         // draw from sheet method
         const drawFromSheet = (canObj, ctx, canvas, state) => {
-            //ctx.fillStyle = 'black';
-            //ctx.fillRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0,0, canvas.width, canvas.height);
             const img = state.textureObj[state.key].image;
             const sx = state.xi * 32;
             const sy = state.yi * 32;
@@ -173,7 +173,7 @@ guy1.moveHead(seq.per * 4)
             }),
             // 4 
             new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_bottom
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_top
             }),
             // 5 
             new THREE.MeshLambertMaterial({
