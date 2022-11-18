@@ -135,52 +135,24 @@ VIDEO.init = function(sm, scene, camera){
             canvasMod.update(canObj_head);
         };
         // create textures from canvas
-        // HEAD LEFT
-        setHeadCanvasTo(canObj_head, 1, 0, 'smile_sheet_128');
-        const texture_head_left = copyCanvas(canObj_head.canvas);
-        // HEAD BACK
-        setHeadCanvasTo(canObj_head, 2, 0, 'smile_sheet_128');
-        const texture_head_back = copyCanvas(canObj_head.canvas);
-        // HEAD RIGHT
-        setHeadCanvasTo(canObj_head, 3, 0, 'smile_sheet_128');
-        const texture_head_right = copyCanvas(canObj_head.canvas);
-        // HEAD TOP
-        setHeadCanvasTo(canObj_head, 0, 1, 'smile_sheet_128');
-        const texture_head_top = copyCanvas(canObj_head.canvas);
-        // HEAD BOTTOM
-        setHeadCanvasTo(canObj_head, 1, 1, 'smile_sheet_128');
-        const texture_head_bottom = copyCanvas(canObj_head.canvas);
-        // HEAD FACE
-        setHeadCanvasTo(canObj_head, 0, 0, 'smile_sheet_128');
-        const texture_head_face = canObj_head.texture;
         const material = helper.createMaterials();
         material.body.color = new THREE.Color(1, 1, 1);
-        material.head = [
-            // 0 used for the face
-            new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_face
-            }),
-            // 1 
-            new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_back
-            }),
-            // 2 
-            new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_left
-            }),
-            // 3 
-            new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_right
-            }),
-            // 4 
-            new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_top
-            }),
-            // 5 
-            new THREE.MeshLambertMaterial({
-                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_bottom
-            })
-        ];
+        [ 
+          ['back', 2, 0, 1],
+          ['left', 1, 0, 2], 
+          ['right', 3, 0, 3],
+          ['top', 0, 1, 4],
+          ['bottom', 1, 1, 5],
+          ['face', 0, 0, 0, true]
+        ].forEach( (fd) => {
+            setHeadCanvasTo(canObj_head, fd[1], fd[2], 'smile_sheet_128');
+            const m = material.head[ fd[3] ];
+            if(fd[4]){
+                m.map = canObj_head.texture;
+            }else{
+                m.map = copyCanvas(canObj_head.canvas);
+            }
+        });
         //-------- ----------
         // create guy1
         //-------- ----------
