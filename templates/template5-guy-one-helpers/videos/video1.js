@@ -134,25 +134,29 @@ VIDEO.init = function(sm, scene, camera){
             state.key = key || state.key;
             canvasMod.update(canObj_head);
         };
+        const setHeadTextures = (canObj_head, faceData, sheetKey) => {
+            faceData.forEach( (fd) => {
+                setHeadCanvasTo(canObj_head, fd[1], fd[2], sheetKey);
+                const m = material.head[ fd[3] ];
+                if(fd[4]){
+                    m.map = canObj_head.texture;
+                }else{
+                    m.map = copyCanvas(canObj_head.canvas);
+                }
+            });
+        };
         // create textures from canvas
         const material = helper.createMaterials();
         material.body.color = new THREE.Color(1, 1, 1);
-        [ 
-          ['back', 2, 0, 1],
-          ['left', 1, 0, 2], 
-          ['right', 3, 0, 3],
-          ['top', 0, 1, 4],
-          ['bottom', 1, 1, 5],
-          ['face', 0, 0, 0, true]
-        ].forEach( (fd) => {
-            setHeadCanvasTo(canObj_head, fd[1], fd[2], 'smile_sheet_128');
-            const m = material.head[ fd[3] ];
-            if(fd[4]){
-                m.map = canObj_head.texture;
-            }else{
-                m.map = copyCanvas(canObj_head.canvas);
-            }
-        });
+        // set up the head textures
+        setHeadTextures(canObj_head, [ 
+            ['back',   2, 0, 1, false],
+            ['left',   1, 0, 2, false], 
+            ['right',  3, 0, 3, false],
+            ['top',    0, 1, 4, false],
+            ['bottom', 1, 1, 5, false],
+            ['face',   0, 0, 0, true]
+        ], 'smile_sheet_128');
         //-------- ----------
         // create guy1
         //-------- ----------
