@@ -19,9 +19,9 @@ VIDEO.init = function(sm, scene, camera){
     // LIGHT
     //-------- ----------
     const pl = new THREE.PointLight(0xffffff, 1);
-    pl.position.set(3, 2, 1);
+    pl.position.set(3, 1, 2);
     scene.add(pl);
-    const al = new THREE.AmbientLight(0xffffff, 0.15);
+    const al = new THREE.AmbientLight(0xffffff, 0.25);
     scene.add(al);
     //-------- ----------
     // BACKGROUND
@@ -44,7 +44,7 @@ VIDEO.init = function(sm, scene, camera){
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-            camera.position.set(5, 5, 5);
+            camera.position.set(2, 5, 2);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
 
@@ -91,8 +91,8 @@ guy1.moveHead(seq.per * 4)
         //-------- ----------
         // draw from sheet method
         const drawFromSheet = (canObj, ctx, canvas, state) => {
-            ctx.fillStyle = 'black';
-            ctx.fillRect(0,0, canvas.width, canvas.height);
+            //ctx.fillStyle = 'black';
+            //ctx.fillRect(0,0, canvas.width, canvas.height);
             const img = state.textureObj[state.key].image;
             const sx = state.xi * 32;
             const sy = state.yi * 32;
@@ -121,14 +121,32 @@ guy1.moveHead(seq.per * 4)
         // create textures from canvas
         // HEAD LEFT
         canObj_face.state.xi = 1;
+        canObj_face.state.yi = 0;
         canvasMod.update(canObj_face);
         const texture_head_left = copyCanvas(canObj_face.canvas);
         // HEAD BACK
         canObj_face.state.xi = 2;
+        canObj_face.state.yi = 0;
         canvasMod.update(canObj_face);
         const texture_head_back = copyCanvas(canObj_face.canvas);
+        // HEAD RIGHT
+        canObj_face.state.xi = 3;
+        canObj_face.state.yi = 0;
+        canvasMod.update(canObj_face);
+        const texture_head_right = copyCanvas(canObj_face.canvas);
+        // HEAD TOP
+        canObj_face.state.xi = 0;
+        canObj_face.state.yi = 1;
+        canvasMod.update(canObj_face);
+        const texture_head_top = copyCanvas(canObj_face.canvas);
+        // HEAD BOTTOM
+        canObj_face.state.xi = 1;
+        canObj_face.state.yi = 1;
+        canvasMod.update(canObj_face);
+        const texture_head_bottom = copyCanvas(canObj_face.canvas);
         // HEAD FACE
         canObj_face.state.xi = 0;
+        canObj_face.state.yi = 0;
         canvasMod.update(canObj_face);
         const texture_head_face = canObj_face.texture;
         //-------- ----------
@@ -143,23 +161,23 @@ guy1.moveHead(seq.per * 4)
             }),
             // 1 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide, map: texture_head_back
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_back
             }),
             // 2 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide, map: texture_head_left
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_left
             }),
             // 3 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_right
             }),
             // 4 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_bottom
             }),
             // 5 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide
+                color: 0xffffff, side: THREE.DoubleSide, map: texture_head_bottom
             })
         ];
         //-------- ----------
