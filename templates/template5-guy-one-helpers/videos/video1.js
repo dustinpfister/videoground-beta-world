@@ -47,6 +47,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
+
+guy1.moveHead(seq.per * 4)
+
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
@@ -120,6 +123,10 @@ VIDEO.init = function(sm, scene, camera){
         canObj_face.state.xi = 1;
         canvasMod.update(canObj_face);
         const texture_head_left = copyCanvas(canObj_face.canvas);
+        // HEAD BACK
+        canObj_face.state.xi = 2;
+        canvasMod.update(canObj_face);
+        const texture_head_back = copyCanvas(canObj_face.canvas);
         // HEAD FACE
         canObj_face.state.xi = 0;
         canvasMod.update(canObj_face);
@@ -136,7 +143,7 @@ VIDEO.init = function(sm, scene, camera){
             }),
             // 1 
             new THREE.MeshLambertMaterial({
-                color: 0xffaf00, side: THREE.DoubleSide
+                color: 0xffaf00, side: THREE.DoubleSide, map: texture_head_back
             }),
             // 2 
             new THREE.MeshLambertMaterial({
