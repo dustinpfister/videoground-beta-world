@@ -47,15 +47,24 @@
     //-------- ----------
     // CANVAS HEAD
     //-------- ----------
-        // draw from sheet method
-        const drawFromSheet = (canObj, ctx, canvas, state) => {
-            ctx.fillStyle = 'black';
-            ctx.fillRect(0,0, canvas.width, canvas.height);
-            const img = state.textureObj[state.key].image;
-            const sx = state.xi * 32;
-            const sy = state.yi * 32;
-            ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
-        };
+    // draw from sheet method
+    const drawFromSheet = (canObj, ctx, canvas, state) => {
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0,0, canvas.width, canvas.height);
+        const img = state.textureObj[state.key].image;
+        const sx = state.xi * 32;
+        const sy = state.yi * 32;
+        ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
+    };
+    // set the head canvas to the given cell index in the given sheet key
+    api.setHeadCanvasTo = (canObj_head, xi, yi, key) => {
+        const state = canObj_head.state;
+        state.xi = xi;
+        state.yi = yi;
+        state.key = key || state.key;
+        canvasMod.update(canObj_head);
+    };
+    // create a canvasObj for the head
     api.createCanvasHead = (textureObj) => {
         // create the canvas object
         const canObj_head = canvasMod.create({

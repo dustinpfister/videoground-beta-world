@@ -105,21 +105,12 @@ VIDEO.init = function(sm, scene, camera){
              ctx.drawImage(canvas_source, 0, 0, canvas_new.width, canvas_new.height);
              return new THREE.CanvasTexture(canvas_new);
         };
-
         //-------- ----------
         // MATERIALS
         //-------- ----------
-        // set the head canvas to the given cell index in the given sheet key
-        const setHeadCanvasTo = (canObj_head, xi, yi, key) => {
-            const state = canObj_head.state;
-            state.xi = xi;
-            state.yi = yi;
-            state.key = key || state.key;
-            canvasMod.update(canObj_head);
-        };
         const setHeadTextures = (canObj_head, faceData, sheetKey) => {
             faceData.forEach( (fd) => {
-                setHeadCanvasTo(canObj_head, fd[1], fd[2], sheetKey);
+                helper.setHeadCanvasTo(canObj_head, fd[1], fd[2], sheetKey);
                 const m = material.head[ fd[3] ];
                 if(fd[4]){
                     m.map = canObj_head.texture;
@@ -141,7 +132,7 @@ VIDEO.init = function(sm, scene, camera){
             ['bottom', 1, 1, 5, false]
         ], 'smile_sheet_128');
         // set face
-        setHeadCanvasTo(canObj_head, 1, 3, 'smile_sheet_128');
+        helper.setHeadCanvasTo(canObj_head, 1, 3, 'smile_sheet_128');
         //-------- ----------
         // create guy1
         //-------- ----------
