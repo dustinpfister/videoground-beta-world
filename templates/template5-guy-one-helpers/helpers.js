@@ -4,41 +4,41 @@
     //-------- ----------
     api.createMaterials = () => {
         const material = {};
-        material.leg = new THREE.MeshLambertMaterial({
+        material.leg = new THREE.MeshPhongMaterial({
                 color: 0x00aaff, side: THREE.DoubleSide
         });
         // material used for the arms
-        material.arm = new THREE.MeshLambertMaterial({
+        material.arm = new THREE.MeshPhongMaterial({
                 color: 0x00ff88, side: THREE.DoubleSide
             });
         // material used for the body
-        material.body = new THREE.MeshLambertMaterial({
+        material.body = new THREE.MeshPhongMaterial({
                 color: 0x00ff88, side: THREE.DoubleSide
             });
         // array of materials used for the head
         material.head = [
             // 0 face
-            new THREE.MeshLambertMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffaf00, side: THREE.DoubleSide
             }),
             // 1
-            new THREE.MeshLambertMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffffff, side: THREE.DoubleSide
             }),
             // 2
-            new THREE.MeshLambertMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffffff, side: THREE.DoubleSide
             }),
             // 3
-            new THREE.MeshLambertMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffffff, side: THREE.DoubleSide
             }),
             // 4
-            new THREE.MeshLambertMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffffff, side: THREE.DoubleSide
             }),
             // 5
-            new THREE.MeshLambertMaterial({
+            new THREE.MeshPhongMaterial({
                 color: 0xffffff, side: THREE.DoubleSide
             })
         ];
