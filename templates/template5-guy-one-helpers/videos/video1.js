@@ -104,7 +104,7 @@ VIDEO.init = function(sm, scene, camera){
             ctx.drawImage(img, sx, sy, 32, 32, 0, 0, 32, 32);
         };
         // create the canvas object
-        const canObj_face = canvasMod.create({
+        const canObj_head = canvasMod.create({
             size: 32,
             update_mode: 'canvas',
             state: {
@@ -123,40 +123,43 @@ VIDEO.init = function(sm, scene, camera){
              ctx.drawImage(canvas_source, 0, 0, canvas_new.width, canvas_new.height);
              return new THREE.CanvasTexture(canvas_new);
         };
-        // create textures from canvas
-        // HEAD LEFT
-        canObj_face.state.xi = 1;
-        canObj_face.state.yi = 0;
-        canvasMod.update(canObj_face);
-        const texture_head_left = copyCanvas(canObj_face.canvas);
-        // HEAD BACK
-        canObj_face.state.xi = 2;
-        canObj_face.state.yi = 0;
-        canvasMod.update(canObj_face);
-        const texture_head_back = copyCanvas(canObj_face.canvas);
-        // HEAD RIGHT
-        canObj_face.state.xi = 3;
-        canObj_face.state.yi = 0;
-        canvasMod.update(canObj_face);
-        const texture_head_right = copyCanvas(canObj_face.canvas);
-        // HEAD TOP
-        canObj_face.state.xi = 0;
-        canObj_face.state.yi = 1;
-        canvasMod.update(canObj_face);
-        const texture_head_top = copyCanvas(canObj_face.canvas);
-        // HEAD BOTTOM
-        canObj_face.state.xi = 1;
-        canObj_face.state.yi = 1;
-        canvasMod.update(canObj_face);
-        const texture_head_bottom = copyCanvas(canObj_face.canvas);
-        // HEAD FACE
-        canObj_face.state.xi = 0;
-        canObj_face.state.yi = 0;
-        canvasMod.update(canObj_face);
-        const texture_head_face = canObj_face.texture;
         //-------- ----------
         // MATERIALS
         //-------- ----------
+
+
+
+        // create textures from canvas
+        // HEAD LEFT
+        canObj_head.state.xi = 1;
+        canObj_head.state.yi = 0;
+        canvasMod.update(canObj_head);
+        const texture_head_left = copyCanvas(canObj_head.canvas);
+        // HEAD BACK
+        canObj_head.state.xi = 2;
+        canObj_head.state.yi = 0;
+        canvasMod.update(canObj_head);
+        const texture_head_back = copyCanvas(canObj_head.canvas);
+        // HEAD RIGHT
+        canObj_head.state.xi = 3;
+        canObj_head.state.yi = 0;
+        canvasMod.update(canObj_head);
+        const texture_head_right = copyCanvas(canObj_head.canvas);
+        // HEAD TOP
+        canObj_head.state.xi = 0;
+        canObj_head.state.yi = 1;
+        canvasMod.update(canObj_head);
+        const texture_head_top = copyCanvas(canObj_head.canvas);
+        // HEAD BOTTOM
+        canObj_head.state.xi = 1;
+        canObj_head.state.yi = 1;
+        canvasMod.update(canObj_head);
+        const texture_head_bottom = copyCanvas(canObj_head.canvas);
+        // HEAD FACE
+        canObj_head.state.xi = 0;
+        canObj_head.state.yi = 0;
+        canvasMod.update(canObj_head);
+        const texture_head_face = canObj_head.texture;
         const material = helper.createMaterials();
         material.body.color = new THREE.Color(1, 1, 1);
         material.head = [
