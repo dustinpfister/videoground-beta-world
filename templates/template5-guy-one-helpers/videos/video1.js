@@ -13,8 +13,6 @@ VIDEO.init = function(sm, scene, camera){
     // GUY
     //-------- ----------
     let guy1 = {}; 
-
-
     //-------- ----------
     // LIGHT
     //-------- ----------
@@ -47,7 +45,6 @@ VIDEO.init = function(sm, scene, camera){
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
-
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
@@ -92,7 +89,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     return textureMod.load({
         URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../img/smile/'),
-        URLS: ['smile_sheet_128.png','smile_creepy_128.png']
+        URLS: ['smile_sheet_128.png']
     }).then( (textureObj) => {
         //-------- ----------
         // TEXTURES
