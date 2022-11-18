@@ -126,39 +126,32 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // MATERIALS
         //-------- ----------
-
-
-
+        // set the head canvas to the given cell index in the given sheet key
+        const setHeadCanvasTo = (canObj_head, xi, yi, key) => {
+            const state = canObj_head.state;
+            state.xi = xi;
+            state.yi = yi;
+            state.key = key || state.key;
+            canvasMod.update(canObj_head);
+        };
         // create textures from canvas
         // HEAD LEFT
-        canObj_head.state.xi = 1;
-        canObj_head.state.yi = 0;
-        canvasMod.update(canObj_head);
+        setHeadCanvasTo(canObj_head, 1, 0, 'smile_sheet_128');
         const texture_head_left = copyCanvas(canObj_head.canvas);
         // HEAD BACK
-        canObj_head.state.xi = 2;
-        canObj_head.state.yi = 0;
-        canvasMod.update(canObj_head);
+        setHeadCanvasTo(canObj_head, 2, 0, 'smile_sheet_128');
         const texture_head_back = copyCanvas(canObj_head.canvas);
         // HEAD RIGHT
-        canObj_head.state.xi = 3;
-        canObj_head.state.yi = 0;
-        canvasMod.update(canObj_head);
+        setHeadCanvasTo(canObj_head, 3, 0, 'smile_sheet_128');
         const texture_head_right = copyCanvas(canObj_head.canvas);
         // HEAD TOP
-        canObj_head.state.xi = 0;
-        canObj_head.state.yi = 1;
-        canvasMod.update(canObj_head);
+        setHeadCanvasTo(canObj_head, 0, 1, 'smile_sheet_128');
         const texture_head_top = copyCanvas(canObj_head.canvas);
         // HEAD BOTTOM
-        canObj_head.state.xi = 1;
-        canObj_head.state.yi = 1;
-        canvasMod.update(canObj_head);
+        setHeadCanvasTo(canObj_head, 1, 1, 'smile_sheet_128');
         const texture_head_bottom = copyCanvas(canObj_head.canvas);
         // HEAD FACE
-        canObj_head.state.xi = 0;
-        canObj_head.state.yi = 0;
-        canvasMod.update(canObj_head);
+        setHeadCanvasTo(canObj_head, 0, 0, 'smile_sheet_128');
         const texture_head_face = canObj_head.texture;
         const material = helper.createMaterials();
         material.body.color = new THREE.Color(1, 1, 1);
