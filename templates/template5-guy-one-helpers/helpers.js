@@ -79,6 +79,27 @@
         });
         return canObj_head;
     };
+    // create a new canvas texture from the current state of the given canvas element
+    const copyCanvas = (canvas_source) => {
+         const canvas_new = document.createElement('canvas');
+         const ctx = canvas_new.getContext('2d');
+         canvas_new.width = canvas_source.width;
+         canvas_new.height = canvas_source.height;
+         ctx.drawImage(canvas_source, 0, 0, canvas_new.width, canvas_new.height);
+         return new THREE.CanvasTexture(canvas_new);
+    };
+    // set up the head textures
+    api.setHeadTextures = (canObj_head, faceData, material, sheetKey) => {
+        faceData.forEach( (fd) => {
+            api.setHeadCanvasTo(canObj_head, fd[1], fd[2], sheetKey);
+            const m = material.head[ fd[3] ];
+            if(fd[4]){
+                m.map = canObj_head.texture;
+            }else{
+                m.map = copyCanvas(canObj_head.canvas);
+            }
+        });
+    };
     //-------- ----------
     // CREATE A GUY
     //-------- ----------
