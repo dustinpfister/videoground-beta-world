@@ -44,11 +44,9 @@ VIDEO.init = function(sm, scene, camera){
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-            camera.position.set(2, 5, 2);
+            camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
-
-guy1.moveHead(seq.per * 4)
 
         },
         afterObjects: function(seq){
@@ -61,7 +59,10 @@ guy1.moveHead(seq.per * 4)
         secs: 3,
         update: function(seq, partPer, partBias){
             // update guy1
-            //helper.updateGuyEffect(guy1, 0);
+            helper.updateGuyEffect(guy1, 0);
+            guy1.moveHead(1 / 8 * partPer);
+            guy1.walk(1 / 4 * 0.25 + partPer, 4);
+            
         }
      };
     // SEQ 1 - ...
@@ -73,9 +74,11 @@ guy1.moveHead(seq.per * 4)
         update: function(seq, partPer, partBias){
             // update guy1
             //helper.updateGuyEffect(guy1, seq.getSinBias(1));
+            guy1.moveHead(1 / 8);
+            guy1.walk(1 / 2 * 0.25, 2);
             // camera
-            //seq.copyPos('campos', camera);
-            //camera.lookAt(guy1.group.position);
+            seq.copyPos('campos', camera);
+            camera.lookAt(guy1.group.position);
         }
     };
 
