@@ -16,13 +16,21 @@
 * (done) have a text plane in the scene
 * (done) good starting location and rotation of text plane
 * (done) see about adjusting text size without using a lower or higher canvas size
+* (done) use creepy sheet
+* (done) have a guy helper that I can use to define and play an animation of cells
 
 <!-- guy -->
-* (done) use creepy sheet
-* () have a guy helper that I can use to define and play an animation of cells
 * () have a seq in which the guy is talking
 
 * () set body texture helper
+
+<!--  seq objects -->
+* () seq0 - have the guy walk from the side of the scene to the center with a fixed face
+* () seq1 - cam moves in closer, head turns
+* () seq2 - head talk
+* () seq3 - creepy smile
+* () seq4 - camera moves out
+* () seq5 - effect demo
 
 <!-- curve.js -->
 * () add curve.js r0 as one of the javaScript modules used for this template
