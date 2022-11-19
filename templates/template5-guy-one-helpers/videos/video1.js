@@ -142,7 +142,6 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(guy1.group.position);
         }
     };
-
     //-------- ----------
     // LOAD IMAGES
     //-------- ----------

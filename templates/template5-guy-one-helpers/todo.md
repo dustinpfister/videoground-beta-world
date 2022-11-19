@@ -17,13 +17,20 @@
 * (done) good starting location and rotation of text plane
 * (done) see about adjusting text size without using a lower or higher canvas size
 
-* () use creepy sheet and have a seq object in which it is used
+<!-- guy -->
+* (done) use creepy sheet
+* () have a guy helper that I can use to define and play an animation of cells
 * () have a seq in which the guy is talking
 
+* () set body texture helper
+
+<!-- curve.js -->
 * () add curve.js r0 as one of the javaScript modules used for this template
 * () remove path tools from helpers.js as I am now using curvejs
 
+<!-- WORLD OBJECTS -->
 * () have a DAE file to place and addtional objects that will be the typical scene for all these videos
+
 
 <!-- only do this when helpers.js is solid -->
 * () have a text-plane-helpers.js file in the r0 folder for r0 of text-plane.
