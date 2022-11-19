@@ -128,12 +128,20 @@ VIDEO.init = function(sm, scene, camera){
             GUYANI.static1( 0 );
         }
      };
-    // SEQ1 - 
+    // SEQ1 - camera moves in closer and looks at head rather than body, head turns
     opt_seq.objects[1] = {
         secs: 3,
         update: function(seq, partPer, partBias){
             // GUY1
+            guy1.moveHead(1 / 8 * partPer);
             GUYANI.static1( 0 );
+            // CAMERA
+            const a = 5 - 3 * partPer;
+            camera.position.set(a, a, a);
+            const v1 = guy1.group.position.clone();
+            const v2 = new THREE.Vector3();
+            guy1.head.getWorldPosition(v2);
+            camera.lookAt( v1.lerp(v2, partPer) );
         }
      };
 
