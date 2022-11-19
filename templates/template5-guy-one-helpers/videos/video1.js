@@ -150,7 +150,7 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
-            GUYANI.talk( seq.getBias( 8 ) );
+            GUYANI.talk( seq.getBias( 16 ) );
             // CAMERA
             camera.position.set(2, 2, 2);
             const v2 = new THREE.Vector3();
