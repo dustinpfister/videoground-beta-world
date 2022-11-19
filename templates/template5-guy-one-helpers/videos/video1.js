@@ -6,7 +6,7 @@ VIDEO.scripts = [
    '../../../js/canvas-text-plane/r0/text-plane.js',
    '../../../js/guy/r0/guy.js',
    '../../../js/texture/r0/texture.js',
-   '../helpers.js' // <== Using a Video folder level helpers file
+   '../guy-helpers.js' // <== Using a Video folder level helpers file
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
