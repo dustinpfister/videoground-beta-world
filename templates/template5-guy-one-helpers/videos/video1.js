@@ -23,8 +23,8 @@ VIDEO.init = function(sm, scene, camera){
         rows: 10, size: 256,
         palette: ['rgba(0,255,255,0.2)', 'black', 'black']
     });
-    plane_text.position.set(0, 0, 0);
-    plane_text.rotation.set(0, Math.PI * 0.5, 0);
+    plane_text.position.set(-2, 2, 0);
+    plane_text.rotation.set(0, Math.PI / 180 * 45, 0);
     scene.add(plane_text);
     // update
     let alpha = 0;
