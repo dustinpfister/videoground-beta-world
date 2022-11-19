@@ -16,7 +16,7 @@ I have made an electron.js powered program that I aim to use to make little vide
 
 The current idea for this beta world collection of content is to just use this is a general collection of experimental content to gain a better sense of what I like to make with videoground. I have a lot of general ideas for content and as such I just need a place to park what I have together with these ideas. If something works in terms of intrinsic value, or external interest maybe I will start a stand alone collection for that, otherwise it will remain here.
 
-Another thing that I would like to do is focus more so on content rather than tools. What I mean by that is thus far my other collection of content here on github has to do with making little demos videos for my various blog posts on threejs. So these are videos that just demo threejs feature in the core of the librray, as well as my various javaScript projects that built on top of threejs. So the focus is on the tools that are made to create content rather than on content itself. So with the beta world collection of videos I would like to focus more so on what can be done with a tool rather than the tool itself.
+Thus far my other collection of content on Github has to do with making little demos videos for my various blog posts on threejs. So these are videos that just demo threejs feature in the core of the librray, as well as my various javaScript projects that built on top of threejs. So the focus is on the tools that are made to create content rather than on content itself.
 
 ## The Original general idea of 'Beta World'
 
