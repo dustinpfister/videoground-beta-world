@@ -118,7 +118,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // SEQ0 - demo of guy walking with fixed face
     opt_seq.objects[0] = {
-        secs: 3,
+        secs: 5,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.walk(1 / 4 * 0.25 + partPer, 4);
@@ -130,7 +130,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // SEQ1 - camera moves in closer and looks at head rather than body, head turns
     opt_seq.objects[1] = {
-        secs: 3,
+        secs: 2,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8 * partPer);
@@ -146,7 +146,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // SEQ2 - head talks
     opt_seq.objects[2] = {
-        secs: 3,
+        secs: 5,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
@@ -174,7 +174,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // SEQ4 - camera moves out
     opt_seq.objects[4] = {
-        secs: 3,
+        secs: 2,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
@@ -188,29 +188,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt( v1.lerp(v2, partPer) );
         }
     };
-
-
-/*
-    // SEQ 0 - ...
-    opt_seq.objects[0] = {
-        secs: 3,
-        update: function(seq, partPer, partBias){
-            // GUY1
-            helper.updateGuyEffect(guy1, 0);
-            guy1.moveHead(1 / 8 * partPer);
-            guy1.walk(1 / 4 * 0.25 + partPer, 4);
-            const v3_guypos = new THREE.Vector3();
-            v3_guypos.z = -5 + 5 * partPer;
-            helper.setGuyPos(guy1, v3_guypos);
-            // smile
-            GUYANI.talk( seq.getBias(8) );
-            // TEXT
-            updateText(plane_text, partPer, 0);
-        }
-     };
-    // SEQ 1 - ...
-    opt_seq.objects[1] = {
-        secs: 27,
+    // SEQ 4 - EFFECT DEMO
+    opt_seq.objects[5] = {
+        secs: 13,
         v3Paths: [
             { key: 'campos', array: v3Array_campos, lerp: true }
         ],
@@ -218,19 +198,14 @@ VIDEO.init = function(sm, scene, camera){
             // GUY1
             helper.updateGuyEffect(guy1, seq.getSinBias(1));
             guy1.moveHead(1 / 8);
-            guy1.walk(1 / 2 * 0.25, 2);
+            GUYANI.smile_creepy( 1 );
             const v3_guypos = new THREE.Vector3();
             helper.setGuyPos(guy1, v3_guypos);
-            // smile
-            GUYANI.smile_creepy( 1 );
-            // TEXT
-            updateText(plane_text, partPer, 1);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(guy1.group.position);
         }
     };
-*/
     //-------- ----------
     // LOAD IMAGES
     //-------- ----------
