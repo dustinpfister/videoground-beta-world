@@ -143,7 +143,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.head.getWorldPosition(v2);
             camera.lookAt( v1.lerp(v2, partPer) );
         }
-     };
+    };
     // SEQ2 - head talks
     opt_seq.objects[2] = {
         secs: 3,
@@ -157,21 +157,37 @@ VIDEO.init = function(sm, scene, camera){
             guy1.head.getWorldPosition(v2);
             camera.lookAt( v2);
         }
-     };
+    };
     // SEQ3 - creepy smile
     opt_seq.objects[3] = {
         secs: 3,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
-            GUYANI.smile_creepy( partPer);
+            GUYANI.smile_creepy( partPer );
             // CAMERA
             camera.position.set(2, 2, 2);
             const v2 = new THREE.Vector3();
             guy1.head.getWorldPosition(v2);
             camera.lookAt( v2);
         }
-     };
+    };
+    // SEQ4 - camera moves out
+    opt_seq.objects[4] = {
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            // GUY1
+            guy1.moveHead(1 / 8);
+            GUYANI.smile_creepy( 1 );
+            // CAMERA
+            const a = 2 + 3 * partPer;
+            camera.position.set(a, a, a);
+            const v1 = new THREE.Vector3();
+            guy1.head.getWorldPosition(v1);
+            const v2 = guy1.group.position.clone();
+            camera.lookAt( v1.lerp(v2, partPer) );
+        }
+    };
 
 
 /*
