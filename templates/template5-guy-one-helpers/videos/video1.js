@@ -13,17 +13,21 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // TEXT PLANE HELPERS
     //-------- ----------
-    const setLineSize = (plane_text, pxSize ) => {
+    const setLineStyle = (plane_text, pxSize, font ) => {
         const state = plane_text.userData.canObj.state;
         state.lines.forEach((line)=>{
             line.fs = pxSize + 'px';
+            line.f = font || 'arial';
         })
     };
     //-------- ----------
     // TEXT and textLines
     //-------- ----------
+    const TEXT_PXSIZE = 40;
+    const TEXT_CHAR_PER_LINE = 9;
+    const TEXT_STARTY = 60;
     const text2 = 'Hello, this is a video on something called the 3D! In other words there are three things of interest here.'
-    const textLines = TextPlane.createTextLines(text2, 8);
+    const textLines = TextPlane.createTextLines(text2, TEXT_CHAR_PER_LINE);
     //-------- ----------
     // TEXT PLANE
     //-------- ----------
@@ -35,12 +39,12 @@ VIDEO.init = function(sm, scene, camera){
     plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 45, 0);
     scene.add(plane_text);
-    // set the line size
-    setLineSize(plane_text, 60);
+    // Set Line Style 
+    setLineStyle(plane_text, TEXT_PXSIZE, 'courier');
 
  
     // move the text lines ( lines, testLines, alpha, startY, deltaY )
-    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, 0, 60, 60);
+    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, 0, TEXT_STARTY, TEXT_PXSIZE);
     // update the canave
     canvasMod.update(plane_text.userData.canObj);
     //-------- ----------
