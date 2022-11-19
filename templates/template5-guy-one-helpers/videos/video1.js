@@ -127,7 +127,7 @@ VIDEO.init = function(sm, scene, camera){
             helper.setGuyPos(guy1, v3_guypos);
             GUYANI.static1( 0 );
         }
-     };
+    };
     // SEQ1 - camera moves in closer and looks at head rather than body, head turns
     opt_seq.objects[1] = {
         secs: 3,
@@ -142,6 +142,20 @@ VIDEO.init = function(sm, scene, camera){
             const v2 = new THREE.Vector3();
             guy1.head.getWorldPosition(v2);
             camera.lookAt( v1.lerp(v2, partPer) );
+        }
+     };
+    // SEQ2 - head talks
+    opt_seq.objects[2] = {
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            // GUY1
+            guy1.moveHead(1 / 8);
+            GUYANI.talk( seq.getBias( 8 ) );
+            // CAMERA
+            camera.position.set(2, 2, 2);
+            const v2 = new THREE.Vector3();
+            guy1.head.getWorldPosition(v2);
+            camera.lookAt( v2);
         }
      };
 
