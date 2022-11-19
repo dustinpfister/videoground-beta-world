@@ -99,6 +99,9 @@ VIDEO.init = function(sm, scene, camera){
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
+            // guy defaults
+            helper.updateGuyEffect(guy1, 0);
+            // camera defaults
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
@@ -108,6 +111,25 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
+
+    opt_seq.objects[0] = {
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            // GUY1
+
+            //guy1.moveHead(1 / 8 * partPer);
+            guy1.walk(1 / 4 * 0.25 + partPer, 4);
+            const v3_guypos = new THREE.Vector3();
+            v3_guypos.z = -5 + 5 * partPer;
+            helper.setGuyPos(guy1, v3_guypos);
+            GUYANI.static1( 0 );
+            // TEXT
+            updateText(plane_text, partPer, 0);
+        }
+     };
+
+
+/*
     // SEQ 0 - ...
     opt_seq.objects[0] = {
         secs: 3,
@@ -147,6 +169,7 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(guy1.group.position);
         }
     };
+*/
     //-------- ----------
     // LOAD IMAGES
     //-------- ----------
@@ -175,8 +198,8 @@ VIDEO.init = function(sm, scene, camera){
         ], material, 'smile_sheet_128');
         // CREATE ANI ALPHA FUNCTIONS
         GUYANI = helper.createHeadAniAlphas(canObj_head, [
-            { aniKey: 'static1', sheetKey: 'smile_sheet_128', cells: [ [0,0] ] },
-            { aniKey: 'static2', sheetKey: 'smile_sheet_128', cells: [ [0,3]] },
+            { aniKey: 'static1', sheetKey: 'smile_sheet_128', cells: [ [0,3] ] },
+            { aniKey: 'static2', sheetKey: 'smile_sheet_128', cells: [ [0,0]] },
             {
                 aniKey: 'talk', sheetKey: 'smile_sheet_128',
                 cells: [ [0,3], [1,3] ]
