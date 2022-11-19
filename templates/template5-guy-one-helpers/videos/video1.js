@@ -120,7 +120,7 @@ VIDEO.init = function(sm, scene, camera){
             v3_guypos.z = -5 + 5 * partPer;
             helper.setGuyPos(guy1, v3_guypos);
             // smile
-            GUYANI.smile_creepy(partPer);
+            GUYANI.talk( seq.getBias(8) );
             // TEXT
             updateText(plane_text, partPer, 0);
         }
@@ -139,7 +139,7 @@ VIDEO.init = function(sm, scene, camera){
             const v3_guypos = new THREE.Vector3();
             helper.setGuyPos(guy1, v3_guypos);
             // smile
-            GUYANI.smile_creepy(1);
+            GUYANI.smile_creepy( 1 );
             // TEXT
             updateText(plane_text, partPer, 1);
             // CAMERA
@@ -175,6 +175,12 @@ VIDEO.init = function(sm, scene, camera){
         ], material, 'smile_sheet_128');
         // CREATE ANI ALPHA FUNCTIONS
         GUYANI = helper.createHeadAniAlphas(canObj_head, [
+            { aniKey: 'static1', sheetKey: 'smile_sheet_128', cells: [ [0,0] ] },
+            { aniKey: 'static2', sheetKey: 'smile_sheet_128', cells: [ [0,3]] },
+            {
+                aniKey: 'talk', sheetKey: 'smile_sheet_128',
+                cells: [ [0,3], [1,3] ]
+            },
             {
                 aniKey: 'smile_creepy', sheetKey: 'smile_creepy_128',
                 cells: [ [0,0], [1,0], [2,0], [3,0] ]
