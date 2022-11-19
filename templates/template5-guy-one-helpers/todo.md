@@ -6,10 +6,12 @@
 * (done) better methods for setting the texture of a face of the head cube
 * (done) use text-plane r0
 * (done) have a text plane in the scene
+* (done) good starting location and rotation of text plane
 
 <!-- text-plane -->
-* () Have an array of text lines to choose from
 * () see about adjusting text size without using a lower or higher canvas size
+* () Have an array of text lines to choose from
+
 * () have a starting scrolling text message
 * () any and all text plane helpers will need to be baked into the video file for now
 * () rename local helpers.js to guy-helpers.js

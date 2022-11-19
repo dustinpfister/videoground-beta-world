@@ -26,6 +26,12 @@ VIDEO.init = function(sm, scene, camera){
     plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 45, 0);
     scene.add(plane_text);
+
+// FORMAT
+console.log(textLines);
+console.log(plane_text);
+
+
     // update
     let alpha = 0;
     TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, alpha, 0, 30);
