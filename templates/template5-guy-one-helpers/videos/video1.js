@@ -68,6 +68,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GUY
     //-------- ----------
+    let GUYANI = {};
     let guy1 = {}; 
     //-------- ----------
     // LIGHT
@@ -118,6 +119,8 @@ VIDEO.init = function(sm, scene, camera){
             const v3_guypos = new THREE.Vector3();
             v3_guypos.z = -5 + 5 * partPer;
             helper.setGuyPos(guy1, v3_guypos);
+            // smile
+            GUYANI.smile_creepy(partPer);
             // TEXT
             updateText(plane_text, partPer, 0);
         }
@@ -135,6 +138,8 @@ VIDEO.init = function(sm, scene, camera){
             guy1.walk(1 / 2 * 0.25, 2);
             const v3_guypos = new THREE.Vector3();
             helper.setGuyPos(guy1, v3_guypos);
+            // smile
+            GUYANI.smile_creepy(1);
             // TEXT
             updateText(plane_text, partPer, 1);
             // CAMERA
@@ -168,8 +173,25 @@ VIDEO.init = function(sm, scene, camera){
             ['top',    0, 1, 4, false],
             ['bottom', 1, 1, 5, false]
         ], material, 'smile_sheet_128');
-        // SET FACE FOR FIRST TIME
-        helper.setHeadCanvasTo(canObj_head, 3, 0, 'smile_creepy_128');
+
+
+// CREATE ANI ALPHA FUNCTIONS
+GUYANI = helper.createHeadAniAlphas(canObj_head, [
+    {
+        aniKey: 'smile_creepy',
+        sheetKey: 'smile_creepy_128',
+        cells: [ [0,0], [1,0], [2,0], [3,0] ]
+    }
+]);
+
+console.log(GUYANI);
+
+// SET FACE FOR FIRST TIME
+GUYANI.smile_creepy(0);
+
+
+
+        //helper.setHeadCanvasTo(canObj_head, 3, 0, 'smile_creepy_128');
         //-------- ----------
         // create guy1
         //-------- ----------

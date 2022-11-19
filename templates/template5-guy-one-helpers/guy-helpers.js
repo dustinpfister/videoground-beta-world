@@ -64,6 +64,22 @@
         state.key = key || state.key;
         canvasMod.update(canObj_head);
     };
+    // Create Animations
+    const setHeadAni = (canObj_head, key, cells, alpha) => {
+        const i = cells[ Math.round( ( cells.length - 1 ) * alpha) ];
+        api.setHeadCanvasTo(canObj_head, i[0], i[1], key);
+    };
+
+    api.createHeadAniAlphas = (canObj_head, arr) => {
+        const ani = {};
+        arr.forEach( (opt) => {
+            ani[opt.aniKey] = function(alpha){
+                setHeadAni(canObj_head, opt.sheetKey, opt.cells, alpha);
+            };
+        });
+        return ani;
+    };
+
     // create a canvasObj for the head
     api.createCanvasHead = (textureObj) => {
         // create the canvas object
