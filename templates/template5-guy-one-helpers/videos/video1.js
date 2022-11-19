@@ -35,6 +35,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // TEXT PLANE HELPERS
     //-------- ----------
+    // set style helper
     const setLineStyle = (plane_text, pxSize, font ) => {
         const state = plane_text.userData.canObj.state;
         state.lines.forEach((line)=>{
@@ -42,8 +43,8 @@ VIDEO.init = function(sm, scene, camera){
             line.f = font || 'arial';
         })
     };
+    // update text helper
     const updateText = (plane_text, alpha, TLIndex) => {
-        //const textLines = TextPlane.createTextLines(TEXT[0], TEXT_CHAR_PER_LINE);
         // move the text lines ( lines, testLines, alpha, startY, deltaY )
         const lines = plane_text.userData.canObj.state.lines;
         TextPlane.moveTextLines(lines, TEXT_LINES[TLIndex], alpha, TEXT_STARTY, TEXT_PXSIZE);
@@ -64,7 +65,6 @@ VIDEO.init = function(sm, scene, camera){
     // Set Line Style 
     setLineStyle(plane_text, TEXT_PXSIZE, 'courier');
     updateText(plane_text, 0, 0);
-
     //-------- ----------
     // GUY
     //-------- ----------

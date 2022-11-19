@@ -28,5 +28,6 @@
 
 * () have a DAE file to place and addtional objects that will be the typical scene for all these videos
 
-<!-- only do this when helpers.js iss solid -->
+<!-- only do this when helpers.js is solid -->
+* () have a text-plane-helpers.js file in the r0 folder for r0 of text-plane.
 * () add helpers.js to the guy r0 folder as guy-helpers.js as I am not going to want to have copies of this from video to video
