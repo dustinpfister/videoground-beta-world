@@ -12,7 +12,7 @@ I have made an electron.js powered program that I aim to use to make little vide
     </p>
 </div>
 
-## The current idea of 'Beta World' is _experimentation_, and _content over tools_
+## The current idea of 'Beta World' is *experimentation*, and *content over tools*
 
 The current idea for this beta world collection of content is to just use this is a general collection of experimental content to gain a better sense of what I like to make with videoground. I have a lot of general ideas for content and as such I just need a place to park what I have together with these ideas. If something works in terms of intrinsic value, or external interest maybe I will start a stand alone collection for that, otherwise it will remain here.
 
