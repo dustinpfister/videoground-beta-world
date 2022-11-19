@@ -14,15 +14,22 @@ VIDEO.init = function(sm, scene, camera){
     // TEXT CONST
     //-------- ----------
     const TEXT_PXSIZE = 40;
+    const TEXT_BLANK_START_LINES = 7;
     const TEXT_CHAR_PER_LINE = 9;
-    const TEXT_STARTY = 60;
+    const TEXT_STARTY = 10;
     const TEXT_BGCOLOR = 'rgba(0,0,0,0.4)';
     const TEXT_FONTCOLORS = ['lime', 'white'];
     const TEXT = [
-        'Hello, this is just some sample text.'
+        'Hello, this is just some sample text. '
     ];
     const TEXT_LINES = TEXT.map( (str) => {
-        return TextPlane.createTextLines(str, TEXT_CHAR_PER_LINE);
+        const lines = TextPlane.createTextLines(str, TEXT_CHAR_PER_LINE);
+        let i = 0;
+        while(i < TEXT_BLANK_START_LINES){
+            lines.unshift('');
+            i += 1;
+        }
+        return lines;
     });
     //-------- ----------
     // TEXT PLANE HELPERS
@@ -33,6 +40,14 @@ VIDEO.init = function(sm, scene, camera){
             line.fs = pxSize + 'px';
             line.f = font || 'arial';
         })
+    };
+    const updateText = (plane_text, alpha, TLIndex) => {
+        //const textLines = TextPlane.createTextLines(TEXT[0], TEXT_CHAR_PER_LINE);
+        // move the text lines ( lines, testLines, alpha, startY, deltaY )
+        const lines = plane_text.userData.canObj.state.lines;
+        TextPlane.moveTextLines(lines, TEXT_LINES[TLIndex], alpha, TEXT_STARTY, TEXT_PXSIZE);
+        // update the canave
+        canvasMod.update(plane_text.userData.canObj);
     };
     //-------- ----------
     // TEXT PLANE MESH OBJECT
@@ -47,12 +62,8 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(plane_text);
     // Set Line Style 
     setLineStyle(plane_text, TEXT_PXSIZE, 'courier');
+    updateText(plane_text, 0, 0);
 
-    //const textLines = TextPlane.createTextLines(TEXT[0], TEXT_CHAR_PER_LINE);
-    // move the text lines ( lines, testLines, alpha, startY, deltaY )
-    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, TEXT_LINES[0], 0, TEXT_STARTY, TEXT_PXSIZE);
-    // update the canave
-    canvasMod.update(plane_text.userData.canObj);
     //-------- ----------
     // GUY
     //-------- ----------
@@ -99,14 +110,15 @@ VIDEO.init = function(sm, scene, camera){
     opt_seq.objects[0] = {
         secs: 3,
         update: function(seq, partPer, partBias){
-            // update guy1
+            // GUY1
             helper.updateGuyEffect(guy1, 0);
             guy1.moveHead(1 / 8 * partPer);
             guy1.walk(1 / 4 * 0.25 + partPer, 4);
             const v3_guypos = new THREE.Vector3();
             v3_guypos.z = -5 + 5 * partPer;
             helper.setGuyPos(guy1, v3_guypos);
-            
+            // TEXT
+            updateText(plane_text, partPer, 0);
         }
      };
     // SEQ 1 - ...
@@ -116,13 +128,15 @@ VIDEO.init = function(sm, scene, camera){
             { key: 'campos', array: v3Array_campos, lerp: true }
         ],
         update: function(seq, partPer, partBias){
-            // update guy1
+            // GUY1
             helper.updateGuyEffect(guy1, seq.getSinBias(1));
             guy1.moveHead(1 / 8);
             guy1.walk(1 / 2 * 0.25, 2);
             const v3_guypos = new THREE.Vector3();
             helper.setGuyPos(guy1, v3_guypos);
-            // camera
+            // TEXT
+            updateText(plane_text, 1, 0);
+            // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(guy1.group.position);
         }
