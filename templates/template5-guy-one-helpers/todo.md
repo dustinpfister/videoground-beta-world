@@ -38,6 +38,9 @@
 <!-- WORLD OBJECTS -->
 * () have a DAE file to place and addtional objects that will be the typical scene for all these videos
 
+<!-- sample alphas -->
+* () sample alphas should be part of the stack
+* () have basic setup code for sample alphas
 
 <!-- only do this when helpers.js is solid -->
 * () have a text-plane-helpers.js file in the r0 folder for r0 of text-plane.
