@@ -20,10 +20,11 @@ VIDEO.init = function(sm, scene, camera){
     const TEXT_BGCOLOR = 'rgba(0,0,0,0.4)';
     const TEXT_FONTCOLORS = ['lime', 'white'];
     const TEXT = [
-        'Hello, this is just some sample text. '
+        'Hello, this is just some sample text.',
+        'So this is some more demo text for another seq object or whatever, this is a template file after all here.'
     ];
     const TEXT_LINES = TEXT.map( (str) => {
-        const lines = TextPlane.createTextLines(str, TEXT_CHAR_PER_LINE);
+        const lines = TextPlane.createTextLines(str + ' ', TEXT_CHAR_PER_LINE);
         let i = 0;
         while(i < TEXT_BLANK_START_LINES){
             lines.unshift('');
@@ -135,7 +136,7 @@ VIDEO.init = function(sm, scene, camera){
             const v3_guypos = new THREE.Vector3();
             helper.setGuyPos(guy1, v3_guypos);
             // TEXT
-            updateText(plane_text, 1, 0);
+            updateText(plane_text, partPer, 1);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(guy1.group.position);
