@@ -158,6 +158,20 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt( v2);
         }
      };
+    // SEQ3 - creepy smile
+    opt_seq.objects[3] = {
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            // GUY1
+            guy1.moveHead(1 / 8);
+            GUYANI.smile_creepy( partPer);
+            // CAMERA
+            camera.position.set(2, 2, 2);
+            const v2 = new THREE.Vector3();
+            guy1.head.getWorldPosition(v2);
+            camera.lookAt( v2);
+        }
+     };
 
 
 /*

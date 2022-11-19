@@ -27,7 +27,7 @@
 <!--  seq objects -->
 * (done) seq0 - have the guy walk from the side of the scene to the center with a fixed face
 * (done) seq1 - cam moves in closer, head turns
-* () seq2 - head talk
+* (done) seq2 - head talk
 * () seq3 - creepy smile
 * () seq4 - camera moves out
 * () seq5 - effect demo
