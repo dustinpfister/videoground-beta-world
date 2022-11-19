@@ -173,24 +173,15 @@ VIDEO.init = function(sm, scene, camera){
             ['top',    0, 1, 4, false],
             ['bottom', 1, 1, 5, false]
         ], material, 'smile_sheet_128');
-
-
-// CREATE ANI ALPHA FUNCTIONS
-GUYANI = helper.createHeadAniAlphas(canObj_head, [
-    {
-        aniKey: 'smile_creepy',
-        sheetKey: 'smile_creepy_128',
-        cells: [ [0,0], [1,0], [2,0], [3,0] ]
-    }
-]);
-
-console.log(GUYANI);
-
-// SET FACE FOR FIRST TIME
-GUYANI.smile_creepy(0);
-
-
-
+        // CREATE ANI ALPHA FUNCTIONS
+        GUYANI = helper.createHeadAniAlphas(canObj_head, [
+            {
+                aniKey: 'smile_creepy', sheetKey: 'smile_creepy_128',
+                cells: [ [0,0], [1,0], [2,0], [3,0] ]
+            }
+        ]);
+        // SET FACE FOR FIRST TIME
+        GUYANI.smile_creepy(0);
         //helper.setHeadCanvasTo(canObj_head, 3, 0, 'smile_creepy_128');
         //-------- ----------
         // create guy1

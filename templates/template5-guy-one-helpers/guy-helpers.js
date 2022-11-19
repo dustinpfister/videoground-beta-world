@@ -69,7 +69,6 @@
         const i = cells[ Math.round( ( cells.length - 1 ) * alpha) ];
         api.setHeadCanvasTo(canObj_head, i[0], i[1], key);
     };
-
     api.createHeadAniAlphas = (canObj_head, arr) => {
         const ani = {};
         arr.forEach( (opt) => {
@@ -79,7 +78,6 @@
         });
         return ani;
     };
-
     // create a canvasObj for the head
     api.createCanvasHead = (textureObj) => {
         // create the canvas object
