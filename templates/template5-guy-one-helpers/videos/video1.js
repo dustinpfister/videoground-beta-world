@@ -148,7 +148,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     return textureMod.load({
         URLS_BASE: videoAPI.pathJoin(sm.filePath, '../../../img/smile/'),
-        URLS: ['smile_sheet_128.png']
+        URLS: ['smile_sheet_128.png', 'smile_creepy_128.png']
     }).then( (textureObj) => {
         //-------- ----------
         // TEXTURES
@@ -169,8 +169,8 @@ VIDEO.init = function(sm, scene, camera){
             ['top',    0, 1, 4, false],
             ['bottom', 1, 1, 5, false]
         ], material, 'smile_sheet_128');
-        // set face
-        helper.setHeadCanvasTo(canObj_head, 1, 3, 'smile_sheet_128');
+        // SET FACE FOR FIRST TIME
+        helper.setHeadCanvasTo(canObj_head, 3, 0, 'smile_creepy_128');
         //-------- ----------
         // create guy1
         //-------- ----------

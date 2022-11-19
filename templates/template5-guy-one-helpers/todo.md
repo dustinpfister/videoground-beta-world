@@ -17,9 +17,6 @@
 * (done) good starting location and rotation of text plane
 * (done) see about adjusting text size without using a lower or higher canvas size
 
-
-
-
 * () use creepy sheet and have a seq object in which it is used
 * () have a seq in which the guy is talking
 
