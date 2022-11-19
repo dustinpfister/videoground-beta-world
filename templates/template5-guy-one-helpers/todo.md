@@ -15,8 +15,7 @@
 * (done) use text-plane r0
 * (done) have a text plane in the scene
 * (done) good starting location and rotation of text plane
-
-* () see about adjusting text size without using a lower or higher canvas size
+* (done) see about adjusting text size without using a lower or higher canvas size
 
 
 

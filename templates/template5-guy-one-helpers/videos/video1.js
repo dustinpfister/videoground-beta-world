@@ -11,6 +11,20 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // TEXT CONST
+    //-------- ----------
+    const TEXT_PXSIZE = 40;
+    const TEXT_CHAR_PER_LINE = 9;
+    const TEXT_STARTY = 60;
+    const TEXT_BGCOLOR = 'rgba(0,0,0,0.4)';
+    const TEXT_FONTCOLORS = ['lime', 'white'];
+    const TEXT = [
+        'Hello, this is just some sample text.'
+    ];
+    const TEXT_LINES = TEXT.map( (str) => {
+        return TextPlane.createTextLines(str, TEXT_CHAR_PER_LINE);
+    });
+    //-------- ----------
     // TEXT PLANE HELPERS
     //-------- ----------
     const setLineStyle = (plane_text, pxSize, font ) => {
@@ -21,20 +35,12 @@ VIDEO.init = function(sm, scene, camera){
         })
     };
     //-------- ----------
-    // TEXT and textLines
-    //-------- ----------
-    const TEXT_PXSIZE = 40;
-    const TEXT_CHAR_PER_LINE = 9;
-    const TEXT_STARTY = 60;
-    const text2 = 'Hello, this is a video on something called the 3D! In other words there are three things of interest here.'
-    const textLines = TextPlane.createTextLines(text2, TEXT_CHAR_PER_LINE);
-    //-------- ----------
-    // TEXT PLANE
+    // TEXT PLANE MESH OBJECT
     //-------- ----------
     const plane_text = TextPlane.createPlane({
         w: 3.2, h: 2.4,
         rows: 10, size: 256,
-        palette: ['rgba(0,0,0,0.4)', 'white', 'gray']
+        palette: [TEXT_BGCOLOR, TEXT_FONTCOLORS[0], TEXT_FONTCOLORS[1]]
     });
     plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 45, 0);
@@ -42,9 +48,9 @@ VIDEO.init = function(sm, scene, camera){
     // Set Line Style 
     setLineStyle(plane_text, TEXT_PXSIZE, 'courier');
 
- 
+    //const textLines = TextPlane.createTextLines(TEXT[0], TEXT_CHAR_PER_LINE);
     // move the text lines ( lines, testLines, alpha, startY, deltaY )
-    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, 0, TEXT_STARTY, TEXT_PXSIZE);
+    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, TEXT_LINES[0], 0, TEXT_STARTY, TEXT_PXSIZE);
     // update the canave
     canvasMod.update(plane_text.userData.canObj);
     //-------- ----------
