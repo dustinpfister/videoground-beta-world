@@ -25,7 +25,7 @@
 * () set body texture helper
 
 <!--  seq objects -->
-* () seq0 - have the guy walk from the side of the scene to the center with a fixed face
+* (done) seq0 - have the guy walk from the side of the scene to the center with a fixed face
 * () seq1 - cam moves in closer, head turns
 * () seq2 - head talk
 * () seq3 - creepy smile

@@ -101,8 +101,11 @@ VIDEO.init = function(sm, scene, camera){
         beforeObjects: function(seq){
             // guy defaults
             helper.updateGuyEffect(guy1, 0);
+            guy1.walk(1 / 2 * 0.25, 2);
+            guy1.moveHead(0);
+            helper.setGuyPos(guy1, new THREE.Vector3(0, 0, 0));
             // TEXT
-            updateText(plane_text, partPer, 0);
+            updateText(plane_text, seq.per, 0);
             // camera defaults
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
@@ -122,6 +125,14 @@ VIDEO.init = function(sm, scene, camera){
             const v3_guypos = new THREE.Vector3();
             v3_guypos.z = -5 + 5 * partPer;
             helper.setGuyPos(guy1, v3_guypos);
+            GUYANI.static1( 0 );
+        }
+     };
+    // SEQ1 - 
+    opt_seq.objects[1] = {
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            // GUY1
             GUYANI.static1( 0 );
         }
      };
