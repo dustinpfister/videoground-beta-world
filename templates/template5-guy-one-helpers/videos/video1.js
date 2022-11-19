@@ -30,7 +30,6 @@ VIDEO.init = function(sm, scene, camera){
     let alpha = 0;
     TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, alpha, 0, 30);
     canvasMod.update(plane_text.userData.canObj);
- 
     //-------- ----------
     // GUY
     //-------- ----------
