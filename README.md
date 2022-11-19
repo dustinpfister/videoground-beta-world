@@ -4,11 +4,11 @@ I have made an electron.js powered program that I aim to use to make little vide
 
 
 <div align="center">
-    <a href="https://www.youtube.com/watch?v=XVToFw-pdK4">
-        <img src="https://img.youtube.com/vi/XVToFw-pdK4/0.jpg" style="width:50%;">
+    <a href="https://www.youtube.com/watch?v=67j1q73byqc">
+        <img src="https://img.youtube.com/vi/67j1q73byqc/0.jpg" style="width:50%;">
     </a><br>
     <p>
-        Frink 2
+        Frink 4
     </p>
 </div>
 
