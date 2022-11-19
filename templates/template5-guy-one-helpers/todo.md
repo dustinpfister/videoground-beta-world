@@ -26,8 +26,10 @@
 * (done) seq5 - effect demo
 
 <!-- guy -->
-* () have a seq in which the guy is talking
 * () set body texture helper
+
+<!-- seq objects -->
+* () seq3+ have arms go up and stay up
 
 <!-- curve.js -->
 * () add curve.js r0 as one of the javaScript modules used for this template
