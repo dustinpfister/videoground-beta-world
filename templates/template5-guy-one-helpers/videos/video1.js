@@ -3,12 +3,34 @@
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
+   '../../../js/canvas-text-plane/r0/text-plane.js',
    '../../../js/guy/r0/guy.js',
    '../../../js/texture/r0/texture.js',
    '../helpers.js' // <== Using a Video folder level helpers file
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
+    //-------- ----------
+    // TEXT and textLines
+    //-------- ----------
+    const text2 = 'Hello, this is the beta world'
+    const textLines = TextPlane.createTextLines(text2, 8);
+    //-------- ----------
+    // TEXT PLANE
+    //-------- ----------
+    const plane_text = TextPlane.createPlane({
+        w: 3.2, h: 2.4,
+        rows: 10, size: 256,
+        palette: ['rgba(0,255,255,0.2)', 'black', 'black']
+    });
+    plane_text.position.set(0, 0, 0);
+    plane_text.rotation.set(0, Math.PI * 0.5, 0);
+    scene.add(plane_text);
+    // update
+    let alpha = 0;
+    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, alpha, 0, 30);
+    canvasMod.update(plane_text.userData.canObj);
+ 
     //-------- ----------
     // GUY
     //-------- ----------
