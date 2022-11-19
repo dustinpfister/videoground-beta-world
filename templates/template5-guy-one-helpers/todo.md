@@ -1,5 +1,13 @@
 # template 5 guy one helpers todo list
 
+<!-- text-plane -->
+* () Have an array of text lines to choose from
+* () have a starting scrolling text message
+* () any and all text plane helpers will need to be baked into the video file for now
+* () rename local helpers.js to guy-helpers.js
+* () start a local text-plane-helpers.js for all text plain helpers.
+* () have text plane messages change from one seq to the next.
+
 ## video1 - single guyjs r0 object with canvas textures, single text plane object
 * (done) using sequence hooks r2, canvas r1, guyjs r0 and texture r0 
 * (done) using a helpers.js to put a lot of code that I am not going to want to repleat in each video file
@@ -8,15 +16,10 @@
 * (done) have a text plane in the scene
 * (done) good starting location and rotation of text plane
 
-<!-- text-plane -->
 * () see about adjusting text size without using a lower or higher canvas size
-* () Have an array of text lines to choose from
 
-* () have a starting scrolling text message
-* () any and all text plane helpers will need to be baked into the video file for now
-* () rename local helpers.js to guy-helpers.js
-* () start a local text-plane-helpers.js for all text plain helpers.
-* () have text plane messages change from one seq to the next.
+
+
 
 * () use creepy sheet and have a seq object in which it is used
 * () have a seq in which the guy is talking

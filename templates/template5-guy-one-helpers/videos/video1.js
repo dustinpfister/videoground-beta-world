@@ -11,9 +11,18 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // TEXT PLANE HELPERS
+    //-------- ----------
+    const setLineSize = (plane_text, pxSize ) => {
+        const state = plane_text.userData.canObj.state;
+        state.lines.forEach((line)=>{
+            line.fs = pxSize + 'px';
+        })
+    };
+    //-------- ----------
     // TEXT and textLines
     //-------- ----------
-    const text2 = 'Hello, this is the beta world'
+    const text2 = 'Hello, this is a video on something called the 3D! In other words there are three things of interest here.'
     const textLines = TextPlane.createTextLines(text2, 8);
     //-------- ----------
     // TEXT PLANE
@@ -21,20 +30,18 @@ VIDEO.init = function(sm, scene, camera){
     const plane_text = TextPlane.createPlane({
         w: 3.2, h: 2.4,
         rows: 10, size: 256,
-        palette: ['rgba(0,255,255,0.2)', 'black', 'black']
+        palette: ['rgba(0,0,0,0.4)', 'white', 'gray']
     });
     plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 45, 0);
     scene.add(plane_text);
+    // set the line size
+    setLineSize(plane_text, 60);
 
-// FORMAT
-console.log(textLines);
-console.log(plane_text);
-
-
-    // update
-    let alpha = 0;
-    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, alpha, 0, 30);
+ 
+    // move the text lines ( lines, testLines, alpha, startY, deltaY )
+    TextPlane.moveTextLines(plane_text.userData.canObj.state.lines, textLines, 0, 60, 60);
+    // update the canave
     canvasMod.update(plane_text.userData.canObj);
     //-------- ----------
     // GUY
