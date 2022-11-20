@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // SCALE
     //-------- ----------
-    const SCALE = 0.1;  // 1 foot = SCALE units
+    const SCALE = 1;  // 1 foot = SCALE units
     //-------- ----------
     // TEXT CONST
     //-------- ----------
@@ -125,7 +125,7 @@ VIDEO.init = function(sm, scene, camera){
             helper.updateGuyEffect(guy1, 0);
             guy1.walk(1 / 2 * 0.25, 2);
             guy1.moveHead(0);
-            helper.setGuyPos(guy1, new THREE.Vector3(0, 0, 0));
+            helper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
             // TEXT
             updateText(plane_text, seq.per, 0);
             // camera defaults
@@ -145,7 +145,9 @@ VIDEO.init = function(sm, scene, camera){
             // GUY1
             guy1.walk(1 / 4 * 0.25 + partPer, 4);
             const v3_guypos = new THREE.Vector3();
-            v3_guypos.z = -5 + 5 * partPer;
+            v3_guypos.x = 1.5 * SCALE;
+            //v3_guypos.z = -5 + 5 * partPer;
+            v3_guypos.z = -10 * SCALE + 10 * SCALE * partPer;
             helper.setGuyPos(guy1, v3_guypos);
             GUYANI.static1( 0 );
         }
