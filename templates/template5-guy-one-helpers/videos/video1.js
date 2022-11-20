@@ -81,7 +81,7 @@ VIDEO.init = function(sm, scene, camera){
         rows: 10, size: 256,
         palette: [TEXT_BGCOLOR, TEXT_FONTCOLORS[0], TEXT_FONTCOLORS[1]]
     });
-    plane_text.position.set(-5.4 * SCALE, 5.3 * SCALE, -1 * SCALE);
+    plane_text.position.set(-9.45 * SCALE, 4.5 * SCALE, -1.5 * SCALE);
     //plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 90, 0);
     scene.add(plane_text);
@@ -293,4 +293,3 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const seq = scene.userData.seq;
     seqHooks.setFrame(seq, sm.frame, sm.frameMax);
 };
- 
