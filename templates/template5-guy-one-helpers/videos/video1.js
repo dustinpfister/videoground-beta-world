@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // SCALE
     //-------- ----------
-    const SCALE = 1;  // 1 foot = SCALE units
+    const SCALE = 0.75;  // 1 foot = SCALE units
     //-------- ----------
     // TEXT CONST
     //-------- ----------
@@ -104,9 +104,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GRID
     //-------- ----------
-    const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
-    grid.material.linewidth = 3;
-    scene.add( grid );
+    //const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
+    //grid.material.linewidth = 3;
+    //scene.add( grid );
     //-------- ----------
     // PATHS
     //-------- ----------
