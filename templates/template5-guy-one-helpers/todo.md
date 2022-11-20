@@ -27,8 +27,12 @@
 * (done) add curve.js r0 as one of the javaScript modules used for this template
 * (done) remove path tools from helpers.js as I am now using curvejs
 <!-- WORLD OBJECTS -->
-* () set a scale for all objects where 0.1 = 0.1 foot so the height of the guy should be 0.6
-* () have a SCALE const to help wit this
+* (done) have a main SCALE const in video1
+* (done) use the SCALE const to set the scale of guy1
+
+* () see about using SCALE to set the position of the test plane
+* () see about using SCALE to set camera paths
+
 * () have a DAE file to place addtional objects that will be the typical scene for all these videos
 <!-- guy -->
 * () set body texture helper

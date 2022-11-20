@@ -66,7 +66,8 @@ VIDEO.init = function(sm, scene, camera){
         rows: 10, size: 256,
         palette: [TEXT_BGCOLOR, TEXT_FONTCOLORS[0], TEXT_FONTCOLORS[1]]
     });
-    plane_text.position.set(-2, 2, 0);
+    plane_text.position.set(-1 * SCALE, 6 * SCALE, 0);
+    //plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 45, 0);
     scene.add(plane_text);
     // Set Line Style 
