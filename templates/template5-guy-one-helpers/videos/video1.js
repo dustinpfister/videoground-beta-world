@@ -49,6 +49,7 @@ VIDEO.init = function(sm, scene, camera){
     const shell = DAE_SCENE.getObjectByName('shell');
     shell.scale.set(SCALE, SCALE, SCALE);
     shell.rotation.z = Math.PI / 180 * 90;
+    shell.material.color = new THREE.Color(0.8, 0.8, 0.8);
     scene.add(shell);
     //-------- ----------
     // TEXT PLANE HELPERS
