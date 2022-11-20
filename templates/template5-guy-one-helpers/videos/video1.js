@@ -14,6 +14,10 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // SCALE
+    //-------- ----------
+    const SCALE = 1;  // 1 foot = SCALE units
+    //-------- ----------
     // TEXT CONST
     //-------- ----------
     const TEXT_PXSIZE = 40;
@@ -95,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
     // PATHS
     //-------- ----------
     const v3Array_campos = curveMod.QBV3Array([
-        [5,5,5, 4,2,-4,    1,0,1,      100]
+        [10, 10, 10, 7, 7,-7,    0, 0, 0,      100]
     ]);
     //scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
@@ -113,7 +117,7 @@ VIDEO.init = function(sm, scene, camera){
             // TEXT
             updateText(plane_text, seq.per, 0);
             // camera defaults
-            camera.position.set(5, 5, 5);
+            camera.position.set(10, 10, 10);
             camera.lookAt(guy1.group.position);
             camera.zoom = 1;
         },
@@ -142,7 +146,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.moveHead(1 / 8 * partPer);
             GUYANI.static1( 0 );
             // CAMERA
-            const a = 5 - 3 * partPer;
+            const a = 10 - 6 * partPer;
             camera.position.set(a, a, a);
             const v1 = guy1.group.position.clone();
             const v2 = new THREE.Vector3();
@@ -158,7 +162,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.moveHead(1 / 8);
             GUYANI.talk( seq.getBias( 16 ) );
             // CAMERA
-            camera.position.set(2, 2, 2);
+            camera.position.set(4, 4, 4);
             const v2 = new THREE.Vector3();
             guy1.head.getWorldPosition(v2);
             camera.lookAt( v2);
@@ -172,7 +176,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.moveHead(1 / 8);
             GUYANI.smile_creepy( partPer );
             // CAMERA
-            camera.position.set(2, 2, 2);
+            camera.position.set(4, 4, 4);
             const v2 = new THREE.Vector3();
             guy1.head.getWorldPosition(v2);
             camera.lookAt( v2);
@@ -186,7 +190,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.moveHead(1 / 8);
             GUYANI.smile_creepy( 1 );
             // CAMERA
-            const a = 2 + 3 * partPer;
+            const a = 4 + 6 * partPer;
             camera.position.set(a, a, a);
             const v1 = new THREE.Vector3();
             guy1.head.getWorldPosition(v1);
@@ -257,7 +261,7 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // create guy1
         //-------- ----------
-        guy1 = helper.createGuyHScale(3, 5, 8, material);
+        guy1 = helper.createGuyHScale(SCALE * 6, 5, 8, material);
         scene.add(guy1.group);
         //-------- ----------
         // create main seq object
