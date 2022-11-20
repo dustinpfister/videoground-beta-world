@@ -16,7 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // SCALE
     //-------- ----------
-    const SCALE = 0.1;  // 1 foot = SCALE units
+    const SCALE = 1;  // 1 foot = SCALE units
     //-------- ----------
     // TEXT CONST
     //-------- ----------
@@ -66,7 +66,7 @@ VIDEO.init = function(sm, scene, camera){
         rows: 10, size: 256,
         palette: [TEXT_BGCOLOR, TEXT_FONTCOLORS[0], TEXT_FONTCOLORS[1]]
     });
-    plane_text.position.set(-2 * SCALE, 6 * SCALE, 2 * SCALE);
+    plane_text.position.set(-3 * SCALE, 6 * SCALE, -1 * SCALE);
     //plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 60, 0);
     scene.add(plane_text);
