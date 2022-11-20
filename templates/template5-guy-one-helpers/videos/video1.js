@@ -47,10 +47,13 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const DAE_SCENE = VIDEO.daeResults[0].scene;
     const shell = DAE_SCENE.getObjectByName('shell');
+    shell.position.set(0, 0, 0);
     shell.scale.set(SCALE, SCALE, SCALE);
     shell.rotation.z = Math.PI / 180 * 90;
     shell.material.color = new THREE.Color(0.8, 0.8, 0.8);
     scene.add(shell);
+
+
     //-------- ----------
     // TEXT PLANE HELPERS
     //-------- ----------
