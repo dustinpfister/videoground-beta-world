@@ -11,6 +11,9 @@ VIDEO.scripts = [
    '../../../js/texture/r0/texture.js',
    '../guy-helpers.js' // <== Using a Video folder level helpers file
 ];
+VIDEO.daePaths = [
+    '../../../dae/guy-one-studio/studio.dae'
+];
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
@@ -39,6 +42,13 @@ VIDEO.init = function(sm, scene, camera){
         }
         return lines;
     });
+    //-------- ----------
+    // DAE
+    //-------- ----------
+    const DAE_SCENE = VIDEO.daeResults[0].scene;
+    const shell = DAE_SCENE.getObjectByName('shell');
+    shell.rotation.z = Math.PI / 180 * 90;
+    scene.add(shell);
     //-------- ----------
     // TEXT PLANE HELPERS
     //-------- ----------
