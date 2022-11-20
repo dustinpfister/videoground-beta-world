@@ -223,8 +223,6 @@ VIDEO.init = function(sm, scene, camera){
             helper.updateGuyEffect(guy1, seq.getSinBias(1));
             guy1.moveHead(1 / 8);
             GUYANI.smile_creepy( 1 );
-            const v3_guypos = new THREE.Vector3();
-            helper.setGuyPos(guy1, v3_guypos);
             // CAMERA
             seq.copyPos('campos', camera);
             camera.lookAt(guy1.group.position);
