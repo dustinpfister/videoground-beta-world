@@ -24,9 +24,8 @@
 * (done) seq3 - creepy smile
 * (done) seq4 - camera moves out
 * (done) seq5 - effect demo
-<!-- curve.js -->
-* () add curve.js r0 as one of the javaScript modules used for this template
-* () remove path tools from helpers.js as I am now using curvejs
+* (done) add curve.js r0 as one of the javaScript modules used for this template
+* (done) remove path tools from helpers.js as I am now using curvejs
 <!-- guy -->
 * () set body texture helper
 <!-- seq objects -->

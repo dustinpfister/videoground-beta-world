@@ -6,6 +6,7 @@ VIDEO.scripts = [
    '../../../js/canvas-text-plane/r0/text-plane.js',
    '../../../js/guy/r0/guy.js',
    '../../../js/texture/r0/texture.js',
+   '../../../js/curve/r0/curve.js',
    '../guy-helpers.js' // <== Using a Video folder level helpers file
 ];
 // init
@@ -38,10 +39,10 @@ VIDEO.init = function(sm, scene, camera){
     // set style helper
     const setLineStyle = (plane_text, pxSize, font ) => {
         const state = plane_text.userData.canObj.state;
-        state.lines.forEach((line)=>{
+        state.lines.forEach( (line) => {
             line.fs = pxSize + 'px';
             line.f = font || 'arial';
-        })
+        });
     };
     // update text helper
     const updateText = (plane_text, alpha, TLIndex) => {
@@ -89,12 +90,15 @@ VIDEO.init = function(sm, scene, camera){
     grid.material.linewidth = 3;
     scene.add( grid );
     //-------- ----------
-    // A MAIN SEQ OBJECT
+    // PATHS
     //-------- ----------
-    const v3Array_campos = helper.QBV3Array([
+    const v3Array_campos = curveMod.QBV3Array([
         [5,5,5, 4,2,-4,    1,0,1,      100]
     ]);
-    //scene.add( helper.QBDebugV3Array(v3Array_campos, 0.1, new THREE.Color(0, 1, 1)) );
+    //scene.add( curveMod.debugPoints( v3Array_campos ) );
+    //-------- ----------
+    // A MAIN SEQ OBJECT
+    //-------- ----------
     // start options for main seq object
     const opt_seq = {
         fps: 30,
