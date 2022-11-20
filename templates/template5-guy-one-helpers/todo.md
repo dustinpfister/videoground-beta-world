@@ -25,7 +25,8 @@
 * (done) Have an array of text lines to choose from
 <!-- WORLD OBJECTS -->
 * (done) have a studio DAE file to place addtional objects that will be the typical scene for all these videos
-* () load studio dae file and add shell object to scene
+* (done) load studio dae file and add shell object to scene
+* () set scale of shell object to SCALE const
 * () adjust position of guy realtive to shell
 * () adjust position of text plane to shell
 * () texture for walls
@@ -37,7 +38,6 @@
 <!-- FINAL TOUCHES -->
 * () seq3+ have arms go up and stay up
 * () see about using SCALE to set camera paths
-* () Change in scale should also change size of any and add objects added from DAE file
 * () start a local text-plane-helpers.js for all text plain helpers and park it in the r0 folder.
 * () add guy-helpers.js to r0 folder for guyjs.
 

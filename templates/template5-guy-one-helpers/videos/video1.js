@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // SCALE
     //-------- ----------
-    const SCALE = 1;  // 1 foot = SCALE units
+    const SCALE = 0.1;  // 1 foot = SCALE units
     //-------- ----------
     // TEXT CONST
     //-------- ----------
@@ -47,6 +47,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const DAE_SCENE = VIDEO.daeResults[0].scene;
     const shell = DAE_SCENE.getObjectByName('shell');
+    shell.scale.set(SCALE, SCALE, SCALE);
     shell.rotation.z = Math.PI / 180 * 90;
     scene.add(shell);
     //-------- ----------
