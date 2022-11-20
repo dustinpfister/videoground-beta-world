@@ -11,5 +11,5 @@
 * (done) the floor of the shell will be 12 by 20
 
 * () have walls that are 0.5 units thick
-* () have an opening in the wall.
+* () have an opening in the wall that is 3 wide.
 
