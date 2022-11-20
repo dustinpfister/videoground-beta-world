@@ -24,7 +24,11 @@
 * (done) use SCALE to set the size of the text plane
 * (done) Have an array of text lines to choose from
 <!-- WORLD OBJECTS -->
-* () have a DAE file to place addtional objects that will be the typical scene for all these videos
+* (done) have a studio DAE file to place addtional objects that will be the typical scene for all these videos
+* () load studio dae file and add shell object to scene
+* () adjust position of guy realtive to shell
+* () adjust position of text plane to shell
+* () texture for walls
 <!-- guy -->
 * () set body texture helper
 <!-- sample alphas -->
