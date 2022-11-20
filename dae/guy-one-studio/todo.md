@@ -6,8 +6,8 @@
 ## () - hallway
 * () have a hallway behind the opening in the wall
 
-## () shell uv mapping
-* () have the uv mapping of the shell worked out okay
+## ( done 11/20/2022 ) shell uv mapping
+* (done) have the uv mapping of the shell worked out okay
 
 ## ( done 11/20/2022 ) - studio.dae file and main 'shell' object started.
 * (done) start a main shell object 
