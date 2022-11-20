@@ -26,14 +26,15 @@
 * (done) seq5 - effect demo
 * (done) add curve.js r0 as one of the javaScript modules used for this template
 * (done) remove path tools from helpers.js as I am now using curvejs
-<!-- WORLD OBJECTS -->
 * (done) have a main SCALE const in video1
 * (done) use the SCALE const to set the scale of guy1
-
-* () see about using SCALE to set the position of the test plane
-* () see about using SCALE to set camera paths
-
+* (done) use SCALE to set the position of the test plane
+* (done) use SCALE to set the size of the text plane
+<!-- WORLD OBJECTS -->
 * () have a DAE file to place addtional objects that will be the typical scene for all these videos
+<!-- SCALE -->
+* () see about using SCALE to set camera paths
+* () Change in scale should also change size of any and add objects added from DAE file
 <!-- guy -->
 * () set body texture helper
 <!-- seq objects -->
