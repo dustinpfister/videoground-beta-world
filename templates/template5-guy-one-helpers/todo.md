@@ -29,12 +29,14 @@
 * (done) adjust position of guy realtive to shell
 * (done) adjust position of text plane to shell
 <!-- WORLD OBJECTS -->
-* () texture for walls
+* () desk object
+* () texture for shell
+* () texture for desk
 <!-- guy -->
 * () set body texture helper
 <!-- sample alphas -->
 * () sample alphas should be part of the stack
-* () have basic setup code for sample alphas
+* () have basic setup code for sample alphas in place
 <!-- FINAL TOUCHES -->
 * () seq3+ have arms go up and stay up
 * () see about using SCALE to set camera paths
