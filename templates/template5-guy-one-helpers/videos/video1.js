@@ -1,12 +1,14 @@
 // video1 for template5-guy-one-helpers
 // scripts
 VIDEO.scripts = [
+   // CORE MODULES
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
+   '../../../js/curve/r0/curve.js',
+   // ADDITIONAL
    '../../../js/canvas-text-plane/r0/text-plane.js',
    '../../../js/guy/r0/guy.js',
    '../../../js/texture/r0/texture.js',
-   '../../../js/curve/r0/curve.js',
    '../guy-helpers.js' // <== Using a Video folder level helpers file
 ];
 // init

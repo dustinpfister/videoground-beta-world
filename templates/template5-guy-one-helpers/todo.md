@@ -26,12 +26,12 @@
 * (done) seq5 - effect demo
 * (done) add curve.js r0 as one of the javaScript modules used for this template
 * (done) remove path tools from helpers.js as I am now using curvejs
+<!-- WORLD OBJECTS -->
+* () have a DAE file to place and addtional objects that will be the typical scene for all these videos
 <!-- guy -->
 * () set body texture helper
 <!-- seq objects -->
 * () seq3+ have arms go up and stay up
-<!-- WORLD OBJECTS -->
-* () have a DAE file to place and addtional objects that will be the typical scene for all these videos
 <!-- sample alphas -->
 * () sample alphas should be part of the stack
 * () have basic setup code for sample alphas
