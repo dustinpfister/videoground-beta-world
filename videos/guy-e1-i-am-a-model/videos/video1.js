@@ -140,34 +140,37 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(guy1.group.position);
         }
     };
-    // SEQ3 - 
+    // SEQ3 - guy says 'hello i am an example of a 3 d model'
     opt_seq.objects[3] = {
         secs: 7,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
+            GUYANI.talk( seq.getBias( 16 ) );
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
         }
     };
-    // SEQ4 - 
+    // SEQ4 - guy says 'I was generated using somehting called a computer'
     opt_seq.objects[4] = {
         secs: 9,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
+            GUYANI.talk( seq.getBias( 16 ) );
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
         }
     };
-    // SEQ 4 - 
+    // SEQ5 - GUY explodes
     opt_seq.objects[5] = {
         secs: 4,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
+            guyHelper.updateGuyEffect(guy1, seq.getSinBias(1));
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
