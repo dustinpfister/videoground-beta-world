@@ -90,6 +90,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.walk(1 / 2 * 0.25, 2);
             guy1.moveHead(0);
             guyHelper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
+            GUYANI.static1( 0 );
             // TEXT
             textPlaneHelper.updateText(plane_text, seq.per, 0, textData);
             // camera defaults
@@ -102,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ0 - guy walks into the scene
+    // SEQ0 - guy walks into the scene, CAMERA zooms in
     opt_seq.objects[0] = {
         secs: 3,
         update: function(seq, partPer, partBias){
@@ -112,30 +113,28 @@ VIDEO.init = function(sm, scene, camera){
             v3_guypos.x = 1.5 * SCALE;
             v3_guypos.z = -10 * SCALE + 10 * SCALE * partPer;
             guyHelper.setGuyPos(guy1, v3_guypos);
-            GUYANI.static1( 0 );
             // CAMERA
             const a = 10 - 5 * partPer;
             camera.position.set(a, a, a);
             camera.lookAt(guy1.group.position);
         }
     };
-    // SEQ1 - 
+    // SEQ1 - guy is still, we have an awkward pause
     opt_seq.objects[1] = {
         secs: 3,
         update: function(seq, partPer, partBias){
             // GUY1
-
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
         }
     };
-    // SEQ2 - 
+    // SEQ2 - guy head moves to have the camera
     opt_seq.objects[2] = {
         secs: 4,
         update: function(seq, partPer, partBias){
             // GUY1
-
+            guy1.moveHead(1 / 8 * partPer);
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
@@ -146,7 +145,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: 7,
         update: function(seq, partPer, partBias){
             // GUY1
-
+            guy1.moveHead(1 / 8);
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
@@ -157,7 +156,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: 9,
         update: function(seq, partPer, partBias){
             // GUY1
-
+            guy1.moveHead(1 / 8);
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
@@ -168,7 +167,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: 4,
         update: function(seq, partPer, partBias){
             // GUY1
-
+            guy1.moveHead(1 / 8);
             // CAMERA
             camera.position.set(5, 5, 5);
             camera.lookAt(guy1.group.position);
