@@ -7,6 +7,7 @@ VIDEO.scripts = [
    '../../../js/curve/r0/curve.js',
    // ADDITIONAL
    '../../../js/canvas-text-plane/r0/text-plane.js',
+   '../../../js/canvas-text-plane/r0/text-plane-helpers.js',
    '../../../js/guy/r0/guy.js',
    '../../../js/guy/r0/guy-helpers.js',
    '../../../js/texture/r0/texture.js'
@@ -126,10 +127,10 @@ VIDEO.init = function(sm, scene, camera){
         fps: 30,
         beforeObjects: function(seq){
             // guy defaults
-            helper.updateGuyEffect(guy1, 0);
+            guyHelper.updateGuyEffect(guy1, 0);
             guy1.walk(1 / 2 * 0.25, 2);
             guy1.moveHead(0);
-            helper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
+            guyHelper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
             // TEXT
             updateText(plane_text, seq.per, 0);
             // camera defaults
@@ -152,7 +153,7 @@ VIDEO.init = function(sm, scene, camera){
             v3_guypos.x = 1.5 * SCALE;
             //v3_guypos.z = -5 + 5 * partPer;
             v3_guypos.z = -10 * SCALE + 10 * SCALE * partPer;
-            helper.setGuyPos(guy1, v3_guypos);
+            guyHelper.setGuyPos(guy1, v3_guypos);
             GUYANI.static1( 0 );
         }
     };
@@ -224,7 +225,7 @@ VIDEO.init = function(sm, scene, camera){
         ],
         update: function(seq, partPer, partBias){
             // GUY1
-            helper.updateGuyEffect(guy1, seq.getSinBias(1));
+            guyHelper.updateGuyEffect(guy1, seq.getSinBias(1));
             guy1.moveHead(1 / 8);
             GUYANI.smile_creepy( 1 );
             // CAMERA
@@ -242,15 +243,15 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // TEXTURES
         //-------- ---------
-        const canObj_head = helper.createCanvasHead(textureObj);
+        const canObj_head = guyHelper.createCanvasHead(textureObj);
         //-------- ----------
         // MATERIALS
         //-------- ----------
         // create textures from canvas
-        const material = helper.createMaterials();
+        const material = guyHelper.createMaterials();
         material.body.color = new THREE.Color(1, 1, 1);
         // set up the head textures
-        helper.setHeadTextures(canObj_head, [
+        guyHelper.setHeadTextures(canObj_head, [
             ['face',   0, 0, 0, true],
             ['back',   2, 0, 1, false],
             ['left',   1, 0, 2, false], 
@@ -259,7 +260,7 @@ VIDEO.init = function(sm, scene, camera){
             ['bottom', 1, 1, 5, false]
         ], material, 'smile_sheet_128');
         // CREATE ANI ALPHA FUNCTIONS
-        GUYANI = helper.createHeadAniAlphas(canObj_head, [
+        GUYANI = guyHelper.createHeadAniAlphas(canObj_head, [
             { aniKey: 'static1', sheetKey: 'smile_sheet_128', cells: [ [0,3] ] },
             { aniKey: 'static2', sheetKey: 'smile_sheet_128', cells: [ [0,0]] },
             {
@@ -273,11 +274,11 @@ VIDEO.init = function(sm, scene, camera){
         ]);
         // SET FACE FOR FIRST TIME
         GUYANI.smile_creepy(0);
-        //helper.setHeadCanvasTo(canObj_head, 3, 0, 'smile_creepy_128');
+        //guyHelper.setHeadCanvasTo(canObj_head, 3, 0, 'smile_creepy_128');
         //-------- ----------
         // create guy1
         //-------- ----------
-        guy1 = helper.createGuyHScale(SCALE * 6, 5, 8, material);
+        guy1 = guyHelper.createGuyHScale(SCALE * 6, 5, 8, material);
         scene.add(guy1.group);
         //-------- ----------
         // create main seq object

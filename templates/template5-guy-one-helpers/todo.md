@@ -41,10 +41,7 @@
 * (done) set scale of shell object to SCALE const
 * (done) adjust position of guy realtive to shell
 * (done) adjust position of text plane to shell
-
-
-<!-- FINAL TOUCHES -->
+* (done) add guy-helpers.js to r0 folder for guyjs.
 
 * () start a local text-plane-helpers.js for all text plain helpers and park it in the r0 folder.
-* () add guy-helpers.js to r0 folder for guyjs.
 

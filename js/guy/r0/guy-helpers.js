@@ -244,4 +244,4 @@
             }
         });
     };
-}(this['helper'] = {}));
+}(this['guyHelper'] = {}));

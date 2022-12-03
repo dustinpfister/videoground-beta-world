@@ -1,0 +1,3 @@
+(function(api){
+
+}(this['textPlaneHelper'] = {}));
