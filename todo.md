@@ -1,9 +1,10 @@
 # VideoGround-beta-world video files todo list
 
-<!-- FRINK -->
+<!-- WHATS NEXT -->
 
 ## ( ) - guy1
-* () start a guy1 video folder
+* () start a guy1 video folder based off of template5 video1
+* () work out seq objects for the script
 
 ## ( ) - frink5
 * () have more than one layer like with the text plane project

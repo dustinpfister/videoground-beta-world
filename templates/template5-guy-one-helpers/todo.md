@@ -1,5 +1,18 @@
 # template 5 guy one helpers todo list
 
+## video2 - 
+<!-- WORLD OBJECTS -->
+* () desk object
+* () texture for shell
+* () texture for desk
+<!-- guy -->
+* () set body texture helper
+<!-- sample alphas -->
+* () sample alphas should be part of the stack
+* () have basic setup code for sample alphas in place
+<!-- SCALE FIX -->
+* () see about using SCALE to set camera paths
+
 ## video1 - single guyjs r0 object with canvas textures, single text plane object
 * (done) using sequence hooks r2, canvas r1, guyjs r0 and texture r0 
 * (done) using a helpers.js to put a lot of code that I am not going to want to repleat in each video file
@@ -28,18 +41,10 @@
 * (done) set scale of shell object to SCALE const
 * (done) adjust position of guy realtive to shell
 * (done) adjust position of text plane to shell
-<!-- WORLD OBJECTS -->
-* () desk object
-* () texture for shell
-* () texture for desk
-<!-- guy -->
-* () set body texture helper
-<!-- sample alphas -->
-* () sample alphas should be part of the stack
-* () have basic setup code for sample alphas in place
+
+
 <!-- FINAL TOUCHES -->
-* () seq3+ have arms go up and stay up
-* () see about using SCALE to set camera paths
+
 * () start a local text-plane-helpers.js for all text plain helpers and park it in the r0 folder.
 * () add guy-helpers.js to r0 folder for guyjs.
 

@@ -8,8 +8,8 @@ VIDEO.scripts = [
    // ADDITIONAL
    '../../../js/canvas-text-plane/r0/text-plane.js',
    '../../../js/guy/r0/guy.js',
-   '../../../js/texture/r0/texture.js',
-   '../guy-helpers.js' // <== Using a Video folder level helpers file
+   '../../../js/guy/r0/guy-helpers.js',
+   '../../../js/texture/r0/texture.js'
 ];
 VIDEO.daePaths = [
     '../../../dae/guy-one-studio/studio.dae'
