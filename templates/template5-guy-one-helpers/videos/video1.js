@@ -22,31 +22,13 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const SCALE = 0.75;  // 1 foot = SCALE units
     //-------- ----------
-    // TEXT CONST
+    // text Data
     //-------- ----------
-    const textData = {};
-    textData.TEXT_PXSIZE = 40;
-    textData.TEXT_BLANK_START_LINES = 7;
-    textData.TEXT_CHAR_PER_LINE = 9;
-    textData.TEXT_STARTY = 10;
-    textData.TEXT_BGCOLOR = 'rgba(0,0,0,0.4)';
-    textData.TEXT_FONTCOLORS = ['lime', 'white'];
-    textData.TEXT = [
-        'Hello, this is just some sample text.',
-        'So this is some more demo text for another seq object or whatever, this is a template file after all here.'
-    ];
-    textData.TEXT_LINES = textData.TEXT.map( (str) => {
-        const lines = TextPlane.createTextLines(str + ' ', textData.TEXT_CHAR_PER_LINE);
-        let i = 0;
-        while(i < textData.TEXT_BLANK_START_LINES){
-            lines.unshift('');
-            i += 1;
-        }
-        return lines;
+    const textData = textPlaneHelper.createTextData({
+        TEXT_PXSIZE: 90,
+        TEXT_BLANK_START_LINES: 2,
+        TEXT: [' 3D']
     });
-
-console.log(textData.TEXT_LINES);
-
     //-------- ----------
     // DAE
     //-------- ----------
@@ -57,27 +39,6 @@ console.log(textData.TEXT_LINES);
     shell.rotation.z = Math.PI / 180 * 90;
     shell.material.color = new THREE.Color(0.8, 0.8, 0.8);
     scene.add(shell);
-
-
-    //-------- ----------
-    // TEXT PLANE HELPERS
-    //-------- ----------
-    // set style helper
-    const setLineStyle = (plane_text, pxSize, font ) => {
-        const state = plane_text.userData.canObj.state;
-        state.lines.forEach( (line) => {
-            line.fs = pxSize + 'px';
-            line.f = font || 'arial';
-        });
-    };
-    // update text helper
-    const updateText = (plane_text, alpha, TLIndex, textData ) => {
-        // move the text lines ( lines, testLines, alpha, startY, deltaY )
-        const lines = plane_text.userData.canObj.state.lines;
-        TextPlane.moveTextLines(lines, textData.TEXT_LINES[TLIndex], alpha, textData.TEXT_STARTY, textData.TEXT_PXSIZE);
-        // update the canave
-        canvasMod.update(plane_text.userData.canObj);
-    };
     //-------- ----------
     // TEXT PLANE MESH OBJECT
     //-------- ----------
@@ -91,8 +52,8 @@ console.log(textData.TEXT_LINES);
     plane_text.rotation.set(0, Math.PI / 180 * 90, 0);
     scene.add(plane_text);
     // Set Line Style 
-    setLineStyle(plane_text, textData.TEXT_PXSIZE, 'courier');
-    updateText(plane_text, 0, 0, textData);
+    textPlaneHelper.setLineStyle(plane_text, textData.TEXT_PXSIZE, 'courier');
+    textPlaneHelper.updateText(plane_text, 0, 0, textData);
     //-------- ----------
     // GUY
     //-------- ----------
@@ -110,12 +71,6 @@ console.log(textData.TEXT_LINES);
     // BACKGROUND
     //-------- ----------
     scene.background = new THREE.Color('#000000');
-    //-------- ----------
-    // GRID
-    //-------- ----------
-    //const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
-    //grid.material.linewidth = 3;
-    //scene.add( grid );
     //-------- ----------
     // PATHS
     //-------- ----------
@@ -136,7 +91,7 @@ console.log(textData.TEXT_LINES);
             guy1.moveHead(0);
             guyHelper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
             // TEXT
-            updateText(plane_text, seq.per, 0, textData);
+            textPlaneHelper.updateText(plane_text, seq.per, 0, textData);
             // camera defaults
             camera.position.set(10, 10, 10);
             camera.lookAt(guy1.group.position);

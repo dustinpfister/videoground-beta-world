@@ -13,7 +13,7 @@
 <!-- SCALE FIX -->
 * () see about using SCALE to set camera paths
 
-## video1 - single guyjs r0 object with canvas textures, single text plane object
+## (done 12/03/2022 ) video1 - single guyjs r0 object with canvas textures, single text plane object
 * (done) using sequence hooks r2, canvas r1, guyjs r0 and texture r0 
 * (done) using a helpers.js to put a lot of code that I am not going to want to repleat in each video file
 * (done) better methods for setting the texture of a face of the head cube
@@ -42,6 +42,5 @@
 * (done) adjust position of guy realtive to shell
 * (done) adjust position of text plane to shell
 * (done) add guy-helpers.js to r0 folder for guyjs.
-
-* () start a local text-plane-helpers.js for all text plain helpers and park it in the r0 folder.
-* () I will need to create what I have in terms of the text set up in an object from
+* (done) start a local text-plane-helpers.js for all text plain helpers and park it in the r0 folder.
+* (done) I will need to create what I have in terms of the text set up in an object from
