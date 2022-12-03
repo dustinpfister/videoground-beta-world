@@ -4,7 +4,7 @@
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
-* () start a guy1 video folder based off of template5 video1
+* (done) start a guy1 video folder based off of template5 video1
 * () work out seq objects for the script
 * () have a first video for this one
 
