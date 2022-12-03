@@ -102,9 +102,9 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ0 - demo of guy walking with fixed face
+    // SEQ0 - 
     opt_seq.objects[0] = {
-        secs: 5,
+        secs: 3,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.walk(1 / 4 * 0.25 + partPer, 4);
@@ -116,9 +116,9 @@ VIDEO.init = function(sm, scene, camera){
             GUYANI.static1( 0 );
         }
     };
-    // SEQ1 - camera moves in closer and looks at head rather than body, head turns
+    // SEQ1 - 
     opt_seq.objects[1] = {
-        secs: 2,
+        secs: 3,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8 * partPer);
@@ -132,9 +132,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt( v1.lerp(v2, partPer) );
         }
     };
-    // SEQ2 - head talks
+    // SEQ2 - 
     opt_seq.objects[2] = {
-        secs: 5,
+        secs: 4,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
@@ -146,9 +146,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt( v2);
         }
     };
-    // SEQ3 - creepy smile
+    // SEQ3 - 
     opt_seq.objects[3] = {
-        secs: 3,
+        secs: 7,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
@@ -160,9 +160,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt( v2);
         }
     };
-    // SEQ4 - camera moves out
+    // SEQ4 - 
     opt_seq.objects[4] = {
-        secs: 2,
+        secs: 9,
         update: function(seq, partPer, partBias){
             // GUY1
             guy1.moveHead(1 / 8);
@@ -176,20 +176,22 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt( v1.lerp(v2, partPer) );
         }
     };
-    // SEQ 4 - EFFECT DEMO
+    // SEQ 4 - 
     opt_seq.objects[5] = {
-        secs: 13,
+        secs: 4,
+/*
         v3Paths: [
             { key: 'campos', array: v3Array_campos, lerp: true }
         ],
+*/
         update: function(seq, partPer, partBias){
             // GUY1
             guyHelper.updateGuyEffect(guy1, seq.getSinBias(1));
             guy1.moveHead(1 / 8);
             GUYANI.smile_creepy( 1 );
             // CAMERA
-            seq.copyPos('campos', camera);
-            camera.lookAt(guy1.group.position);
+            //seq.copyPos('campos', camera);
+            //camera.lookAt(guy1.group.position);
         }
     };
     //-------- ----------
