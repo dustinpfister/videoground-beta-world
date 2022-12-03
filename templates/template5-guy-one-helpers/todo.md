@@ -44,4 +44,4 @@
 * (done) add guy-helpers.js to r0 folder for guyjs.
 
 * () start a local text-plane-helpers.js for all text plain helpers and park it in the r0 folder.
-
+* () I will need to create what I have in terms of the text set up in an object from

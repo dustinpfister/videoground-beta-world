@@ -24,25 +24,29 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // TEXT CONST
     //-------- ----------
-    const TEXT_PXSIZE = 40;
-    const TEXT_BLANK_START_LINES = 7;
-    const TEXT_CHAR_PER_LINE = 9;
-    const TEXT_STARTY = 10;
-    const TEXT_BGCOLOR = 'rgba(0,0,0,0.4)';
-    const TEXT_FONTCOLORS = ['lime', 'white'];
-    const TEXT = [
+    const textData = {};
+    textData.TEXT_PXSIZE = 40;
+    textData.TEXT_BLANK_START_LINES = 7;
+    textData.TEXT_CHAR_PER_LINE = 9;
+    textData.TEXT_STARTY = 10;
+    textData.TEXT_BGCOLOR = 'rgba(0,0,0,0.4)';
+    textData.TEXT_FONTCOLORS = ['lime', 'white'];
+    textData.TEXT = [
         'Hello, this is just some sample text.',
         'So this is some more demo text for another seq object or whatever, this is a template file after all here.'
     ];
-    const TEXT_LINES = TEXT.map( (str) => {
-        const lines = TextPlane.createTextLines(str + ' ', TEXT_CHAR_PER_LINE);
+    textData.TEXT_LINES = textData.TEXT.map( (str) => {
+        const lines = TextPlane.createTextLines(str + ' ', textData.TEXT_CHAR_PER_LINE);
         let i = 0;
-        while(i < TEXT_BLANK_START_LINES){
+        while(i < textData.TEXT_BLANK_START_LINES){
             lines.unshift('');
             i += 1;
         }
         return lines;
     });
+
+console.log(textData.TEXT_LINES);
+
     //-------- ----------
     // DAE
     //-------- ----------
@@ -67,10 +71,10 @@ VIDEO.init = function(sm, scene, camera){
         });
     };
     // update text helper
-    const updateText = (plane_text, alpha, TLIndex) => {
+    const updateText = (plane_text, alpha, TLIndex, textData ) => {
         // move the text lines ( lines, testLines, alpha, startY, deltaY )
         const lines = plane_text.userData.canObj.state.lines;
-        TextPlane.moveTextLines(lines, TEXT_LINES[TLIndex], alpha, TEXT_STARTY, TEXT_PXSIZE);
+        TextPlane.moveTextLines(lines, textData.TEXT_LINES[TLIndex], alpha, textData.TEXT_STARTY, textData.TEXT_PXSIZE);
         // update the canave
         canvasMod.update(plane_text.userData.canObj);
     };
@@ -80,15 +84,15 @@ VIDEO.init = function(sm, scene, camera){
     const plane_text = TextPlane.createPlane({
         w: 8 * SCALE, h: 4.5 * SCALE,
         rows: 10, size: 256,
-        palette: [TEXT_BGCOLOR, TEXT_FONTCOLORS[0], TEXT_FONTCOLORS[1]]
+        palette: [textData.TEXT_BGCOLOR, textData.TEXT_FONTCOLORS[0], textData.TEXT_FONTCOLORS[1]]
     });
     plane_text.position.set(-9.45 * SCALE, 4.5 * SCALE, -1.5 * SCALE);
     //plane_text.position.set(-2, 2, 0);
     plane_text.rotation.set(0, Math.PI / 180 * 90, 0);
     scene.add(plane_text);
     // Set Line Style 
-    setLineStyle(plane_text, TEXT_PXSIZE, 'courier');
-    updateText(plane_text, 0, 0);
+    setLineStyle(plane_text, textData.TEXT_PXSIZE, 'courier');
+    updateText(plane_text, 0, 0, textData);
     //-------- ----------
     // GUY
     //-------- ----------
@@ -132,7 +136,7 @@ VIDEO.init = function(sm, scene, camera){
             guy1.moveHead(0);
             guyHelper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
             // TEXT
-            updateText(plane_text, seq.per, 0);
+            updateText(plane_text, seq.per, 0, textData);
             // camera defaults
             camera.position.set(10, 10, 10);
             camera.lookAt(guy1.group.position);
