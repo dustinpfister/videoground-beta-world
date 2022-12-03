@@ -27,7 +27,7 @@ VIDEO.init = function(sm, scene, camera){
     const textData = textPlaneHelper.createTextData({
         TEXT_PXSIZE: 90,
         TEXT_BLANK_START_LINES: 2,
-        TEXT: [' 3D']
+        TEXT: [' 3D ']
     });
     //-------- ----------
     // DAE
@@ -92,7 +92,7 @@ VIDEO.init = function(sm, scene, camera){
             guyHelper.setGuyPos(guy1, new THREE.Vector3(1.5 * SCALE, 0, 0));
             GUYANI.static1( 0 );
             // TEXT
-            textPlaneHelper.updateText(plane_text, seq.per, 0, textData);
+            textPlaneHelper.updateText(plane_text, 0.25, 0, textData);
             // camera defaults
             camera.position.set(10, 10, 10);
             camera.lookAt(guy1.group.position);
