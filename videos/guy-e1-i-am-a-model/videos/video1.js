@@ -74,9 +74,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // PATHS
     //-------- ----------
-    const v3Array_campos = curveMod.QBV3Array([
-        [10, 10, 10, 7, 7,-7,    0, 0, 0,      100]
-    ]);
+    //const v3Array_campos = curveMod.QBV3Array([
+    //    [10, 10, 10, 7, 7,-7,    0, 0, 0,      100]
+    //]);
     //scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
     // A MAIN SEQ OBJECT
@@ -102,7 +102,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ0 - 
+    // SEQ0 - guy walks into the scene
     opt_seq.objects[0] = {
         secs: 3,
         update: function(seq, partPer, partBias){
@@ -110,10 +110,13 @@ VIDEO.init = function(sm, scene, camera){
             guy1.walk(1 / 4 * 0.25 + partPer, 4);
             const v3_guypos = new THREE.Vector3();
             v3_guypos.x = 1.5 * SCALE;
-            //v3_guypos.z = -5 + 5 * partPer;
             v3_guypos.z = -10 * SCALE + 10 * SCALE * partPer;
             guyHelper.setGuyPos(guy1, v3_guypos);
             GUYANI.static1( 0 );
+            // CAMERA
+            const a = 10 - 5 * partPer;
+            camera.position.set(a, a, a);
+            camera.lookAt(guy1.group.position);
         }
     };
     // SEQ1 - 
@@ -121,15 +124,10 @@ VIDEO.init = function(sm, scene, camera){
         secs: 3,
         update: function(seq, partPer, partBias){
             // GUY1
-            guy1.moveHead(1 / 8 * partPer);
-            GUYANI.static1( 0 );
+
             // CAMERA
-            const a = 10 - 6 * partPer;
-            camera.position.set(a, a, a);
-            const v1 = guy1.group.position.clone();
-            const v2 = new THREE.Vector3();
-            guy1.head.getWorldPosition(v2);
-            camera.lookAt( v1.lerp(v2, partPer) );
+            camera.position.set(5, 5, 5);
+            camera.lookAt(guy1.group.position);
         }
     };
     // SEQ2 - 
@@ -137,13 +135,10 @@ VIDEO.init = function(sm, scene, camera){
         secs: 4,
         update: function(seq, partPer, partBias){
             // GUY1
-            guy1.moveHead(1 / 8);
-            GUYANI.talk( seq.getBias( 16 ) );
+
             // CAMERA
-            camera.position.set(4, 4, 4);
-            const v2 = new THREE.Vector3();
-            guy1.head.getWorldPosition(v2);
-            camera.lookAt( v2);
+            camera.position.set(5, 5, 5);
+            camera.lookAt(guy1.group.position);
         }
     };
     // SEQ3 - 
@@ -151,13 +146,10 @@ VIDEO.init = function(sm, scene, camera){
         secs: 7,
         update: function(seq, partPer, partBias){
             // GUY1
-            guy1.moveHead(1 / 8);
-            GUYANI.smile_creepy( partPer );
+
             // CAMERA
-            camera.position.set(4, 4, 4);
-            const v2 = new THREE.Vector3();
-            guy1.head.getWorldPosition(v2);
-            camera.lookAt( v2);
+            camera.position.set(5, 5, 5);
+            camera.lookAt(guy1.group.position);
         }
     };
     // SEQ4 - 
@@ -165,33 +157,21 @@ VIDEO.init = function(sm, scene, camera){
         secs: 9,
         update: function(seq, partPer, partBias){
             // GUY1
-            guy1.moveHead(1 / 8);
-            GUYANI.smile_creepy( 1 );
+
             // CAMERA
-            const a = 4 + 6 * partPer;
-            camera.position.set(a, a, a);
-            const v1 = new THREE.Vector3();
-            guy1.head.getWorldPosition(v1);
-            const v2 = guy1.group.position.clone();
-            camera.lookAt( v1.lerp(v2, partPer) );
+            camera.position.set(5, 5, 5);
+            camera.lookAt(guy1.group.position);
         }
     };
     // SEQ 4 - 
     opt_seq.objects[5] = {
         secs: 4,
-/*
-        v3Paths: [
-            { key: 'campos', array: v3Array_campos, lerp: true }
-        ],
-*/
         update: function(seq, partPer, partBias){
             // GUY1
-            guyHelper.updateGuyEffect(guy1, seq.getSinBias(1));
-            guy1.moveHead(1 / 8);
-            GUYANI.smile_creepy( 1 );
+
             // CAMERA
-            //seq.copyPos('campos', camera);
-            //camera.lookAt(guy1.group.position);
+            camera.position.set(5, 5, 5);
+            camera.lookAt(guy1.group.position);
         }
     };
     //-------- ----------
