@@ -2,6 +2,15 @@
 
 <!-- WHATS NEXT -->
 
+## () - timer-basic-30sec
+
+## () - timer-basic-template
+* () have const settings for amount of time
+* () have a let value for a time string
+* () have a collection of objects for numbers 0-9 and ':'
+* () start DAE file for this template that will contain just numbers and ':' for now
+* () use DAE Objects for all time str obejcts
+
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
 * (done) start a guy1 video folder based off of template5 video1
