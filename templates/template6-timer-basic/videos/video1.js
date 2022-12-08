@@ -9,9 +9,37 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
+    // CANVAS OBJ
+    //-------- ----------
+    const drawNumber = (canObj, ctx, canvas, state) => {
+        ctx.fillStyle = canObj.palette[0];
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = canObj.palette[1];
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        ctx.font = '16px arial';
+        ctx.fillText(state.char, 16, 16);
+    };
+    const canObj_number = canvasMod.create({
+        size: 32,
+        update_mode: 'canvas',
+        palette: ['black', 'white'],
+        state: {
+           char: '0',
+        },
+        draw: drawNumber
+    });
+    canvasMod.update(canObj_number);
+    //-------- ----------
     // SCENE CHILD OBJECTS
     //-------- ----------
     scene.add( new THREE.GridHelper(10, 10) );
+
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(5,5,5), new THREE.MeshBasicMaterial({
+        map: canObj_number.texture
+    }));
+    scene.add(mesh);
+
     //-------- ----------
     // BACKGROUND
     //-------- ----------
