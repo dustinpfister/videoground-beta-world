@@ -39,6 +39,16 @@ VIDEO.init = function(sm, scene, camera){
         });
         return timeGroup;
     };
+    // update time group helper
+    const updateTimeGroup = (timeGroup, str_time) => {
+        str_time = str_time || '00:00:00';
+        timeGroup.children.forEach((mesh, i, arr) => {
+            const canObj = mesh.userData.canObj;
+            const char = str_time[i];
+            canObj.state.char = char;
+            canvasMod.update(canObj);
+        });
+    };
     //-------- ----------
     // CANVAS OBJ
     //-------- ----------
@@ -61,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
     timeGroup.scale.set(2,4,1)
     scene.add(timeGroup);
 
-
+    updateTimeGroup(timeGroup, '33:33:33');
 
     //-------- ----------
     // BACKGROUND
