@@ -3,13 +3,8 @@
 <!-- WHATS NEXT -->
 
 ## () - timer-basic-30sec
-
-## () - timer-basic-template
-* () have const settings for amount of time
-* () have a let value for a time string
-* () have a collection of objects for numbers 0-9 and ':'
-* () start DAE file for this template that will contain just numbers and ':' for now
-* () use DAE Objects for all time str obejcts
+* () finish template 6
+* () make a 30sec video for this
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
