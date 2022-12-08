@@ -11,7 +11,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // STATE
     //-------- ----------
-    let str_time = '00:00:00';
+    let str_time = '00';
     //-------- ----------
     // HELPERS
     //-------- ----------
@@ -34,7 +34,8 @@ VIDEO.init = function(sm, scene, camera){
             }));
             mesh.userData.canObj = canObj;
             const a_charpos = i / arr.length;
-            mesh.position.x = -4.5 + 9 * a_charpos;
+            mesh.position.x = -0.6 + 2.4 * a_charpos;
+            mesh.position.y = 0.5;
             timeGroup.add(mesh);
         });
         return timeGroup;
@@ -71,7 +72,7 @@ VIDEO.init = function(sm, scene, camera){
     timeGroup.scale.set(2,4,1)
     scene.add(timeGroup);
 
-    updateTimeGroup(timeGroup, '33:33:33');
+    updateTimeGroup(timeGroup, '30');
 
     //-------- ----------
     // BACKGROUND
