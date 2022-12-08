@@ -9,10 +9,6 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
-    // STATE
-    //-------- ----------
-    let str_time = '00';
-    //-------- ----------
     // HELPERS
     //-------- ----------
     const createTimeGroup = (str_time) => {
@@ -68,7 +64,7 @@ VIDEO.init = function(sm, scene, camera){
     scene.add( new THREE.GridHelper(10, 10) );
 
     // create and add the time group
-    const timeGroup = createTimeGroup(str_time);
+    const timeGroup = createTimeGroup('00');
     timeGroup.scale.set(2,4,1)
     scene.add(timeGroup);
 
@@ -82,7 +78,7 @@ VIDEO.init = function(sm, scene, camera){
     // PATHS
     //-------- ----------
     const v3Array_campos = curveMod.QBV3Array([
-        [10, 10, 10, 7, 7,-7,    0, 0, 0,      100]
+        [10, 10, 10, 0, 5, 10,    0, 0, 0,      100]
     ]);
     //scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
@@ -96,6 +92,10 @@ VIDEO.init = function(sm, scene, camera){
             camera.position.set(10, 10, 10);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1;
+
+            let secs = Math.floor(30 - 30 * seq.per);
+            updateTimeGroup(timeGroup, String(secs).padStart(2, '0'));
+
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
@@ -111,7 +111,7 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             // CAMERA
             seq.copyPos('campos', camera);
-            camera.lookAt(0, 0, 0);
+            camera.lookAt(0, 2 * partPer, 0);
         }
     };
     //-------- ----------
