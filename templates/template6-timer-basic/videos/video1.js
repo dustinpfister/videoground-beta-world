@@ -20,6 +20,7 @@ VIDEO.init = function(sm, scene, camera){
         ctx.font = '16px arial';
         ctx.fillText(state.char, 16, 16);
     };
+/*
     const canObj_number = canvasMod.create({
         size: 32,
         update_mode: 'canvas',
@@ -30,15 +31,35 @@ VIDEO.init = function(sm, scene, camera){
         draw: drawNumber
     });
     canvasMod.update(canObj_number);
+*/
     //-------- ----------
     // SCENE CHILD OBJECTS
     //-------- ----------
     scene.add( new THREE.GridHelper(10, 10) );
 
-    const mesh = new THREE.Mesh(new THREE.BoxGeometry(5,5,5), new THREE.MeshBasicMaterial({
-        map: canObj_number.texture
-    }));
-    scene.add(mesh);
+    // create and add the time group
+    const timeGroup = new THREE.Group();
+    scene.add(timeGroup);
+
+    '12:34:56'.split('').forEach((char, i, arr) => {
+        const canObj = canvasMod.create({
+            size: 32,
+            update_mode: 'canvas',
+            palette: ['black', 'white'],
+            state: {
+               char: char,
+            },
+            draw: drawNumber
+        });
+        canvasMod.update(canObj);
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({
+            map: canObj.texture
+        }));
+        mesh.userData.canObj = canObj;
+        const a_charpos = i / arr.length;
+        mesh.position.x = -4 + 8 * a_charpos;
+        timeGroup.add(mesh);
+    });
 
     //-------- ----------
     // BACKGROUND
