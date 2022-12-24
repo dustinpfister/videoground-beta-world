@@ -25,9 +25,9 @@ VIDEO.init = function(sm, scene, camera){
     // PATHS
     //-------- ----------
     const v3Array_campos = curveMod.QBV3Array([
-        [10, 10, 10, 0, 5, 10,    0, 0, 0,      100]
+        [5, 5, 5, -5, 5, 5,    0, 0, 0,      100]
     ]);
-    //scene.add( curveMod.debugPoints( v3Array_campos ) );
+    scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -103,8 +103,9 @@ VIDEO.init = function(sm, scene, camera){
             ],
             update: function(seq, partPer, partBias){
                 // CAMERA
-                seq.copyPos('campos', camera);
-                camera.lookAt(0, 2 * partPer, 0);
+                //seq.copyPos('campos', camera);
+                camera.position.set(15, 15, 15);
+                camera.lookAt(count_sec.position);
             }
         };
         //-------- ----------
