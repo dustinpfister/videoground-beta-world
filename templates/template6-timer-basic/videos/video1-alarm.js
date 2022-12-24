@@ -1,4 +1,4 @@
-// video1-thum.js for template6-timer-basic
+// video1-alarm for template6-timer-basic
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -12,8 +12,11 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    const SECS = 30;                     // NUMBER OF SECONDS
+    const SECS = 0;                      // NUMBER OF SECONDS SHOULD BE ZERO FOR AN ALARM
     const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
+    const START_FRAME = 899;             // The start frame value to display 
+                                         // ( this should be the last frame value from the cd video part )
+    const ALARM_SECS = 5;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -30,7 +33,7 @@ VIDEO.init = function(sm, scene, camera){
     // PATHS
     //-------- ----------
     const v3Array_campos = curveMod.QBV3Array([
-        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100]
+        [-5, 2, 4, 0, 1, 8,    0, 0, 2,      100]
     ]);
     //scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
@@ -45,6 +48,17 @@ VIDEO.init = function(sm, scene, camera){
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
         // if I want to do something with each source objects
+/*
+        Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
+            const obj = SOURCE_OBJECTS[key];
+            const mat = obj.material;
+            if(mat.map){
+                const tex = mat.map;
+                //tex.magFilter = THREE.NearestFilter;
+                //tex.minFilter = THREE.NearestFilter;
+            }
+        });
+*/
         //-------- ----------
         // SCENE CHILD OBJECTS
         //-------- ----------
@@ -80,9 +94,10 @@ VIDEO.init = function(sm, scene, camera){
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.26;
-                // setting count down values
+                // DISPLAY SECS VALUES, WHICH SHOULD BE 0 OR whatever to display for an alarm video part
+                
                 countDown.set(count_sec, SECS);
-                countDown.set(count_frames, '000');
+                countDown.set(count_frames, seq.frame + START_FRAME);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -91,7 +106,7 @@ VIDEO.init = function(sm, scene, camera){
         };
         // SEQ 4 - EFFECT DEMO
         opt_seq.objects[0] = {
-            secs: 30,
+            secs: ALARM_SECS,
             v3Paths: [
                 { key: 'campos', array: v3Array_campos, lerp: true }
             ],

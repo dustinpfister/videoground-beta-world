@@ -1,4 +1,4 @@
-// video1 for template6-timer-basic
+// video1-countdown for template6-timer-basic
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
-            digits: 3,
+            digits: 4,
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
