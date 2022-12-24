@@ -25,9 +25,9 @@ VIDEO.init = function(sm, scene, camera){
     // PATHS
     //-------- ----------
     const v3Array_campos = curveMod.QBV3Array([
-        [5, 5, 5, -5, 5, 5,    0, 0, 0,      100]
+        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100]
     ]);
-    scene.add( curveMod.debugPoints( v3Array_campos ) );
+    //scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -39,7 +39,8 @@ VIDEO.init = function(sm, scene, camera){
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
-        console.log(SOURCE_OBJECTS);
+        // if I want to do something with each source objects
+/*
         Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
             const obj = SOURCE_OBJECTS[key];
             const mat = obj.material;
@@ -47,9 +48,9 @@ VIDEO.init = function(sm, scene, camera){
                 const tex = mat.map;
                 //tex.magFilter = THREE.NearestFilter;
                 //tex.minFilter = THREE.NearestFilter;
-                console.log(mat.map);
             }
         });
+*/
         //-------- ----------
         // SCENE CHILD OBJECTS
         //-------- ----------
@@ -84,7 +85,7 @@ VIDEO.init = function(sm, scene, camera){
                 // camera defaults
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
-                camera.zoom = 1;
+                camera.zoom = 1.26;
                 const a1 = (seq.frame + 1) / seq.frameMax;
                 let secs = Math.floor(30 - 30 * a1);
                 countDown.set(count_sec, secs);
@@ -103,9 +104,9 @@ VIDEO.init = function(sm, scene, camera){
             ],
             update: function(seq, partPer, partBias){
                 // CAMERA
-                //seq.copyPos('campos', camera);
-                camera.position.set(15, 15, 15);
-                camera.lookAt(count_sec.position);
+                seq.copyPos('campos', camera);
+                //camera.position.set(10, 10, 10);
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
             }
         };
         //-------- ----------
