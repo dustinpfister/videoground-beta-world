@@ -1,15 +1,16 @@
 # template 6 - timer basic todo list
 
-## video 3 - DAE FILE
-* () start DAE file for this template that will contain just numbers and ':' for now
-* () use DAE Objects for all time str obejcts
+## () - video1-thum, and video1-alarm files
+* () rename video1.js to video1-countdown.js
+* () have a video1-thum.js file for the sake of making a video that is a thumnail image
+* () have a video1-alarm.js file that can be used to make addtional frames for an alarm video part
 
-## video 2 - new source object system
-* () have a system where the idea is to have a collection of source objects for 0-9 and :
-* () a timeGroup can then be a group of groups where each char location is a copy of all value from the source objects
-* () I will want to have a helper that will convert 600 to '10:00'
+## ( done 12/24/2022 ) video1 - using count-down.js r0, cd3 DAE FILES
+* (done) now using count-down.js r0 for video1.js
+* (done) using cd3 DAE files for video1
+* (done) using the DAE loader with count-down.js over what I have in videoground
 
-## (done 12/08/2022 ) video 1 - core idea started
+## ( done 12/08/2022 ) video 1 - core idea started
 * (done) have a collection of objects for numbers 0-9 and ':'
 * (done) using canvas for now
 
