@@ -10,6 +10,11 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
+    // CONST
+    // ---------- ----------
+    const SECS = 30;                     // NUMBER OF SECONDS
+    const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
+    // ---------- ----------
     // LIGHT
     // ---------- ----------
     const dl = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -34,7 +39,7 @@ VIDEO.init = function(sm, scene, camera){
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-nums.dae'),
-            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-ground.dae')
+            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/' + DAE_SCENE_FILE + '.dae')
         ]
     )
     .then( (SOURCE_OBJECTS) => {
@@ -87,7 +92,7 @@ VIDEO.init = function(sm, scene, camera){
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.26;
                 const a1 = (seq.frame + 1) / seq.frameMax;
-                let secs = Math.floor(30 - 30 * a1);
+                let secs = Math.floor(SECS - SECS * a1);
                 countDown.set(count_sec, secs);
                 countDown.set(count_frames, seq.frame);
             },

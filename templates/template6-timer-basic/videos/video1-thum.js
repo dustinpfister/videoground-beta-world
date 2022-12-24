@@ -12,7 +12,8 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    const SECS = 30;
+    const SECS = 30;                     // NUMBER OF SECONDS
+    const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -38,7 +39,7 @@ VIDEO.init = function(sm, scene, camera){
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-nums.dae'),
-            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-ground.dae')
+            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/' + DAE_SCENE_FILE + '.dae')
         ]
     )
     .then( (SOURCE_OBJECTS) => {
