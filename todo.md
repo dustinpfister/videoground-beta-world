@@ -2,9 +2,13 @@
 
 <!-- WHATS NEXT -->
 
-## () - timer-basic-30sec
-* () finish template 6
-* () make a 30sec video for this
+## () - timer-basic
+* (done) finish template 6
+* () start timer-basic video folder
+* () Make a custom alarm video effect
+* () make a 30 sec video
+* () make a 15 sec video
+* () make a 10 sec video
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
