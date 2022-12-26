@@ -47,18 +47,6 @@ VIDEO.init = function(sm, scene, camera){
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
-        // if I want to do something with each source objects
-/*
-        Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
-            const obj = SOURCE_OBJECTS[key];
-            const mat = obj.material;
-            if(mat.map){
-                const tex = mat.map;
-                //tex.magFilter = THREE.NearestFilter;
-                //tex.minFilter = THREE.NearestFilter;
-            }
-        });
-*/
         //-------- ----------
         // SCENE CHILD OBJECTS
         //-------- ----------
@@ -87,6 +75,12 @@ VIDEO.init = function(sm, scene, camera){
         // A MAIN SEQ OBJECT
         //-------- ----------
         // start options for main seq object
+        //!!! I SHOULD NOT HAVE TO COPY AND PAST THIS FROM THE COUNT-DOWN.JS MODULE
+        const positionDigit = (digit, di, digits, width) => {
+            const hd = digits / 2;
+            const sx = hd * width * -1;
+            digit.position.x = width / 2 + sx + width * di;
+        };
         const opt_seq = {
             fps: 30,
             beforeObjects: function(seq){
@@ -95,9 +89,21 @@ VIDEO.init = function(sm, scene, camera){
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.26;
                 // DISPLAY SECS VALUES, WHICH SHOULD BE 0 OR whatever to display for an alarm video part
-                
                 countDown.set(count_sec, SECS);
                 countDown.set(count_frames, seq.frame + START_FRAME);
+                // scale all digit groups of count_secs
+                const a1 = seq.getSinBias( Math.floor(ALARM_SECS * 2) , false);
+                count_sec.children.forEach( (digit, i) => {
+                    const s = 1 + 0.25 * a1;
+                    digit.scale.set(s, s, s);
+                    // adjust position
+                    positionDigit(digit, i, 2, 1)
+                    const n = i % 2 === 0 ? -1 : 1;
+                    digit.position.x = digit.position.x + (0.30 * n) * a1;
+                    digit.position.y = 0.5 * a1;
+                    // adjust rotation
+                    digit.rotation.y = Math.PI / 180 * 22.5 * n * a1;
+                });
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
