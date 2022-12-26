@@ -64,8 +64,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.25, 0.25, 0.25);
-        count_frames.position.set(0, 0, 1.50);
+        count_frames.scale.set(0.35, 0.35, 0.35);
+        count_frames.position.set(0, -0.1, 1.50);
         scene.add(count_frames);
         // add ground object
         scene.add( SOURCE_OBJECTS['ground_0'] );
