@@ -90,7 +90,7 @@ VIDEO.init = function(sm, scene, camera){
                 // camera defaults
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
-                camera.zoom = 1.26;
+                camera.zoom = 1.10 + 0.15 * seq.getSinBias(1, false);
                 const a1 = (seq.frame + 1) / seq.frameMax;
                 let secs = Math.floor(SECS - SECS * a1);
                 countDown.set(count_sec, secs);
@@ -111,7 +111,7 @@ VIDEO.init = function(sm, scene, camera){
                 // CAMERA
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
-                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
             }
         };
         //-------- ----------
