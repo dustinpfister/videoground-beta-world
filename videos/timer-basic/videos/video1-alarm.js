@@ -66,8 +66,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.25, 0.25, 0.25);
-        count_frames.position.set(0, 0, 1.50);
+        count_frames.scale.set(0.35, 0.35, 0.35);
+        count_frames.position.set(0, -0.1, 1.50);
         scene.add(count_frames);
         // add ground object
         scene.add( SOURCE_OBJECTS['ground_0'] );
@@ -87,7 +87,7 @@ VIDEO.init = function(sm, scene, camera){
                 // camera defaults
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
-                camera.zoom = 1.26;
+                camera.zoom = 1.26 - 0.26 * seq.per;
                 // DISPLAY SECS VALUES, WHICH SHOULD BE 0 OR whatever to display for an alarm video part
                 countDown.set(count_sec, SECS);
                 countDown.set(count_frames, seq.frame + START_FRAME);
