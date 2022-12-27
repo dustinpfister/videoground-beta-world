@@ -12,7 +12,8 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    const SECS = 30;                     // NUMBER OF SECONDS
+    const SECS = 30;                     // NUMBER OF SECONDS TO DISPLAY
+    const FRAMES = 30;                   // SET NUMBER OF FRAMES FOR A SET NUMBER OF THUMS TO CHOOSE FROM
     const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
     // ---------- ----------
     // LIGHT
@@ -107,7 +108,7 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         const seq = scene.userData.seq = seqHooks.create(opt_seq);
         //console.log('frameMax for main seq: ' + seq.frameMax);
-        sm.frameMax = 30;
+        sm.frameMax = FRAMES;
     })
     .catch( (e) => {
         console.log(e.message);
