@@ -106,8 +106,8 @@ VIDEO.init = function(sm, scene, camera){
         // SET FRAME MAX
         //-------- ----------
         const seq = scene.userData.seq = seqHooks.create(opt_seq);
-        console.log('frameMax for main seq: ' + seq.frameMax);
-        sm.frameMax = seq.frameMax;
+        //console.log('frameMax for main seq: ' + seq.frameMax);
+        sm.frameMax = 30;
     })
     .catch( (e) => {
         console.log(e.message);
