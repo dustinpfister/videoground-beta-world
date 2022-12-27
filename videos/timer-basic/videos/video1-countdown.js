@@ -103,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
         };
         // SEQ 4 - EFFECT DEMO
         opt_seq.objects[0] = {
-            secs: 30,
+            secs: SECS,
             v3Paths: [
                 { key: 'campos', array: v3Array_campos, lerp: true }
             ],
