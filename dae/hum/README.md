@@ -7,4 +7,5 @@ After making the 2d outline there is then the question of where to go from there
 ## todo
 
 * (done) have a 2d outline of the bird
-* () start making the rest of the body from the 2d outline by using a miror modifer.
+* (done) start making the rest of the body from the 2d outline by using a miror modifer.
+* () make a custom shape that is not just a bevel
