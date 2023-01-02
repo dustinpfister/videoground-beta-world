@@ -1,4 +1,4 @@
-// video1-countdown for timer-hum
+	// video1-countdown for timer-hum
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -46,17 +46,25 @@ VIDEO.init = function(sm, scene, camera){
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
         // if I want to do something with each source objects
-/*
+
         Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
             const obj = SOURCE_OBJECTS[key];
             const mat = obj.material;
+
+            if( String( parseInt(key) )  != 'NaN'){
+                obj.material.transparent = true;
+                obj.material.opacity = 0.3;
+            }
+
+
             if(mat.map){
+
                 const tex = mat.map;
                 //tex.magFilter = THREE.NearestFilter;
                 //tex.minFilter = THREE.NearestFilter;
             }
         });
-*/
+
         //-------- ----------
         // HUM OBJECTS
         //-------- ----------
