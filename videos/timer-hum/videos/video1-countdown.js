@@ -5,7 +5,8 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
    '../../../js/curve/r0/curve.js',
-   '../../../js/count-down/r0/count-down.js'
+   '../../../js/count-down/r0/count-down.js',
+   '../../../js/tween-many/r0/tween-many.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -68,8 +69,12 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // HUM OBJECTS
         //-------- ----------
-        const hum = SOURCE_OBJECTS['hum_1'].clone();
-        hum.material = SOURCE_OBJECTS['hum_1'].material.clone();
+
+        const hum = tweenMany.createMesh(SOURCE_OBJECTS, 'hum_1');
+
+
+        //const hum = SOURCE_OBJECTS['hum_1'].clone();
+        //hum.material = SOURCE_OBJECTS['hum_1'].material.clone();
         hum.material.color = new THREE.Color(0, 1, 1);
         hum.scale.set(0.5, 0.5, 0.5);
         hum.position.set(0,0,-2)
@@ -116,6 +121,12 @@ VIDEO.init = function(sm, scene, camera){
                 let secs = Math.floor(SECS - SECS * a1);
                 countDown.set(count_sec, secs);
                 countDown.set(count_frames, seq.frame);
+
+const a_hum = seq.getSinBias(60, false);
+tweenMany.tween(hum.geometry, [
+   [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
+]);
+
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
