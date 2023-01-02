@@ -1,4 +1,4 @@
-	// video1-countdown for timer-hum
+// video1-countdown for timer-hum
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -14,7 +14,6 @@ VIDEO.init = function(sm, scene, camera){
     // CONST
     // ---------- ----------
     const SECS = 30;                     // NUMBER OF SECONDS
-    const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -40,46 +39,33 @@ VIDEO.init = function(sm, scene, camera){
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-nums.dae'),
-            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/' + DAE_SCENE_FILE + '.dae'),
             videoAPI.pathJoin(sm.filePath, '../../../dae/hum/hum_lp.dae')
         ]
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
         // if I want to do something with each source objects
-
         Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
             const obj = SOURCE_OBJECTS[key];
             const mat = obj.material;
-
             if( String( parseInt(key) )  != 'NaN'){
                 obj.material.transparent = true;
                 obj.material.opacity = 0.6;
             }
-
-
             if(mat.map){
-
                 const tex = mat.map;
                 //tex.magFilter = THREE.NearestFilter;
                 //tex.minFilter = THREE.NearestFilter;
             }
         });
-
         //-------- ----------
         // HUM OBJECTS
         //-------- ----------
-
         const hum = tweenMany.createMesh(SOURCE_OBJECTS, 'hum_1');
-
-
-        //const hum = SOURCE_OBJECTS['hum_1'].clone();
-        //hum.material = SOURCE_OBJECTS['hum_1'].material.clone();
         hum.material.color = new THREE.Color(0, 1, 1);
         hum.scale.set(0.5, 0.5, 0.5);
         hum.position.set(0,0,-2)
         scene.add(hum);
-
         //-------- ----------
         // COUNT DOWN OBJECTS
         //-------- ----------
@@ -104,8 +90,6 @@ VIDEO.init = function(sm, scene, camera){
         //count_frames.position.set(0, -0.1, 1.50);
         count_frames.position.copy(hum.position).add( new THREE.Vector3(0,-1.5,1) );
         scene.add(count_frames);
-        // add ground object
-        //scene.add( SOURCE_OBJECTS['ground_0'] );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------

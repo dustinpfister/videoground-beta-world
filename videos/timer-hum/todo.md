@@ -42,14 +42,13 @@ TERM                  term percent / compare percent
 
 ## ( ) - video1-alarm, video1-thum
 
-## ( ) - start video folder, video1-countdown
-* () start the video folder
-* () make use of the hum_lp DAE file
-* () see about using the toon material for hum
-* () add tween many and see about using that to switch between hum 0 and hum 1 over time
-* () have both secs and ms counts along with frame count
+## () - Object grid wrap, MS Count
 * () see about using object grid wrap to add some sense of movement
+* () have both secs and ms counts along with frame count
 
-
+## ( done 01/02/2023 ) - start video folder, video1-countdown
+* (done) start the video folder
+* (done) make use of the hum_lp DAE file
+* (done) add tween many and see about using that to switch between hum 0 and hum 1 over time
 
 
