@@ -39,7 +39,8 @@ VIDEO.init = function(sm, scene, camera){
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-nums.dae'),
-            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/' + DAE_SCENE_FILE + '.dae')
+            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/' + DAE_SCENE_FILE + '.dae'),
+            videoAPI.pathJoin(sm.filePath, '../../../dae/hum/hum_lp.dae')
         ]
     )
     .then( (SOURCE_OBJECTS) => {
@@ -57,7 +58,15 @@ VIDEO.init = function(sm, scene, camera){
         });
 */
         //-------- ----------
-        // SCENE CHILD OBJECTS
+        // HUM OBJECTS
+        //-------- ----------
+        const hum = SOURCE_OBJECTS['hum_1'];
+        hum.scale.set(0.5, 0.5, 0.5);
+        hum.position.set(0,0,-2)
+        scene.add(hum);
+
+        //-------- ----------
+        // COUNT DOWN OBJECTS
         //-------- ----------
         // count secs count down object
         const count_sec = countDown.create({
@@ -66,7 +75,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.position.set(0, 1.30, 0.4);
+        //count_sec.position.set(0, 1.30, 0.4);
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(0,0,1) );
         scene.add(count_sec);
         // adding a frame count
         const count_frames = countDown.create({
@@ -76,10 +86,11 @@ VIDEO.init = function(sm, scene, camera){
             source_objects: SOURCE_OBJECTS
         });
         count_frames.scale.set(0.35, 0.35, 0.35);
-        count_frames.position.set(0, -0.1, 1.50);
+        //count_frames.position.set(0, -0.1, 1.50);
+        count_frames.position.copy(hum.position).add( new THREE.Vector3(0,-1.5,1) );
         scene.add(count_frames);
         // add ground object
-        scene.add( SOURCE_OBJECTS['ground_0'] );
+        //scene.add( SOURCE_OBJECTS['ground_0'] );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -111,7 +122,8 @@ VIDEO.init = function(sm, scene, camera){
                 // CAMERA
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
-                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
+                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
+camera.lookAt( hum.position.clone().add(new THREE.Vector3(0,0,0)));
             }
         };
         //-------- ----------
