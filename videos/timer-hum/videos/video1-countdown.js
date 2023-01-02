@@ -76,8 +76,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        //count_sec.position.set(0, 1.30, 0.4);
-        count_sec.position.copy(hum.position).add( new THREE.Vector3(0,0,1) );
+        count_sec.scale.set(0.75, 0.75, 0.75);
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(0.5, 0, 0.75) );
         scene.add(count_sec);
         // adding a frame count
         const count_frames = countDown.create({
@@ -86,9 +86,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.35, 0.35, 0.35);
-        //count_frames.position.set(0, -0.1, 1.50);
-        count_frames.position.copy(hum.position).add( new THREE.Vector3(0,-1.5,1) );
+        count_frames.scale.set(0.2, 0.2, 0.2);
+        count_frames.position.copy(hum.position).add( new THREE.Vector3(0.5, -1.2, 0.75) );
         scene.add(count_frames);
         //-------- ----------
         // A MAIN SEQ OBJECT
