@@ -17,15 +17,15 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // LIGHT
     // ---------- ----------
-    const dl = new THREE.DirectionalLight(0xffffff, 0.8);
-    dl.position.set(-2, 1, 2);
+    const dl = new THREE.DirectionalLight(0xffffff, 0.75);
+    dl.position.set(-2, 3, 2);
     scene.add(dl);
-    const al = new THREE.AmbientLight(0xffffff, 0.1);
+    const al = new THREE.AmbientLight(0xffffff, 0.05);
     scene.add(al);
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-    scene.background = new THREE.Color('#2a2a2a');
+    scene.background = new THREE.Color('#0f0f0f');
     //-------- ----------
     // PATHS
     //-------- ----------
@@ -53,7 +53,7 @@ VIDEO.init = function(sm, scene, camera){
 
             if( String( parseInt(key) )  != 'NaN'){
                 obj.material.transparent = true;
-                obj.material.opacity = 0.3;
+                obj.material.opacity = 0.6;
             }
 
 
@@ -68,7 +68,9 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // HUM OBJECTS
         //-------- ----------
-        const hum = SOURCE_OBJECTS['hum_1'];
+        const hum = SOURCE_OBJECTS['hum_1'].clone();
+        hum.material = SOURCE_OBJECTS['hum_1'].material.clone();
+        hum.material.color = new THREE.Color(0, 1, 1);
         hum.scale.set(0.5, 0.5, 0.5);
         hum.position.set(0,0,-2)
         scene.add(hum);
