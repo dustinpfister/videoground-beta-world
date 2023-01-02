@@ -6,6 +6,11 @@ After making the 2d outline there is then the question of where to go from there
 
 ## todo
 
+## () - have a hum_lp_outline.png for hum_lp.blend
+* () start a hum_lp_outline.png file for hum_lp.lend
+
+## ( done 12/02/2023 ) hum.blend and hum_lp.blend
 * (done) have a 2d outline of the bird
 * (done) start making the rest of the body from the 2d outline by using a miror modifer.
-* () make a custom shape that is not just a bevel
+* (done) start a low poly hum_lp.blend file
+* (done) make a custom shape that is not just a bevel with hum-lv
