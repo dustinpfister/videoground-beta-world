@@ -63,8 +63,8 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         const hum = tweenMany.createMesh(SOURCE_OBJECTS, 'hum_1');
         hum.material.color = new THREE.Color(0, 1, 1);
-        hum.scale.set(0.5, 0.5, 0.5);
-        hum.position.set(0,0,-2)
+        hum.scale.set(0.42, 0.42, 0.42);
+        hum.position.set(0,0,-2.5)
         scene.add(hum);
         //-------- ----------
         // COUNT DOWN OBJECTS
@@ -104,12 +104,14 @@ VIDEO.init = function(sm, scene, camera){
                 let secs = Math.floor(SECS - SECS * a1);
                 countDown.set(count_sec, secs);
                 countDown.set(count_frames, seq.frame);
-
-const a_hum = seq.getSinBias(60, false);
-tweenMany.tween(hum.geometry, [
-   [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
-]);
-
+                // hum tween of objects
+                const a_hum = seq.getSinBias(60, false);
+                tweenMany.tween(hum.geometry, [
+                    [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
+                ]);
+                // hum y pos up and down over time
+                const a_hum_y = seq.getSinBias(5, false);
+                hum.position.y = -0.25 + 0.5 * a_hum_y;
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -127,7 +129,7 @@ tweenMany.tween(hum.geometry, [
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
                 //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
-camera.lookAt( hum.position.clone().add(new THREE.Vector3(0,0,0)));
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,0.25,0)));
             }
         };
         //-------- ----------
