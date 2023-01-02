@@ -9,7 +9,12 @@ After making the 2d outline there is then the question of where to go from there
 ## () - have a hum_lp_outline.png for hum_lp.blend
 * () start a hum_lp_outline.png file for hum_lp.lend
 
-## ( done 12/02/2023 ) hum.blend and hum_lp.blend
+## ( done 12/02/2021 ) - hum 0 object and first DAE file
+* (done) hum 0 object with wings togeather
+* (done) hum 1 object with wings in apart state
+* (done) first DAE file
+
+## ( done 12/02/2023 ) - hum.blend and hum_lp.blend
 * (done) have a 2d outline of the bird
 * (done) start making the rest of the body from the 2d outline by using a miror modifer.
 * (done) start a low poly hum_lp.blend file
