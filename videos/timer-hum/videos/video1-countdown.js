@@ -50,7 +50,7 @@ VIDEO.init = function(sm, scene, camera){
             const mat = obj.material;
             if( String( parseInt(key) )  != 'NaN'){
                 obj.material.transparent = true;
-                obj.material.opacity = 0.6;
+                obj.material.opacity = 1;
             }
             if(mat.map){
                 const tex = mat.map;
@@ -76,8 +76,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.scale.set(0.75, 0.75, 0.75);
-        count_sec.position.copy(hum.position).add( new THREE.Vector3(0.5, 0, 0.75) );
+        count_sec.scale.set(1.25, 1.25, 1.25);
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(4, 0.5, 0) );
         scene.add(count_sec);
         // adding a frame count
         const count_frames = countDown.create({
@@ -86,8 +86,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.2, 0.2, 0.2);
-        count_frames.position.copy(hum.position).add( new THREE.Vector3(0.5, -1.2, 0.75) );
+        count_frames.scale.set(0.4, 0.4, 0.4);
+        count_frames.position.copy(hum.position).add( new THREE.Vector3(4, -1.3, 0) );
         scene.add(count_frames);
         //-------- ----------
         // A MAIN SEQ OBJECT
@@ -129,7 +129,7 @@ VIDEO.init = function(sm, scene, camera){
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
                 //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
-                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,0.25,0)));
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-2 ,-0.25,0)));
             }
         };
         //-------- ----------
