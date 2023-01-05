@@ -40,7 +40,12 @@ TERM                  term percent / compare percent
 
 ## ( ) - 30 seconds video
 
-## ( ) - video1-alarm, video1-thum
+## ( ) - video1-alarm
+* () just do a simple scale change with the bird
+* () random colors for the bird
+
+## ( done 01/05/2023 ) - video1-thum
+* (done) make the thum video
 
 ## ( done 01/05/2023 ) - Object grid wrap, MS Count
 * (done) see about using object grid wrap to add some sense of movement
