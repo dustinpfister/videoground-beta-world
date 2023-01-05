@@ -78,8 +78,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.scale.set(1, 1, 1);
-        count_sec.position.copy(hum.position).add( new THREE.Vector3(3.5, 0.5, 0) );
+        count_sec.scale.set(1.2, 1.2, 1.2);
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(3.3, 0.7, 0) );
         scene.add(count_sec);
         // count ms count down object
         const count_ms = countDown.create({
@@ -88,8 +88,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_ms.scale.set(0.35, 0.35, 0.35);
-        count_ms.position.copy(hum.position).add( new THREE.Vector3(5.2, 0, 0.6) );
+        count_ms.scale.set(0.4, 0.4, 0.4);
+        count_ms.position.copy(hum.position).add( new THREE.Vector3(5.3, 0, 0.6) );
         scene.add(count_ms);
         // adding a frame count
         const count_frames = countDown.create({
@@ -158,9 +158,9 @@ VIDEO.init = function(sm, scene, camera){
                 let secs = Math.floor(SECS - SECS * a1);
                 countDown.set(count_sec, secs);
                 countDown.set(count_frames, seq.frame);
-        let a2 = (SECS - SECS * a1) % 1;
-        let ms = Math.floor(1000 * a2);
-        countDown.set(count_ms, ms);
+                let a2 = (SECS - SECS * a1) % 1;
+                let ms = Math.floor(1000 * a2);
+                 countDown.set(count_ms, ms);
                 // hum tween of objects
                 const a_hum = seq.getSinBias(60, false);
                 tweenMany.tween(hum.geometry, [
@@ -169,11 +169,8 @@ VIDEO.init = function(sm, scene, camera){
                 // hum y pos up and down over time
                 const a_hum_y = seq.getSinBias(5, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
-
                 ObjectGridWrap.setPos(grid, seq.getPer(4, false), 0 );
                 ObjectGridWrap.update(grid);
-
-
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -191,7 +188,7 @@ VIDEO.init = function(sm, scene, camera){
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
                 //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
-                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.5 ,-0.25,0)));
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.2 ,-0.5,0)));
             }
         };
         //-------- ----------
