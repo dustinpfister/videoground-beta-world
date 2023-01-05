@@ -14,7 +14,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     const SECS = 0;                      // NUMBER OF SECONDS SHOULD BE ZERO FOR AN ALARM
     const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
-    const START_FRAME = 899;             // The start frame value to display 
+    const START_FRAME = 30 * 5;          // The start frame value to display 
                                          // ( this should be the last frame value from the cd video part )
     const ALARM_SECS = 5;
     // ---------- ----------
