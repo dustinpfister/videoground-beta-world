@@ -56,8 +56,8 @@ VIDEO.init = function(sm, scene, camera){
             }
             if(mat.map){
                 const tex = mat.map;
-                //tex.magFilter = THREE.NearestFilter;
-                //tex.minFilter = THREE.NearestFilter;
+                tex.magFilter = THREE.NearestFilter;
+                tex.minFilter = THREE.NearestFilter;
             }
         });
         //-------- ----------
@@ -78,9 +78,19 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.scale.set(1.25, 1.25, 1.25);
-        count_sec.position.copy(hum.position).add( new THREE.Vector3(4, 0.5, 0) );
+        count_sec.scale.set(1, 1, 1);
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(3.5, 0.5, 0) );
         scene.add(count_sec);
+        // count ms count down object
+        const count_ms = countDown.create({
+            countID: 'ms',
+            digits: 3,
+            width: 1.1,
+            source_objects: SOURCE_OBJECTS
+        });
+        count_ms.scale.set(0.35, 0.35, 0.35);
+        count_ms.position.copy(hum.position).add( new THREE.Vector3(5.2, 0, 0.6) );
+        scene.add(count_ms);
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
@@ -178,7 +188,7 @@ VIDEO.init = function(sm, scene, camera){
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
                 //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
-                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-2 ,-0.25,0)));
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.5 ,-0.25,0)));
             }
         };
         //-------- ----------

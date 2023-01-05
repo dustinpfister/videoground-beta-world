@@ -43,7 +43,7 @@ TERM                  term percent / compare percent
 ## ( ) - video1-alarm, video1-thum
 
 ## () - Object grid wrap, MS Count
-* () see about using object grid wrap to add some sense of movement
+* (done) see about using object grid wrap to add some sense of movement
 * () have both secs and ms counts along with frame count
 
 ## ( done 01/02/2023 ) - start video folder, video1-countdown
