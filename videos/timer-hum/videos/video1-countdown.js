@@ -103,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
                 new THREE.MeshNormalMaterial() );
             return mesh;
         };
-        var array_source_objects = [
+        const array_source_objects = [
             mkBox()
         ];
         const array_oi = [
@@ -128,7 +128,7 @@ VIDEO.init = function(sm, scene, camera){
             objectIndices: array_oi
         });
         scene.add(grid);
-        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, 0) );
+        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, -10) );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -153,7 +153,8 @@ VIDEO.init = function(sm, scene, camera){
                 const a_hum_y = seq.getSinBias(5, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
 
-
+                ObjectGridWrap.setPos(grid, seq.getPer(4, false), 0 );
+                ObjectGridWrap.update(grid);
 
 
             },
