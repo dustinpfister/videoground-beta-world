@@ -7,7 +7,8 @@ VIDEO.scripts = [
    '../../../js/curve/r0/curve.js',
    '../../../js/count-down/r0/count-down.js',
    '../../../js/tween-many/r0/tween-many.js',
-   '../../../js/object-grid-wrap/r2/object-grid-wrap.js'
+   '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
+   '../../../js/object-grid-wrap/r2/effects/opacity2.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -93,8 +94,8 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // GRID OPTIONS
         //-------- ----------
-        const tw = 8,
-        th = 8,
+        const tw = 20,
+        th = 10,
         space = 3.5;
         // source objects
         const mkBox = function(){
@@ -107,14 +108,16 @@ VIDEO.init = function(sm, scene, camera){
             mkBox()
         ];
         const array_oi = [
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         ];
         //-------- ----------
         // CREATE GRID
@@ -123,12 +126,13 @@ VIDEO.init = function(sm, scene, camera){
             space: space,
             tw: tw,
             th: th,
-            effects: [],
+            effects: ['opacity2'],
             sourceObjects: array_source_objects,
             objectIndices: array_oi
         });
         scene.add(grid);
-        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, -10) );
+        grid.userData.minB = 0.95;
+        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, -18) );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
