@@ -158,6 +158,9 @@ VIDEO.init = function(sm, scene, camera){
                 let secs = Math.floor(SECS - SECS * a1);
                 countDown.set(count_sec, secs);
                 countDown.set(count_frames, seq.frame);
+        let a2 = (SECS - SECS * a1) % 1;
+        let ms = Math.floor(1000 * a2);
+        countDown.set(count_ms, ms);
                 // hum tween of objects
                 const a_hum = seq.getSinBias(60, false);
                 tweenMany.tween(hum.geometry, [
