@@ -12,7 +12,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    const SECS = 30;                     // NUMBER OF SECONDS
+    const SECS = 5;                     // NUMBER OF SECONDS
     const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
     // ---------- ----------
     // LIGHT

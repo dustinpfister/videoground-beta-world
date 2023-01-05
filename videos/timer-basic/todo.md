@@ -35,7 +35,7 @@ TERM                  term percent / compare percent
 "4 seconds"           71/59  ( 1.20 )  <= 9  
 "3 seconds"           73/40  ( 1.82 )  <= 6  
 "2 seconds"           75/39  ( 1.92 )  <= 5  
-"1 second"            74/16  ( 4.62 )  <= 1  
+"1 second"            74/16  ( 4.62 )  <= 1  DONE 12/27/2022
 ```
 
 ## () - 5 Seconds video
