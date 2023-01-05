@@ -6,7 +6,8 @@ VIDEO.scripts = [
    '../../../js/canvas/r1/canvas.js',
    '../../../js/curve/r0/curve.js',
    '../../../js/count-down/r0/count-down.js',
-   '../../../js/tween-many/r0/tween-many.js'
+   '../../../js/tween-many/r0/tween-many.js',
+   '../../../js/object-grid-wrap/r2/object-grid-wrap.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -90,6 +91,45 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.position.copy(hum.position).add( new THREE.Vector3(4, -1.3, 0) );
         scene.add(count_frames);
         //-------- ----------
+        // GRID OPTIONS
+        //-------- ----------
+        const tw = 8,
+        th = 8,
+        space = 3.5;
+        // source objects
+        const mkBox = function(){
+            const mesh = new THREE.Mesh(
+                new THREE.BoxGeometry(2, 0.25, 2),
+                new THREE.MeshNormalMaterial() );
+            return mesh;
+        };
+        var array_source_objects = [
+            mkBox()
+        ];
+        const array_oi = [
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,0
+        ];
+        //-------- ----------
+        // CREATE GRID
+        //-------- ----------
+        const grid = ObjectGridWrap.create({
+            space: space,
+            tw: tw,
+            th: th,
+            effects: [],
+            sourceObjects: array_source_objects,
+            objectIndices: array_oi
+        });
+        scene.add(grid);
+        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, 0) );
+        //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
         // start options for main seq object
@@ -112,6 +152,10 @@ VIDEO.init = function(sm, scene, camera){
                 // hum y pos up and down over time
                 const a_hum_y = seq.getSinBias(5, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
+
+
+
+
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
