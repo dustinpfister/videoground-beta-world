@@ -132,7 +132,7 @@ VIDEO.init = function(sm, scene, camera){
         });
         scene.add(grid);
         grid.userData.minB = 0.95;
-        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, -18) );
+        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, -15) );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
