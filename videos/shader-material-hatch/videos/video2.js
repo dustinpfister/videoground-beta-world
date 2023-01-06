@@ -85,7 +85,7 @@ VIDEO.init = function(sm, scene, camera){
     // LIGHT
     // ---------- ----------
     const dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set(0.8, 1, 0.5);
+    dl.position.set(0, 1, 0);
     scene.add(dl);
     // ---------- ----------
     // SHADER MATERIAL
@@ -129,11 +129,11 @@ VIDEO.init = function(sm, scene, camera){
         //};
         const array_source_objects = [
             new THREE.Mesh(
-                new THREE.BoxGeometry(2, 0.25, 2),
+                new THREE.BoxGeometry(4, 0.25, 3),
                 material1
             ),
             new THREE.Mesh(
-                new THREE.SphereGeometry(1, 30, 30),
+                new THREE.SphereGeometry(1.5, 30, 30),
                 material1
             )
         ];
@@ -187,13 +187,13 @@ VIDEO.init = function(sm, scene, camera){
         secs: 30,
         update: function(seq, partPer, partBias){
             // light
-            const a1 = seq.getSinBias(2);
-            const v = new THREE.Vector3();
-            const e = new THREE.Euler();
-            e.x = Math.PI * 0.25 + Math.PI * 0.5 * a1;
-            e.z = Math.PI / 180 * -20;
-            v.set(0,1,0).applyEuler(e);
-            dl.position.copy(v);
+            //const a1 = seq.getSinBias(2);
+            //const v = new THREE.Vector3();
+            //const e = new THREE.Euler();
+            //e.x = Math.PI * 0.25 + Math.PI * 0.5 * a1;
+           // e.z = Math.PI / 180 * -20;
+           // v.set(0,1,0).applyEuler(e);
+            //dl.position.copy(v);
             // move wings
             const a_hum = seq.getBias(60);
             tweenMany.tween(mesh.geometry, [
