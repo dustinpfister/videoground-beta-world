@@ -85,7 +85,7 @@ VIDEO.init = function(sm, scene, camera){
     // LIGHT
     // ---------- ----------
     const dl = new THREE.DirectionalLight(0xffffff, 1);
-    dl.position.set(0, 1, 0);
+    dl.position.set(0.2, 0.2, 0.7);
     scene.add(dl);
     // ---------- ----------
     // SHADER MATERIAL
