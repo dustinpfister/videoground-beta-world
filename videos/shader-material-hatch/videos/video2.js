@@ -143,8 +143,10 @@ VIDEO.init = function(sm, scene, camera){
             v.set(0,1,0).applyEuler(e);
             dl.position.copy(v);
 
-            camera.position.set(10, 10 - 5 * partPer, 10 - 40 * partPer);
-            camera.lookAt(-2, 0.8, 0);
+            const v1 = new THREE.Vector3(10, 10, 10);
+			const v2 = new THREE.Vector3(5, 0, -10);
+            camera.position.copy( v1.lerp(v2, partPer) );
+            camera.lookAt(mesh.position.clone().add(new THREE.Vector3(0,1,0)));
         }
     };
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
