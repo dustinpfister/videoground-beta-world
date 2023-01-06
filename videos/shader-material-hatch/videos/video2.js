@@ -113,6 +113,57 @@ VIDEO.init = function(sm, scene, camera){
     const mesh = new THREE.Mesh(hum_0.geometry.clone(), material1);
     mesh.position.y = 1.0;
     scene.add(mesh);
+	
+        //-------- ----------
+        // GRID OPTIONS
+        //-------- ----------
+        const tw = 20,
+        th = 10,
+        space = 5.5;
+        // source objects
+        //const mkBox = function(){
+        //    const mesh = new THREE.Mesh(
+        //        new THREE.BoxGeometry(2, 0.25, 2),
+        //        new THREE.MeshNormalMaterial() );
+        //    return mesh;
+        //};
+        const array_source_objects = [
+            new THREE.Mesh(
+                new THREE.BoxGeometry(2, 0.25, 2),
+                material1
+            ),
+            new THREE.Mesh(
+                new THREE.SphereGeometry(1, 30, 30),
+                material1
+            )
+        ];
+        const array_oi = [
+            0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,0,0,
+            0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,
+            1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,1,1,
+            0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,
+            0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,
+            0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,0,
+            0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,0,0,
+            0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+        ];
+        //-------- ----------
+        // CREATE GRID
+        //-------- ----------
+        const grid = ObjectGridWrap.create({
+            space: space,
+            tw: tw,
+            th: th,
+            effects: [],
+            sourceObjects: array_source_objects,
+            objectIndices: array_oi
+        });
+        scene.add(grid);
+        grid.position.copy(mesh.position).add( new THREE.Vector3(0, -7, 0) );
+	
+	
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -153,6 +204,9 @@ VIDEO.init = function(sm, scene, camera){
             const v2 = new THREE.Vector3(5, 0, -10);
             camera.position.copy( v1.lerp(v2, partPer) );
             camera.lookAt(mesh.position.clone().add(new THREE.Vector3(0,1,0)));
+            // wrap
+            ObjectGridWrap.setPos(grid, seq.getPer(4), 0 );
+            ObjectGridWrap.update(grid);
         }
     };
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
