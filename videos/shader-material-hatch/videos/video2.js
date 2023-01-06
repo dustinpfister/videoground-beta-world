@@ -1,7 +1,10 @@
 // video2 for custom shader
 // scripts
 VIDEO.scripts = [
-   '../../../js/sequences-hooks/r2/sequences-hooks.js'
+   '../../../js/sequences-hooks/r2/sequences-hooks.js',
+   '../../../js/tween-many/r0/tween-many.js',
+   '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
+   '../../../js/object-grid-wrap/r2/effects/opacity2.js'
 ];
 // dae file
 VIDEO.daePaths = [
@@ -100,17 +103,14 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // GEOMETRY, MESH
     // ---------- ----------
-	
-	const scene_dae = VIDEO.daeResults[0].scene;
-	const obj_source = scene_dae.getObjectByName('hum_1');
-	obj_source.geometry.rotateX(Math.PI / 180 * 60);
-	obj_source.geometry.rotateZ(Math.PI / 180 * 280);
-	
-	console.log(obj_source);
-	
-    //const geo = new THREE.TorusGeometry( 3, 1, 100, 100);
-    //geo.rotateX(Math.PI * 0.5);
-    const mesh = new THREE.Mesh(obj_source.geometry, material1);
+    const scene_dae = VIDEO.daeResults[0].scene;
+    const hum_0 = scene_dae.getObjectByName('hum_0');
+    const hum_1 = scene_dae.getObjectByName('hum_1');
+    hum_0.geometry.rotateX(Math.PI / 180 * 60);
+    hum_0.geometry.rotateZ(Math.PI / 180 * 280);
+    hum_1.geometry.rotateX(Math.PI / 180 * 60);
+    hum_1.geometry.rotateZ(Math.PI / 180 * 280);
+    const mesh = new THREE.Mesh(hum_0.geometry.clone(), material1);
     mesh.position.y = 1.0;
     scene.add(mesh);
     //-------- ----------
@@ -135,6 +135,7 @@ VIDEO.init = function(sm, scene, camera){
     opt_seq.objects[0] = {
         secs: 30,
         update: function(seq, partPer, partBias){
+            // light
             const a1 = seq.getSinBias(2);
             const v = new THREE.Vector3();
             const e = new THREE.Euler();
@@ -142,9 +143,14 @@ VIDEO.init = function(sm, scene, camera){
             e.z = Math.PI / 180 * -20;
             v.set(0,1,0).applyEuler(e);
             dl.position.copy(v);
-
+            // move wings
+            const a_hum = seq.getBias(60);
+            tweenMany.tween(mesh.geometry, [
+                    [ hum_0.geometry, hum_1.geometry, a_hum]
+            ]);
+            // camera
             const v1 = new THREE.Vector3(10, 10, 10);
-			const v2 = new THREE.Vector3(5, 0, -10);
+            const v2 = new THREE.Vector3(5, 0, -10);
             camera.position.copy( v1.lerp(v2, partPer) );
             camera.lookAt(mesh.position.clone().add(new THREE.Vector3(0,1,0)));
         }
