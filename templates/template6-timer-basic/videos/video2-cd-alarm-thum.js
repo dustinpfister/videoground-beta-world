@@ -54,19 +54,7 @@ VIDEO.init = function(sm, scene, camera){
         ]
     )
     .then( (SOURCE_OBJECTS) => {
-        console.log('Done Loading.');
-        // if I want to do something with each source objects
-/*
-        Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
-            const obj = SOURCE_OBJECTS[key];
-            const mat = obj.material;
-            if(mat.map){
-                const tex = mat.map;
-                //tex.magFilter = THREE.NearestFilter;
-                //tex.minFilter = THREE.NearestFilter;
-            }
-        });
-*/
+        console.log('DAE FILES LOADED');
         //-------- ----------
         // SCENE CHILD OBJECTS
         //-------- ----------
@@ -98,11 +86,11 @@ VIDEO.init = function(sm, scene, camera){
         const opt_seq = {
             fps: FPS,
             beforeObjects: function(seq){
-                // camera defaults
+                // CAMERA DEFAULTS
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.26;
-                // set frame count
+                // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
                     f = 0;
@@ -121,7 +109,7 @@ VIDEO.init = function(sm, scene, camera){
                 { key: 'campos', array: campos, lerp: true }
             ],
             update: function(seq, partPer, partBias){
-                // update secs count
+                // SECS COUNTER
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 let secs = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
                 // in thum mode secs should be SECS_COUNT_DOWN
@@ -159,16 +147,20 @@ VIDEO.init = function(sm, scene, camera){
         // SET FRAME MAX
         //-------- ----------
         const seq = scene.userData.seq = seqHooks.create(opt_seq);
+        // THUM_FRAMES const should be used for THUM_Mode, 
+        // else set it to the frameMax value of main seq object
         if(THUM_MODE){
+            console.log('Timer Video is in THUM_Mode');
             sm.frameMax = THUM_FRAMES;
         }else{ 
             sm.frameMax = seq.frameMax;
+            console.log( SECS_COUNT_DOWN + ' Timer Video = ' + sm.frameMax + ' Frames.' );
         }
+        return '';
     })
     .catch( (e) => {
         console.log(e.message);
-        scene.add( new THREE.GridHelper(10, 10) );
-        renderer.render(scene, camera);
+        return '';
     });
 };
 // update method for the video
