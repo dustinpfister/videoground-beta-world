@@ -17,6 +17,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     const SECS = 30;                     // NUMBER OF SECONDS
     const WING_FLAPS_PER_SEC = 2;
+    const GRID_X_LOOPS_PER_SEC = 0.1;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -177,7 +178,8 @@ VIDEO.init = function(sm, scene, camera){
                 // hum y pos up and down over time
                 const a_hum_y = seq.getSinBias(5, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
-                ObjectGridWrap.setPos(grid, seq.getPer(4, false), 0 );
+
+                ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
                 ObjectGridWrap.update(grid);
             },
             afterObjects: function(seq){

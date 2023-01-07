@@ -20,6 +20,7 @@ VIDEO.init = function(sm, scene, camera){
     const DISPLAY_SECS = 0;
 
     const WING_FLAPS_PER_SEC = 2;
+    const GRID_X_LOOPS_PER_SEC = 0.1;
     const FPS = 30;
     const START_FRAME = FPS * SECS;
     // ---------- ----------
@@ -178,7 +179,9 @@ VIDEO.init = function(sm, scene, camera){
                 // hum y pos up and down over time
                 const a_hum_y = seq.getSinBias(5, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
-                ObjectGridWrap.setPos(grid, seq.getPer(4, false), 0 );
+
+                //ObjectGridWrap.setPos(grid, seq.getPer(4, false), 0 );
+                ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * ALARM_SECS, false), 0 );
                 ObjectGridWrap.update(grid);
             },
             afterObjects: function(seq){
