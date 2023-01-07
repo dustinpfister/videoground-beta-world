@@ -33,6 +33,8 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     const HUM_WING_FLAPS_PER_SEC = 2;
     const HUM_Y_BOUNCE_PER_SEC = 0.5;
+    const HUM_ALARM_SCALE_CHANGE_PER_SEC = 1;
+    const HUM_COLORS = [ new THREE.Color(0, 1, 1), new THREE.Color(1, 0, 0), new THREE.Color(0, 1, 0) ];
     const GRID_X_LOOPS_PER_SEC = 1 / 20;
     // ---------- ----------
     // LIGHT
@@ -85,8 +87,8 @@ VIDEO.init = function(sm, scene, camera){
         // HUM OBJECTS
         //-------- ----------
         const hum = tweenMany.createMesh(SOURCE_OBJECTS, 'hum_1');
-        hum.material.color = new THREE.Color(0, 1, 1);
-        hum.scale.set(0.42, 0.42, 0.42);
+        //hum.material.color = new THREE.Color(0, 1, 1);
+        //hum.scale.set(0.42, 0.42, 0.42);
         hum.position.set(0,0,-2.5)
         scene.add(hum);
         //-------- ----------
@@ -183,7 +185,9 @@ VIDEO.init = function(sm, scene, camera){
                 // hum y pos up and down over time
                 const a_hum_y = seq.getSinBias(HUM_Y_BOUNCE_PER_SEC * SECS, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
+                // scale and color
                 hum.scale.set(0.42, 0.42, 0.42);
+                hum.material.color = HUM_COLORS[0];
                 // GRID
                 ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
                 ObjectGridWrap.update(grid);
@@ -240,9 +244,13 @@ VIDEO.init = function(sm, scene, camera){
                 seq.copyPos('campos_alarm', camera);
                 // HUM MESH
                 // scale
-                let a1 = seq.getSinBias(1 * SECS_ALARM, true);
+                let a1 = seq.getSinBias(HUM_ALARM_SCALE_CHANGE_PER_SEC * SECS_ALARM, true);
                 const s = 0.42 - 0.12 * a1;
                 hum.scale.set(s, s, s);
+                // color
+                const a2 = seq.getPer(SECS_ALARM, true);
+                const ci = Math.floor( HUM_COLORS.length  * a2 );
+                hum.material.color = HUM_COLORS[ci];
             }
         };
         //-------- ----------
