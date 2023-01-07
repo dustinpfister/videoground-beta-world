@@ -41,6 +41,10 @@ TERM                  term percent / compare percent
 ## ( ) - 30 seconds video
 
 ## ( ) - video1-alarm
+* (done) start the alarm video
+
+* () the rate at which things update needs to be set to per sec rates for alarm and countdown videos
+
 * () just do a simple scale change with the bird
 * () random colors for the bird
 
