@@ -128,13 +128,6 @@ VIDEO.init = function(sm, scene, camera){
         const tw = 20,
         th = 10,
         space = 3.5;
-        // source objects
-        //const mkBox = function(){
-        //    const mesh = new THREE.Mesh(
-        //        new THREE.BoxGeometry(2, 0.25, 2),
-        //        new THREE.MeshNormalMaterial() );
-        //    return mesh;
-        //};
         const array_source_objects = [
             new THREE.Mesh(
                 new THREE.BoxGeometry(2, 0.25, 2),
@@ -214,8 +207,6 @@ VIDEO.init = function(sm, scene, camera){
                 { key: 'campos_cd', array: campos_cd, lerp: true }
             ],
             update: function(seq, partPer, partBias){
-
-
                 // SECS COUNTER
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 let secs = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
@@ -224,7 +215,6 @@ VIDEO.init = function(sm, scene, camera){
                     secs = SECS_COUNT_DOWN;
                 };
                 countDown.set(count_sec, secs);
-
                 // MS COUNTER
                 let a2 = (SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1) % 1;
                 let ms = Math.floor(1000 * a2);
@@ -232,17 +222,10 @@ VIDEO.init = function(sm, scene, camera){
                     ms = 0;
                 }
                 countDown.set(count_ms, ms);
-
-
                 // CAMERA
                 seq.copyPos('campos_cd', camera);
-                //camera.position.set(10, 10, 10);
-                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
-                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.2 ,-0.5,0)));
             }
         };
-
-
         // SEQ 1 - ALARM
         opt_seq.objects[1] = {
             secs: SECS_ALARM,
@@ -260,12 +243,8 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_ms, 0);
                 // CAMERA
                 seq.copyPos('campos_alarm', camera);
-                //camera.position.set(10, 10, 10);
-                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.2 ,-0.5,0)));
             }
         };
-
-
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
