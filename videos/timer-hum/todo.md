@@ -42,8 +42,9 @@ TERM                  term percent / compare percent
 
 ## ( ) - video1-alarm
 * (done) start the alarm video
+* (done) have a WING FLAPS PER SEC const for countdown and alarm videos
+* (done) have a GRID X LOOPS PER SEC for countdown and alarm videos
 
-* () the rate at which things update needs to be set to per sec rates for alarm and countdown videos
 
 * () just do a simple scale change with the bird
 * () random colors for the bird
