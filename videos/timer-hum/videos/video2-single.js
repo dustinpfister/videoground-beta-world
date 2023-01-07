@@ -183,6 +183,7 @@ VIDEO.init = function(sm, scene, camera){
                 // hum y pos up and down over time
                 const a_hum_y = seq.getSinBias(HUM_Y_BOUNCE_PER_SEC * SECS, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
+                hum.scale.set(0.42, 0.42, 0.42);
                 // GRID
                 ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
                 ObjectGridWrap.update(grid);
@@ -211,16 +212,12 @@ VIDEO.init = function(sm, scene, camera){
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 let secs = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
                 // in thum mode secs should be SECS_COUNT_DOWN
-                if(THUM_MODE){
-                    secs = SECS_COUNT_DOWN;
-                };
+                if(THUM_MODE){ secs = SECS_COUNT_DOWN; };
                 countDown.set(count_sec, secs);
                 // MS COUNTER
                 let a2 = (SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1) % 1;
                 let ms = Math.floor(1000 * a2);
-                if(THUM_MODE){
-                    ms = 0;
-                }
+                if(THUM_MODE){ ms = 0; }
                 countDown.set(count_ms, ms);
                 // CAMERA
                 seq.copyPos('campos_cd', camera);
@@ -233,16 +230,19 @@ VIDEO.init = function(sm, scene, camera){
                 { key: 'campos_alarm', array: campos_alarm, lerp: true }
             ],
             update: function(seq, partPer, partBias){
+                // COUNT_SECS AND COUNT_MS
                 let secs = 0;
                 // in thum mode secs should be SECS_COUNT_DOWN
-                if(THUM_MODE){
-                    secs = SECS_COUNT_DOWN;
-                };
-                // update secs count
+                if(THUM_MODE){ secs = SECS_COUNT_DOWN; };
                 countDown.set(count_sec, secs);
                 countDown.set(count_ms, 0);
                 // CAMERA
                 seq.copyPos('campos_alarm', camera);
+                // HUM MESH
+                // scale
+                let a1 = seq.getSinBias(1 * SECS_ALARM, true);
+                const s = 0.42 - 0.12 * a1;
+                hum.scale.set(s, s, s);
             }
         };
         //-------- ----------
