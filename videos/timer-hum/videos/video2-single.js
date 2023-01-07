@@ -31,9 +31,9 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    //const SECS = 30;                     // NUMBER OF SECONDS
-    const WING_FLAPS_PER_SEC = 2;
-    const GRID_X_LOOPS_PER_SEC = 0.1;
+    const HUM_WING_FLAPS_PER_SEC = 2;
+    const HUM_Y_BOUNCE_PER_SEC = 0.5;
+    const GRID_X_LOOPS_PER_SEC = 1 / 20;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -182,18 +182,15 @@ VIDEO.init = function(sm, scene, camera){
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.10 + 0.15 * seq.getSinBias(1, false);
-
-
-
-                // hum tween of objects
-                const a_hum = seq.getSinBias(WING_FLAPS_PER_SEC * SECS, false);
+                // HUM MESH
+                const a_hum = seq.getSinBias(HUM_WING_FLAPS_PER_SEC * SECS, false);
                 tweenMany.tween(hum.geometry, [
                     [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
                 ]);
                 // hum y pos up and down over time
-                const a_hum_y = seq.getSinBias(5, false);
+                const a_hum_y = seq.getSinBias(HUM_Y_BOUNCE_PER_SEC * SECS, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
-
+                // GRID
                 ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
                 ObjectGridWrap.update(grid);
             },
@@ -201,6 +198,12 @@ VIDEO.init = function(sm, scene, camera){
                 camera.updateProjectionMatrix();
                 // have the camera always look at this position
                 camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.2 ,-0.5,0)));
+                // FRAME COUNTER
+                let f = seq.frame;
+                if(THUM_MODE){
+                    f = 0;
+                };
+                countDown.set(count_frames, f);
             },
             objects: []
         };
