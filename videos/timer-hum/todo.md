@@ -40,14 +40,15 @@ TERM                  term percent / compare percent
 
 ## ( ) - 30 seconds video
 
-## ( ) - video1-alarm
+## (  ) video2-single
+* (done) start a single file video2 form as I hate the many video file format
+* () just do a simple scale change with the bird
+* () random colors for the bird
+
+## ( done 01/07/2023 ) - video1-alarm
 * (done) start the alarm video
 * (done) have a WING FLAPS PER SEC const for countdown and alarm videos
 * (done) have a GRID X LOOPS PER SEC for countdown and alarm videos
-
-
-* () just do a simple scale change with the bird
-* () random colors for the bird
 
 ## ( done 01/05/2023 ) - video1-thum
 * (done) make the thum video
