@@ -1,5 +1,9 @@
 # template 6 - timer basic todo list
 
+## ( done 01/07/2022 ) - video2-cd-alarm-thum
+* (done) single video file that has both a count down and alarm seq object
+* (done) video file can also be set into "THUM MODE"
+
 ## ( done 12/24/2022 ) - video1-thum, and video1-alarm files
 * (done) rename video1.js to video1-countdown.js
 * (done) have a video1-thum.js file for the sake of making a video that is a thumnail image

@@ -18,11 +18,11 @@ VIDEO.init = function(sm, scene, camera){
     // as the main thing to make one video from the next
     const SECS_COUNT_DOWN = 15;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
-    const THUM_MODE = false;                                              // SET VIDEO INTO THUM MODE
+    const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
-    const SECS = SECS_COUNT_DOWN + SECS_ALARM;                          // NUMBER OF TOTAL SECONDS
-    const FPS = 30;                                                     // FRAMES PER SECOND
+    const SECS = SECS_COUNT_DOWN + SECS_ALARM;                           // NUMBER OF TOTAL SECONDS
+    const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd3-nums.dae';
     const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
