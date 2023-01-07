@@ -18,6 +18,8 @@ VIDEO.init = function(sm, scene, camera){
     // as the main thing to make one video from the next
     const SECS_COUNT_DOWN = 15;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
+    const THUM_MODE = false;                                              // SET VIDEO INTO THUM MODE
+    const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
     const SECS = SECS_COUNT_DOWN + SECS_ALARM;                          // NUMBER OF TOTAL SECONDS
     const FPS = 30;                                                     // FRAMES PER SECOND
@@ -42,7 +44,6 @@ VIDEO.init = function(sm, scene, camera){
     const campos = curveMod.QBV3Array([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
     const campos_alarm = curveMod.QBV3Array([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
     //scene.add( curveMod.debugPoints( campos_alarm ) );
-
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -102,14 +103,17 @@ VIDEO.init = function(sm, scene, camera){
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.26;
                 // set frame count
-                countDown.set(count_frames, seq.frame);
+                let f = seq.frame;
+                if(THUM_MODE){
+                    f = 0;
+                };
+                countDown.set(count_frames, f);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
             },
             objects: []
         };
-
         // SEQ 0 - count down
         opt_seq.objects[0] = {
             secs: SECS_COUNT_DOWN,
@@ -120,6 +124,10 @@ VIDEO.init = function(sm, scene, camera){
                 // update secs count
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 let secs = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
+                // in thum mode secs should be SECS_COUNT_DOWN
+                if(THUM_MODE){
+                    secs = SECS_COUNT_DOWN;
+                };
                 countDown.set(count_sec, secs);
                 // CAMERA
                 seq.copyPos('campos', camera);
@@ -127,7 +135,6 @@ VIDEO.init = function(sm, scene, camera){
                 camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
             }
         };
-
         // SEQ 1 - ALARM
         opt_seq.objects[1] = {
             secs: SECS_ALARM,
@@ -135,22 +142,28 @@ VIDEO.init = function(sm, scene, camera){
                 { key: 'campos_alarm', array: campos_alarm, lerp: true }
             ],
             update: function(seq, partPer, partBias){
+                let secs = 0;
+                // in thum mode secs should be SECS_COUNT_DOWN
+                if(THUM_MODE){
+                    secs = SECS_COUNT_DOWN;
+                };
                 // update secs count
-                countDown.set(count_sec, '00');
+                countDown.set(count_sec, secs);
                 // CAMERA
                 seq.copyPos('campos_alarm', camera);
                 //camera.position.set(10, 10, 10);
                 camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
             }
         };
-
-
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
         const seq = scene.userData.seq = seqHooks.create(opt_seq);
-        console.log('frameMax for main seq: ' + seq.frameMax);
-        sm.frameMax = seq.frameMax;
+        if(THUM_MODE){
+            sm.frameMax = THUM_FRAMES;
+        }else{ 
+            sm.frameMax = seq.frameMax;
+        }
     })
     .catch( (e) => {
         console.log(e.message);
