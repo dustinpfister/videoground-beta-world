@@ -34,8 +34,11 @@ VIDEO.init = function(sm, scene, camera){
     const HUM_WING_FLAPS_PER_SEC = 2;
     const HUM_Y_BOUNCE_PER_SEC = 0.5;
     const HUM_ALARM_SCALE_CHANGE_PER_SEC = 1;
-    const HUM_ALARM_COLOR_LOOPS_PER_SEC = 2;
-    const HUM_COLORS = [ new THREE.Color(0, 1, 1), new THREE.Color(1, 0, 0), new THREE.Color(0, 1, 0) ];
+    const HUM_ALARM_COLOR_LOOPS_PER_SEC = 0.5;
+    const HUM_COLORS = 'cyan,red,lime,blue,orange,purple,yellow,green,white'.split(',').map( (str) => {
+        return new THREE.Color(str);
+    });
+    //const HUM_COLORS = [ new THREE.Color(0, 1, 1), new THREE.Color(1, 0, 0), new THREE.Color(0, 1, 0) ];
     const HUM_DEFAULT_COLOR_INDEX = 0;
     const GRID_X_LOOPS_PER_SEC = 1 / 20;
     // ---------- ----------
