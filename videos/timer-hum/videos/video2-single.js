@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 10;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
@@ -249,13 +249,20 @@ VIDEO.init = function(sm, scene, camera){
         // SET FRAME MAX
         //-------- ----------
         const seq = scene.userData.seq = seqHooks.create(opt_seq);
-        console.log('frameMax for main seq: ' + seq.frameMax);
-        sm.frameMax = seq.frameMax;
+        // THUM_FRAMES const should be used for THUM_Mode, 
+        // else set it to the frameMax value of main seq object
+        if(THUM_MODE){
+            console.log('Timer Video is in THUM_Mode');
+            sm.frameMax = THUM_FRAMES;
+        }else{ 
+            sm.frameMax = seq.frameMax;
+            console.log( SECS_COUNT_DOWN + ' Timer Video = ' + sm.frameMax + ' Frames.' );
+        }
+        return '';
     })
     .catch( (e) => {
         console.log(e.message);
-        scene.add( new THREE.GridHelper(10, 10) );
-        renderer.render(scene, camera);
+        return '';
     });
 };
 // update method for the video
