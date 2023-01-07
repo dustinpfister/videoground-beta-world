@@ -5,35 +5,37 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r1/canvas.js',
    '../../../js/curve/r0/curve.js',
-   '../../../js/count-down/r0/count-down.js'
+   '../../../js/count-down/r0/count-down.js',
+   '../../../js/tween-many/r0/tween-many.js',
+   '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
+   '../../../js/object-grid-wrap/r2/effects/opacity2.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    const SECS = 0;                      // NUMBER OF SECONDS SHOULD BE ZERO FOR AN ALARM
-    const DAE_SCENE_FILE = 'cd3-ground'; // DAE file to use in /dae/count_down_basic
-    const START_FRAME = 899;             // The start frame value to display 
-                                         // ( this should be the last frame value from the cd video part )
+    const SECS = 0;                     // NUMBER OF SECONDS
     const ALARM_SECS = 5;
+    const FPS = 30;
+    const START_FRAME = FPS * 30;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
-    const dl = new THREE.DirectionalLight(0xffffff, 0.8);
-    dl.position.set(-2, 1, 2);
+    const dl = new THREE.DirectionalLight(0xffffff, 0.75);
+    dl.position.set(-2, 3, 2);
     scene.add(dl);
-    const al = new THREE.AmbientLight(0xffffff, 0.1);
+    const al = new THREE.AmbientLight(0xffffff, 0.05);
     scene.add(al);
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-    scene.background = new THREE.Color('#2a2a2a');
+    scene.background = new THREE.Color('#0f0f0f');
     //-------- ----------
     // PATHS
     //-------- ----------
     const v3Array_campos = curveMod.QBV3Array([
-        [-5, 2, 4, 0, 1, 8,    0, 0, 2,      100]
+        [-5, 2, 4, 0, 0, 5,    0, 0, 0,      100]
     ]);
     //scene.add( curveMod.debugPoints( v3Array_campos ) );
     //-------- ----------
@@ -42,13 +44,35 @@ VIDEO.init = function(sm, scene, camera){
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/cd3-nums.dae'),
-            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/' + DAE_SCENE_FILE + '.dae')
+            videoAPI.pathJoin(sm.filePath, '../../../dae/hum/hum_lp.dae')
         ]
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
+        // if I want to do something with each source objects
+        Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
+            const obj = SOURCE_OBJECTS[key];
+            const mat = obj.material;
+            if( String( parseInt(key) )  != 'NaN'){
+                obj.material.transparent = true;
+                obj.material.opacity = 1;
+            }
+            if(mat.map){
+                const tex = mat.map;
+                tex.magFilter = THREE.NearestFilter;
+                tex.minFilter = THREE.NearestFilter;
+            }
+        });
         //-------- ----------
-        // SCENE CHILD OBJECTS
+        // HUM OBJECTS
+        //-------- ----------
+        const hum = tweenMany.createMesh(SOURCE_OBJECTS, 'hum_1');
+        hum.material.color = new THREE.Color(0, 1, 1);
+        hum.scale.set(0.42, 0.42, 0.42);
+        hum.position.set(0,0,-2.5)
+        scene.add(hum);
+        //-------- ----------
+        // COUNT DOWN OBJECTS
         //-------- ----------
         // count secs count down object
         const count_sec = countDown.create({
@@ -57,8 +81,19 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.position.set(0, 1.30, 0.4);
+        count_sec.scale.set(1.2, 1.2, 1.2);
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(3.3, 0.7, 0) );
         scene.add(count_sec);
+        // count ms count down object
+        const count_ms = countDown.create({
+            countID: 'ms',
+            digits: 3,
+            width: 1.1,
+            source_objects: SOURCE_OBJECTS
+        });
+        count_ms.scale.set(0.4, 0.4, 0.4);
+        count_ms.position.copy(hum.position).add( new THREE.Vector3(5.3, 0, 0.6) );
+        scene.add(count_ms);
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
@@ -66,44 +101,86 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.35, 0.35, 0.35);
-        count_frames.position.set(0, -0.1, 1.50);
+        count_frames.scale.set(0.4, 0.4, 0.4);
+        count_frames.position.copy(hum.position).add( new THREE.Vector3(4, -1.3, 0) );
         scene.add(count_frames);
-        // add ground object
-        scene.add( SOURCE_OBJECTS['ground_0'] );
+        //-------- ----------
+        // GRID OPTIONS
+        //-------- ----------
+        const tw = 20,
+        th = 10,
+        space = 3.5;
+        // source objects
+        //const mkBox = function(){
+        //    const mesh = new THREE.Mesh(
+        //        new THREE.BoxGeometry(2, 0.25, 2),
+        //        new THREE.MeshNormalMaterial() );
+        //    return mesh;
+        //};
+        const array_source_objects = [
+            new THREE.Mesh(
+                new THREE.BoxGeometry(2, 0.25, 2),
+                new THREE.MeshNormalMaterial()
+            ),
+            new THREE.Mesh(
+                new THREE.SphereGeometry(1, 30, 30),
+                new THREE.MeshNormalMaterial()
+            )
+        ];
+        const array_oi = [
+            0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
+            0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,0,0,
+            0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,
+            1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,1,1,
+            0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,
+            0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,
+            0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,
+            0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,0,
+            0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,0,0,
+            0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+        ];
+        //-------- ----------
+        // CREATE GRID
+        //-------- ----------
+        const grid = ObjectGridWrap.create({
+            space: space,
+            tw: tw,
+            th: th,
+            effects: ['opacity2'],
+            sourceObjects: array_source_objects,
+            objectIndices: array_oi
+        });
+        scene.add(grid);
+        grid.userData.minB = 0.95;
+        grid.position.copy(hum.position).add( new THREE.Vector3(2, -3, -15) );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
         // start options for main seq object
-        //!!! I SHOULD NOT HAVE TO COPY AND PAST THIS FROM THE COUNT-DOWN.JS MODULE
-        const positionDigit = (digit, di, digits, width) => {
-            const hd = digits / 2;
-            const sx = hd * width * -1;
-            digit.position.x = width / 2 + sx + width * di;
-        };
         const opt_seq = {
             fps: 30,
             beforeObjects: function(seq){
                 // camera defaults
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
-                camera.zoom = 1.26 - 0.26 * seq.per;
-                // DISPLAY SECS VALUES, WHICH SHOULD BE 0 OR whatever to display for an alarm video part
-                countDown.set(count_sec, SECS);
+                camera.zoom = 1.10 + 0.15 * seq.getSinBias(1, false);
+                //const a1 = (seq.frame + 1) / seq.frameMax;
+                //let secs = Math.floor(SECS - SECS * a1);
+                countDown.set(count_sec, '00');
                 countDown.set(count_frames, seq.frame + START_FRAME);
-                // scale all digit groups of count_secs
-                const a1 = seq.getSinBias( Math.floor(ALARM_SECS * 2) , false);
-                count_sec.children.forEach( (digit, i) => {
-                    const s = 1 + 0.25 * a1;
-                    digit.scale.set(s, s, s);
-                    // adjust position
-                    positionDigit(digit, i, 2, 1)
-                    const n = i % 2 === 0 ? -1 : 1;
-                    digit.position.x = digit.position.x + (0.30 * n) * a1;
-                    digit.position.y = 0.5 * a1;
-                    // adjust rotation
-                    digit.rotation.y = Math.PI / 180 * 22.5 * n * a1;
-                });
+                //let a2 = (SECS - SECS * a1) % 1;
+                //let ms = Math.floor(1000 * a2);
+                 countDown.set(count_ms, '000');
+                // hum tween of objects
+                const a_hum = seq.getSinBias(60, false);
+                tweenMany.tween(hum.geometry, [
+                    [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
+                ]);
+                // hum y pos up and down over time
+                const a_hum_y = seq.getSinBias(5, false);
+                hum.position.y = -0.25 + 0.5 * a_hum_y;
+                ObjectGridWrap.setPos(grid, seq.getPer(4, false), 0 );
+                ObjectGridWrap.update(grid);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -120,7 +197,8 @@ VIDEO.init = function(sm, scene, camera){
                 // CAMERA
                 seq.copyPos('campos', camera);
                 //camera.position.set(10, 10, 10);
-                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
+                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.49,0)));
+                camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(-1.2 ,-0.5,0)));
             }
         };
         //-------- ----------
