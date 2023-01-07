@@ -42,8 +42,11 @@ TERM                  term percent / compare percent
 
 ## (  ) video2-single
 * (done) start a single file video2 form as I hate the many video file format
-* () just do a simple scale change with the bird
-* () random colors for the bird
+* (done) just do a simple scale change with the bird
+* (done) random colors for the bird
+
+* () have some kind of effect for the numbers durring the alarm also
+
 
 ## ( done 01/07/2023 ) - video1-alarm
 * (done) start the alarm video
