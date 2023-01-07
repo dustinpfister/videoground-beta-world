@@ -16,6 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     // CONST
     // ---------- ----------
     const SECS = 30;                     // NUMBER OF SECONDS
+    const WING_FLAPS_PER_SEC = 2;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -169,7 +170,7 @@ VIDEO.init = function(sm, scene, camera){
                 let ms = Math.floor(1000 * a2);
                  countDown.set(count_ms, ms);
                 // hum tween of objects
-                const a_hum = seq.getSinBias(60, false);
+                const a_hum = seq.getSinBias(WING_FLAPS_PER_SEC * SECS, false);
                 tweenMany.tween(hum.geometry, [
                     [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
                 ]);

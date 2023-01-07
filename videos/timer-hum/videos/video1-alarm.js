@@ -15,10 +15,13 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // CONST
     // ---------- ----------
-    const SECS = 0;                     // NUMBER OF SECONDS
-    const ALARM_SECS = 5;
+    const SECS = 30;                     // NUMBER OF SECONDS FOR THE COUNTDOWN VIDEO
+    const ALARM_SECS = 5;                // NUMBER OF SECONDS FOR THE ALARM
+    const DISPLAY_SECS = 0;
+
+    const WING_FLAPS_PER_SEC = 2;
     const FPS = 30;
-    const START_FRAME = FPS * 30;
+    const START_FRAME = FPS * SECS;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -164,15 +167,11 @@ VIDEO.init = function(sm, scene, camera){
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.10 + 0.15 * seq.getSinBias(1, false);
-                //const a1 = (seq.frame + 1) / seq.frameMax;
-                //let secs = Math.floor(SECS - SECS * a1);
-                countDown.set(count_sec, '00');
+                countDown.set(count_sec, DISPLAY_SECS);
                 countDown.set(count_frames, seq.frame + START_FRAME);
-                //let a2 = (SECS - SECS * a1) % 1;
-                //let ms = Math.floor(1000 * a2);
-                 countDown.set(count_ms, '000');
+                countDown.set(count_ms, '000');
                 // hum tween of objects
-                const a_hum = seq.getSinBias(60, false);
+                const a_hum = seq.getSinBias(WING_FLAPS_PER_SEC * ALARM_SECS, false);
                 tweenMany.tween(hum.geometry, [
                     [ SOURCE_OBJECTS['hum_0'].geometry, SOURCE_OBJECTS['hum_1'].geometry, a_hum]
                 ]);
