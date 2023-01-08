@@ -62,17 +62,30 @@ const canObj = canvasMod.create({
    size: 512,
    draw: 'grid_palette',
    palette: ['#000000', '#1f1f1f', '#00ffff'],
+       dataParse: 'lzstring64',
    state: {
        w: 8, h: 5,
+       data: 'AwGlEYyzNCVgpcmPit1mqvTsg==='
+/*
        data: [
            0,0,1,0,0,1,1,0,
            0,1,1,0,1,1,0,0,
            1,1,0,0,1,0,0,1,
            0,0,0,1,1,0,1,1,
            0,0,1,1,0,0,1,0
-       ]
+       ].join(',')
+*/
    }
 });
+
+console.log(canObj.state.data)
+
+//LZString.compressToBase64(
+//const str = canObj.state.data.join(',');
+//console.log( LZString.compressToBase64(str)  );
+//console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg==='));
+
+
 
 const texture = canObj.texture;
 //texture.offset.set(0, 1);
