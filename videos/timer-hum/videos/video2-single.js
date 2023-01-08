@@ -4,7 +4,8 @@
 VIDEO.scripts = [
    // CORE MODULES
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
-   '../../../js/canvas/r1/canvas.js',
+   '../../../js/canvas/r2/lz-string.js',
+   '../../../js/canvas/r2/canvas.js',
    '../../../js/curve/r0/curve.js',
    '../../../js/count-down/r0/count-down.js',
    '../../../js/tween-many/r0/tween-many.js',
@@ -56,7 +57,31 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-    scene.background = new THREE.Color('#0f0f0f');
+
+const canObj = canvasMod.create({
+   size: 512,
+   draw: 'grid_palette',
+   palette: ['#000000', '#1f1f1f', '#00ffff'],
+   state: {
+       w: 8, h: 5,
+       data: [
+           0,0,1,0,0,1,1,0,
+           0,1,1,0,1,1,0,0,
+           1,1,0,0,1,0,0,1,
+           0,0,0,1,1,0,1,1,
+           0,0,1,1,0,0,1,0
+       ]
+   }
+});
+
+const texture = canObj.texture;
+//texture.offset.set(0, 1);
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.repeat.set(40, 40);
+
+
+    scene.background = texture; //new THREE.Color('#0f0f0f');
     //-------- ----------
     // PATHS
     //-------- ----------
