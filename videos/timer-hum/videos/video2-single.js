@@ -43,6 +43,7 @@ VIDEO.init = function(sm, scene, camera){
     //const HUM_COLORS = [ new THREE.Color(0, 1, 1), new THREE.Color(1, 0, 0), new THREE.Color(0, 1, 0) ];
     const HUM_DEFAULT_COLOR_INDEX = 0;
     const GRID_X_LOOPS_PER_SEC = 1 / 20;
+    const COUNT_SCALE_MAX = 1.25;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -69,6 +70,29 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
+
+
+    const updateSourceStyle = (SOURCE_OBJECTS, numColor) => {
+        // if I want to do something with each source objects
+        Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
+            const obj = SOURCE_OBJECTS[key];
+            const mat = obj.material;
+            mat.transparent = true;
+            mat.opacity = 1;
+            // if number mesh
+            if( String( parseInt(key) )  != 'NaN'){
+                if(mat.map){
+                    const tex = mat.map;
+                    tex.magFilter = THREE.NearestFilter;
+                    tex.minFilter = THREE.NearestFilter;
+                }
+                mat.color = numColor || new THREE.Color(1, 0, 0);
+            }else{
+                // anything for other objects?
+            }
+        });
+    };
+
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
@@ -77,26 +101,7 @@ VIDEO.init = function(sm, scene, camera){
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('Done Loading.');
-        // if I want to do something with each source objects
-        Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
-            const obj = SOURCE_OBJECTS[key];
-            const mat = obj.material;
-            mat.transparent = true;
-            mat.opacity = 1;
-            if( String( parseInt(key) )  != 'NaN'){
-
-                // number mesh
-                if(mat.map){
-                    const tex = mat.map;
-                    tex.magFilter = THREE.NearestFilter;
-                    tex.minFilter = THREE.NearestFilter;
-                }
- mat.color = new THREE.Color(1, 0 , 0)
-            }else{
-
-                          
-            }
-        });
+        updateSourceStyle(SOURCE_OBJECTS);
         //-------- ----------
         // HUM OBJECTS
         //-------- ----------
@@ -205,6 +210,8 @@ VIDEO.init = function(sm, scene, camera){
                 // GRID
                 ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
                 ObjectGridWrap.update(grid);
+                // COUNT SECS
+                //count_sec.scale.set(COUNT_SCALE_MAX, COUNT_SCALE_MAX, COUNT_SCALE_MAX);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -229,12 +236,14 @@ VIDEO.init = function(sm, scene, camera){
                 // SECS COUNTER
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 let secs = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
+                secs = secs < 0 ? 0: secs;
                 // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){ secs = SECS_COUNT_DOWN; };
                 countDown.set(count_sec, secs);
                 // MS COUNTER
                 let a2 = (SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1) % 1;
                 let ms = Math.floor(1000 * a2);
+                ms = ms < 0 ? 0: ms;
                 if(THUM_MODE){ ms = 0; }
                 countDown.set(count_ms, ms);
                 // CAMERA
@@ -265,6 +274,9 @@ VIDEO.init = function(sm, scene, camera){
                 const a2 = seq.getPer(HUM_ALARM_COLOR_LOOPS_PER_SEC * SECS_ALARM, true);
                 const ci = Math.floor( HUM_COLORS.length  * a2 );
                 hum.material.color = HUM_COLORS[ci];
+                // COUNT SEC SCALE
+                //const s2 = COUNT_SCALE_MAX - 0.25 * a1;
+                //count_sec.scale.set(s2, s2, s2);
             }
         };
         //-------- ----------

@@ -41,8 +41,8 @@ TERM                  term percent / compare percent
 ## ( ) - 30 seconds video
 
 ## ( ) - video2-single - nummber alarm effects
-* () have a HUM SCALE MAX const
-* () make the huming brid a little bigger, and move it to the left a bit more
+* (done) have a HUM SCALE MAX const
+* (done) make the huming brid a little bigger, and move it to the left a bit more
 
 * () have some kind of effect for the numbers durring the alarm also
 * () use phong material for object grid wrap source objects
