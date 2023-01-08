@@ -40,11 +40,12 @@ TERM                  term percent / compare percent
 
 ## ( ) - 30 seconds video
 
-## ( ) - video2-single - nummber alarm effects
+## ( 01/08/2022 ) - video2-single - nummber alarm effects
 * (done) have a HUM SCALE MAX const
 * (done) make the huming brid a little bigger, and move it to the left a bit more
 * (done) have some kind of effect for the numbers durring the alarm also
-* () use phong material for object grid wrap source objects
+* (done) use phong material for object grid wrap source objects
+* (done) canvas background using r2 of the module
 
 ## ( done 01/07/2022 ) - video2-single
 * (done) start a single file video2 form as I hate the many video file format
