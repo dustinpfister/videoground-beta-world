@@ -19,8 +19,8 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 10;                                     // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const SECS_ALARM = 5;                                           // NUMBER OF SECONDS FOR THE ALARM
+    const SECS_COUNT_DOWN = 30;                                     // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_ALARM = 10;                                           // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                        // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                        // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
