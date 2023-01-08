@@ -18,13 +18,13 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
-    const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
-    const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
+    const SECS_COUNT_DOWN = 10;                                     // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_ALARM = 5;                                           // NUMBER OF SECONDS FOR THE ALARM
+    const THUM_MODE = false;                                        // SET VIDEO INTO THUM MODE
+    const THUM_FRAMES = 100;                                        // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
-    const SECS = SECS_COUNT_DOWN + SECS_ALARM;                           // NUMBER OF TOTAL SECONDS
-    const FPS = 30;                                                      // FRAMES PER SECOND
+    const SECS = SECS_COUNT_DOWN + SECS_ALARM;                      // NUMBER OF TOTAL SECONDS
+    const FPS = 30;                                                 // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd3-nums.dae';
     const URL_DAE_SCENE = '../../../dae/hum/hum_lp.dae';
@@ -33,7 +33,9 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     const HUM_WING_FLAPS_PER_SEC = 2;
     const HUM_Y_BOUNCE_PER_SEC = 0.5;
-    const HUM_ALARM_SCALE_CHANGE_PER_SEC = 1;
+    const HUM_SCALE_MAX = 0.45;
+    const HUM_SCALE_SUB = 0.10;
+    const HUM_ALARM_SCALE_CHANGE_PER_SEC = 1;      // the count of scale changes per second durring the alarm
     const HUM_ALARM_COLOR_LOOPS_PER_SEC = 0.5;
     const HUM_COLORS = 'cyan,red,lime,blue,orange,purple,yellow,green,white'.split(',').map( (str) => {
         return new THREE.Color(str);
@@ -94,7 +96,7 @@ VIDEO.init = function(sm, scene, camera){
         const hum = tweenMany.createMesh(SOURCE_OBJECTS, 'hum_1');
         //hum.material.color = new THREE.Color(0, 1, 1);
         //hum.scale.set(0.42, 0.42, 0.42);
-        hum.position.set(0,0,-2.5)
+        hum.position.set(-1.0 ,0,-2.5)
         scene.add(hum);
         //-------- ----------
         // COUNT DOWN OBJECTS
@@ -107,7 +109,7 @@ VIDEO.init = function(sm, scene, camera){
             source_objects: SOURCE_OBJECTS
         });
         count_sec.scale.set(1.2, 1.2, 1.2);
-        count_sec.position.copy(hum.position).add( new THREE.Vector3(3.3, 0.7, 0) );
+        count_sec.position.copy(hum.position).add( new THREE.Vector3(3.5, 0.7, 0) );
         scene.add(count_sec);
         // count ms count down object
         const count_ms = countDown.create({
@@ -191,7 +193,7 @@ VIDEO.init = function(sm, scene, camera){
                 const a_hum_y = seq.getSinBias(HUM_Y_BOUNCE_PER_SEC * SECS, false);
                 hum.position.y = -0.25 + 0.5 * a_hum_y;
                 // scale and color
-                hum.scale.set(0.42, 0.42, 0.42);
+                hum.scale.set(HUM_SCALE_MAX, HUM_SCALE_MAX, HUM_SCALE_MAX);
                 hum.material.color = HUM_COLORS[HUM_DEFAULT_COLOR_INDEX];
                 // GRID
                 ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
@@ -250,7 +252,7 @@ VIDEO.init = function(sm, scene, camera){
                 // HUM MESH
                 // scale
                 let a1 = seq.getSinBias(HUM_ALARM_SCALE_CHANGE_PER_SEC * SECS_ALARM, true);
-                const s = 0.42 - 0.12 * a1;
+                const s = HUM_SCALE_MAX - HUM_SCALE_SUB * a1;
                 hum.scale.set(s, s, s);
                 // color
                 const a2 = seq.getPer(HUM_ALARM_COLOR_LOOPS_PER_SEC * SECS_ALARM, true);
