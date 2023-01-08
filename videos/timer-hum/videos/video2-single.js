@@ -59,10 +59,11 @@ VIDEO.init = function(sm, scene, camera){
     // PATHS
     //-------- ----------
     const campos_cd = curveMod.QBV3Array([
-        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100]
+        [5, 2, 5.5, -5, 2, 4,    0, -3, 4,      100]
     ]);
     const campos_alarm = curveMod.QBV3Array([
-        [-5, 2, 4, 0, 0, 8,    5, -5, 5,      100]
+        [-5, 2, 4, 0, 0, 8,    5, -5, 5,      100],
+        [0, 0, 8, 6, -2, 2,    5, 5, 5,      100]
     ]);
     //scene.add( curveMod.debugPoints( campos_alarm ) );
     //-------- ----------
@@ -80,14 +81,20 @@ VIDEO.init = function(sm, scene, camera){
         Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
             const obj = SOURCE_OBJECTS[key];
             const mat = obj.material;
+            mat.transparent = true;
+            mat.opacity = 1;
             if( String( parseInt(key) )  != 'NaN'){
-                obj.material.transparent = true;
-                obj.material.opacity = 1;
-            }
-            if(mat.map){
-                const tex = mat.map;
-                tex.magFilter = THREE.NearestFilter;
-                tex.minFilter = THREE.NearestFilter;
+
+                // number mesh
+                if(mat.map){
+                    const tex = mat.map;
+                    tex.magFilter = THREE.NearestFilter;
+                    tex.minFilter = THREE.NearestFilter;
+                }
+ mat.color = new THREE.Color(1, 0 , 0)
+            }else{
+
+                          
             }
         });
         //-------- ----------
@@ -108,28 +115,28 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.scale.set(1.2, 1.2, 1.2);
+        count_sec.scale.set(1.25, 1.25, 1.25);
         count_sec.position.copy(hum.position).add( new THREE.Vector3(3.5, 0.7, 0) );
         scene.add(count_sec);
         // count ms count down object
         const count_ms = countDown.create({
             countID: 'ms',
             digits: 3,
-            width: 1.1,
+            width: 1.05,
             source_objects: SOURCE_OBJECTS
         });
-        count_ms.scale.set(0.4, 0.4, 0.4);
-        count_ms.position.copy(hum.position).add( new THREE.Vector3(5.3, 0, 0.6) );
+        count_ms.scale.set(0.58, 0.58, 0.58);
+        count_ms.position.copy(hum.position).add( new THREE.Vector3(5.77, 0.025, 0.25) );
         scene.add(count_ms);
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
             digits: 4,
-            width: 1.4,
+            width: 1.05,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.4, 0.4, 0.4);
-        count_frames.position.copy(hum.position).add( new THREE.Vector3(4, -1.3, 0) );
+        count_frames.scale.set(0.6, 0.6, 0.6);
+        count_frames.position.copy(hum.position).add( new THREE.Vector3(4, -1.3, 0.5) );
         scene.add(count_frames);
         //-------- ----------
         // GRID OPTIONS
