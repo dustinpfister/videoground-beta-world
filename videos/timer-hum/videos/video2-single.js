@@ -43,7 +43,8 @@ VIDEO.init = function(sm, scene, camera){
     //const HUM_COLORS = [ new THREE.Color(0, 1, 1), new THREE.Color(1, 0, 0), new THREE.Color(0, 1, 0) ];
     const HUM_DEFAULT_COLOR_INDEX = 0;
     const GRID_X_LOOPS_PER_SEC = 1 / 20;
-    const COUNT_SCALE_MAX = 1.25;
+    const COUNT_SECS_SCALE_MAX = 1.25;
+    const COUNT_MS_SCALE_MAX = 0.58;
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -68,10 +69,8 @@ VIDEO.init = function(sm, scene, camera){
     ]);
     //scene.add( curveMod.debugPoints( campos_alarm ) );
     //-------- ----------
-    // USING DAE LOADER OF COUNT-DOWN.JS
+    // HELPERS for COUNT-DOWN.JS
     //-------- ----------
-
-
     const updateSourceStyle = (SOURCE_OBJECTS, numColor) => {
         // if I want to do something with each source objects
         Object.keys( SOURCE_OBJECTS ).forEach( ( key ) => {
@@ -86,13 +85,14 @@ VIDEO.init = function(sm, scene, camera){
                     tex.magFilter = THREE.NearestFilter;
                     tex.minFilter = THREE.NearestFilter;
                 }
-                mat.color = numColor || new THREE.Color(1, 0, 0);
             }else{
                 // anything for other objects?
             }
         });
     };
-
+    //-------- ----------
+    // USING DAE LOADER OF COUNT-DOWN.JS
+    //-------- ----------
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
@@ -120,7 +120,7 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.scale.set(1.25, 1.25, 1.25);
+        //count_sec.scale.set(1.25, 1.25, 1.25);
         count_sec.position.copy(hum.position).add( new THREE.Vector3(3.5, 0.7, 0) );
         scene.add(count_sec);
         // count ms count down object
@@ -130,7 +130,7 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.05,
             source_objects: SOURCE_OBJECTS
         });
-        count_ms.scale.set(0.58, 0.58, 0.58);
+        //count_ms.scale.set(COUNT_MS_SCALE_MAX, COUNT_MS_SCALE_MAX, COUNT_MS_SCALE_MAX);
         count_ms.position.copy(hum.position).add( new THREE.Vector3(5.77, 0.025, 0.25) );
         scene.add(count_ms);
         // adding a frame count
@@ -210,8 +210,9 @@ VIDEO.init = function(sm, scene, camera){
                 // GRID
                 ObjectGridWrap.setPos(grid, seq.getPer(GRID_X_LOOPS_PER_SEC * SECS, false), 0 );
                 ObjectGridWrap.update(grid);
-                // COUNT SECS
-                //count_sec.scale.set(COUNT_SCALE_MAX, COUNT_SCALE_MAX, COUNT_SCALE_MAX);
+                // COUNT SECS AND MS SCALE
+                count_sec.scale.set(COUNT_SECS_SCALE_MAX, COUNT_SECS_SCALE_MAX, COUNT_SECS_SCALE_MAX);
+                count_ms.scale.set(COUNT_MS_SCALE_MAX, COUNT_MS_SCALE_MAX, COUNT_MS_SCALE_MAX);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -275,8 +276,10 @@ VIDEO.init = function(sm, scene, camera){
                 const ci = Math.floor( HUM_COLORS.length  * a2 );
                 hum.material.color = HUM_COLORS[ci];
                 // COUNT SEC SCALE
-                //const s2 = COUNT_SCALE_MAX - 0.25 * a1;
-                //count_sec.scale.set(s2, s2, s2);
+                const s2 = COUNT_SECS_SCALE_MAX - 0.25 * a1;
+                count_sec.scale.set(s2, s2, s2);
+                const s3 = COUNT_MS_SCALE_MAX - 0.25 * a1;
+                count_ms.scale.set(s3, s3, s3);
             }
         };
         //-------- ----------
