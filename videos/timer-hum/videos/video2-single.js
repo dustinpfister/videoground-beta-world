@@ -57,43 +57,20 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-
-const canObj = canvasMod.create({
-   size: 512,
-   draw: 'grid_palette',
-   palette: ['#000000', '#1f1f1f', '#00ffff'],
-       dataParse: 'lzstring64',
-   state: {
-       w: 8, h: 5,
-       data: 'AwGlEYyzNCVgpcmPit1mqvTsg==='
-/*
-       data: [
-           0,0,1,0,0,1,1,0,
-           0,1,1,0,1,1,0,0,
-           1,1,0,0,1,0,0,1,
-           0,0,0,1,1,0,1,1,
-           0,0,1,1,0,0,1,0
-       ].join(',')
-*/
-   }
-});
-
-console.log(canObj.state.data)
-
-//LZString.compressToBase64(
-//const str = canObj.state.data.join(',');
-//console.log( LZString.compressToBase64(str)  );
-//console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg==='));
-
-
-
-const texture = canObj.texture;
-//texture.offset.set(0, 1);
-texture.wrapS = THREE.RepeatWrapping;
-texture.wrapT = THREE.RepeatWrapping;
-texture.repeat.set(40, 40);
-
-
+    const canObj = canvasMod.create({
+        size: 512,
+        draw: 'grid_palette',
+        palette: ['#000000', '#1f1f1f', '#00ffff'],
+        dataParse: 'lzstring64',
+        state: { w: 8, h: 5, data: 'AwGlEYyzNCVgpcmPit1mqvTsg===' }
+    });
+    // can use LZString to compress and decompress
+    //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
+    // I want to repeat the texture
+    const texture = canObj.texture;
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(40, 40);
     scene.background = texture; //new THREE.Color('#0f0f0f');
     //-------- ----------
     // PATHS
