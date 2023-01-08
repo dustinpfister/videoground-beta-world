@@ -152,11 +152,11 @@ VIDEO.init = function(sm, scene, camera){
         const array_source_objects = [
             new THREE.Mesh(
                 new THREE.BoxGeometry(2, 0.25, 2),
-                new THREE.MeshNormalMaterial()
+                new THREE.MeshPhongMaterial()
             ),
             new THREE.Mesh(
                 new THREE.SphereGeometry(1, 30, 30),
-                new THREE.MeshNormalMaterial()
+                new THREE.MeshPhongMaterial()
             )
         ];
         const array_oi = [

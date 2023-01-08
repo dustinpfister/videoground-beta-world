@@ -43,8 +43,7 @@ TERM                  term percent / compare percent
 ## ( ) - video2-single - nummber alarm effects
 * (done) have a HUM SCALE MAX const
 * (done) make the huming brid a little bigger, and move it to the left a bit more
-
-* () have some kind of effect for the numbers durring the alarm also
+* (done) have some kind of effect for the numbers durring the alarm also
 * () use phong material for object grid wrap source objects
 
 ## ( done 01/07/2022 ) - video2-single
