@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(40, 40);
-    scene.background = texture; //new THREE.Color('#0f0f0f');
+    scene.background = texture;
     //-------- ----------
     // PATHS
     //-------- ----------
