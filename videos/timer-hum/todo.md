@@ -6,31 +6,31 @@ GOOGLE TRENDS - 12/27/2022 - USA - 12 months - all cats - Web Search
 COMPARE: 'lodash'
  
 TERM                  term percent / compare percent
-"30 seconds"          71/19  ( 3.73 )  <= 2  
-"29 seconds"           6/77  ( 0.07 )
-"28 seconds"           9/77  ( 0.11 )
-"27 seconds"           8/77  ( 0.10 )
-"26 seconds"           7/77  ( 0.09 )
-"25 seconds"          29/77  ( 0.37 )
-"24 seconds"          29/77  ( 0.37 )
-"23 seconds"           9/77  ( 0.11 )
-"22 seconds"          15/77  ( 0.22 )
-"21 seconds"          11/77  ( 0.14 )
+"30 seconds"          71/19  ( 3.73 )  <= 2  DONE 01/10/2023
+"29 seconds"           6/77  ( 0.07 )  <= 30
+"28 seconds"           9/77  ( 0.11 )  <= 25
+"27 seconds"           8/77  ( 0.10 )  <= 28
+"26 seconds"           7/77  ( 0.09 )  <= 29
+"25 seconds"          29/77  ( 0.37 )  <= 16
+"24 seconds"          29/77  ( 0.37 )  <= 17
+"23 seconds"           9/77  ( 0.11 )  <= 26
+"22 seconds"          15/77  ( 0.22 )  <= 22
+"21 seconds"          11/77  ( 0.14 )  <= 24
 "20 seconds"          71/62  ( 1.14 )  <= 10 
-"19 seconds"           9/77  ( 0.11 )
-"18 seconds"          18/77  ( 0.23 )
-"17 seconds"          15/77  ( 0.22 )
-"16 seconds"          21/77  ( 0.27 )
+"19 seconds"           9/77  ( 0.11 )  <= 27
+"18 seconds"          18/77  ( 0.23 )  <= 21
+"17 seconds"          15/77  ( 0.22 )  <= 23
+"16 seconds"          21/77  ( 0.27 )  <= 19
 "15 seconds"          76/62  ( 1.22 )  <= 8  
-"14 seconds"          19/77  ( 0.24 )
-"13 seconds"          13/33  ( 0.39 )
-"12 seconds"          50/77  ( 0.64 )
-"11 seconds"          28/77  ( 0.36 )
+"14 seconds"          19/77  ( 0.24 )  <= 20
+"13 seconds"          13/33  ( 0.39 )  <= 15
+"12 seconds"          50/77  ( 0.64 )  <= 13
+"11 seconds"          28/77  ( 0.36 )  <= 18
 "10 seconds"          54/21  ( 2.57 )  <= 4  
-"9 seconds"           34/77  ( 0.44 )
+"9 seconds"           34/77  ( 0.44 )  <= 14
 "8 seconds"           80/55  ( 1.54 )  <= 7  
-"7 seconds"           56/64  ( 0.87 )
-"6 seconds"           68/77  ( 0.88 )
+"7 seconds"           56/64  ( 0.87 )  <= 12
+"6 seconds"           68/77  ( 0.88 )  <= 11
 "5 seconds"           63/18  ( 3.50 )  <= 3  
 "4 seconds"           71/59  ( 1.20 )  <= 9  
 "3 seconds"           73/40  ( 1.82 )  <= 6  
@@ -38,9 +38,25 @@ TERM                  term percent / compare percent
 "1 second"            74/16  ( 4.62 )  <= 1  
 ```
 
-## ( ) - 30 seconds video
+## () - 5 seconds video
+* () make a 5 seconds video
 
-## ( 01/08/2022 ) - video2-single - nummber alarm effects
+## () - 10 seconds video
+* () make a 10 seconds video
+
+## () - 15 seconds video
+* () make a 10 seconds video
+
+## () - 20 seconds video
+* () make a 20 seconds video
+
+## () - 25 seconds video
+* () make a 20 seconds video
+
+## ( done 01/10/2023 ) - 30 seconds video
+* (done) make a 30 second video for this
+
+## ( done 01/08/2022 ) - video2-single - nummber alarm effects
 * (done) have a HUM SCALE MAX const
 * (done) make the huming brid a little bigger, and move it to the left a bit more
 * (done) have some kind of effect for the numbers durring the alarm also
