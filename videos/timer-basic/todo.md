@@ -31,20 +31,29 @@ TERM                  term percent / compare percent
 "8 seconds"           80/55  ( 1.54 )  <= 7  
 "7 seconds"           56/64  ( 0.87 )
 "6 seconds"           68/77  ( 0.88 )
-"5 seconds"           63/18  ( 3.50 )  <= 3  
+"5 seconds"           63/18  ( 3.50 )  <= 3  DONE 01/05/2022
 "4 seconds"           71/59  ( 1.20 )  <= 9  
 "3 seconds"           73/40  ( 1.82 )  <= 6  
 "2 seconds"           75/39  ( 1.92 )  <= 5  
 "1 second"            74/16  ( 4.62 )  <= 1  DONE 12/27/2022
 ```
 
-## () - 5 Seconds video
-* () make a 5 seconds video
+## () - 2 seconds video
+* () make a 2 seconds video
 
-## () - 1 Second video
-* () make a 1 second video
+## () - 10 seconds video
+* () make a 10 seconds video
 
-## ( done 12.27/2022 ) - 30 seconds video
+## () - video2-single.js
+* () make a single file video
+
+## ( done 01/05/2023 ) - 5 Seconds video
+* (done) make a 5 seconds video
+
+## ( done 12/27/2022 ) - 1 Second video
+* (done) make a 1 second video
+
+## ( done 12/27/2022 ) - 30 seconds video
 * (done) create 30 seconds video
 
 ## ( done 12/27/2022 ) - start video folder, custom alarm
