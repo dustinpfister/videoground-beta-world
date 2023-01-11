@@ -2,13 +2,8 @@
 
 <!-- WHATS NEXT -->
 
-## () - timer-basic
-* (done) finish template 6
-* () start timer-basic video folder
-* () Make a custom alarm video effect
-* () make a 30 sec video
-* () make a 15 sec video
-* () make a 10 sec video
+## () - timer-hiit
+* () start a new video file project where the goal is to just have a decent hiit timer
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
@@ -24,6 +19,17 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 01/11/2023 ) - timer-hum
+* (done) single file format video1 for timer-hum
+
+## ( done 01/11/2023 ) - timer-basic
+* (done) finish template 6
+* (done) start timer-basic video folder
+* (done) Make a custom alarm video effect
+* (done) make a 30 sec video
+* (done) single file format video2 file
+* (done) make a 10 sec video
 
 ## ( 11/11/2022 ) - frink4
 * (done) get audio sample mod working
