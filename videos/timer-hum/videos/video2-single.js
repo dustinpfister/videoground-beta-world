@@ -57,7 +57,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-    const canObj = canvasMod.create({
+    const canObj_back = canvasMod.create({
         size: 512,
         draw: 'grid_palette',
         palette: ['#000000', '#1f1f1f', '#00ffff'],
@@ -67,11 +67,11 @@ VIDEO.init = function(sm, scene, camera){
     // can use LZString to compress and decompress
     //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
     // I want to repeat the texture
-    const texture = canObj.texture;
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(40, 40);
-    scene.background = texture;
+    const texture_back = canObj_back.texture;
+    texture_back.wrapS = THREE.RepeatWrapping;
+    texture_back.wrapT = THREE.RepeatWrapping;
+    texture_back.repeat.set(40, 40);
+    scene.background = texture_back;
     //-------- ----------
     // PATHS
     //-------- ----------
