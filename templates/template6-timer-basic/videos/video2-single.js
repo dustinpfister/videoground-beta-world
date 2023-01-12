@@ -1,4 +1,4 @@
-// video2-cd-alarm-thum for template6-timer-basic
+// video2-single for template6-timer-basic
 // The aim here is for a single file that will include both a count down, and alarm part
 // The file can also be set into 'THUM_MODE' to replace the need for the thrid file
 // scripts
