@@ -69,7 +69,7 @@ VIDEO.init = function(sm, scene, camera){
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
         //-------- ----------
-        // SCENE CHILD OBJECTS
+        // MIN AND SEC COUNT DOWN OBJECTS
         //-------- ----------
         // count min count down object
         const count_min = countDown.create({
@@ -91,6 +91,21 @@ VIDEO.init = function(sm, scene, camera){
         count_sec.position.set(1.2, 1.08, 0.4);
         count_sec.scale.set(0.8, 0.8, 0.8);
         scene.add(count_sec);
+        //-------- ----------
+        // COLON
+        //-------- ----------
+        const colon = new THREE.Group();
+        const mesh1 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), new THREE.MeshPhongMaterial());
+        mesh1.position.y = 0.45;
+        colon.add(mesh1);
+        const mesh2 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), new THREE.MeshPhongMaterial());
+        mesh2.position.y = -0.45;
+        colon.add(mesh2);
+        scene.add(colon);
+        colon.position.set(0, 1.05, 0.4);
+        //-------- ----------
+        // FRAME COUNT
+        //-------- ----------
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
