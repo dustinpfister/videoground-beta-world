@@ -2,19 +2,21 @@
 
 <!-- WHATS NEXT -->
 
+## () - template7-timer-min-sec-ms
+* () new template based off of template6 where we have a minute count
+* () still have a second count
+* () ms count
+* () still have a frame count as well
+
 ## () - timer-hiit - High-intensity interval training
 * () start a new video file project where the goal is to just have a decent hiit timer
 * () DELAY-SECS const for a number of seconds to delay until start
 * () WARMUP-SECS const for a number of seconds for a warm up period
 * () have a INTERVAL-SECS-ON, INTERVAL-SECS-OFF, and INTERVAL-COUNT CONSTS
-
 * () timer-hitt- 1 interval, 20 seconds on, 10 seconds off, 30 seconds warm up, 5 second start delay
 * () 1 * ( 20 + 10 ) + 30 + 5 = 65 seconds
-
 * () timer-hitt- 5 intervals, 20 seconds on, 10 seconds off, 30 seconds warm up, 5 second start delay
 * () 5 * ( 20 + 10 ) + 30 + 5 = 185 seconds * 30 = 5,550 frames
-
-
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
