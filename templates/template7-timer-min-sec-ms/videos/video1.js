@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // SCENE CHILD OBJECTS
         //-------- ----------
-        // count secs count down object
+        // count min count down object
         const count_min = countDown.create({
             countID: 'min',
             digits: 2,
@@ -80,7 +80,6 @@ VIDEO.init = function(sm, scene, camera){
         });
         count_min.position.set(-1.5, 1.30, 0.4);
         scene.add(count_min);
-
         // count secs count down object
         const count_sec = countDown.create({
             countID: 'sec',
