@@ -1,5 +1,10 @@
 # template 6 - timer basic todo list
 
+## ( done 01/12/2023 ) - video2-single
+* (done) renamed video2-cd-alarm-thum to just video2-single
+* (done) use canvas r2 for video2-single
+* (done) useing canvas module for default background texture
+
 ## ( done 01/07/2022 ) - video2-cd-alarm-thum
 * (done) single video file that has both a count down and alarm seq object
 * (done) video file can also be set into "THUM MODE"
