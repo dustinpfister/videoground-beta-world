@@ -15,7 +15,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 15;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_COUNT_DOWN = 90;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
@@ -78,7 +78,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_min.position.set(-1.5, 1.30, 0.4);
+        count_min.position.set(-1.2, 1.08, 0.4);
+        count_min.scale.set(0.8, 0.8, 0.8);
         scene.add(count_min);
         // count secs count down object
         const count_sec = countDown.create({
@@ -87,7 +88,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.position.set(1.5, 1.30, 0.4);
+        count_sec.position.set(1.2, 1.08, 0.4);
+        count_sec.scale.set(0.8, 0.8, 0.8);
         scene.add(count_sec);
         // adding a frame count
         const count_frames = countDown.create({
@@ -133,12 +135,20 @@ VIDEO.init = function(sm, scene, camera){
             ],
             update: function(seq, partPer, partBias){
                 // SECS COUNTER
+
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                let secs = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
+
+
+                const n = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
+                let mins = Math.floor(n / 60);
+                let secs = n % 60;
+
+
                 // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
                     secs = SECS_COUNT_DOWN;
                 };
+                countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
                 // CAMERA
                 seq.copyPos('campos', camera);
