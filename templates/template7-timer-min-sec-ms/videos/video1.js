@@ -94,11 +94,12 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // COLON
         //-------- ----------
+        const colon_mat = new THREE.MeshPhongMaterial({color:0xaaaaaa});
         const colon = new THREE.Group();
-        const mesh1 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), new THREE.MeshPhongMaterial());
+        const mesh1 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), colon_mat);
         mesh1.position.y = 0.45;
         colon.add(mesh1);
-        const mesh2 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), new THREE.MeshPhongMaterial());
+        const mesh2 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), colon_mat);
         mesh2.position.y = -0.45;
         colon.add(mesh2);
         scene.add(colon);
@@ -109,7 +110,7 @@ VIDEO.init = function(sm, scene, camera){
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
-            digits: 4,
+            digits: 6,
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
