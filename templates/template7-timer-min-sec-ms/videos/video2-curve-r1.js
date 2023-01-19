@@ -1,5 +1,7 @@
 // video2-curve-r1 for template7-timer-min-sec-ms
-// using r1 of curve.js
+// * using r1 of curve.js
+// * using curveMod.QBCurvePath over that of curveMod.QBV3Array
+// * uisng curve paths diretcly ovet that of the sequence hooks feature
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -16,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 90;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
@@ -53,11 +55,11 @@ VIDEO.init = function(sm, scene, camera){
     texture.repeat.set(32, 24);
     scene.background = texture;
     //-------- ----------
-    // PATHS
+    // CURVE PATHS
     //-------- ----------
-    const campos = curveMod.QBV3Array([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
-    const campos_alarm = curveMod.QBV3Array([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
-    //scene.add( curveMod.debugPoints( campos_alarm ) );
+    const cam_pos_cd = curveMod.QBCurvePath([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
+    const cam_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
+    //scene.add( curveMod.debugPointsCurve( cam_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -147,20 +149,12 @@ VIDEO.init = function(sm, scene, camera){
         // SEQ 0 - count down
         opt_seq.objects[0] = {
             secs: SECS_COUNT_DOWN,
-            v3Paths: [
-                { key: 'campos', array: campos, lerp: true }
-            ],
             update: function(seq, partPer, partBias){
                 // SECS COUNTER
-
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
-
-
                 const n = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
                 let mins = Math.floor(n / 60);
                 let secs = n % 60;
-
-
                 // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
                     secs = SECS_COUNT_DOWN;
@@ -168,17 +162,13 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
                 // CAMERA
-                seq.copyPos('campos', camera);
-                //camera.position.set(10, 10, 10);
-                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
+                //camera.position.set(15, 10, 15);
+                camera.position.copy( cam_pos_cd.getPoint(partPer) );
             }
         };
         // SEQ 1 - ALARM
         opt_seq.objects[1] = {
             secs: SECS_ALARM,
-            v3Paths: [
-                { key: 'campos_alarm', array: campos_alarm, lerp: true }
-            ],
             update: function(seq, partPer, partBias){
                 let secs = 0;
                 // in thum mode secs should be SECS_COUNT_DOWN
@@ -188,9 +178,7 @@ VIDEO.init = function(sm, scene, camera){
                 // update secs count
                 countDown.set(count_sec, secs);
                 // CAMERA
-                seq.copyPos('campos_alarm', camera);
-                //camera.position.set(10, 10, 10);
-                //camera.lookAt( count_sec.position.clone().add(new THREE.Vector3(0,-0.32,0)));
+                camera.position.copy( cam_pos_alarm.getPoint(partPer) );
             }
         };
         //-------- ----------
@@ -206,10 +194,6 @@ VIDEO.init = function(sm, scene, camera){
             sm.frameMax = seq.frameMax;
             console.log( SECS_COUNT_DOWN + ' Timer Video = ' + sm.frameMax + ' Frames.' );
         }
-        return '';
-    })
-    .catch( (e) => {
-        console.log(e.message);
         return '';
     });
 };
