@@ -135,11 +135,11 @@ VIDEO.init = function(sm, scene, camera){
         land.geometry.rotateX(Math.PI * 1.5);
         scene.add(land);
         // TRAIN MESH OBJECTS
-        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), material_train );
+        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train );
 
         const train = new THREE.Group();
         scene.add(train);
-        [0,0,0].forEach((ti)=>{
+        [0,0,0,0,0,0].forEach((ti)=>{
             const mesh = SOURCE_OBJECTS['train_' + ti].clone();
             train.add(mesh);
         });
@@ -148,12 +148,13 @@ VIDEO.init = function(sm, scene, camera){
         const setTranPos = (train, cp, alpha) => {
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.1 + alpha;
+                const alpha_car_pos = alpha_car * 0.18 + alpha;
                 const v = cp.getPoint(alpha_car_pos % 1);
                 car.position.copy(v);
 
-               
-
+                // get a look at point
+                const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1);
+                car.lookAt(v_look);
             })
         };
 
