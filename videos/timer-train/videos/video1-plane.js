@@ -70,11 +70,13 @@ VIDEO.init = function(sm, scene, camera){
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
+
+
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
         const count_wrap = new THREE.Group();
-        count_wrap.scale.set(0.75,0.75,0.75);
+        count_wrap.scale.set(0.5, 0.5, 0.5);
         count_wrap.position.y = 1.03;
         scene.add(count_wrap);
         // count min count down object
@@ -101,9 +103,6 @@ VIDEO.init = function(sm, scene, camera){
         const colon = SOURCE_OBJECTS.colon;
         colon.position.set(0, 0, 0.4);
         count_wrap.add(colon);
-        //-------- ----------
-        // FRAME COUNT
-        //-------- ----------
         // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
@@ -111,11 +110,13 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.3, 0.3, 0.3);
-        count_frames.position.set(0, -0.14, 1.15);
-        scene.add(count_frames);
-        // add ground object
-        scene.add( SOURCE_OBJECTS['ground_0'] );
+        count_frames.scale.set(0.4, 0.4, 0.4);
+        count_frames.position.set(0, -1.5, 0.50);
+        count_wrap.add(count_frames);
+        //-------- ----------
+        // THEME OBJECTS
+        //-------- ----------
+        //scene.add( SOURCE_OBJECTS['ground_0'] );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
