@@ -129,17 +129,19 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         //scene.add( SOURCE_OBJECTS['ground_0'] );
         const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
-        const material_train = new THREE.MeshNormalMaterial({});
+        const material_train0 = new THREE.MeshPhongMaterial({});
+        const material_train1 = new THREE.MeshNormalMaterial({});
         // THE LAND MESH
         const land = new THREE.Mesh( new THREE.PlaneGeometry(30, 30, 10, 10), material_land );
         land.geometry.rotateX(Math.PI * 1.5);
         scene.add(land);
         // TRAIN MESH OBJECTS
-        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train );
+        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train0 );
+        SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train1 );
 
         const train = new THREE.Group();
         scene.add(train);
-        [0,0,0,0,0,0].forEach((ti)=>{
+        [1,1,1,1,1,0].forEach((ti)=>{
             const mesh = SOURCE_OBJECTS['train_' + ti].clone();
             train.add(mesh);
         });
