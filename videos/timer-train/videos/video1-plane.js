@@ -56,11 +56,19 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
+
+      const cp_pos_train = curveMod.QBCurvePath([ 
+          [0,1,12, 12,1,0, 5,0,5,     0],
+          [12,1,0, 0,1,-12, 5,0,-5,     0],
+          [0,1,-12, -12,1,0, -5,0,-5,     0],
+          [-12,1,0, 0,1,12, -5,0,5,     0]
+      ]);
+      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 40, size: 1.5, color: new THREE.Color(1, 0, 1)} ) );
+
 //    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
 //    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
 
 //    scene.add( curveMod.debugPointsCurve( cw_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(0, 1, 0)} ) );
-//    scene.add( curveMod.debugPointsCurve( cw_pos_alarm, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
 
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
@@ -120,11 +128,36 @@ VIDEO.init = function(sm, scene, camera){
         // THEME OBJECTS
         //-------- ----------
         //scene.add( SOURCE_OBJECTS['ground_0'] );
-
         const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
+        const material_train = new THREE.MeshNormalMaterial({});
+        // THE LAND MESH
         const land = new THREE.Mesh( new THREE.PlaneGeometry(30, 30, 10, 10), material_land );
         land.geometry.rotateX(Math.PI * 1.5);
         scene.add(land);
+        // TRAIN MESH OBJECTS
+        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), material_train );
+
+        const train = new THREE.Group();
+        scene.add(train);
+        [0,0,0].forEach((ti)=>{
+            const mesh = SOURCE_OBJECTS['train_' + ti].clone();
+            train.add(mesh);
+        });
+
+
+        const setTranPos = (train, cp, alpha) => {
+            train.children.forEach( (car, i, arr) => {
+                const alpha_car = i / arr.length;
+                const alpha_car_pos = alpha_car * 0.1 + alpha;
+                const v = cp.getPoint(alpha_car_pos % 1);
+                car.position.copy(v);
+
+               
+
+            })
+        };
+
+        setTranPos(train, cp_pos_train, 0);
 
 
         //-------- ----------
@@ -146,6 +179,9 @@ VIDEO.init = function(sm, scene, camera){
                     f = 0;
                 };
                 countDown.set(count_frames, f);
+
+        setTranPos(train, cp_pos_train, seq.per);
+
             },
             afterObjects: function(seq){
 
