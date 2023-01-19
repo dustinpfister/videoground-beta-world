@@ -171,18 +171,13 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
-
                 // COUNT DOWN WRAP
                 const v1 = cw_pos_cd.getPoint(partPer);
                 const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
                 count_wrap.position.copy( v1 );
-
-
                 // CAMERA
                 //camera.position.set(15, 10, 15);
                 camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
-
-                //camera.position.copy( cw_pos_cd.getPoint(partPer) );
             }
         };
         // SEQ 1 - ALARM
@@ -196,19 +191,12 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 // update secs count
                 countDown.set(count_sec, secs);
-
                 // COUNT DOWN WRAP
                 const v1 = cw_pos_alarm.getPoint(partPer);
                 const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
                 count_wrap.position.copy( v1 );
-                //count_wrap.position.copy( cw_pos_alarm.getPoint(partPer) );
-
-
                 // CAMERA
                 camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
-                //camera.position.copy(count_wrap.position).add(new THREE.Vector3(4,0,0))
-
-                //camera.position.copy( cw_pos_alarm.getPoint(partPer) );
             }
         };
         //-------- ----------

@@ -8,12 +8,12 @@
 
 ## () start folder, and video1-plane.js
 * (done) start the video folder
+* (done) start out with just a plane geometry
 
-* () start out with just a plane geometry
 * () mutate a few of the points in the plane
 * () see about creating a curve that moves along the plane
 
 * () create a collection of mesh objects that will serve as the train for now
 * () have the mesh objects move along the curve
 
-
+* () work out a better system for the movement of count wrap group
