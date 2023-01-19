@@ -17,7 +17,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_COUNT_DOWN = 5;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
@@ -56,9 +56,10 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
-    //const cam_pos_cd = curveMod.QBCurvePath([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
-    //const cam_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
-    //scene.add( curveMod.debugPointsCurve( cam_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
+    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
+    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
+    scene.add( curveMod.debugPointsCurve( cw_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(0, 1, 0)} ) );
+    scene.add( curveMod.debugPointsCurve( cw_pos_alarm, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -71,14 +72,14 @@ VIDEO.init = function(sm, scene, camera){
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
 
-
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
         const count_wrap = new THREE.Group();
         count_wrap.scale.set(0.5, 0.5, 0.5);
-        count_wrap.position.y = 1.03;
+        //count_wrap.position.y = 1.03;
         scene.add(count_wrap);
+        count_wrap.position.set(-10,0,-10);
         // count min count down object
         const count_min = countDown.create({
             countID: 'min',
@@ -117,6 +118,13 @@ VIDEO.init = function(sm, scene, camera){
         // THEME OBJECTS
         //-------- ----------
         //scene.add( SOURCE_OBJECTS['ground_0'] );
+
+        const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
+        const land = new THREE.Mesh( new THREE.PlaneGeometry(30, 30, 10, 10), material_land );
+        land.geometry.rotateX(Math.PI * 1.5);
+        scene.add(land);
+
+
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -129,8 +137,7 @@ VIDEO.init = function(sm, scene, camera){
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
-                count_wrap.position.set(0, 0, 0);
-                count_wrap.lookAt(camera.position);
+                count_wrap.position.set(0, 1, 0);
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
@@ -139,8 +146,13 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_frames, f);
             },
             afterObjects: function(seq){
-                camera.lookAt(0,0,0);
+
+                camera.lookAt(count_wrap.position);
                 camera.updateProjectionMatrix();
+                // COUNT WRAP SHOULD ALWAYS...
+                count_wrap.lookAt(camera.position);
+
+             
             },
             objects: []
         };
@@ -159,9 +171,18 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
+
+                // COUNT DOWN WRAP
+                const v1 = cw_pos_cd.getPoint(partPer);
+                const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
+                count_wrap.position.copy( v1 );
+
+
                 // CAMERA
                 //camera.position.set(15, 10, 15);
-                //camera.position.copy( cam_pos_cd.getPoint(partPer) );
+                camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
+
+                //camera.position.copy( cw_pos_cd.getPoint(partPer) );
             }
         };
         // SEQ 1 - ALARM
@@ -175,8 +196,19 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 // update secs count
                 countDown.set(count_sec, secs);
+
+                // COUNT DOWN WRAP
+                const v1 = cw_pos_alarm.getPoint(partPer);
+                const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
+                count_wrap.position.copy( v1 );
+                //count_wrap.position.copy( cw_pos_alarm.getPoint(partPer) );
+
+
                 // CAMERA
-                //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
+                camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
+                //camera.position.copy(count_wrap.position).add(new THREE.Vector3(4,0,0))
+
+                //camera.position.copy( cw_pos_alarm.getPoint(partPer) );
             }
         };
         //-------- ----------
