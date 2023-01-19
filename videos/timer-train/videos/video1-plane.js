@@ -56,10 +56,12 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
-    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
-    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
-    scene.add( curveMod.debugPointsCurve( cw_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(0, 1, 0)} ) );
-    scene.add( curveMod.debugPointsCurve( cw_pos_alarm, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
+//    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
+//    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
+
+//    scene.add( curveMod.debugPointsCurve( cw_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(0, 1, 0)} ) );
+//    scene.add( curveMod.debugPointsCurve( cw_pos_alarm, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
+
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -76,7 +78,7 @@ VIDEO.init = function(sm, scene, camera){
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
         const count_wrap = new THREE.Group();
-        count_wrap.scale.set(0.5, 0.5, 0.5);
+        count_wrap.scale.set(2.5, 2.5, 2.5);
         //count_wrap.position.y = 1.03;
         scene.add(count_wrap);
         count_wrap.position.set(-10,0,-10);
@@ -133,7 +135,7 @@ VIDEO.init = function(sm, scene, camera){
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(5, 1, 5);
+                camera.position.set(20, 20, 20);
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
@@ -147,10 +149,10 @@ VIDEO.init = function(sm, scene, camera){
             },
             afterObjects: function(seq){
 
-                camera.lookAt(count_wrap.position);
+                //camera.lookAt(count_wrap.position);
                 camera.updateProjectionMatrix();
                 // COUNT WRAP SHOULD ALWAYS...
-                count_wrap.lookAt(camera.position);
+                //count_wrap.lookAt(camera.position);
 
              
             },
@@ -172,12 +174,12 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
                 // COUNT DOWN WRAP
-                const v1 = cw_pos_cd.getPoint(partPer);
-                const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
-                count_wrap.position.copy( v1 );
+                //const v1 = cw_pos_cd.getPoint(partPer);
+                //const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
+                //count_wrap.position.copy( v1 );
                 // CAMERA
                 //camera.position.set(15, 10, 15);
-                camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
+                //camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
             }
         };
         // SEQ 1 - ALARM
@@ -192,11 +194,11 @@ VIDEO.init = function(sm, scene, camera){
                 // update secs count
                 countDown.set(count_sec, secs);
                 // COUNT DOWN WRAP
-                const v1 = cw_pos_alarm.getPoint(partPer);
-                const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
-                count_wrap.position.copy( v1 );
+                //const v1 = cw_pos_alarm.getPoint(partPer);
+                //const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
+                //count_wrap.position.copy( v1 );
                 // CAMERA
-                camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
+                //camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
             }
         };
         //-------- ----------
