@@ -56,8 +56,8 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
-    const cam_pos_cd = curveMod.QBCurvePath([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
-    const cam_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
+    //const cam_pos_cd = curveMod.QBCurvePath([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
+    //const cam_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
     //scene.add( curveMod.debugPointsCurve( cam_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
@@ -125,9 +125,12 @@ VIDEO.init = function(sm, scene, camera){
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(10, 10, 10);
+                camera.position.set(5, 1, 5);
                 camera.lookAt(0, 0, 0);
                 camera.zoom = 1.20;
+                // COUNT WRAP DEFAULTS
+                count_wrap.position.set(0, 0, 0);
+                count_wrap.lookAt(camera.position);
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
@@ -136,7 +139,7 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_frames, f);
             },
             afterObjects: function(seq){
-                camera.lookAt(0,1,0);
+                camera.lookAt(0,0,0);
                 camera.updateProjectionMatrix();
             },
             objects: []
@@ -158,7 +161,7 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_sec, secs);
                 // CAMERA
                 //camera.position.set(15, 10, 15);
-                camera.position.copy( cam_pos_cd.getPoint(partPer) );
+                //camera.position.copy( cam_pos_cd.getPoint(partPer) );
             }
         };
         // SEQ 1 - ALARM
@@ -173,7 +176,7 @@ VIDEO.init = function(sm, scene, camera){
                 // update secs count
                 countDown.set(count_sec, secs);
                 // CAMERA
-                camera.position.copy( cam_pos_alarm.getPoint(partPer) );
+                //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
             }
         };
         //-------- ----------
