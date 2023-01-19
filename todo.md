@@ -2,11 +2,8 @@
 
 <!-- WHATS NEXT -->
 
-## () - template7-timer-min-sec-ms
-* () new template based off of template6 where we have a minute count
-* () still have a second count
-* () ms count
-* () still have a frame count as well
+## () - timer-train
+* () video project that makes use of a number of objects that move along a curve that from a train
 
 ## () - timer-hiit - High-intensity interval training
 * () start a new video file project where the goal is to just have a decent hiit timer
@@ -32,6 +29,12 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 01/12/2023 ) - template7-timer-min-sec-ms
+* (done) new template based off of template6 where we have a minute count
+* (done) still have a second count
+* (done) ms count
+
 
 ## ( done 01/11/2023 ) - timer-hum
 * (done) single file format video1 for timer-hum
