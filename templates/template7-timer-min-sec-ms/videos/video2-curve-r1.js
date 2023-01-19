@@ -3,6 +3,7 @@
 // * using curveMod.QBCurvePath over that of curveMod.QBV3Array
 // * uisng curve paths diretcly ovet that of the sequence hooks feature
 // * using cd4-nums.dae and the colon object
+// * count_wrap group added
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -73,8 +74,12 @@ VIDEO.init = function(sm, scene, camera){
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
         //-------- ----------
-        // MIN AND SEC COUNT DOWN OBJECTS
+        // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
+        const count_wrap = new THREE.Group();
+        count_wrap.scale.set(0.75,0.75,0.75);
+        count_wrap.position.y = 1.03;
+        scene.add(count_wrap);
         // count min count down object
         const count_min = countDown.create({
             countID: 'min',
@@ -82,9 +87,9 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_min.position.set(-1.2, 1.08, 0.4);
-        count_min.scale.set(0.8, 0.8, 0.8);
-        scene.add(count_min);
+        count_min.position.set(-1.5, 0, 0.4);
+        //count_min.scale.set(0.8, 0, 0.8);
+        count_wrap.add(count_min);
         // count secs count down object
         const count_sec = countDown.create({
             countID: 'sec',
@@ -92,15 +97,13 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.1,
             source_objects: SOURCE_OBJECTS
         });
-        count_sec.position.set(1.2, 1.08, 0.4);
-        count_sec.scale.set(0.8, 0.8, 0.8);
-        scene.add(count_sec);
-        //-------- ----------
-        // COLON
-        //-------- ----------
+        count_sec.position.set(1.5, 0, 0.4);
+        //count_sec.scale.set(0.8, 0, 0.8);
+        count_wrap.add(count_sec);
+        // colon
         const colon = SOURCE_OBJECTS.colon;
-        colon.position.set(0, 1.05, 0.4);
-        scene.add(colon);
+        colon.position.set(0, 0, 0.4);
+        count_wrap.add(colon);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
@@ -111,8 +114,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.25, 0.25, 0.25);
-        count_frames.position.set(0, 0, 1.50);
+        count_frames.scale.set(0.3, 0.3, 0.3);
+        count_frames.position.set(0, -0.14, 1.15);
         scene.add(count_frames);
         // add ground object
         scene.add( SOURCE_OBJECTS['ground_0'] );
@@ -126,7 +129,7 @@ VIDEO.init = function(sm, scene, camera){
                 // CAMERA DEFAULTS
                 camera.position.set(10, 10, 10);
                 camera.lookAt(0, 0, 0);
-                camera.zoom = 1.26;
+                camera.zoom = 1.20;
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
