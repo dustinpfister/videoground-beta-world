@@ -2,6 +2,7 @@
 // * using r1 of curve.js
 // * using curveMod.QBCurvePath over that of curveMod.QBV3Array
 // * uisng curve paths diretcly ovet that of the sequence hooks feature
+// * using cd4-nums.dae and the colon object
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -26,7 +27,7 @@ VIDEO.init = function(sm, scene, camera){
     const SECS = SECS_COUNT_DOWN + SECS_ALARM;                           // NUMBER OF TOTAL SECONDS
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
-    const URL_DAE_NUMS = '../../../dae/count_down_basic/cd3-nums.dae';
+    const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
     const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
     // ---------- ----------
     // LIGHT
@@ -97,16 +98,9 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // COLON
         //-------- ----------
-        const colon_mat = new THREE.MeshPhongMaterial({color:0xaaaaaa});
-        const colon = new THREE.Group();
-        const mesh1 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), colon_mat);
-        mesh1.position.y = 0.45;
-        colon.add(mesh1);
-        const mesh2 = new THREE.Mesh( new THREE.BoxGeometry(0.5,0.5,0.5), colon_mat);
-        mesh2.position.y = -0.45;
-        colon.add(mesh2);
-        scene.add(colon);
+        const colon = SOURCE_OBJECTS.colon;
         colon.position.set(0, 1.05, 0.4);
+        scene.add(colon);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
