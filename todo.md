@@ -3,7 +3,9 @@
 <!-- WHATS NEXT -->
 
 ## () - timer-train
-* () video project that makes use of a number of objects that move along a curve that from a train
+* (done) start video1.js for this timer project
+* () start video2.js that will work with dae files
+* () upload first video
 
 ## () - timer-hiit - High-intensity interval training
 * () start a new video file project where the goal is to just have a decent hiit timer
@@ -34,7 +36,6 @@
 * (done) new template based off of template6 where we have a minute count
 * (done) still have a second count
 * (done) ms count
-
 
 ## ( done 01/11/2023 ) - timer-hum
 * (done) single file format video1 for timer-hum
