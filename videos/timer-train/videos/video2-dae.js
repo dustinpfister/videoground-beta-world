@@ -57,12 +57,18 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
 
       const cp_pos_train = curveMod.QBCurvePath([ 
-          [0,1,12, 12,1,0, 5,0,5,     0],
-          [12,1,0, 0,1,-12, 5,0,-5,     0],
-          [0,1,-12, -12,1,0, -5,0,-5,     0],
-          [-12,1,0, 0,1,12, -5,0,5,     0]
+          [-3,1,10, 7,1,10, 0,0,0,     0],
+          [7,1,10, 9,1,6, 1,0,2,     0],
+          [9,1,6, 9,1,-2, 0,0,0,     0],
+          [9,1,-2, 6,1,-5, 1,0,-2,     0],
+          [6,1,-5, 0,1,-5, 0,0,0,     0],
+
+          [0,1,-5, -5,1,3, -7,-1,-7,     0],
+
+          [-5,1,3, -5,1,8, 0,0,0,     0],
+          [-5,1,8, -3,1,10, -2,0,1,     0]
       ]);
-      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 40, size: 1.5, color: new THREE.Color(1, 0, 1)} ) );
+      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 40, size: 1.0, color: new THREE.Color(1, 0, 1)} ) );
 
 //    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
 //    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
@@ -85,7 +91,7 @@ VIDEO.init = function(sm, scene, camera){
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
         const count_wrap = new THREE.Group();
-        count_wrap.scale.set(2.5, 2.5, 2.5);
+        count_wrap.scale.set(1.5, 1.5, 1.5);
         //count_wrap.position.y = 1.03;
         scene.add(count_wrap);
         count_wrap.position.set(-10,0,-10);
@@ -130,9 +136,15 @@ VIDEO.init = function(sm, scene, camera){
         const material_train0 = new THREE.MeshPhongMaterial({});
         const material_train1 = new THREE.MeshNormalMaterial({});
 
+
         // THE LAND MESH
+//        const land = new THREE.Mesh( new THREE.PlaneGeometry(30, 30, 10, 10), material_land );
+//        land.geometry.rotateX(Math.PI * 1.5);
+//        scene.add(land);
         const land = SOURCE_OBJECTS['trainset_land'];
         scene.add(land);
+
+
 
         // TRAIN MESH OBJECTS
         SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train0 );
@@ -255,6 +267,7 @@ VIDEO.init = function(sm, scene, camera){
         return '';
     });
 };
+
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
     const seq = scene.userData.seq;
