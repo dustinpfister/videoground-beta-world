@@ -25,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
-    const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
+    const URL_DAE_SCENE = '../../../dae/trainset/land-1.dae';
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -126,14 +126,14 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // THEME OBJECTS
         //-------- ----------
-        //scene.add( SOURCE_OBJECTS['ground_0'] );
         const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
         const material_train0 = new THREE.MeshPhongMaterial({});
         const material_train1 = new THREE.MeshNormalMaterial({});
+
         // THE LAND MESH
-        const land = new THREE.Mesh( new THREE.PlaneGeometry(30, 30, 10, 10), material_land );
-        land.geometry.rotateX(Math.PI * 1.5);
+        const land = SOURCE_OBJECTS['trainset_land'];
         scene.add(land);
+
         // TRAIN MESH OBJECTS
         SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train0 );
         SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train1 );
