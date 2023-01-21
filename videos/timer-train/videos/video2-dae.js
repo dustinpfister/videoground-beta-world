@@ -147,8 +147,8 @@ VIDEO.init = function(sm, scene, camera){
 
 
         // TRAIN MESH OBJECTS
-        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train0 );
-        SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 2), material_train1 );
+        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train0 );
+        SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train1 );
 
         const train = new THREE.Group();
         scene.add(train);
@@ -161,7 +161,7 @@ VIDEO.init = function(sm, scene, camera){
         const setTranPos = (train, cp, alpha) => {
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.18 + alpha;
+                const alpha_car_pos = alpha_car * 0.13 + alpha;
                 const v = cp.getPoint(alpha_car_pos % 1);
                 car.position.copy(v);
 
