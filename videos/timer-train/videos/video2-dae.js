@@ -30,6 +30,25 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
+    //-------- ----------
+    // TRAIN HELPERS
+    //-------- ----------
+    const getTrainVectors = (cp, alpha) => {
+        return {
+            pos: cp.getPoint(alpha % 1).add(TRAIN_Y_ADJUST),
+            look: cp.getPoint( (alpha + 0.01) % 1).add(TRAIN_Y_ADJUST)
+        };
+    };
+    // set position of tran cars
+    const setTranPos = (train, cp, alpha) => {
+        train.children.forEach( (car, i, arr) => {
+            const alpha_car = i / arr.length;
+            const alpha_car_pos = alpha_car * 0.12 + alpha;
+            const v = getTrainVectors(cp, alpha_car_pos);
+            car.position.copy(v.pos);
+            car.lookAt(v.look);
+        })
+    };
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -142,25 +161,6 @@ VIDEO.init = function(sm, scene, camera){
             const mesh = SOURCE_OBJECTS['train_' + ti].clone();
             train.add(mesh);
         });
-        //-------- ----------
-        // TRAIN HELPERS
-        //-------- ----------
-        const getTrainVectors = (cp, alpha) => {
-            return {
-                pos: cp.getPoint(alpha % 1).add(TRAIN_Y_ADJUST),
-                look: cp.getPoint( (alpha + 0.01) % 1).add(TRAIN_Y_ADJUST)
-            };
-        };
-        // set position of tran cars
-        const setTranPos = (train, cp, alpha) => {
-            train.children.forEach( (car, i, arr) => {
-                const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.12 + alpha;
-                const v = getTrainVectors(cp, alpha_car_pos);
-                car.position.copy(v.pos);
-                car.lookAt(v.look);
-            })
-        };
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
