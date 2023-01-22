@@ -55,7 +55,13 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
+      const cp_pos_train = curveMod.QBCurvePath([ 
+          [-7,0,1.5, -4,0,9, 0,0,0,     0],
+          [-4,0,9, 6,0,9, 0,0,0,     0]
+      ]);
 
+
+/*
       const cp_pos_train = curveMod.QBCurvePath([ 
           [-3,1,10, 7,1,10, 0,0,0,     0],
           [7,1,10, 9,1,6, 1,0,2,     0],
@@ -68,6 +74,9 @@ VIDEO.init = function(sm, scene, camera){
           [-5,1,3, -5,1,8, 0,0,0,     0],
           [-5,1,8, -3,1,10, -2,0,1,     0]
       ]);
+
+*/
+
       scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 40, size: 1.0, color: new THREE.Color(1, 0, 1)} ) );
 
 //    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
@@ -161,10 +170,10 @@ VIDEO.init = function(sm, scene, camera){
         const setTranPos = (train, cp, alpha) => {
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.13 + alpha;
+                const alpha_car_pos = alpha_car * 0.5 + alpha;
                 const v = cp.getPoint(alpha_car_pos % 1);
                 car.position.copy(v);
-
+                //car.position.y += 0.3;
                 // get a look at point
                 const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1);
                 car.lookAt(v_look);
@@ -194,7 +203,8 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 countDown.set(count_frames, f);
 
-        setTranPos(train, cp_pos_train, seq.per);
+                setTranPos(train, cp_pos_train, seq.per);
+                //train.position.y += 0.5;
 
             },
             afterObjects: function(seq){
