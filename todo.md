@@ -4,7 +4,8 @@
 
 ## () - timer-train
 * (done) start video1.js for this timer project
-* () start video2.js that will work with dae files
+* (done) start video2.js that will work with dae files
+* () need to work out tracks, textures
 * () upload first video
 
 ## () - timer-hiit - High-intensity interval training
