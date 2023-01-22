@@ -160,7 +160,7 @@ VIDEO.init = function(sm, scene, camera){
         const setTranPos = (train, cp, alpha) => {
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.13 + alpha;
+                const alpha_car_pos = alpha_car * 0.1 + alpha;
                 const v = cp.getPoint(alpha_car_pos % 1);
                 car.position.copy(v);
                 //car.position.y += 0.3;
