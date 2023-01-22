@@ -185,9 +185,9 @@ VIDEO.init = function(sm, scene, camera){
                 // TRAIN POS
                 setTranPos(train, cp_pos_train, seq.per);
                 // have camera follow train?
-                //const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
-                //camera.position.copy(v.pos).add(new THREE.Vector3(0,5,5));
-                //camera.lookAt(v.look);
+                const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
+                camera.position.copy(v.pos).add(new THREE.Vector3(-10,5,-10));
+                camera.lookAt(v.look);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
