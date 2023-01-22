@@ -56,18 +56,18 @@ VIDEO.init = function(sm, scene, camera){
     // CURVE PATHS
     //-------- ----------
       const cp_pos_train = curveMod.QBCurvePath([ 
-          [-7,0,1.5,    -4,0,9,       0,0,0,     0],
-          [-4,0,9,       6,0,9,       0,0,0,     0],
-          [6,0,9,        8.5,0,5.5,   0,0,0,     0],
-          [8.5,0,5.5,    8.5,0,-4,    0,0,0,     0],
-          [8.5,0,-4,    4,0,-7,    0,0,0,     0],
-          [4,0,-7,    -2,0,-7,    0,0,0,     0],
-          [-2,0,-7,    -7,0,-3.5,    0,0,0,     0],
-          [-7,0,-3.5,    -7,0,1.5,    0,0,0,     0],
+          [-7,0,1.5,     -4,0,9,       -2,0,4,     0],
+          [-4,0,9,        6,0,9,       0,0,0,     0],
+          [6,0,9,         8.5,0,5.5,   1,0,1,     0],
+          [8.5,0,5.5,     8.5,0,-4,    0,0,0,     0],
+          [8.5,0,-4,      4,0,-7,      2,0,-2,     0],
+          [4,0,-7,       -2,0,-7,      0,0,0,     0],
+          [-2,0,-7,      -7,0,-3.5,    -2,0,-2,     0],
+          [-7,0,-3.5,    -7,0,1.5,     0,0,0,     0]
 
       ]);
 
-      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 40, size: 1.0, color: new THREE.Color(1, 0, 1)} ) );
+      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 100, size: 0.5, color: new THREE.Color(1, 0, 1)} ) );
 
 //    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
 //    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
