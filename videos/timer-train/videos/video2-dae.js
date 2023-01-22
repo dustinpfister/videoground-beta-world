@@ -25,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
-    const URL_DAE_SCENE = '../../../dae/trainset/land-1.dae';
+    const URL_DAE_SCENE = '../../../dae/trainset/land-1a.dae';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
     // ---------- ----------
@@ -71,19 +71,15 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
-	
-	console.log('IS THE PATH HERE GOOD AT LEST?');
-	console.log(videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS));
-	
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
         ],
-		[
-		videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/'),
-		videoAPI.pathJoin(sm.filePath, '../../../dae/trainset/')
-		]
+        [
+            videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/'),
+            videoAPI.pathJoin(sm.filePath, '../../../dae/trainset/')
+        ]
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
@@ -171,7 +167,7 @@ VIDEO.init = function(sm, scene, camera){
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(17, 15, 17);
+                camera.position.set(10, 5, 17);
                 camera.lookAt(0, -1, 0);
                 //camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
@@ -185,9 +181,9 @@ VIDEO.init = function(sm, scene, camera){
                 // TRAIN POS
                 setTranPos(train, cp_pos_train, seq.per);
                 // have camera follow train?
-                const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
-                camera.position.copy(v.pos).add(new THREE.Vector3(-10,5,-10));
-                camera.lookAt(v.look);
+                //const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
+                //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
+                //camera.lookAt(v.look);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
