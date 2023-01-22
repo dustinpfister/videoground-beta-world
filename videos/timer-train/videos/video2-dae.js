@@ -66,16 +66,8 @@ VIDEO.init = function(sm, scene, camera){
           [4,0,-7,       -2,0,-7,      0,0,0,     0],
           [-2,0,-7,      -7,0,-3.5,    -2,0,-2,     0],
           [-7,0,-3.5,    -7,0,1.5,     0,0,0,     0]
-
       ]);
-
-      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 100, size: 0.5, color: new THREE.Color(1, 0, 1)} ) );
-
-//    const cw_pos_cd = curveMod.QBCurvePath([ [0, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
-//    const cw_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
-
-//    scene.add( curveMod.debugPointsCurve( cw_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(0, 1, 0)} ) );
-
+      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 120, size: 0.25, color: new THREE.Color(1, 0, 1)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -87,13 +79,11 @@ VIDEO.init = function(sm, scene, camera){
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
-
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
         const count_wrap = new THREE.Group();
         count_wrap.scale.set(1.5, 1.5, 1.5);
-        //count_wrap.position.y = 1.03;
         scene.add(count_wrap);
         count_wrap.position.set(-10,0,-10);
         // count min count down object
@@ -104,7 +94,6 @@ VIDEO.init = function(sm, scene, camera){
             source_objects: SOURCE_OBJECTS
         });
         count_min.position.set(-1.5, 0, 0.4);
-        //count_min.scale.set(0.8, 0, 0.8);
         count_wrap.add(count_min);
         // count secs count down object
         const count_sec = countDown.create({
@@ -114,7 +103,6 @@ VIDEO.init = function(sm, scene, camera){
             source_objects: SOURCE_OBJECTS
         });
         count_sec.position.set(1.5, 0, 0.4);
-        //count_sec.scale.set(0.8, 0, 0.8);
         count_wrap.add(count_sec);
         // colon
         const colon = SOURCE_OBJECTS.colon;
@@ -136,33 +124,21 @@ VIDEO.init = function(sm, scene, camera){
         const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
         const material_train0 = new THREE.MeshPhongMaterial({});
         const material_train1 = new THREE.MeshNormalMaterial({});
-
-
         // THE LAND MESH
-//        const land = new THREE.Mesh( new THREE.PlaneGeometry(30, 30, 10, 10), material_land );
-//        land.geometry.rotateX(Math.PI * 1.5);
-//        scene.add(land);
         const land = SOURCE_OBJECTS['trainset_land'];
         scene.add(land);
-
-
-
         // TRAIN MESH OBJECTS
         SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train0 );
         SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train1 );
-
         const train = new THREE.Group();
         scene.add(train);
         [1,1,1,1,1,0].forEach((ti)=>{
             const mesh = SOURCE_OBJECTS['train_' + ti].clone();
             train.add(mesh);
         });
-
-
-//-------- ----------
-// TRAIN HELPERS
-//-------- ----------
-
+        //-------- ----------
+        // TRAIN HELPERS
+        //-------- ----------
         const getTrainVectors = (cp, alpha) => {
             return {
                 pos: cp.getPoint(alpha % 1).add(TRAIN_Y_ADJUST),
@@ -174,22 +150,11 @@ VIDEO.init = function(sm, scene, camera){
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
                 const alpha_car_pos = alpha_car * 0.12 + alpha;
-
-                //const v = cp.getPoint(alpha_car_pos % 1).add(TRAIN_Y_ADJUST);
-                //car.position.copy(v);
-                // get a look at point
-                //const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1).add(TRAIN_Y_ADJUST);
-                //car.lookAt(v_look);
                 const v = getTrainVectors(cp, alpha_car_pos);
                 car.position.copy(v.pos);
                 car.lookAt(v.look);
             })
         };
-
-        // set trans 
-        //setTranPos(train, cp_pos_train, 0);
-
-
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -209,28 +174,15 @@ VIDEO.init = function(sm, scene, camera){
                     f = 0;
                 };
                 countDown.set(count_frames, f);
-
+                // TRAIN POS
                 setTranPos(train, cp_pos_train, seq.per);
-
-
-
-                const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
-                camera.position.copy(v.pos).add(new THREE.Vector3(0,5,5));
-
-                camera.lookAt(v.look);
-
-
-                //train.position.y += 0.5;
-
+                // have camera follow train?
+                //const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
+                //camera.position.copy(v.pos).add(new THREE.Vector3(0,5,5));
+                //camera.lookAt(v.look);
             },
             afterObjects: function(seq){
-
-                //camera.lookAt(count_wrap.position);
                 camera.updateProjectionMatrix();
-                // COUNT WRAP SHOULD ALWAYS...
-                //count_wrap.lookAt(camera.position);
-
-             
             },
             objects: []
         };
@@ -249,13 +201,6 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
-                // COUNT DOWN WRAP
-                //const v1 = cw_pos_cd.getPoint(partPer);
-                //const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
-                //count_wrap.position.copy( v1 );
-                // CAMERA
-                //camera.position.set(15, 10, 15);
-                //camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
             }
         };
         // SEQ 1 - ALARM
@@ -269,12 +214,6 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 // update secs count
                 countDown.set(count_sec, secs);
-                // COUNT DOWN WRAP
-                //const v1 = cw_pos_alarm.getPoint(partPer);
-                //const e1 = new THREE.Euler(0,Math.PI * 0.5,0);
-                //count_wrap.position.copy( v1 );
-                // CAMERA
-                //camera.position.copy(v1).add( v1.clone().normalize().applyEuler(e1).multiplyScalar(4) );
             }
         };
         //-------- ----------
