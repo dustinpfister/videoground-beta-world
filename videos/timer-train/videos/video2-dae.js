@@ -56,26 +56,16 @@ VIDEO.init = function(sm, scene, camera){
     // CURVE PATHS
     //-------- ----------
       const cp_pos_train = curveMod.QBCurvePath([ 
-          [-7,0,1.5, -4,0,9, 0,0,0,     0],
-          [-4,0,9, 6,0,9, 0,0,0,     0]
+          [-7,0,1.5,    -4,0,9,       0,0,0,     0],
+          [-4,0,9,       6,0,9,       0,0,0,     0],
+          [6,0,9,        8.5,0,5.5,   0,0,0,     0],
+          [8.5,0,5.5,    8.5,0,-4,    0,0,0,     0],
+          [8.5,0,-4,    4,0,-7,    0,0,0,     0],
+          [4,0,-7,    -2,0,-7,    0,0,0,     0],
+          [-2,0,-7,    -7,0,-3.5,    0,0,0,     0],
+          [-7,0,-3.5,    -7,0,1.5,    0,0,0,     0],
+
       ]);
-
-
-/*
-      const cp_pos_train = curveMod.QBCurvePath([ 
-          [-3,1,10, 7,1,10, 0,0,0,     0],
-          [7,1,10, 9,1,6, 1,0,2,     0],
-          [9,1,6, 9,1,-2, 0,0,0,     0],
-          [9,1,-2, 6,1,-5, 1,0,-2,     0],
-          [6,1,-5, 0,1,-5, 0,0,0,     0],
-
-          [0,1,-5, -5,1,3, -7,-1,-7,     0],
-
-          [-5,1,3, -5,1,8, 0,0,0,     0],
-          [-5,1,8, -3,1,10, -2,0,1,     0]
-      ]);
-
-*/
 
       scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 40, size: 1.0, color: new THREE.Color(1, 0, 1)} ) );
 
@@ -170,7 +160,7 @@ VIDEO.init = function(sm, scene, camera){
         const setTranPos = (train, cp, alpha) => {
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.5 + alpha;
+                const alpha_car_pos = alpha_car * 0.13 + alpha;
                 const v = cp.getPoint(alpha_car_pos % 1);
                 car.position.copy(v);
                 //car.position.y += 0.3;
