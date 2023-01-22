@@ -1,5 +1,5 @@
 // count-down.js - r0 - from threejs-examples-count-down
-// * looking to make a custom fix for a problem with the DAE Loader
+// * made a custom fix for a problem with the DAE Loader in windows
 (function(api){
     //-------- ----------
     // DEFAULT SOURCE OBJECTS
@@ -120,9 +120,9 @@
             };
             dae_urls.forEach((url, i) => {
                 const loader = new THREE.ColladaLoader(manager);
-				if(resource_urls[i]){
-				loader.setResourcePath(resource_urls[i]);
-				}
+                if(resource_urls[i]){
+                    loader.setResourcePath(resource_urls[i]);
+                }
                 loader.load(url, function(result){
                     // what to do for each DAE by calling the built in helper for this
                     DAE_on_loaded_item(result, SOURCE_OBJECTS);
