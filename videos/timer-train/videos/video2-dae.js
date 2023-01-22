@@ -7,7 +7,7 @@ VIDEO.scripts = [
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
    '../../../js/curve/r1/curve.js',
-   '../../../js/count-down/r0/count-down.js'
+   '../../../js/count-down/r0/count-down-tempfix.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -71,11 +71,19 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
+	
+	console.log('IS THE PATH HERE GOOD AT LEST?');
+	console.log(videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS));
+	
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
-        ]
+        ],
+		[
+		videoAPI.pathJoin(sm.filePath, '../../../dae/count_down_basic/'),
+		videoAPI.pathJoin(sm.filePath, '../../../dae/trainset/')
+		]
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
