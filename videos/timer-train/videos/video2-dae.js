@@ -26,6 +26,8 @@ VIDEO.init = function(sm, scene, camera){
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
     const URL_DAE_SCENE = '../../../dae/trainset/land-1.dae';
+    // TRAIN SETTINGS
+    const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -157,16 +159,32 @@ VIDEO.init = function(sm, scene, camera){
         });
 
 
+//-------- ----------
+// TRAIN HELPERS
+//-------- ----------
+
+        const getTrainVectors = (cp, alpha) => {
+            return {
+                pos: cp.getPoint(alpha % 1).add(TRAIN_Y_ADJUST),
+                look: cp.getPoint( (alpha + 0.01) % 1).add(TRAIN_Y_ADJUST)
+            };
+        };
+
         const setTranPos = (train, cp, alpha) => {
-            const yAdjust = new THREE.Vector3(0,0.25,0)
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
                 const alpha_car_pos = alpha_car * 0.12 + alpha;
-                const v = cp.getPoint(alpha_car_pos % 1).add(yAdjust);
-                car.position.copy(v);
+
+                //const v = cp.getPoint(alpha_car_pos % 1).add(TRAIN_Y_ADJUST);
+                //car.position.copy(v);
                 // get a look at point
-                const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1).add(yAdjust);;
-                car.lookAt(v_look);
+                //const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1).add(TRAIN_Y_ADJUST);
+                //car.lookAt(v_look);
+
+const v = getTrainVectors(cp, alpha_car_pos);
+car.position.copy(v.pos);
+car.lookAt(v.look);
+
             })
         };
 
