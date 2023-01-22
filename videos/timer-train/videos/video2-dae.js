@@ -169,7 +169,7 @@ VIDEO.init = function(sm, scene, camera){
                 look: cp.getPoint( (alpha + 0.01) % 1).add(TRAIN_Y_ADJUST)
             };
         };
-
+        // set position of tran cars
         const setTranPos = (train, cp, alpha) => {
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
@@ -180,15 +180,14 @@ VIDEO.init = function(sm, scene, camera){
                 // get a look at point
                 //const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1).add(TRAIN_Y_ADJUST);
                 //car.lookAt(v_look);
-
-const v = getTrainVectors(cp, alpha_car_pos);
-car.position.copy(v.pos);
-car.lookAt(v.look);
-
+                const v = getTrainVectors(cp, alpha_car_pos);
+                car.position.copy(v.pos);
+                car.lookAt(v.look);
             })
         };
 
-        setTranPos(train, cp_pos_train, 0);
+        // set trans 
+        //setTranPos(train, cp_pos_train, 0);
 
 
         //-------- ----------
@@ -199,9 +198,9 @@ car.lookAt(v.look);
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(20, 20, 20);
-                camera.lookAt(0, 0, 0);
-                camera.zoom = 1.20;
+                camera.position.set(17, 15, 17);
+                camera.lookAt(0, -1, 0);
+                //camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
                 count_wrap.position.set(0, 1, 0);
                 // FRAME COUNTER
@@ -212,6 +211,15 @@ car.lookAt(v.look);
                 countDown.set(count_frames, f);
 
                 setTranPos(train, cp_pos_train, seq.per);
+
+
+
+                const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
+                camera.position.copy(v.pos).add(new THREE.Vector3(0,5,5));
+
+                camera.lookAt(v.look);
+
+
                 //train.position.y += 0.5;
 
             },
