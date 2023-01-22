@@ -158,14 +158,14 @@ VIDEO.init = function(sm, scene, camera){
 
 
         const setTranPos = (train, cp, alpha) => {
+            const yAdjust = new THREE.Vector3(0,0.25,0)
             train.children.forEach( (car, i, arr) => {
                 const alpha_car = i / arr.length;
-                const alpha_car_pos = alpha_car * 0.1 + alpha;
-                const v = cp.getPoint(alpha_car_pos % 1);
+                const alpha_car_pos = alpha_car * 0.12 + alpha;
+                const v = cp.getPoint(alpha_car_pos % 1).add(yAdjust);
                 car.position.copy(v);
-                //car.position.y += 0.3;
                 // get a look at point
-                const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1);
+                const v_look = cp.getPoint( (alpha_car_pos + 0.01) % 1).add(yAdjust);;
                 car.lookAt(v_look);
             })
         };
