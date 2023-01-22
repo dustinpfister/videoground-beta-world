@@ -16,8 +16,8 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 25;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
+    const SECS_COUNT_DOWN = 90;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_ALARM = 10;                                                // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
@@ -30,6 +30,9 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
+    const TRAIN_LAPS = 4;
+    const TRAIN_CARS = [1,1,1,1,1,1,1,0];
+    const TRAIN_SPACING = 0.16;
     //-------- ----------
     // TRAIN HELPERS
     //-------- ----------
@@ -39,11 +42,11 @@ VIDEO.init = function(sm, scene, camera){
             look: cp.getPoint( (alpha + 0.01) % 1).add(TRAIN_Y_ADJUST)
         };
     };
-    // set position of tran cars
+    // set position of train cars
     const setTranPos = (train, cp, alpha) => {
         train.children.forEach( (car, i, arr) => {
             const alpha_car = i / arr.length;
-            const alpha_car_pos = alpha_car * 0.12 + alpha;
+            const alpha_car_pos = alpha_car * TRAIN_SPACING + alpha;
             const v = getTrainVectors(cp, alpha_car_pos);
             car.position.copy(v.pos);
             car.lookAt(v.look);
@@ -157,7 +160,7 @@ VIDEO.init = function(sm, scene, camera){
         SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train1 );
         const train = new THREE.Group();
         scene.add(train);
-        [1,1,1,1,1,0].forEach((ti)=>{
+        TRAIN_CARS.forEach((ti)=>{
             const mesh = SOURCE_OBJECTS['train_' + ti].clone();
             train.add(mesh);
         });
@@ -181,7 +184,7 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 countDown.set(count_frames, f);
                 // TRAIN POS
-                setTranPos(train, cp_pos_train, seq.per);
+                setTranPos(train, cp_pos_train, seq.getPer(TRAIN_LAPS, false));
                 // have camera follow train?
                 //const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
                 //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
