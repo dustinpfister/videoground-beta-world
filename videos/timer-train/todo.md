@@ -1,22 +1,22 @@
 # timer-train todo list
 
 
-## () - video8-smoke.js
+## () - video7-smoke.js
 * () see about having animated cars, mainly the wheels of the engine
 * () smoke coming from engine smoke stacks
 
-## () - video7-water.js
+## () - video6-water.js
 * () I will want to have a water level feature
 
-## () - video6-textures.js
+## () - video5-textures.js
+* () update count-down.js to r1 of the module if done
 * () start having textures for all dae files thus far
 
-## () - video5-nature.js - trees
-* () strart a nature dae file that will contain objects like trees, bushes, rocks and so forth
-
-## () - video4-town.js - houses
-* () start a down dae file that will have objects that compose houses and other such objects
-* () update count-down.js to r1 of the module if done, else move this up to the next task
+## () - video4-landscape.js - houses
+* () start a landscape dae file that will have objects that compose houses and other such objects
+* () have a system of placing objects from landscape onto the land
+* () have at least 4 options for houses
+* () gave at least one option for trees
 
 ## ( done 01/24/2022 ) - video3-train.js
 * (done) start a video3-cars.js file
