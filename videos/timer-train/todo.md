@@ -13,8 +13,8 @@
 * () start a down dae file that will have objects that compose houses and other such objects
 * () update count-down.js to r1 of the module if done, else move this up to the next task
 
-## () - video3-cars.js
-* () start a video3-cars.js file
+## () - video3-train.js
+* (done) start a video3-cars.js file
 * () start a cars dae file in the trainset dae folder
 * () load the cars dae file and make use of it to create the cars of the train
 * () remove old code that is used to create train mesh objects
