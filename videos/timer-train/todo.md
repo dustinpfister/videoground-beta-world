@@ -1,5 +1,10 @@
 # timer-train todo list
 
+
+## () - video8-smoke.js
+* () see about having animated cars, mainly the wheels of the engine
+* () smoke coming from engine smoke stacks
+
 ## () - video7-water.js
 * () I will want to have a water level feature
 
@@ -13,12 +18,11 @@
 * () start a down dae file that will have objects that compose houses and other such objects
 * () update count-down.js to r1 of the module if done, else move this up to the next task
 
-## () - video3-train.js
+## ( done 01/24/2022 ) - video3-train.js
 * (done) start a video3-cars.js file
-* () start a cars dae file in the trainset dae folder
-* () load the cars dae file and make use of it to create the cars of the train
-* () remove old code that is used to create train mesh objects
-* () see about having animated cars, mainly the wheels of the engine
+* (done) start a cars dae file in the trainset dae folder
+* (done) load the cars dae file and make use of it to create the cars of the train
+* (done) remove old code that is used to create train mesh objects
 
 ## ( done 01/22/2023 ) land DAE file and video2-dae.js started
 * (done) start a new DAE file that will contain all the objects that I will uae for this little train world
