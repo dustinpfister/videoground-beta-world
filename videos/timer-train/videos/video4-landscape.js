@@ -163,6 +163,7 @@ VIDEO.init = function(sm, scene, camera){
         // THE LAND MESH
         const land = SOURCE_OBJECTS['trainset_land'];
         land.position.set(0,0,0);
+        land.rotation.set(Math.PI * 1.5,Math.PI * 0.0057, Math.PI * 0.0);
         scene.add(land);
         // TRAIN MESH OBJECTS
         const train = new THREE.Group();
@@ -209,8 +210,11 @@ VIDEO.init = function(sm, scene, camera){
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(8, 1, 10);
-                camera.lookAt(-7, 0, -2);
+                //camera.position.set(12 - 24 * seq.per, 5, 18);
+
+
+camera.position.set(0, 6, 19);
+                camera.lookAt(0.5, -0.7, 0);
                 //camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
                 count_wrap.position.set(0, 1, 0);
@@ -221,11 +225,15 @@ VIDEO.init = function(sm, scene, camera){
                 };
                 countDown.set(count_frames, f);
                 // TRAIN POS
-                setTranPos(train, cp_pos_train, seq.getPer(TRAIN_LAPS, false));
+                const a_trainpos = seq.getPer(TRAIN_LAPS, false);
+                setTranPos(train, cp_pos_train, a_trainpos);
                 // have camera follow train?
-                //const v = getTrainVectors(cp_pos_train, (seq.per + 0.1) % 1);
+                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.16) % 1);
                 //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
                 //camera.lookAt(v.look);
+
+                
+
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
