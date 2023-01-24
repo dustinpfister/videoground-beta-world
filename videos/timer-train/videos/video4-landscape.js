@@ -115,10 +115,6 @@ VIDEO.init = function(sm, scene, camera){
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
-
-
-console.log(SOURCE_OBJECTS);
-
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
@@ -159,13 +155,14 @@ console.log(SOURCE_OBJECTS);
         count_frames.position.set(0, -1.5, 0.50);
         count_wrap.add(count_frames);
         //-------- ----------
-        // THEME OBJECTS
+        // TRAIN OBJECTS
         //-------- ----------
         const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
         const material_train0 = new THREE.MeshPhongMaterial({});
         const material_train1 = new THREE.MeshNormalMaterial({});
         // THE LAND MESH
         const land = SOURCE_OBJECTS['trainset_land'];
+        land.position.set(0,0,0);
         scene.add(land);
         // TRAIN MESH OBJECTS
         const train = new THREE.Group();
@@ -178,6 +175,33 @@ console.log(SOURCE_OBJECTS);
             train.add(mesh);
         });
         //-------- ----------
+        // LANDSCAPE OBJECTS
+        //-------- ----------
+
+        const LANDSCAPE_DATA = [ 
+            0, 5, -0.3, 7,
+            0, 6, -0.3, -1,
+            0, -7, 0.95, -2,
+            0, -9, 0.6, -1,
+            0, -9, 1.7, -5
+        ];
+
+        const data = LANDSCAPE_DATA;
+        let i = 0;
+        const len = data.length;
+        while(i < len){
+
+            const objIndex = data[i];
+            const v = new THREE.Vector3(data[i + 1], data[i + 2], data[i + 3]);
+
+            const mesh = SOURCE_OBJECTS['landscape_' + objIndex].clone();
+            mesh.position.copy(v);
+
+            scene.add(mesh);
+            i += 4;
+        }
+
+        //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
         // start options for main seq object
@@ -185,8 +209,8 @@ console.log(SOURCE_OBJECTS);
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(10, 5, 17);
-                camera.lookAt(0, -1, 0);
+                camera.position.set(8, 1, 10);
+                camera.lookAt(-7, 0, -2);
                 //camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
                 count_wrap.position.set(0, 1, 0);
@@ -238,6 +262,7 @@ console.log(SOURCE_OBJECTS);
                 countDown.set(count_sec, secs);
             }
         };
+
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
