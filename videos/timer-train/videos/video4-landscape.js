@@ -33,7 +33,7 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_TRAIN_RESOURCE = '../../../dae/trainset/';
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/';
     // TRAIN SETTINGS
-    const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
+    const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.3,0);
     const TRAIN_LAPS = 4;
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
@@ -86,11 +86,11 @@ VIDEO.init = function(sm, scene, camera){
     // CURVE PATHS
     //-------- ----------
       const cp_pos_train = curveMod.QBCurvePath([ 
-          [-7,0,1.5,     -4,0,9,       -2,0,4,     0],
+          [-7,0,1.5,     -4,0,9,       -1.3,0,4,     0],
           [-4,0,9,        6,0,9,       0,0,0,     0],
           [6,0,9,         8.5,0,5.5,   1,0,1,     0],
           [8.5,0,5.5,     8.5,0,-4,    0,0,0,     0],
-          [8.5,0,-4,      4,0,-7,      2,0,-2,     0],
+          [8.5,0,-4,      4,0,-7,      1.5,0,-1.2,     0],
           [4,0,-7,       -2,0,-7,      0,0,0,     0],
           [-2,0,-7,      -7,0,-3.5,    -2,0,-2,     0],
           [-7,0,-3.5,    -7,0,1.5,     0,0,0,     0]
@@ -228,9 +228,9 @@ camera.position.set(0, 6, 19);
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // have camera follow train?
-                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.16) % 1);
-                //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
-                //camera.lookAt(v.look);
+                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
+                camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
+                camera.lookAt(v.look);
 
                 
 
