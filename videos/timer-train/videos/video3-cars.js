@@ -26,8 +26,11 @@ VIDEO.init = function(sm, scene, camera){
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
     const URL_DAE_SCENE = '../../../dae/trainset/land-1a.dae';
+    const URL_DAE_TRAIN = '../../../dae/trainset/train-1.dae';
+    // RESOURCE DAE PATHS
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/';
     const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/';
+    const URL_DAE_TRAIN_RESOURCE = '../../../dae/trainset/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
     const TRAIN_LAPS = 4;
@@ -98,11 +101,13 @@ VIDEO.init = function(sm, scene, camera){
     return countDown.DAE_loader(
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
+            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE),
+            videoAPI.pathJoin(sm.filePath, URL_DAE_TRAIN)
         ],
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
+            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE),
+            videoAPI.pathJoin(sm.filePath, URL_DAE_TRAIN_RESOURCE)
         ]
     )
     .then( (SOURCE_OBJECTS) => {
