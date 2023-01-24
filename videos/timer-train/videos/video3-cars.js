@@ -34,7 +34,7 @@ VIDEO.init = function(sm, scene, camera){
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
     const TRAIN_LAPS = 4;
-    const TRAIN_CARS = [1,1,1,1,1,1,1,0];
+    const TRAIN_CARS = [0,0,0,0,1];
     const TRAIN_SPACING = 0.16;
     //-------- ----------
     // TRAIN HELPERS
@@ -161,12 +161,13 @@ VIDEO.init = function(sm, scene, camera){
         const land = SOURCE_OBJECTS['trainset_land'];
         scene.add(land);
         // TRAIN MESH OBJECTS
-        SOURCE_OBJECTS['train_0'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train0 );
-        SOURCE_OBJECTS['train_1'] = new THREE.Mesh( new THREE.BoxGeometry(0.5, 0.5, 1), material_train1 );
         const train = new THREE.Group();
         scene.add(train);
         TRAIN_CARS.forEach((ti)=>{
-            const mesh = SOURCE_OBJECTS['train_' + ti].clone();
+            const mesh_source = SOURCE_OBJECTS['train_car_' + ti];
+            const mesh = new THREE.Mesh(mesh_source.geometry.clone(), mesh_source.material);
+            mesh.geometry.rotateX(Math.PI * 1.5);
+            mesh.geometry.rotateY(Math.PI * 1.5);
             train.add(mesh);
         });
         //-------- ----------
