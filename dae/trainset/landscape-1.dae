@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2023-01-24T13:52:39</created>
-    <modified>2023-01-24T13:52:39</modified>
+    <created>2023-01-24T14:24:41</created>
+    <modified>2023-01-24T14:24:41</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -102,73 +102,36 @@
     </light>
   </library_lights>
   <library_images/>
-  <library_effects>
-    <effect id="landscape_0_mat-effect">
-      <profile_COMMON>
-        <technique sid="common">
-          <phong>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <ambient>
-              <color sid="ambient">0 0 0 1</color>
-            </ambient>
-            <diffuse>
-              <color sid="diffuse">0.64 0.64 0.64 1</color>
-            </diffuse>
-            <specular>
-              <color sid="specular">0.5 0.5 0.5 1</color>
-            </specular>
-            <shininess>
-              <float sid="shininess">50</float>
-            </shininess>
-            <index_of_refraction>
-              <float sid="index_of_refraction">1</float>
-            </index_of_refraction>
-          </phong>
-        </technique>
-      </profile_COMMON>
-    </effect>
-  </library_effects>
-  <library_materials>
-    <material id="landscape_0_mat-material" name="landscape_0_mat">
-      <instance_effect url="#landscape_0_mat-effect"/>
-    </material>
-  </library_materials>
   <library_geometries>
-    <geometry id="landscape_0_geo-mesh" name="landscape_0_geo">
+    <geometry id="Cone-mesh" name="Cone">
       <mesh>
-        <source id="landscape_0_geo-mesh-positions">
-          <float_array id="landscape_0_geo-mesh-positions-array" count="129">0 0.25 0.75 0.04877257 0.2451963 0.75 0.09567081 0.2309699 0.75 0.1388925 0.2078674 0.75 0.1767767 0.1767767 0.75 0.2078674 0.1388925 0.75 0.2309699 0.09567081 0.75 0.2451963 0.04877257 0.75 0.25 0 0.75 0.2451963 -0.04877251 0.75 0.2309699 -0.09567081 0.75 0.2078674 -0.1388925 0.75 0.1767767 -0.1767767 0.75 0.1388925 -0.2078674 0.75 0.09567081 -0.2309699 0.75 0.04877251 -0.2451963 0.75 0 -0.25 0.75 -0.04877263 -0.2451963 0.75 -0.09567093 -0.2309698 0.75 -0.1388927 -0.2078673 0.75 -0.1767768 -0.1767765 0.75 -0.2078675 -0.1388924 0.75 -0.2309699 -0.09567064 0.75 0 0 2.75 -0.2451964 -0.04877233 0.75 -0.25 2.414e-7 0.75 -0.2451962 0.04877281 0.75 -0.2309697 0.09567111 0.75 -0.2078672 0.1388928 0.75 -0.1767764 0.1767769 0.75 -0.1388922 0.2078676 0.75 -0.09567052 0.23097 0.75 -0.04877215 0.2451964 0.75 0 1.30137e-7 0.75 0 0 0 0.1 0.1 0 -0.1 0.1 0 -0.1 -0.1 0 0.1 -0.1 0 0.1 0.1 0.75 -0.1 0.1 0.75 -0.1 -0.1 0.75 0.1 -0.1 0.75</float_array>
+        <source id="Cone-mesh-positions">
+          <float_array id="Cone-mesh-positions-array" count="78">0 0.25 0.7499999 0.09567081 0.2309699 0.7499999 0.1767767 0.1767767 0.7499999 0.2309699 0.09567081 0.7499999 0.25 0 0.7499999 0.2309699 -0.09567087 0.7499999 0.1767767 -0.1767767 0.7499999 0.09567087 -0.2309699 0.7499999 0 -0.25 0.7499999 -0.09567075 -0.2309699 0.7499999 -0.1767766 -0.1767767 0.7499999 0 0 2.75 -0.2309699 -0.09567087 0.7499999 -0.25 0 0.7499999 -0.2309699 0.09567087 0.7499999 -0.1767766 0.1767767 0.7499999 -0.0956707 0.2309699 0.7499999 0 0 -1.19209e-7 0.04999995 0.04999995 0.7499999 -0.04999995 0.04999995 0.7499999 -0.04999995 -0.04999995 0.7499999 0.04999995 -0.04999995 0.7499999 0.04999995 0.04999995 -1.19209e-7 -0.04999995 0.04999995 -1.19209e-7 -0.04999995 -0.04999995 -1.19209e-7 0.04999995 -0.04999995 -1.19209e-7</float_array>
           <technique_common>
-            <accessor source="#landscape_0_geo-mesh-positions-array" count="43" stride="3">
+            <accessor source="#Cone-mesh-positions-array" count="26" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
             </accessor>
           </technique_common>
         </source>
-        <source id="landscape_0_geo-mesh-normals">
-          <float_array id="landscape_0_geo-mesh-normals-array" count="156">0.09726756 0.9875728 0.1234465 0.2880643 0.9496209 0.1234466 0.4677909 0.8751758 0.1234467 0.629541 0.7670979 0.1234466 0.7670978 0.629541 0.1234465 0.8751758 0.4677909 0.1234466 0.9496209 0.2880644 0.1234466 0.9875728 0.09726756 0.1234466 0.9875728 -0.09726727 0.1234466 0.949621 -0.2880644 0.1234466 0.8751759 -0.4677909 0.1234466 0.7670978 -0.629541 0.1234466 0.6295409 -0.7670979 0.1234466 0.4677911 -0.8751757 0.1234466 0.2880637 -0.9496211 0.1234466 0.0972675 -0.9875729 0.1234466 -0.0972681 -0.9875728 0.1234466 -0.2880643 -0.949621 0.1234466 -0.4677917 -0.8751754 0.1234465 -0.6295413 -0.7670975 0.1234466 -0.7670984 -0.6295404 0.1234465 -0.8751761 -0.4677906 0.1234466 -0.9496212 -0.2880634 0.1234466 -0.9875729 -0.09726661 0.1234466 -0.9875727 0.0972684 0.1234465 -0.9496206 0.2880654 0.1234466 -0.8751752 0.467792 0.1234466 -0.7670972 0.6295419 0.1234465 -0.6295401 0.7670987 0.1234466 -0.46779 0.8751764 0.1234466 -0.288063 0.9496213 0.1234466 -0.09726649 0.987573 0.1234466 0 0 -1 0 -1 0 1 0 0 0 1 0 -1 0 0 -2.17996e-6 0 -1 2.17998e-6 0 -1 -7.03461e-7 0 -1 6.69929e-7 0 -1 -1.08998e-6 0 -1 -6.12644e-7 0 -1 2.81384e-6 0 -1 -2.67971e-6 0 -1 4.90115e-6 0 -1 3.26994e-6 0 -1 -7.0346e-7 0 -1 2.17996e-6 0 -1 -6.12645e-7 0 -1 2.67971e-6 0 -1 -4.90115e-6 0 -1</float_array>
+        <source id="Cone-mesh-normals">
+          <float_array id="Cone-mesh-normals-array" count="81">0.1936405 0.9734966 0.1216871 0.5514414 0.8252906 0.1216871 0.8252907 0.5514414 0.1216871 0.9734966 0.1936405 0.121687 0.9734966 -0.1936405 0.1216871 0.8252906 -0.5514416 0.1216871 0.5514415 -0.8252907 0.1216871 0.1936406 -0.9734966 0.1216871 -0.1936403 -0.9734966 0.1216871 -0.5514414 -0.8252907 0.1216871 -0.8252905 -0.5514417 0.1216871 -0.9734967 -0.1936405 0.121687 -0.9734966 0.1936406 0.121687 -0.8252905 0.5514417 0.1216871 -0.5514414 0.8252907 0.1216871 -0.1936402 0.9734967 0.1216871 0 -1 0 1 0 0 0 1 0 -1 0 0 0 0 -1 4.09763e-7 0 -1 -8.19525e-7 0 -1 6.14644e-7 0 -1 -4.34366e-7 0 -1 2.04881e-7 0 -1 4.34366e-7 0 -1</float_array>
           <technique_common>
-            <accessor source="#landscape_0_geo-mesh-normals-array" count="52" stride="3">
+            <accessor source="#Cone-mesh-normals-array" count="27" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
             </accessor>
           </technique_common>
         </source>
-        <vertices id="landscape_0_geo-mesh-vertices">
-          <input semantic="POSITION" source="#landscape_0_geo-mesh-positions"/>
+        <vertices id="Cone-mesh-vertices">
+          <input semantic="POSITION" source="#Cone-mesh-positions"/>
         </vertices>
-        <lines count="1">
-          <input semantic="VERTEX" source="#landscape_0_geo-mesh-vertices" offset="0"/>
-          <p>34 33</p>
-        </lines>
-        <triangles material="landscape_0_mat-material" count="78">
-          <input semantic="VERTEX" source="#landscape_0_geo-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#landscape_0_geo-mesh-normals" offset="1"/>
-          <p>0 0 23 0 1 0 1 1 23 1 2 1 2 2 23 2 3 2 3 3 23 3 4 3 4 4 23 4 5 4 5 5 23 5 6 5 6 6 23 6 7 6 7 7 23 7 8 7 8 8 23 8 9 8 9 9 23 9 10 9 10 10 23 10 11 10 11 11 23 11 12 11 12 12 23 12 13 12 13 13 23 13 14 13 14 14 23 14 15 14 15 15 23 15 16 15 16 16 23 16 17 16 17 17 23 17 18 17 18 18 23 18 19 18 19 19 23 19 20 19 20 20 23 20 21 20 21 21 23 21 22 21 22 22 23 22 24 22 24 23 23 23 25 23 25 24 23 24 26 24 26 25 23 25 27 25 27 26 23 26 28 26 28 27 23 27 29 27 29 28 23 28 30 28 30 29 23 29 31 29 31 30 23 30 32 30 32 31 23 31 0 31 35 32 37 32 36 32 38 33 41 33 37 33 38 34 39 34 42 34 35 35 40 35 39 35 37 36 40 36 36 36 8 32 42 32 39 32 42 32 16 32 41 32 41 32 25 32 40 32 0 32 39 32 40 32 7 32 8 32 39 32 15 37 16 37 42 37 24 32 25 32 41 32 32 38 0 38 40 38 35 32 38 32 37 32 38 33 42 33 41 33 38 34 35 34 39 34 35 35 36 35 40 35 37 36 41 36 40 36 39 32 0 32 1 32 1 32 2 32 39 32 2 32 3 32 39 32 3 32 4 32 39 32 4 39 5 39 39 39 5 40 6 40 39 40 6 32 7 32 39 32 42 41 8 41 9 41 9 42 10 42 42 42 10 32 11 32 42 32 11 32 12 32 42 32 12 43 13 43 42 43 13 44 14 44 42 44 14 45 15 45 42 45 41 46 16 46 17 46 17 32 18 32 41 32 18 32 19 32 41 32 19 32 20 32 41 32 20 47 21 47 41 47 21 32 22 32 41 32 22 32 24 32 41 32 40 48 25 48 26 48 26 49 27 49 40 49 27 32 28 32 40 32 28 32 29 32 40 32 29 32 30 32 40 32 30 50 31 50 40 50 31 51 32 51 40 51</p>
+        <triangles count="46">
+          <input semantic="VERTEX" source="#Cone-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cone-mesh-normals" offset="1"/>
+          <p>0 0 11 0 1 0 1 1 11 1 2 1 2 2 11 2 3 2 3 3 11 3 4 3 4 4 11 4 5 4 5 5 11 5 6 5 6 6 11 6 7 6 7 7 11 7 8 7 8 8 11 8 9 8 9 9 11 9 10 9 10 10 11 10 12 10 12 11 11 11 13 11 13 12 11 12 14 12 14 13 11 13 15 13 15 14 11 14 16 14 16 15 11 15 0 15 20 16 25 16 21 16 21 17 22 17 18 17 18 18 23 18 19 18 19 19 24 19 20 19 23 20 25 20 24 20 0 20 18 20 19 20 18 20 4 20 21 20 8 20 20 20 21 20 13 20 19 20 20 20 16 20 0 20 19 20 3 20 4 20 18 20 7 20 8 20 21 20 12 21 13 21 20 21 20 16 24 16 25 16 21 17 25 17 22 17 18 18 22 18 23 18 19 19 23 19 24 19 23 20 22 20 25 20 19 22 13 22 14 22 14 20 15 20 19 20 15 20 16 20 19 20 18 23 0 23 1 23 1 20 2 20 18 20 2 24 3 24 18 24 21 20 4 20 5 20 5 20 6 20 21 20 6 20 7 20 21 20 20 25 8 25 9 25 9 20 10 20 20 20 10 26 12 26 20 26</p>
         </triangles>
       </mesh>
     </geometry>
@@ -185,14 +148,8 @@
         <instance_light url="#Lamp-light"/>
       </node>
       <node id="landscape_0" name="landscape_0" type="NODE">
-        <matrix sid="transform">1 0 0 0 0 -4.37114e-8 1 0 0 -1 -4.37114e-8 0 0 0 0 1</matrix>
-        <instance_geometry url="#landscape_0_geo-mesh" name="landscape_0">
-          <bind_material>
-            <technique_common>
-              <instance_material symbol="landscape_0_mat-material" target="#landscape_0_mat-material"/>
-            </technique_common>
-          </bind_material>
-        </instance_geometry>
+        <matrix sid="transform">1 0 0 0 0 -4.37114e-8 1 0 0 -1 -4.37114e-8 1.19209e-7 0 0 0 1</matrix>
+        <instance_geometry url="#Cone-mesh" name="landscape_0"/>
       </node>
     </visual_scene>
   </library_visual_scenes>

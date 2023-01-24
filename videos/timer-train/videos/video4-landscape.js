@@ -103,16 +103,22 @@ VIDEO.init = function(sm, scene, camera){
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_TRAIN)
+            videoAPI.pathJoin(sm.filePath, URL_DAE_TRAIN),
+            videoAPI.pathJoin(sm.filePath, URL_DAE_LANDSCAPE)
         ],
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_TRAIN_RESOURCE)
+            videoAPI.pathJoin(sm.filePath, URL_DAE_TRAIN_RESOURCE),
+            videoAPI.pathJoin(sm.filePath, URL_DAE_LANDSCAPE_RESOURCE)
         ]
     )
     .then( (SOURCE_OBJECTS) => {
         console.log('DAE FILES LOADED');
+
+
+console.log(SOURCE_OBJECTS);
+
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
