@@ -15,7 +15,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 90;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 10;                                                // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
@@ -209,13 +209,6 @@ VIDEO.init = function(sm, scene, camera){
         const opt_seq = {
             fps: FPS,
             beforeObjects: function(seq){
-                // CAMERA DEFAULTS
-                //camera.position.set(12 - 24 * seq.per, 5, 18);
-
-
-camera.position.set(0, 6, 19);
-                camera.lookAt(0.5, -0.7, 0);
-                //camera.zoom = 1.20;
                 // COUNT WRAP DEFAULTS
                 count_wrap.position.set(0, 1, 0);
                 // FRAME COUNTER
@@ -227,13 +220,14 @@ camera.position.set(0, 6, 19);
                 // TRAIN POS
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
+                // CAMERA DEFAULTS
+                camera.position.set(10 - 20 * seq.per, 6, 19);
+                camera.lookAt(0.5, -0.7, 0);
+                //camera.zoom = 1.20;
                 // have camera follow train?
-                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
-                camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
-                camera.lookAt(v.look);
-
-                
-
+                //const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
+                //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
+                //camera.lookAt(v.look);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
