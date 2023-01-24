@@ -1,5 +1,7 @@
 // video2-dae.js - from timer-train - videoground-beta-world project
-// * using a trainset land1 dae file
+// * using the trainset land1 dae file
+// * using a count-down-tempfix version of r0 of count-down.js that helps with an isshue of loading resources
+// * 
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
