@@ -1,5 +1,6 @@
 // video3-train.js - from timer-train - videoground-beta-world project
-// * using a cars dae file that contains geometry for the train
+// * using a train dae file that contains geometry for the train
+// * adjusting geometry when making train mesh objects from source objects
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -34,8 +35,8 @@ VIDEO.init = function(sm, scene, camera){
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.25,0);
     const TRAIN_LAPS = 4;
-    const TRAIN_CARS = [0,0,0,0,1];
-    const TRAIN_SPACING = 0.16;
+    const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
+    const TRAIN_SPACING = 0.19;
     //-------- ----------
     // TRAIN HELPERS
     //-------- ----------
