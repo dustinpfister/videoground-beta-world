@@ -1,17 +1,20 @@
 # trainset dae files todo list
 
 ## () textures
-* () texture for land-1.dae trainset_land mesh
-* () textures for all cars in cars-1.dae
+* () start adding textures starting with land
+* () go with using textures to create tracks on the land
 
-## () addtional cars for cars-1.dae
-* () add a coal car for the engine
-* () add a caboose car
+## () add first buildings for landscape objects
+* () add first house object
 
-## () start cars-1.dae
-* () start a new dae file for adding train car mesh objects
-* () I will want an engine of course
-* () passenger cars as well for now
+## () improved train geo
+* () add wheels for train car 0 \( blank \)
+* () add wheels for train car 1 \( engine \)
+* () start a train car 2 \( passenger car \)
+
+## ( done 01/26/2023 ) train, and landscape dae files
+* (done) have a train dae file that will contain all the geo that is used to create a train
+* (done) have a landscape dae file that will be used to place all other objects in an over all scene
 
 ## ( done 01/21/2023 ) start land-1.dae
 * (done) start land dae file
