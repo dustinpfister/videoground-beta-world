@@ -1,4 +1,6 @@
 // video4-landscape.js - from timer-train - videoground-beta-world project
+// * using a landscape dae file for all other objects to place in the scene
+// * system for setting objects in place
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
