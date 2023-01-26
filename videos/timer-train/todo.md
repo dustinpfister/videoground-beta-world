@@ -13,10 +13,10 @@
 * () start having textures for all dae files thus far
 
 ## () - video4-landscape.js - houses
-* () start a landscape dae file that will have objects that compose houses and other such objects
-* () have a system of placing objects from landscape onto the land
-* () have at least 4 options for houses
-* () gave at least one option for trees
+* (done) start a landscape dae file that will have objects that compose houses and other such objects
+* (done) gave at least one option for trees
+* (done) have a system of placing objects from landscape onto the land
+* () have at least 1 option for houses
 
 ## ( done 01/24/2022 ) - video3-train.js
 * (done) start a video3-cars.js file
