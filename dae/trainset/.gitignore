@@ -1,3 +1,5 @@
 # no image files here, pace them in the skins folder
 *.png
 !skins/*.png
+!skins/*/*.png
+
