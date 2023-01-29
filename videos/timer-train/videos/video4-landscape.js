@@ -26,12 +26,12 @@ VIDEO.init = function(sm, scene, camera){
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
-    const URL_DAE_SCENE = '../../../dae/trainset/land-1b.dae';
+    const URL_DAE_SCENE = '../../../dae/trainset/land-1c.dae';
     const URL_DAE_TRAIN = '../../../dae/trainset/train-1.dae';
     const URL_DAE_LANDSCAPE = '../../../dae/trainset/landscape-1.dae';
     // RESOURCE DAE PATHS
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/';
-    const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/';
+    const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/skins/land-1-solid/';
     const URL_DAE_TRAIN_RESOURCE = '../../../dae/trainset/';
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/';
     // TRAIN SETTINGS
