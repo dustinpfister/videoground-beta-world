@@ -87,15 +87,16 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
-      const cp_pos_train = curveMod.QBCurvePath([ 
-          [-7,0,1.5,     -4,0,9,       -1.3,0,4,     0],
-          [-4,0,9,        6,0,9,       0,0,0,     0],
-          [6,0,9,         8.5,0,5.5,   1,0,1,     0],
-          [8.5,0,5.5,     8.5,0,-3,    0,0,0,     0],
-          [8.5,0,-3,      4,0,-7,      1.5,0,-1.2,     0],
-          [4,0,-7,       -2,0,-7,      0,0,0,     0],
-          [-2,0,-7,      -7,0,-3.5,    -2,0,-2,     0],
-          [-7,0,-3.5,    -7,0,1.5,     0,0,0,     0]
+      const cp_pos_train = curveMod.QBCurvePath([
+          [-6.75,0, 1.50,     -6.75,0, 6.00,      0.00,0, 0.00,     0],
+          [-6.75,0, 6.00,     -4.00,0, 8.50,     -1.50,0, 1.50,     0],
+          [-4.00,0, 8.50,      6.00,0, 8.50,      0.00,0, 0.00,     0],
+          [ 6.00,0, 8.50,      8.50,0, 5.50,      1.25,0, 1.25,     0],
+          [ 8.50,0, 5.50,      8.50,0,-2.00,      0.00,0, 0.00,     0],
+          [ 8.50,0,-2.00,      4.00,0,-6.75,      1.50,0,-1.50,     0],
+          [ 4.00,0,-6.75,     -2.00,0,-6.75,      0.00,0, 0.00,     0],
+          [-2.00,0,-6.75,     -6.75,0,-3.50,     -2.00,0,-2.00,     0],
+          [-6.75,0,-3.50,     -6.75,0, 1.50,      0.00,0, 0.00,     0]
       ]);
       scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 120, size: 0.25, color: new THREE.Color(1, 0, 1)} ) );
     //-------- ----------
@@ -169,7 +170,7 @@ VIDEO.init = function(sm, scene, camera){
         scene.add(land);
         // TRAIN MESH OBJECTS
         const train = new THREE.Group();
-        scene.add(train);
+        //scene.add(train);
         TRAIN_CARS.forEach((ti)=>{
             const mesh_source = SOURCE_OBJECTS['train_car_' + ti];
             const mesh = new THREE.Mesh(mesh_source.geometry.clone(), mesh_source.material);
@@ -223,13 +224,19 @@ VIDEO.init = function(sm, scene, camera){
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // CAMERA DEFAULTS
-                camera.position.set(10 - 20 * seq.per, 6, 19);
-                camera.lookAt(0.5, -0.7, 0);
-                //camera.zoom = 1.20;
+                camera.zoom = 1.20;
+                // MOVE ALONG X
+                //camera.position.set(10 - 20 * seq.per, 6, 19);
+                //camera.lookAt(0.5, -0.7, 0);
+
+                // TOP DOWN TO DEBUG TRAIN CURVE
+                //camera.position.set(0,27,0);
+                //camera.lookAt(0,0,0);
+
                 // have camera follow train?
-                //const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
-                //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
-                //camera.lookAt(v.look);
+                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
+                camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
+                camera.lookAt(v.look);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
