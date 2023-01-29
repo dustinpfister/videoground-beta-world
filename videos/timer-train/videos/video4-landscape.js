@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
     const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const SECS_ALARM = 10;                                                // NUMBER OF SECONDS FOR THE ALARM
+    const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
@@ -87,18 +87,18 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
-      const cp_pos_train = curveMod.QBCurvePath([
-          [-6.75,0, 1.50,     -6.75,0, 6.00,      0.00,0, 0.00,     0],
-          [-6.75,0, 6.00,     -4.00,0, 8.50,     -1.50,0, 1.50,     0],
-          [-4.00,0, 8.50,      6.00,0, 8.50,      0.00,0, 0.00,     0],
-          [ 6.00,0, 8.50,      8.50,0, 5.50,      1.25,0, 1.25,     0],
-          [ 8.50,0, 5.50,      8.50,0,-2.00,      0.00,0, 0.00,     0],
-          [ 8.50,0,-2.00,      4.00,0,-6.75,      1.50,0,-1.50,     0],
-          [ 4.00,0,-6.75,     -2.00,0,-6.75,      0.00,0, 0.00,     0],
-          [-2.00,0,-6.75,     -6.75,0,-3.50,     -2.00,0,-2.00,     0],
-          [-6.75,0,-3.50,     -6.75,0, 1.50,      0.00,0, 0.00,     0]
-      ]);
-      scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 120, size: 0.25, color: new THREE.Color(1, 0, 1)} ) );
+    const cp_pos_train = curveMod.QBCurvePath([
+        [-6.85,0, 1.50,     -6.85,0, 6.00,      0.00,0, 0.00,     0],
+        [-6.85,0, 6.00,     -4.00,0, 8.65,     -1.50,0, 1.50,     0],
+        [-4.00,0, 8.65,      6.00,0, 8.65,      0.00,0, 0.00,     0],
+        [ 6.00,0, 8.65,      8.50,0, 5.50,      1.25,0, 1.25,     0],
+        [ 8.50,0, 5.50,      8.50,0,-2.00,      0.00,0, 0.00,     0],
+        [ 8.50,0,-2.00,      3.50,0,-6.85,      1.70,0,-1.70,     0],
+        [ 3.50,0,-6.85,     -2.00,0,-6.85,      0.00,0, 0.00,     0],
+        [-2.00,0,-6.85,     -6.85,0,-3.50,     -1.80,0,-1.80,     0],
+        [-6.85,0,-3.50,     -6.85,0, 1.50,      0.00,0, 0.00,     0]
+    ]);
+    //scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 150, size: 0.25, color: new THREE.Color(1, 0, 1)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -170,7 +170,7 @@ VIDEO.init = function(sm, scene, camera){
         scene.add(land);
         // TRAIN MESH OBJECTS
         const train = new THREE.Group();
-        //scene.add(train);
+        scene.add(train);
         TRAIN_CARS.forEach((ti)=>{
             const mesh_source = SOURCE_OBJECTS['train_car_' + ti];
             const mesh = new THREE.Mesh(mesh_source.geometry.clone(), mesh_source.material);
@@ -224,19 +224,19 @@ VIDEO.init = function(sm, scene, camera){
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // CAMERA DEFAULTS
-                camera.zoom = 1.20;
+                camera.zoom = 1.00;
                 // MOVE ALONG X
-                //camera.position.set(10 - 20 * seq.per, 6, 19);
-                //camera.lookAt(0.5, -0.7, 0);
+                camera.position.set(10 - 20 * seq.per, 6, 19);
+                camera.lookAt(0.5, -0.7, 0);
 
                 // TOP DOWN TO DEBUG TRAIN CURVE
                 //camera.position.set(0,27,0);
                 //camera.lookAt(0,0,0);
 
                 // have camera follow train?
-                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
-                camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
-                camera.lookAt(v.look);
+                //const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.175) % 1);
+                //camera.position.copy(v.pos).add(new THREE.Vector3(0,0,0));
+                //camera.lookAt(v.look);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
