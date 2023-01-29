@@ -10,7 +10,7 @@ over all train sounds
 https://www.youtube.com/watch?v=wqO2HC1QYuc
 ```
 
-Collection of whissle and horn sounds
+Collection of whistle and horn sounds
 ```
 https://www.youtube.com/watch?v=FdvZJCzn19E
 ```
