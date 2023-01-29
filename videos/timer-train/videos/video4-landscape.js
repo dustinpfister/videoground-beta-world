@@ -35,7 +35,7 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_TRAIN_RESOURCE = '../../../dae/trainset/';
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/';
     // TRAIN SETTINGS
-    const TRAIN_Y_ADJUST = new THREE.Vector3(0,0.3,0);
+    const TRAIN_Y_ADJUST = new THREE.Vector3(0,-0.1,0);
     const TRAIN_LAPS = 4;
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
@@ -122,9 +122,9 @@ VIDEO.init = function(sm, scene, camera){
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
         const count_wrap = new THREE.Group();
-        count_wrap.scale.set(1.5, 1.5, 1.5);
+        count_wrap.scale.set(1.7, 1.7, 1.7);
         scene.add(count_wrap);
-        count_wrap.position.set(-10,0,-10);
+        //count_wrap.position.set(-10,0,-10);
         // count min count down object
         const count_min = countDown.create({
             countID: 'min',
@@ -154,8 +154,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.4, 0.4, 0.4);
-        count_frames.position.set(0, -1.5, 0.50);
+        count_frames.scale.set(0.6, 0.6, 0.6);
+        count_frames.position.set(0, 1.75, 0.50);
         count_wrap.add(count_frames);
         //-------- ----------
         // TRAIN OBJECTS
@@ -166,7 +166,7 @@ VIDEO.init = function(sm, scene, camera){
         // THE LAND MESH
         const land = SOURCE_OBJECTS['trainset_land'];
         land.position.set(0,0,0);
-        land.rotation.set(Math.PI * 1.5,Math.PI * 0.0057, Math.PI * 0.0);
+        //land.rotation.set(Math.PI * 1.5,Math.PI * 0.0057, Math.PI * 0.0);
         scene.add(land);
         // TRAIN MESH OBJECTS
         const train = new THREE.Group();
@@ -194,13 +194,10 @@ VIDEO.init = function(sm, scene, camera){
         let i = 0;
         const len = data.length;
         while(i < len){
-
             const objIndex = data[i];
             const v = new THREE.Vector3(data[i + 1], data[i + 2], data[i + 3]);
-
             const mesh = SOURCE_OBJECTS['landscape_' + objIndex].clone();
             mesh.position.copy(v);
-
             scene.add(mesh);
             i += 4;
         }
@@ -213,7 +210,7 @@ VIDEO.init = function(sm, scene, camera){
             fps: FPS,
             beforeObjects: function(seq){
                 // COUNT WRAP DEFAULTS
-                count_wrap.position.set(0, 1, 0);
+                count_wrap.position.set(0, 1.5, 0);
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
@@ -224,10 +221,10 @@ VIDEO.init = function(sm, scene, camera){
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // CAMERA DEFAULTS
-                camera.zoom = 1.00;
+                camera.zoom = 1.10;
                 // MOVE ALONG X
-                camera.position.set(10 - 20 * seq.per, 6, 19);
-                camera.lookAt(0.5, -0.7, 0);
+                camera.position.set(10 - 25 * seq.per, 5, 19);
+                camera.lookAt(0.2, -0.50, 0);
 
                 // TOP DOWN TO DEBUG TRAIN CURVE
                 //camera.position.set(0,27,0);
