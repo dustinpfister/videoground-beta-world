@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2023-01-31T13:39:57</created>
-    <modified>2023-01-31T13:39:57</modified>
+    <created>2023-01-31T15:37:13</created>
+    <modified>2023-01-31T15:37:13</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -101,7 +101,96 @@
       </extra>
     </light>
   </library_lights>
-  <library_images/>
+  <library_images>
+    <image id="landscape-1-obj-0_png" name="landscape-1-obj-0_png">
+      <init_from>landscape-1-obj-0.png</init_from>
+    </image>
+    <image id="landscape-1-obj-1_png" name="landscape-1-obj-1_png">
+      <init_from>landscape-1-obj-1.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="landscape_0_mat-effect">
+      <profile_COMMON>
+        <newparam sid="landscape-1-obj-0_png-surface">
+          <surface type="2D">
+            <init_from>landscape-1-obj-0_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="landscape-1-obj-0_png-sampler">
+          <sampler2D>
+            <source>landscape-1-obj-0_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="landscape-1-obj-0_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="landscape_1_mat-effect">
+      <profile_COMMON>
+        <newparam sid="landscape-1-obj-1_png-surface">
+          <surface type="2D">
+            <init_from>landscape-1-obj-1_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="landscape-1-obj-1_png-sampler">
+          <sampler2D>
+            <source>landscape-1-obj-1_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="landscape-1-obj-1_png-sampler"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="landscape_0_mat-material" name="landscape_0_mat">
+      <instance_effect url="#landscape_0_mat-effect"/>
+    </material>
+    <material id="landscape_1_mat-material" name="landscape_1_mat">
+      <instance_effect url="#landscape_1_mat-effect"/>
+    </material>
+  </library_materials>
   <library_geometries>
     <geometry id="lansscape_0_geo-mesh" name="lansscape_0_geo">
       <mesh>
@@ -137,7 +226,7 @@
         <vertices id="lansscape_0_geo-mesh-vertices">
           <input semantic="POSITION" source="#lansscape_0_geo-mesh-positions"/>
         </vertices>
-        <triangles count="46">
+        <triangles material="landscape_0_mat-material" count="46">
           <input semantic="VERTEX" source="#lansscape_0_geo-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#lansscape_0_geo-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#lansscape_0_geo-mesh-map-0" offset="2" set="0"/>
@@ -168,7 +257,7 @@
           </technique_common>
         </source>
         <source id="landscape_1_geo-mesh-map-0">
-          <float_array id="landscape_1_geo-mesh-map-0-array" count="192">0.9459909 0.6551458 0.6872091 0.7198413 0.6872091 0.6551458 0.2833039 0.5192794 0.05002939 0.6496838 0.05002933 0.5192794 0.6315992 0.4996376 0.3684007 0.6312368 0.3684007 0.4996375 0.6466924 0.1664854 0.3511897 0.01873409 0.6466924 0.01873409 0.9421951 0.3142368 0.791865 0.1665064 0.7944437 0.1664854 0.3511897 0.1664854 0.2034383 0.01873409 0.3511897 0.01873409 0.6868051 0.8176509 0.6868005 0.7570228 0.8419578 0.7570229 0.3684007 0.4996375 0.6315992 0.3680383 0.6315992 0.4996376 0.7944437 0.1664854 0.6466924 0.01873409 0.7944437 0.01873409 0.1620293 0.6859892 0.3284383 0.6860172 0.2452057 0.8524122 0.6365173 0.6964535 0.3634825 0.9694882 0.3634826 0.6964535 0.2833039 0.388875 0.05002933 0.5192794 0.05002933 0.388875 0.09649419 0.9840044 0.01367884 0.8174014 0.1800874 0.8177904 0.2034383 0.1664854 0.206017 0.3142158 0.05568695 0.3142368 0.6868367 0.8332051 0.8449189 0.8332051 0.6868367 0.9004344 0.6880115 0.3709506 0.831888 0.6283245 0.6880115 0.6283245 0.9459909 0.6551458 0.9459909 0.7198413 0.6872091 0.7198413 0.2833039 0.5192794 0.2833039 0.6496838 0.05002939 0.6496838 0.6315992 0.4996376 0.6315992 0.6312368 0.3684007 0.6312368 0.6466924 0.1664854 0.3511897 0.1664854 0.3511897 0.01873409 0.7944437 0.01873409 0.9421949 0.01873415 0.7944437 0.1664854 0.9421949 0.01873415 0.9421951 0.3142368 0.7944437 0.1664854 0.9421951 0.3142368 0.7944437 0.3142368 0.791865 0.1665064 0.3511897 0.1664854 0.2034383 0.1664854 0.2034383 0.01873409 0.3684007 0.4996375 0.3684007 0.3680383 0.6315992 0.3680383 0.7944437 0.1664854 0.6466924 0.1664854 0.6466924 0.01873409 0.6365173 0.6964535 0.6365173 0.9694882 0.3634825 0.9694882 0.2833039 0.388875 0.2833039 0.5192794 0.05002933 0.5192794 0.05568695 0.01873409 0.2034383 0.01873409 0.2034383 0.1664854 0.206017 0.3142158 0.2034384 0.3142368 0.05568695 0.3142368 0.05568695 0.01873409 0.2034383 0.1664854 0.05568695 0.3142368 0.6880115 0.3709506 0.831888 0.3709506 0.831888 0.6283245</float_array>
+          <float_array id="landscape_1_geo-mesh-map-0-array" count="192">0.2941578 0.618592 0.2346128 0.3803467 0.2941731 0.3803506 0.7053682 0.9373996 0.5679818 0.6915985 0.705384 0.6916074 0.9676187 0.4958254 0.6936641 0.6327807 0.693673 0.4958077 0.3421828 0.1683403 0.6528895 0.01296192 0.3421728 0.01298189 0.03147596 0.3237187 0.1868293 0.2460295 0.1868243 0.1683503 0.6528995 0.1683203 0.8082479 0.01295191 0.6528895 0.01296192 0.2087352 0.2656191 0.2095327 0.1925048 0.3687204 0.1928883 0.693673 0.4958077 0.9676275 0.3588526 0.9676187 0.4958254 0.1868243 0.1683503 0.3421728 0.01298189 0.1868143 0.0129919 0.03429055 0.4060502 0.1921821 0.4060612 0.1132253 0.5639473 0.6232603 0.3012717 0.3756268 0.5488736 0.3756427 0.3012559 0.8427703 0.9374085 0.705384 0.6916074 0.8427861 0.6916162 0.1024742 0.7595831 0.02372676 0.6015926 0.1816182 0.6017909 0.8082579 0.1683103 0.808263 0.2459895 0.9636263 0.3236588 0.7872858 0.1842309 0.6293941 0.1842397 0.7872902 0.2631767 0.3618215 0.6910215 0.4982731 0.935174 0.3617959 0.9351596 0.2941578 0.618592 0.2345975 0.6185882 0.2346128 0.3803467 0.7053682 0.9373996 0.567966 0.9373908 0.5679818 0.6915985 0.9676187 0.4958254 0.9676099 0.6327983 0.6936641 0.6327807 0.3421828 0.1683403 0.6528995 0.1683203 0.6528895 0.01296192 0.1868143 0.0129919 0.03145593 0.01300191 0.1868243 0.1683503 0.03145593 0.01300191 0.03147596 0.3237187 0.1868243 0.1683503 0.03147596 0.3237187 0.1868343 0.3237088 0.1868293 0.2460295 0.6528995 0.1683203 0.8082579 0.1683103 0.8082479 0.01295191 0.693673 0.4958077 0.6936818 0.3588349 0.9676275 0.3588526 0.1868243 0.1683503 0.3421828 0.1683403 0.3421728 0.01298189 0.6232603 0.3012717 0.6232444 0.5488895 0.3756268 0.5488736 0.8427703 0.9374085 0.7053682 0.9373996 0.705384 0.6916074 0.9636064 0.01294189 0.8082479 0.01295191 0.8082579 0.1683103 0.808263 0.2459895 0.8082679 0.3236687 0.9636263 0.3236588 0.9636064 0.01294189 0.8082579 0.1683103 0.9636263 0.3236588 0.3618215 0.6910215 0.4982988 0.6910359 0.4982731 0.935174</float_array>
           <technique_common>
             <accessor source="#landscape_1_geo-mesh-map-0-array" count="96" stride="2">
               <param name="S" type="float"/>
@@ -179,7 +268,7 @@
         <vertices id="landscape_1_geo-mesh-vertices">
           <input semantic="POSITION" source="#landscape_1_geo-mesh-positions"/>
         </vertices>
-        <triangles count="32">
+        <triangles material="landscape_1_mat-material" count="32">
           <input semantic="VERTEX" source="#landscape_1_geo-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#landscape_1_geo-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#landscape_1_geo-mesh-map-0" offset="2" set="0"/>
@@ -201,11 +290,23 @@
       </node>
       <node id="landscape_0" name="landscape_0" type="NODE">
         <matrix sid="transform">1 0 0 -2 0 1 0 0 0 0 1 1.19209e-7 0 0 0 1</matrix>
-        <instance_geometry url="#lansscape_0_geo-mesh" name="landscape_0"/>
+        <instance_geometry url="#lansscape_0_geo-mesh" name="landscape_0">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="landscape_0_mat-material" target="#landscape_0_mat-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
       </node>
       <node id="landscape_1" name="landscape_1" type="NODE">
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
-        <instance_geometry url="#landscape_1_geo-mesh" name="landscape_1"/>
+        <instance_geometry url="#landscape_1_geo-mesh" name="landscape_1">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="landscape_1_mat-material" target="#landscape_1_mat-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
       </node>
     </visual_scene>
   </library_visual_scenes>
