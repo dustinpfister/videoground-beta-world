@@ -1,6 +1,6 @@
 // video4-landscape.js - from timer-train - videoground-beta-world project
 // * using a landscape dae file for all other objects to place in the scene
-// * system for setting objects in place
+// * system for setting objects in place from the landscape file
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -27,7 +27,7 @@ VIDEO.init = function(sm, scene, camera){
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
     const URL_DAE_SCENE = '../../../dae/trainset/land-1c.dae';
-    const URL_DAE_TRAIN = '../../../dae/trainset/train-1a.dae';
+    const URL_DAE_TRAIN = '../../../dae/trainset/train-1b.dae';
     const URL_DAE_LANDSCAPE = '../../../dae/trainset/landscape-1.dae';
     // RESOURCE DAE PATHS
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/';
@@ -181,15 +181,13 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // LANDSCAPE OBJECTS
         //-------- ----------
-
         const LANDSCAPE_DATA = [ 
-            0, 5, -0.3, 7,
-            0, 6, -0.3, -1,
-            0, -7, 0.95, -2,
-            0, -9, 0.6, -1,
-            0, -9, 1.7, -5
+            0,  5.00, -0.30,  7.00,  // object index, x, y, z
+            0,  6.00, -0.30, -1.00,
+            0, -7.00,  0.95, -2.00,
+            0, -9.00,  0.60, -1.00,
+            0, -9.00,  1.70, -5.00
         ];
-
         const data = LANDSCAPE_DATA;
         let i = 0;
         const len = data.length;
