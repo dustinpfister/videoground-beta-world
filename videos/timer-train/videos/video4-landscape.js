@@ -33,7 +33,7 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/';
     const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/skins/land-1-solid/';
     const URL_DAE_TRAIN_RESOURCE = '../../../dae/trainset/';
-    const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/';
+    const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/skins/landscape-1-solid/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,-0.1,0);
     const TRAIN_LAPS = 4;
