@@ -182,11 +182,11 @@ VIDEO.init = function(sm, scene, camera){
         // LANDSCAPE OBJECTS
         //-------- ----------
         const LANDSCAPE_DATA = [ 
-            0,  5.00, -0.30,  7.00,  // object index, x, y, z
-            0,  6.00, -0.30, -1.00,
-            0, -7.00,  0.95, -2.00,
-            0, -9.00,  0.60, -1.00,
-            0, -9.00,  1.70, -5.00
+            0,  5.00, -0.30,  7.00,  0.00, // object_index, x, y, z, rotation_y
+            0,  6.00, -0.30, -1.00,  0.00,
+            0, -7.00,  0.95, -2.00,  0.00,
+            0, -9.00,  0.60, -1.00,  0.00,
+            0, -9.00,  1.70, -5.00,  0.00
         ];
         const data = LANDSCAPE_DATA;
         let i = 0;
@@ -196,8 +196,9 @@ VIDEO.init = function(sm, scene, camera){
             const v = new THREE.Vector3(data[i + 1], data[i + 2], data[i + 3]);
             const mesh = SOURCE_OBJECTS['landscape_' + objIndex].clone();
             mesh.position.copy(v);
+            mesh.rotation.set(Math.PI * 1.5, data[i + 4], 0);
             scene.add(mesh);
-            i += 4;
+            i += 5;
         }
 
         //-------- ----------
