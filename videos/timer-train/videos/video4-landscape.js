@@ -28,7 +28,7 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
     const URL_DAE_SCENE = '../../../dae/trainset/land-1c.dae';
     const URL_DAE_TRAIN = '../../../dae/trainset/train-1b.dae';
-    const URL_DAE_LANDSCAPE = '../../../dae/trainset/landscape-1.dae';
+    const URL_DAE_LANDSCAPE = '../../../dae/trainset/landscape-1a.dae';
     // RESOURCE DAE PATHS
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/';
     const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/skins/land-1-solid/';
@@ -182,8 +182,8 @@ VIDEO.init = function(sm, scene, camera){
         // LANDSCAPE OBJECTS
         //-------- ----------
         const LANDSCAPE_DATA = [ 
-            0,  5.00, -0.30,  7.00,  0.00, // object_index, x, y, z, rotation_y
-            0,  6.00, -0.30, -1.00,  0.00,
+            1,  5.00,  0.00,  7.00,  0.00, // object_index, x, y, z, rotation_y
+            0,  6.00, -0.40, -1.00,  0.00,
             0, -7.00,  0.95, -2.00,  0.00,
             0, -9.00,  0.60, -1.00,  0.00,
             0, -9.00,  1.70, -5.00,  0.00
