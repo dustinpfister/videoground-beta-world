@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0</authoring_tool>
     </contributor>
-    <created>2023-01-31T13:04:20</created>
-    <modified>2023-01-31T13:04:20</modified>
+    <created>2023-01-31T13:08:22</created>
+    <modified>2023-01-31T13:08:22</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -138,7 +138,7 @@
     <geometry id="landscape_1_geo-mesh" name="landscape_1_geo">
       <mesh>
         <source id="landscape_1_geo-mesh-positions">
-          <float_array id="landscape_1_geo-mesh-positions-array" count="48">-0.5 -0.5 -0.5 -0.5 -0.5 0.5 -0.5 0.5 -0.5 -0.5 0.5 0.5 0.5 -0.5 -0.5 0.5 0.5 -0.5 -0.25 0.5 1 -0.25 -0.5 1 0 0.5 -0.5 0 0.5 0.5 0.5 0.5 0 0.5 -0.5 0 0 -0.5 -0.5 0 -0.5 0.5 0 -0.5 0 0 0.5 0</float_array>
+          <float_array id="landscape_1_geo-mesh-positions-array" count="48">-0.5 -0.5 0 -0.5 -0.5 1 -0.5 0.5 0 -0.5 0.5 1 0.5 -0.5 0 0.5 0.5 0 -0.25 0.5 1.5 -0.25 -0.5 1.5 0 0.5 0 0 0.5 1 0.5 0.5 0.5 0.5 -0.5 0.5 0 -0.5 0 0 -0.5 1 0 -0.5 0.5 0 0.5 0.5</float_array>
           <technique_common>
             <accessor source="#landscape_1_geo-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -184,7 +184,7 @@
         <instance_geometry url="#lansscape_0_geo-mesh" name="landscape_0"/>
       </node>
       <node id="landscape_1" name="landscape_1" type="NODE">
-        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.5 0 0 0 1</matrix>
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
         <instance_geometry url="#landscape_1_geo-mesh" name="landscape_1"/>
       </node>
     </visual_scene>
