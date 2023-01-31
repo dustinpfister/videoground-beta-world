@@ -171,7 +171,7 @@ VIDEO.init = function(sm, scene, camera){
             transparent: true,
             opacity: 0.25
         });
-        const water = new THREE.Mesh( new THREE.PlaneGeometry(20, 20, 1, 1), material_water );
+        const water = new THREE.Mesh( new THREE.PlaneGeometry(19, 20, 1, 1), material_water );
         water.geometry.translate(0,0,-0.5)
         land.add(water);
         //-------- ----------
