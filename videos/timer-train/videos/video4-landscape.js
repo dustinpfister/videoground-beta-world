@@ -158,17 +158,25 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.position.set(0, 1.75, 0.50);
         count_wrap.add(count_frames);
         //-------- ----------
-        // TRAIN OBJECTS
+        // THE LAND MESH
         //-------- ----------
         const material_land = new THREE.MeshNormalMaterial({ wireframe: true, wireframeLinewidth: 6 });
-        const material_train0 = new THREE.MeshPhongMaterial({});
-        const material_train1 = new THREE.MeshNormalMaterial({});
-        // THE LAND MESH
         const land = SOURCE_OBJECTS['trainset_land'];
         land.position.set(0,0,0);
         //land.rotation.set(Math.PI * 1.5,Math.PI * 0.0057, Math.PI * 0.0);
         scene.add(land);
+        // water plane
+        const material_water = new THREE.MeshBasicMaterial({
+            color: new THREE.Color(0,1,1),
+            transparent: true,
+            opacity: 0.25
+        });
+        const water = new THREE.Mesh( new THREE.PlaneGeometry(20, 20, 1, 1), material_water );
+        water.geometry.translate(0,0,-0.5)
+        land.add(water);
+        //-------- ----------
         // TRAIN MESH OBJECTS
+        //-------- ----------
         const train = new THREE.Group();
         scene.add(train);
         TRAIN_CARS.forEach((ti)=>{
