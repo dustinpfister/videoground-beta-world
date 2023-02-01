@@ -1,6 +1,5 @@
-// video4-landscape.js - from timer-train - videoground-beta-world project
-// * using a landscape dae file for all other objects to place in the scene
-// * system for setting objects in place from the landscape file
+// video5-angles.js - from timer-train - videoground-beta-world project
+//     * more than one sequence object for the count down part of the video
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -212,7 +211,41 @@ VIDEO.init = function(sm, scene, camera){
             scene.add(mesh);
             i += 5;
         }
+        //-------- ----------
+        // COUNT DOWN SEQ OBJECT
+        //-------- ----------
+        const seq_cd = seqHooks.create({
+            setPerValues: false,
+            fps: FPS,
+            beforeObjects: function(seq){
 
+            },
+            objects: [
+                {
+                    per: 0,
+                    update: function(seq, partPer, partBias){
+
+
+                // MOVE ALONG X
+                camera.position.set(10 - 25 * partPer, 5, 19);
+                camera.lookAt(0.2, -0.50, 0);
+
+                    }
+                },
+                {
+                    per: 0.5,
+                    update: function(seq, partPer, partBias){
+
+
+                //camera.zoom = 0.70;
+                const v1 = new THREE.Vector3(-15, 5, 19);
+                camera.position.copy(v1);
+                camera.lookAt(0.2, -0.50, 0);
+
+                    }
+                }
+            ]
+        });
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -232,7 +265,7 @@ VIDEO.init = function(sm, scene, camera){
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // CAMERA DEFAULTS
-                camera.zoom = 1.10;
+                camera.zoom = 1.20;
                 // MOVE ALONG X
                 //camera.position.set(10 - 25 * seq.per, 5, 19);
                 //camera.lookAt(0.2, -0.50, 0);
@@ -242,9 +275,9 @@ VIDEO.init = function(sm, scene, camera){
                 //camera.lookAt(0,0,0);
 
                 // FIXED LOCATION
-                camera.zoom = 0.70;
-                camera.position.set(4,0,10);
-                camera.lookAt(0,1.8,0);
+                //camera.zoom = 0.70;
+                //camera.position.set(4,0,10);
+                //camera.lookAt(0,1.8,0);
 
                 // have camera follow train?
                 //const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.18) % 1);
@@ -273,9 +306,11 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_sec, secs);
 
                 // FIXED LOCATION
-                camera.zoom = 0.70;
-                camera.position.set(4,0,10);
-                camera.lookAt(0,1.8,0);
+                //camera.zoom = 0.70;
+                //camera.position.set(4,0,10);
+                //camera.lookAt(0,1.8,0);
+
+                seqHooks.setFrame(seq_cd, seq.partFrame, seq.partFrameMax);
 
             }
         };
@@ -293,14 +328,14 @@ VIDEO.init = function(sm, scene, camera){
 
 
                 // FIXED TO FOLOW TRAIN
-                camera.zoom = 0.70 + 0.3 * partPer;
-                const v1 = new THREE.Vector3(4,0,10);
+                //camera.zoom = 0.70 + 0.3 * partPer;
+                const v1 = new THREE.Vector3(-15, 5, 19);
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.18) % 1);
                 const n = 10 * partPer;
                 const v2 = v1.lerp(v.pos, partPer).add( new THREE.Vector3(n,n,n) );
                 camera.position.copy( v2 );
-                const v3 = new THREE.Vector3(0,1.8,0);
+                const v3 = new THREE.Vector3(0.2, -0.50, 0);
                 camera.lookAt(v3.lerp(v.look, partPer));
 
             }
