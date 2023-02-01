@@ -3,6 +3,7 @@
 
 ## () - video5-angles.js
 * (done) start video5 angles file
+* (done) seq hook object for more than one cam angle that wil be used for count down seq object of main seq object
 * () solid textures for train
 * () update count-down.js to r1 of the module if done
 
