@@ -2,7 +2,10 @@
 
 
 ## () - video5-angles.js
+* (done) start video5 angles file
+* () solid textures for train
 * () update count-down.js to r1 of the module if done
+
 
 ## ( done 02/01/2023 ) - video4-landscape.js - trees, houses
 * (done) start a landscape dae file that will have objects that compose houses and other such objects
