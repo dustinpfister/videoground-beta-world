@@ -5,7 +5,12 @@
 ## () - timer-train
 * (done) start video1.js for this timer project
 * (done) start video2.js that will work with dae files
-* () start video5 that will be the final video file
+* (done) start video5 that will be the final video file
+
+* () I will want a detail skin for land at least where I add track texture
+* () might also want a better grass texture while I am at it
+* () have a said or rock color and texture for the area where the lake is
+
 * () upload first video
 
 ## () - timer-hiit - High-intensity interval training
