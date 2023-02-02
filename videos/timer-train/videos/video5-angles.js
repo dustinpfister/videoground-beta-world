@@ -35,7 +35,7 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/skins/landscape-1-solid/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,-0.1,0);
-    const TRAIN_LAPS = 4;
+    const TRAIN_LAPS = 5;
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
     //-------- ----------
@@ -153,8 +153,8 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.6, 0.6, 0.6);
-        count_frames.position.set(0, 1.75, 0.50);
+        count_frames.scale.set(0.5, 0.5, 0.5);
+        count_frames.position.set(0, 1.55, 0.50);
         count_wrap.add(count_frames);
         //-------- ----------
         // THE LAND MESH
@@ -217,31 +217,23 @@ VIDEO.init = function(sm, scene, camera){
         const seq_cd = seqHooks.create({
             setPerValues: false,
             fps: FPS,
-            beforeObjects: function(seq){
-
-            },
+            beforeObjects: function(seq){},
             objects: [
                 {
                     per: 0,
                     update: function(seq, partPer, partBias){
-
-
-                // MOVE ALONG X
-                camera.position.set(10 - 25 * partPer, 5, 19);
-                camera.lookAt(0.2, -0.50, 0);
-
+                        // MOVE ALONG X
+                        camera.position.set(10 - 22 * partPer, 5, 15 - 3 * partPer);
+                        camera.lookAt(0, 0.25, 0);
                     }
                 },
                 {
                     per: 0.5,
                     update: function(seq, partPer, partBias){
-
-
-                //camera.zoom = 0.70;
-                const v1 = new THREE.Vector3(-15, 5, 19);
-                camera.position.copy(v1);
-                camera.lookAt(0.2, -0.50, 0);
-
+                        // fixed location
+                        const v1 = new THREE.Vector3(-12, 5, 12);
+                        camera.position.copy(v1);
+                        camera.lookAt(0, 0.25, 0);
                     }
                 }
             ]
@@ -265,7 +257,7 @@ VIDEO.init = function(sm, scene, camera){
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // CAMERA DEFAULTS
-                camera.zoom = 1.20;
+                camera.zoom = 1.00;
                 // MOVE ALONG X
                 //camera.position.set(10 - 25 * seq.per, 5, 19);
                 //camera.lookAt(0.2, -0.50, 0);
@@ -328,14 +320,13 @@ VIDEO.init = function(sm, scene, camera){
 
 
                 // FIXED TO FOLOW TRAIN
-                //camera.zoom = 0.70 + 0.3 * partPer;
-                const v1 = new THREE.Vector3(-15, 5, 19);
+                const v1 = new THREE.Vector3(-12, 5, 12);
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.18) % 1);
                 const n = 10 * partPer;
                 const v2 = v1.lerp(v.pos, partPer).add( new THREE.Vector3(n,n,n) );
                 camera.position.copy( v2 );
-                const v3 = new THREE.Vector3(0.2, -0.50, 0);
+                const v3 = new THREE.Vector3(0, 0.25, 0);
                 camera.lookAt(v3.lerp(v.look, partPer));
 
             }
