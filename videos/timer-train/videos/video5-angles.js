@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
     const canObj = canvasMod.create({
         size: 512,
         draw: 'grid_palette',
-        palette: ['#000000', '#1f1f1f', '#00ffff'],
+        palette: ['#008a8a', '#00afaf', '#00ffff'],
         dataParse: 'lzstring64',
         state: { w: 8, h: 5, data: 'AwGlEYyzNCVgpcmPit1mqvTsg===' }
     });
