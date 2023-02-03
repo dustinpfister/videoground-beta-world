@@ -30,7 +30,7 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_LANDSCAPE = '../../../dae/trainset/landscape-1b.dae';
     // RESOURCE DAE PATHS
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/';
-    const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/skins/land-1-solid/';
+    const URL_DAE_SCENE_RESOURCE = '../../../dae/trainset/skins/land-1-detail/';
     const URL_DAE_TRAIN_RESOURCE = '../../../dae/trainset/skins/train-1-solid/';
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/skins/landscape-1-solid/';
     // TRAIN SETTINGS
