@@ -245,6 +245,7 @@ VIDEO.init = function(sm, scene, camera){
                         const v2 = new THREE.Vector3(10, 0.25, 10);
                         camera.position.copy(v1.lerp(v2, partPer));
                         camera.lookAt(0, 0.5, 0);
+                        camera.zoom = 0.80 - 0.25 * seq.getSinBias(1, true);
                     }
                 }
             ]
@@ -325,35 +326,19 @@ VIDEO.init = function(sm, scene, camera){
                 // update secs count
                 countDown.set(count_sec, secs);
 
-
                 // FIXED TO FOLOW TRAIN
                 let a_trans = partPer * 2;
                 a_trans = a_trans > 1 ? 1 : a_trans;
                 const v1 = new THREE.Vector3(10, 0.25, 10);
                 const v2 = new THREE.Vector3(0, 0.5, 0);
-
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
                 const v_adjust = new THREE.Vector3(0, 0.2725 * a_trans ,0);
                 const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.10) % 1);
                 const v3 = v1.lerp(v.pos, a_trans).add(v_adjust);
                 camera.position.copy( v1 );
                 camera.lookAt( v2.lerp(v.look, a_trans).add(v_adjust) );
-
-/*
-                let a_tofollow = partPer * 4;
-                a_tofollow = a_tofollow > 1 ? 1 : a_tofollow;
-                const v1 = new THREE.Vector3(10, 0.25, 10);
-                const a_trainpos = seq.getPer(TRAIN_LAPS, false);
-                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.18) % 1);
-                const n = 0.0 * a_tofollow;
-                const v2 = v1.lerp(v.pos, partPer).add( new THREE.Vector3(n,n,n) );
-                camera.position.copy( v2 );
-                const v3 = new THREE.Vector3(0, 0.5, 0);
-                camera.lookAt(v3.lerp(v.look, a_tofollow));
-*/
             }
         };
-
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
