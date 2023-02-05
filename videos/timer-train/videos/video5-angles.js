@@ -35,9 +35,11 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/skins/landscape-1-solid/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,-0.1,0);
-    const TRAIN_LAPS = 5;
+    const TRAIN_LAPS = 8 * ( ( SECS_COUNT_DOWN + SECS_ALARM ) / 60 );
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
+    // CAMERA SETTING
+    const CAMERA_FIXED_TO_FOLLOW_RATE = 3;
     //-------- ----------
     // TRAIN HELPERS
     //-------- ----------
@@ -327,7 +329,7 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_sec, secs);
 
                 // FIXED TO FOLOW TRAIN
-                let a_trans = partPer * 2;
+                let a_trans = partPer * CAMERA_FIXED_TO_FOLLOW_RATE;
                 a_trans = a_trans > 1 ? 1 : a_trans;
                 const v1 = new THREE.Vector3(10, 0.25, 10);
                 const v2 = new THREE.Vector3(0, 0.5, 0);
