@@ -16,8 +16,8 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
+    const SECS_COUNT_DOWN = 300;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_ALARM = 30;                                               // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
@@ -302,10 +302,16 @@ VIDEO.init = function(sm, scene, camera){
             secs: SECS_COUNT_DOWN,
             update: function(seq, partPer, partBias){
                 // SECS COUNTER
-                const a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                const n = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
-                let mins = Math.floor(n / 60);
-                let secs = n % 60;
+				let n = seq.partFrame, d = seq.partFrameMax;
+				if(n >= d){
+					n = seq.partFrameMax - 1;
+				}
+                const a1 = (n + 1) / d;
+                const t = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
+                let mins = Math.floor(t / 60);
+                let secs = t % 60;
+                mins = mins < 0 ? 0: mins;
+                secs = secs < 0 ? 0: secs;
                 // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
                     secs = SECS_COUNT_DOWN;
@@ -313,7 +319,7 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
                 // use the count down camera sequence object
-                seqHooks.setFrame(seq_cd, seq.partFrame, seq.partFrameMax);
+                seqHooks.setFrame(seq_cd, n, d);
             }
         };
         // SEQ 1 - ALARM
