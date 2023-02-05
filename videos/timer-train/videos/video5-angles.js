@@ -301,7 +301,6 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects[0] = {
             secs: SECS_COUNT_DOWN,
             update: function(seq, partPer, partBias){
-                // SECS COUNTER
 				let n = seq.partFrame, d = seq.partFrameMax;
 				if(n >= d){
 					n = seq.partFrameMax - 1;
@@ -314,7 +313,8 @@ VIDEO.init = function(sm, scene, camera){
                 secs = secs < 0 ? 0: secs;
                 // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
-                    secs = SECS_COUNT_DOWN;
+                    mins = Math.floor(SECS_COUNT_DOWN / 60);
+                    secs = SECS_COUNT_DOWN % 60;;
                 };
                 countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
@@ -326,14 +326,15 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects[1] = {
             secs: SECS_ALARM,
             update: function(seq, partPer, partBias){
+                let mins = 0;
                 let secs = 0;
-                // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
-                    secs = SECS_COUNT_DOWN;
+                    mins = Math.floor(SECS_COUNT_DOWN / 60);
+                    secs = SECS_COUNT_DOWN % 60;
                 };
                 // update secs count
+                countDown.set(count_min, mins);
                 countDown.set(count_sec, secs);
-
                 // FIXED TO FOLOW TRAIN
                 let a_trans = partPer * CAMERA_FIXED_TO_FOLLOW_RATE;
                 a_trans = a_trans > 1 ? 1 : a_trans;
