@@ -39,7 +39,7 @@ VIDEO.init = function(sm, scene, camera){
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
     // CAMERA SETTING
-    const CAMERA_FIXED_TO_FOLLOW_RATE = 3;
+    const CAMERA_FIXED_TO_FOLLOW_RATE = 8;
     //-------- ----------
     // TRAIN HELPERS
     //-------- ----------
