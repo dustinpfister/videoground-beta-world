@@ -301,10 +301,10 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects[0] = {
             secs: SECS_COUNT_DOWN,
             update: function(seq, partPer, partBias){
-				let n = seq.partFrame, d = seq.partFrameMax;
-				if(n >= d){
-					n = seq.partFrameMax - 1;
-				}
+                let n = seq.partFrame, d = seq.partFrameMax;
+                if(n >= d){
+                    n = seq.partFrameMax - 1;
+                }
                 const a1 = (n + 1) / d;
                 const t = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
                 let mins = Math.floor(t / 60);
