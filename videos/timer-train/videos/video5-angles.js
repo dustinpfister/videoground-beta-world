@@ -89,17 +89,18 @@ VIDEO.init = function(sm, scene, camera){
     // CURVE PATHS
     //-------- ----------
     const cp_pos_train = curveMod.QBCurvePath([
-        [-6.85,0, 1.50,     -6.85,0, 6.00,      0.00,0, 0.00,     0],
-        [-6.85,0, 6.00,     -4.00,0, 8.65,     -1.50,0, 1.50,     0],
-        [-4.00,0, 8.65,      6.00,0, 8.65,      0.00,0, 0.00,     0],
-        [ 6.00,0, 8.65,      8.50,0, 5.50,      1.25,0, 1.25,     0],
+        [-6.86,0, 1.50,     -6.86,0, 6.00,      0.00,0, 0.00,     0],
+        [-6.86,0, 6.00,     -4.00,0, 8.60,     -1.00,0, 1.00,     0],
+        [-4.00,0, 8.60,      6.00,0, 8.60,      0.00,0, 0.00,     0],
+
+        [ 6.00,0, 8.60,      8.50,0, 5.50,      1.25,0, 1.25,     0],
         [ 8.50,0, 5.50,      8.50,0,-2.00,      0.00,0, 0.00,     0],
         [ 8.50,0,-2.00,      3.50,0,-6.85,      1.70,0,-1.70,     0],
         [ 3.50,0,-6.85,     -2.00,0,-6.85,      0.00,0, 0.00,     0],
-        [-2.00,0,-6.85,     -6.85,0,-3.50,     -1.80,0,-1.80,     0],
-        [-6.85,0,-3.50,     -6.85,0, 1.50,      0.00,0, 0.00,     0]
+        [-2.00,0,-6.85,     -6.86,0,-3.50,     -1.80,0,-1.80,     0],
+        [-6.86,0,-3.50,     -6.86,0, 1.50,      0.00,0, 0.00,     0]
     ]);
-    //scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 150, size: 0.25, color: new THREE.Color(1, 0, 1)} ) );
+    scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 250, size: 0.125, color: new THREE.Color(1, 0, 1)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
@@ -285,15 +286,17 @@ VIDEO.init = function(sm, scene, camera){
                 //camera.position.set(4,0,10);
                 //camera.lookAt(0,1.8,0);
 
-                // have camera follow train?
-                //const v_adjust = new THREE.Vector3(0, 0.5, 0);
-                //const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.17) % 1);
-                //camera.position.copy(v.pos).add(v_adjust);
-                //camera.lookAt(v.look.add(v_adjust));
-                //camera.lookAt(-10,1.8,0);
+
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
+
+                // have camera follow train?
+                const a_trainpos = seq.getPer(TRAIN_LAPS, false);
+                const v_adjust = new THREE.Vector3(0, 0.5, 0);
+                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.95) % 1);
+                camera.position.copy(v.pos).add(v_adjust);
+                camera.lookAt(v.look.add(v_adjust));
             },
             objects: []
         };
