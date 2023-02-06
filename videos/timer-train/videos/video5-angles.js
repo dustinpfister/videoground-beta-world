@@ -16,7 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 900;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
+    const SECS_COUNT_DOWN = 30;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
@@ -39,7 +39,7 @@ VIDEO.init = function(sm, scene, camera){
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
     // CAMERA SETTING
-    const CAMERA_FIXED_TO_FOLLOW_RATE = 3.25;
+    const CAMERA_FIXED_TO_FOLLOW_RATE = 2.25;
     //-------- ----------
     // TRAIN HELPERS
     //-------- ----------
@@ -341,7 +341,7 @@ VIDEO.init = function(sm, scene, camera){
                 const v1 = new THREE.Vector3(10, 0.25, 10);
                 const v2 = new THREE.Vector3(0, 0.5, 0);
                 const a_trainpos = seq.getPer(TRAIN_LAPS, false);
-                const v_adjust = new THREE.Vector3(0, 0.2725 * a_trans ,0);
+                const v_adjust = new THREE.Vector3(0, 0.28 * a_trans ,0);
                 const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.10) % 1);
                 const v3 = v1.lerp(v.pos, a_trans).add(v_adjust);
                 camera.position.copy( v1 );
