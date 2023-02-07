@@ -90,11 +90,11 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const cp_pos_train = curveMod.QBCurvePath([
         [-6.86,0, 1.50,     -6.86,0, 6.00,      0.00,0, 0.00,     0],
-        [-6.86,0, 6.00,     -4.00,0, 8.60,     -1.00,0, 1.00,     0],
-        [-4.00,0, 8.60,      6.00,0, 8.60,      0.00,0, 0.00,     0],
-        [ 6.00,0, 8.60,      8.65,0, 5.50,      1.12,0, 1.12,     0],
-        [ 8.65,0, 5.50,      8.65,0,-2.00,      0.00,0, 0.00,     0],
-        [ 8.65,0,-2.00,      3.50,0,-6.85,      1.70,0,-1.70,     0],
+        [-6.86,0, 6.00,     -4.00,0, 8.62,     -1.00,0, 1.00,     0],
+        [-4.00,0, 8.62,      6.50,0, 8.62,      0.00,0, 0.00,     0],
+        [ 6.50,0, 8.62,      8.62,0, 5.50,      0.90,0, 0.90,     0],
+        [ 8.62,0, 5.50,      8.62,0,-2.00,      0.00,0, 0.00,     0],
+        [ 8.62,0,-2.00,      3.50,0,-6.85,      1.70,0,-1.70,     0],
         [ 3.50,0,-6.85,     -2.00,0,-6.85,      0.00,0, 0.00,     0],
         [-2.00,0,-6.85,     -6.86,0,-3.50,     -2.00,0,-2.00,     0],
         [-6.86,0,-3.50,     -6.86,0, 1.50,      0.00,0, 0.00,     0]
@@ -272,30 +272,20 @@ VIDEO.init = function(sm, scene, camera){
                 setTranPos(train, cp_pos_train, a_trainpos);
                 // CAMERA DEFAULTS
                 camera.zoom = 0.80;
-                // MOVE ALONG X
-                //camera.position.set(10 - 25 * seq.per, 5, 19);
-                //camera.lookAt(0.2, -0.50, 0);
-
-                // TOP DOWN TO DEBUG TRAIN CURVE
-                //camera.position.set(0,27,0);
-                //camera.lookAt(0,0,0);
-
-                // FIXED LOCATION
-                //camera.zoom = 0.70;
-                //camera.position.set(4,0,10);
-                //camera.lookAt(0,1.8,0);
-
-
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
-
-                // have camera follow train?
-                const a_trainpos = seq.getPer(TRAIN_LAPS, false);
-                const v_adjust = new THREE.Vector3(0, 0.5, 0);
-                const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.95) % 1);
-                camera.position.copy(v.pos).add(v_adjust);
-                camera.lookAt(v.look.add(v_adjust));
+                // have camera always follow train?
+                //const a_trainpos = seq.getPer(TRAIN_LAPS, false);
+                //const v_adjust = new THREE.Vector3(0, 0.5, 0);
+                //const v = getTrainVectors(cp_pos_train, (a_trainpos + 0.95) % 1);
+                //camera.position.copy(v.pos).add(v_adjust);
+                //camera.lookAt(v.look.add(v_adjust));
+				
+				// ALWAYS TOP DOWN VIEW
+				//camera.position.set(7,10, 7);
+				//camera.lookAt(7,0,7)
+				
             },
             objects: []
         };
