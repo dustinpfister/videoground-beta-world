@@ -99,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
         [-2.00,0,-6.85,     -6.86,0,-3.50,     -2.00,0,-2.00,     0],
         [-6.86,0,-3.50,     -6.86,0, 1.50,      0.00,0, 0.00,     0]
     ]);
-    scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 250, size: 0.125, color: new THREE.Color(1, 0, 1)} ) );
+    //scene.add( curveMod.debugPointsCurve( cp_pos_train, { count: 250, size: 0.125, color: new THREE.Color(1, 0, 1)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
