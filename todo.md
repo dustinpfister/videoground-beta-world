@@ -3,8 +3,7 @@
 <!-- WHATS NEXT -->
 
 ## ( ) - timer-basic
-* () new video file that updates number skin to the one used in timer-train
-* () make a 2 second coutn down video uisng this file
+* () make a 3 seconds video with video3.js
 
 ## ( ) - timer-train
 * () make a 10 second video with video5-angles.js
@@ -33,6 +32,10 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 02/10/2023 ) - timer-basic
+* (done) new video file that updates number skin to the one used in timer-train
+* (done) make a 2 second coutn down video uisng this file
 
 ## ( done 02/10/2023 ) - timer-train
 * (done) start video1.js for this timer project
