@@ -34,7 +34,7 @@ TERM                  term percent / compare percent
 "5 seconds"           63/18  ( 3.50 )  <= 3  DONE 01/05/2022
 "4 seconds"           71/59  ( 1.20 )  <= 9  
 "3 seconds"           73/40  ( 1.82 )  <= 6  
-"2 seconds"           75/39  ( 1.92 )  <= 5  
+"2 seconds"           75/39  ( 1.92 )  <= 5  DONE 02/10/2023
 "1 second"            74/16  ( 4.62 )  <= 1  DONE 12/27/2022
 ```
 
