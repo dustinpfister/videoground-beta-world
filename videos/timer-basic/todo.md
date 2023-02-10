@@ -26,7 +26,7 @@ TERM                  term percent / compare percent
 "13 seconds"          13/33  ( 0.39 )
 "12 seconds"          50/77  ( 0.64 )
 "11 seconds"          28/77  ( 0.36 )
-"10 seconds"          54/21  ( 2.57 )  <= 4  
+"10 seconds"          54/21  ( 2.57 )  <= 4  DONE 01/10/2023
 "9 seconds"           34/77  ( 0.44 )
 "8 seconds"           80/55  ( 1.54 )  <= 7  
 "7 seconds"           56/64  ( 0.87 )

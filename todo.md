@@ -2,16 +2,12 @@
 
 <!-- WHATS NEXT -->
 
-## () - timer-train
-* (done) start video1.js for this timer project
-* (done) start video2.js that will work with dae files
-* (done) start video5 that will be the final video file
+## ( ) - timer-basic
+* () new video file that updates number skin to the one used in timer-train
+* () make a 2 second coutn down video uisng this file
 
-* () I will want a detail skin for land at least where I add track texture
-* () might also want a better grass texture while I am at it
-* () have a said or rock color and texture for the area where the lake is
-
-* () upload first video
+## ( ) - timer-train
+* () make a 10 second video with video5-angles.js
 
 ## () - timer-hiit - High-intensity interval training
 * () start a new video file project where the goal is to just have a decent hiit timer
@@ -37,6 +33,15 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 02/10/2023 ) - timer-train
+* (done) start video1.js for this timer project
+* (done) start video2.js that will work with dae files
+* (done) start video5 that will be the final video file
+* (done) I will want a detail skin for land at least where I add track texture
+* (done) might also want a better grass texture while I am at it
+* (done) have a said or rock color and texture for the area where the lake is
+* (done) upload first video
 
 ## ( done 01/12/2023 ) - template7-timer-min-sec-ms
 * (done) new template based off of template6 where we have a minute count
