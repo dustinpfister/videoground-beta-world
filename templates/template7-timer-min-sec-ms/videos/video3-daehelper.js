@@ -84,17 +84,14 @@ VIDEO.init = function(sm, scene, camera){
     //.then( (SOURCE_OBJECTS) => {
     .then( (scene_source) => {
         console.log('DAE FILES LOADED');
-		
+        // STILL NEED TO DO THIS IF I AM USING count-down.js R0
 		const SOURCE_OBJECTS = {};
 		let i = 0;
 		while(i < 10){
 			const key = 'num_' + i;
 			SOURCE_OBJECTS[i] =  scene_source.getObjectByName(key);
 			i += 1;
-		}
-		
-		console.log( SOURCE_OBJECTS);
-		
+        }
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
@@ -103,7 +100,6 @@ VIDEO.init = function(sm, scene, camera){
         count_wrap.position.y = 1.03;
         scene.add(count_wrap);
         // count min count down object
-
         const count_min = countDown.create({
             countID: 'min',
             digits: 2,
@@ -124,9 +120,9 @@ VIDEO.init = function(sm, scene, camera){
         //count_sec.scale.set(0.8, 0, 0.8);
         count_wrap.add(count_sec);
         // colon
-        //const colon = SOURCE_OBJECTS.colon;
-        //colon.position.set(0, 0, 0.4);
-        //count_wrap.add(colon);
+        const colon = scene_source.getObjectByName('colon');
+        colon.position.set(0, 0, 0.4);
+        count_wrap.add(colon);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
