@@ -1,10 +1,10 @@
 # template7-timer-min-sec-ms : todo list
 
-## () - video3-daehelper.js
+## ( done 02/11/2023 ) - video3-daehelper.js
 * (done) start out using tempfix count down file, and have RESOURCE PATHS
 * (done) use depth 256 skin for numbers
 * (done) thum mode fix
-* () use new dae helper script in place of what is built into count-down.js
+* (done) use new dae helper script in place of what is built into count-down.js
 
 ## ( done 01/19/2023 ) - video2-curve-r1 and cd4-nums.dae
 * (done) new updated video file where I am using R1 of curve.js
