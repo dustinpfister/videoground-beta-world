@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     // as the main thing to make one video from the next
     const SECS_COUNT_DOWN = 300;                                          // NUMBER OF SECONDS FOR THE COUNTDOWN
     const SECS_ALARM = 5;                                                // NUMBER OF SECONDS FOR THE ALARM
-    const THUM_MODE = true;                                             // SET VIDEO INTO THUM MODE
+    const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
     const SECS = SECS_COUNT_DOWN + SECS_ALARM;                           // NUMBER OF TOTAL SECONDS
@@ -67,21 +67,34 @@ VIDEO.init = function(sm, scene, camera){
     return DAE_loader({
         urls_dae: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
+            //videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
         ],
         urls_resource: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
-        ]
+            //videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
+        ],
+        cloner : (obj_source, scene_source, scene_result, result) => {
+            if(obj_source.type === 'Mesh'){
+                const obj = obj_source.clone()
+                obj.position.set(0,0,0);
+                scene_source.add(obj);
+            }
+        }
     })
-    .then( (SOURCE_OBJECTS) => {
-		
-		console.log('YES WE GET THIS FAR');
-		
-		console.log(SOURCE_OBJECTS)
-		
-/*
+    //.then( (SOURCE_OBJECTS) => {
+    .then( (scene_source) => {
         console.log('DAE FILES LOADED');
+		
+		const SOURCE_OBJECTS = {};
+		let i = 0;
+		while(i < 10){
+			const key = 'num_' + i;
+			SOURCE_OBJECTS[i] =  scene_source.getObjectByName(key);
+			i += 1;
+		}
+		
+		console.log( SOURCE_OBJECTS);
+		
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
         //-------- ----------
@@ -90,6 +103,7 @@ VIDEO.init = function(sm, scene, camera){
         count_wrap.position.y = 1.03;
         scene.add(count_wrap);
         // count min count down object
+
         const count_min = countDown.create({
             countID: 'min',
             digits: 2,
@@ -110,9 +124,9 @@ VIDEO.init = function(sm, scene, camera){
         //count_sec.scale.set(0.8, 0, 0.8);
         count_wrap.add(count_sec);
         // colon
-        const colon = SOURCE_OBJECTS.colon;
-        colon.position.set(0, 0, 0.4);
-        count_wrap.add(colon);
+        //const colon = SOURCE_OBJECTS.colon;
+        //colon.position.set(0, 0, 0.4);
+        //count_wrap.add(colon);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
@@ -127,7 +141,8 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.position.set(0, -0.14, 1.15);
         scene.add(count_frames);
         // add ground object
-        scene.add( SOURCE_OBJECTS['ground_0'] );
+        //scene.add( SOURCE_OBJECTS['ground_0'] );
+
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -189,7 +204,6 @@ VIDEO.init = function(sm, scene, camera){
                 camera.position.copy( cam_pos_alarm.getPoint(partPer) );
             }
         };
-		*/
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
