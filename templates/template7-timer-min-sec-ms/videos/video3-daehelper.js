@@ -67,11 +67,11 @@ VIDEO.init = function(sm, scene, camera){
     return DAE_loader({
         urls_dae: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
-            //videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
+            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
         ],
         urls_resource: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
-            //videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
+            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
         ],
         cloner : (obj_source, scene_source, scene_result, result) => {
             if(obj_source.type === 'Mesh'){
@@ -137,8 +137,7 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.position.set(0, -0.14, 1.15);
         scene.add(count_frames);
         // add ground object
-        //scene.add( SOURCE_OBJECTS['ground_0'] );
-
+        scene.add( scene_source.getObjectByName('ground_0') );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
