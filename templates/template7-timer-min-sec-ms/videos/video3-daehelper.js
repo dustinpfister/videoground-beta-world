@@ -7,7 +7,8 @@ VIDEO.scripts = [
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
    '../../../js/curve/r1/curve.js',
-   '../../../js/count-down/r0/count-down-tempfix.js'
+   '../../../js/count-down/r0/count-down.js',
+   '../../../js/dae-helper/r0/dae-helper.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -63,17 +64,23 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
-    return countDown.DAE_loader(
-        [
+    return DAE_loader({
+        urls_dae: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
         ],
-        [
+        urls_resource: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
         ]
-    )
+    })
     .then( (SOURCE_OBJECTS) => {
+		
+		console.log('YES WE GET THIS FAR');
+		
+		console.log(SOURCE_OBJECTS)
+		
+/*
         console.log('DAE FILES LOADED');
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
@@ -182,6 +189,7 @@ VIDEO.init = function(sm, scene, camera){
                 camera.position.copy( cam_pos_alarm.getPoint(partPer) );
             }
         };
+		*/
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
