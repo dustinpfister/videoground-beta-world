@@ -26,9 +26,9 @@ VIDEO.init = function(sm, scene, camera){
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
-    const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
+    //const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/skins/depth_256/';
-    const URL_DAE_SCENE_RESOURCE = '../../../dae/count_down_basic/';
+    //const URL_DAE_SCENE_RESOURCE = '../../../dae/count_down_basic/';
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -58,8 +58,13 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CURVE PATHS
     //-------- ----------
-    const cam_pos_cd = curveMod.QBCurvePath([ [5, 2, 5, -5, 2, 4,    0, -3, 4,      100] ]);
+/*
+    const cam_pos_cd = curveMod.QBCurvePath([
+        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100],
+        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100]
+    ]);
     const cam_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
+*/
     //scene.add( curveMod.debugPointsCurve( cam_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
     //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
@@ -67,11 +72,11 @@ VIDEO.init = function(sm, scene, camera){
     return DAE_loader({
         urls_dae: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
+            //videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
         ],
         urls_resource: [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
-            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
+            //videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
         ],
         cloner : (obj_source, scene_source, scene_result, result) => {
             if(obj_source.type === 'Mesh'){
@@ -85,12 +90,12 @@ VIDEO.init = function(sm, scene, camera){
     .then( (scene_source) => {
         console.log('DAE FILES LOADED');
         // STILL NEED TO DO THIS IF I AM USING count-down.js R0
-		const SOURCE_OBJECTS = {};
-		let i = 0;
-		while(i < 10){
-			const key = 'num_' + i;
-			SOURCE_OBJECTS[i] =  scene_source.getObjectByName(key);
-			i += 1;
+        const SOURCE_OBJECTS = {};
+        let i = 0;
+        while(i < 10){
+            const key = 'num_' + i;
+            SOURCE_OBJECTS[i] =  scene_source.getObjectByName(key);
+             i += 1;
         }
         //-------- ----------
         // TIME GROUP composed of MIN, SEC, COLON OBJECTS
@@ -137,7 +142,7 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.position.set(0, -0.14, 1.15);
         scene.add(count_frames);
         // add ground object
-        scene.add( scene_source.getObjectByName('ground_0') );
+        //scene.add( scene_source.getObjectByName('ground_0') );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -146,8 +151,8 @@ VIDEO.init = function(sm, scene, camera){
             fps: FPS,
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
-                camera.position.set(10, 10, 10);
-                camera.lookAt(0, 0, 0);
+                camera.position.set(0, 2, 8);
+                camera.lookAt(0, -0.5, 0);
                 camera.zoom = 1.20;
                 // FRAME COUNTER
                 let f = seq.frame;
@@ -157,7 +162,6 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_frames, f);
             },
             afterObjects: function(seq){
-                camera.lookAt(0,1,0);
                 camera.updateProjectionMatrix();
             },
             objects: []
@@ -180,7 +184,7 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_sec, secs);
                 // CAMERA
                 //camera.position.set(15, 10, 15);
-                camera.position.copy( cam_pos_cd.getPoint(partPer) );
+                //camera.position.copy( cam_pos_cd.getPoint(partPer) );
             }
         };
         // SEQ 1 - ALARM
@@ -196,7 +200,7 @@ VIDEO.init = function(sm, scene, camera){
                 // update secs count
                 countDown.set(count_sec, secs);
                 // CAMERA
-                camera.position.copy( cam_pos_alarm.getPoint(partPer) );
+                //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
             }
         };
         //-------- ----------
