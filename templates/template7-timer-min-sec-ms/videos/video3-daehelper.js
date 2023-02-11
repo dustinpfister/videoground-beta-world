@@ -1,9 +1,5 @@
-// video2-curve-r1 for template7-timer-min-sec-ms
-// * using r1 of curve.js
-// * using curveMod.QBCurvePath over that of curveMod.QBV3Array
-// * using curve paths directly over that of the sequence hooks feature
-// * using cd4-nums.dae and the colon object
-// * count_wrap group added
+// video3-daehelper.js for template7-timer-min-sec-ms
+// * using daehelper in place of what is built into count-down.js
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -11,7 +7,7 @@ VIDEO.scripts = [
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
    '../../../js/curve/r1/curve.js',
-   '../../../js/count-down/r0/count-down.js'
+   '../../../js/count-down/r0/count-down-tempfix.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -30,6 +26,8 @@ VIDEO.init = function(sm, scene, camera){
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
     const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
+    const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/skins/depth_256/';
+    const URL_DAE_SCENE_RESOURCE = '../../../dae/count_down_basic/';
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -69,6 +67,10 @@ VIDEO.init = function(sm, scene, camera){
         [
             videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS),
             videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE)
+        ],
+        [
+            videoAPI.pathJoin(sm.filePath, URL_DAE_NUMS_RESOURCE),
+            videoAPI.pathJoin(sm.filePath, URL_DAE_SCENE_RESOURCE)
         ]
     )
     .then( (SOURCE_OBJECTS) => {

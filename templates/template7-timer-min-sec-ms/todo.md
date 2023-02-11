@@ -1,9 +1,9 @@
 # template7-timer-min-sec-ms : todo list
 
-
-## () new labels dae file
-* () start a count-down-lables dae folder
-* () have a lables1.dae file with a colen open to place between min and sec digits
+## () - video3-daehelper.js
+* () start out using tempfix count down file, and have RESOURCE PATHS
+* () use depth 256 skin for numbers
+* () use new dae helper script in place of what is built into count-down.js
 
 ## ( done 01/19/2023 ) - video2-curve-r1 and cd4-nums.dae
 * (done) new updated video file where I am using R1 of curve.js
