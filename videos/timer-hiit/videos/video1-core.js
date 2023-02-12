@@ -106,6 +106,7 @@ VIDEO.init = function(sm, scene, camera){
         count_wrap.scale.set(0.75,0.75,0.75);
         count_wrap.position.y = 1.03;
         scene.add(count_wrap);
+/*
         // count min count down object
         const count_min = countDown.create({
             countID: 'min',
@@ -130,6 +131,7 @@ VIDEO.init = function(sm, scene, camera){
         const colon = scene_source.getObjectByName('colon');
         colon.position.set(0, 0, 0.4);
         count_wrap.add(colon);
+*/
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
@@ -182,8 +184,8 @@ VIDEO.init = function(sm, scene, camera){
                     mins = Math.floor(SECS_COUNT_DOWN / 60);
                     secs = SECS_COUNT_DOWN;
                 };
-                countDown.set(count_min, mins);
-                countDown.set(count_sec, secs);
+                //countDown.set(count_min, mins);
+                //countDown.set(count_sec, secs);
                 // CAMERA
                 //camera.position.set(15, 10, 15);
                 //camera.position.copy( cam_pos_cd.getPoint(partPer) );
@@ -202,7 +204,7 @@ VIDEO.init = function(sm, scene, camera){
                         secs = SECS_COUNT_DOWN;
                     };
                     // update secs count
-                    countDown.set(count_sec, secs);
+                    //countDown.set(count_sec, secs);
                     // CAMERA
                     //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
                 }
@@ -220,7 +222,7 @@ VIDEO.init = function(sm, scene, camera){
                     secs = SECS_COUNT_DOWN;
                 };
                 // update secs count
-                countDown.set(count_sec, secs);
+                //countDown.set(count_sec, secs);
                 // CAMERA
                 //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
             }
