@@ -37,6 +37,18 @@ VIDEO.init = function(sm, scene, camera){
     const al = new THREE.AmbientLight(0xffffff, 0.1);
     scene.add(al);
     //-------- ----------
+    // HELPERS
+    //-------- ----------
+    // set opaicty for all mesh objects of given object3d object
+    const setOpacity = (obj_root, opacity) => {
+        obj_root.traverse((obj) => {
+            if(obj.type === 'Mesh'){
+                obj.material.transparent = true;
+                obj.material.opacity = opacity === undefined ? 1 : opacity;
+            }
+        });
+    };
+    //-------- ----------
     // BACKGROUND
     //-------- ----------
     const canObj = canvasMod.create({
@@ -131,9 +143,9 @@ VIDEO.init = function(sm, scene, camera){
             width: 1.4,
             source_objects: SOURCE_OBJECTS
         });
-        count_frames.scale.set(0.3, 0.3, 0.3);
-        count_frames.position.set(0, -0.14, 1.15);
-        scene.add(count_frames);
+        count_frames.scale.set(0.5, 0.5, 0.5);
+        count_frames.position.set(0, -2.0, 0);
+        count_wrap.add(count_frames);
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -155,14 +167,17 @@ VIDEO.init = function(sm, scene, camera){
                     f = 0;
                 }
                 countDown.set(count_frames, f);
+                // COUNT WRAP
+                setOpacity(count_wrap, 0.8);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
             },
             objects: []
         };
+
         // SEQ 0 - count down
-        opt_seq.objects[0] = {
+        opt_seq.objects.push({
             secs: DELAY_SECS,
             update: function(seq, partPer, partBias){
                 // DELAY COUNTER
@@ -175,7 +190,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 countDown.set(count_delay, delay);
             }
-        };
+        });
         // SEQ 1 - X Intervals
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
