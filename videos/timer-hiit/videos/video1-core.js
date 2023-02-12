@@ -15,7 +15,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // SETTINGS AND COST VALUES
     // ---------- ----------
-    const TRANS_SECS = 2;
+    const TRANS_SECS = 3;              // NUMBER OF SECONDS FOR AND OPACITY CHANGE
     const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
     const INTERVAL_SECS = 5;           // SECONDS PER INTERVAL
     const INTERVAL_COUNT = 3;          // COUNT OF INTERVALS
@@ -176,7 +176,6 @@ VIDEO.init = function(sm, scene, camera){
             },
             objects: []
         };
-
         // SEQ 0 - count down
         opt_seq.objects.push({
             secs: DELAY_SECS,
@@ -190,7 +189,7 @@ VIDEO.init = function(sm, scene, camera){
                     delay = DELAY_SECS; 
                 }
                 countDown.set(count_delay, delay);
-                // COUNT DELAY
+                // COUNT DELAY OPACITY
                 let a2 = 0;
                 if(delay <= TRANS_SECS ){
                     a2 = 1 - n / TRANS_SECS;
@@ -208,6 +207,11 @@ VIDEO.init = function(sm, scene, camera){
                 },
                 update: function(seq, partPer, partBias, partSinBias, obj){
                     let curent_interval = 1 + obj.data.i;
+                    const a1 = (seq.partFrame + 1) / seq.partFrameMax;
+                    //const a2 = obj.data.i / INTERVAL_COUNT;
+                    const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
+                    const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
+                    const n = total_interval_secs - total_interval_secs * a3;
                     count_interval.visible = true;
                     count_interval_max.visible = true;
                     mesh_forward_slash.visible = true;
@@ -216,6 +220,14 @@ VIDEO.init = function(sm, scene, camera){
                     }
                     countDown.set( count_interval, curent_interval);
                     countDown.set( count_interval_max, INTERVAL_COUNT);
+                    // COUNT INTERVAL OPACITY
+                    let a4 = 0;
+                    if(n <= TRANS_SECS ){
+                        a4 = 1 - n / TRANS_SECS;
+                    }
+                    setOpacity(count_interval, 1 - a4);
+                    setOpacity(count_interval_max, 1 - a4);
+                    setOpacity(mesh_forward_slash, 1 - a4);
                 }
             });
             i2 += 1;
