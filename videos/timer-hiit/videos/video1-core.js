@@ -121,6 +121,10 @@ VIDEO.init = function(sm, scene, camera){
         });
         count_interval_max.position.set(1.75, 0, 0);
         count_wrap.add(count_interval_max);
+        // forward slash
+        const mesh_forward_slash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 1), new THREE.MeshPhongMaterial());
+        mesh_forward_slash.rotation.z = Math.PI * 1.90;
+        count_wrap.add(mesh_forward_slash);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
@@ -147,6 +151,7 @@ VIDEO.init = function(sm, scene, camera){
                 count_delay.visible = false;
                 count_interval.visible = false;
                 count_interval_max.visible = false;
+                mesh_forward_slash.visible = false;
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
@@ -186,6 +191,7 @@ VIDEO.init = function(sm, scene, camera){
                     let curent_interval = 1 + obj.data.i;
                     count_interval.visible = true;
                     count_interval_max.visible = true;
+                    mesh_forward_slash.visible = true;
                     if(THUM_MODE){
                         curent_interval = 1;
                     }
