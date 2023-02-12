@@ -15,6 +15,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // SETTINGS AND COST VALUES
     // ---------- ----------
+    const TRANS_SECS = 2;
     const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
     const INTERVAL_SECS = 5;           // SECONDS PER INTERVAL
     const INTERVAL_COUNT = 3;          // COUNT OF INTERVALS
@@ -167,8 +168,8 @@ VIDEO.init = function(sm, scene, camera){
                     f = 0;
                 }
                 countDown.set(count_frames, f);
-                // COUNT WRAP
-                setOpacity(count_wrap, 0.8);
+                // COUNT WRAP AND CHILDREN
+                setOpacity(count_delay, 1);
             },
             afterObjects: function(seq){
                 camera.updateProjectionMatrix();
@@ -183,12 +184,18 @@ VIDEO.init = function(sm, scene, camera){
                 // DELAY COUNTER
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                const n = Math.floor(DELAY_SECS - DELAY_SECS * a1);
-                let delay = n % 60;
+                const n = DELAY_SECS - DELAY_SECS * a1;
+                let delay = Math.floor(n) % 60;
                 if(THUM_MODE){
                     delay = DELAY_SECS; 
                 }
                 countDown.set(count_delay, delay);
+                // COUNT DELAY
+                let a2 = 0;
+                if(delay <= TRANS_SECS ){
+                    a2 = 1 - n / TRANS_SECS;
+                }
+                setOpacity(count_delay, 1 - a2);
             }
         });
         // SEQ 1 - X Intervals
