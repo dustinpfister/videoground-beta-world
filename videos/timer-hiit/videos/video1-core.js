@@ -148,7 +148,7 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ---------
         // TORUS MESH
         //-------- ---------
-        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 60, 60);
+        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 10, 10);
         const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
         const mesh_torus = new THREE.Mesh(geometry_torus, material_torus);
         mesh_torus.position.z = -2;
@@ -159,12 +159,25 @@ VIDEO.init = function(sm, scene, camera){
 		const pos = geometry_torus.getAttribute('position');
 		const data_color = [];
 		while(ci < pos.count){
-			const a1 = ci / pos.count;
-			if(a1 < 0.25){
-			    data_color.push(0,1 * a1,0);
-			}else{
-				data_color.push(0,0,0)
+			let r = 0, g = 0, b = 0;
+			/*
+			const x = ci % 60;
+			const y = Math.floor(ci / 60);
+			if(x < 50){
+				r = 1;
 			}
+			*/
+			
+			const v = new THREE.Vector3( pos.getX(ci), pos.getY(ci), pos.getZ(ci) );
+			const a = v.angleTo(mesh_torus.position);
+			const deg = THREE.MathUtils.radToDeg(a);
+			
+			if(deg > 90 && deg < 100){
+				r = 1;
+			}
+			
+			//console.log(v.x, v.y, v.z)
+			data_color.push(r, g, b)
 			ci += 1;
 		}
 		geometry_torus.setAttribute('color', new THREE.Float32BufferAttribute(data_color, 3));
