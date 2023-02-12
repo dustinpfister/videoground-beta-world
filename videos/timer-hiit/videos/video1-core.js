@@ -110,8 +110,17 @@ VIDEO.init = function(sm, scene, camera){
             width: 1,
             source_objects: SOURCE_OBJECTS
         });
-        count_interval.position.set(-1, 0, 0);
+        count_interval.position.set(-1.75, 0, 0);
         count_wrap.add(count_interval);
+        // interval max count
+        const count_interval_max = countDown.create({
+            countID: 'interval_max',
+            digits: 2,
+            width: 1,
+            source_objects: SOURCE_OBJECTS
+        });
+        count_interval_max.position.set(1.75, 0, 0);
+        count_wrap.add(count_interval_max);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
@@ -137,6 +146,7 @@ VIDEO.init = function(sm, scene, camera){
                 // COUNT DELAY
                 count_delay.visible = false;
                 count_interval.visible = false;
+                count_interval_max.visible = false;
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
@@ -175,10 +185,12 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(seq, partPer, partBias, partSinBias, obj){
                     let curent_interval = 1 + obj.data.i;
                     count_interval.visible = true;
+                    count_interval_max.visible = true;
                     if(THUM_MODE){
                         curent_interval = 1;
                     }
                     countDown.set( count_interval, curent_interval);
+                    countDown.set( count_interval_max, INTERVAL_COUNT);
                 }
             });
             i2 += 1;
