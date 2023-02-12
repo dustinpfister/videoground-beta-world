@@ -17,7 +17,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     const TRANS_SECS = 3;              // NUMBER OF SECONDS FOR AND OPACITY CHANGE
     const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
-    const INTERVAL_SECS = 5;           // SECONDS PER INTERVAL
+    const INTERVAL_SECS = 30;          // SECONDS PER INTERVAL
     const INTERVAL_COUNT = 3;          // COUNT OF INTERVALS
     const SECS_ALARM = 10;             // COOL DOWN TIME
     const THUM_MODE = false;           // SET VIDEO INTO THUM MODE
@@ -135,9 +135,7 @@ VIDEO.init = function(sm, scene, camera){
         const mesh_forward_slash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 1), new THREE.MeshPhongMaterial());
         mesh_forward_slash.rotation.z = Math.PI * 1.90;
         count_wrap.add(mesh_forward_slash);
-        //-------- ----------
-        // FRAME COUNT
-        //-------- ----------
+        // frame counter
         const count_frames = countDown.create({
             countID: 'frames',
             digits: 6,
@@ -147,6 +145,14 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.scale.set(0.5, 0.5, 0.5);
         count_frames.position.set(0, -2.0, 0);
         count_wrap.add(count_frames);
+        //-------- ---------
+        // TORUS MESH
+        //-------- ---------
+        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 60, 60);
+        const material_torus = new THREE.MeshPhongMaterial();
+        const mesh_torus = new THREE.Mesh(geometry_torus, material_torus);
+        mesh_torus.position.z = -2;
+        scene.add(mesh_torus);
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
