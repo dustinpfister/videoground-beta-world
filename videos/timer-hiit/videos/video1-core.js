@@ -149,10 +149,26 @@ VIDEO.init = function(sm, scene, camera){
         // TORUS MESH
         //-------- ---------
         const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 60, 60);
-        const material_torus = new THREE.MeshPhongMaterial();
+        const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
         const mesh_torus = new THREE.Mesh(geometry_torus, material_torus);
         mesh_torus.position.z = -2;
         scene.add(mesh_torus);
+		
+		// color attribute for torus
+		let ci = 0;
+		const pos = geometry_torus.getAttribute('position');
+		const data_color = [];
+		while(ci < pos.count){
+			const a1 = ci / pos.count;
+			if(a1 < 0.25){
+			    data_color.push(0,1 * a1,0);
+			}else{
+				data_color.push(0,0,0)
+			}
+			ci += 1;
+		}
+		geometry_torus.setAttribute('color', new THREE.Float32BufferAttribute(data_color, 3));
+		
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
