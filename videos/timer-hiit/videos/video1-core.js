@@ -18,9 +18,9 @@ VIDEO.init = function(sm, scene, camera){
     // just set the desired SECS count for the count down
     // as the main thing to make one video from the next
     const SECS_COUNT_DOWN = 10;                                         // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const INTERVAL_SECS = 1;
-    const INTERVAL_COUNT = 1;
-    const SECS_ALARM = 1;                                               // NUMBER OF SECONDS FOR THE ALARM
+    const INTERVAL_SECS = 5;
+    const INTERVAL_COUNT = 3;
+    const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
     const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
     // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
@@ -108,7 +108,7 @@ VIDEO.init = function(sm, scene, camera){
         scene.add(count_wrap);
 
 
-        // count min count down object
+        // count delay count down object
         const count_delay = countDown.create({
             countID: 'delay',
             digits: 2,
@@ -118,32 +118,14 @@ VIDEO.init = function(sm, scene, camera){
         count_delay.position.set(0, 0, 0);
         count_wrap.add(count_delay);
 
-/*
-        // count min count down object
-        const count_min = countDown.create({
-            countID: 'min',
+        const count_interval = countDown.create({
+            countID: 'interval',
             digits: 2,
-            width: 1.1,
+            width: 1,
             source_objects: SOURCE_OBJECTS
         });
-        count_min.position.set(-1.5, 0, 0.4);
-        //count_min.scale.set(0.8, 0, 0.8);
-        count_wrap.add(count_min);
-        // count secs count down object
-        const count_sec = countDown.create({
-            countID: 'sec',
-            digits: 2,
-            width: 1.1,
-            source_objects: SOURCE_OBJECTS
-        });
-        count_sec.position.set(1.5, 0, 0.4);
-        //count_sec.scale.set(0.8, 0, 0.8);
-        count_wrap.add(count_sec);
-        // colon
-        const colon = scene_source.getObjectByName('colon');
-        colon.position.set(0, 0, 0.4);
-        count_wrap.add(colon);
-*/
+        count_interval.position.set(-1, 0, 0);
+        count_wrap.add(count_interval);
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
@@ -157,8 +139,6 @@ VIDEO.init = function(sm, scene, camera){
         count_frames.scale.set(0.3, 0.3, 0.3);
         count_frames.position.set(0, -0.14, 1.15);
         scene.add(count_frames);
-        // add ground object
-        //scene.add( scene_source.getObjectByName('ground_0') );
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -168,10 +148,11 @@ VIDEO.init = function(sm, scene, camera){
             beforeObjects: function(seq){
                 // CAMERA DEFAULTS
                 camera.position.set(0, 2, 8);
-                camera.lookAt(0, -0.5, 0);
+                camera.lookAt(0, 0.5, 0);
                 camera.zoom = 1.20;
                 // COUNT DELAY
                 count_delay.visible = false;
+                count_interval.visible = false;
                 // FRAME COUNTER
                 let f = seq.frame;
                 if(THUM_MODE){
@@ -192,19 +173,12 @@ VIDEO.init = function(sm, scene, camera){
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 const n = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
-                //let mins = Math.floor(n / 60);
-                //let secs = n % 60;
                 let delay = n % 60;
                 // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
-                    delay = SECS_COUNT_DOWN; //Math.floor(SECS_COUNT_DOWN / 60);
-                    //secs = SECS_COUNT_DOWN;
+                    delay = SECS_COUNT_DOWN; 
                 };
-
                 countDown.set(count_delay, delay);
-
-                //countDown.set(count_min, mins);
-                //countDown.set(count_sec, secs);
                 // CAMERA
                 //camera.position.set(15, 10, 15);
                 //camera.position.copy( cam_pos_cd.getPoint(partPer) );
@@ -213,17 +187,20 @@ VIDEO.init = function(sm, scene, camera){
         // SEQ 1 - X Intervals
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
+
+            
             opt_seq.objects.push({
                 secs: INTERVAL_SECS,
-                update: function(seq, partPer, partBias){
-                    let secs = 0;
+                data: {
+                    i: i2
+                },
+                update: function(seq, partPer, partBias, partSinBias, obj){
+                    const curent_interval = 1 + obj.data.i;
+                    count_interval.visible = true;
                     // in thum mode secs should be SECS_COUNT_DOWN
                     if(THUM_MODE){
-                        mins = Math.floor(SECS_COUNT_DOWN / 60);
-                        secs = SECS_COUNT_DOWN;
                     };
-                    // update secs count
-                    //countDown.set(count_sec, secs);
+                    countDown.set( count_interval, curent_interval);
                     // CAMERA
                     //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
                 }
