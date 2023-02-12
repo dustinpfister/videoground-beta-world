@@ -148,7 +148,7 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ---------
         // TORUS MESH
         //-------- ---------
-        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 10, 10);
+        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 150, 360);
         const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
         const mesh_torus = new THREE.Mesh(geometry_torus, material_torus);
         mesh_torus.position.z = -2;
@@ -169,10 +169,11 @@ VIDEO.init = function(sm, scene, camera){
 			*/
 			
 			const v = new THREE.Vector3( pos.getX(ci), pos.getY(ci), pos.getZ(ci) );
-			const a = v.angleTo(mesh_torus.position);
+			const v2 = mesh_torus.position;
+			const a = Math.PI + Math.atan2(v.x - v2.x, v.y - v2.y); //v.angleTo(mesh_torus.position);
 			const deg = THREE.MathUtils.radToDeg(a);
 			
-			if(deg > 90 && deg < 100){
+			if(deg >= 0 && deg < 358){
 				r = 1;
 			}
 			
