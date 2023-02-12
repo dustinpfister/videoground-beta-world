@@ -58,17 +58,6 @@ VIDEO.init = function(sm, scene, camera){
     texture.repeat.set(32, 24);
     scene.background = texture;
     //-------- ----------
-    // CURVE PATHS
-    //-------- ----------
-/*
-    const cam_pos_cd = curveMod.QBCurvePath([
-        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100],
-        [5, 2, 5, -5, 2, 4,    0, -3, 4,      100]
-    ]);
-    const cam_pos_alarm = curveMod.QBCurvePath([ [-5, 2, 4, 0, 1, 8,    0, 3, 5,      100] ]);
-*/
-    //scene.add( curveMod.debugPointsCurve( cam_pos_cd, { count: 40, size: 0.5, color: new THREE.Color(1, 0, 0)} ) );
-    //-------- ----------
     // USING DAE LOADER OF COUNT-DOWN.JS
     //-------- ----------
     return DAE_loader({
@@ -88,7 +77,6 @@ VIDEO.init = function(sm, scene, camera){
             }
         }
     })
-    //.then( (SOURCE_OBJECTS) => {
     .then( (scene_source) => {
         console.log('DAE FILES LOADED');
         // STILL NEED TO DO THIS IF I AM USING count-down.js R0
@@ -100,14 +88,12 @@ VIDEO.init = function(sm, scene, camera){
              i += 1;
         }
         //-------- ----------
-        // TIME GROUP composed of MIN, SEC, COLON OBJECTS
+        // TIME GROUP
         //-------- ----------
         const count_wrap = new THREE.Group();
         count_wrap.scale.set(0.75,0.75,0.75);
         count_wrap.position.y = 1.03;
         scene.add(count_wrap);
-
-
         // count delay count down object
         const count_delay = countDown.create({
             countID: 'delay',
@@ -117,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
         });
         count_delay.position.set(0, 0, 0);
         count_wrap.add(count_delay);
-
+        // interval count
         const count_interval = countDown.create({
             countID: 'interval',
             digits: 2,
@@ -129,7 +115,6 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // FRAME COUNT
         //-------- ----------
-        // adding a frame count
         const count_frames = countDown.create({
             countID: 'frames',
             digits: 6,
@@ -142,7 +127,6 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
-        // start options for main seq object
         const opt_seq = {
             fps: FPS,
             beforeObjects: function(seq){
@@ -157,7 +141,7 @@ VIDEO.init = function(sm, scene, camera){
                 let f = seq.frame;
                 if(THUM_MODE){
                     f = 0;
-                };
+                }
                 countDown.set(count_frames, f);
             },
             afterObjects: function(seq){
@@ -174,35 +158,27 @@ VIDEO.init = function(sm, scene, camera){
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 const n = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
                 let delay = n % 60;
-                // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
                     delay = SECS_COUNT_DOWN; 
-                };
+                }
                 countDown.set(count_delay, delay);
-                // CAMERA
-                //camera.position.set(15, 10, 15);
-                //camera.position.copy( cam_pos_cd.getPoint(partPer) );
             }
         };
         // SEQ 1 - X Intervals
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
-
-            
             opt_seq.objects.push({
                 secs: INTERVAL_SECS,
                 data: {
                     i: i2
                 },
                 update: function(seq, partPer, partBias, partSinBias, obj){
-                    const curent_interval = 1 + obj.data.i;
+                    let curent_interval = 1 + obj.data.i;
                     count_interval.visible = true;
-                    // in thum mode secs should be SECS_COUNT_DOWN
                     if(THUM_MODE){
-                    };
+                        curent_interval = 1;
+                    }
                     countDown.set( count_interval, curent_interval);
-                    // CAMERA
-                    //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
                 }
             });
             i2 += 1;
@@ -211,24 +187,14 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects.push({
             secs: SECS_ALARM,
             update: function(seq, partPer, partBias){
-                let secs = 0;
-                // in thum mode secs should be SECS_COUNT_DOWN
                 if(THUM_MODE){
-                    mins = Math.floor(SECS_COUNT_DOWN / 60);
-                    secs = SECS_COUNT_DOWN;
-                };
-                // update secs count
-                //countDown.set(count_sec, secs);
-                // CAMERA
-                //camera.position.copy( cam_pos_alarm.getPoint(partPer) );
+                }
             }
         });
         //-------- ----------
         // SET FRAME MAX
         //-------- ----------
         const seq = scene.userData.seq = seqHooks.create(opt_seq);
-        // THUM_FRAMES const should be used for THUM_Mode, 
-        // else set it to the frameMax value of main seq object
         if(THUM_MODE){
             console.log('Timer Video is in THUM_Mode');
             sm.frameMax = THUM_FRAMES;
