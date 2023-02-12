@@ -15,21 +15,18 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // SETTINGS AND COST VALUES
     // ---------- ----------
-    // just set the desired SECS count for the count down
-    // as the main thing to make one video from the next
-    const SECS_COUNT_DOWN = 10;                                         // NUMBER OF SECONDS FOR THE COUNTDOWN
-    const INTERVAL_SECS = 5;
-    const INTERVAL_COUNT = 3;
-    const SECS_ALARM = 10;                                               // NUMBER OF SECONDS FOR THE ALARM
-    const THUM_MODE = false;                                             // SET VIDEO INTO THUM MODE
-    const THUM_FRAMES = 100;                                             // number of frames when in THUM MODE
-    // OTHER SETTINGS THAT I MIGHT NOT NEED TO CHANGE FROM
-    const SECS = SECS_COUNT_DOWN + SECS_ALARM;                           // NUMBER OF TOTAL SECONDS
+    const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
+    const INTERVAL_SECS = 5;           // SECONDS PER INTERVAL
+    const INTERVAL_COUNT = 3;          // COUNT OF INTERVALS
+    const SECS_ALARM = 10;             // COOL DOWN TIME
+    const THUM_MODE = false;           // SET VIDEO INTO THUM MODE
+    const THUM_FRAMES = 100;           // number of frames when in THUM MODE
+    // OTHER CONSTS THAT I MIGHT NOT NEED TO CHANGE
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
     const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
-    //const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/skins/depth_256/';
+    //const URL_DAE_SCENE = '../../../dae/count_down_basic/cd3-ground.dae';
     //const URL_DAE_SCENE_RESOURCE = '../../../dae/count_down_basic/';
     // ---------- ----------
     // LIGHT
@@ -166,15 +163,15 @@ VIDEO.init = function(sm, scene, camera){
         };
         // SEQ 0 - count down
         opt_seq.objects[0] = {
-            secs: SECS_COUNT_DOWN,
+            secs: DELAY_SECS,
             update: function(seq, partPer, partBias){
                 // DELAY COUNTER
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                const n = Math.floor(SECS_COUNT_DOWN - SECS_COUNT_DOWN * a1);
+                const n = Math.floor(DELAY_SECS - DELAY_SECS * a1);
                 let delay = n % 60;
                 if(THUM_MODE){
-                    delay = SECS_COUNT_DOWN; 
+                    delay = DELAY_SECS; 
                 }
                 countDown.set(count_delay, delay);
             }
@@ -218,7 +215,10 @@ VIDEO.init = function(sm, scene, camera){
             sm.frameMax = THUM_FRAMES;
         }else{ 
             sm.frameMax = seq.frameMax;
-            console.log( SECS_COUNT_DOWN + ' Timer Video = ' + sm.frameMax + ' Frames.' );
+            console.log( INTERVAL_COUNT + ' Interval Count HIIT Timer Video');
+            console.log( 'Where each interval is: ' + INTERVAL_SECS + ' secs');
+            console.log( DELAY_SECS + ' Sec DELAY to start');
+            console.log( 'FRAMES: ' + sm.frameMax);
         }
         return '';
     });
