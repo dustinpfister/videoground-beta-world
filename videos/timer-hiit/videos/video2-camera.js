@@ -1,12 +1,12 @@
-// video1-core.js for timer-hiit
-//    * core idea worked out for this kind of timer video
+// video2-camera.js for timer-hiit
+//    * added logic for camera movement
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
-   '../../../js/curve/r1/curve.js',
+   //'../../../js/curve/r1/curve.js',
    '../../../js/count-down/r0/count-down.js',
    '../../../js/dae-helper/r0/dae-helper.js'
 ];
@@ -188,7 +188,7 @@ VIDEO.init = function(sm, scene, camera){
         mesh_torus.position.z = -2;
         scene.add(mesh_torus);
         //-------- ----------
-        // A MAIN SEQ OBJECT
+        // MAIN SEQ OBJECT START
         //-------- ----------
         const opt_seq = {
             fps: FPS,
@@ -216,10 +216,12 @@ VIDEO.init = function(sm, scene, camera){
             },
             objects: []
         };
+        //-------- ----------
         // SEQ 0 - count down
+        //-------- ----------
         opt_seq.objects.push({
             secs: DELAY_SECS,
-            update: function(seq, partPer, partBias){
+            update: function(seq, partPer, partBias, partSinBias, obj){
                 // DELAY COUNTER
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
@@ -239,10 +241,18 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 // always
                 countDown.set(count_delay, delay);
-                
+                // camera
+                const v1 = new THREE.Vector3(8,8,8);
+                const v2 = new THREE.Vector3(0, 2, 8);
+                camera.position.copy(v1).lerp(v2, a1);
+                const v3 = new THREE.Vector3(0,1,5);
+                const v4 = new THREE.Vector3(0, 0.5, 0);
+                camera.lookAt( v3.lerp(v4, a1) );
             }
         });
+        //-------- ----------
         // SEQ 1 - X Intervals
+        //-------- ----------
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
             opt_seq.objects.push({
@@ -287,20 +297,19 @@ VIDEO.init = function(sm, scene, camera){
             });
             i2 += 1;
         }
+        //-------- ----------
         // SEQ X - COOL DOWN
+        //-------- ----------
         opt_seq.objects.push({
             secs: SECS_COOLDOWN,
             update: function(seq, partPer, partBias){
                 count_delay.visible = true;
-				
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 const n = SECS_COOLDOWN * a1;
                 let delay = Math.floor(n) % 60;
-				
-				
                 const color_elapsed = new THREE.Color(1, 0, 1);
                 if(THUM_MODE){
-					delay = SECS_COOLDOWN;
+                    delay = SECS_COOLDOWN;
                     updateTimeTorus(mesh_torus, 1, color_elapsed);
                 }else{
                     updateTimeTorus(mesh_torus, a1, color_elapsed);
