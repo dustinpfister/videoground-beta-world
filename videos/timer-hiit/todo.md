@@ -1,10 +1,13 @@
 # timer-hiit
 
-## () - video1-core.js done
-* () have opacity and scale effects from delay > intervals > cooldown
-* () create mesh with torus geometry behind the count down wrap
-* () have a vertex color attribute for the torus geometry
-* () change the state of the vertex color attaribite as a way to display the progess of the current interval
+## ( done 02/13/2023 ) - video1-core.js done
+* (done) have opacity effects from delay > intervals > cooldown
+* (done) create mesh with torus geometry behind the count down wrap
+* (done) have a vertex color attribute for the torus geometry
+* (done) change the state of the vertex color attribute as a way to display the progress of the current interval
+* () have color arguments for updateTimeTorus helper
+* () for seq objects switch between blue and red to help let people know if this is a high or low intensity interval
+
 
 ## ( done 02/12/2023 ) - video1-core.js started
 * (done) start a video1-core.js file where I would like to just find out what the core idea of this is

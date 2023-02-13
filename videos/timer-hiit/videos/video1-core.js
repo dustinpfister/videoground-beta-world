@@ -65,20 +65,22 @@ VIDEO.init = function(sm, scene, camera){
         return mesh_torus;
     };
     // update the torus time mesh object
-    const updateTimeTorus = (mesh, alpha) => {
+    const updateTimeTorus = (mesh, alpha, color_elapsed) => {
+        alpha = alpha === undefined ? 1 : alpha;
+        color_elapsed = color_elapsed === undefined ? new THREE.Color(1,1,1) : color_elapsed;
         const att_color = mesh.geometry.getAttribute('color');
         const att_pos = mesh.geometry.getAttribute('position');
         let ci = 0;
         while(ci < att_pos.count){
-            let r = 0, g = 0, b = 0;
             const v = new THREE.Vector3( att_pos.getX(ci), att_pos.getY(ci), att_pos.getZ(ci) );
             const v2 = mesh.position;
             const a = Math.PI + Math.atan2(v.x - v2.x, v.y - v2.y);
             const deg = THREE.MathUtils.radToDeg(a);
+            const color = new THREE.Color(0, 0, 0);
             if(deg >= 0 && deg < 360 * alpha){
-                r = 1;
+                color.copy(color_elapsed)
             }
-            att_color.setXYZ(ci, r, g, b);
+            att_color.setXYZ(ci, color.r, color.g, color.b);
             ci += 1;
          }
          att_color.needsUpdate = true;
