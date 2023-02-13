@@ -17,7 +17,7 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     const TRANS_SECS = 3;              // NUMBER OF SECONDS FOR AND OPACITY CHANGE
     const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
-    const INTERVAL_SECS = 30;          // SECONDS PER INTERVAL
+    const INTERVAL_SECS = 5;           // SECONDS PER INTERVAL
     const INTERVAL_COUNT = 3;          // COUNT OF INTERVALS
     const SECS_ALARM = 10;             // COOL DOWN TIME
     const THUM_MODE = false;           // SET VIDEO INTO THUM MODE
@@ -51,7 +51,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // create a mesh object that uses a torus geometry with a color attribute
     const createTimeTorus = () => {
-        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 150, 360);
+        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 60, 180);
         const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
         let ci = 0;
         const pos = geometry_torus.getAttribute('position');
@@ -271,7 +271,10 @@ VIDEO.init = function(sm, scene, camera){
                     setOpacity(count_interval_max, 1 - a4);
                     setOpacity(mesh_forward_slash, 1 - a4);
                     // update time torus mesh
-                    const color_elapsed = new THREE.Color(1, 0, 0);
+                    const color_elapsed = new THREE.Color(0, 1, 1);
+					if(curent_interval % 2 === 0){
+						color_elapsed.setRGB(1, 0, 0)
+					}
                     updateTimeTorus(mesh_torus, a1, color_elapsed);
                 }
             });
