@@ -249,7 +249,7 @@ VIDEO.init = function(sm, scene, camera){
                 },
                 update: function(seq, partPer, partBias, partSinBias, obj){
                     let curent_interval = 1 + obj.data.i;
-                    const a1 = (seq.partFrame + 1) / seq.partFrameMax;
+                    let a1 = (seq.partFrame + 1) / seq.partFrameMax;
                     //const a2 = obj.data.i / INTERVAL_COUNT;
                     const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
                     const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
@@ -257,11 +257,6 @@ VIDEO.init = function(sm, scene, camera){
                     count_interval.visible = true;
                     count_interval_max.visible = true;
                     mesh_forward_slash.visible = true;
-                    if(THUM_MODE){
-                        curent_interval = 1;
-                    }
-                    countDown.set( count_interval, curent_interval);
-                    countDown.set( count_interval_max, INTERVAL_COUNT);
                     // COUNT INTERVAL OPACITY
                     let a4 = 0;
                     if(n <= TRANS_SECS ){
@@ -270,12 +265,22 @@ VIDEO.init = function(sm, scene, camera){
                     setOpacity(count_interval, 1 - a4);
                     setOpacity(count_interval_max, 1 - a4);
                     setOpacity(mesh_forward_slash, 1 - a4);
-                    // update time torus mesh
+                    // elapse color for time torus mesh
                     const color_elapsed = new THREE.Color(0, 1, 1);
-					if(curent_interval % 2 === 0){
-						color_elapsed.setRGB(1, 0, 0)
-					}
-                    updateTimeTorus(mesh_torus, a1, color_elapsed);
+                    if(curent_interval % 2 === 0){
+                        color_elapsed.setRGB(1, 0, 0)
+                    }
+                    countDown.set( count_interval_max, INTERVAL_COUNT);
+                    if(THUM_MODE){
+                        curent_interval = INTERVAL_COUNT;
+                        setOpacity(count_interval, 1);
+                        setOpacity(count_interval_max, 1);
+                        setOpacity(mesh_forward_slash, 1);
+                        updateTimeTorus(mesh_torus, 1, color_elapsed);
+                    }else{
+                        updateTimeTorus(mesh_torus, a1, color_elapsed);
+                    }
+                    countDown.set( count_interval, curent_interval);
                 }
             });
             i2 += 1;
