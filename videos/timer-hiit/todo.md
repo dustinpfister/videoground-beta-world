@@ -8,6 +8,7 @@
 * (done) have color arguments for updateTimeTorus helper
 * (done) switch between blue and cyan to help let people know if this is a high or low intensity interval
 * (done) thum mode worked out
+* (done) count up for cool down part
 
 ## ( done 02/12/2023 ) - video1-core.js started
 * (done) start a video1-core.js file where I would like to just find out what the core idea of this is

@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
     const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
     const INTERVAL_SECS = 15;          // SECONDS PER INTERVAL
     const INTERVAL_COUNT = 4;          // COUNT OF INTERVALS
-    const SECS_ALARM = 10;             // COOL DOWN TIME
+    const SECS_COOLDOWN = 20;          // COOL DOWN TIME
     const THUM_MODE = false;           // SET VIDEO INTO THUM MODE
     const THUM_FRAMES = 100;           // number of frames when in THUM MODE
     // OTHER CONSTS THAT I MIGHT NOT NEED TO CHANGE
@@ -287,17 +287,26 @@ VIDEO.init = function(sm, scene, camera){
             });
             i2 += 1;
         }
-        // SEQ X - ALARM
+        // SEQ X - COOL DOWN
         opt_seq.objects.push({
-            secs: SECS_ALARM,
+            secs: SECS_COOLDOWN,
             update: function(seq, partPer, partBias){
+                count_delay.visible = true;
+				
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
+                const n = SECS_COOLDOWN * a1;
+                let delay = Math.floor(n) % 60;
+				
+				
                 const color_elapsed = new THREE.Color(1, 0, 1);
                 if(THUM_MODE){
+					delay = SECS_COOLDOWN;
                     updateTimeTorus(mesh_torus, 1, color_elapsed);
                 }else{
                     updateTimeTorus(mesh_torus, a1, color_elapsed);
                 }
+                // always
+                countDown.set(count_delay, delay);
             }
         });
         //-------- ----------
