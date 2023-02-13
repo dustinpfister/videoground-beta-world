@@ -15,9 +15,9 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // SETTINGS AND COST VALUES
     // ---------- ----------
-    const TRANS_SECS = 3;              // NUMBER OF SECONDS FOR AND OPACITY CHANGE
+    const TRANS_SECS = 5;              // NUMBER OF SECONDS FOR AND OPACITY CHANGE
     const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
-    const INTERVAL_SECS = 5;           // SECONDS PER INTERVAL
+    const INTERVAL_SECS = 15;          // SECONDS PER INTERVAL
     const INTERVAL_COUNT = 3;          // COUNT OF INTERVALS
     const SECS_ALARM = 10;             // COOL DOWN TIME
     const THUM_MODE = false;           // SET VIDEO INTO THUM MODE
@@ -225,18 +225,21 @@ VIDEO.init = function(sm, scene, camera){
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 const n = DELAY_SECS - DELAY_SECS * a1;
                 let delay = Math.floor(n) % 60;
-                if(THUM_MODE){
-                    delay = DELAY_SECS; 
+                if(THUM_MODE){ // if in thum mode
+                    delay = DELAY_SECS;
+                    updateTimeTorus(mesh_torus, 1, new THREE.Color(1,1,1) );
+                    setOpacity(count_delay, 1);
+                }else{   // if not in thum mode
+                    let a2 = 0;  // COUNT DELAY OPACITY
+                    if(delay <= TRANS_SECS ){
+                        a2 = 1 - n / TRANS_SECS;
+                    }
+                    updateTimeTorus(mesh_torus, a1, new THREE.Color(1,1,1) );
+                    setOpacity(count_delay, 1 - a2);
                 }
+                // always
                 countDown.set(count_delay, delay);
-                // COUNT DELAY OPACITY
-                let a2 = 0;
-                if(delay <= TRANS_SECS ){
-                    a2 = 1 - n / TRANS_SECS;
-                }
-                setOpacity(count_delay, 1 - a2);
-                // update time torus mesh
-                updateTimeTorus(mesh_torus, a1, new THREE.Color(1,1,1) );
+                
             }
         });
         // SEQ 1 - X Intervals
@@ -257,14 +260,6 @@ VIDEO.init = function(sm, scene, camera){
                     count_interval.visible = true;
                     count_interval_max.visible = true;
                     mesh_forward_slash.visible = true;
-                    // COUNT INTERVAL OPACITY
-                    let a4 = 0;
-                    if(n <= TRANS_SECS ){
-                        a4 = 1 - n / TRANS_SECS;
-                    }
-                    setOpacity(count_interval, 1 - a4);
-                    setOpacity(count_interval_max, 1 - a4);
-                    setOpacity(mesh_forward_slash, 1 - a4);
                     // elapse color for time torus mesh
                     const color_elapsed = new THREE.Color(0, 1, 1);
                     if(curent_interval % 2 === 0){
@@ -278,6 +273,13 @@ VIDEO.init = function(sm, scene, camera){
                         setOpacity(mesh_forward_slash, 1);
                         updateTimeTorus(mesh_torus, 1, color_elapsed);
                     }else{
+                        let a4 = 0; // COUNT INTERVAL OPACITY
+                        if(n <= TRANS_SECS ){
+                            a4 = 1 - n / TRANS_SECS;
+                        }
+                        setOpacity(count_interval, 1 - a4);
+                        setOpacity(count_interval_max, 1 - a4);
+                        setOpacity(mesh_forward_slash, 1 - a4);
                         updateTimeTorus(mesh_torus, a1, color_elapsed);
                     }
                     countDown.set( count_interval, curent_interval);
@@ -290,11 +292,12 @@ VIDEO.init = function(sm, scene, camera){
             secs: SECS_ALARM,
             update: function(seq, partPer, partBias){
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                if(THUM_MODE){
-                }
-                // update time torus mesh
                 const color_elapsed = new THREE.Color(1, 0, 1);
-                updateTimeTorus(mesh_torus, a1, color_elapsed);
+                if(THUM_MODE){
+                    updateTimeTorus(mesh_torus, 1, color_elapsed);
+                }else{
+                    updateTimeTorus(mesh_torus, a1, color_elapsed);
+                }
             }
         });
         //-------- ----------
