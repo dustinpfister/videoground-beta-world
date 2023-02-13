@@ -307,7 +307,7 @@ VIDEO.init = function(sm, scene, camera){
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 const n = SECS_COOLDOWN * a1;
                 let delay = Math.floor(n) % 60;
-                const color_elapsed = new THREE.Color(1, 0, 1);
+                const color_elapsed = new THREE.Color(1 - 1 * a1, 0, 1);
                 if(THUM_MODE){
                     delay = SECS_COOLDOWN;
                     updateTimeTorus(mesh_torus, 1, color_elapsed);

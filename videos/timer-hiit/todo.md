@@ -1,5 +1,14 @@
 # timer-hiit
 
+## () - video2-camera.js
+* (done) start a video2-camera.js file where I will just be working out some logic for camera movement
+* (done) work out a simple opening camera movement for COUNT DOWN part
+* (done) Color goes from purple to blue in cool down part
+
+* () create a helper method that will create a curve for a camera position for a given interval
+* () have a CAMERA-INTERVAL-LOOPS-MIN setting
+* () have a CAMERA-INTERVAL-LOOPS-MAX setting
+
 ## ( done 02/13/2023 ) - video1-core.js done
 * (done) have opacity effects from delay > intervals > cooldown
 * (done) create mesh with torus geometry behind the count down wrap
