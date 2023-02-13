@@ -40,7 +40,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // HELPERS
     //-------- ----------
-    // set opaicty for all mesh objects of given object3d object
+    // set opacity for all mesh objects of given object3d object
     const setOpacity = (obj_root, opacity) => {
         obj_root.traverse((obj) => {
             if(obj.type === 'Mesh'){
@@ -48,6 +48,40 @@ VIDEO.init = function(sm, scene, camera){
                 obj.material.opacity = opacity === undefined ? 1 : opacity;
             }
         });
+    };
+    // create a mesh object that uses a torus geometry with a color attribute
+    const createTimeTorus = () => {
+        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 150, 360);
+        const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
+        let ci = 0;
+        const pos = geometry_torus.getAttribute('position');
+        const data_color = [];
+        while(ci < pos.count){
+            data_color.push(0,0,0)
+            ci += 1;
+        }
+        geometry_torus.setAttribute('color', new THREE.Float32BufferAttribute(data_color, 3));
+        const mesh_torus = new THREE.Mesh(geometry_torus, material_torus);
+        return mesh_torus;
+    };
+    // update the torus time mesh object
+    const updateTimeTorus = (mesh, alpha) => {
+        const att_color = mesh.geometry.getAttribute('color');
+        const att_pos = mesh.geometry.getAttribute('position');
+        let ci = 0;
+        while(ci < att_pos.count){
+            let r = 0, g = 0, b = 0;
+            const v = new THREE.Vector3( att_pos.getX(ci), att_pos.getY(ci), att_pos.getZ(ci) );
+            const v2 = mesh.position;
+            const a = Math.PI + Math.atan2(v.x - v2.x, v.y - v2.y);
+            const deg = THREE.MathUtils.radToDeg(a);
+            if(deg >= 0 && deg < 360 * alpha){
+                r = 1;
+            }
+            att_color.setXYZ(ci, r, g, b);
+            ci += 1;
+         }
+         att_color.needsUpdate = true;
     };
     //-------- ----------
     // BACKGROUND
@@ -148,41 +182,9 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ---------
         // TORUS MESH
         //-------- ---------
-        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 150, 360);
-        const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
-        const mesh_torus = new THREE.Mesh(geometry_torus, material_torus);
+        const mesh_torus = createTimeTorus();
         mesh_torus.position.z = -2;
         scene.add(mesh_torus);
-		
-		// color attribute for torus
-		let ci = 0;
-		const pos = geometry_torus.getAttribute('position');
-		const data_color = [];
-		while(ci < pos.count){
-			let r = 0, g = 0, b = 0;
-			/*
-			const x = ci % 60;
-			const y = Math.floor(ci / 60);
-			if(x < 50){
-				r = 1;
-			}
-			*/
-			
-			const v = new THREE.Vector3( pos.getX(ci), pos.getY(ci), pos.getZ(ci) );
-			const v2 = mesh_torus.position;
-			const a = Math.PI + Math.atan2(v.x - v2.x, v.y - v2.y); //v.angleTo(mesh_torus.position);
-			const deg = THREE.MathUtils.radToDeg(a);
-			
-			if(deg >= 0 && deg < 358){
-				r = 1;
-			}
-			
-			//console.log(v.x, v.y, v.z)
-			data_color.push(r, g, b)
-			ci += 1;
-		}
-		geometry_torus.setAttribute('color', new THREE.Float32BufferAttribute(data_color, 3));
-		
         //-------- ----------
         // A MAIN SEQ OBJECT
         //-------- ----------
@@ -231,6 +233,8 @@ VIDEO.init = function(sm, scene, camera){
                     a2 = 1 - n / TRANS_SECS;
                 }
                 setOpacity(count_delay, 1 - a2);
+                    // update time torus mesh
+                    updateTimeTorus(mesh_torus, 0);
             }
         });
         // SEQ 1 - X Intervals
@@ -264,6 +268,8 @@ VIDEO.init = function(sm, scene, camera){
                     setOpacity(count_interval, 1 - a4);
                     setOpacity(count_interval_max, 1 - a4);
                     setOpacity(mesh_forward_slash, 1 - a4);
+                    // update time torus mesh
+                    updateTimeTorus(mesh_torus, a1);
                 }
             });
             i2 += 1;
@@ -274,6 +280,8 @@ VIDEO.init = function(sm, scene, camera){
             update: function(seq, partPer, partBias){
                 if(THUM_MODE){
                 }
+                    // update time torus mesh
+                    updateTimeTorus(mesh_torus, 0);
             }
         });
         //-------- ----------
