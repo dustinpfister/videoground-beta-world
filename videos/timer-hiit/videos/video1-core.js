@@ -235,8 +235,8 @@ VIDEO.init = function(sm, scene, camera){
                     a2 = 1 - n / TRANS_SECS;
                 }
                 setOpacity(count_delay, 1 - a2);
-                    // update time torus mesh
-                    updateTimeTorus(mesh_torus, 0);
+                // update time torus mesh
+                updateTimeTorus(mesh_torus, a1, new THREE.Color(1,1,1) );
             }
         });
         // SEQ 1 - X Intervals
@@ -271,7 +271,8 @@ VIDEO.init = function(sm, scene, camera){
                     setOpacity(count_interval_max, 1 - a4);
                     setOpacity(mesh_forward_slash, 1 - a4);
                     // update time torus mesh
-                    updateTimeTorus(mesh_torus, a1);
+                    const color_elapsed = new THREE.Color(1, 0, 0);
+                    updateTimeTorus(mesh_torus, a1, color_elapsed);
                 }
             });
             i2 += 1;
@@ -280,10 +281,12 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects.push({
             secs: SECS_ALARM,
             update: function(seq, partPer, partBias){
+                const a1 = (seq.partFrame + 1) / seq.partFrameMax;
                 if(THUM_MODE){
                 }
-                    // update time torus mesh
-                    updateTimeTorus(mesh_torus, 0);
+                // update time torus mesh
+                const color_elapsed = new THREE.Color(1, 0, 1);
+                updateTimeTorus(mesh_torus, a1, color_elapsed);
             }
         });
         //-------- ----------
