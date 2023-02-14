@@ -15,13 +15,15 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // SETTINGS AND COST VALUES
     // ---------- ----------
-    const TRANS_SECS = 5;              // NUMBER OF SECONDS FOR AND OPACITY CHANGE
-    const DELAY_SECS = 10;             // NUMBER OF SECONDS FOR THE DELAY
-    const INTERVAL_SECS = 15;          // SECONDS PER INTERVAL
-    const INTERVAL_COUNT = 4;          // COUNT OF INTERVALS
-    const SECS_COOLDOWN = 20;          // COOL DOWN TIME
-    const THUM_MODE = false;           // SET VIDEO INTO THUM MODE
-    const THUM_FRAMES = 100;           // number of frames when in THUM MODE
+    const TRANS_SECS = 5;                  // NUMBER OF SECONDS FOR AND OPACITY CHANGE
+    const DELAY_SECS = 10;                 // NUMBER OF SECONDS FOR THE DELAY
+    const INTERVAL_SECS = 15;              // SECONDS PER INTERVAL
+    const INTERVAL_COUNT = 4;              // COUNT OF INTERVALS
+    const SECS_COOLDOWN = 20;              // COOL DOWN TIME
+    const THUM_MODE = false;               // SET VIDEO INTO THUM MODE
+    const THUM_FRAMES = 100;               // number of frames when in THUM MODE
+    const CAMERA_LOOPS_MIN = 1;
+    const CAMERA_LOOPS_MAX = 2;
     // OTHER CONSTS THAT I MIGHT NOT NEED TO CHANGE
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
@@ -102,11 +104,15 @@ VIDEO.init = function(sm, scene, camera){
         const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
         const m = ( current_interval % 2 === 0 ? -1 : 1 );
         const x = 2.0 * m;
-        const dx1 = 1.0 * m;
-        const dx2 = 2.0 * m;
-        curve.add( CBC3D( 0.0, 2.0, 8.0,      x, 2.0, 8.0,     dx1, 2.0, 0.0,    dx2, 1.0, 0.0) );
-        curve.add( CBC3D(   x, 2.0, 8.0,    0.0, 2.0, 8.0,     dx1,-2.0, 0.0,    dx2,-1.0, 0.0) );
-        cam.position.copy( curve.getPoint(a1) );
+        const dx1 = -2.0 * m;
+        const dx2 = 4.0 * m;
+        curve.add( CBC3D( 0.0, 2.0, 8.0,      x, 2.0, 8.0,     dx1, 2.0, 0.0,    dx2, 2.0, 0.0) );
+        curve.add( CBC3D(   x, 2.0, 8.0,    0.0, 2.0, 8.0,     dx1,-2.0, 0.0,    dx2,-2.0, 0.0) );
+
+        const a3 = (current_interval - 1) / ( INTERVAL_COUNT - 1);
+        const loop_count = CAMERA_LOOPS_MIN + Math.floor( (CAMERA_LOOPS_MAX - CAMERA_LOOPS_MIN) * a3) ;
+        const a4 = a1 * loop_count % 1;
+        cam.position.copy( curve.getPoint(a4) );
         cam.zoom = 1.1 - 0.1 * a2;
         //cam.lookAt(0, 0.5 + 0.5 * a2, 0);
     };
