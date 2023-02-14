@@ -4,15 +4,14 @@
 * (done) add the r1 of the wave module from threejs-examples-waves
 * (done) start a sinwave to the scene by using the wave module to create a geometry.
 * (done) go with a mesh object and the Phong material for the waves
+* (done) WAVE-LOOPS-MIN and WAVE-LOOPS-MAX const values
+* (done) have the speed at which the sin wave moves go up with each interval
+* (done) have the speed of the wave go from max to min in cool down part
+* (done) fix wave jump problem when going switching between high and low intensity
+* (done) have the color of the wave mesh change from interval to interval
+* (done) have the color of the wave mesh change for count down and cool down parts
 
-* () WAVE-LOOP-COUNT-MIN and WAVE-LOOP-COUNT-MAX const values
-
-* () have the speed at which the sin wave moves go up with each interval
 * () have the direction of the waves change with each interval
-* () have the color of the wave mesh change from interval to interval
-
-* () have the color of the wave mesh change for count down and cool down parts
-* () have the speed of the wave go from max to min in cool down part
 
 ## ( done 02/14/2023 ) - video2-camera.js
 * (done) start a video2-camera.js file where I will just be working out some logic for camera movement

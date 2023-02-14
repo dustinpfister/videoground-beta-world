@@ -274,12 +274,13 @@ VIDEO.init = function(sm, scene, camera){
             return a1 * WAVE_LOOPS_MIN % 1;
         };
         const getWaveCoolDownAlpha = (a1) => {
-            const d = WAVE_LOOPS_MIN + WAVE_LOOPS_MAX - WAVE_LOOPS_MAX * a1; 
-            return a1 * d % 1;
+            const d = WAVE_LOOPS_MIN + WAVE_LOOPS_MAX - WAVE_LOOPS_MAX * (a1 * 0.5); 
+            return a1 * d  % 1;
         };
         opt_seq.objects.push({
             secs: DELAY_SECS,
             update: function(seq, partPer, partBias, partSinBias, obj){
+				const color_elapsed = new THREE.Color(1,1,1);
                 // DELAY COUNTER
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
@@ -287,20 +288,21 @@ VIDEO.init = function(sm, scene, camera){
                 let delay = Math.floor(n) % 60;
                 if(THUM_MODE){ // if in thum mode
                     delay = DELAY_SECS;
-                    updateTimeTorus(mesh_torus, 1, new THREE.Color(1,1,1) );
+                    updateTimeTorus(mesh_torus, 1, color_elapsed );
                     setOpacity(count_delay, 1);
                 }else{   // if not in thum mode
                     let a2 = 0;  // COUNT DELAY OPACITY
                     if(delay <= TRANS_SECS ){
                         a2 = 1 - n / TRANS_SECS;
                     }
-                    updateTimeTorus(mesh_torus, a1, new THREE.Color(1,1,1) );
+                    updateTimeTorus(mesh_torus, a1, color_elapsed );
                     setOpacity(count_delay, 1 - a2);
                 }
                 // always
                 countDown.set(count_delay, delay);
                 opt_waves.alpha = getWaveAlpha(partPer);
                 waveMod.update(geo_waves, opt_waves);
+				mesh_waves.material.color = color_elapsed;
                 // camera
                 const v1 = new THREE.Vector3(8,8,8);
                 const v2 = new THREE.Vector3(0, 2, 8);
@@ -354,11 +356,19 @@ VIDEO.init = function(sm, scene, camera){
                         updateTimeTorus(mesh_torus, a1, color_elapsed);
                     }
                     countDown.set( count_interval, current_interval);
-                    let a5 = 0.25 * a3;
+                    //const a5 = 0.25 * a3;
+					//const a6 = 0.75 + 0.25 * a3;
+					let a7 = 0;
                     if(high_intensity){
-                        a5 = 0.75 + 0.25 * a3;
-                    }
-                    opt_waves.alpha = getWaveRangeAlpha(a5, partPer);
+						a7 = 1;
+						a7 = 0.5 + 0.5 * seq.getSinBias(1) * (partPer * 0.5);
+                        //a7 = THREE.MathUtils.lerp(a5, a6, 1 - partPer);
+                    }else{
+						a7 = 0;
+						//a7 = THREE.MathUtils.lerp(a6, a5, 1 - partPer)
+					}
+					mesh_waves.material.color = color_elapsed;
+                    opt_waves.alpha = getWaveRangeAlpha(a7, partPer);
                     waveMod.update(geo_waves, opt_waves);
                     // camera
                     intervalCameraPos(camera, current_interval, partPer);
@@ -386,8 +396,9 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 // always
                 countDown.set(count_delay, delay);
-                opt_waves.alpha = partPer;
+                opt_waves.alpha = getWaveCoolDownAlpha(partPer, 1 - partPer);
                 waveMod.update(geo_waves, opt_waves);
+                mesh_waves.material.color = color_elapsed;
             }
         });
         //-------- ----------
