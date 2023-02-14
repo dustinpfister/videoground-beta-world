@@ -1,7 +1,7 @@
 # timer-hiit
 
 ## () - video3-sinwave.js
-* () add the r1 of the wave module from threejs-examples-waves
+* (done) add the r1 of the wave module from threejs-examples-waves
 * () start a sinwave to the scene by using the wave module to create a geometry.
 * () go with a mesh object for the geometry
 * () have the speed at which the sin wave moves go up with each interval
