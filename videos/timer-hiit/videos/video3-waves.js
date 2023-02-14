@@ -221,10 +221,16 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ---------
         // WAVE MESH
         //-------- ---------
-        const geo_wave = waveMod.create({waveHeight: 1.5, width: 100, height: 100});
-        const mesh_wave = new THREE.Mesh(geo_wave, new THREE.MeshPhongMaterial());
-        mesh_wave.position.y = -4;
-        scene.add(mesh_wave);
+        const opt_waves = {
+            waveHeight: 1.75,
+            width: 100, height: 100,
+            widthSegs: 30,heightSegs: 30,
+            degree: 45, alpha: 0
+        };
+        const geo_waves = waveMod.create(opt_waves);
+        const mesh_waves = new THREE.Mesh(geo_waves, new THREE.MeshPhongMaterial());
+        mesh_waves.position.y = -5;
+        scene.add(mesh_waves);
         //-------- ----------
         // MAIN SEQ OBJECT START
         //-------- ----------
@@ -279,6 +285,8 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 // always
                 countDown.set(count_delay, delay);
+                opt_waves.alpha = partPer * 4 % 1;
+                waveMod.update(geo_waves, opt_waves);
                 // camera
                 const v1 = new THREE.Vector3(8,8,8);
                 const v2 = new THREE.Vector3(0, 2, 8);
@@ -331,6 +339,8 @@ VIDEO.init = function(sm, scene, camera){
                         updateTimeTorus(mesh_torus, a1, color_elapsed);
                     }
                     countDown.set( count_interval, current_interval);
+                    opt_waves.alpha = partPer;
+                    waveMod.update(geo_waves, opt_waves);
                     // camera
                     intervalCameraPos(camera, current_interval, partPer);
                     camera.lookAt(mesh_torus.position);
@@ -357,6 +367,8 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 // always
                 countDown.set(count_delay, delay);
+                opt_waves.alpha = partPer;
+                waveMod.update(geo_waves, opt_waves);
             }
         });
         //-------- ----------
