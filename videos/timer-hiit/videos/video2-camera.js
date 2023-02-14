@@ -103,12 +103,11 @@ VIDEO.init = function(sm, scene, camera){
         const curve = new THREE.CurvePath();
         const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
         const m = ( current_interval % 2 === 0 ? -1 : 1 );
-        const x = 2.0 * m;
-        const dx1 = -2.0 * m;
-        const dx2 = 4.0 * m;
-        curve.add( CBC3D( 0.0, 2.0, 8.0,      x, 2.0, 8.0,     dx1, 2.0, 0.0,    dx2, 2.0, 0.0) );
-        curve.add( CBC3D(   x, 2.0, 8.0,    0.0, 2.0, 8.0,     dx1,-2.0, 0.0,    dx2,-2.0, 0.0) );
-
+        const x = 4.0 * m;
+        const dx1 = 0.0 * m;
+        const dx2 = 2.0 * m;
+        curve.add( CBC3D( 0.0, 2.0, 8.0,      x, 2.0, 8.0,     dx1, 4.0, 0.0,    dx2, 4.0, 0.0) );
+        curve.add( CBC3D(   x, 2.0, 8.0,    0.0, 2.0, 8.0,     dx1,-4.0, 0.0,    dx2,-4.0, 0.0) );
         const a3 = (current_interval - 1) / ( INTERVAL_COUNT - 1);
         const loop_count = CAMERA_LOOPS_MIN + Math.floor( (CAMERA_LOOPS_MAX - CAMERA_LOOPS_MIN) * a3) ;
         const a4 = a1 * loop_count % 1;

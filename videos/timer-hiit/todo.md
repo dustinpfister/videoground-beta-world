@@ -9,15 +9,14 @@
 * () have the color of the wave mesh change from interval to interval
 * () have the color of the wave mesh change for count down and cool down parts
 
-## () - video2-camera.js
+## ( done 02/14/2023 ) - video2-camera.js
 * (done) start a video2-camera.js file where I will just be working out some logic for camera movement
 * (done) work out a simple opening camera movement for COUNT DOWN part
 * (done) Color goes from purple to blue in cool down part
 * (done) create a helper method that will create a curve for a camera position for a given interval
-
-* () have a CAMERA-INTERVAL-LOOPS-MIN setting
-* () have a CAMERA-INTERVAL-LOOPS-MAX setting
-* () use the CAMERA-INTERVAL-LOOPS-... to set what the number of loops should be for each interval
+* (done) have a CAMERA-INTERVAL-LOOPS-MIN setting
+* (done) have a CAMERA-INTERVAL-LOOPS-MAX setting
+* (done) use the CAMERA-INTERVAL-LOOPS-... to set what the number of loops should be for each interval
 
 ## ( done 02/13/2023 ) - video1-core.js done
 * (done) have opacity effects from delay > intervals > cooldown
