@@ -85,6 +85,31 @@ VIDEO.init = function(sm, scene, camera){
          }
          att_color.needsUpdate = true;
     };
+    // abstraction for THREE.CubicBezierCurve3
+    const CBC3D = (sx, sy, sz, ex, ey, ez, cx1, cy1, cz1, cx2, cy2, cz2) => {
+        const v_start = new THREE.Vector3(sx, sy, sz);
+        const v_end = new THREE.Vector3(ex, ey, ez);
+        return new THREE.CubicBezierCurve3(
+            v_start,
+            v_start.clone().lerp(v_end, 0.25).add(new THREE.Vector3(cx1, cy1, cz1)),
+            v_start.clone().lerp(v_end, 0.75).add(new THREE.Vector3(cx1, cy1, cz1)),
+            v_end
+        );
+    };
+    // set the camera position based on current interval
+    const intervalCameraPos = (cam, current_interval, a1) => {
+        const curve = new THREE.CurvePath();
+        const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
+        const m = ( current_interval % 2 === 0 ? -1 : 1 );
+        const x = 2.0 * m;
+        const dx1 = 1.0 * m;
+        const dx2 = 2.0 * m;
+        curve.add( CBC3D( 0.0, 2.0, 8.0,      x, 2.0, 8.0,     dx1, 2.0, 0.0,    dx2, 1.0, 0.0) );
+        curve.add( CBC3D(   x, 2.0, 8.0,    0.0, 2.0, 8.0,     dx1,-2.0, 0.0,    dx2,-1.0, 0.0) );
+        cam.position.copy( curve.getPoint(a1) );
+        cam.zoom = 1.1 - 0.1 * a2;
+        //cam.lookAt(0, 0.5 + 0.5 * a2, 0);
+    };
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -196,7 +221,7 @@ VIDEO.init = function(sm, scene, camera){
                 // CAMERA DEFAULTS
                 camera.position.set(0, 2, 8);
                 camera.lookAt(0, 0.5, 0);
-                camera.zoom = 1.20;
+                camera.zoom = 1.10;
                 // COUNT DELAY
                 count_delay.visible = false;
                 count_interval.visible = false;
@@ -246,7 +271,7 @@ VIDEO.init = function(sm, scene, camera){
                 const v2 = new THREE.Vector3(0, 2, 8);
                 camera.position.copy(v1).lerp(v2, a1);
                 const v3 = new THREE.Vector3(0,1,5);
-                const v4 = new THREE.Vector3(0, 0.5, 0);
+                const v4 = mesh_torus.position.clone();
                 camera.lookAt( v3.lerp(v4, a1) );
             }
         });
@@ -261,7 +286,7 @@ VIDEO.init = function(sm, scene, camera){
                     i: i2
                 },
                 update: function(seq, partPer, partBias, partSinBias, obj){
-                    let curent_interval = 1 + obj.data.i;
+                    let current_interval = 1 + obj.data.i;
                     let a1 = (seq.partFrame + 1) / seq.partFrameMax;
                     //const a2 = obj.data.i / INTERVAL_COUNT;
                     const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
@@ -272,12 +297,12 @@ VIDEO.init = function(sm, scene, camera){
                     mesh_forward_slash.visible = true;
                     // elapse color for time torus mesh
                     const color_elapsed = new THREE.Color(0, 1, 1);
-                    if(curent_interval % 2 === 0){
+                    if(current_interval % 2 === 0){
                         color_elapsed.setRGB(1, 0, 0)
                     }
                     countDown.set( count_interval_max, INTERVAL_COUNT);
                     if(THUM_MODE){
-                        curent_interval = INTERVAL_COUNT;
+                        current_interval = INTERVAL_COUNT;
                         setOpacity(count_interval, 1);
                         setOpacity(count_interval_max, 1);
                         setOpacity(mesh_forward_slash, 1);
@@ -292,7 +317,10 @@ VIDEO.init = function(sm, scene, camera){
                         setOpacity(mesh_forward_slash, 1 - a4);
                         updateTimeTorus(mesh_torus, a1, color_elapsed);
                     }
-                    countDown.set( count_interval, curent_interval);
+                    countDown.set( count_interval, current_interval);
+                    // camera
+                    intervalCameraPos(camera, current_interval, partPer);
+                    camera.lookAt(mesh_torus.position);
                 }
             });
             i2 += 1;
