@@ -1,13 +1,23 @@
 # timer-hiit
 
+## () - video3-sinwave.js
+* () add the r1 of the wave module from threejs-examples-waves
+* () start a sinwave to the scene by using the wave module to create a geometry.
+* () go with a mesh object for the geometry
+* () have the speed at which the sin wave moves go up with each interval
+* () have the direction of the waves change with each interval
+* () have the color of the wave mesh change from interval to interval
+* () have the color of the wave mesh change for count down and cool down parts
+
 ## () - video2-camera.js
 * (done) start a video2-camera.js file where I will just be working out some logic for camera movement
 * (done) work out a simple opening camera movement for COUNT DOWN part
 * (done) Color goes from purple to blue in cool down part
+* (done) create a helper method that will create a curve for a camera position for a given interval
 
-* () create a helper method that will create a curve for a camera position for a given interval
 * () have a CAMERA-INTERVAL-LOOPS-MIN setting
 * () have a CAMERA-INTERVAL-LOOPS-MAX setting
+* () use the CAMERA-INTERVAL-LOOPS-... to set what the number of loops should be for each interval
 
 ## ( done 02/13/2023 ) - video1-core.js done
 * (done) have opacity effects from delay > intervals > cooldown
