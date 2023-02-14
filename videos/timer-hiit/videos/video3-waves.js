@@ -25,6 +25,8 @@ VIDEO.init = function(sm, scene, camera){
     const THUM_FRAMES = 100;               // number of frames when in THUM MODE
     const CAMERA_LOOPS_MIN = 1;
     const CAMERA_LOOPS_MAX = 2;
+    const WAVE_LOOPS_MIN = 4;
+    const WAVE_LOOPS_MAX = 10;
     // OTHER CONSTS THAT I MIGHT NOT NEED TO CHANGE
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
@@ -263,6 +265,18 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // SEQ 0 - count down
         //-------- ----------
+        
+        const getWaveRangeAlpha = (a1, a2) => {
+            const d = WAVE_LOOPS_MIN + ( (WAVE_LOOPS_MAX - WAVE_LOOPS_MIN) * a1);
+            return a2 * d % 1;
+        };
+        const getWaveAlpha = (a1) => {
+            return a1 * WAVE_LOOPS_MIN % 1;
+        };
+        const getWaveCoolDownAlpha = (a1) => {
+            const d = WAVE_LOOPS_MIN + WAVE_LOOPS_MAX - WAVE_LOOPS_MAX * a1; 
+            return a1 * d % 1;
+        };
         opt_seq.objects.push({
             secs: DELAY_SECS,
             update: function(seq, partPer, partBias, partSinBias, obj){
@@ -285,7 +299,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 // always
                 countDown.set(count_delay, delay);
-                opt_waves.alpha = partPer * 4 % 1;
+                opt_waves.alpha = getWaveAlpha(partPer);
                 waveMod.update(geo_waves, opt_waves);
                 // camera
                 const v1 = new THREE.Vector3(8,8,8);
@@ -309,6 +323,7 @@ VIDEO.init = function(sm, scene, camera){
                 update: function(seq, partPer, partBias, partSinBias, obj){
                     let current_interval = 1 + obj.data.i;
                     let a1 = (seq.partFrame + 1) / seq.partFrameMax;
+                    const high_intensity = current_interval % 2 === 0;
                     //const a2 = obj.data.i / INTERVAL_COUNT;
                     const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
                     const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
@@ -318,7 +333,7 @@ VIDEO.init = function(sm, scene, camera){
                     mesh_forward_slash.visible = true;
                     // elapse color for time torus mesh
                     const color_elapsed = new THREE.Color(0, 1, 1);
-                    if(current_interval % 2 === 0){
+                    if(high_intensity){
                         color_elapsed.setRGB(1, 0, 0)
                     }
                     countDown.set( count_interval_max, INTERVAL_COUNT);
@@ -339,7 +354,11 @@ VIDEO.init = function(sm, scene, camera){
                         updateTimeTorus(mesh_torus, a1, color_elapsed);
                     }
                     countDown.set( count_interval, current_interval);
-                    opt_waves.alpha = partPer;
+                    let a5 = 0.25 * a3;
+                    if(high_intensity){
+                        a5 = 0.75 + 0.25 * a3;
+                    }
+                    opt_waves.alpha = getWaveRangeAlpha(a5, partPer);
                     waveMod.update(geo_waves, opt_waves);
                     // camera
                     intervalCameraPos(camera, current_interval, partPer);
