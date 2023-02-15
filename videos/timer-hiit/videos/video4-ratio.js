@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     const INTERVAL_SECS = 30;                        // SECONDS PER INTERVAL (HIGH AND LOW TIME)
     const INTERVAL_COUNT = 3;                        // COUNT OF INTERVALS
     const INTERVAL_RATIO = new THREE.Vector2(1, 2);  // RATIO OF TIME FOR HIGH TO LOW
-    const INTERVAL_HIGH_START = true;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
+    const INTERVAL_HIGH_START = false;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
 
     const SECS_COOLDOWN = 20;                        // COOL DOWN TIME
 
@@ -335,7 +335,7 @@ VIDEO.init = function(sm, scene, camera){
                 const r = high_intensity ? rx : ry;
                 const interval_part_secs = INTERVAL_SECS / (rx + ry) * r;
                 // DEBUG
-                console.log(interval_part_secs)
+                console.log(i2, i_intensity, high_intensity ? 'high': 'low', interval_part_secs)
                 // push the seq object
                 opt_seq.objects.push({
                     secs: interval_part_secs,
@@ -346,13 +346,7 @@ VIDEO.init = function(sm, scene, camera){
                     },
                     update: function(seq, partPer, partBias, partSinBias, obj){
                         let current_interval = 1 + obj.data.i;
-
                         let a1 = (seq.partFrame + 1) / seq.partFrameMax;
-
-                        //const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
-//const a3 = (obj.data.i - obj.data.i_intensity + a1) / INTERVAL_COUNT;
-
-
                         count_interval.visible = true;
                         count_interval_max.visible = true;
                         mesh_forward_slash.visible = true;
@@ -369,28 +363,19 @@ VIDEO.init = function(sm, scene, camera){
                             setOpacity(mesh_forward_slash, 1);
                             updateTimeTorus(mesh_torus, 1, color_elapsed);
                         }else{
+                            // transition effect
                             let a4 = 0;
-
-
-
-//console.log(obj.data.i, obj.data.i_intensity, '/', INTERVAL_COUNT);
-
-//console.log(a3, n);
-
-if(obj.data.i + obj.data.i_intensity === INTERVAL_COUNT){
-
-                            const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
-                            const n = total_interval_secs - total_interval_secs * a3;
-
-                            if(n <= TRANS_SECS ){
-                                a4 = 1 - n / TRANS_SECS;
+                            if(obj.data.i + obj.data.i_intensity === INTERVAL_COUNT){
+                                const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
+                                const n = total_interval_secs - total_interval_secs * a3;
+                                if(n <= TRANS_SECS ){
+                                    a4 = 1 - n / TRANS_SECS;
+                                }
                             }
-
-}
-
                             setOpacity(count_interval, 1 - a4);
                             setOpacity(count_interval_max, 1 - a4);
                             setOpacity(mesh_forward_slash, 1 - a4);
+                            // update the time torus
                             updateTimeTorus(mesh_torus, a1, color_elapsed);
                         }
                         countDown.set( count_interval, current_interval);
