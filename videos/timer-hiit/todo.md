@@ -7,6 +7,7 @@
 * (done) HAVE a INTERVAL-START-HIGH setting that is a Boolen that when true will result in each interval starting high rather than low
 * (done) fix transition issue so that it happens when the full set on intervals are over
 * (done) fix camera looping so that it goes by the part of the current interval, rather than the current interval
+* (done) transparent material for waves
 
 * () there should be a warm up part to the video that comes after the delay part
 * () have the direction of the waves change with each interval over time by way of wave update option setting

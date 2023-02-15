@@ -1,4 +1,5 @@
 // video4-ratio.js for timer-hiit
+//      * Can set a ratio to adjust high to low time for each interval
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -127,7 +128,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BACKGROUND
     //-------- ----------
-    const canObj = canvasMod.create({
+    const canObj_bg = canvasMod.create({
         size: 512,
         draw: 'grid_palette',
         palette: ['#000000', '#1f1f1f', '#00ffff'],
@@ -137,7 +138,7 @@ VIDEO.init = function(sm, scene, camera){
     // can use LZString to compress and decompress
     //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
     // I want to repeat the texture
-    const texture = canObj.texture;
+    const texture = canObj_bg.texture;
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(32, 24);
@@ -236,7 +237,8 @@ VIDEO.init = function(sm, scene, camera){
             degree: 45, alpha: 0
         };
         const geo_waves = waveMod.create(opt_waves);
-        const mesh_waves = new THREE.Mesh(geo_waves, new THREE.MeshPhongMaterial());
+        const material_waves = new THREE.MeshPhongMaterial({ transparent: true, opacity: 0.75});
+        const mesh_waves = new THREE.Mesh(geo_waves, material_waves);
         mesh_waves.position.y = -5;
         scene.add(mesh_waves);
         //-------- ----------
