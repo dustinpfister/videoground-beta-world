@@ -12,9 +12,9 @@
 * () make a 10 second video with timer hum
 
 ## () - timer-hiit - video4-ratio.js
-* () start final video file for hiit where I focus on setting what the ratio is between high intensity and cool down
+* (done) start video file for timer-hiit where I focus on setting what the ratio is between high intensity and cool down
+* (done) I should be able to set the ratio for the number of seconds for the high intensity part compared to low intensity 
 * () this will need a new warm up part after the delay part
-* () I should be able to set the ratio for the number of seconds for the high intensity part compared to low intensity 
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
