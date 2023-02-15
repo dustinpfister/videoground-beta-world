@@ -62,7 +62,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // create a mesh object that uses a torus geometry with a color attribute
     const createTimeTorus = () => {
-        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 30, 30);
+        const geometry_torus = new THREE.TorusGeometry(2.2, 0.8, 40, 400);
         const material_torus = new THREE.MeshPhongMaterial({vertexColors: true});
         let ci = 0;
         const pos = geometry_torus.getAttribute('position');
@@ -230,6 +230,12 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ---------
         // WAVE MESH
         //-------- ---------
+        const canObj_waves = canvasMod.create({
+            size: 512,
+            draw: 'rnd',
+            palette: ['#ffffff', '#aaaaaa', '#888888'],
+            state: { gSize: 64 }
+        });
         const opt_waves = {
             waveHeight: 1.75,
             width: 100, height: 100,
@@ -240,6 +246,7 @@ VIDEO.init = function(sm, scene, camera){
         const material_waves = new THREE.MeshPhongMaterial({
             transparent: true, 
             opacity: 0.75,
+            map: canObj_waves.texture
             // IF I WANT ONE SIDE OF A WAVE TO RENDER AND ANOTHEER NOT TO, THAT MIGHT BE A CLIPING ISSHUE RATHER THAN BLEDNING
             //blending: THREE.CustomBlending, //THREE.NoBlending
             //blendSrc: THREE.SrcAlphaSaturateFactor

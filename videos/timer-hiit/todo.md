@@ -11,12 +11,12 @@
 * (done) fix transition issue so that it happens when the full set on intervals are over
 * (done) fix camera looping so that it goes by the part of the current interval, rather than the current interval
 * (done) transparent material for waves
-
+* (done) canvas textures for waves
+* (done) higher poly torus
+<!-- FUNCTION -->
 * () there should be a warm up part to the video that comes after the delay part
-* () have the direction of the waves change with each interval over time by way of wave update option setting
-
 <!-- LOOK -->
-* () canvas textures for waves
+* () have the direction of the waves change with each interval over time by way of wave update option setting
 
 <!-- CODE READABILTY -->
 * () have a trans effect helper
