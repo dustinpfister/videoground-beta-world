@@ -125,6 +125,17 @@ VIDEO.init = function(sm, scene, camera){
         cam.zoom = 1.1 - 0.1 * a2;
         //cam.lookAt(0, 0.5 + 0.5 * a2, 0);
     };
+    const getWaveRangeAlpha = (a1, a2) => {
+        const d = WAVE_LOOPS_MIN + ( (WAVE_LOOPS_MAX - WAVE_LOOPS_MIN) * a1);
+        return a2 * d % 1;
+    };
+    const getWaveAlpha = (a1) => {
+        return a1 * WAVE_LOOPS_MIN % 1;
+    };
+    const getWaveCoolDownAlpha = (a1) => {
+        const d = WAVE_LOOPS_MIN + WAVE_LOOPS_MAX - WAVE_LOOPS_MAX * (a1 * 0.5); 
+        return a1 * d  % 1;
+    };
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -286,18 +297,6 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         // SEQ 0 - count down
         //-------- ----------
-        
-        const getWaveRangeAlpha = (a1, a2) => {
-            const d = WAVE_LOOPS_MIN + ( (WAVE_LOOPS_MAX - WAVE_LOOPS_MIN) * a1);
-            return a2 * d % 1;
-        };
-        const getWaveAlpha = (a1) => {
-            return a1 * WAVE_LOOPS_MIN % 1;
-        };
-        const getWaveCoolDownAlpha = (a1) => {
-            const d = WAVE_LOOPS_MIN + WAVE_LOOPS_MAX - WAVE_LOOPS_MAX * (a1 * 0.5); 
-            return a1 * d  % 1;
-        };
         opt_seq.objects.push({
             secs: DELAY_SECS,
             update: function(seq, partPer, partBias, partSinBias, obj){
