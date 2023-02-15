@@ -21,8 +21,8 @@ VIDEO.init = function(sm, scene, camera){
 
     const INTERVAL_SECS = 30;                        // SECONDS PER INTERVAL (HIGH AND LOW TIME)
     const INTERVAL_COUNT = 3;                        // COUNT OF INTERVALS
-    const INTERVAL_RATIO = new THREE.Vector2(1, 1);  // RATIO OF TIME FOR HIGH TO LOW ( OR LOW TO HIGH IF INTERVAL_HIGH_START = false)
-    const INTERVAL_HIGH_START = true;                // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
+    const INTERVAL_RATIO = new THREE.Vector2(1, 1);  // RATIO OF TIME FOR HIGH TO LOW
+    const INTERVAL_HIGH_START = false;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
 
     const SECS_COOLDOWN = 20;                        // COOL DOWN TIME
 
@@ -329,9 +329,12 @@ VIDEO.init = function(sm, scene, camera){
                 high_intensity = !high_intensity;
             }
             
+            const rx = INTERVAL_RATIO['x'];
+            const ry = INTERVAL_RATIO['y'];
+            const r = high_intensity ? rx : ry;
+            const interval_part_secs = INTERVAL_SECS / (rx + ry) * r;
 
-            //const r = INTERVAL_RATIO['x'] : INTERVAL_RATIO['y'];
-            //const interval_part_secs = 
+console.log(interval_part_secs)
 
             opt_seq.objects.push({
                 secs: INTERVAL_SECS,
