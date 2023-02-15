@@ -323,80 +323,76 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
-
-            let high_intensity = i2 % 2 === 0;
-            if(!INTERVAL_HIGH_START){
-                high_intensity = !high_intensity;
-            }
-            
             const rx = INTERVAL_RATIO['x'];
             const ry = INTERVAL_RATIO['y'];
-            const r = high_intensity ? rx : ry;
-            const interval_part_secs = INTERVAL_SECS / (rx + ry) * r;
-
-console.log(interval_part_secs)
-
-            opt_seq.objects.push({
-                secs: INTERVAL_SECS,
-//                  secs: 
-
-
-                data: {
-                    i: i2
-                },
-                update: function(seq, partPer, partBias, partSinBias, obj){
-                    let current_interval = 1 + obj.data.i;
-                    let a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                    //const high_intensity = current_interval % 2 === 0;
-                    //const a2 = obj.data.i / INTERVAL_COUNT;
-                    const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
-                    const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
-                    const n = total_interval_secs - total_interval_secs * a3;
-                    count_interval.visible = true;
-                    count_interval_max.visible = true;
-                    mesh_forward_slash.visible = true;
-                    // elapse color for time torus mesh
-                    const color_elapsed = new THREE.Color(0, 1, 1);
-                    if(high_intensity){
-                        color_elapsed.setRGB(1, 0, 0)
-                    }
-                    countDown.set( count_interval_max, INTERVAL_COUNT);
-                    if(THUM_MODE){
-                        current_interval = INTERVAL_COUNT;
-                        setOpacity(count_interval, 1);
-                        setOpacity(count_interval_max, 1);
-                        setOpacity(mesh_forward_slash, 1);
-                        updateTimeTorus(mesh_torus, 1, color_elapsed);
-                    }else{
-                        let a4 = 0; // COUNT INTERVAL OPACITY
-                        if(n <= TRANS_SECS ){
-                            a4 = 1 - n / TRANS_SECS;
-                        }
-                        setOpacity(count_interval, 1 - a4);
-                        setOpacity(count_interval_max, 1 - a4);
-                        setOpacity(mesh_forward_slash, 1 - a4);
-                        updateTimeTorus(mesh_torus, a1, color_elapsed);
-                    }
-                    countDown.set( count_interval, current_interval);
-                    //const a5 = 0.25 * a3;
-                    //const a6 = 0.75 + 0.25 * a3;
-                    let a7 = 0;
-                    if(high_intensity){
-                        a7 = 1;
-                        a7 = 0.5 + 0.5 * seq.getSinBias(1) * (partPer * 0.5);
-                        //a7 = THREE.MathUtils.lerp(a5, a6, 1 - partPer);
-                    }else{
-                        a7 = 0;
-                        //a7 = THREE.MathUtils.lerp(a6, a5, 1 - partPer)
-                    }
-                    mesh_waves.material.color = color_elapsed;
-                    opt_waves.alpha = getWaveRangeAlpha(a7, partPer);
-                    waveMod.update(geo_waves, opt_waves);
-                    // camera
-                    intervalCameraPos(camera, current_interval, partPer);
-                    camera.lookAt(mesh_torus.position);
+            let i_intensity = 0;
+            while(i_intensity < 2){ 
+                let high_intensity = i_intensity % 2 === 0;
+                if(!INTERVAL_HIGH_START){
+                    high_intensity = !high_intensity;
                 }
-            });
+                const r = high_intensity ? rx : ry;
+                const interval_part_secs = INTERVAL_SECS / (rx + ry) * r;
+                // DEBUG
+                console.log(interval_part_secs)
+                // push the seq object
+                opt_seq.objects.push({
+                    secs: interval_part_secs,
+                    data: {
+                        i: i2,
+                        high_intensity: high_intensity
+                    },
+                    update: function(seq, partPer, partBias, partSinBias, obj){
+                        let current_interval = 1 + obj.data.i;
+                        let a1 = (seq.partFrame + 1) / seq.partFrameMax;
+                        const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
+
+                        const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
+
+                        const n = total_interval_secs - total_interval_secs * a3;
+                        count_interval.visible = true;
+                        count_interval_max.visible = true;
+                        mesh_forward_slash.visible = true;
+                        // elapse color for time torus mesh
+                        const color_elapsed = new THREE.Color(0, 1, 1);
+                        if(obj.data.high_intensity){
+                            color_elapsed.setRGB(1, 0, 0)
+                        }
+                        countDown.set( count_interval_max, INTERVAL_COUNT);
+                        if(THUM_MODE){
+                            current_interval = INTERVAL_COUNT;
+                            setOpacity(count_interval, 1);
+                            setOpacity(count_interval_max, 1);
+                            setOpacity(mesh_forward_slash, 1);
+                            updateTimeTorus(mesh_torus, 1, color_elapsed);
+                        }else{
+                            let a4 = 0; // COUNT INTERVAL OPACITY
+                            if(n <= TRANS_SECS ){
+                                a4 = 1 - n / TRANS_SECS;
+                            }
+                            setOpacity(count_interval, 1 - a4);
+                            setOpacity(count_interval_max, 1 - a4);
+                            setOpacity(mesh_forward_slash, 1 - a4);
+                            updateTimeTorus(mesh_torus, a1, color_elapsed);
+                        }
+                        countDown.set( count_interval, current_interval);
+                        let a7 = 0;
+                        if(obj.data.high_intensity){
+                            a7 = 1;
+                            a7 = 0.5 + 0.5 * seq.getSinBias(1) * (partPer * 0.5);
+                        }else{
+                            a7 = 0;
+                        }
+                        mesh_waves.material.color = color_elapsed;
+                        opt_waves.alpha = getWaveRangeAlpha(a7, partPer);
+                        waveMod.update(geo_waves, opt_waves);
+                        // camera
+                        intervalCameraPos(camera, current_interval, partPer);
+                        camera.lookAt(mesh_torus.position);
+                    }
+                });
+                i_intensity += 1;
+            }
             i2 += 1;
         }
         //-------- ----------
