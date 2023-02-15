@@ -21,8 +21,8 @@ VIDEO.init = function(sm, scene, camera){
 
     const INTERVAL_SECS = 30;                        // SECONDS PER INTERVAL (HIGH AND LOW TIME)
     const INTERVAL_COUNT = 3;                        // COUNT OF INTERVALS
-    const INTERVAL_RATIO = new THREE.Vector2(1, 1);  // RATIO OF TIME FOR HIGH TO LOW
-    const INTERVAL_HIGH_START = false;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
+    const INTERVAL_RATIO = new THREE.Vector2(1, 2);  // RATIO OF TIME FOR HIGH TO LOW
+    const INTERVAL_HIGH_START = true;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
 
     const SECS_COOLDOWN = 20;                        // COOL DOWN TIME
 
