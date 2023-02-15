@@ -108,7 +108,8 @@ VIDEO.init = function(sm, scene, camera){
         );
     };
     // set the camera position based on current interval
-    const intervalCameraPos = (cam, current_interval, a1) => {
+    const intervalCameraPos = (cam, i_interval, i_intensity, a1) => {
+        const current_interval = i_interval + 1;
         const curve = new THREE.CurvePath();
         const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
         const m = ( current_interval % 2 === 0 ? -1 : 1 );
@@ -390,7 +391,7 @@ VIDEO.init = function(sm, scene, camera){
                         opt_waves.alpha = getWaveRangeAlpha(a7, partPer);
                         waveMod.update(geo_waves, opt_waves);
                         // camera
-                        intervalCameraPos(camera, current_interval, partPer);
+                        intervalCameraPos(camera, obj.data.i, obj.data.i_intensity, partPer);
                         camera.lookAt(mesh_torus.position);
                     }
                 });
