@@ -286,7 +286,7 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects.push({
             secs: DELAY_SECS,
             update: function(seq, partPer, partBias, partSinBias, obj){
-				const color_elapsed = new THREE.Color(1,1,1);
+                const color_elapsed = new THREE.Color(1,1,1);
                 // DELAY COUNTER
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;
@@ -308,7 +308,7 @@ VIDEO.init = function(sm, scene, camera){
                 countDown.set(count_delay, delay);
                 opt_waves.alpha = getWaveAlpha(partPer);
                 waveMod.update(geo_waves, opt_waves);
-				mesh_waves.material.color = color_elapsed;
+                mesh_waves.material.color = color_elapsed;
                 // camera
                 const v1 = new THREE.Vector3(8,8,8);
                 const v2 = new THREE.Vector3(0, 2, 8);
@@ -323,15 +323,28 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
+
+            let high_intensity = i2 % 2 === 0;
+            if(!INTERVAL_HIGH_START){
+                high_intensity = !high_intensity;
+            }
+            
+
+            //const r = INTERVAL_RATIO['x'] : INTERVAL_RATIO['y'];
+            //const interval_part_secs = 
+
             opt_seq.objects.push({
                 secs: INTERVAL_SECS,
+//                  secs: 
+
+
                 data: {
                     i: i2
                 },
                 update: function(seq, partPer, partBias, partSinBias, obj){
                     let current_interval = 1 + obj.data.i;
                     let a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                    const high_intensity = current_interval % 2 === 0;
+                    //const high_intensity = current_interval % 2 === 0;
                     //const a2 = obj.data.i / INTERVAL_COUNT;
                     const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
                     const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
@@ -363,17 +376,17 @@ VIDEO.init = function(sm, scene, camera){
                     }
                     countDown.set( count_interval, current_interval);
                     //const a5 = 0.25 * a3;
-					//const a6 = 0.75 + 0.25 * a3;
-					let a7 = 0;
+                    //const a6 = 0.75 + 0.25 * a3;
+                    let a7 = 0;
                     if(high_intensity){
-						a7 = 1;
-						a7 = 0.5 + 0.5 * seq.getSinBias(1) * (partPer * 0.5);
+                        a7 = 1;
+                        a7 = 0.5 + 0.5 * seq.getSinBias(1) * (partPer * 0.5);
                         //a7 = THREE.MathUtils.lerp(a5, a6, 1 - partPer);
                     }else{
-						a7 = 0;
-						//a7 = THREE.MathUtils.lerp(a6, a5, 1 - partPer)
-					}
-					mesh_waves.material.color = color_elapsed;
+                        a7 = 0;
+                        //a7 = THREE.MathUtils.lerp(a6, a5, 1 - partPer)
+                    }
+                    mesh_waves.material.color = color_elapsed;
                     opt_waves.alpha = getWaveRangeAlpha(a7, partPer);
                     waveMod.update(geo_waves, opt_waves);
                     // camera
