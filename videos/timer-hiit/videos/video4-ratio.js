@@ -325,6 +325,7 @@ VIDEO.init = function(sm, scene, camera){
         while( i2 < INTERVAL_COUNT ){
             const rx = INTERVAL_RATIO['x'];
             const ry = INTERVAL_RATIO['y'];
+            const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
             let i_intensity = 0;
             while(i_intensity < 2){ 
                 let high_intensity = i_intensity % 2 === 0;
@@ -340,22 +341,24 @@ VIDEO.init = function(sm, scene, camera){
                     secs: interval_part_secs,
                     data: {
                         i: i2,
-                        high_intensity: high_intensity
+                        i_intensity: i_intensity,
+                        high: high_intensity
                     },
                     update: function(seq, partPer, partBias, partSinBias, obj){
                         let current_interval = 1 + obj.data.i;
+
                         let a1 = (seq.partFrame + 1) / seq.partFrameMax;
-                        const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
 
-                        const total_interval_secs = INTERVAL_SECS * INTERVAL_COUNT;
+                        //const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
+//const a3 = (obj.data.i - obj.data.i_intensity + a1) / INTERVAL_COUNT;
 
-                        const n = total_interval_secs - total_interval_secs * a3;
+
                         count_interval.visible = true;
                         count_interval_max.visible = true;
                         mesh_forward_slash.visible = true;
                         // elapse color for time torus mesh
                         const color_elapsed = new THREE.Color(0, 1, 1);
-                        if(obj.data.high_intensity){
+                        if(obj.data.high){
                             color_elapsed.setRGB(1, 0, 0)
                         }
                         countDown.set( count_interval_max, INTERVAL_COUNT);
@@ -366,10 +369,25 @@ VIDEO.init = function(sm, scene, camera){
                             setOpacity(mesh_forward_slash, 1);
                             updateTimeTorus(mesh_torus, 1, color_elapsed);
                         }else{
-                            let a4 = 0; // COUNT INTERVAL OPACITY
+                            let a4 = 0;
+
+
+
+//console.log(obj.data.i, obj.data.i_intensity, '/', INTERVAL_COUNT);
+
+//console.log(a3, n);
+
+if(obj.data.i + obj.data.i_intensity === INTERVAL_COUNT){
+
+                            const a3 = (obj.data.i + a1) / INTERVAL_COUNT;
+                            const n = total_interval_secs - total_interval_secs * a3;
+
                             if(n <= TRANS_SECS ){
                                 a4 = 1 - n / TRANS_SECS;
                             }
+
+}
+
                             setOpacity(count_interval, 1 - a4);
                             setOpacity(count_interval_max, 1 - a4);
                             setOpacity(mesh_forward_slash, 1 - a4);
@@ -377,7 +395,7 @@ VIDEO.init = function(sm, scene, camera){
                         }
                         countDown.set( count_interval, current_interval);
                         let a7 = 0;
-                        if(obj.data.high_intensity){
+                        if(obj.data.high){
                             a7 = 1;
                             a7 = 0.5 + 0.5 * seq.getSinBias(1) * (partPer * 0.5);
                         }else{

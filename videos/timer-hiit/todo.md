@@ -2,12 +2,15 @@
 
 ## (  ) - video4-ratio.js
 * (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time
-* () I should be able to adjust the amount of time with an INTERVAL-RATIO setting
-* () INTERVAL-RATIO setting can be a THREE.Vector2
+* (done) I should be able to adjust the amount of time with an INTERVAL-RATIO setting
+* (done) INTERVAL-RATIO setting can be a THREE.Vector2
+* (done) HAVE a INTERVAL-START-HIGH setting that is a boolen that when true will result in each interval starting high rather than low
+* (done) fix transtion isshue so that it happens when the full set on intervals are over
+
+* () fix camera looping so that it goes by the part of the current interval, rather than the current interval
 
 * () there should be a warm up part to the video that comes after the delay part
 * () each interval should then start with high intensity exercise
-* () HAVE a INTERVAL-START-HIGH setting that is a boolen that when true will result in each interval starting high rather than low
 
 * () have the direction of the waves change with each interval
 
