@@ -1,5 +1,8 @@
 # timer-hiit
 
+## (  ) - video5
+* () If I lean more about clipping I might choose to fix the waves.
+
 ## (  ) - video4-ratio.js
 * (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time
 * (done) I should be able to adjust the amount of time with an INTERVAL-RATIO setting

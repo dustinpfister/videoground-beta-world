@@ -237,7 +237,13 @@ VIDEO.init = function(sm, scene, camera){
             degree: 45, alpha: 0
         };
         const geo_waves = waveMod.create(opt_waves);
-        const material_waves = new THREE.MeshPhongMaterial({ transparent: true, opacity: 0.75});
+        const material_waves = new THREE.MeshPhongMaterial({
+            transparent: true, 
+            opacity: 0.75,
+            // IF I WANT ONE SIDE OF A WAVE TO RENDER AND ANOTHEER NOT TO, THAT MIGHT BE A CLIPING ISSHUE RATHER THAN BLEDNING
+            //blending: THREE.CustomBlending, //THREE.NoBlending
+            //blendSrc: THREE.SrcAlphaSaturateFactor
+        });
         const mesh_waves = new THREE.Mesh(geo_waves, material_waves);
         mesh_waves.position.y = -5;
         scene.add(mesh_waves);
