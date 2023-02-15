@@ -1,6 +1,17 @@
 # timer-hiit
 
-## () - video3-waves.js
+## (  ) - video4-ratio.js
+* (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time
+* () I should be able to adjust the amount of time with an INTERVAL-RATIO setting
+* () INTERVAL-RATIO setting can be a THREE.Vector2
+
+* () there should be a warm up part to the video that comes after the delay part
+* () each interval should then start with high intensity exercise
+* () HAVE a INTERVAL-START-HIGH setting that is a boolen that when true will result in each interval starting high rather than low
+
+* () have the direction of the waves change with each interval
+
+## ( done 02/15/2023 ) - video3-waves.js
 * (done) add the r1 of the wave module from threejs-examples-waves
 * (done) start a sinwave to the scene by using the wave module to create a geometry.
 * (done) go with a mesh object and the Phong material for the waves
@@ -10,8 +21,6 @@
 * (done) fix wave jump problem when going switching between high and low intensity
 * (done) have the color of the wave mesh change from interval to interval
 * (done) have the color of the wave mesh change for count down and cool down parts
-
-* () have the direction of the waves change with each interval
 
 ## ( done 02/14/2023 ) - video2-camera.js
 * (done) start a video2-camera.js file where I will just be working out some logic for camera movement
