@@ -15,16 +15,20 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // SETTINGS AND COST VALUES
     // ---------- ----------
-    const DELAY_SECS = 10;                 // NUMBER OF SECONDS FOR THE DELAY
+    const DELAY_SECS = 10;                           // NUMBER OF SECONDS FOR THE DELAY
 
-    const INTERVAL_SECS = 15;              // SECONDS PER INTERVAL
-    const INTERVAL_COUNT = 4;              // COUNT OF INTERVALS
-    
+    const WARMUP_SECS = 30;                          // NUMBER OF SECONDS FOR A WARM UP PART
 
-    const SECS_COOLDOWN = 20;              // COOL DOWN TIME
-    const THUM_MODE = false;               // SET VIDEO INTO THUM MODE
-    const THUM_FRAMES = 100;               // number of frames when in THUM MODE
-    const TRANS_SECS = 5;                  // NUMBER OF SECONDS FOR AND OPACITY CHANGE
+    const INTERVAL_SECS = 30;                        // SECONDS PER INTERVAL (HIGH AND LOW TIME)
+    const INTERVAL_COUNT = 3;                        // COUNT OF INTERVALS
+    const INTERVAL_RATIO = new THREE.Vector2(1, 1);  // RATIO OF TIME FOR HIGH TO LOW ( OR LOW TO HIGH IF INTERVAL_HIGH_START = false)
+    const INTERVAL_HIGH_START = true;                // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
+
+    const SECS_COOLDOWN = 20;                        // COOL DOWN TIME
+
+    const THUM_MODE = false;                         // SET VIDEO INTO THUM MODE
+    const THUM_FRAMES = 100;                         // number of frames when in THUM MODE
+    const TRANS_SECS = 5;                            // NUMBER OF SECONDS FOR AND OPACITY CHANGE
     const CAMERA_LOOPS_MIN = 1;
     const CAMERA_LOOPS_MAX = 2;
     const WAVE_LOOPS_MIN = 4;
