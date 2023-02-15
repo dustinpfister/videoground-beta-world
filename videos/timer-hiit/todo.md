@@ -6,8 +6,7 @@
 * (done) INTERVAL-RATIO setting can be a THREE.Vector2
 * (done) HAVE a INTERVAL-START-HIGH setting that is a boolen that when true will result in each interval starting high rather than low
 * (done) fix transition issue so that it happens when the full set on intervals are over
-
-* () fix camera looping so that it goes by the part of the current interval, rather than the current interval
+* (done) fix camera looping so that it goes by the part of the current interval, rather than the current interval
 
 * () there should be a warm up part to the video that comes after the delay part
 * () each interval should then start with high intensity exercise

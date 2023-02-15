@@ -112,7 +112,7 @@ VIDEO.init = function(sm, scene, camera){
         const current_interval = i_interval + 1;
         const curve = new THREE.CurvePath();
         const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
-        const m = ( current_interval % 2 === 0 ? -1 : 1 );
+        const m = ( (i_intensity + 1) % 2 === 0 ? -1 : 1 );
         const x = 4.0 * m;
         const dx1 = 0.0 * m;
         const dx2 = 2.0 * m;
