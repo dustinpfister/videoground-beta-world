@@ -4,13 +4,15 @@
 * (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time
 * (done) I should be able to adjust the amount of time with an INTERVAL-RATIO setting
 * (done) INTERVAL-RATIO setting can be a THREE.Vector2
-* (done) HAVE a INTERVAL-START-HIGH setting that is a boolen that when true will result in each interval starting high rather than low
+* (done) HAVE a INTERVAL-START-HIGH setting that is a Boolen that when true will result in each interval starting high rather than low
 * (done) fix transition issue so that it happens when the full set on intervals are over
 * (done) fix camera looping so that it goes by the part of the current interval, rather than the current interval
 
 * () there should be a warm up part to the video that comes after the delay part
-* () each interval should then start with high intensity exercise
-* () have the direction of the waves change with each interval
+* () have the direction of the waves change with each interval over time by way of wave update option setting
+
+<!-- LOOK -->
+* () canvas textures for waves
 
 <!-- CODE READABILTY -->
 * () have a trans effect helper
