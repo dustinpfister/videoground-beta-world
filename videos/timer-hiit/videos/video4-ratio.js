@@ -338,7 +338,15 @@ VIDEO.init = function(sm, scene, camera){
         opt_seq.objects.push({
             secs: WARMUP_SECS,
             update: function(seq, partPer, partBias, partSinBias, obj){
-                const color_elapsed = new THREE.Color(1,1,1);
+                const color_elapsed = new THREE.Color( 1, 1, 1);
+                color_elapsed.r = 1 - partPer;
+                color_elapsed.g = 1 - partPer;
+                color_elapsed.b = 1;
+                if(INTERVAL_HIGH_START){
+                    color_elapsed.r = 1;
+                    color_elapsed.g = 1 - partPer;
+                    color_elapsed.b = 1 - partPer;
+                }
                 // DELAY COUNTER
                 count_delay.visible = true;
                 const a1 = (seq.partFrame + 1) / seq.partFrameMax;

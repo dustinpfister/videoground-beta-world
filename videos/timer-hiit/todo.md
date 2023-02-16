@@ -16,6 +16,7 @@
 * (done) canvas textures for waves
 * (done) higher poly torus
 * (done) there should be a warm up part to the video that comes after the delay part
+* (done) white to blue or red color in warm up part depeding on INTERVAL-HIGH-START setting
 <!-- CODE READABILTY -->
 * () have a trans effect helper
 
