@@ -1,7 +1,9 @@
 # timer-hiit
 
 ## (  ) - video5
-* () If I lean more about clipping I might choose to fix the waves.
+<!-- LOOK -->
+* () have the direction of the waves change with each interval over time by way of wave update option setting
+* () wave height should change over time with higher waves for high intensity parts of intervals
 
 ## (  ) - video4-ratio.js
 * (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time
@@ -13,11 +15,7 @@
 * (done) transparent material for waves
 * (done) canvas textures for waves
 * (done) higher poly torus
-<!-- FUNCTION -->
-* () there should be a warm up part to the video that comes after the delay part
-<!-- LOOK -->
-* () have the direction of the waves change with each interval over time by way of wave update option setting
-
+* (done) there should be a warm up part to the video that comes after the delay part
 <!-- CODE READABILTY -->
 * () have a trans effect helper
 

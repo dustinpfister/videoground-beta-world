@@ -21,7 +21,7 @@ VIDEO.init = function(sm, scene, camera){
     const INTERVAL_COUNT = 3;                        // COUNT OF INTERVALS
     const INTERVAL_SECS = 30;                        // SECONDS PER INTERVAL (HIGH AND LOW TIME)
     const INTERVAL_RATIO = new THREE.Vector2(1, 2);  // RATIO OF TIME FOR HIGH TO LOW
-    const INTERVAL_HIGH_START = false;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
+    const INTERVAL_HIGH_START = true;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
     const WARMUP_SECS = 30;                          // NUMBER OF SECONDS FOR A WARM UP PART
     const SECS_COOLDOWN = 20;                        // COOL DOWN TIME
     const DELAY_SECS = 10;                           // NUMBER OF SECONDS FOR THE DELAY
@@ -333,7 +333,41 @@ VIDEO.init = function(sm, scene, camera){
             }
         });
         //-------- ----------
-        // SEQ 1 - X Intervals
+        // SEQ 1 - WARM UP
+        //-------- ----------
+        opt_seq.objects.push({
+            secs: WARMUP_SECS,
+            update: function(seq, partPer, partBias, partSinBias, obj){
+                const color_elapsed = new THREE.Color(1,1,1);
+                // DELAY COUNTER
+                count_delay.visible = true;
+                const a1 = (seq.partFrame + 1) / seq.partFrameMax;
+                const n = WARMUP_SECS - WARMUP_SECS * a1;
+                let delay = Math.floor(n) % 60;
+                if(THUM_MODE){ // if in thum mode
+                    delay = WARMUP_SECS;
+                    updateTimeTorus(mesh_torus, 1, color_elapsed );
+                    setOpacity(count_delay, 1);
+                }else{   // if not in thum mode
+                    let a2 = 0;  // COUNT DELAY OPACITY
+                    if(delay <= TRANS_SECS ){
+                        a2 = 1 - n / TRANS_SECS;
+                    }
+                    updateTimeTorus(mesh_torus, a1, color_elapsed );
+                    setOpacity(count_delay, 1 - a2);
+                }
+                // always
+                countDown.set(count_delay, delay);
+                opt_waves.alpha = getWaveAlpha(partPer);
+                waveMod.update(geo_waves, opt_waves);
+                mesh_waves.material.color = color_elapsed;
+                // camera
+                camera.position.set(0, 2, 8);
+                camera.lookAt( mesh_torus.position);
+            }
+        });
+        //-------- ----------
+        // SEQ 2 - X Intervals
         //-------- ----------
         let i2 = 0;
         while( i2 < INTERVAL_COUNT ){
