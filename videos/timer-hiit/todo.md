@@ -4,6 +4,8 @@
 <!-- LOOK -->
 * () have the direction of the waves change with each interval over time by way of wave update option setting
 * () wave height should change over time with higher waves for high intensity parts of intervals
+<!-- NUMS DAE FILE -->
+* () I will want a new cd5-nums.dae, and and updated depth 256 skin that will include a forward slash
 
 ## (  ) - video4-ratio.js
 * (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time
@@ -18,8 +20,8 @@
 * (done) there should be a warm up part to the video that comes after the delay part
 * (done) white to blue or red color in warm up part depeding on INTERVAL-HIGH-START setting
 <!-- CODE READABILTY -->
+* (done) have a textures section, and have both canvas textures there
 * () have a trans effect helper
-
 
 ## ( done 02/15/2023 ) - video3-waves.js
 * (done) add the r1 of the wave module from threejs-examples-waves

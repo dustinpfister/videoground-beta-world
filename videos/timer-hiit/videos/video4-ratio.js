@@ -1,5 +1,7 @@
 // video4-ratio.js for timer-hiit
 //      * Can set a ratio to adjust high to low time for each interval
+//      * delay part, warm up part, intervals part, and then a cool down part
+//      * canvas textures, and trasparent material for waves
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -137,7 +139,7 @@ VIDEO.init = function(sm, scene, camera){
         return a1 * d  % 1;
     };
     //-------- ----------
-    // BACKGROUND
+    // TEXTURES
     //-------- ----------
     const canObj_bg = canvasMod.create({
         size: 512,
@@ -148,7 +150,15 @@ VIDEO.init = function(sm, scene, camera){
     });
     // can use LZString to compress and decompress
     //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
-    // I want to repeat the texture
+    const canObj_waves = canvasMod.create({
+        size: 512,
+        draw: 'rnd',
+        palette: ['#ffffff', '#aaaaaa', '#888888'],
+        state: { gSize: 64 }
+    });
+    //-------- ----------
+    // BACKGROUND
+    //-------- ----------
     const texture = canObj_bg.texture;
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -241,12 +251,6 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ---------
         // WAVE MESH
         //-------- ---------
-        const canObj_waves = canvasMod.create({
-            size: 512,
-            draw: 'rnd',
-            palette: ['#ffffff', '#aaaaaa', '#888888'],
-            state: { gSize: 64 }
-        });
         const opt_waves = {
             waveHeight: 1.75,
             width: 100, height: 100,
