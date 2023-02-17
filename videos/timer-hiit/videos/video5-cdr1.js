@@ -1,14 +1,12 @@
-// video4-ratio.js for timer-hiit
-//      * Can set a ratio to adjust high to low time for each interval
-//      * delay part, warm up part, intervals part, and then a cool down part
-//      * canvas textures, and transparent material for waves
+// video5-dcr1.js for timer-hiit
+//      * using count-down.js r1
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
-   //'../../../js/curve/r1/curve.js',
+   //'../../../js/curve/r1/curve.js',    // worked out my own helpers for curves
    '../../../js/count-down/r0/count-down.js',
    '../../../js/dae-helper/r0/dae-helper.js',
    '../../../js/waves/r1/waves.js'
