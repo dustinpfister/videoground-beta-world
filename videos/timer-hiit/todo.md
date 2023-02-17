@@ -1,8 +1,8 @@
 # timer-hiit
 
 ## (  ) - video5-cdr1.js
+* (done) see about updating to count-down.js R1
 <!-- FUNCITON -->
-* () see about updating to count-down.js R1
 * () see about having a seconds display for the interval part as well.
 <!-- LOOK -->
 * () have trans in as well as trans out effects

@@ -7,7 +7,7 @@ VIDEO.scripts = [
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
    //'../../../js/curve/r1/curve.js',    // worked out my own helpers for curves
-   '../../../js/count-down/r0/count-down.js',
+   '../../../js/count-down/r1/count-down.js',
    '../../../js/dae-helper/r0/dae-helper.js',
    '../../../js/waves/r1/waves.js'
 ];
@@ -66,7 +66,7 @@ VIDEO.init = function(sm, scene, camera){
         const pos = geometry_torus.getAttribute('position');
         const data_color = [];
         while(ci < pos.count){
-            data_color.push(0,0,0)
+            data_color.push(0,0,0);
             ci += 1;
         }
         geometry_torus.setAttribute('color', new THREE.Float32BufferAttribute(data_color, 3));
@@ -180,14 +180,7 @@ VIDEO.init = function(sm, scene, camera){
     })
     .then( (scene_source) => {
         console.log('DAE FILES LOADED');
-        // STILL NEED TO DO THIS IF I AM USING count-down.js R0
-        const SOURCE_OBJECTS = {};
-        let i = 0;
-        while(i < 10){
-            const key = 'num_' + i;
-            SOURCE_OBJECTS[i] =  scene_source.getObjectByName(key);
-             i += 1;
-        }
+        
         //-------- ----------
         // TIME GROUP
         //-------- ----------
@@ -198,27 +191,27 @@ VIDEO.init = function(sm, scene, camera){
         // count delay count down object
         const count_delay = countDown.create({
             countID: 'delay',
-            digits: 2,
+            digitCount: 2,
             width: 1,
-            source_objects: SOURCE_OBJECTS
+            scene_source: scene_source
         });
         count_delay.position.set(0, 0, 0);
         count_wrap.add(count_delay);
         // interval count
         const count_interval = countDown.create({
             countID: 'interval',
-            digits: 2,
+            digitCount: 2,
             width: 1,
-            source_objects: SOURCE_OBJECTS
+            scene_source: scene_source
         });
         count_interval.position.set(-1.75, 0, 0);
         count_wrap.add(count_interval);
         // interval max count
         const count_interval_max = countDown.create({
             countID: 'interval_max',
-            digits: 2,
+            digitCount: 2,
             width: 1,
-            source_objects: SOURCE_OBJECTS
+            scene_source: scene_source
         });
         count_interval_max.position.set(1.75, 0, 0);
         count_wrap.add(count_interval_max);
@@ -229,9 +222,9 @@ VIDEO.init = function(sm, scene, camera){
         // frame counter
         const count_frames = countDown.create({
             countID: 'frames',
-            digits: 6,
+            digitCount: 6,
             width: 1.4,
-            source_objects: SOURCE_OBJECTS
+            scene_source: scene_source
         });
         count_frames.scale.set(0.5, 0.5, 0.5);
         count_frames.position.set(0, -2.0, 0);
