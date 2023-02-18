@@ -2,6 +2,33 @@
 
 <!-- WHATS NEXT -->
 
+## ( ) - timer-hiit
+* () finish video5-cdr1.js
+* () make first video a 5 minute workout
+* () 35 * 6 + 60 + 30 = 300
+* () 2:3 ratio for 35 sec intervals (14 sec high, 21 sec low)
+
+```
+var getPerIntervalSecs = (min, sec, intervals, warmSecs, coolSecs) => {
+    intervals = intervals === undefined ? 3 : intervals;
+    warmSecs = warmSecs === undefined ? 3 : warmSecs;
+    coolSecs = coolSecs === undefined ? 3 : coolSecs;
+    var totalSecs = min * 60 + sec;
+    var totalIntervalSecs = totalSecs - warmSecs - coolSecs;
+    return totalIntervalSecs / intervals;
+};
+
+var getHighLowSecs = (min, sec, intervals, warmSecs, coolSecs, ratio) => {
+    ratio = ratio || [1,1];
+    var perIntervalSecs = getPerIntervalSecs(min, sec, intervals, warmSecs, coolSecs);
+    var sum = ratio[0] + ratio[1];
+    return ratio.map( (n) => {
+        return perIntervalSecs / sum * n;
+    });
+};
+```
+
+
 ## ( ) - timer-basic - make a 3 second video
 * () make a 3 seconds video with video3.js
 
@@ -11,10 +38,6 @@
 ## () - timer-hum - make a 10 sec video
 * () make a 10 second video with timer hum
 
-## () - timer-hiit - video4-ratio.js
-* (done) start video file for timer-hiit where I focus on setting what the ratio is between high intensity and cool down
-* (done) I should be able to set the ratio for the number of seconds for the high intensity part compared to low intensity 
-* () this will need a new warm up part after the delay part
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
@@ -30,6 +53,11 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 02/16/2023 ) - timer-hiit - video4-ratio.js
+* (done) start video file for timer-hiit where I focus on setting what the ratio is between high intensity and cool down
+* (done) I should be able to set the ratio for the number of seconds for the high intensity part compared to low intensity 
+* (done) this will need a new warm up part after the delay part
 
 ## ( done 02/14/2023 ) - timer-hiit - start a High-intensity interval training video file folder
 * (done) start a new video file project where the goal is to just have a decent hiit timer
