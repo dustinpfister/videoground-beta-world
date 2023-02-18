@@ -195,7 +195,7 @@ VIDEO.init = function(sm, scene, camera){
             width: 1,
             scene_source: scene_source
         });
-        count_delay.position.set(0, 0, 0);
+        count_delay.position.set(0, -0.25, 0);
         count_wrap.add(count_delay);
         // interval count
         const count_interval = countDown.create({
@@ -204,7 +204,12 @@ VIDEO.init = function(sm, scene, camera){
             width: 1,
             scene_source: scene_source
         });
-        count_interval.position.set(-1.75, 0, 0);
+
+const INTERVAL_COUNT_YPOS = 1.4;
+
+count_interval.position.set(-0.9, INTERVAL_COUNT_YPOS, 0);
+count_interval.scale.set(0.5, 0.5, 0.5);
+
         count_wrap.add(count_interval);
         // interval max count
         const count_interval_max = countDown.create({
@@ -213,12 +218,24 @@ VIDEO.init = function(sm, scene, camera){
             width: 1,
             scene_source: scene_source
         });
-        count_interval_max.position.set(1.75, 0, 0);
+
+count_interval_max.position.set(0.9, INTERVAL_COUNT_YPOS, 0);
+count_interval_max.scale.set(0.5, 0.5, 0.5);
+
+
         count_wrap.add(count_interval_max);
         // forward slash
         const mesh_forward_slash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 1), new THREE.MeshPhongMaterial());
         mesh_forward_slash.rotation.z = Math.PI * 1.90;
+
+mesh_forward_slash.position.set(0,INTERVAL_COUNT_YPOS, 0)
+mesh_forward_slash.scale.set(0.5, 0.5, 0.5);
+
+
         count_wrap.add(mesh_forward_slash);
+
+
+
         // frame counter
         const count_frames = countDown.create({
             countID: 'frames',
@@ -390,13 +407,16 @@ VIDEO.init = function(sm, scene, camera){
                     data: {
                         i: i2,
                         i_intensity: i_intensity,
-                        high: high_intensity
+                        high: high_intensity,
                     },
                     update: function(seq, partPer, partBias, partSinBias, obj){
                         let current_interval = 1 + obj.data.i;
                         let a1 = (seq.partFrame + 1) / seq.partFrameMax;
                         count_interval.visible = true;
                         count_interval_max.visible = true;
+
+count_delay.visible = true;
+
                         mesh_forward_slash.visible = true;
                         // elapse color for time torus mesh
                         const color_elapsed = new THREE.Color(0, 1, 1);
@@ -427,6 +447,11 @@ VIDEO.init = function(sm, scene, camera){
                             updateTimeTorus(mesh_torus, a1, color_elapsed);
                         }
                         countDown.set( count_interval, current_interval);
+
+const n = obj.secs - obj.secs * a1;
+let delay = Math.floor(n) % 60;
+countDown.set(count_delay, delay + 1);
+
                         let a7 = 0;
                         if(obj.data.high){
                             a7 = 1;
