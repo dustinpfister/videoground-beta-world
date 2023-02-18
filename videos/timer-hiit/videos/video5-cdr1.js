@@ -18,12 +18,12 @@ VIDEO.init = function(sm, scene, camera){
     // ---------- ----------
     // HIIT SETTINGS
     // 3 Intervals, 30 seconds each, with a 1:2 ratio - timer hiit
-    const INTERVAL_COUNT = 3;                        // COUNT OF INTERVALS
+    const INTERVAL_COUNT = 7;                        // COUNT OF INTERVALS
     const INTERVAL_SECS = 30;                        // SECONDS PER INTERVAL (HIGH AND LOW TIME)
-    const INTERVAL_RATIO = new THREE.Vector2(1, 2);  // RATIO OF TIME FOR HIGH TO LOW
+    const INTERVAL_RATIO = new THREE.Vector2(2, 3);  // RATIO OF TIME FOR HIGH TO LOW
     const INTERVAL_HIGH_START = true;               // START WITH HIGH OR LOW EXERCISE FOR EACH INTERVAL
-    const WARMUP_SECS = 30;                          // NUMBER OF SECONDS FOR A WARM UP PART
-    const SECS_COOLDOWN = 20;                        // COOL DOWN TIME
+    const WARMUP_SECS = 60;                          // NUMBER OF SECONDS FOR A WARM UP PART
+    const SECS_COOLDOWN = 30;                        // COOL DOWN TIME
     const DELAY_SECS = 10;                           // NUMBER OF SECONDS FOR THE DELAY
     // other settings
     const THUM_MODE = false;                         // SET VIDEO INTO THUM MODE
