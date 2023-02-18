@@ -1,14 +1,15 @@
 # timer-hiit
 
-## (  ) - video5-cdr1.js
-* (done) see about updating to count-down.js R1
-* (done) see about having a seconds display for the interval part as well.
-<!-- LOOK -->
+## ( ) - video6-newlook.js
 * () have trans in as well as trans out effects
 * () have a scale effect for the numbers as well.
 * () have the direction of the waves change with each interval over time by way of wave update option setting
 * () wave height should change over time with higher waves for high intensity parts of intervals
 * () see about more than one canvas texture for the waves, one updates over time and the background does not
+
+## ( ) - video5-cdr1.js
+* (done) see about updating to count-down.js R1
+* (done) see about having a seconds display for the interval part as well.
 <!-- NUMS DAE FILE -->
 * () I will want a new cd5-nums.dae, and and updated depth 256 skin that will include a forward slash
 
