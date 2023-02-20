@@ -36,7 +36,7 @@ VIDEO.init = function(sm, scene, camera){
     // OTHER CONSTS THAT I MIGHT NOT NEED TO CHANGE
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
-    const URL_DAE_NUMS = '../../../dae/count_down_basic/cd4-nums.dae';
+    const URL_DAE_NUMS = '../../../dae/count_down_basic/cd5-nums.dae';
     const URL_DAE_NUMS_RESOURCE = '../../../dae/count_down_basic/skins/depth_256/';
     // ---------- ----------
     // LIGHT
@@ -224,9 +224,14 @@ count_interval_max.scale.set(0.5, 0.5, 0.5);
 
 
         count_wrap.add(count_interval_max);
+
+
         // forward slash
-        const mesh_forward_slash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 1), new THREE.MeshPhongMaterial());
-        mesh_forward_slash.rotation.z = Math.PI * 1.90;
+        //const mesh_forward_slash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 1), new THREE.MeshPhongMaterial());
+
+const mesh_forward_slash = scene_source.getObjectByName('slash');
+
+        //mesh_forward_slash.rotation.z = Math.PI * 1.90;
 
 mesh_forward_slash.position.set(0,INTERVAL_COUNT_YPOS, 0)
 mesh_forward_slash.scale.set(0.5, 0.5, 0.5);

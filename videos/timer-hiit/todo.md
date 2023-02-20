@@ -7,11 +7,10 @@
 * () wave height should change over time with higher waves for high intensity parts of intervals
 * () see about more than one canvas texture for the waves, one updates over time and the background does not
 
-## ( ) - video5-cdr1.js
+## ( done 02/20/2023 ) - video5-cdr1.js
 * (done) see about updating to count-down.js R1
 * (done) see about having a seconds display for the interval part as well.
-<!-- NUMS DAE FILE -->
-* () I will want a new cd5-nums.dae, and and updated depth 256 skin that will include a forward slash
+* (done) I will want a new cd5-nums.dae, and and updated depth 256 skin that will include a forward slash
 
 ## ( done 02/16/2023 ) - video4-ratio.js
 * (done) start a video4-ratio file where I will be fixing some core problems with the ratio of time

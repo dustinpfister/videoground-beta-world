@@ -3,7 +3,7 @@
 <!-- WHATS NEXT -->
 
 ## ( ) - timer-hiit
-* () finish video5-cdr1.js
+* (done) finish video5-cdr1.js
 * () make first video a 5 minute workout
 * () 35 * 6 + 60 + 30 = 300
 * () 2:3 ratio for 35 sec intervals (14 sec high, 21 sec low)
