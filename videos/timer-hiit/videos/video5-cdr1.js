@@ -1,5 +1,6 @@
 // video5-dcr1.js for timer-hiit
 //      * using count-down.js r1
+//      * using cd5-nums-dae file with slash object
 // scripts
 VIDEO.scripts = [
    // CORE MODULES
@@ -33,6 +34,7 @@ VIDEO.init = function(sm, scene, camera){
     const CAMERA_LOOPS_MAX = 2;
     const WAVE_LOOPS_MIN = 4;
     const WAVE_LOOPS_MAX = 10;
+    const INTERVAL_COUNT_YPOS = 1.4;
     // OTHER CONSTS THAT I MIGHT NOT NEED TO CHANGE
     const FPS = 30;                                                      // FRAMES PER SECOND
     // DAE FILES FOR NUMS AND OTHER OBJECTS
@@ -180,7 +182,6 @@ VIDEO.init = function(sm, scene, camera){
     })
     .then( (scene_source) => {
         console.log('DAE FILES LOADED');
-        
         //-------- ----------
         // TIME GROUP
         //-------- ----------
@@ -192,7 +193,7 @@ VIDEO.init = function(sm, scene, camera){
         const count_delay = countDown.create({
             countID: 'delay',
             digitCount: 2,
-            width: 1,
+            width: 1.1,
             scene_source: scene_source
         });
         count_delay.position.set(0, -0.25, 0);
@@ -201,46 +202,27 @@ VIDEO.init = function(sm, scene, camera){
         const count_interval = countDown.create({
             countID: 'interval',
             digitCount: 2,
-            width: 1,
+            width: 1.1,
             scene_source: scene_source
         });
-
-const INTERVAL_COUNT_YPOS = 1.4;
-
-count_interval.position.set(-0.9, INTERVAL_COUNT_YPOS, 0);
-count_interval.scale.set(0.5, 0.5, 0.5);
-
+        count_interval.position.set(-0.9, INTERVAL_COUNT_YPOS, 0);
+        count_interval.scale.set(0.5, 0.5, 0.5);
         count_wrap.add(count_interval);
         // interval max count
         const count_interval_max = countDown.create({
             countID: 'interval_max',
             digitCount: 2,
-            width: 1,
+            width: 1.1,
             scene_source: scene_source
         });
-
-count_interval_max.position.set(0.9, INTERVAL_COUNT_YPOS, 0);
-count_interval_max.scale.set(0.5, 0.5, 0.5);
-
-
+        count_interval_max.position.set(0.9, INTERVAL_COUNT_YPOS, 0);
+        count_interval_max.scale.set(0.5, 0.5, 0.5);
         count_wrap.add(count_interval_max);
-
-
         // forward slash
-        //const mesh_forward_slash = new THREE.Mesh(new THREE.BoxGeometry(0.5, 2, 1), new THREE.MeshPhongMaterial());
-
-const mesh_forward_slash = scene_source.getObjectByName('slash');
-
-        //mesh_forward_slash.rotation.z = Math.PI * 1.90;
-
-mesh_forward_slash.position.set(0,INTERVAL_COUNT_YPOS, 0)
-mesh_forward_slash.scale.set(0.5, 0.5, 0.5);
-
-
+        const mesh_forward_slash = scene_source.getObjectByName('slash');
+        mesh_forward_slash.position.set(0,INTERVAL_COUNT_YPOS, 0);
+        mesh_forward_slash.scale.set(0.5, 0.5, 0.5);
         count_wrap.add(mesh_forward_slash);
-
-
-
         // frame counter
         const count_frames = countDown.create({
             countID: 'frames',
