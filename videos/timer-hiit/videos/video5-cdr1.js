@@ -401,9 +401,7 @@ VIDEO.init = function(sm, scene, camera){
                         let a1 = (seq.partFrame + 1) / seq.partFrameMax;
                         count_interval.visible = true;
                         count_interval_max.visible = true;
-
-count_delay.visible = true;
-
+                        count_delay.visible = true;
                         mesh_forward_slash.visible = true;
                         // elapse color for time torus mesh
                         const color_elapsed = new THREE.Color(0, 1, 1);
@@ -417,6 +415,7 @@ count_delay.visible = true;
                             setOpacity(count_interval_max, 1);
                             setOpacity(mesh_forward_slash, 1);
                             updateTimeTorus(mesh_torus, 1, color_elapsed);
+                            countDown.set(count_delay, obj.secs);
                         }else{
                             // transition effect
                             let a4 = 0;
@@ -432,13 +431,11 @@ count_delay.visible = true;
                             setOpacity(mesh_forward_slash, 1 - a4);
                             // update the time torus
                             updateTimeTorus(mesh_torus, a1, color_elapsed);
+                            const n = obj.secs - obj.secs * a1;
+                            let delay = Math.floor(n) % 60;
+                            countDown.set(count_delay, delay + 1);
                         }
                         countDown.set( count_interval, current_interval);
-
-const n = obj.secs - obj.secs * a1;
-let delay = Math.floor(n) % 60;
-countDown.set(count_delay, delay + 1);
-
                         let a7 = 0;
                         if(obj.data.high){
                             a7 = 1;

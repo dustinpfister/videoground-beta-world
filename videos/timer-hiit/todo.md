@@ -7,6 +7,9 @@
 * () wave height should change over time with higher waves for high intensity parts of intervals
 * () see about more than one canvas texture for the waves, one updates over time and the background does not
 
+## ( done 02/21/2023 ) - video5-cdr1.js thum mode fixed
+* (done) the number of secs for each high or low part is what will be displayed for each interval part in thum mode
+
 ## ( done 02/20/2023 ) - video5-cdr1.js
 * (done) see about updating to count-down.js R1
 * (done) see about having a seconds display for the interval part as well.
