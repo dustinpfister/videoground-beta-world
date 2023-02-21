@@ -1,4 +1,4 @@
-// video5-dcr1.js for timer-hiit
+// video5-cdr1.js for timer-hiit
 //      * using count-down.js r1
 //      * using cd5-nums-dae file with slash object
 // scripts
