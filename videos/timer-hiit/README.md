@@ -2,6 +2,14 @@
 
 This is a timer video project where I would like to make timer videos that help with the process of [High-intensity interval training](https://en.wikipedia.org/wiki/High-intensity_interval_training).
 
+<div align="center">
+    <a href="https://www.youtube.com/watch?v=5nccUYq6sRg">
+        <img src="https://img.youtube.com/vi/5nccUYq6sRg/0.jpg" style="width:50%;">
+    </a><br>
+    <p>
+        First HIIT TIMER video using video5-cdr1.js
+    </p>
+</div>
 
 ## What is HIIT?
 
