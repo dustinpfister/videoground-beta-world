@@ -5,6 +5,7 @@
 ## ( ) - breathing-basic - video1 started
 * () start a new collection of videos that has to do with controled breathing
 * () readme and todo list
+* () start a template8-breathing template
 * () video1.core.js started
 
 ## ( ) - timer-train - make a 10 sec video
