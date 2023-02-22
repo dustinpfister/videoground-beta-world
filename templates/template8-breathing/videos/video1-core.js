@@ -6,6 +6,36 @@ VIDEO.scripts = [
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
+
+    // create curve Path helper
+    const createCurvePath = (count) => {
+        const cp = new THREE.CurvePath();
+        let i = 0;
+        while(i < count){
+            const v_start = new THREE.Vector3();
+            const radian = Math.PI * 2 * (i / count);
+            const x = Math.cos(radian) * 3;
+            const y = Math.sin(radian) * 3;
+            const v_end = new THREE.Vector3(x,y,0);
+            const curve = new THREE.LineCurve3(v_start, v_end);
+            cp.add(curve);
+            i += 1;
+        }
+        return cp;
+    };
+
+const cp = createCurvePath(10);
+
+
+    const geometry_sphere = new THREE.SphereGeometry(0.5, 20, 20);
+
+    const mesh = new THREE.Mesh(geometry_sphere);
+
+    mesh.position.copy(cp.getPoint(0.1))
+
+    scene.add(mesh);
+
+
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
     //-------- ----------
@@ -33,6 +63,9 @@ VIDEO.init = function(sm, scene, camera){
         beforeObjects: function(seq){
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
+
+mesh.position.copy(cp.getPoint(seq.per))
+
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
