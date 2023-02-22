@@ -23,19 +23,36 @@ VIDEO.init = function(sm, scene, camera){
         }
         return cp;
     };
+    const createMeshGroup = (count) => {
+        const group = new THREE.Group();
+        const geometry_sphere = new THREE.SphereGeometry(0.125, 20, 20);
+        let i = 0;
+        while(i < count){
+            const mesh = new THREE.Mesh(geometry_sphere);
+            group.add(mesh);
+            i += 1;
+        }
+        return group;
+    };
 
-const cp = createCurvePath(10);
+const updateMeshGroup = (group, cp, alpha) => {
 
+const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
+group.children.forEach( (mesh, i, arr) => {
+    const a_child = i / arr.length;
+    const index_curve = Math.floor( cp.curves.length * a_child );
+    const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
+    const a_point2 = 0.2 + 0.8 * a_point1;
+    mesh.position.copy( cp.curves[index_curve].getPoint(a_point2) );
+});
 
-    const geometry_sphere = new THREE.SphereGeometry(0.5, 20, 20);
-
-    const mesh = new THREE.Mesh(geometry_sphere);
-
-    mesh.position.copy(cp.getPoint(0.1))
-
-    scene.add(mesh);
-
-
+};
+    //-------- ----------
+    // Curve Path, and Group used for breath circle
+    //-------- ----------
+    const cp = createCurvePath(10);
+    const group = createMeshGroup(100);
+    scene.add(group);
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
     //-------- ----------
@@ -63,9 +80,8 @@ const cp = createCurvePath(10);
         beforeObjects: function(seq){
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
-
-mesh.position.copy(cp.getPoint(seq.per))
-
+            // update the mesh group
+            updateMeshGroup(group, cp, seq.per * 32 % 1)
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
