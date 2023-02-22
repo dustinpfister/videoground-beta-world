@@ -2,11 +2,8 @@
 
 <!-- WHATS NEXT -->
 
-## ( ) - breathing-basic - video1 started
-* () start a new collection of videos that has to do with controled breathing
-* () readme and todo list
-* () start a template8-breathing template
-* () video1.core.js started
+## (  ) - breathing-basic - finish video1.js
+* () finish video1 for breahing-basic
 
 ## ( ) - timer-train - make a 10 sec video
 * () make a 10 second video with video5-angles.js
@@ -35,6 +32,12 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 02/22/2023 ) - breathing-basic - video1 started
+* (done) start a new collection of videos that has to do with controled breathing
+* (done) readme and todo list
+* (done) start a template8-breathing template
+* (done) video1.core.js started
 
 ## ( done 02/21/2023 ) - timer-hiit - video5 done, first video
 * (done) finish video5-cdr1.js
