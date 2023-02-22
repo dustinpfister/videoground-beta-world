@@ -2,42 +2,23 @@
 
 <!-- WHATS NEXT -->
 
-## ( ) - timer-hiit
-* (done) finish video5-cdr1.js
-* () make first video a 5 minute workout
-* () 35 * 6 + 60 + 30 = 300
-* () 2:3 ratio for 35 sec intervals (14 sec high, 21 sec low)
-
-```
-var getPerIntervalSecs = (min, sec, intervals, warmSecs, coolSecs) => {
-    intervals = intervals === undefined ? 3 : intervals;
-    warmSecs = warmSecs === undefined ? 3 : warmSecs;
-    coolSecs = coolSecs === undefined ? 3 : coolSecs;
-    var totalSecs = min * 60 + sec;
-    var totalIntervalSecs = totalSecs - warmSecs - coolSecs;
-    return totalIntervalSecs / intervals;
-};
-
-var getHighLowSecs = (min, sec, intervals, warmSecs, coolSecs, ratio) => {
-    ratio = ratio || [1,1];
-    var perIntervalSecs = getPerIntervalSecs(min, sec, intervals, warmSecs, coolSecs);
-    var sum = ratio[0] + ratio[1];
-    return ratio.map( (n) => {
-        return perIntervalSecs / sum * n;
-    });
-};
-```
-
-
-## ( ) - timer-basic - make a 3 second video
-* () make a 3 seconds video with video3.js
+## ( ) - breathing-basic - video1 started
+* () start a new collection of videos that has to do with controled breathing
+* () readme and todo list
+* () video1.core.js started
 
 ## ( ) - timer-train - make a 10 sec video
 * () make a 10 second video with video5-angles.js
 
+## ( ) - timer-hiit - 1:1 5 minue video, start video6
+* () start video6 js file
+* () make a new video with video5-cdr1.js that is also 5 minutes but with a 1:1 ratio
+
+## ( ) - timer-basic - make a 3 second video
+* () make a 3 seconds video with video3.js
+
 ## () - timer-hum - make a 10 sec video
 * () make a 10 second video with timer hum
-
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
@@ -53,6 +34,10 @@ var getHighLowSecs = (min, sec, intervals, warmSecs, coolSecs, ratio) => {
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 02/21/2023 ) - timer-hiit - video5 done, first video
+* (done) finish video5-cdr1.js
+* (done) make first video a 5 minute workout
 
 ## ( done 02/16/2023 ) - timer-hiit - video4-ratio.js
 * (done) start video file for timer-hiit where I focus on setting what the ratio is between high intensity and cool down
