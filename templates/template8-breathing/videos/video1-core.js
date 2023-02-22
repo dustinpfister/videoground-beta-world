@@ -6,7 +6,15 @@ VIDEO.scripts = [
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
-
+    //-------- ----------
+    // SETTINGS
+    //-------- ----------
+    const BREATH_SECS = 60;
+    const BREATHS_PER_MINUTE = 5;
+    const DELAY_SECS = 10;
+    //-------- ----------
+    // HELPER FUNCTIONS
+    //-------- ----------
     // create curve Path helper
     const createCurvePath = (count) => {
         const cp = new THREE.CurvePath();
@@ -25,7 +33,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     const createMeshGroup = (count) => {
         const group = new THREE.Group();
-        const geometry_sphere = new THREE.SphereGeometry(0.125, 20, 20);
+        const geometry_sphere = new THREE.SphereGeometry(0.1, 20, 20);
         let i = 0;
         while(i < count){
             const mesh = new THREE.Mesh(geometry_sphere);
@@ -34,19 +42,18 @@ VIDEO.init = function(sm, scene, camera){
         }
         return group;
     };
-
-const updateMeshGroup = (group, cp, alpha) => {
-
-const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
-group.children.forEach( (mesh, i, arr) => {
-    const a_child = i / arr.length;
-    const index_curve = Math.floor( cp.curves.length * a_child );
-    const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
-    const a_point2 = 0.2 + 0.8 * a_point1;
-    mesh.position.copy( cp.curves[index_curve].getPoint(a_point2) );
-});
-
-};
+    const updateMeshGroup = (group, cp, alpha) => {
+        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
+        group.children.forEach( (mesh, i, arr) => {
+            const a_child = i / arr.length;
+            const index_curve = Math.floor( cp.curves.length * a_child );
+            const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
+            const a_point2 = 0.2 + 0.8 * a_point1;
+            mesh.position.copy( cp.curves[index_curve].getPoint(a_point2) );
+            const s = 2 - (1 - a_point1) * 1.5;
+            mesh.scale.set(s, s, s);
+        });
+    };
     //-------- ----------
     // Curve Path, and Group used for breath circle
     //-------- ----------
@@ -90,15 +97,12 @@ group.children.forEach( (mesh, i, arr) => {
     };
     // SEQ 0 - ...
     opt_seq.objects[0] = {
-        secs: 10,
+        secs: DELAY_SECS,
         update: function(seq, partPer, partBias){
             updateMeshGroup(group, cp, 0);
             camera.lookAt(0, 0, 0);
         }
     };
-    const BREATH_SECS = 60;
-    const BREATHS_PER_MINUTE = 5;
-
     // SEQ 1 - ...
     opt_seq.objects[1] = {
         secs: BREATH_SECS,
