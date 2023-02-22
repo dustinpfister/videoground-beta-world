@@ -81,7 +81,7 @@ group.children.forEach( (mesh, i, arr) => {
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
             // update the mesh group
-            updateMeshGroup(group, cp, seq.per * 32 % 1)
+            updateMeshGroup(group, cp, 0);
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
@@ -90,10 +90,24 @@ group.children.forEach( (mesh, i, arr) => {
     };
     // SEQ 0 - ...
     opt_seq.objects[0] = {
-        secs: 30,
+        secs: 10,
         update: function(seq, partPer, partBias){
-            // camera
-            //camera.position.set(-8, 4, -8);
+            updateMeshGroup(group, cp, 0);
+            camera.lookAt(0, 0, 0);
+        }
+    };
+    const BREATH_SECS = 60;
+    const BREATHS_PER_MINUTE = 5;
+
+    // SEQ 1 - ...
+    opt_seq.objects[1] = {
+        secs: BREATH_SECS,
+        update: function(seq, partPer, partBias){
+
+            const sec = BREATH_SECS * partPer;
+            const a1 = (sec % 60 / 60) * BREATHS_PER_MINUTE % 1;
+
+            updateMeshGroup(group, cp, a1);
             camera.lookAt(0, 0, 0);
         }
     };
