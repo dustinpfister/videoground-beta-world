@@ -38,7 +38,8 @@ VIDEO.init = function(sm, scene, camera){
     const URL_DAE_LANDSCAPE_RESOURCE = '../../../dae/trainset/skins/landscape-1-detail/';
     // TRAIN SETTINGS
     const TRAIN_Y_ADJUST = new THREE.Vector3(0,0,0);
-    const TRAIN_LAPS = 8 * ( ( SECS_COUNT_DOWN + SECS_ALARM ) / 60 );
+    const TRAIN_LAPS_PER_MINUTE = 8;
+    const TRAIN_LAPS = TRAIN_LAPS_PER_MINUTE * ( ( SECS_COUNT_DOWN + SECS_ALARM ) / 60 );
     const TRAIN_CARS = [0,0,0,0,0,0,0,0,0,1];
     const TRAIN_SPACING = 0.19;
     // CAMERA SETTING
