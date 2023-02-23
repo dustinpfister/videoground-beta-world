@@ -1,6 +1,6 @@
 # timer-train
 
-I would like to make another timer video, this time with a train that moves around in a little world
+I would like to make another timer video, this time with a train that moves around in a little world. I now have a better system for making this kind of project that does not involve making just a single geometry. So when it comes to any addtional video file revisions it will likley just be minor stuff.
 
 ## TRAIN SOUND VIDEOS
 
