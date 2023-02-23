@@ -1,5 +1,6 @@
 // video6-transnums.js - from timer-train - videoground-beta-world project
 //        * now using count-down.js r1 and dae-helper.js r0
+//        * numbers are not transparent
 //        
 // scripts
 VIDEO.scripts = [
@@ -42,6 +43,8 @@ VIDEO.init = function(sm, scene, camera){
     const TRAIN_SPACING = 0.19;
     // CAMERA SETTING
     const CAMERA_FIXED_TO_FOLLOW_RATE = 2.25;
+    // NUMS
+    const NUM_OPACITY = 0.6;
     //-------- ----------
     // TRAIN HELPERS
     //-------- ----------
@@ -120,8 +123,13 @@ VIDEO.init = function(sm, scene, camera){
         ],
         cloner : (obj_source, scene_source, scene_result, result) => {
             if(obj_source.type === 'Mesh'){
-                const obj = obj_source.clone()
+                const obj = obj_source.clone();
                 obj.position.set(0,0,0);
+                const name_parts = obj.name.split('_');
+                if(name_parts[0]=== 'num' || name_parts[0]=== 'colon'){
+                    obj.material.transparent = true;
+                    obj.material.opacity = NUM_OPACITY;
+                }
                 scene_source.add(obj);
             }
         }
