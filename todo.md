@@ -7,10 +7,11 @@
 * () finish video1 for breahing-basic
 
 ## ( ) - timer-train - make a 1 minute video
-* () make a 1 minute video with video5-angles.js
+* () finish video6-transnums.js
+* () make a 1 minute video with video6-transnums.js
 
 ## ( ) - timer-train - make a 10 sec video
-* () make a 10 second video with video5-angles.js
+* () make a 10 second video with video5-transnums.js
 
 ## ( ) - timer-hiit - 1:1 5 minue video, start video6
 * () start video6 js file
