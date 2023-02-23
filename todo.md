@@ -2,8 +2,6 @@
 
 <!-- WHATS NEXT -->
 
-## ( ) - timer-train - make a 2 minute video
-* () make a 2 minute video with video5-angles.js
 
 ## (  ) - breathing-basic - finish video1.js
 * () finish video1 for breahing-basic
@@ -38,6 +36,9 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 02/23/2023) - timer-train - make a 2 minute video
+* (done) make a 2 minute video with video5-angles.js
 
 ## ( done 02/22/2023 ) - breathing-basic - video1 started
 * (done) start a new collection of videos that has to do with controled breathing

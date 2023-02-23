@@ -1,12 +1,14 @@
 # timer-train todo list
 
+## () - video6-transnums.js
+* () transparent numbers
+* () add more landscape objects
 
-## () - video5-angles.js
+## ( done 02/10/2023 ) - video5-angles.js
 * (done) start video5 angles file
 * (done) seq hook object for more than one cam angle that wil be used for count down seq object of main seq object
-* () solid textures for train
-* () update count-down.js to r1 of the module if done
-
+* (done) solid textures for train
+* (done) update count-down.js to r1 of the module if done
 
 ## ( done 02/01/2023 ) - video4-landscape.js - trees, houses
 * (done) start a landscape dae file that will have objects that compose houses and other such objects
