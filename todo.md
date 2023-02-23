@@ -2,8 +2,14 @@
 
 <!-- WHATS NEXT -->
 
+## ( ) - timer-train - make a 2 minute video
+* () make a 2 minute video with video5-angles.js
+
 ## (  ) - breathing-basic - finish video1.js
 * () finish video1 for breahing-basic
+
+## ( ) - timer-train - make a 1 minute video
+* () make a 1 minute video with video5-angles.js
 
 ## ( ) - timer-train - make a 10 sec video
 * () make a 10 second video with video5-angles.js
