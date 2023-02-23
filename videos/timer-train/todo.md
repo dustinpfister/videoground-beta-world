@@ -1,6 +1,7 @@
 # timer-train todo list
 
 ## () - video6-transnums.js
+* (done) use count down r1, and dae helper r0
 * () transparent numbers
 * () add more landscape objects
 
