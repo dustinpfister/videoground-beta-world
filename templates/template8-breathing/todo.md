@@ -4,12 +4,10 @@
 * (done) start a new video file where the focus is on the delay part of the video project
 * (done) start with new logic where we are just moving the spheres during the delay part
 * (done) use cubic bezier curve 3 in place of line curve for the createCurvePath helper
+* (done) the start point for the control points can be the same outcome as line curve
 
-* () the start point for the control points can be the same outcome as line curve
-
+* () mutation of control points over time in update mesh group helper
 * () work out a nice starting example for control point deltas
-
-
 * () use phong material when making mesh objects in createMeshGroup
 * () add a directional light
 
