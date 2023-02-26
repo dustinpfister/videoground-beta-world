@@ -2,7 +2,12 @@
 
 ## () video2-delay.js
 * (done) start a new video file where the focus is on the delay part of the video project
-* () start with new logic where we are just moving the spheres in a circle
+* (done) start with new logic where we are just moving the spheres during the delay part
+
+* () use cubic bezier curve 3 in place of line curve for the createCurvePath helper
+* () use phong material when making mesh objects in createMeshGroup
+* () add a directional light
+
 * () make dae-helper r0, and count-down.js r1 part of the stack
 * () have a single count down object for the delay part
 

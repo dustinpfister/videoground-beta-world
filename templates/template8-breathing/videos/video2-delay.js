@@ -31,6 +31,7 @@ VIDEO.init = function(sm, scene, camera){
         }
         return cp;
     };
+    // create a mesh group of spheres
     const createMeshGroup = (count) => {
         const group = new THREE.Group();
         const geometry_sphere = new THREE.SphereGeometry(0.1, 20, 20);
@@ -42,6 +43,7 @@ VIDEO.init = function(sm, scene, camera){
         }
         return group;
     };
+    // update a given mesh group with the given curve path and an alpha value
     const updateMeshGroup = (group, cp, alpha) => {
         const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
         group.children.forEach( (mesh, i, arr) => {
@@ -99,7 +101,7 @@ VIDEO.init = function(sm, scene, camera){
     opt_seq.objects[0] = {
         secs: DELAY_SECS,
         update: function(seq, partPer, partBias){
-            updateMeshGroup(group, cp, 0);
+            updateMeshGroup(group, cp, 0.5 - 0.5 * partPer);
             camera.lookAt(0, 0, 0);
         }
     };
