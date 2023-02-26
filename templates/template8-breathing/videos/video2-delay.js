@@ -25,7 +25,11 @@ VIDEO.init = function(sm, scene, camera){
             const x = Math.cos(radian) * 3;
             const y = Math.sin(radian) * 3;
             const v_end = new THREE.Vector3(x,y,0);
-            const curve = new THREE.LineCurve3(v_start, v_end);
+
+const v_c1 = v_start.clone().lerp(v_end, 0.25).add( new THREE.Vector3() );
+const v_c2 = v_start.clone().lerp(v_end, 0.75);
+
+            const curve = new THREE.CubicBezierCurve3(v_start, v_c1, v_c2, v_end);
             cp.add(curve);
             i += 1;
         }
