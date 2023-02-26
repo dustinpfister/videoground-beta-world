@@ -1,5 +1,4 @@
-// video1-core.js from template8-breathing
-//        * core idea of this kind of video project working
+// video2-delay.js from template8-breathing
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -96,7 +95,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ 0 - ...
+    // SEQ 0 - DELAY PART
     opt_seq.objects[0] = {
         secs: DELAY_SECS,
         update: function(seq, partPer, partBias){
@@ -104,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(0, 0, 0);
         }
     };
-    // SEQ 1 - ...
+    // SEQ 1 - BREATH
     opt_seq.objects[1] = {
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
