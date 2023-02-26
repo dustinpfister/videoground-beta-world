@@ -5,9 +5,10 @@
 * (done) start with new logic where we are just moving the spheres during the delay part
 * (done) use cubic bezier curve 3 in place of line curve for the createCurvePath helper
 * (done) the start point for the control points can be the same outcome as line curve
+* (done) mutation of control points over time in update mesh group helper
 
-* () mutation of control points over time in update mesh group helper
-* () work out a nice starting example for control point deltas
+* () work out a nice starting example for control point deltas in update mesh group helper
+
 * () use phong material when making mesh objects in createMeshGroup
 * () add a directional light
 

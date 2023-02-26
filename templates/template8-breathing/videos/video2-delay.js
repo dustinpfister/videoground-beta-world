@@ -56,9 +56,11 @@ VIDEO.init = function(sm, scene, camera){
             const index_curve = Math.floor( cp.curves.length * a_child );
             const curve = cp.curves[index_curve];
 
+curve.v1.x = 3 - 3 * a2;
+
 if(i === 0){
 
-console.log(curve.v1.x, curve.v1.y, curve.v1.z)
+//console.log(curve.v1.x, curve.v1.y, curve.v1.z)
 
 }
 
