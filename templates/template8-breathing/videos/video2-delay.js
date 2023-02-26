@@ -47,13 +47,24 @@ VIDEO.init = function(sm, scene, camera){
     };
     // update a given mesh group with the given curve path and an alpha value
     const updateMeshGroup = (group, cp, alpha) => {
+        // main alpha used to get a bias alpha
         const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
+        
+        // update control points and set positions for each mesh object
         group.children.forEach( (mesh, i, arr) => {
             const a_child = i / arr.length;
             const index_curve = Math.floor( cp.curves.length * a_child );
+            const curve = cp.curves[index_curve];
+
+if(i === 0){
+
+console.log(curve.v1.x, curve.v1.y, curve.v1.z)
+
+}
+
             const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
             const a_point2 = 0.2 + 0.8 * a_point1;
-            mesh.position.copy( cp.curves[index_curve].getPoint(a_point2) );
+            mesh.position.copy( curve.getPoint(a_point2) );
             const s = 2 - (1 - a_point1) * 1.5;
             mesh.scale.set(s, s, s);
         });
@@ -91,8 +102,6 @@ VIDEO.init = function(sm, scene, camera){
         beforeObjects: function(seq){
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
-            // update the mesh group
-            updateMeshGroup(group, cp, 0);
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
