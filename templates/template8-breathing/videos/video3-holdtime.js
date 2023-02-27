@@ -139,50 +139,43 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
     // SEQ 1 - BREATH
+    const keys = 'restLow,breathIn,restHigh,breathOut'.split(',');
+    const BREATH_ALPHA_TARGETS = keys.reduce((acc, key, i, arr) => {
+        let a = BREATH_PARTS[ key ];
+        if(i > 0){
+            a += acc[i - 1]
+        }
+        acc.push( a );
+        return acc;
+    }, []).map((n)=>{
+        return n / BREATH_PARTS_SUM;
+    });
     opt_seq.objects[0] = {
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
-
-
-const keys = 'restLow,breathIn,restHigh,breathOut'.split(',');
-const alpha_targets = keys.reduce((acc, key, i, arr) => {
-   let a = BREATH_PARTS[ key ];
-   if(i > 0){
-      a += acc[i - 1]
-   }
-   acc.push( a );
-   return acc;
-}, []).map((n)=>{
-    return n / BREATH_PARTS_SUM;
-});
-
-
-let ki = 0;
-while(ki < keys.length){
-    if(a1 < alpha_targets[ki]){
-        const a_base = ki > 0 ? alpha_targets[ki - 1] : 0;
-        const a_breathpart = (a1 - a_base) / (alpha_targets[ki] - a_base);
-
-        //console.log(keys[ki], a_breathpart.toFixed(2));
-        if(keys[ki] === 'restLow'){
-            BreathGroup.update(group, 0);
-        }
-        if(keys[ki] === 'restHigh'){
-            BreathGroup.update(group, 1);
-        }
-        if(keys[ki] === 'breathIn'){
-            BreathGroup.update(group, Math.sin(Math.PI * 0.5 * a_breathpart));
-        }
-        if(keys[ki] === 'breathOut'){
-            BreathGroup.update(group, 1 - Math.sin(Math.PI * 0.5 * a_breathpart));
-        }
-
-        break;
-    }
-    ki += 1;;
-}
+            let ki = 0;
+            while(ki < keys.length){
+                if(a1 < BREATH_ALPHA_TARGETS[ki]){
+                    const a_base = ki > 0 ? BREATH_ALPHA_TARGETS[ki - 1] : 0;
+                    const a_breathpart = (a1 - a_base) / (BREATH_ALPHA_TARGETS[ki] - a_base);
+                    if(keys[ki] === 'restLow'){
+                        BreathGroup.update(group, 0);
+                    }
+                    if(keys[ki] === 'restHigh'){
+                        BreathGroup.update(group, 1);
+                    }
+                    if(keys[ki] === 'breathIn'){
+                        BreathGroup.update(group, Math.sin(Math.PI * 0.5 * a_breathpart));
+                    }
+                    if(keys[ki] === 'breathOut'){
+                        BreathGroup.update(group, 1 - Math.sin(Math.PI * 0.5 * a_breathpart));
+                    }
+                    break;
+                }
+                ki += 1;;
+            }
             //BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }
