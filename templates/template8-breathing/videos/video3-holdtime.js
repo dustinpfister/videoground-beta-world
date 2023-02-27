@@ -1,5 +1,4 @@
-// video2-curves.js from template8-breathing
-//    * using a new breath module prototype
+// video3-holdtime.js from template8-breathing
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -8,10 +7,12 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
-    // SETTINGS
+    // CONST VALUES
     //-------- ----------
     const BREATH_SECS = 60 * 5;
-    const BREATHS_PER_MINUTE = 5;
+    const BREATH_PER_MINUTE = 5;
+    const BREATH_PARTS = {restLow: 1, breath: 3, restHigh: 1};
+    const BREATH_PARTS_SUM = Object.keys( BREATH_PARTS ).map( () => { return } );
     //-------- ----------
     // BREATH MESH GROUP
     //-------- ----------
@@ -142,7 +143,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
-            const a1 = (sec % 60 / 60) * BREATHS_PER_MINUTE % 1;
+            const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
             BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }

@@ -5,8 +5,13 @@
 * () make dae-helper r0, and count-down.js r1 part of the stack
 * () have a single count down object for the delay part
 
+## () video4-breathjs-r0.js
+* () make use of breath.js RO
+
 ## () video3-holdtime.js
-* () there should be at least some hold time for each breath
+* () there should be at least some hold time for each breath start with a BREATH-RATIO const
+* () the BREATH-RATIO const can be an array of numbers like { lowRest: 1, breath: 3, highRest: 1}
+* () The numbers in BREATH-RATIO are used to figure the amount of time for each part
 
 ## ( done 02/27/2023 ) video2-curves.js
 * (done) start a new video file where the focus is on the delay part of the video project
