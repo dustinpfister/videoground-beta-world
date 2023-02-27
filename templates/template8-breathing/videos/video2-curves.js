@@ -1,4 +1,4 @@
-// video2-delay.js from template8-breathing
+// video2-curves.js from template8-breathing
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -14,8 +14,77 @@ VIDEO.init = function(sm, scene, camera){
     const DELAY_SECS = 10;
     const RADIUS = 3;
     //-------- ----------
+    // BREATH MESH GROUP
+    //-------- ----------
+    const BreathGroup = {};
+
+    const getMeshName = (gud, index_curve, index_mesh) => {
+        return 'breath_id' + gud.id + '_curve' + index_curve + '_mesh' + index_mesh;
+    };
+
+    BreathGroup.update = (group, alpha) => {
+        const gud = group.userData;
+        let index_curve = 0;
+        while(index_curve < gud.curveCount){
+            const a_curve_index = index_curve / gud.curveCount;
+
+            let index_mesh = 0;
+            while(index_mesh < gud.meshPerCurve){
+                const name = getMeshName(gud, index_curve, index_mesh);
+                index_mesh += 1;
+            }
+            index_curve += 1;
+        };
+    };
+
+    // main create method
+    BreathGroup.create = (opt) => {
+        opt = opt || {};
+        const group = new THREE.Group();
+        const gud = group.userData;
+        gud.radius = opt.radius === undefined ? 3 : opt.radius;
+        gud.curveCount = opt.curveCount === undefined ? 10 : opt.curveCount;
+        gud.meshPerCurve = opt.meshPerCurve === undefined ? 5 : opt.meshPerCurve;
+        gud.curvePath = new THREE.CurvePath();
+        gud.id = opt.id || '1';
+        let index_curve = 0;
+        while(index_curve < gud.curveCount){
+            const a_curve_index = index_curve / gud.curveCount;
+            // add current curve
+            const e = new THREE.Euler();
+            e.y = Math.PI * 2 * a_curve_index;
+            const v_start = new THREE.Vector3();
+            const v_end = new THREE.Vector3();
+            const v_c1 = v_start.clone().lerp(v_end, 0.25);
+            const v_c2 = v_start.clone().lerp(v_end, 0.75);
+            const curve = new THREE.CubicBezierCurve3(v_start.clone(), v_c1, v_c2, v_end);
+            gud.curvePath.add(curve);
+            // add mesh objects for each curve
+            let index_mesh = 0;
+            const geometry = new THREE.SphereGeometry(0.1, 20, 20);
+            while(index_mesh < gud.meshPerCurve){
+                const mesh = new THREE.Mesh(geometry);
+                mesh.name = getMeshName(gud, index_curve, index_mesh);
+
+console.log(mesh.name);
+
+                group.add(mesh);
+                index_mesh += 1;
+            }
+            index_curve += 1;
+        };
+        BreathGroup.update(group, 0);
+        return group;
+    };
+
+
+const group = BreathGroup.create();
+scene.add(group);
+
+    //-------- ----------
     // HELPER FUNCTIONS
     //-------- ----------
+/*
     const getControlRadian = (i, count, deg, alpha) => {
         return Math.PI * 2 * (i / count) + Math.PI / 180 * (deg * alpha);
     };
@@ -97,6 +166,7 @@ VIDEO.init = function(sm, scene, camera){
     const cp = createCurvePath(8);
     const group = createMeshGroup(90);
     scene.add(group);
+*/
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
     //-------- ----------
@@ -134,7 +204,7 @@ VIDEO.init = function(sm, scene, camera){
     opt_seq.objects[0] = {
         secs: DELAY_SECS,
         update: function(seq, partPer, partBias){
-            updateMeshGroup(group, cp, 0.5 - 0.5 * partPer);
+            //updateMeshGroup(group, cp, 0.5 - 0.5 * partPer);
             camera.lookAt(0, 0, 0);
         }
     };
@@ -146,7 +216,7 @@ VIDEO.init = function(sm, scene, camera){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATHS_PER_MINUTE % 1;
 
-            updateMeshGroup(group, cp, a1);
+            //updateMeshGroup(group, cp, a1);
             camera.lookAt(0, 0, 0);
         }
     };
