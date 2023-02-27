@@ -21,7 +21,8 @@ VIDEO.init = function(sm, scene, camera){
     };
     // update curve control points and mesh object values
     BreathGroup.update = (group, alpha) => {
-        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
+        const a1 = 1 - Math.abs(0.5 - alpha) / 0.5;
+        const a2 = Math.sin(Math.PI * 0.5 * a1);
         const gud = group.userData;
         let index_curve = 0;
         while(index_curve < gud.curveCount){
@@ -37,7 +38,7 @@ VIDEO.init = function(sm, scene, camera){
             while(index_mesh < gud.meshPerCurve){
                 const name = getMeshName(gud, index_curve, index_mesh);
                 const mesh = group.getObjectByName(name);
-                const a_meshpos = index_mesh / gud.meshPerCurve * a2;
+                const a_meshpos = (index_mesh + 1) / gud.meshPerCurve * a2;
                 mesh.position.copy( curve.getPoint(a_meshpos) );
                 index_mesh += 1;
             }
@@ -51,7 +52,7 @@ VIDEO.init = function(sm, scene, camera){
         const gud = group.userData;
         gud.radiusMin = opt.radiusMin === undefined ? 0.50 : opt.radiusMin;
         gud.radiusMax = opt.radiusMax === undefined ? 2.80 : opt.radiusMax;
-        gud.curveCount = opt.curveCount === undefined ? 15 : opt.curveCount;
+        gud.curveCount = opt.curveCount === undefined ? 10 : opt.curveCount;
         gud.meshPerCurve = opt.meshPerCurve === undefined ? 10 : opt.meshPerCurve;
         gud.geometry = opt.geometry || new THREE.SphereGeometry(0.1, 20, 20);
         gud.curvePath = new THREE.CurvePath();
@@ -86,7 +87,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BREATH GROUP
     //-------- ----------
-    const group = BreathGroup.create();
+    const group = BreathGroup.create({ geometry: new THREE.BoxGeometry(0.1,0.1,0.1)});
     scene.add(group);
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
@@ -127,7 +128,7 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATHS_PER_MINUTE % 1;
-            BreathGroup.update(group, a1)
+            BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }
     };
