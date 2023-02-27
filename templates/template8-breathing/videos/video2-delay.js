@@ -20,18 +20,38 @@ VIDEO.init = function(sm, scene, camera){
         return Math.PI * 2 * (i / count) + Math.PI / 180 * (deg * alpha);
     };
     // set the control points for a curve
-    const setControlPoints = (curve, i, count, deg, alpha) => {
-        const radian = getControlRadian(i, count, deg, alpha);
+    const setControlPoints = (curve, i, count, deg1, deg2, alpha) => {
         const v_start = curve.v0.clone();
         const v_end = curve.v3.clone();
-        const v_delta = new THREE.Vector3();
 
-        const r1 = RADIUS * 0.25 * alpha;
-        const r2 = RADIUS * 0.75 * alpha;
-        v_delta.x = Math.cos(radian) * r1;
-        v_delta.y = Math.sin(radian) * r1;
-        curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
-        curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
+        let ci = 0;
+        while(ci < 2){
+            const deg = ci === 0 ? deg1 : deg2;
+            const cRadian = getControlRadian(i, count, deg, alpha);
+            const cRadius = (ci === 0 ? 0.25 : 0.75) * RADIUS * alpha;
+            const v = curve['v' + (ci + 1)];
+            v.x = Math.cos(cRadian) * cRadius;
+            v.y = Math.sin(cRadian) * cRadius;
+            ci += 1;
+        }
+
+
+        //const r1 = RADIUS * 0.25;
+        //const r2 = RADIUS * 0.75;
+
+        //const v_delta = new THREE.Vector3();
+
+        //const radian1 = getControlRadian(i, count, deg1, alpha);
+        //v_delta.x = 0;//Math.cos(radian1) * r1;
+        //v_delta.y = 0;//Math.sin(radian1) * r1;
+        //curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
+
+        //const radian2 = getControlRadian(i, count, deg2, alpha);
+        //v_delta.x = 0; //Math.cos(radian2) * r2;
+        //v_delta.y = 0; //Math.sin(radian2) * r2;
+        //curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
+
+        //curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
     };
     // create curve Path helper
     const createCurvePath = (count) => {
@@ -46,7 +66,7 @@ VIDEO.init = function(sm, scene, camera){
             const v_c1 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.25);
             const v_c2 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.75);
             const curve = new THREE.CubicBezierCurve3(v_start, v_c1, v_c2, v_end);
-            setControlPoints(curve, i, count, 90, 0);
+            setControlPoints(curve, i, count, 90, 90, 0);
             cp.add(curve);
             i += 1;
         }
@@ -74,11 +94,15 @@ VIDEO.init = function(sm, scene, camera){
             const a_child = i / count;
             const index_curve = Math.floor( cp.curves.length * a_child );
             const curve = cp.curves[index_curve];
-            setControlPoints(curve, i, count, 0, a2);
+
+
+            setControlPoints(curve, i, count, 0, 0, a2);
+
+
             const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
             const a_point2 = 0.2 + 0.8 * a_point1;
             mesh.position.copy( curve.getPoint(a_point2) );
-            const s = 2 - (1 - a_point1) * 1.5;
+            const s = 1 - (1 - a_point1) * 0.75;
             mesh.scale.set(s, s, s);
             i += 1;
         }
