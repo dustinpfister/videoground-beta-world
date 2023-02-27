@@ -16,6 +16,19 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // HELPER FUNCTIONS
     //-------- ----------
+    // set the control points for a curve
+    const setControlPoints = (curve, i, count, deg, alpha) => {
+        const radian = Math.PI * 2 * (i / count) + Math.PI / 180 * (90 * alpha);
+        const v_start = curve.v0.clone();
+        const v_end = curve.v3.clone();
+        const v_delta = new THREE.Vector3();
+        const r1 = RADIUS * 0.25 * alpha;
+        v_delta.x = Math.cos(radian) * r1;
+        v_delta.y = Math.sin(radian) * r1;
+        curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
+        curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
+    };
+
     // create curve Path helper
     const createCurvePath = (count) => {
         const cp = new THREE.CurvePath();
@@ -26,9 +39,11 @@ VIDEO.init = function(sm, scene, camera){
             const x = Math.cos(radian) * RADIUS;
             const y = Math.sin(radian) * RADIUS;
             const v_end = new THREE.Vector3(x,y,0);
-            const v_c1 = v_start.clone().lerp(v_end, 0.25);
-            const v_c2 = v_start.clone().lerp(v_end, 0.75);
+            const v_c1 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.25);
+            const v_c2 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.75);
             const curve = new THREE.CubicBezierCurve3(v_start, v_c1, v_c2, v_end);
+
+setControlPoints(curve, i, count, 90, 0);
             cp.add(curve);
             i += 1;
         }
@@ -57,26 +72,7 @@ VIDEO.init = function(sm, scene, camera){
             const index_curve = Math.floor( cp.curves.length * a_child );
             const curve = cp.curves[index_curve];
 
-const radian = Math.PI * 2 * (i / arr.length) + Math.PI / 180 * (90 * a2);
-//curve.v1.x = Math.cos(radian) * (RADIUS * 0.25);
-//curve.v1.y =  Math.sin(radian) * (RADIUS * 0.25);
-
-const v_start = curve.v0.clone();
-const v_end = curve.v3.clone();
-const v_delta = new THREE.Vector3();
-const r1 = RADIUS * 0.25 * a2;
-v_delta.x = Math.cos(radian) * r1;
-v_delta.y = Math.sin(radian) * r1;
-curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
-curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
-
-//curve.v1.x = 3 - 3 * a2;
-
-if(i === 0){
-
-//console.log(curve.v1.x, curve.v1.y, curve.v1.z)
-
-}
+setControlPoints(curve, i, arr.length, 90, a2);
 
             const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
             const a_point2 = 0.2 + 0.8 * a_point1;
