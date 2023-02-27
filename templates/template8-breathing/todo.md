@@ -9,9 +9,9 @@
 * () make use of breath.js RO
 
 ## () video3-holdtime.js
-* () there should be at least some hold time for each breath start with a BREATH-RATIO const
-* () the BREATH-RATIO const can be an array of numbers like { lowRest: 1, breath: 3, highRest: 1}
-* () The numbers in BREATH-RATIO are used to figure the amount of time for each part
+* (done) the BREATH-RATIO const can be a collection of numbers like {restLow: 1, breathIn: 3, restHigh: 1, breathOut: 3}
+* (done) have a way to get alpha targets array
+* (done) I will need to get the proper alpha values for each part
 
 ## ( done 02/27/2023 ) video2-curves.js
 * (done) start a new video file where the focus is on the delay part of the video project

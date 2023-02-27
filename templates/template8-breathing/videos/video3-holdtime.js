@@ -146,36 +146,37 @@ VIDEO.init = function(sm, scene, camera){
             const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
 
 
-let keys = 'restLow,breathIn,restHigh,breathOut'.split(',');
+const keys = 'restLow,breathIn,restHigh,breathOut'.split(',');
+const alpha_targets = keys.reduce((acc, key, i, arr) => {
+   let a = BREATH_PARTS[ key ];
+   if(i > 0){
+      a += acc[i - 1]
+   }
+   acc.push( a );
+   return acc;
+}, []).map((n)=>{
+    return n / BREATH_PARTS_SUM;
+});
+
+
 let ki = 0;
 while(ki < keys.length){
+    if(a1 < alpha_targets[ki]){
+        const a_base = ki > 0 ? alpha_targets[ki - 1] : 0;
+        const a_breathpart = (a1 - a_base) / (alpha_targets[ki] - a_base);
 
-    const value = BREATH_PARTS[ keys[ki] ];
-    console.log( value / BREATH_PARTS_SUM );
+        //console.log(keys[ki], a_breathpart.toFixed(2));
+        if(keys[ki] === 'restLow'){
+            BreathGroup.update(group, 0);
+        }
+        if(keys[ki] === 'restHigh'){
+            BreathGroup.update(group, 1);
+        }
 
+        break;
+    }
     ki += 1;;
 }
-
-/*
-const n1 = BREATH_PARTS.restLow / BREATH_PARTS_SUM;
-const n2 = BREATH_PARTS.breathIn / BREATH_PARTS_SUM;
-const n3 = BREATH_PARTS.restHigh / BREATH_PARTS_SUM;
-const n4 = BREATH_PARTS.breathOut / BREATH_PARTS_SUM;
-
-if(a1 < n1){
-    BreathGroup.update(group, 0);
-    console.log('low rest part');
-}
-if(a1 > n1 && a1 < n2 + n1){
-    BreathGroup.update(group, a1);
-    console.log('breath in part');
-}
-if(a1 > n2 + n1){
-    BreathGroup.update(group, 1);
-   console.log('high rest part');
-}
-*/
-
             //BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }
