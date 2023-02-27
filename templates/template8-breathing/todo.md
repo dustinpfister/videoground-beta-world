@@ -8,7 +8,7 @@
 ## () video3-holdtime.js
 * () there should be at least some hold time for each breath
 
-## () video2-curves.js
+## ( done 02/27/2023 ) video2-curves.js
 * (done) start a new video file where the focus is on the delay part of the video project
 * (done) start with new logic where we are just moving the spheres during the delay part
 * (done) use cubic bezier curve 3 in place of line curve for the createCurvePath helper
@@ -27,9 +27,7 @@
 * (done) use phong material when making mesh objects in createMeshGroup
 * (done) add a directional light
 * (done) make material transparent and have that be adjused in breathGroup.update
-
-* () adjust mesh scale in breathGroup.update
-
+* (done) adjust mesh scale in breathGroup.update
 
 ## ( done 02/22/2023 ) video1-core.js
 * (done) just start working out the core idea of what these videos should be about

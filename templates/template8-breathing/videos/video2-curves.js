@@ -38,8 +38,15 @@ VIDEO.init = function(sm, scene, camera){
             while(index_mesh < gud.meshPerCurve){
                 const name = getMeshName(gud, index_curve, index_mesh);
                 const mesh = group.getObjectByName(name);
-                const a_meshpos = (index_mesh + 1) / gud.meshPerCurve * a2;
-                mesh.position.copy( curve.getPoint(a_meshpos) );
+                const a_meshpos = (index_mesh + 1) / gud.meshPerCurve;
+                // position
+                mesh.position.copy( curve.getPoint(a_meshpos * a2) );
+                // opacity
+                const a_meshopacity = (1 - a_meshpos) * 0.50 + 0.50 * a2;
+                mesh.material.opacity = a_meshopacity;
+                // scale
+                const s = 1 - a_meshpos * a2;
+                mesh.scale.set( s, s, s );
                 index_mesh += 1;
             }
             index_curve += 1;
@@ -55,7 +62,7 @@ VIDEO.init = function(sm, scene, camera){
         gud.curveCount = opt.curveCount === undefined ? 10 : opt.curveCount;
         gud.meshPerCurve = opt.meshPerCurve === undefined ? 10 : opt.meshPerCurve;
         gud.geometry = opt.geometry || new THREE.SphereGeometry(0.1, 20, 20);
-        gud.material = opt.material || new THREE.PhongMaterial();
+        gud.material = opt.material || new THREE.MeshPhongMaterial();
         gud.curvePath = new THREE.CurvePath();
         gud.id = opt.id || '1';
         let index_curve = 0;
@@ -75,7 +82,7 @@ VIDEO.init = function(sm, scene, camera){
             // add mesh objects for each curve
             let index_mesh = 0;
             while(index_mesh < gud.meshPerCurve){
-                const mesh = new THREE.Mesh(gud.geometry, gud.material);
+                const mesh = new THREE.Mesh(gud.geometry, gud.material.clone());
                 mesh.material.transparent = true;
                 mesh.name = getMeshName(gud, index_curve, index_mesh);
                 group.add(mesh);
@@ -89,8 +96,14 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BREATH GROUP
     //-------- ----------
-    const group = BreathGroup.create({ geometry: new THREE.BoxGeometry(0.1,0.1,0.1)});
+    const group = BreathGroup.create({});
     scene.add(group);
+    //-------- ----------
+    // LIGHT
+    //-------- ----------
+    const dl = new THREE.DirectionalLight(0xffffff, 1);
+    dl.position.set(0,2,1)
+    scene.add(dl);
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
     //-------- ----------
