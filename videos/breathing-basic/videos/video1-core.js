@@ -160,6 +160,10 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
+
+
+            group.rotation.z = 0;
+
             let ki = 0;
             while(ki < BREATH_KEYS.length){
                 if(a1 < BREATH_ALPHA_TARGETS[ki]){
@@ -172,16 +176,22 @@ VIDEO.init = function(sm, scene, camera){
                         BreathGroup.update(group, 1);
                     }
                     if(BREATH_KEYS[ki] === 'breathIn'){
-                        BreathGroup.update(group, Math.sin(Math.PI * 0.5 * a_breathpart));
+                        const a_breath = Math.sin(Math.PI * 0.5 * a_breathpart);
+                        BreathGroup.update(group, a_breath);
+                        group.rotation.z = Math.PI * 0.5 * a_breath;
                     }
                     if(BREATH_KEYS[ki] === 'breathOut'){
+                        const a_breath = 1 - Math.sin(Math.PI * 0.5 * a_breathpart);
                         BreathGroup.update(group, 1 - Math.sin(Math.PI * 0.5 * a_breathpart));
+                        group.rotation.z = Math.PI * 0.5 * a_breath;
                     }
                     break;
                 }
                 ki += 1;;
             }
-            //BreathGroup.update(group, a1);
+
+            //group.rotation.z = Math.PI * 2 * 8 * seq.per;
+
             camera.lookAt(0, 0, 0);
         }
     };
