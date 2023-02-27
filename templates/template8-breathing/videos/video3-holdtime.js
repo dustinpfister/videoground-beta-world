@@ -172,6 +172,12 @@ while(ki < keys.length){
         if(keys[ki] === 'restHigh'){
             BreathGroup.update(group, 1);
         }
+        if(keys[ki] === 'breathIn'){
+            BreathGroup.update(group, Math.sin(Math.PI * 0.5 * a_breathpart));
+        }
+        if(keys[ki] === 'breathOut'){
+            BreathGroup.update(group, 1 - Math.sin(Math.PI * 0.5 * a_breathpart));
+        }
 
         break;
     }
