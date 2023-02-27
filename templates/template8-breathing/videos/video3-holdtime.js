@@ -13,6 +13,17 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_PER_MINUTE = 5;
     const BREATH_PARTS = {restLow: 1, breathIn: 3, restHigh: 1, breathOut: 3};
     const BREATH_PARTS_SUM = Object.keys( BREATH_PARTS ).reduce( ( acc, key ) => { return acc + BREATH_PARTS[key]; }, 0);
+    const BREATH_KEYS = 'restLow,breathIn,restHigh,breathOut'.split(',');
+    const BREATH_ALPHA_TARGETS = BREATH_KEYS.reduce((acc, key, i, arr) => {
+        let a = BREATH_PARTS[ key ];
+        if(i > 0){
+            a += acc[i - 1]
+        }
+        acc.push( a );
+        return acc;
+    }, []).map((n)=>{
+        return n / BREATH_PARTS_SUM;
+    });
     //-------- ----------
     // BREATH MESH GROUP
     //-------- ----------
@@ -139,37 +150,26 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
     // SEQ 1 - BREATH
-    const keys = 'restLow,breathIn,restHigh,breathOut'.split(',');
-    const BREATH_ALPHA_TARGETS = keys.reduce((acc, key, i, arr) => {
-        let a = BREATH_PARTS[ key ];
-        if(i > 0){
-            a += acc[i - 1]
-        }
-        acc.push( a );
-        return acc;
-    }, []).map((n)=>{
-        return n / BREATH_PARTS_SUM;
-    });
     opt_seq.objects[0] = {
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
             let ki = 0;
-            while(ki < keys.length){
+            while(ki < BREATH_KEYS.length){
                 if(a1 < BREATH_ALPHA_TARGETS[ki]){
                     const a_base = ki > 0 ? BREATH_ALPHA_TARGETS[ki - 1] : 0;
                     const a_breathpart = (a1 - a_base) / (BREATH_ALPHA_TARGETS[ki] - a_base);
-                    if(keys[ki] === 'restLow'){
+                    if(BREATH_KEYS[ki] === 'restLow'){
                         BreathGroup.update(group, 0);
                     }
-                    if(keys[ki] === 'restHigh'){
+                    if(BREATH_KEYS[ki] === 'restHigh'){
                         BreathGroup.update(group, 1);
                     }
-                    if(keys[ki] === 'breathIn'){
+                    if(BREATH_KEYS[ki] === 'breathIn'){
                         BreathGroup.update(group, Math.sin(Math.PI * 0.5 * a_breathpart));
                     }
-                    if(keys[ki] === 'breathOut'){
+                    if(BREATH_KEYS[ki] === 'breathOut'){
                         BreathGroup.update(group, 1 - Math.sin(Math.PI * 0.5 * a_breathpart));
                     }
                     break;
