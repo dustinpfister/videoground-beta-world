@@ -48,9 +48,10 @@ VIDEO.init = function(sm, scene, camera){
         opt = opt || {};
         const group = new THREE.Group();
         const gud = group.userData;
-        gud.radius = opt.radius === undefined ? 3 : opt.radius;
-        gud.curveCount = opt.curveCount === undefined ? 10 : opt.curveCount;
-        gud.meshPerCurve = opt.meshPerCurve === undefined ? 5 : opt.meshPerCurve;
+        gud.radiusMin = opt.radiusMin === undefined ? 0.75 : opt.radiusMin;
+        gud.radiusMax = opt.radiusMax === undefined ? 3.00 : opt.radiusMax;
+        gud.curveCount = opt.curveCount === undefined ? 15 : opt.curveCount;
+        gud.meshPerCurve = opt.meshPerCurve === undefined ? 10 : opt.meshPerCurve;
         gud.curvePath = new THREE.CurvePath();
         gud.id = opt.id || '1';
         let index_curve = 0;
@@ -58,11 +59,11 @@ VIDEO.init = function(sm, scene, camera){
             const a_curve_index = index_curve / gud.curveCount;
             // add current curve
             const e = new THREE.Euler();
-            e.y = Math.PI * 2 * a_curve_index;
+            e.z = Math.PI * 2 * a_curve_index;
             const v_start = new THREE.Vector3(1, 0, 0);
             const v_end = new THREE.Vector3(1, 0, 0);
-            v_start.applyEuler(e).multiplyScalar(0);
-            v_end.applyEuler(e).multiplyScalar(gud.radius);
+            v_start.applyEuler(e).multiplyScalar(gud.radiusMin);
+            v_end.applyEuler(e).multiplyScalar(gud.radiusMax);
 
             const v_c1 = v_start.clone().lerp(v_end, 0.25);
             const v_c2 = v_start.clone().lerp(v_end, 0.75);

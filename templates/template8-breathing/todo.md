@@ -22,8 +22,10 @@
 * (done) have a getControlRadius helper
 * (done) have two deg values one for each control point in setControlPoints
 * (done) video is to messy, start over as video2-curves.js and start a prototype for a module
+* (done) have a breathGroup module with a create method
+* (done) new breahGroup prototype has a update method as well.
 
-* () have a breathGroup module with a create method
+* () adjust control points in breahGroup.update
 
 * () use phong material when making mesh objects in createMeshGroup
 * () add a directional light
