@@ -21,8 +21,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // update curve control points and mesh object values
     BreathGroup.update = (group, alpha) => {
-        const a1 = 1 - Math.abs(0.5 - alpha) / 0.5;
-        const a2 = Math.sin(Math.PI * 0.5 * a1);
+        const a2 = Math.sin(Math.PI * 1 * alpha);
         const gud = group.userData;
         let index_curve = 0;
         while(index_curve < gud.curveCount){
