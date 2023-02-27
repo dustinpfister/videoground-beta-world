@@ -5,9 +5,6 @@
 * () make dae-helper r0, and count-down.js r1 part of the stack
 * () have a single count down object for the delay part
 
-## () video4-alphas.js
-* () the alpha values that ar used to move the breath spheres in and out should not be linear.
-
 ## () video3-holdtime.js
 * () there should be at least some hold time for each breath
 
@@ -26,13 +23,13 @@
 * (done) new breahGroup prototype has a update method as well.
 * (done) adjust control points in breahGroup.update
 * (done) remove delay part for this video, and maybe all videos for this template
+* (done) can give a custom geometry to use when calling breathGroup.create
+* (done) use phong material when making mesh objects in createMeshGroup
+* (done) add a directional light
+* (done) make material transparent and have that be adjused in breathGroup.update
 
-* () use phong material when making mesh objects in createMeshGroup
-* () add a directional light
-* () make material transparent and have that be adjused in breathGroup.update
 * () adjust mesh scale in breathGroup.update
 
-* () can give a custom geometry to use when calling breathGroup.create
 
 ## ( done 02/22/2023 ) video1-core.js
 * (done) just start working out the core idea of what these videos should be about

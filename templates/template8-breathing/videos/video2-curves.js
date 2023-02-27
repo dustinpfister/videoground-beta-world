@@ -55,6 +55,7 @@ VIDEO.init = function(sm, scene, camera){
         gud.curveCount = opt.curveCount === undefined ? 10 : opt.curveCount;
         gud.meshPerCurve = opt.meshPerCurve === undefined ? 10 : opt.meshPerCurve;
         gud.geometry = opt.geometry || new THREE.SphereGeometry(0.1, 20, 20);
+        gud.material = opt.material || new THREE.PhongMaterial();
         gud.curvePath = new THREE.CurvePath();
         gud.id = opt.id || '1';
         let index_curve = 0;
@@ -74,7 +75,8 @@ VIDEO.init = function(sm, scene, camera){
             // add mesh objects for each curve
             let index_mesh = 0;
             while(index_mesh < gud.meshPerCurve){
-                const mesh = new THREE.Mesh(gud.geometry);
+                const mesh = new THREE.Mesh(gud.geometry, gud.material);
+                mesh.material.transparent = true;
                 mesh.name = getMeshName(gud, index_curve, index_mesh);
                 group.add(mesh);
                 index_mesh += 1;
