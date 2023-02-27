@@ -12,6 +12,7 @@
 * (done) the BREATH-RATIO const can be a collection of numbers like {restLow: 1, breathIn: 3, restHigh: 1, breathOut: 3}
 * (done) have a way to get alpha targets array
 * (done) I will need to get the proper alpha values for each part
+* () BREATH-KEYS const and move BREATH-ALPHA-TARGETS to the top of the file
 
 ## ( done 02/27/2023 ) video2-curves.js
 * (done) start a new video file where the focus is on the delay part of the video project
