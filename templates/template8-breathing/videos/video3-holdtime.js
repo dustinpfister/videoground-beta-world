@@ -9,10 +9,10 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 5;
+    const BREATH_SECS = 60 * 0.5;
     const BREATH_PER_MINUTE = 5;
-    const BREATH_PARTS = {restLow: 1, breath: 3, restHigh: 1};
-    const BREATH_PARTS_SUM = Object.keys( BREATH_PARTS ).map( () => { return } );
+    const BREATH_PARTS = {restLow: 1, breathIn: 3, restHigh: 1, breathOut: 3};
+    const BREATH_PARTS_SUM = Object.keys( BREATH_PARTS ).reduce( ( acc, key ) => { return acc + BREATH_PARTS[key]; }, 0);
     //-------- ----------
     // BREATH MESH GROUP
     //-------- ----------
@@ -23,7 +23,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // update curve control points and mesh object values
     BreathGroup.update = (group, alpha) => {
-        const a2 = Math.sin(Math.PI * 1 * alpha);
+        const a2 = alpha; //Math.sin(Math.PI * 1 * alpha);
         const gud = group.userData;
         let index_curve = 0;
         while(index_curve < gud.curveCount){
@@ -144,7 +144,39 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
-            BreathGroup.update(group, a1);
+
+
+let keys = 'restLow,breathIn,restHigh,breathOut'.split(',');
+let ki = 0;
+while(ki < keys.length){
+
+    const value = BREATH_PARTS[ keys[ki] ];
+    console.log( value / BREATH_PARTS_SUM );
+
+    ki += 1;;
+}
+
+/*
+const n1 = BREATH_PARTS.restLow / BREATH_PARTS_SUM;
+const n2 = BREATH_PARTS.breathIn / BREATH_PARTS_SUM;
+const n3 = BREATH_PARTS.restHigh / BREATH_PARTS_SUM;
+const n4 = BREATH_PARTS.breathOut / BREATH_PARTS_SUM;
+
+if(a1 < n1){
+    BreathGroup.update(group, 0);
+    console.log('low rest part');
+}
+if(a1 > n1 && a1 < n2 + n1){
+    BreathGroup.update(group, a1);
+    console.log('breath in part');
+}
+if(a1 > n2 + n1){
+    BreathGroup.update(group, 1);
+   console.log('high rest part');
+}
+*/
+
+            //BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }
     };
