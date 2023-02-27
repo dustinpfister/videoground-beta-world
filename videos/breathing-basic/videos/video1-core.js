@@ -1,6 +1,4 @@
 // video1-core.js for breathing-basic beta world project
-//     * starting with video2 from template8
-//     * using BretahGroup module protoype built into the start file
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -9,10 +7,23 @@ VIDEO.scripts = [
 // init
 VIDEO.init = function(sm, scene, camera){
     //-------- ----------
-    // SETTINGS
+    // CONST VALUES
     //-------- ----------
     const BREATH_SECS = 60 * 5;
-    const BREATHS_PER_MINUTE = 5;
+    const BREATH_PER_MINUTE = 5;
+    const BREATH_PARTS = {restLow: 1, breathIn: 3, restHigh: 1, breathOut: 3};
+    const BREATH_PARTS_SUM = Object.keys( BREATH_PARTS ).reduce( ( acc, key ) => { return acc + BREATH_PARTS[key]; }, 0);
+    const BREATH_KEYS = 'restLow,breathIn,restHigh,breathOut'.split(',');
+    const BREATH_ALPHA_TARGETS = BREATH_KEYS.reduce((acc, key, i, arr) => {
+        let a = BREATH_PARTS[ key ];
+        if(i > 0){
+            a += acc[i - 1]
+        }
+        acc.push( a );
+        return acc;
+    }, []).map((n)=>{
+        return n / BREATH_PARTS_SUM;
+    });
     //-------- ----------
     // BREATH MESH GROUP
     //-------- ----------
@@ -23,7 +34,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // update curve control points and mesh object values
     BreathGroup.update = (group, alpha) => {
-        const a2 = Math.sin(Math.PI * 1 * alpha);
+        const a2 = alpha;
         const gud = group.userData;
         let index_curve = 0;
         while(index_curve < gud.curveCount){
@@ -46,7 +57,7 @@ VIDEO.init = function(sm, scene, camera){
                 const a_meshopacity = (1 - a_meshpos) * 0.50 + 0.50 * a2;
                 mesh.material.opacity = a_meshopacity;
                 // scale
-                const s = 0.5 + 1.5 * a_meshpos * a2;
+                const s = 0.5 + 3.0 * a_meshpos * Math.sin(Math.PI * 0.5 * a2);
                 mesh.scale.set( s, s, s );
                 index_mesh += 1;
             }
@@ -98,7 +109,10 @@ VIDEO.init = function(sm, scene, camera){
     // BREATH GROUP
     //-------- ----------
     const group = BreathGroup.create({
-        material: new THREE.MeshPhongMaterial({color: new THREE.Color(0, 1, 1)})
+        curveCount: 20,
+        meshPerCurve: 16,
+        radiusMin: 0.5, radiusMax: 8,
+        material: new THREE.MeshPhongMaterial({color: 0x00ffff})
     });
     scene.add(group);
     //-------- ----------
@@ -145,8 +159,29 @@ VIDEO.init = function(sm, scene, camera){
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
-            const a1 = (sec % 60 / 60) * BREATHS_PER_MINUTE % 1;
-            BreathGroup.update(group, a1);
+            const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
+            let ki = 0;
+            while(ki < BREATH_KEYS.length){
+                if(a1 < BREATH_ALPHA_TARGETS[ki]){
+                    const a_base = ki > 0 ? BREATH_ALPHA_TARGETS[ki - 1] : 0;
+                    const a_breathpart = (a1 - a_base) / (BREATH_ALPHA_TARGETS[ki] - a_base);
+                    if(BREATH_KEYS[ki] === 'restLow'){
+                        BreathGroup.update(group, 0);
+                    }
+                    if(BREATH_KEYS[ki] === 'restHigh'){
+                        BreathGroup.update(group, 1);
+                    }
+                    if(BREATH_KEYS[ki] === 'breathIn'){
+                        BreathGroup.update(group, Math.sin(Math.PI * 0.5 * a_breathpart));
+                    }
+                    if(BREATH_KEYS[ki] === 'breathOut'){
+                        BreathGroup.update(group, 1 - Math.sin(Math.PI * 0.5 * a_breathpart));
+                    }
+                    break;
+                }
+                ki += 1;;
+            }
+            //BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }
     };
