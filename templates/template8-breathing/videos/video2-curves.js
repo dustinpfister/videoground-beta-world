@@ -45,7 +45,7 @@ VIDEO.init = function(sm, scene, camera){
                 const a_meshopacity = (1 - a_meshpos) * 0.50 + 0.50 * a2;
                 mesh.material.opacity = a_meshopacity;
                 // scale
-                const s = 1 - a_meshpos * a2;
+                const s = 0.5 + 1.5 * a_meshpos * a2;
                 mesh.scale.set( s, s, s );
                 index_mesh += 1;
             }

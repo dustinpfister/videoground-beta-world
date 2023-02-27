@@ -1,4 +1,6 @@
-// video1-core.js from breathing-basic
+// video1-core.js for breathing-basic beta world project
+//     * starting with video2 from template8
+//     * using BretahGroup module protoype built into the start file
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -9,57 +11,103 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // SETTINGS
     //-------- ----------
-    const BREATH_SECS = 60;
+    const BREATH_SECS = 60 * 5;
     const BREATHS_PER_MINUTE = 5;
-    const DELAY_SECS = 10;
     //-------- ----------
-    // HELPER FUNCTIONS
+    // BREATH MESH GROUP
     //-------- ----------
-    // create curve Path helper
-    const createCurvePath = (count) => {
-        const cp = new THREE.CurvePath();
-        let i = 0;
-        while(i < count){
-            const v_start = new THREE.Vector3();
-            const radian = Math.PI * 2 * (i / count);
-            const x = Math.cos(radian) * 3;
-            const y = Math.sin(radian) * 3;
-            const v_end = new THREE.Vector3(x,y,0);
-            const curve = new THREE.LineCurve3(v_start, v_end);
-            cp.add(curve);
-            i += 1;
-        }
-        return cp;
+    const BreathGroup = {};
+    // get a mesh object name to be used when creating and getting mesh objects in breath group
+    const getMeshName = (gud, index_curve, index_mesh) => {
+        return 'breath_id' + gud.id + '_curve' + index_curve + '_mesh' + index_mesh;
     };
-    const createMeshGroup = (count) => {
+    // update curve control points and mesh object values
+    BreathGroup.update = (group, alpha) => {
+        const a1 = 1 - Math.abs(0.5 - alpha) / 0.5;
+        const a2 = Math.sin(Math.PI * 0.5 * a1);
+        const gud = group.userData;
+        let index_curve = 0;
+        while(index_curve < gud.curveCount){
+            const curve = gud.curvePath.curves[index_curve];
+            const v_start = curve.v0, v_c1 = curve.v1, v_c2 = curve.v2, v_end = curve.v3;
+            const e1 = new THREE.Euler();
+            e1.z = Math.PI / 180 * 60 * a2;
+            const e2 = new THREE.Euler();
+            e2.z = Math.PI / 180 * -60 * a2;
+            v_c1.copy( v_start.clone().lerp(v_end, 0.25).applyEuler(e1) );
+            v_c2.copy( v_start.clone().lerp(v_end, 0.75).applyEuler(e2) );
+            let index_mesh = 0;
+            while(index_mesh < gud.meshPerCurve){
+                const name = getMeshName(gud, index_curve, index_mesh);
+                const mesh = group.getObjectByName(name);
+                const a_meshpos = (index_mesh + 1) / gud.meshPerCurve;
+                // position
+                mesh.position.copy( curve.getPoint(a_meshpos * a2) );
+                // opacity
+                const a_meshopacity = (1 - a_meshpos) * 0.50 + 0.50 * a2;
+                mesh.material.opacity = a_meshopacity;
+                // scale
+                const s = 1 - a_meshpos * a2;
+                mesh.scale.set( s, s, s );
+                index_mesh += 1;
+            }
+            index_curve += 1;
+        };
+    };
+    // main create method
+    BreathGroup.create = (opt) => {
+        opt = opt || {};
         const group = new THREE.Group();
-        const geometry_sphere = new THREE.SphereGeometry(0.1, 20, 20);
-        let i = 0;
-        while(i < count){
-            const mesh = new THREE.Mesh(geometry_sphere);
-            group.add(mesh);
-            i += 1;
-        }
+        const gud = group.userData;
+        gud.radiusMin = opt.radiusMin === undefined ? 0.50 : opt.radiusMin;
+        gud.radiusMax = opt.radiusMax === undefined ? 2.80 : opt.radiusMax;
+        gud.curveCount = opt.curveCount === undefined ? 10 : opt.curveCount;
+        gud.meshPerCurve = opt.meshPerCurve === undefined ? 10 : opt.meshPerCurve;
+        gud.geometry = opt.geometry || new THREE.SphereGeometry(0.1, 20, 20);
+        gud.material = opt.material || new THREE.MeshPhongMaterial();
+        gud.curvePath = new THREE.CurvePath();
+        gud.id = opt.id || '1';
+        let index_curve = 0;
+        while(index_curve < gud.curveCount){
+            const a_curve_index = index_curve / gud.curveCount;
+            // add current curve
+            const e = new THREE.Euler();
+            e.z = Math.PI * 2 * a_curve_index;
+            const v_start = new THREE.Vector3(1, 0, 0);
+            const v_end = new THREE.Vector3(1, 0, 0);
+            v_start.applyEuler(e).multiplyScalar(gud.radiusMin);
+            v_end.applyEuler(e).multiplyScalar(gud.radiusMax);
+            const v_c1 = v_start.clone().lerp(v_end, 0.25);
+            const v_c2 = v_start.clone().lerp(v_end, 0.75);
+            const curve = new THREE.CubicBezierCurve3(v_start.clone(), v_c1, v_c2, v_end);
+            gud.curvePath.add(curve);
+            // add mesh objects for each curve
+            let index_mesh = 0;
+            while(index_mesh < gud.meshPerCurve){
+                const mesh = new THREE.Mesh(gud.geometry, gud.material.clone());
+                mesh.material.transparent = true;
+                mesh.name = getMeshName(gud, index_curve, index_mesh);
+                group.add(mesh);
+                index_mesh += 1;
+            }
+            index_curve += 1;
+        };
+        BreathGroup.update(group, 0);
         return group;
     };
-    const updateMeshGroup = (group, cp, alpha) => {
-        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
-        group.children.forEach( (mesh, i, arr) => {
-            const a_child = i / arr.length;
-            const index_curve = Math.floor( cp.curves.length * a_child );
-            const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
-            const a_point2 = 0.2 + 0.8 * a_point1;
-            mesh.position.copy( cp.curves[index_curve].getPoint(a_point2) );
-            const s = 2 - (1 - a_point1) * 1.5;
-            mesh.scale.set(s, s, s);
-        });
-    };
     //-------- ----------
-    // Curve Path, and Group used for breath circle
+    // BREATH GROUP
     //-------- ----------
-    const cp = createCurvePath(10);
-    const group = createMeshGroup(100);
+    const group = BreathGroup.create({
+        material: new THREE.MeshPhongMaterial({color: new THREE.Color(0, 1, 1)})
+    });
     scene.add(group);
+    //-------- ----------
+    // LIGHT
+    //-------- ----------
+    const dl = new THREE.DirectionalLight(0xffffff, 1);
+    dl.position.set(0,2,1)
+    scene.add(dl);
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
     //-------- ----------
@@ -87,31 +135,19 @@ VIDEO.init = function(sm, scene, camera){
         beforeObjects: function(seq){
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
-            // update the mesh group
-            updateMeshGroup(group, cp, 0);
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
         },
         objects: []
     };
-    // SEQ 0 - ...
+    // SEQ 1 - BREATH
     opt_seq.objects[0] = {
-        secs: DELAY_SECS,
-        update: function(seq, partPer, partBias){
-            updateMeshGroup(group, cp, 0);
-            camera.lookAt(0, 0, 0);
-        }
-    };
-    // SEQ 1 - ...
-    opt_seq.objects[1] = {
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
-
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATHS_PER_MINUTE % 1;
-
-            updateMeshGroup(group, cp, a1);
+            BreathGroup.update(group, a1);
             camera.lookAt(0, 0, 0);
         }
     };
