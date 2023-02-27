@@ -16,13 +16,18 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // HELPER FUNCTIONS
     //-------- ----------
+    const getControlRadian = (i, count, deg, alpha) => {
+        return Math.PI * 2 * (i / count) + Math.PI / 180 * (deg * alpha);
+    };
     // set the control points for a curve
     const setControlPoints = (curve, i, count, deg, alpha) => {
-        const radian = Math.PI * 2 * (i / count) + Math.PI / 180 * (90 * alpha);
+        const radian = getControlRadian(i, count, deg, alpha);
         const v_start = curve.v0.clone();
         const v_end = curve.v3.clone();
         const v_delta = new THREE.Vector3();
+
         const r1 = RADIUS * 0.25 * alpha;
+        const r2 = RADIUS * 0.75 * alpha;
         v_delta.x = Math.cos(radian) * r1;
         v_delta.y = Math.sin(radian) * r1;
         curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
@@ -69,7 +74,7 @@ VIDEO.init = function(sm, scene, camera){
             const a_child = i / count;
             const index_curve = Math.floor( cp.curves.length * a_child );
             const curve = cp.curves[index_curve];
-            setControlPoints(curve, i, count, 90, a2);
+            setControlPoints(curve, i, count, 0, a2);
             const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
             const a_point2 = 0.2 + 0.8 * a_point1;
             mesh.position.copy( curve.getPoint(a_point2) );

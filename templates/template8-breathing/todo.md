@@ -14,12 +14,12 @@
 * (done) mutation of control points over time in update mesh group helper
 * (done) work out a nice starting example for control point deltas in update mesh group helper
 * (done) have a setControlPoint helper
+* (done) have a getControlRadius helper
+
+* () have two deg values one for each control point in setControlPoints
 
 * () use phong material when making mesh objects in createMeshGroup
 * () add a directional light
-
-* () have a getControlRadius helper
-* () have two deg values one for each control point in setControlPoints
 
 * () make dae-helper r0, and count-down.js r1 part of the stack
 * () have a single count down object for the delay part
