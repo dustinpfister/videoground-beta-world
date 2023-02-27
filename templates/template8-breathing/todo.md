@@ -24,13 +24,15 @@
 * (done) video is to messy, start over as video2-curves.js and start a prototype for a module
 * (done) have a breathGroup module with a create method
 * (done) new breahGroup prototype has a update method as well.
-
-* () adjust control points in breahGroup.update
+* (done) adjust control points in breahGroup.update
+* (done) remove delay part for this video, and maybe all videos for this template
 
 * () use phong material when making mesh objects in createMeshGroup
 * () add a directional light
+* () make material transparent and have that be adjused in breathGroup.update
+* () adjust mesh scale in breathGroup.update
 
-* () remove delay part for this video, and maybe all videos for this template
+* () can give a custom geometry to use when calling breathGroup.create
 
 ## ( done 02/22/2023 ) video1-core.js
 * (done) just start working out the core idea of what these videos should be about
