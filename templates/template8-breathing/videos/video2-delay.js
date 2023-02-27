@@ -34,24 +34,6 @@ VIDEO.init = function(sm, scene, camera){
             v.y = Math.sin(cRadian) * cRadius;
             ci += 1;
         }
-
-
-        //const r1 = RADIUS * 0.25;
-        //const r2 = RADIUS * 0.75;
-
-        //const v_delta = new THREE.Vector3();
-
-        //const radian1 = getControlRadian(i, count, deg1, alpha);
-        //v_delta.x = 0;//Math.cos(radian1) * r1;
-        //v_delta.y = 0;//Math.sin(radian1) * r1;
-        //curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
-
-        //const radian2 = getControlRadian(i, count, deg2, alpha);
-        //v_delta.x = 0; //Math.cos(radian2) * r2;
-        //v_delta.y = 0; //Math.sin(radian2) * r2;
-        //curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
-
-        //curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
     };
     // create curve Path helper
     const createCurvePath = (count) => {
@@ -59,14 +41,14 @@ VIDEO.init = function(sm, scene, camera){
         let i = 0;
         while(i < count){
             const v_start = new THREE.Vector3();
-            const radian = Math.PI * 2 * (i / count);
+            const radian = getControlRadian(i, count, 0, 0, 0);
             const x = Math.cos(radian) * RADIUS;
             const y = Math.sin(radian) * RADIUS;
             const v_end = new THREE.Vector3(x,y,0);
-            const v_c1 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.25);
-            const v_c2 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.75);
+            const v_c1 = new THREE.Vector3();
+            const v_c2 = new THREE.Vector3();
             const curve = new THREE.CubicBezierCurve3(v_start, v_c1, v_c2, v_end);
-            setControlPoints(curve, i, count, 90, 90, 0);
+            setControlPoints(curve, i, count, 0, 0, 0);
             cp.add(curve);
             i += 1;
         }
@@ -86,7 +68,7 @@ VIDEO.init = function(sm, scene, camera){
     };
     // update a given mesh group with the given curve path and an alpha value
     const updateMeshGroup = (group, cp, alpha) => {
-        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;     
+        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
         let i = 0;
         const count = group.children.length;
         while(i < count){
@@ -101,7 +83,9 @@ VIDEO.init = function(sm, scene, camera){
 
             const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
             const a_point2 = 0.2 + 0.8 * a_point1;
+
             mesh.position.copy( curve.getPoint(a_point2) );
+
             const s = 1 - (1 - a_point1) * 0.75;
             mesh.scale.set(s, s, s);
             i += 1;
@@ -110,8 +94,8 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // Curve Path, and Group used for breath circle
     //-------- ----------
-    const cp = createCurvePath(10);
-    const group = createMeshGroup(100);
+    const cp = createCurvePath(8);
+    const group = createMeshGroup(90);
     scene.add(group);
     //-------- ----------
     // BACKGROUND - using canvas2 and lz-string to create a background texture
