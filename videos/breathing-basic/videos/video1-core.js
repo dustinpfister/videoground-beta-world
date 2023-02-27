@@ -11,7 +11,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const BREATH_SECS = 60 * 5;
     const BREATH_PER_MINUTE = 5;
-    const BREATH_PARTS = {restLow: 1, breathIn: 3, restHigh: 1, breathOut: 3};
+    const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const BREATH_PARTS_SUM = Object.keys( BREATH_PARTS ).reduce( ( acc, key ) => { return acc + BREATH_PARTS[key]; }, 0);
     const BREATH_KEYS = 'restLow,breathIn,restHigh,breathOut'.split(',');
     const BREATH_ALPHA_TARGETS = BREATH_KEYS.reduce((acc, key, i, arr) => {
