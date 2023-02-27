@@ -1,5 +1,11 @@
 # template8-breathing todo list
 
+## () video4-alphas.js
+* () the alpha values that ar used to move the breath spheres in and out should not be linear.
+
+## () video3-holdtime.js
+* () there should be at least some hold time for each breath
+
 ## () video2-delay.js
 * (done) start a new video file where the focus is on the delay part of the video project
 * (done) start with new logic where we are just moving the spheres during the delay part
@@ -11,6 +17,9 @@
 
 * () use phong material when making mesh objects in createMeshGroup
 * () add a directional light
+
+* () have a getControlRadius helper
+* () have two deg values one for each control point in setControlPoints
 
 * () make dae-helper r0, and count-down.js r1 part of the stack
 * () have a single count down object for the delay part

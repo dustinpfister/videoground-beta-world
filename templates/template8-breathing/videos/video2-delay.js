@@ -28,7 +28,6 @@ VIDEO.init = function(sm, scene, camera){
         curve.v1.copy(v_start).lerp(v_end, 0.25).add(v_delta);
         curve.v2.copy(v_start).lerp(v_end, 0.75).add(v_delta);
     };
-
     // create curve Path helper
     const createCurvePath = (count) => {
         const cp = new THREE.CurvePath();
@@ -42,8 +41,7 @@ VIDEO.init = function(sm, scene, camera){
             const v_c1 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.25);
             const v_c2 = new THREE.Vector3(); //v_start.clone().lerp(v_end, 0.75);
             const curve = new THREE.CubicBezierCurve3(v_start, v_c1, v_c2, v_end);
-
-setControlPoints(curve, i, count, 90, 0);
+            setControlPoints(curve, i, count, 90, 0);
             cp.add(curve);
             i += 1;
         }
@@ -63,23 +61,22 @@ setControlPoints(curve, i, count, 90, 0);
     };
     // update a given mesh group with the given curve path and an alpha value
     const updateMeshGroup = (group, cp, alpha) => {
-        // main alpha used to get a bias alpha
-        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;
-        
-        // update control points and set positions for each mesh object
-        group.children.forEach( (mesh, i, arr) => {
-            const a_child = i / arr.length;
+        const a2 = 1 - Math.abs(0.5 - alpha) / 0.5;     
+        let i = 0;
+        const count = group.children.length;
+        while(i < count){
+            const mesh = group.children[i];
+            const a_child = i / count;
             const index_curve = Math.floor( cp.curves.length * a_child );
             const curve = cp.curves[index_curve];
-
-setControlPoints(curve, i, arr.length, 90, a2);
-
+            setControlPoints(curve, i, count, 90, a2);
             const a_point1 = i  % cp.curves.length / cp.curves.length * a2;
             const a_point2 = 0.2 + 0.8 * a_point1;
             mesh.position.copy( curve.getPoint(a_point2) );
             const s = 2 - (1 - a_point1) * 1.5;
             mesh.scale.set(s, s, s);
-        });
+            i += 1;
+        }
     };
     //-------- ----------
     // Curve Path, and Group used for breath circle
