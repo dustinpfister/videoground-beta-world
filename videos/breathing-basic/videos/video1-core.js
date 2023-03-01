@@ -160,10 +160,7 @@ VIDEO.init = function(sm, scene, camera){
         update: function(seq, partPer, partBias){
             const sec = BREATH_SECS * partPer;
             const a1 = (sec % 60 / 60) * BREATH_PER_MINUTE % 1;
-
-
             group.rotation.z = 0;
-
             let ki = 0;
             while(ki < BREATH_KEYS.length){
                 if(a1 < BREATH_ALPHA_TARGETS[ki]){
@@ -189,9 +186,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 ki += 1;;
             }
-
             //group.rotation.z = Math.PI * 2 * 8 * seq.per;
-
             camera.lookAt(0, 0, 0);
         }
     };
