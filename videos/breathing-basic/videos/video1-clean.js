@@ -21,6 +21,9 @@ VIDEO.init = function(sm, scene, camera){
         totalBreathSecs: BREATH_SECS,
         breathsPerMinute: BREATH_PER_MINUTE,
         breathParts: BREATH_PARTS,
+        curveCount: 20,
+        meshPerCurve: 16,
+        radiusMin: 0.5, radiusMax: 12,
         curveUpdate: (curve, alpha, v_c1, v_c2, v_start, v_end, gud, group) => {
             const e1 = new THREE.Euler();
             e1.z = Math.PI / 180 * 60 * alpha;
@@ -91,7 +94,8 @@ VIDEO.init = function(sm, scene, camera){
     opt_seq.objects[0] = {
         secs: BREATH_SECS,
         update: function(seq, partPer, partBias){
-            camera.lookAt(0, 0, 0);
+            camera.position.set(0, 0, 8);
+            camera.lookAt(0,0,0);
         }
     };
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
