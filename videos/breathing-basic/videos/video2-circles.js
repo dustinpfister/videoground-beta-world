@@ -29,11 +29,11 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // update circle group
     const updateCircleGroup = (group_circles, alpha) => {
-        group_circles.children.forEach( (mesh, i) => {
+        group_circles.children.forEach( (mesh, i, arr) => {
             const sd = (i + 1) * 0.75 * alpha;
             const s = 1 + sd;
             group_circles.scale.set(s, s, s);
-            
+            mesh.material.opacity = 0.25 + 1 / arr.length * (i + 1) * 0.75 * alpha;
         });
     };
     // create circle group
