@@ -3,12 +3,21 @@
 <!-- WHATS NEXT -->
 
 
-## (  ) - breathing-basic - finish video1.js
-* () finish video1 for breahing-basic
+## (  ) - breathing-basic - first video
+* (done) finish video1.clean.js for breahing-basic
+* () finish video2, and video3
+* () make first 10 minute video using video3.js
 
 ## ( ) - timer-train - make a 1 minute video
 * () finish video6-transnums.js
 * () make a 1 minute video with video6-transnums.js
+
+## (  ) - breathing-basic - five minute video
+* () make a five minute video using video3
+
+## ( ) - n64rip-basic - start the project
+* () look into ripping geometry from quest64 rom if possible
+* () expand DAE folder if progress is made
 
 ## ( ) - timer-train - make a 10 sec video
 * () make a 10 second video with video5-transnums.js
