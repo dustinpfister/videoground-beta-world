@@ -16,24 +16,37 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
 
 
-const material_orbs = new THREE.MeshPhongMaterial({
-            color: 0x00ffff,
-            emissive: 0xffffff,
-            emissiveIntensity: 0.1
-        })
+    const material_orbs = new THREE.MeshPhongMaterial({
+        color: 0x00ffff,
+        emissive: 0xffffff,
+        emissiveIntensity: 0.1,
+        transparent: true,
+        opacity: 1
+    });
 
     //-------- ----------
     // CIRCLES
     //-------- ----------
+    // update circle group
+    const updateCircleGroup = (group_circles, alpha) => {
+        group_circles.children.forEach( (mesh, i) => {
+            const sd = (i + 1) * 0.75 * alpha;
+            const s = 1 + sd;
+            group_circles.scale.set(s, s, s);
+            
+        });
+    };
+    // create circle group
     const group_circles = new THREE.Group();
     let ic = 0;
     while(ic < 3){
-        const mesh = new THREE.Mesh(new THREE.CircleGeometry(3, 40), material_orbs );
+        const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_orbs.clone() );
         mesh.position.z = -0.5 - 1 * ic;
         group_circles.add(mesh);
         ic += 1;
     }
     scene.add(group_circles);
+    updateCircleGroup(group_circles, 0);
     //-------- ----------
     // BREATH GROUP 
     //-------- ----------
@@ -66,15 +79,21 @@ const material_orbs = new THREE.MeshPhongMaterial({
         hooks : {
             restLow : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
                 updateGroup(group, 0);
+                updateCircleGroup(group_circles, 0);
             },
             restHigh : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
                 updateGroup(group, 1);
+                updateCircleGroup(group_circles, 1);
             },
             breathIn : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
-                updateGroup(group, Math.sin(Math.PI * 0.5 * a_breathPart));
+                const a1 = Math.sin(Math.PI * 0.5 * a_breathPart);
+                updateGroup(group, a1);
+                updateCircleGroup(group_circles, a1);
             },
             breathOut : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
-                updateGroup(group, 1 - Math.sin(Math.PI * 0.5 * a_breathPart));
+                const a1 = 1 - Math.sin(Math.PI * 0.5 * a_breathPart);
+                updateGroup(group, a1);
+                updateCircleGroup(group_circles, a1);
             }
         },
         material: material_orbs
