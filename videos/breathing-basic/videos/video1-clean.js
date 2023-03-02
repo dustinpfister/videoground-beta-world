@@ -32,7 +32,7 @@ VIDEO.init = function(sm, scene, camera){
             v_c1.copy( v_start.clone().lerp(v_end, 0.25).applyEuler(e1) );
             v_c2.copy( v_start.clone().lerp(v_end, 0.75).applyEuler(e2) );
         },
-        meshUpdate: (mesh, curve, alpha, index, count, group) => {
+        meshUpdate: (mesh, curve, alpha, index, count, group, gud) => {
             // position
             const a_meshpos = (index + 1) / count;
             mesh.position.copy( curve.getPoint(a_meshpos * alpha) );
@@ -42,6 +42,20 @@ VIDEO.init = function(sm, scene, camera){
             // scale
             const s = 0.25 + 2.25 * a_meshpos * Math.sin(Math.PI * 0.5 * alpha);
             mesh.scale.set( s, s, s );
+        },
+        hooks : {
+            restLow : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+                updateGroup(group, 0);
+            },
+            restHigh : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+                updateGroup(group, 1);
+            },
+            breathIn : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+                updateGroup(group, Math.sin(Math.PI * 0.5 * a_breathPart));
+            },
+            breathOut : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+                updateGroup(group, 1 - Math.sin(Math.PI * 0.5 * a_breathPart));
+            }
         },
         material: new THREE.MeshPhongMaterial({
             color: 0x00ffff,
