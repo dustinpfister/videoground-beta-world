@@ -27,14 +27,14 @@
 * () display number of seconds for each breath cycle
 * () display Breath Part Ratios as second values
 
-## () - video2-circles.js
+## ( done 03/03/2023) - video2-circles.js
 * (done) have a number of circles behind the main breath group
 * (done) have the radius of the circles go up and down with the breath
 * (done) have the opacity of the circles go up and down with the breath
 * (done) textures for both orb and circles
-* () canvas textures for both orb material, and circles material
+* (done) canvas textures for circles material
 
-## ( done 03/02/0223 ) video1-clean.js
+## ( done 03/02/2023 ) video1-clean.js
 * (done) start video1 with the template8 video4-breathr0.js
 * (done) use custom methods for curveUpdate, meshUpdate
 * (done) use custom hooks
