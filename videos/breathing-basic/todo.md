@@ -18,12 +18,9 @@
 * (done) this can be based off of the s4-2-loop-plane-aspect from threejs-camera-perspective
 * (done) have a canvas for this mesh object and use it to display a progress bars
 * (done) display frame and max frame
+* (done) have a progress bar for the whole video
+* (done) have a progress bar for the current breath cycle
 
-
-* () have a progress bar for the current breath cycle
-* () have a progress bar for the whole video
-* () the breath cycle bar has differing colors for each breath part
-* () the main progress bar is broken up by breath cycles
 * () display time / totaltime
 * () display Breaths Per Minute
 * () display number of seconds for each breath cycle

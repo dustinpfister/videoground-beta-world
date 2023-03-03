@@ -78,18 +78,20 @@ VIDEO.init = function(sm, scene, camera){
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
-        palette: ['#3a3a3a', '#ffffff', '#00ff00'],
+        palette: ['#3a3a3a', '#ffffff', '#00ff00', '#ffff00'],
         state: {
            frame: 0, frameMax: 100,
-           a_video: 0.5
+           a_video: 0.5, a_breath: 0.5
         },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
 
+ctx.fillStyle = canObj.palette[3];
+ctx.fillRect(0,0, canvas.width * state.a_breath, 7);
 // whole video progress
 ctx.fillStyle = canObj.palette[2];
-ctx.fillRect(0,0, canvas.width * state.a_video, 10);
+ctx.fillRect(0,7, canvas.width * state.a_video, 15);
 
             ctx.fillStyle = canObj.palette[1];
             // text info
@@ -232,6 +234,12 @@ ctx.fillRect(0,0, canvas.width * state.a_video, 10);
             canObj_plane_map.state.frame = seq.frame;
             canObj_plane_map.state.frameMax = seq.frameMax;
             canObj_plane_map.state.a_video = seq.per;
+
+            const gud = group.userData;
+            const sec = gud.totalBreathSecs * gud.a_fullvid;
+            const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
+            canObj_plane_map.state.a_breath = a1;
+
             canvasMod.update(canObj_plane_map);
         },
         afterObjects: function(seq){
