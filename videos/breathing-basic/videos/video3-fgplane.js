@@ -53,7 +53,7 @@ VIDEO.init = function(sm, scene, camera){
     // alpha map for the plane that faces the camera
     const canObj_plane_alpha = canvasMod.create({
         size: 128,
-        palette: ['#ffffff', '#000000', '#aaaaaa'],
+        palette: ['#ffffff', '#000000', '#888888'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[1];
@@ -77,7 +77,7 @@ VIDEO.init = function(sm, scene, camera){
 
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
-        size: 256,
+        size: 512,
         palette: ['#3a3a3a', '#ffffff'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
@@ -85,8 +85,9 @@ VIDEO.init = function(sm, scene, camera){
             ctx.fillRect(0,0, canvas.width, canvas.height);
             ctx.fillStyle = canObj.palette[1];
             // text info
+            ctx.font = '18px arial';
             ctx.textBaseline = 'top';
-            ctx.fillText(sm.frame + ' / ' + sm.frameMax, 5, 5)
+            ctx.fillText(sm.frame + ' / ' + sm.frameMax, 5, 100)
         }
     });
     const texture_plane_map = canObj_plane_map.texture;
