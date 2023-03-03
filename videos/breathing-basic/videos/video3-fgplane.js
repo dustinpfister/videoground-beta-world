@@ -37,7 +37,7 @@ VIDEO.init = function(sm, scene, camera){
     const canObj_circles = canvasMod.create({
         size: 32,
         palette: ['#888800', '#ff0000'],
-        state: { foo: 'bar'},
+        state: {},
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
@@ -50,6 +50,23 @@ VIDEO.init = function(sm, scene, camera){
         }
     });
     const texture_circles = canObj_circles.texture;
+
+
+    // texture for circles
+    const canObj_plane_alpha = canvasMod.create({
+        size: 128,
+        palette: ['#ffffff', '#000000', '#888888'],
+        state: { },
+        draw: (canObj, ctx, canvas, state) => {
+            const width = canvas.width;
+            ctx.fillStyle = canObj.palette[1];
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = canObj.palette[2];
+            ctx.fillRect(0,0, width / 2, canvas.height / 4);
+        }
+    });
+    const texture_plane_alpha = canObj_plane_alpha.texture;
+
     //-------- ----------
     // MATERIALS
     //-------- ----------
@@ -66,27 +83,27 @@ VIDEO.init = function(sm, scene, camera){
         transparent: true,
         map: texture_circles
     });
-//-------- ----------
-// MESH
-//-------- ----------
-const material_plane = new THREE.MeshBasicMaterial({
-    //map: texture_plane_map, 
-    //alphaMap: texture_plane_alpha,
-    transparent: true,
-    opacity: 0.75
-});
-const geometry_plane = new THREE.PlaneGeometry(1, 1, 1, 1);
-const mesh_plane_1 = new THREE.Mesh(geometry_plane, material_plane);
-mesh_plane_1.scale.set(
-   camera.aspect,
-   1,
-   1
-);
-const group_plane = new THREE.Group();
-group_plane.add(mesh_plane_1);
-group_plane.add(camera);
-scene.add(group_plane);
-mesh_plane_1.position.z = 6.7;
+    const material_plane = new THREE.MeshBasicMaterial({
+        //map: texture_plane_map, 
+        alphaMap: texture_plane_alpha,
+        transparent: true,
+        opacity: 1
+    });
+    //-------- ----------
+    // PLANE
+    //-------- ----------
+    const geometry_plane = new THREE.PlaneGeometry(1, 1, 1, 1);
+    const mesh_plane_1 = new THREE.Mesh(geometry_plane, material_plane);
+    mesh_plane_1.scale.set(
+        camera.aspect,
+        1,
+        1
+    );
+    const group_plane = new THREE.Group();
+    group_plane.add(mesh_plane_1);
+    group_plane.add(camera);
+    scene.add(group_plane);
+    mesh_plane_1.position.z = 6.7;
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
     //-------- ----------

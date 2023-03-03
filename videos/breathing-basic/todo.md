@@ -14,8 +14,9 @@
 * () the speed at which the little dots move will go up and down with the breath
 
 ## () - video3-fgplane.js
-* () have a for ground mesh object that is a plane geometry that always faces the camera
-* () this can be based off of the s4-2-loop-plane-aspect from threejs-camera-perspective
+* (done) have a for ground mesh object that is a plane geometry that always faces the camera
+* (done) this can be based off of the s4-2-loop-plane-aspect from threejs-camera-perspective
+
 * () have a canvas for this mesh object and use it to display a progress bars
 * () have a progress bar for the current breath cycle
 * () have a progress bar for the whole video
