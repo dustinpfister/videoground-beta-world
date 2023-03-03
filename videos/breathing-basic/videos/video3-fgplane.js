@@ -66,6 +66,27 @@ VIDEO.init = function(sm, scene, camera){
         transparent: true,
         map: texture_circles
     });
+//-------- ----------
+// MESH
+//-------- ----------
+const material_plane = new THREE.MeshBasicMaterial({
+    //map: texture_plane_map, 
+    //alphaMap: texture_plane_alpha,
+    transparent: true,
+    opacity: 0.75
+});
+const geometry_plane = new THREE.PlaneGeometry(1, 1, 1, 1);
+const mesh_plane_1 = new THREE.Mesh(geometry_plane, material_plane);
+mesh_plane_1.scale.set(
+   camera.aspect,
+   1,
+   1
+);
+const group_plane = new THREE.Group();
+group_plane.add(mesh_plane_1);
+group_plane.add(camera);
+scene.add(group_plane);
+mesh_plane_1.position.z = 6.7;
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
     //-------- ----------
