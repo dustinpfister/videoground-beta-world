@@ -11,10 +11,21 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 2;
+    const BREATH_SECS = 60 * 2.0;
     const BREATH_PER_MINUTE = 5;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const CIRCLE_COUNT = 3;
+
+    //!!! might want to add this as a public method for R1 of breath.js
+    const secsToTimeStr = (totalSecs) => {
+        const minutes = Math.floor( totalSecs / 60 );
+        const secs = Math.floor(totalSecs % 60);
+        return String(minutes).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
+    };
+
+    const BREATH_TIMESTR = secsToTimeStr( BREATH_SECS );
+
+
     //-------- ----------
     // CANVAS TEXTURES - for the background, mesh objects, ect
     //-------- ----------
@@ -81,25 +92,26 @@ VIDEO.init = function(sm, scene, camera){
         palette: ['#3a3a3a', '#ffffff', '#00ff00', '#ffff00'],
         state: {
            frame: 0, frameMax: 100,
-           a_video: 0.5, a_breath: 0.5
+           a_video: 0.5, a_breath: 0.5,
+           timeStr: ''
         },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
 
 ctx.fillStyle = canObj.palette[3];
-ctx.fillRect(0,0, canvas.width * state.a_breath, 7);
+ctx.fillRect(0,0, canvas.width * state.a_breath, 5);
 // whole video progress
 ctx.fillStyle = canObj.palette[2];
-ctx.fillRect(0,7, canvas.width * state.a_video, 7);
+ctx.fillRect(0,6, canvas.width * state.a_video, 5);
 
             ctx.fillStyle = canObj.palette[1];
             // text info
-            ctx.font = '18px arial';
+            ctx.font = '16px arial';
             ctx.textBaseline = 'top';
 
             ctx.fillText('BPM: ' + BREATH_PER_MINUTE, 5, 20);
-            ctx.fillText('BPM: ' + BREATH_PER_MINUTE, 5, 20);
+            ctx.fillText(state.timeStr + ' / ' + BREATH_TIMESTR, 5, 80);
 
             ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100);
         }
@@ -248,6 +260,7 @@ ctx.fillRect(0,7, canvas.width * state.a_video, 7);
             const sec = gud.totalBreathSecs * gud.a_fullvid;
             const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
             canState.a_breath = a1;
+            canState.timeStr = secsToTimeStr(sec);
             canvasMod.update(canObj_plane_map);
 
         },
