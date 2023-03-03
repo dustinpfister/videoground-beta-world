@@ -20,8 +20,14 @@ VIDEO.init = function(sm, scene, camera){
         color: 0x00ffff,
         emissive: 0xffffff,
         emissiveIntensity: 0.1,
-        transparent: true,
-        opacity: 1
+        transparent: true
+    });
+
+    const material_circles = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        emissive: 0xffffff,
+        emissiveIntensity: 0.1,
+        transparent: true
     });
 
     //-------- ----------
@@ -40,7 +46,7 @@ VIDEO.init = function(sm, scene, camera){
     const group_circles = new THREE.Group();
     let ic = 0;
     while(ic < 3){
-        const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_orbs.clone() );
+        const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_circles.clone() );
         mesh.position.z = -0.5 - 1 * ic;
         group_circles.add(mesh);
         ic += 1;
