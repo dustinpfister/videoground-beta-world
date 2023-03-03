@@ -13,7 +13,8 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const BREATH_SECS = 60 * 2.0;
     const BREATH_PER_MINUTE = 5;
-    const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
+    const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
+    const BREATH_PARTS = {restLow: 1, breathIn: 7, restHigh: 1, breathOut: 14};
     const CIRCLE_COUNT = 3;
 
     //!!! might want to add this as a public method for R1 of breath.js
@@ -22,8 +23,29 @@ VIDEO.init = function(sm, scene, camera){
         const secs = Math.floor(totalSecs % 60);
         return String(minutes).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
     };
+    //!!! might want to make this public, or have a GUD prop
+    // get the sum of a breath parts object
+    const getBreathPartsSum = (breathParts) => {
+        return Object.keys( breathParts ).reduce( ( acc, key ) => { return acc + breathParts[key]; }, 0);
+    };
+
+    const BREATH_PARTS_SUM = getBreathPartsSum(BREATH_PARTS);
 
     const BREATH_TIMESTR = secsToTimeStr( BREATH_SECS );
+    const BREATH_PARTS_STR = Object.keys(BREATH_PARTS).reduce( (acc, key, i) => {
+        //acc += key + ': ' + BREATH_PARTS[key] + ' ';
+
+const n = BREATH_PARTS[key];
+const a = n / BREATH_PARTS_SUM;
+const s = BREATH_SECS_PER_CYCLE * a;
+//BREATH_PARTS_SUM
+
+        acc += s.toFixed(2) + (i === 3 ? '' : ', ');
+        return acc;
+    }, '');
+
+
+console.log(BREATH_PARTS_STR);
 
 
     //-------- ----------
@@ -110,7 +132,10 @@ ctx.fillRect(0,6, canvas.width * state.a_video, 5);
             ctx.font = '16px arial';
             ctx.textBaseline = 'top';
 
-            ctx.fillText('BPM: ' + BREATH_PER_MINUTE, 5, 20);
+            ctx.fillText('BPM: ' + BREATH_PER_MINUTE + ' ( ' + BREATH_SECS_PER_CYCLE.toFixed(1) +' sec cycles )', 5, 20);
+            ctx.fillText('PARTS: ' + BREATH_PARTS_STR, 5, 40);
+
+
             ctx.fillText(state.timeStr + ' / ' + BREATH_TIMESTR, 5, 80);
 
             ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100);
