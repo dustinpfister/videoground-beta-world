@@ -50,38 +50,47 @@ VIDEO.init = function(sm, scene, camera){
         }
     });
     const texture_circles = canObj_circles.texture;
-
-
-    // texture for circles
+    // alpha map for the plane that faces the camera
     const canObj_plane_alpha = canvasMod.create({
         size: 128,
-        palette: ['#ffffff', '#000000', '#888888'],
+        palette: ['#ffffff', '#000000', '#aaaaaa'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
-
             ctx.fillStyle = canObj.palette[1];
             ctx.fillRect(0,0, canvas.width, canvas.height);
-
-ctx.fillStyle = canObj.palette[2];
-const ymax = canvas.height / 4;
-ctx.beginPath();
-ctx.moveTo( 0, 0 );
-ctx.lineTo( 0, ymax );
-ctx.lineTo( canvas.width / 4, ymax);
-ctx.bezierCurveTo(
-    canvas.width * 0.5, ymax * 1.00,
-    canvas.width * 0.75, ymax * 0.50,
-    canvas.width, ymax / 2 );
-ctx.lineTo(canvas.width, 0);
-ctx.fill();
-
-
-//            const width = canvas.width;
-//            ctx.fillStyle = canObj.palette[2];
-//            ctx.fillRect(0,0, width / 2, canvas.height / 4);
+            ctx.fillStyle = canObj.palette[2];
+            const ymax = canvas.height / 4;
+            ctx.beginPath();
+            ctx.moveTo( 0, 0 );
+            ctx.lineTo( 0, ymax );
+            ctx.lineTo( canvas.width / 4, ymax);
+            ctx.bezierCurveTo(
+                canvas.width * 0.5, ymax * 1.00,
+                canvas.width * 0.75, ymax * 0.50,
+                canvas.width, ymax / 2 );
+            ctx.lineTo(canvas.width, 0);
+            ctx.fill();
         }
     });
     const texture_plane_alpha = canObj_plane_alpha.texture;
+
+
+    // diffue color map for the plane that faces the camera
+    const canObj_plane_map = canvasMod.create({
+        size: 256,
+        palette: ['#3a3a3a', '#ffffff'],
+        state: { },
+        draw: (canObj, ctx, canvas, state) => {
+            ctx.fillStyle = canObj.palette[0];
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = canObj.palette[1];
+            // text info
+            ctx.textBaseline = 'top';
+            ctx.fillText(sm.frame + ' / ' + sm.frameMax, 5, 5)
+        }
+    });
+    const texture_plane_map = canObj_plane_map.texture;
+
 
     //-------- ----------
     // MATERIALS
@@ -100,7 +109,7 @@ ctx.fill();
         map: texture_circles
     });
     const material_plane = new THREE.MeshBasicMaterial({
-        //map: texture_plane_map, 
+        map: texture_plane_map, 
         alphaMap: texture_plane_alpha,
         transparent: true,
         opacity: 1
@@ -119,7 +128,7 @@ ctx.fill();
     group_plane.add(mesh_plane_1);
     group_plane.add(camera);
     scene.add(group_plane);
-    mesh_plane_1.position.z = 6.7;
+    mesh_plane_1.position.z = 6.62;
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
     //-------- ----------
@@ -211,6 +220,7 @@ ctx.fill();
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
             BreathMod.update(group, seq.per);
+            canvasMod.update(canObj_plane_map);
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
