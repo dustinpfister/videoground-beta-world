@@ -53,7 +53,7 @@ VIDEO.init = function(sm, scene, camera){
     // alpha map for the plane that faces the camera
     const canObj_plane_alpha = canvasMod.create({
         size: 128,
-        palette: ['#ffffff', '#000000', '#888888'],
+        palette: ['#ffffff', '#000000', '#5f5f5f'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[1];
@@ -78,16 +78,24 @@ VIDEO.init = function(sm, scene, camera){
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
-        palette: ['#3a3a3a', '#ffffff'],
-        state: { },
+        palette: ['#3a3a3a', '#ffffff', '#00ff00'],
+        state: {
+           frame: 0, frameMax: 100,
+           a_video: 0.5
+        },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
+
+// whole video progress
+ctx.fillStyle = canObj.palette[2];
+ctx.fillRect(0,0, canvas.width * state.a_video, 10);
+
             ctx.fillStyle = canObj.palette[1];
             // text info
             ctx.font = '18px arial';
             ctx.textBaseline = 'top';
-            ctx.fillText(sm.frame + ' / ' + sm.frameMax, 5, 100)
+            ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100)
         }
     });
     const texture_plane_map = canObj_plane_map.texture;
@@ -221,6 +229,9 @@ VIDEO.init = function(sm, scene, camera){
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
             BreathMod.update(group, seq.per);
+            canObj_plane_map.state.frame = seq.frame;
+            canObj_plane_map.state.frameMax = seq.frameMax;
+            canObj_plane_map.state.a_video = seq.per;
             canvasMod.update(canObj_plane_map);
         },
         afterObjects: function(seq){
