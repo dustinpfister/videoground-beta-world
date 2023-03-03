@@ -1,5 +1,5 @@
-// video3-breathr0.js from template8-breathing
-//    * using breath.js R0
+// video2-circles.js from breathing-basic beta world video project
+//    * added circle mesh objects that update with breath.js group
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',

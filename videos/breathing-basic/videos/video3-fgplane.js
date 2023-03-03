@@ -1,6 +1,5 @@
-// video1-clean.js from breathing-basic beta world video project
-//    * using breath.js R0
-//    * clean start with custom logic for curve, mesh, and hook updates
+// video3-fgplane.js from breathing-basic beta world video project
+//    * 
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -15,6 +14,81 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_SECS = 60 * 2;
     const BREATH_PER_MINUTE = 5;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
+    const CIRCLE_COUNT = 3;
+    //-------- ----------
+    // CANVAS TEXTURES - for the background, mesh objects, ect
+    //-------- ----------
+    const canObj_bg = canvasMod.create({
+        size: 512,
+        draw: 'grid_palette',
+        palette: ['#000000', '#1f1f1f', '#00ffff'],
+        dataParse: 'lzstring64',
+        state: { w: 8, h: 5, data: 'AwGlEYyzNCVgpcmPit1mqvTsg===' }
+    });
+    // can use LZString to compress and decompress
+    //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
+    // I want to repeat the texture
+    const texture_bg = canObj_bg.texture;
+    texture_bg.wrapS = THREE.RepeatWrapping;
+    texture_bg.wrapT = THREE.RepeatWrapping;
+    texture_bg.repeat.set(32, 24);
+    scene.background = texture_bg;
+    // texture for circles
+    const canObj_circles = canvasMod.create({
+        size: 32,
+        palette: ['#888800', '#ff0000'],
+        state: { foo: 'bar'},
+        draw: (canObj, ctx, canvas, state) => {
+            ctx.fillStyle = canObj.palette[0];
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+            ctx.strokeStyle = canObj.palette[1];
+            ctx.beginPath();
+            const radius = canvas.width / 2;
+            ctx.lineWidth = 3;
+            ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+    });
+    const texture_circles = canObj_circles.texture;
+    //-------- ----------
+    // MATERIALS
+    //-------- ----------
+    const material_orbs = new THREE.MeshPhongMaterial({
+        color: 0xffff00,
+        emissive: 0xffffff,
+        emissiveIntensity: 0.1,
+        transparent: true
+    });
+    const material_circles = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        emissive: 0xffffff,
+        emissiveIntensity: 0.1,
+        transparent: true,
+        map: texture_circles
+    });
+    //-------- ----------
+    // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
+    //-------- ----------
+    // update circle group
+    const updateCircleGroup = (group_circles, alpha) => {
+        group_circles.children.forEach( (mesh, i, arr) => {
+            const sd = (i + 1) * 0.75 * alpha;
+            const s = 1 + sd;
+            group_circles.scale.set(s, s, s);
+            mesh.material.opacity = 0.25 + 1 / arr.length * i * 0.75 * alpha;
+        });
+    };
+    // create circle group
+    const group_circles = new THREE.Group();
+    let ic = 0;
+    while(ic < CIRCLE_COUNT){
+        const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_circles.clone() );
+        mesh.position.z = -0.5 - 1 * ic;
+        group_circles.add(mesh);
+        ic += 1;
+    }
+    scene.add(group_circles);
+    updateCircleGroup(group_circles, 0);
     //-------- ----------
     // BREATH GROUP 
     //-------- ----------
@@ -47,22 +121,24 @@ VIDEO.init = function(sm, scene, camera){
         hooks : {
             restLow : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
                 updateGroup(group, 0);
+                updateCircleGroup(group_circles, 0);
             },
             restHigh : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
                 updateGroup(group, 1);
+                updateCircleGroup(group_circles, 1);
             },
             breathIn : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
-                updateGroup(group, Math.sin(Math.PI * 0.5 * a_breathPart));
+                const a1 = Math.sin(Math.PI * 0.5 * a_breathPart);
+                updateGroup(group, a1);
+                updateCircleGroup(group_circles, a1);
             },
             breathOut : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
-                updateGroup(group, 1 - Math.sin(Math.PI * 0.5 * a_breathPart));
+                const a1 = 1 - Math.sin(Math.PI * 0.5 * a_breathPart);
+                updateGroup(group, a1);
+                updateCircleGroup(group_circles, a1);
             }
         },
-        material: new THREE.MeshPhongMaterial({
-            color: 0x00ffff,
-            emissive: 0xffffff,
-            emissiveIntensity: 0.1
-        })
+        material: material_orbs
     });
     scene.add(group);
     //-------- ----------
@@ -71,24 +147,6 @@ VIDEO.init = function(sm, scene, camera){
     const dl = new THREE.DirectionalLight(0xffffff, 1);
     dl.position.set(0,2,1)
     scene.add(dl);
-    //-------- ----------
-    // BACKGROUND - using canvas2 and lz-string to create a background texture
-    //-------- ----------
-    const canObj = canvasMod.create({
-        size: 512,
-        draw: 'grid_palette',
-        palette: ['#000000', '#1f1f1f', '#00ffff'],
-        dataParse: 'lzstring64',
-        state: { w: 8, h: 5, data: 'AwGlEYyzNCVgpcmPit1mqvTsg===' }
-    });
-    // can use LZString to compress and decompress
-    //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
-    // I want to repeat the texture
-    const texture = canObj.texture;
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(32, 24);
-    scene.background = texture;
     //-------- ----------
     // A MAIN SEQ OBJECT
     //-------- ----------
