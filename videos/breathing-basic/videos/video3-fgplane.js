@@ -91,13 +91,17 @@ ctx.fillStyle = canObj.palette[3];
 ctx.fillRect(0,0, canvas.width * state.a_breath, 7);
 // whole video progress
 ctx.fillStyle = canObj.palette[2];
-ctx.fillRect(0,7, canvas.width * state.a_video, 15);
+ctx.fillRect(0,7, canvas.width * state.a_video, 7);
 
             ctx.fillStyle = canObj.palette[1];
             // text info
             ctx.font = '18px arial';
             ctx.textBaseline = 'top';
-            ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100)
+
+            ctx.fillText('BPM: ' + BREATH_PER_MINUTE, 5, 20);
+            ctx.fillText('BPM: ' + BREATH_PER_MINUTE, 5, 20);
+
+            ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100);
         }
     });
     const texture_plane_map = canObj_plane_map.texture;
@@ -228,19 +232,24 @@ ctx.fillRect(0,7, canvas.width * state.a_video, 15);
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
+
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
-            BreathMod.update(group, seq.per);
-            canObj_plane_map.state.frame = seq.frame;
-            canObj_plane_map.state.frameMax = seq.frameMax;
-            canObj_plane_map.state.a_video = seq.per;
 
+            BreathMod.update(group, seq.per);
+
+            // diffuse map for plane
+            const canState = canObj_plane_map.state;
+            canState.frame = seq.frame;
+            canState.frameMax = seq.frameMax;
+            canState.a_video = seq.per;
+            // this is done in R0 of breath.js but it is not public, added a fix for R1 in the todo list
             const gud = group.userData;
             const sec = gud.totalBreathSecs * gud.a_fullvid;
             const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
-            canObj_plane_map.state.a_breath = a1;
-
+            canState.a_breath = a1;
             canvasMod.update(canObj_plane_map);
+
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
