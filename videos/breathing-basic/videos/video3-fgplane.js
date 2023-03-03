@@ -58,11 +58,27 @@ VIDEO.init = function(sm, scene, camera){
         palette: ['#ffffff', '#000000', '#888888'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
-            const width = canvas.width;
+
             ctx.fillStyle = canObj.palette[1];
             ctx.fillRect(0,0, canvas.width, canvas.height);
-            ctx.fillStyle = canObj.palette[2];
-            ctx.fillRect(0,0, width / 2, canvas.height / 4);
+
+ctx.fillStyle = canObj.palette[2];
+const ymax = canvas.height / 4;
+ctx.beginPath();
+ctx.moveTo( 0, 0 );
+ctx.lineTo( 0, ymax );
+ctx.lineTo( canvas.width / 4, ymax);
+ctx.bezierCurveTo(
+    canvas.width * 0.5, ymax * 1.00,
+    canvas.width * 0.75, ymax * 0.50,
+    canvas.width, ymax / 2 );
+ctx.lineTo(canvas.width, 0);
+ctx.fill();
+
+
+//            const width = canvas.width;
+//            ctx.fillStyle = canObj.palette[2];
+//            ctx.fillRect(0,0, width / 2, canvas.height / 4);
         }
     });
     const texture_plane_alpha = canObj_plane_alpha.texture;
