@@ -110,13 +110,14 @@ VIDEO.init = function(sm, scene, camera){
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
-        palette: ['#3a3a3a', '#ffffff', '#00ff00', '#ffff00'],
+        palette: ['#000000', '#ffffff', '#00ff00', '#ffff00'],
         state: {
            frame: 0, frameMax: 100,
            a_video: 0.5, a_breath: 0.5,
            timeStr: ''
         },
         draw: (canObj, ctx, canvas, state) => {
+            ctx.clearRect( 0, 0, canvas.width, canvas.height );
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
             // breath progress
