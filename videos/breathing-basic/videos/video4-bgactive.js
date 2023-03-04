@@ -39,6 +39,9 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CANVAS TEXTURES - for the background, mesh objects, ect
     //-------- ----------
+
+
+/*
     const canObj_bg = canvasMod.create({
         size: 512,
         draw: 'grid_palette',
@@ -46,6 +49,18 @@ VIDEO.init = function(sm, scene, camera){
         dataParse: 'lzstring64',
         state: { w: 8, h: 5, data: 'AwGlEYyzNCVgpcmPit1mqvTsg===' }
     });
+*/
+
+    const canObj_bg = canvasMod.create({
+        size: 512,
+        palette: ['#000000', '#ffffff', '#00ffff'],
+        state: {  },
+        draw: (canObj, ctx, canvas, state) => {
+            ctx.fillStyle = canObj.palette[0];
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+        }
+    });
+
     // can use LZString to compress and decompress
     //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
     // I want to repeat the texture
@@ -74,7 +89,7 @@ VIDEO.init = function(sm, scene, camera){
     // alpha map for the plane that faces the camera
     const canObj_plane_alpha = canvasMod.create({
         size: 128,
-        palette: ['#ffffff', '#000000', '#4f4f4f'],
+        palette: ['#ffffff', '#000000', '#afafaf'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[1];
@@ -106,14 +121,15 @@ VIDEO.init = function(sm, scene, camera){
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
-            ctx.fillStyle = canObj.palette[3];
-            ctx.fillRect(0,0, canvas.width * state.a_breath, 5);
-            // whole video progress
+            // breath progress
             ctx.fillStyle = canObj.palette[2];
-            ctx.fillRect(0,6, canvas.width * state.a_video, 5);
+            ctx.fillRect(0,2, canvas.width * state.a_breath, 5);
+            // whole video progress
+            ctx.fillStyle = canObj.palette[3];
+            ctx.fillRect(0,7, canvas.width * state.a_video, 5);
             ctx.fillStyle = canObj.palette[1];
             // text info
-            ctx.font = '16px arial';
+            ctx.font = '20px arial';
             ctx.textBaseline = 'top';
             ctx.fillText('BPM: ' + BREATH_PER_MINUTE + ' ( ' + BREATH_SECS_PER_CYCLE.toFixed(1) +' sec cycles )', 5, 20);
             ctx.fillText('PARTS: ' + BREATH_PARTS_STR, 5, 40);
@@ -158,7 +174,7 @@ VIDEO.init = function(sm, scene, camera){
     group_plane.add(mesh_plane_1);
     group_plane.add(camera);
     scene.add(group_plane);
-    mesh_plane_1.position.z = 6.62;
+    mesh_plane_1.position.z = 6.625;
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
     //-------- ----------
