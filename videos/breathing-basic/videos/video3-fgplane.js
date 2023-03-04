@@ -160,7 +160,7 @@ VIDEO.init = function(sm, scene, camera){
     group_plane.add(mesh_plane_1);
     group_plane.add(camera);
     scene.add(group_plane);
-    mesh_plane_1.position.z = 6.62;
+    mesh_plane_1.position.z = 6.63;
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
     //-------- ----------
