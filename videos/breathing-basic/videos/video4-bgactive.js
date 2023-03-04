@@ -52,27 +52,25 @@ VIDEO.init = function(sm, scene, camera){
 */
 
     const canObj_bg = canvasMod.create({
-        size: 512,
-        palette: ['#000000', '#ffffff', '#00ffff'],
+        size: 256,
+        palette: ['#00eeee', '#0000ee', '#eeee00', '#ee0000'],
         state: {  },
         draw: (canObj, ctx, canvas, state) => {
-            ctx.fillStyle = canObj.palette[0];
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            canObj.palette.forEach( (color, i, arr) => {
+                const offset = i / (arr.length - 1);
+                gradient.addColorStop(offset, color);
+            });
+            ctx.fillStyle = gradient;
             ctx.fillRect(0,0, canvas.width, canvas.height);
         }
     });
-
-    // can use LZString to compress and decompress
-    //console.log( LZString.decompressFromBase64('AwGlEYyzNCVgpcmPit1mqvTsg===') );
-    // I want to repeat the texture
     const texture_bg = canObj_bg.texture;
-    texture_bg.wrapS = THREE.RepeatWrapping;
-    texture_bg.wrapT = THREE.RepeatWrapping;
-    texture_bg.repeat.set(32, 24);
     scene.background = texture_bg;
     // texture for circles
     const canObj_circles = canvasMod.create({
         size: 32,
-        palette: ['#888800', '#ff0000'],
+        palette: ['#ffff00', '#ff0000'],
         state: {},
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
@@ -184,7 +182,7 @@ VIDEO.init = function(sm, scene, camera){
             const sd = (i + 1) * 0.75 * alpha;
             const s = 1 + sd;
             group_circles.scale.set(s, s, s);
-            mesh.material.opacity = 0.25 + 1 / arr.length * i * 0.75 * alpha;
+            mesh.material.opacity = 0.25 + 1 / (arr.length + 0) * i * 0.5 * alpha;
         });
     };
     // create circle group
