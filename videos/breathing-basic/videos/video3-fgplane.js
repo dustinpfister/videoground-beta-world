@@ -12,7 +12,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 0.25;
+    const BREATH_SECS = 60 * 1;
     const BREATH_PER_MINUTE = 5;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
@@ -108,11 +108,12 @@ VIDEO.init = function(sm, scene, camera){
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
+            // breath progress
             ctx.fillStyle = canObj.palette[3];
-            ctx.fillRect(0,0, canvas.width * state.a_breath, 5);
+            ctx.fillRect(0,6, canvas.width * state.a_breath, 5);
             // whole video progress
             ctx.fillStyle = canObj.palette[2];
-            ctx.fillRect(0,6, canvas.width * state.a_video, 5);
+            ctx.fillRect(0,0, canvas.width * state.a_video, 5);
             ctx.fillStyle = canObj.palette[1];
             // text info
             ctx.font = '16px arial';
