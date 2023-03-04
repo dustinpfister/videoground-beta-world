@@ -1,5 +1,6 @@
 // video3-fgplane.js from breathing-basic beta world video project
-//    * 
+//    * Added a foreground plane that can be used to display info
+//    * using forground plane to display into about video settings and frame by frame state data
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -28,26 +29,15 @@ VIDEO.init = function(sm, scene, camera){
     const getBreathPartsSum = (breathParts) => {
         return Object.keys( breathParts ).reduce( ( acc, key ) => { return acc + breathParts[key]; }, 0);
     };
-
     const BREATH_PARTS_SUM = getBreathPartsSum(BREATH_PARTS);
-
     const BREATH_TIMESTR = secsToTimeStr( BREATH_SECS );
     const BREATH_PARTS_STR = Object.keys(BREATH_PARTS).reduce( (acc, key, i) => {
-        //acc += key + ': ' + BREATH_PARTS[key] + ' ';
-
-const n = BREATH_PARTS[key];
-const a = n / BREATH_PARTS_SUM;
-const s = BREATH_SECS_PER_CYCLE * a;
-//BREATH_PARTS_SUM
-
+        const n = BREATH_PARTS[key];
+        const a = n / BREATH_PARTS_SUM;
+        const s = BREATH_SECS_PER_CYCLE * a;
         acc += s.toFixed(2) + (i === 3 ? '' : ', ');
         return acc;
     }, '');
-
-
-console.log(BREATH_PARTS_STR);
-
-
     //-------- ----------
     // CANVAS TEXTURES - for the background, mesh objects, ect
     //-------- ----------
@@ -86,7 +76,7 @@ console.log(BREATH_PARTS_STR);
     // alpha map for the plane that faces the camera
     const canObj_plane_alpha = canvasMod.create({
         size: 128,
-        palette: ['#ffffff', '#000000', '#5f5f5f'],
+        palette: ['#ffffff', '#000000', '#4f4f4f'],
         state: { },
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[1];
@@ -106,8 +96,6 @@ console.log(BREATH_PARTS_STR);
         }
     });
     const texture_plane_alpha = canObj_plane_alpha.texture;
-
-
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
@@ -120,30 +108,22 @@ console.log(BREATH_PARTS_STR);
         draw: (canObj, ctx, canvas, state) => {
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
-
-ctx.fillStyle = canObj.palette[3];
-ctx.fillRect(0,0, canvas.width * state.a_breath, 5);
-// whole video progress
-ctx.fillStyle = canObj.palette[2];
-ctx.fillRect(0,6, canvas.width * state.a_video, 5);
-
+            ctx.fillStyle = canObj.palette[3];
+            ctx.fillRect(0,0, canvas.width * state.a_breath, 5);
+            // whole video progress
+            ctx.fillStyle = canObj.palette[2];
+            ctx.fillRect(0,6, canvas.width * state.a_video, 5);
             ctx.fillStyle = canObj.palette[1];
             // text info
             ctx.font = '16px arial';
             ctx.textBaseline = 'top';
-
             ctx.fillText('BPM: ' + BREATH_PER_MINUTE + ' ( ' + BREATH_SECS_PER_CYCLE.toFixed(1) +' sec cycles )', 5, 20);
             ctx.fillText('PARTS: ' + BREATH_PARTS_STR, 5, 40);
-
-
             ctx.fillText(state.timeStr + ' / ' + BREATH_TIMESTR, 5, 80);
-
             ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100);
         }
     });
     const texture_plane_map = canObj_plane_map.texture;
-
-
     //-------- ----------
     // MATERIALS
     //-------- ----------
@@ -269,12 +249,11 @@ ctx.fillRect(0,6, canvas.width * state.a_video, 5);
     const opt_seq = {
         fps: 30,
         beforeObjects: function(seq){
-
+            // camera
             camera.position.set(0, 0, 8);
             camera.zoom = 1;
-
+            // breath grouo
             BreathMod.update(group, seq.per);
-
             // diffuse map for plane
             const canState = canObj_plane_map.state;
             canState.frame = seq.frame;
@@ -287,7 +266,6 @@ ctx.fillRect(0,6, canvas.width * state.a_video, 5);
             canState.a_breath = a1;
             canState.timeStr = secsToTimeStr(sec);
             canvasMod.update(canObj_plane_map);
-
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
