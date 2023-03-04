@@ -1,6 +1,4 @@
-// video3-fgplane.js from breathing-basic beta world video project
-//    * Added a foreground plane that can be used to display info
-//    * using forground plane to display into about video settings and frame by frame state data
+// video4-bgactive.js from breathing-basic beta world video project
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -12,7 +10,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 0.25;
+    const BREATH_SECS = 60 * 1.0;
     const BREATH_PER_MINUTE = 5;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
