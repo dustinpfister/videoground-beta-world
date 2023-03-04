@@ -9,7 +9,8 @@
 * () like with the canvas background have the
 
 ## () - video4-bgactive.js
-* () new canvas texture for background that will update over time
+* (done) new canvas texture for background that will update over time
+* (done) gradient background with color stops that update over time
 * () have the background be a bunch of little dots that always move out from the center
 * () the speed at which the little dots move will go up and down with the breath
 

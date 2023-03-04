@@ -39,28 +39,23 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CANVAS TEXTURES - for the background, mesh objects, ect
     //-------- ----------
-
-
-/*
-    const canObj_bg = canvasMod.create({
-        size: 512,
-        draw: 'grid_palette',
-        palette: ['#000000', '#1f1f1f', '#00ffff'],
-        dataParse: 'lzstring64',
-        state: { w: 8, h: 5, data: 'AwGlEYyzNCVgpcmPit1mqvTsg===' }
-    });
-*/
-
+    // canvas object for the background
     const canObj_bg = canvasMod.create({
         size: 256,
-        palette: ['#00eeee', '#0000ee', '#eeee00', '#ee0000'],
-        state: {  },
+        //palette: ['#00eeee', '#0000ee', '#eeee00', '#ee0000'],
+        palette: ['#00eeee', '#0000ee'],
+        state: {  alpha: 1 },
         draw: (canObj, ctx, canvas, state) => {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+/*
             canObj.palette.forEach( (color, i, arr) => {
                 const offset = i / (arr.length - 1);
                 gradient.addColorStop(offset, color);
             });
+*/
+            gradient.addColorStop(0.4 - 0.4 * state.alpha, canObj.palette[0]);
+            gradient.addColorStop(0.6 + 0.4 * state.alpha, canObj.palette[1]);
+
             ctx.fillStyle = gradient;
             ctx.fillRect(0,0, canvas.width, canvas.height);
         }
@@ -110,7 +105,7 @@ VIDEO.init = function(sm, scene, camera){
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
-        palette: ['#000000', '#ffffff', '#00ff00', '#ffff00'],
+        palette: ['rgba(0,0,0,0.5)', '#ffffff', '#00ff00', '#ffff00'],
         state: {
            frame: 0, frameMax: 100,
            a_video: 0.5, a_breath: 0.5,
@@ -279,6 +274,11 @@ VIDEO.init = function(sm, scene, camera){
             canState.a_breath = a1;
             canState.timeStr = secsToTimeStr(sec);
             canvasMod.update(canObj_plane_map);
+
+
+canObj_bg.state.alpha = Math.sin( Math.PI * 1.0 * a1 )
+canvasMod.update(canObj_bg);
+
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
