@@ -69,14 +69,17 @@ VIDEO.init = function(sm, scene, camera){
                 v2.y = canvas.height / 2 + Math.sin(radian) * unit_length * (canvas.height * 0.8);
 
                 const color_dot = new THREE.Color(canObj.palette[2]);
-                ctx.fillStyle = color_dot.getStyle();
+                const r = Math.round(color_dot.r * 255);
+                const g = Math.round(color_dot.g * 255);
+                const b = Math.round(color_dot.b * 255);
+                const a = unit_length < 0.25 ? unit_length / 0.25 : 1;
+                ctx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
                 ctx.beginPath();
                 const radiusX = canvas.width / (16 * 6);
                 const radiusY = canvas.height / (16 * 6);
                 ctx.ellipse(v2.x, v2.y, radiusX, radiusY, 0, 0, Math.PI * 2);
                 ctx.fill();
             });
-
         }
     });
     const texture_bg = canObj_bg.texture;

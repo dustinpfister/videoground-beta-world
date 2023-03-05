@@ -14,13 +14,12 @@
 * (done) have the background be a bunch of little dots that always move out from the center
 * (done) a-gradient and a-dots alpha state object values for canObj-bg.
 * (done) use ctx.ellipse over that of ctx.arc when drawing dots
+* (done) add more dots, say 28 in total
+* (done) have the opacity of each dot start out fully transparent when at the center
+* (done) opacity of dots should become fully opaque at about 0.25 of unit length
+* (done) the dots should always go outward
 
-* () have the opacity of each dot start out fully transparent when at the center
-* () opacity of dots should become fully opaque at about 0.25 of unit length
-* () add more dots
-
-
-* () the speed at which the little dots move will go up and down with the breath, but should always go outward
+* () a-dots state value should be updated by an alpha value that will be consistant, per minute rather than over whole video
 
 ## ( done 03/03/2023 ) - video3-fgplane.js
 * (done) have a for ground mesh object that is a plane geometry that always faces the camera
