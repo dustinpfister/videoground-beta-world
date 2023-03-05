@@ -11,8 +11,15 @@
 ## () - video4-bgactive.js
 * (done) new canvas texture for background that will update over time
 * (done) gradient background with color stops that update over time
-* () have the background be a bunch of little dots that always move out from the center
-* () the speed at which the little dots move will go up and down with the breath
+* (done) have the background be a bunch of little dots that always move out from the center
+
+* () have the opacity of each dot start out fully transparent when at the center
+* () opacity of dots should become fully opaque at about 0.25 of unit length
+* () add more dots
+
+* () see about adjusting texture values to get dots to be more circle rather than oval shape
+
+* () the speed at which the little dots move will go up and down with the breath, but should always go outward
 
 ## ( done 03/03/2023 ) - video3-fgplane.js
 * (done) have a for ground mesh object that is a plane geometry that always faces the camera

@@ -15,7 +15,6 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const CIRCLE_COUNT = 3;
-
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
         const minutes = Math.floor( totalSecs / 60 );
@@ -43,14 +42,38 @@ VIDEO.init = function(sm, scene, camera){
     const canObj_bg = canvasMod.create({
         size: 256,
         //palette: ['#00eeee', '#0000ee', '#eeee00', '#ee0000'],
-        palette: ['#00eeee', '#0000ee'],
-        state: {  alpha: 1 },
+        palette: ['#00eeee', '#0000ee', '#ffffff'],
+        state: {
+            alpha: 1,
+            dots: [
+                [ 0, 0.25 ],
+                [ 45, 0.15 ],
+                [ 90, 0.8 ],
+                [ 180, 0.37 ],
+                [ 270, 0.95 ],
+                [ 315, 0.75 ]
+            ]
+        },
         draw: (canObj, ctx, canvas, state) => {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0.4 - 0.4 * state.alpha, canObj.palette[0]);
             gradient.addColorStop(0.6 + 0.4 * state.alpha, canObj.palette[1]);
             ctx.fillStyle = gradient;
             ctx.fillRect(0,0, canvas.width, canvas.height);
+
+
+            state.dots.forEach( (arr) => {
+                const radian = Math.PI / 180 * arr[0];
+                const unit_length = (arr[1] + state.alpha) % 1;
+                const v2 = new THREE.Vector2(0, 1);
+                v2.x = canvas.width / 2 + Math.cos(radian) * unit_length * (canvas.width * 0.8);
+                v2.y = canvas.height / 2 + Math.sin(radian) * unit_length * (canvas.height * 0.8);
+                ctx.fillStyle = canObj.palette[2];
+                ctx.beginPath();
+                ctx.arc(v2.x, v2.y, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
         }
     });
     const texture_bg = canObj_bg.texture;
