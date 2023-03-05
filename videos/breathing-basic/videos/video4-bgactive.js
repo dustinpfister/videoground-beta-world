@@ -41,8 +41,7 @@ VIDEO.init = function(sm, scene, camera){
     // canvas object for the background
     const canObj_bg = canvasMod.create({
         size: 256,
-        //palette: ['#00eeee', '#0000ee', '#eeee00', '#ee0000'],
-        palette: ['#00eeee', '#0000ee', '#ffffff'],
+        palette: ['#00eeee', '#0000ee', '#dfdfdf'],
         state: {
             a_gradient: 1,
             a_dots: 0.5,
@@ -67,13 +66,13 @@ VIDEO.init = function(sm, scene, camera){
                 const v2 = new THREE.Vector2(0, 1);
                 v2.x = canvas.width / 2 + Math.cos(radian) * unit_length * (canvas.width * 0.8);
                 v2.y = canvas.height / 2 + Math.sin(radian) * unit_length * (canvas.height * 0.8);
-                ctx.fillStyle = canObj.palette[2];
-                ctx.beginPath();
 
+                const color_dot = new THREE.Color(canObj.palette[2]);
+                ctx.fillStyle = color_dot.getStyle();
+                ctx.beginPath();
                 const radiusX = canvas.width / (16 * 6);
                 const radiusY = canvas.height / (16 * 6);
                 ctx.ellipse(v2.x, v2.y, radiusX, radiusY, 0, 0, Math.PI * 2);
-
                 ctx.fill();
             });
 
