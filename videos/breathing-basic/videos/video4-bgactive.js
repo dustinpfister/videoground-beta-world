@@ -47,15 +47,8 @@ VIDEO.init = function(sm, scene, camera){
         state: {  alpha: 1 },
         draw: (canObj, ctx, canvas, state) => {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-/*
-            canObj.palette.forEach( (color, i, arr) => {
-                const offset = i / (arr.length - 1);
-                gradient.addColorStop(offset, color);
-            });
-*/
             gradient.addColorStop(0.4 - 0.4 * state.alpha, canObj.palette[0]);
             gradient.addColorStop(0.6 + 0.4 * state.alpha, canObj.palette[1]);
-
             ctx.fillStyle = gradient;
             ctx.fillRect(0,0, canvas.width, canvas.height);
         }
@@ -105,7 +98,7 @@ VIDEO.init = function(sm, scene, camera){
     // diffue color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
-        palette: ['rgba(0,0,0,0.5)', '#ffffff', '#00ff00', '#ffff00'],
+        palette: ['rgba(0,0,0,0.5)', '#ffffff', '#ffff00', '#00ff00'],
         state: {
            frame: 0, frameMax: 100,
            a_video: 0.5, a_breath: 0.5,
@@ -115,12 +108,12 @@ VIDEO.init = function(sm, scene, camera){
             ctx.clearRect( 0, 0, canvas.width, canvas.height );
             ctx.fillStyle = canObj.palette[0];
             ctx.fillRect(0,0, canvas.width, canvas.height);
-            // breath progress
-            ctx.fillStyle = canObj.palette[2];
-            ctx.fillRect(0,2, canvas.width * state.a_breath, 5);
             // whole video progress
             ctx.fillStyle = canObj.palette[3];
-            ctx.fillRect(0,7, canvas.width * state.a_video, 5);
+            ctx.fillRect(0,0, canvas.width * state.a_video, 5);
+            // breath progress
+            ctx.fillStyle = canObj.palette[2];
+            ctx.fillRect(0,5, canvas.width * state.a_breath, 5);
             ctx.fillStyle = canObj.palette[1];
             // text info
             ctx.font = '20px arial';
@@ -274,11 +267,9 @@ VIDEO.init = function(sm, scene, camera){
             canState.a_breath = a1;
             canState.timeStr = secsToTimeStr(sec);
             canvasMod.update(canObj_plane_map);
-
-
-canObj_bg.state.alpha = Math.sin( Math.PI * 1.0 * a1 )
-canvasMod.update(canObj_bg);
-
+            // background
+            canObj_bg.state.alpha = Math.sin( Math.PI * 1.0 * a1 )
+            canvasMod.update(canObj_bg);
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
