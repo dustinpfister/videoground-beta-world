@@ -69,13 +69,20 @@ VIDEO.init = function(sm, scene, camera){
                 v2.y = canvas.height / 2 + Math.sin(radian) * unit_length * (canvas.height * 0.8);
                 ctx.fillStyle = canObj.palette[2];
                 ctx.beginPath();
-                ctx.arc(v2.x, v2.y, 2.5, 0, Math.PI * 2);
+
+                const radiusX = canvas.width / (16 * 6);
+                const radiusY = canvas.height / (16 * 6);
+                ctx.ellipse(v2.x, v2.y, radiusX, radiusY, 0, 0, Math.PI * 2);
+
                 ctx.fill();
             });
 
         }
     });
     const texture_bg = canObj_bg.texture;
+//texture_bg.repeat.x = 2;
+//texture_bg.
+
     scene.background = texture_bg;
     // texture for circles
     const canObj_circles = canvasMod.create({
