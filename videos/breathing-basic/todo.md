@@ -8,7 +8,7 @@
 * () the grid objects slow down and go alway from the camera for a little while durring breath out
 * () like with the canvas background have the
 
-## () - video4-bgactive.js
+## ( done 03/05/2023 ) - video4-bgactive.js
 * (done) new canvas texture for background that will update over time
 * (done) gradient background with color stops that update over time
 * (done) have the background be a bunch of little dots that always move out from the center
@@ -18,8 +18,7 @@
 * (done) have the opacity of each dot start out fully transparent when at the center
 * (done) opacity of dots should become fully opaque at about 0.25 of unit length
 * (done) the dots should always go outward
-
-* () a-dots state value should be updated by an alpha value that will be consistant, per minute rather than over whole video
+* (done) a-dots state value should be updated by an alpha value that will be consistant, per minute rather than over whole video
 
 ## ( done 03/03/2023 ) - video3-fgplane.js
 * (done) have a for ground mesh object that is a plane geometry that always faces the camera

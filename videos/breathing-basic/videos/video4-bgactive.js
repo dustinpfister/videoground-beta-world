@@ -1,4 +1,5 @@
 // video4-bgactive.js from breathing-basic beta world video project
+//          * canvas background updates over time
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -10,11 +11,12 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 1.0;
+    const BREATH_SECS = 60 * 5.0;
     const BREATH_PER_MINUTE = 5;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const CIRCLE_COUNT = 3;
+    const DOTS_LOOPS_PER_MINUTE = 1;
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
         const minutes = Math.floor( totalSecs / 60 );
@@ -302,7 +304,7 @@ VIDEO.init = function(sm, scene, camera){
             // background
             canState = canObj_bg.state;
             canState.a_gradient = Math.sin( Math.PI * 1.0 * a1 );
-            canState.a_dots = seq.per;
+            canState.a_dots = BREATH_SECS / 60 * DOTS_LOOPS_PER_MINUTE * seq.per;
             canvasMod.update(canObj_bg);
         },
         afterObjects: function(seq){
