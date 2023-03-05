@@ -44,7 +44,8 @@ VIDEO.init = function(sm, scene, camera){
         //palette: ['#00eeee', '#0000ee', '#eeee00', '#ee0000'],
         palette: ['#00eeee', '#0000ee', '#ffffff'],
         state: {
-            alpha: 1,
+            a_gradient: 1,
+            a_dots: 0.5,
             dots: [
                 [ 0, 0.25 ],
                 [ 45, 0.15 ],
@@ -56,15 +57,13 @@ VIDEO.init = function(sm, scene, camera){
         },
         draw: (canObj, ctx, canvas, state) => {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0.4 - 0.4 * state.alpha, canObj.palette[0]);
-            gradient.addColorStop(0.6 + 0.4 * state.alpha, canObj.palette[1]);
+            gradient.addColorStop(0.4 - 0.4 * state.a_gradient, canObj.palette[0]);
+            gradient.addColorStop(0.6 + 0.4 * state.a_gradient, canObj.palette[1]);
             ctx.fillStyle = gradient;
             ctx.fillRect(0,0, canvas.width, canvas.height);
-
-
             state.dots.forEach( (arr) => {
                 const radian = Math.PI / 180 * arr[0];
-                const unit_length = (arr[1] + state.alpha) % 1;
+                const unit_length = (arr[1] + state.a_dots) % 1;
                 const v2 = new THREE.Vector2(0, 1);
                 v2.x = canvas.width / 2 + Math.cos(radian) * unit_length * (canvas.width * 0.8);
                 v2.y = canvas.height / 2 + Math.sin(radian) * unit_length * (canvas.height * 0.8);
@@ -279,7 +278,7 @@ VIDEO.init = function(sm, scene, camera){
             // breath grouo
             BreathMod.update(group, seq.per);
             // diffuse map for plane
-            const canState = canObj_plane_map.state;
+            let canState = canObj_plane_map.state;
             canState.frame = seq.frame;
             canState.frameMax = seq.frameMax;
             canState.a_video = seq.per;
@@ -291,7 +290,9 @@ VIDEO.init = function(sm, scene, camera){
             canState.timeStr = secsToTimeStr(sec);
             canvasMod.update(canObj_plane_map);
             // background
-            canObj_bg.state.alpha = Math.sin( Math.PI * 1.0 * a1 )
+            canState = canObj_bg.state;
+            canState.a_gradient = Math.sin( Math.PI * 1.0 * a1 );
+            canState.a_dots = seq.per;
             canvasMod.update(canObj_bg);
         },
         afterObjects: function(seq){
