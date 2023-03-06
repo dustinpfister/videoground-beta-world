@@ -1,5 +1,7 @@
 // video5-water.js from breathing-basic beta world video project
 //     * made it so that I can move the group that contains the camera
+//     * added a plane for water
+//     * using a whole other camera and renderer to render a texture for the plane
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -344,10 +346,12 @@ VIDEO.init = function(sm, scene, camera){
             canState.a_gradient = Math.sin( Math.PI * 1.0 * a1 );
             canState.a_dots = BREATH_SECS / 60 * DOTS_LOOPS_PER_MINUTE * seq.per;
             canvasMod.update(canObj_bg);
-
-
+            // water texture
             renderer_water.render(scene, camera_water);
-texture_water.needsUpdate = true;
+            texture_water.needsUpdate = true;
+
+group_circles.position.set(0,0,0);
+group_breath.position.set(0,0,0);
 
         },
         afterObjects: function(seq){
