@@ -194,9 +194,9 @@ VIDEO.init = function(sm, scene, camera){
     group_plane_water.add(mesh_plane_water);
 
     // water camera
-    const camera_water = new THREE.PerspectiveCamera(70, 1, 7, 100);
+    const camera_water = new THREE.PerspectiveCamera(70, 2 / 1, 7, 100);
 
-    camera_water.position.set(0,-6,-5)
+    camera_water.position.set(0,-6,-3.5)
     camera_water.lookAt(0,0,-5);
     camera_water.rotation.z = Math.PI * 1;
 
@@ -252,7 +252,7 @@ VIDEO.init = function(sm, scene, camera){
     let ic = 0;
     while(ic < CIRCLE_COUNT){
         const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_circles.clone() );
-        mesh.position.z = -0.5 - 1 * ic;
+        mesh.position.z = -0.1 - 0.1 * ic;
         group_circles.add(mesh);
         ic += 1;
     }
