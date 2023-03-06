@@ -1,12 +1,8 @@
 # breathing-basic todo list
 
-## () - video5-objectgrid.js
-* () make use of the object grid wrap module
-* () make it so that the grid objects move to the camera faster at high rest
-* () make it so that the grid objects move to the camera slower at low reset
-* () the grid objects speed up when breath in
-* () the grid objects slow down and go alway from the camera for a little while durring breath out
-* () like with the canvas background have the
+## () - video5-water.js
+* () see about fixing the deal with moving the camera plane
+* () add a mesh with plane geometry that will be 'water'
 
 ## ( done 03/05/2023 ) - video4-bgactive.js
 * (done) new canvas texture for background that will update over time
