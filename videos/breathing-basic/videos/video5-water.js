@@ -202,7 +202,7 @@ VIDEO.init = function(sm, scene, camera){
     //const camera_water_helper = new THREE.CameraHelper(camera_water);
     //group_plane_water.add(camera_water_helper);
  
-    group_plane_water.position.set(0,-1,10);
+    group_plane_water.position.set(0,0,10);
 
     const renderer_water = new THREE.WebGL1Renderer();
     renderer_water.setSize(512, 512, false)
@@ -228,7 +228,7 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set(0,0,-1.375);
     camera.lookAt(group_plane.position);
     scene.add(group_plane);
-    group_plane.position.set(0,0,10);
+    group_plane.position.set(0,1,10);
 
 //group_plane.position.set(15,15,15);
 
@@ -307,6 +307,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         material: material_orbs
     });
+    group.position.y = 0;
     scene.add(group);
     //-------- ----------
     // LIGHT
