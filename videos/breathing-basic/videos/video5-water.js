@@ -13,12 +13,15 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 5.0;
+    const BREATH_SECS = 60 * 1.0;
     const BREATH_PER_MINUTE = 5;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const CIRCLE_COUNT = 3;
     const DOTS_LOOPS_PER_MINUTE = 2;
+    const SUN_START_Y = 0;
+    const SUN_END_Y = 2;
+
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
         const minutes = Math.floor( totalSecs / 60 );
@@ -349,8 +352,10 @@ VIDEO.init = function(sm, scene, camera){
             renderer_water.render(scene, camera_water);
             texture_water.needsUpdate = true;
 
-group_circles.position.set(0,0,0);
-group_breath.position.set(0,0,0);
+
+const y_sun = THREE.MathUtils.lerp(SUN_START_Y, SUN_END_Y, seq.per)
+group_circles.position.set(0,y_sun,0);
+group_breath.position.set(0,y_sun,0);
 
         },
         afterObjects: function(seq){

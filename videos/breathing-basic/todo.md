@@ -5,7 +5,11 @@
 * (done) add a mesh with plane geometry that will be 'water'
 * (done) use a camera and renderer to create a texture for the water
 * (done) fix scale of circles or just have one circle
-* () move the group-breath and group-circles over time
+* (done) move the group-breath and group-circles over time
+
+* () might want to slowly change background gradient over whole video time
+
+* () work on a message system for the plane facing the camera
 
 
 ## ( done 03/05/2023 ) - video4-bgactive.js
