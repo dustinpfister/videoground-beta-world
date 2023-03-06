@@ -183,10 +183,24 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     const group_plane_water = new THREE.Group();
     scene.add(group_plane_water);
-    const mesh_plane_water = new THREE.Mesh( new THREE.PlaneGeometry( 30,30,1,1 ) );
+    const mesh_plane_water = new THREE.Mesh(
+        new THREE.PlaneGeometry( 10,10,1,1 ),
+        new THREE.MeshBasicMaterial({transparent: true, opacity: 0.5})
+    );
     mesh_plane_water.rotation.x = Math.PI * 1.5;
-    mesh_plane_water.position.y = -1;
+    mesh_plane_water.position.set(0,0,0)
     group_plane_water.add(mesh_plane_water);
+
+    // water camera
+    const camera_water = new THREE.PerspectiveCamera(70, 1, 7, 100);
+
+    camera_water.position.set(0,-6,-5)
+    camera_water.lookAt(0,0,-5);
+    const camera_water_helper = new THREE.CameraHelper(camera_water);
+    group_plane_water.add(camera_water);
+    group_plane_water.add(camera_water_helper);
+ 
+    group_plane_water.position.set(0,-1,5);
 
 
     //-------- ----------
@@ -205,7 +219,7 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set(0,0,-1.375);
     camera.lookAt(group_plane.position);
     scene.add(group_plane);
-    group_plane.position.set(0,0,10);
+    group_plane.position.set(15,15,15);
     group_plane.lookAt(0,0,0);
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
