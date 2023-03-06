@@ -259,7 +259,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // BREATH GROUP 
     //-------- ----------
-    const group = BreathMod.create({
+    const group_breath = BreathMod.create({
         totalBreathSecs: BREATH_SECS,
         breathsPerMinute: BREATH_PER_MINUTE,
         breathParts: BREATH_PARTS,
@@ -307,8 +307,8 @@ VIDEO.init = function(sm, scene, camera){
         },
         material: material_orbs
     });
-    group.position.y = 0;
-    scene.add(group);
+    group_breath.position.y = 0;
+    scene.add(group_breath);
     //-------- ----------
     // LIGHT
     //-------- ----------
@@ -326,14 +326,14 @@ VIDEO.init = function(sm, scene, camera){
             //camera.position.set(0, 0, 8);
             //camera.zoom = 1;
             // breath grouo
-            BreathMod.update(group, seq.per);
+            BreathMod.update(group_breath, seq.per);
             // diffuse map for plane
             let canState = canObj_plane_map.state;
             canState.frame = seq.frame;
             canState.frameMax = seq.frameMax;
             canState.a_video = seq.per;
             // this is done in R0 of breath.js but it is not public, added a fix for R1 in the todo list
-            const gud = group.userData;
+            const gud = group_breath.userData;
             const sec = gud.totalBreathSecs * gud.a_fullvid;
             const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
             canState.a_breath = a1;
