@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const CIRCLE_COUNT = 3;
-    const DOTS_LOOPS_PER_MINUTE = 1;
+    const DOTS_LOOPS_PER_MINUTE = 2;
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
         const minutes = Math.floor( totalSecs / 60 );
@@ -79,8 +79,8 @@ VIDEO.init = function(sm, scene, camera){
                 const a = unit_length < 0.25 ? unit_length / 0.25 : 1;
                 ctx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
                 ctx.beginPath();
-                const radiusX = canvas.width / (16 * 6);
-                const radiusY = canvas.height / (16 * 6);
+                const radiusX = canvas.width / (16 * 8);
+                const radiusY = canvas.height / (16 * 8);
                 ctx.ellipse(v2.x, v2.y, radiusX, radiusY, 0, 0, Math.PI * 2);
                 ctx.fill();
             });
@@ -207,7 +207,7 @@ VIDEO.init = function(sm, scene, camera){
     group_plane_water.position.set(0,0,10);
 
     const renderer_water = new THREE.WebGL1Renderer();
-    renderer_water.setSize(512, 512, false)
+    renderer_water.setSize(256, 256, false)
     renderer_water.render(scene, camera_water);
 
     const texture_water = new THREE.CanvasTexture(renderer_water.domElement);
@@ -241,15 +241,8 @@ VIDEO.init = function(sm, scene, camera){
     // update circle group
     const updateCircleGroup = (group_circles, alpha) => {
         group_circles.children.forEach( (mesh, i, arr) => {
-            //const sd = (i + 1) * 1.75 * alpha;
-//const sd = i * Math.pow(2, 1.0 + 0.25 * (i / arr.length)) * alpha;
-
-const sd = 0.7 + Math.pow(2, (0.5 + 1.75 * (i / arr.length) ) ) * alpha
-
-mesh.scale.set(sd, sd, 1)
-
-            const s = 1 + sd;
-            //group_circles.scale.set(s, s, s);
+            const sd = 0.7 + Math.pow(2, (0.5 + 1.75 * (i / arr.length) ) ) * alpha
+            mesh.scale.set(sd, sd, 1)
             mesh.material.opacity = 0.25 + 1 / (arr.length + 0) * i * 0.5 * alpha;
         });
     };
