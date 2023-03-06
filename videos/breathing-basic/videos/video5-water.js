@@ -1,4 +1,5 @@
 // video5-water.js from breathing-basic beta world video project
+//     * made it so that I can move the group that contains the camera
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -178,13 +179,22 @@ VIDEO.init = function(sm, scene, camera){
         opacity: 1
     });
     //-------- ----------
-    // PLANE
+    // GROUP PLANE WATER
     //-------- ----------
+    const group_plane_water = new THREE.Group();
+    scene.add(group_plane_water);
+    const mesh_plane_water = new THREE.Mesh( new THREE.PlaneGeometry( 30,30,1,1 ) );
+    mesh_plane_water.rotation.x = Math.PI * 1.5;
+    mesh_plane_water.position.y = -1;
+    group_plane_water.add(mesh_plane_water);
 
-camera.aspect = 16 / 9;
-camera.fov = 40;
-camera.updateProjectionMatrix();
 
+    //-------- ----------
+    // GROUP PLANE CAMERA
+    //-------- ----------
+    camera.aspect = 16 / 9;
+    camera.fov = 40;
+    camera.updateProjectionMatrix();
     const geometry_plane = new THREE.PlaneGeometry(1, 1, 1, 1);
     const mesh_plane_1 = new THREE.Mesh(geometry_plane, material_plane);
     mesh_plane_1.scale.set( camera.aspect, 1, 1);
@@ -192,23 +202,11 @@ camera.updateProjectionMatrix();
     group_plane.add(mesh_plane_1);
     group_plane.add(camera);
     mesh_plane_1.rotation.y = Math.PI;
-
     camera.position.set(0,0,-1.375);
-
-
     camera.lookAt(group_plane.position);
-
     scene.add(group_plane);
-
-    group_plane.position.set(0,0,8);
-
-
+    group_plane.position.set(0,0,10);
     group_plane.lookAt(0,0,0);
-
-
-console.log(camera.getFocalLength())
-
-    //mesh_plane_1.position.z = 6.625;
     //-------- ----------
     // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
     //-------- ----------
