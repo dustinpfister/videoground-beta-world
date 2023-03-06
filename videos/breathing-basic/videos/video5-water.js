@@ -241,9 +241,15 @@ VIDEO.init = function(sm, scene, camera){
     // update circle group
     const updateCircleGroup = (group_circles, alpha) => {
         group_circles.children.forEach( (mesh, i, arr) => {
-            const sd = (i + 1) * 0.75 * alpha;
+            //const sd = (i + 1) * 1.75 * alpha;
+//const sd = i * Math.pow(2, 1.0 + 0.25 * (i / arr.length)) * alpha;
+
+const sd = 0.7 + Math.pow(2, (0.5 + 1.75 * (i / arr.length) ) ) * alpha
+
+mesh.scale.set(sd, sd, 1)
+
             const s = 1 + sd;
-            group_circles.scale.set(s, s, s);
+            //group_circles.scale.set(s, s, s);
             mesh.material.opacity = 0.25 + 1 / (arr.length + 0) * i * 0.5 * alpha;
         });
     };
@@ -252,7 +258,7 @@ VIDEO.init = function(sm, scene, camera){
     let ic = 0;
     while(ic < CIRCLE_COUNT){
         const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_circles.clone() );
-        mesh.position.z = -0.1 - 0.1 * ic;
+        mesh.position.z = -0.05 - 0.05 * ic;
         group_circles.add(mesh);
         ic += 1;
     }

@@ -1,8 +1,12 @@
 # breathing-basic todo list
 
 ## () - video5-water.js
-* () see about fixing the deal with moving the camera plane
-* () add a mesh with plane geometry that will be 'water'
+* (done) see about fixing the deal with moving the camera plane
+* (done) add a mesh with plane geometry that will be 'water'
+* (done) use a camera and renderer to create a texture for the water
+* (done) fix scale of circles or just have one circle
+* () move the group-breath and group-circles over time
+
 
 ## ( done 03/05/2023 ) - video4-bgactive.js
 * (done) new canvas texture for background that will update over time
