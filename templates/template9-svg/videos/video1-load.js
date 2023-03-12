@@ -21,7 +21,8 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GRID
     //-------- ----------
-    const grid = new THREE.GridHelper(10, 10);
+    const grid = new THREE.GridHelper(10, 10, 0xff0000);
+    grid.material.linewidth = 3
     scene.add(grid)
     //-------- ----------
     // BACKGROUND
@@ -49,7 +50,7 @@ VIDEO.init = function(sm, scene, camera){
         fps: 30,
         beforeObjects: function(seq){
             // CAMERA DEFAULTS
-            camera.position.set(5, 3, 5);
+            camera.position.set(4, 4, 4);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1.26;
         },
@@ -84,9 +85,18 @@ VIDEO.init = function(sm, scene, camera){
             function ( data ) {
 
 const shapes = THREE.SVGLoader.createShapes( data.paths[0] );
-const geo = new THREE.ShapeGeometry(shapes[0])
+const geo = new THREE.ShapeGeometry(shapes[0]);
+
+geo.rotateZ(Math.PI * 1)
+geo.rotateY(Math.PI * 0)
+geo.scale(0.05, 0.05, 0.05);
+geo.translate(1.5, 1.5, 0)
+
 const mesh = new THREE.Mesh(geo);
 scene.add(mesh);
+
+
+
 
                 // resolve
                 resolve();
