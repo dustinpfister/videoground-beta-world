@@ -4,10 +4,12 @@ VIDEO.scripts = [
    // CORE MODULES
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
-   '../../../js/canvas/r2/canvas.js'
+   '../../../js/canvas/r2/canvas.js',
+   '../../../js/threejs/r146/SVGLoader.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
+    const URI_SVG_FILE = '../../../img/svg-test/test1.svg';
     // ---------- ----------
     // LIGHT
     // ---------- ----------
@@ -19,10 +21,8 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GRID
     //-------- ----------
-const grid = new THREE.GridHelper(10, 10);
-scene.add(grid)
-
-
+    const grid = new THREE.GridHelper(10, 10);
+    scene.add(grid)
     //-------- ----------
     // BACKGROUND
     //-------- ----------
@@ -49,7 +49,7 @@ scene.add(grid)
         fps: 30,
         beforeObjects: function(seq){
             // CAMERA DEFAULTS
-            camera.position.set(10, 10, 10);
+            camera.position.set(5, 3, 5);
             camera.lookAt(0, 0, 0);
             camera.zoom = 1.26;
         },
@@ -68,69 +68,8 @@ scene.add(grid)
     // SET FRAME MAX
     //-------- ----------
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
-};
-// update method for the video
-VIDEO.update = function(sm, scene, camera, per, bias){
-    const seq = scene.userData.seq;
-    seqHooks.setFrame(seq, sm.frame, sm.frameMax);
-};
 
 
-// video1-load.js for template9-svg
-// scripts
-/*
-VIDEO.scripts = [
-   '../../../js/sequences-hooks/r2/sequences-hooks.js',
-   '../../../js/canvas/r2/lz-string.js',
-   '../../../js/canvas/r2/canvas.js',
-   '../../../js/threejs/r146/SVGLoader.js'
-];
-// init
-VIDEO.init = function(sm, scene, camera){
-    //-------- ----------
-    // LIGHT
-    //-------- ----------
-    const dl = new THREE.DirectionalLight(0xffffff, 0.85);
-    dl.position.set(-3, 2, 1)
-    scene.add(dl);
-    const al = new THREE.AmbientLight(0xffffff, 0.15);
-    scene.add(al);
-    //-------- ----------
-    // GRID
-    //-------- ----------
-    const grid = new THREE.GridHelper(0xffffff, 1);
-    scene.add(grid);
-    //-------- ----------
-    // BACKGROUND
-    //-------- ----------
-    scene.background = new THREE.Color('#000000');
-    //-------- ----------
-    // MAIN SEQ OBJECT
-    //-------- ----------
-    var seq_opt = {
-        fps: 30,
-        beforeObjects: function(seq){
-            // camera
-console.log('yes');
-            camera.position.set(12, 12, 12);
-            camera.lookAt(0, 0, 0);
-        },
-        afterObjects: function(seq){
-        },
-        objects: []
-    };
-    seq_opt.objects[0] = {
-        secs: 30,
-        update: function(seq, partPer, partBias){
-            
-
-        }
-    };
-
-    const seq = scene.userData.seq = seqHooks.create(seq_opt);
-
-    console.log('frameMax for main seq: ' + seq.frameMax);
-    sm.frameMax = seq.frameMax;
     //-------- ----------
     // SVG LOADER
     //-------- ----------
@@ -140,9 +79,15 @@ console.log('yes');
         // load a SVG resource
         loader.load(
             // resource URL
-            videoAPI.pathJoin(sm.filePath, '../../../img/svg-test/test1.svg'),
+            videoAPI.pathJoin(sm.filePath, URI_SVG_FILE),
             // called when the resource is loaded
             function ( data ) {
+
+const shapes = THREE.SVGLoader.createShapes( data.paths[0] );
+const geo = new THREE.ShapeGeometry(shapes[0])
+const mesh = new THREE.Mesh(geo);
+scene.add(mesh);
+
                 // resolve
                 resolve();
             },
@@ -162,8 +107,7 @@ console.log('yes');
 };
 // update method for the video
 VIDEO.update = function(sm, scene, camera, per, bias){
-console.log('hello');
-    var seq = scene.userData.seq;
+    const seq = scene.userData.seq;
     seqHooks.setFrame(seq, sm.frame, sm.frameMax);
 };
-*/
+
