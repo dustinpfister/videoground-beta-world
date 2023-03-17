@@ -1,7 +1,5 @@
-// video5-water.js from breathing-basic beta world video project
-//     * made it so that I can move the group that contains the camera
-//     * added a plane for water
-//     * using a whole other camera and renderer to render a texture for the plane
+// video6-bgovertotaltime.js from breathing-basic beta world video project
+
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -21,7 +19,6 @@ VIDEO.init = function(sm, scene, camera){
     const DOTS_LOOPS_PER_MINUTE = 2;
     const SUN_START_Y = 0;
     const SUN_END_Y = 2;
-
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
         const minutes = Math.floor( totalSecs / 60 );
@@ -48,7 +45,7 @@ VIDEO.init = function(sm, scene, camera){
     // canvas object for the background
     const canObj_bg = canvasMod.create({
         size: 256,
-        palette: ['#00eeee', '#0000ee', '#dfdfdf'],
+        palette: ['#ffffff', '#ddee66', '#ee2200', '#00eeee', '#0000ee'  ],
         state: {
             a_gradient: 1,
             a_dots: 0.5,
@@ -63,9 +60,21 @@ VIDEO.init = function(sm, scene, camera){
             ]
         },
         draw: (canObj, ctx, canvas, state) => {
+
+//state.a_gradient = 1;
+
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0.4 - 0.4 * state.a_gradient, canObj.palette[0]);
-            gradient.addColorStop(0.6 + 0.4 * state.a_gradient, canObj.palette[1]);
+
+const c1 = new THREE.Color(canObj.palette[1]);
+const c2 = new THREE.Color(canObj.palette[2]);
+const c3 = new THREE.Color(canObj.palette[3]);
+const c4 = new THREE.Color(canObj.palette[4]);
+
+            gradient.addColorStop(0.4 - 0.4 * state.a_gradient, c1.clone().lerp(c4, state.a_gradient).getStyle());
+
+            gradient.addColorStop(0.6 - 0.4 * state.a_gradient, c2.clone().lerp(c3, state.a_gradient).getStyle());
+
+            //gradient.addColorStop(0.6 + 0.4 * state.a_gradient, canObj.palette[2]);
             ctx.fillStyle = gradient;
             ctx.fillRect(0,0, canvas.width, canvas.height);
             state.dots.forEach( (arr) => {
@@ -74,8 +83,7 @@ VIDEO.init = function(sm, scene, camera){
                 const v2 = new THREE.Vector2(0, 1);
                 v2.x = canvas.width / 2 + Math.cos(radian) * unit_length * (canvas.width * 0.8);
                 v2.y = canvas.height / 2 + Math.sin(radian) * unit_length * (canvas.height * 0.8);
-
-                const color_dot = new THREE.Color(canObj.palette[2]);
+                const color_dot = new THREE.Color(canObj.palette[0]);
                 const r = Math.round(color_dot.r * 255);
                 const g = Math.round(color_dot.g * 255);
                 const b = Math.round(color_dot.b * 255);
@@ -345,7 +353,7 @@ VIDEO.init = function(sm, scene, camera){
             canvasMod.update(canObj_plane_map);
             // background
             canState = canObj_bg.state;
-            canState.a_gradient = Math.sin( Math.PI * 1.0 * a1 );
+            canState.a_gradient = seq.per; //Math.sin( Math.PI * 1.0 * seq.per );
             canState.a_dots = BREATH_SECS / 60 * DOTS_LOOPS_PER_MINUTE * seq.per;
             canvasMod.update(canObj_bg);
             // water texture
@@ -353,7 +361,7 @@ VIDEO.init = function(sm, scene, camera){
             texture_water.needsUpdate = true;
 
 
-const y_sun = THREE.MathUtils.lerp(SUN_START_Y, SUN_END_Y, seq.per)
+const y_sun = THREE.MathUtils.lerp(SUN_START_Y, SUN_END_Y, seq.per);
 group_circles.position.set(0,y_sun,0);
 group_breath.position.set(0,y_sun,0);
 
