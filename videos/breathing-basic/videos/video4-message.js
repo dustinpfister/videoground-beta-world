@@ -1,6 +1,4 @@
-// video3-fgplane.js from breathing-basic beta world video project
-//    * Added a foreground plane that can be used to display info
-//    * using foreground plane to display into about video settings and frame by frame state data
+// video4-fgplane.js from breathing-basic beta world video project
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',

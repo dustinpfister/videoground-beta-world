@@ -1,13 +1,13 @@
 # breathing-basic todo list
 
 ## () new video4-message.js
-* () start a new video4-message.js file that will be the first video that I make actaul final videos with this project
+* (done) start a new video4-message.js file that will be the first video that I make actual final videos with this project
 * () I will want to loose the status plane, however this will still be used to display and opening and closing message
 * () the opening message can display info about the video
 * () the closing message can say somehting like "All done, good job! Have a clam and productive day."
 
 ## (done) remove videos 4-6
-* (done) remove videos 4-6 as they are now videos 1-3 of new bretahing-water project
+* (done) remove videos 4-6 as they are now videos 1-3 of new breathing-water project
 
 ## (done 03/17/2023 ) - video6-bgovertotaltime.js
 * (done) background style change over total video time rather than being tied to breath
