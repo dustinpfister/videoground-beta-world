@@ -1,4 +1,4 @@
-// video4-fgplane.js from breathing-basic beta world video project
+// video4-message.js from breathing-basic beta world video project
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
@@ -11,11 +11,10 @@ VIDEO.init = function(sm, scene, camera){
     // CONST VALUES
     //-------- ----------
     const BREATH_SECS = 60 * 1;
-    const BREATH_PER_MINUTE = 5;
+    const BREATH_PER_MINUTE = 5.88;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
     const CIRCLE_COUNT = 3;
-
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
         const minutes = Math.floor( totalSecs / 60 );
@@ -36,6 +35,12 @@ VIDEO.init = function(sm, scene, camera){
         acc += s.toFixed(2) + (i === 3 ? '' : ', ');
         return acc;
     }, '');
+
+console.log(BREATH_SECS_PER_CYCLE.toFixed(2));
+console.log(BREATH_PARTS_SUM)
+console.log(BREATH_TIMESTR);
+console.log(BREATH_PARTS_STR)
+
     //-------- ----------
     // CANVAS TEXTURES - for the background, mesh objects, ect
     //-------- ----------
@@ -94,32 +99,43 @@ VIDEO.init = function(sm, scene, camera){
         }
     });
     const texture_plane_alpha = canObj_plane_alpha.texture;
-    // diffue color map for the plane that faces the camera
+    // diffuse color map for the plane that faces the camera
     const canObj_plane_map = canvasMod.create({
         size: 512,
-        palette: ['#3a3a3a', '#ffffff', '#00ff00', '#ffff00'],
+        palette: ['#000000', '#ffffff', '#00ff00', '#ffff00'],
         state: {
            frame: 0, frameMax: 100,
+           visible: true,
+           opacity: 0.5,
            a_video: 0.5, a_breath: 0.5,
+           currentMessage: 'opening',
+           messages: {
+               opening: [
+                   { text: BREATH_TIMESTR + ' Meditation time', mx: 0.1, my: 0.4},
+                   { text: BREATH_SECS_PER_CYCLE.toFixed(1) + ' Second Breath Cycles.', mx: 0.1, my: 0.5}
+               ],
+           },
            timeStr: ''
         },
         draw: (canObj, ctx, canvas, state) => {
-            ctx.fillStyle = canObj.palette[0];
-            ctx.fillRect(0,0, canvas.width, canvas.height);
-            // breath progress
-            ctx.fillStyle = canObj.palette[3];
-            ctx.fillRect(0,6, canvas.width * state.a_breath, 5);
-            // whole video progress
-            ctx.fillStyle = canObj.palette[2];
-            ctx.fillRect(0,0, canvas.width * state.a_video, 5);
-            ctx.fillStyle = canObj.palette[1];
-            // text info
-            ctx.font = '16px arial';
-            ctx.textBaseline = 'top';
-            ctx.fillText('BPM: ' + BREATH_PER_MINUTE + ' ( ' + BREATH_SECS_PER_CYCLE.toFixed(1) +' sec cycles )', 5, 20);
-            ctx.fillText('PARTS: ' + BREATH_PARTS_STR, 5, 40);
-            ctx.fillText(state.timeStr + ' / ' + BREATH_TIMESTR, 5, 80);
-            ctx.fillText(state.frame + ' / ' + state.frameMax, 5, 100);
+            ctx.clearRect(0,0, canObj.size, canObj.size);
+            ctx.globalAlpha = state.opacity;
+            if(state.visible){
+                ctx.fillStyle = canObj.palette[0];
+                ctx.fillRect( 0, 0, canObj.size, canObj.size );
+                ctx.fillStyle = canObj.palette[1];
+
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                ctx.font = '20px arial';
+
+                state.messages[state.currentMessage].forEach( (textLine) => {
+                    ctx.fillText(textLine.text, canObj.size * textLine.mx, canObj.size * textLine.my);
+                });
+               
+                //ctx.fillText(state.textLines[0], canObj.size * 0.1, canObj.size * 0.4);
+                //ctx.fillText(state.textLines[1], canObj.size * 0.1, canObj.size * 0.5);
+            }
         }
     });
     const texture_plane_map = canObj_plane_map.texture;
@@ -141,7 +157,7 @@ VIDEO.init = function(sm, scene, camera){
     });
     const material_plane = new THREE.MeshBasicMaterial({
         map: texture_plane_map, 
-        alphaMap: texture_plane_alpha,
+        //alphaMap: texture_plane_alpha,
         transparent: true,
         opacity: 1
     });
@@ -152,8 +168,8 @@ VIDEO.init = function(sm, scene, camera){
     const mesh_plane_1 = new THREE.Mesh(geometry_plane, material_plane);
     mesh_plane_1.scale.set(
         camera.aspect,
-        1,
-        1
+        camera.aspect,
+        camera.aspect
     );
     const group_plane = new THREE.Group();
     group_plane.add(mesh_plane_1);
