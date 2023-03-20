@@ -283,9 +283,9 @@ console.log(BREATH_PARTS_STR)
             const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
             canState.a_breath = a1;
             canState.timeStr = secsToTimeStr(sec);
-
-canObj_plane_map.state.visible = false;
-canObj_plane_map.state.opacity = 0.5;
+            canObj_plane_map.state.visible = false;
+            canObj_plane_map.state.opacity = 0.5;
+            canObj_plane_map.state.currentMessage = 'open';
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
@@ -312,12 +312,34 @@ canObj_plane_map.state.opacity = 0.5;
     };
     // SEQ 1 - BREATH
     opt_seq.objects[2] = {
-        secs: BREATH_SECS - 10,
+        secs: BREATH_SECS - 20,
         update: function(seq, partPer, partBias){
             camera.position.set(0, 0, 8);
             camera.lookAt(0,0,0);
         }
     };
+
+
+    opt_seq.objects[3] = {
+        secs: 5,
+        update: function(seq, partPer, partBias){
+            canObj_plane_map.state.visible = true;
+            canObj_plane_map.state.opacity = 0.5 * partPer;
+            canObj_plane_map.state.currentMessage = 'end';
+            camera.position.set(0, 0, 8);
+            camera.lookAt(0,0,0);
+        }
+    };
+    opt_seq.objects[4] = {
+        secs: 5,
+        update: function(seq, partPer, partBias){
+            canObj_plane_map.state.visible = true;
+            canObj_plane_map.state.currentMessage = 'end';
+            camera.position.set(0, 0, 8);
+            camera.lookAt(0,0,0);
+        }
+    };
+
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
     console.log('frameMax for main seq: ' + seq.frameMax);
     sm.frameMax = seq.frameMax;
