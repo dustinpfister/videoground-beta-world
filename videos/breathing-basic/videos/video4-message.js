@@ -280,16 +280,36 @@ console.log(BREATH_PARTS_STR)
             const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
             canState.a_breath = a1;
             canState.timeStr = secsToTimeStr(sec);
-            canvasMod.update(canObj_plane_map);
+
+canObj_plane_map.state.visible = false;
+canObj_plane_map.state.opacity = 0.5;
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
+            canvasMod.update(canObj_plane_map);
         },
         objects: []
     };
-    // SEQ 1 - BREATH
     opt_seq.objects[0] = {
-        secs: BREATH_SECS,
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            canObj_plane_map.state.visible = true;
+            camera.position.set(0, 0, 8);
+            camera.lookAt(0,0,0);
+        }
+    };
+    opt_seq.objects[1] = {
+        secs: 3,
+        update: function(seq, partPer, partBias){
+            canObj_plane_map.state.visible = true;
+            canObj_plane_map.state.opacity = 0.5 - 0.5 * partPer;
+            camera.position.set(0, 0, 8);
+            camera.lookAt(0,0,0);
+        }
+    };
+    // SEQ 1 - BREATH
+    opt_seq.objects[2] = {
+        secs: BREATH_SECS - 6,
         update: function(seq, partPer, partBias){
             camera.position.set(0, 0, 8);
             camera.lookAt(0,0,0);
