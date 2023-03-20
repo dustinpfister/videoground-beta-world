@@ -108,12 +108,18 @@ console.log(BREATH_PARTS_STR)
            visible: true,
            opacity: 0.5,
            a_video: 0.5, a_breath: 0.5,
-           currentMessage: 'opening',
+           currentMessage: 'open',
            messages: {
-               opening: [
-                   { text: BREATH_TIMESTR + ' Meditation time', mx: 0.1, my: 0.4},
-                   { text: BREATH_SECS_PER_CYCLE.toFixed(1) + ' Second Breath Cycles.', mx: 0.1, my: 0.5}
+               open: [
+                   { text: BREATH_TIMESTR + ' Meditation time', mx: 0.1, my: 0.45},
+                   { text: BREATH_SECS_PER_CYCLE.toFixed(1) + ' Second Breath Cycles.', mx: 0.1, my: 0.5},
+                   { text: BREATH_PARTS_STR + ' Time Tuning ', mx: 0.1, my: 0.6, size: 15},
+                   { text: 'This is video4-message.js of \"breathing-basic\" in \"videoground-beta-world\" collection.', mx: 0.1, my: 0.75, size: 10}
                ],
+               end: [
+                   { text: 'Good Job', mx: 0.5, my: 0.5, ta: 'center', size: 60 },
+                   { text: 'Have a calm and productive day.', mx: 0.5, my: 0.6, ta: 'center'}
+               ]
            },
            timeStr: ''
         },
@@ -124,18 +130,15 @@ console.log(BREATH_PARTS_STR)
                 ctx.fillStyle = canObj.palette[0];
                 ctx.fillRect( 0, 0, canObj.size, canObj.size );
                 ctx.fillStyle = canObj.palette[1];
-
-                ctx.textAlign = 'left';
+                //ctx.textAlign = 'left';
                 ctx.textBaseline = 'middle';
-                ctx.font = '20px arial';
-
+                //ctx.font = '20px arial';
                 state.messages[state.currentMessage].forEach( (textLine) => {
+                    ctx.font = (textLine.size || 20) + 'px arial';
+                    ctx.textAlign = textLine.ta || 'left';
                     ctx.fillText(textLine.text, canObj.size * textLine.mx, canObj.size * textLine.my);
                 });
-               
-                //ctx.fillText(state.textLines[0], canObj.size * 0.1, canObj.size * 0.4);
-                //ctx.fillText(state.textLines[1], canObj.size * 0.1, canObj.size * 0.5);
-            }
+           }
         }
     });
     const texture_plane_map = canObj_plane_map.texture;
@@ -291,7 +294,7 @@ canObj_plane_map.state.opacity = 0.5;
         objects: []
     };
     opt_seq.objects[0] = {
-        secs: 3,
+        secs: 5,
         update: function(seq, partPer, partBias){
             canObj_plane_map.state.visible = true;
             camera.position.set(0, 0, 8);
@@ -299,7 +302,7 @@ canObj_plane_map.state.opacity = 0.5;
         }
     };
     opt_seq.objects[1] = {
-        secs: 3,
+        secs: 5,
         update: function(seq, partPer, partBias){
             canObj_plane_map.state.visible = true;
             canObj_plane_map.state.opacity = 0.5 - 0.5 * partPer;
@@ -309,7 +312,7 @@ canObj_plane_map.state.opacity = 0.5;
     };
     // SEQ 1 - BREATH
     opt_seq.objects[2] = {
-        secs: BREATH_SECS - 6,
+        secs: BREATH_SECS - 10,
         update: function(seq, partPer, partBias){
             camera.position.set(0, 0, 8);
             camera.lookAt(0,0,0);
