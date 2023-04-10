@@ -10,10 +10,10 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 1;
-    const BREATH_PER_MINUTE = 5.88;
+    const BREATH_SECS = 60 * 10;
+    const BREATH_PER_MINUTE = 6;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
-    const BREATH_PARTS = {restLow: 1, breathIn: 5, restHigh: 1, breathOut: 5};
+    const BREATH_PARTS = {restLow: 1, breathIn: 4, restHigh: 1, breathOut: 4};
     const CIRCLE_COUNT = 3;
     //!!! might want to add this as a public method for R1 of breath.js
     const secsToTimeStr = (totalSecs) => {
