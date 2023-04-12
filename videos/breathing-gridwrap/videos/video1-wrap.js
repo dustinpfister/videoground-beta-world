@@ -71,14 +71,27 @@ VIDEO.init = function(sm, scene, camera){
         totalBreathSecs: BREATH_SECS,
         breathsPerMinute: BREATH_PER_MINUTE,
         breathParts: BREATH_PARTS,
+        before: (group, a_breath, a_state, a_fullvid, a_breath_part, breathPart, gud) => {
+             const a_z = a_state;
+             ObjectGridWrap.setPos(grid, a_breath, a_z );
+             ObjectGridWrap.update(grid);
+        },
         hooks : {
-            restLow : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+            restLow : (group, a_breathPart, a_fullvid, gud) => {
+                //ObjectGridWrap.setPos(grid, 0, a_breathPart );
+                //ObjectGridWrap.update(grid);
             },
-            restHigh : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+            restHigh : (group, a_breathPart, a_fullvid, gud) => {
+                //ObjectGridWrap.setPos(grid, 0, a_breathPart * 2 % 1 );
+                //ObjectGridWrap.update(grid);
             },
-            breathIn : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+            breathIn : (group, a_breathPart, a_fullvid, gud) => {
+                //ObjectGridWrap.setPos(grid, 0, (a_breathPart + gud.a_breath_state) % 1 );
+                //ObjectGridWrap.update(grid);
             },
-            breathOut : (updateGroup, group, a_breathPart, a_fullvid, gud) => {
+            breathOut : (group, a_breathPart, a_fullvid, gud) => {
+                //ObjectGridWrap.setPos(grid, 0, (a_breathPart * (2 - gud.a_breath_state) ) % 1 );
+                //ObjectGridWrap.update(grid);
             }
         }
     });
