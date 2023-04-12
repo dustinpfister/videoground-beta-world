@@ -1,7 +1,7 @@
 # breathing-basic todo list
 
 ## ( ) video1-wrap.js - use object grid wrap
-* () loose the circles
+* (done) loose the circles
 * () use R2 of object grid wrap
 * () just have a simple grid of cubes for now
 * () move the grid forward to the breath

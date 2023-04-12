@@ -10,7 +10,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // CONST VALUES
     //-------- ----------
-    const BREATH_SECS = 60 * 10;
+    const BREATH_SECS = 60 * 1;
     const BREATH_PER_MINUTE = 6;
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 4, restHigh: 1, breathOut: 4};
@@ -53,23 +53,6 @@ VIDEO.init = function(sm, scene, camera){
     texture_bg.wrapT = THREE.RepeatWrapping;
     texture_bg.repeat.set(32, 24);
     scene.background = texture_bg;
-    // texture for circles
-    const canObj_circles = canvasMod.create({
-        size: 32,
-        palette: ['#888800', '#ff0000'],
-        state: {},
-        draw: (canObj, ctx, canvas, state) => {
-            ctx.fillStyle = canObj.palette[0];
-            ctx.fillRect(0,0, canvas.width, canvas.height);
-            ctx.strokeStyle = canObj.palette[1];
-            ctx.beginPath();
-            const radius = canvas.width / 2;
-            ctx.lineWidth = 3;
-            ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2);
-            ctx.stroke();
-        }
-    });
-    const texture_circles = canObj_circles.texture;
     // alpha map for the plane that faces the camera
     const canObj_plane_alpha = canvasMod.create({
         size: 128,
@@ -101,7 +84,8 @@ VIDEO.init = function(sm, scene, camera){
            frame: 0, frameMax: 100,
            visible: true,
            opacity: 0.5,
-           a_video: 0.5, a_breath: 0.5,
+           a_video: 0.5, 
+           a_breath: 0.5,
            currentMessage: 'open',
            messages: {
                open: [
@@ -140,19 +124,6 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // MATERIALS
     //-------- ----------
-    const material_orbs = new THREE.MeshPhongMaterial({
-        color: 0xffff00,
-        emissive: 0xffffff,
-        emissiveIntensity: 0.1,
-        transparent: true
-    });
-    const material_circles = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        emissive: 0xffffff,
-        emissiveIntensity: 0.1,
-        transparent: true,
-        map: texture_circles
-    });
     const material_plane = new THREE.MeshBasicMaterial({
         map: texture_plane_map, 
         //alphaMap: texture_plane_alpha,
@@ -175,30 +146,6 @@ VIDEO.init = function(sm, scene, camera){
     scene.add(group_plane);
     mesh_plane_1.position.z = 6.63;
     //-------- ----------
-    // CIRCLES - the circles behind the group of spheres that follow curves created by breath.js R0
-    //-------- ----------
-    // update circle group
-    const updateCircleGroup = (group_circles, alpha) => {
-        group_circles.children.forEach( (mesh, i, arr) => {
-            const sd = (i + 1) * 0.75 * alpha;
-            const s = 1 + sd;
-            group_circles.scale.set(s, s, s);
-            mesh.material.opacity = 0.25 + 1 / arr.length * i * 0.75 * alpha;
-        });
-    };
-    // create circle group
-    const group_circles = new THREE.Group();
-    let ic = 0;
-    while(ic < CIRCLE_COUNT){
-        const mesh = new THREE.Mesh(new THREE.CircleGeometry(1, 30), material_circles.clone() );
-        mesh.position.z = -0.5 - 1 * ic;
-        group_circles.add(mesh);
-        ic += 1;
-    }
-    scene.add(group_circles);
-    updateCircleGroup(group_circles, 0);
-
-    //-------- ----------
     // LIGHT
     //-------- ----------
     const dl = new THREE.DirectionalLight(0xffffff, 1);
@@ -217,19 +164,21 @@ VIDEO.init = function(sm, scene, camera){
             // breath grouo
             BreathMod.update(group, seq.per);
             // diffuse map for plane
-            const canState = canObj_plane_map.state;
-            canState.frame = seq.frame;
-            canState.frameMax = seq.frameMax;
-            canState.a_video = seq.per;
+            const can = canObj_plane_map.state;
+            can.frame = seq.frame;
+            can.frameMax = seq.frameMax;
+            can.a_video = seq.per;
             // this is done in R0 of breath.js but it is not public, added a fix for R1 in the todo list
-            const gud = group.userData;
-            const sec = gud.totalBreathSecs * gud.a_fullvid;
-            const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
-            canState.a_breath = a1;
-            canState.timeStr = BREATH_GUD.timeString; //secsToTimeStr(sec);
-            canObj_plane_map.state.visible = false;
-            canObj_plane_map.state.opacity = 0.5;
-            canObj_plane_map.state.currentMessage = 'open';
+            //const gud = group.userData;
+            //const sec = gud.totalBreathSecs * gud.a_fullvid;
+            //const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
+            //canState.a_breath = a1;
+
+            can.a_breath = BREATH_GUD.a_breath;
+            can.timeStr = BREATH_GUD.timeString; //secsToTimeStr(sec);
+            can.visible = false;
+            can.opacity = 0.5;
+            can.currentMessage = 'open';
         },
         afterObjects: function(seq){
             camera.updateProjectionMatrix();
@@ -254,7 +203,6 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(0,0,0);
         }
     };
-    // SEQ 1 - BREATH
     opt_seq.objects[2] = {
         secs: BREATH_SECS - 20,
         update: function(seq, partPer, partBias){
@@ -262,8 +210,6 @@ VIDEO.init = function(sm, scene, camera){
             camera.lookAt(0,0,0);
         }
     };
-
-
     opt_seq.objects[3] = {
         secs: 5,
         update: function(seq, partPer, partBias){
