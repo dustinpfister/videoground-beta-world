@@ -109,7 +109,7 @@ VIDEO.init = function(sm, scene, camera){
                    { text: BREATH_SECS_PER_CYCLE.toFixed(1) + ' Second Breath Cycles.', mx: 0.1, my: 0.5},
                    { text: 'Timing', mx: 0.1, my: 0.6, size: 15},
                    { text: BREATH_GUD.breathPartsString, mx: 0.1, my: 0.627, size: 15},
-                   { text: 'This is video4-message.js of \"breathing-basic\" in \"videoground-beta-world\" collection.', mx: 0.1, my: 0.75, size: 10}
+                   { text: 'This is video1-wrap.js of \"breathing-gridwrap\" in \"videoground-beta-world\" collection.', mx: 0.1, my: 0.75, size: 10}
                ],
                end: [
                    { text: 'Good Job', mx: 0.5, my: 0.5, ta: 'center', size: 60 },
