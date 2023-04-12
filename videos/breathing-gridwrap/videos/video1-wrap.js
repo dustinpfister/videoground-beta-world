@@ -15,26 +15,6 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 4, restHigh: 1, breathOut: 4};
     const CIRCLE_COUNT = 3;
-    //!!! might want to add this as a public method for R1 of breath.js
-    const secsToTimeStr = (totalSecs) => {
-        const minutes = Math.floor( totalSecs / 60 );
-        const secs = Math.floor(totalSecs % 60);
-        return String(minutes).padStart(2, '0') + ':' + String(secs).padStart(2, '0')
-    };
-    //!!! might want to make this public, or have a GUD prop
-    // get the sum of a breath parts object
-    const getBreathPartsSum = (breathParts) => {
-        return Object.keys( breathParts ).reduce( ( acc, key ) => { return acc + breathParts[key]; }, 0);
-    };
-    const BREATH_PARTS_SUM = getBreathPartsSum(BREATH_PARTS);
-    const BREATH_TIMESTR = secsToTimeStr( BREATH_SECS );
-    //const BREATH_PARTS_STR = Object.keys(BREATH_PARTS).reduce( (acc, key, i) => {
-    //    const n = BREATH_PARTS[key];
-    //    const a = n / BREATH_PARTS_SUM;
-    //    const s = BREATH_SECS_PER_CYCLE * a;
-    //    acc += s.toFixed(2) + (i === 3 ? '' : ', ');
-    //    return acc;
-    //}, '');
     //-------- ----------
     // BREATH GROUP 
     //-------- ----------
@@ -54,10 +34,7 @@ VIDEO.init = function(sm, scene, camera){
         }
     });
     scene.add(group);
-
-
-console.log(group.userData)
-
+    const BREATH_GUD = group.userData;
     //-------- ----------
     // CANVAS TEXTURES - for the background, mesh objects, ect
     //-------- ----------
@@ -128,10 +105,10 @@ console.log(group.userData)
            currentMessage: 'open',
            messages: {
                open: [
-                   { text: BREATH_TIMESTR + ' Meditation time', mx: 0.1, my: 0.45},
+                   { text: BREATH_GUD.totalTimeString + ' Meditation time', mx: 0.1, my: 0.45},
                    { text: BREATH_SECS_PER_CYCLE.toFixed(1) + ' Second Breath Cycles.', mx: 0.1, my: 0.5},
                    { text: 'Timing', mx: 0.1, my: 0.6, size: 15},
-                   { text: group.userData.breathPartsString, mx: 0.1, my: 0.627, size: 15},
+                   { text: BREATH_GUD.breathPartsString, mx: 0.1, my: 0.627, size: 15},
                    { text: 'This is video4-message.js of \"breathing-basic\" in \"videoground-beta-world\" collection.', mx: 0.1, my: 0.75, size: 10}
                ],
                end: [
@@ -249,7 +226,7 @@ console.log(group.userData)
             const sec = gud.totalBreathSecs * gud.a_fullvid;
             const a1 = (sec % 60 / 60) * gud.breathsPerMinute % 1;
             canState.a_breath = a1;
-            canState.timeStr = secsToTimeStr(sec);
+            canState.timeStr = BREATH_GUD.timeString; //secsToTimeStr(sec);
             canObj_plane_map.state.visible = false;
             canObj_plane_map.state.opacity = 0.5;
             canObj_plane_map.state.currentMessage = 'open';
