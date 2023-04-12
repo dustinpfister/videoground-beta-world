@@ -3,7 +3,8 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/canvas/r2/lz-string.js',
    '../../../js/canvas/r2/canvas.js',
-   '../../../js/breath/r1/breath.js'
+   '../../../js/breath/r1/breath.js',
+   '../../../js/object-grid-wrap/r2/object-grid-wrap.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){
@@ -15,6 +16,54 @@ VIDEO.init = function(sm, scene, camera){
     const BREATH_SECS_PER_CYCLE = 60 / BREATH_PER_MINUTE;
     const BREATH_PARTS = {restLow: 1, breathIn: 4, restHigh: 1, breathOut: 4};
     const CIRCLE_COUNT = 3;
+    //-------- ----------
+    // HELPER FUNCTIONS
+    //-------- ----------
+    // Make box method used for object grid wrap source objects
+    const mkBox = function(yd, material){
+        const mesh = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+            material || new THREE.MeshPhongMaterial() );
+        return mesh;
+    };
+    //-------- ----------
+    // GRID OPTIONS
+    //-------- ----------
+    const tw = 9, th = 9,space = 6;
+    const m1 = new THREE.MeshPhongMaterial({
+        color: new THREE.Color(0.5, 0.5, 0.5),
+        emissive: new THREE.Color(1, 1, 1),
+        emissiveIntensity: 1
+    })
+    const array_source_objects = [
+        mkBox(0, m1)
+    ];
+    const array_oi = [
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0
+    ];
+    //-------- ----------
+    // CREATE GRID
+    //-------- ----------
+    const grid = ObjectGridWrap.create({
+        spaceW: space,
+        spaceH: space,
+        tw: tw,
+        th: th,
+        dAdjust: 1.25,
+        effects: [],
+        sourceObjects: array_source_objects,
+        objectIndices: array_oi
+    });
+    scene.add(grid);
+    grid.position.y = -3;
     //-------- ----------
     // BREATH GROUP 
     //-------- ----------

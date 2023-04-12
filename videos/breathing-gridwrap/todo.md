@@ -2,7 +2,7 @@
 
 ## ( ) video1-wrap.js - use object grid wrap
 * (done) loose the circles
-* () use R2 of object grid wrap
+* (done) use R2 of object grid wrap
 * () just have a simple grid of cubes for now
 * () move the grid forward to the breath
 
