@@ -2,22 +2,23 @@
 
 <!-- WHATS NEXT -->
 
+<!-- 'aplay' projects -->
 
-## (  ) - breathing-basic - first video
-* (done) finish video1.clean.js for breahing-basic
-* () finish video2, and video3
-* () make first 10 minute video using video3.js
+## () aplay-frames-sinone - video2
+* () start a video2 for this project
 
-## ( ) - timer-train - make a 1 minute video
-* () finish video6-transnums.js
-* () make a 1 minute video with video6-transnums.js
+<!-- 'breathing' projects -->
 
 ## (  ) - breathing-basic - five minute video
 * () make a five minute video using video3
 
+<!-- 'n64rip' projects -->
+
 ## ( ) - n64rip-basic - start the project
 * () look into ripping geometry from quest64 rom if possible
 * () expand DAE folder if progress is made
+
+<!-- 'timer' projects -->
 
 ## ( ) - timer-train - make a 10 sec video
 * () make a 10 second video with video5-transnums.js
@@ -29,8 +30,10 @@
 ## ( ) - timer-basic - make a 3 second video
 * () make a 3 seconds video with video3.js
 
-## () - timer-hum - make a 10 sec video
+## ( ) - timer-hum - make a 10 sec video
 * () make a 10 second video with timer hum
+
+<!-- The 'guy1' project -->
 
 ## ( ) - guy1 - start video folder
 * (done) wrap up video1 for temp5, leave a lot for video2 and move on
@@ -39,6 +42,8 @@
 * () texture for walls
 * () body textures
 
+<!-- 'FRINK' video projects using audio sample data -->
+
 ## ( ) - frink5
 * () have more than one layer like with the text plane project
 * () make all textures animated
@@ -46,6 +51,19 @@
 * () new path worked out for camera position making use of new glaven points helper
 
 <!-- DONE -->
+
+## ( done 06/20/2023 ) - aplay-frames-sinone
+* ( done ) start an aplay-basic folder
+* ( done ) start a video1-sinone-sphere.js for this
+
+## ( done 03/17/2023 ) - timer-train - make a 1 minute video
+* (done) finish video6-transnums.js
+* (done) make a 1 minute video with video6-transnums.js
+
+## ( done 03/20/2023 ) - breathing-basic - first video
+* (done) finish video1.clean.js for breahing-basic
+* (done) finish video2, and video3
+* (done) make first 10 minute video using video4.js
 
 ## ( done 02/23/2023) - timer-train - make a 2 minute video
 * (done) make a 2 minute video with video5-angles.js
