@@ -84,14 +84,14 @@ const draw_sample_box = (ctx, opt, alpha = 0) => {
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sine = scene.userData.sine = {
-        waveform: 'sin',
+        waveform: 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
-            samp_set.amplitude = 0.75;
-            samp_set.frequency = 200;
+            samp_set.amplitude = 0.25 + 0.5 * a_point;
+            samp_set.frequency = 80 + 120 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
             return samp_set;
         },
         sample_rate: 44100,
-        secs: 1,
+        secs: 3,
         disp_offset: new THREE.Vector2(50, 200),
         disp_size: new THREE.Vector2( 1280 - 100, 200),
         array_disp: [],   // data for whole sound
@@ -153,7 +153,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     //ctx.drawImage(sm.renderer.domElement, 0, 0, canvas.width, canvas.height);
 
     draw_sample_data(ctx, sine.array_disp, opt_disp );
-    draw_sample_box(ctx, opt_disp, sm.per );
+    draw_sample_box(ctx, opt_disp, sm.frame / ( sm.frameMax - 1 ) );
     draw_sample_data(ctx, sine.array_frame, opt_frame );
     draw_sample_box(ctx, opt_frame, 0 );
 
