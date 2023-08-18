@@ -4,7 +4,7 @@
     //-------- ----------
     const DEFAULT_FOR_SAMPLE = ( samp_set, i, a_point ) => {
         samp_set.amplitude = 0.5;
-        samp_set.frequency = 120;
+        samp_set.frequency = 160;
         return samp_set;
     };
     //-------- ----------
@@ -16,7 +16,7 @@
         return Math.sin( Math.PI * 2 * wave_count * a_point )  * samp_set.amplitude;
     };
     WAVE_FORM_FUNCTIONS.sawtooth = (samp_set, i, a_point, wave_count, opt ) => {
-        return 0;
+        return -1 * samp_set.amplitude + 2 * (wave_count * a_point % 1) * samp_set.amplitude;
     };
     //-------- ----------
     // HELPERS
