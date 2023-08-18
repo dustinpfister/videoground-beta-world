@@ -48,8 +48,8 @@
         let i = i_start;
         while(i < i_end){
             const a_point = i / i_size;
-            const wave_count = samp_set.frequency * opt.secs;
             samp_set = for_sample(samp_set, i, a_point, opt);
+            const wave_count = samp_set.frequency * opt.secs;
             let samp = waveform(samp_set, i, a_point, wave_count, opt);
             if(mode === 'bytes'){
                 let byte = Math.round( 127.5 + 128 * samp );

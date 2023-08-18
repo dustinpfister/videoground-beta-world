@@ -84,10 +84,14 @@ const draw_sample_box = (ctx, opt, alpha = 0) => {
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sine = scene.userData.sine = {
-        amplitude: 0.65,
-        frequency: 200,
-        sample_rate: 32000,
-        secs: 5,
+        waveform: 'sin',
+        for_sample: ( samp_set, i, a_point ) => {
+            samp_set.amplitude = 0.75;
+            samp_set.frequency = 200;
+            return samp_set;
+        },
+        sample_rate: 44100,
+        secs: 1,
         disp_offset: new THREE.Vector2(50, 200),
         disp_size: new THREE.Vector2( 1280 - 100, 200),
         array_disp: [],   // data for whole sound
@@ -99,7 +103,8 @@ VIDEO.init = function(sm, scene, camera){
     sm.frameMax = sine.frames;
     const total_bytes = sine.sample_rate * sine.secs;
     sine.array_disp = create_samp_points({
-        waveform: 'sawtooth',
+        waveform: sine.waveform,
+        for_sample: sine.for_sample,
         i_size: total_bytes,
         i_start:0,
         i_count: total_bytes,
@@ -118,7 +123,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const total_bytes = sine.sample_rate * sine.secs;
     const i_start = sine.bytes_per_frame * sm.frame;
     const data_samples =  sine.array_frame = create_samp_points({
-        waveform: 'sawtooth',
+        waveform: sine.waveform,
+        for_sample: sine.for_sample,
         i_size : total_bytes,
         i_start : i_start,
         i_count : sine.bytes_per_frame,
