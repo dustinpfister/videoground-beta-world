@@ -1,54 +1,11 @@
 /*    video1-saw - first video for audio-generator-1 project
           * for this one I just want to try out 'sawtooth'
  */
-//-------- ----------
-// CREATE SINE POINTS METHIOD
-//-------- ----------
-const create_samp_points = ( opt = {} ) => {
-    const i_size = opt.i_size === undefined ? 20 : opt.i_size;
-    const i_start = opt.i_start === undefined ? 8 : opt.i_start;
-    const i_count = opt.i_count === undefined ? 8 : opt.i_count;
-    const secs = opt.secs === undefined ? 1 : opt.secs;
-    const mode = opt.mode === undefined ? 'bytes' : opt.mode;
-    const step = opt.step === undefined ? 1 : opt.step;
-    // what to do for the sample settings object each time
-    const for_sample = opt.for_sample || function( samp_set ){
-        return samp_set;
-    };
-    // the expression to use with the samp_set object
-    const waveform = opt.waveform || function(samp_set, i, a_point, opt ){
-        const wave_count = samp_set.frequency * opt.secs;
-        return Math.sin( Math.PI * 2 * wave_count * a_point )  * samp_set.amplitude;
-    };
-    const sine_points = [];
-    let samp_set = {
-        amplitude: 1,
-        frequency: 80
-    };
-    const i_end = i_start + i_count;
-    let i = i_start;
-    while(i < i_end){
-        const a_point = i / i_size;
-        samp_set = for_sample(samp_set, i, a_point, opt);
-        let samp = waveform(samp_set, i, a_point, opt);
-        if(mode === 'bytes'){
-            let byte = Math.round( 127.5 + 128 * samp );
-            samp = THREE.MathUtils.clamp(byte, 0, 255);
-        }
-        if(mode === 'normal'){
-            samp = ( samp + 1 ) / 2;
-            samp = THREE.MathUtils.clamp(samp, 0, 1);
-        }
-        sine_points.push( parseFloat( samp.toFixed(2)) );
-        i += step;
-    }
-    return sine_points;
-};
-const for_sample_sawtooth = ( samp_set, i, a_point ) => {
-    samp_set.amplitude = 0.5;
-    samp_set.frequency = 120;
-    return samp_set;
-};
+
+VIDEO.scripts = [
+  '../js/create_samp_points.js'
+];
+
 //-------- ----------
 // DRAW SAMPLE DATA - AND RELATED METHODS
 //-------- ----------
@@ -142,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.frameMax = sine.frames;
     const total_bytes = sine.sample_rate * sine.secs;
     sine.array_disp = create_samp_points({
-        for_sample: for_sample_sawtooth,
+        waveform: 'sawtooth',
         i_size: total_bytes,
         i_start:0,
         i_count: total_bytes,
@@ -161,7 +118,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const total_bytes = sine.sample_rate * sine.secs;
     const i_start = sine.bytes_per_frame * sm.frame;
     const data_samples =  sine.array_frame = create_samp_points({
-        for_sample: for_sample_sawtooth,
+        waveform: 'sawtooth',
         i_size : total_bytes,
         i_start : i_start,
         i_count : sine.bytes_per_frame,
@@ -170,7 +127,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     });
     // write data_samples array
     const clear = sm.frame === 0 ? true: false;
-    const uri = videoAPI.pathJoin(sm.filePath, 'vg-sampdata');
+    const uri = videoAPI.pathJoin(sm.filePath, 'sampdata');
     return videoAPI.write(uri, new Uint8Array(data_samples), clear )
 };
 //-------- ----------
