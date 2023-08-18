@@ -84,9 +84,12 @@ const draw_sample_box = (ctx, opt, alpha = 0) => {
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sine = scene.userData.sine = {
-        waveform: 'sawtooth',
+        waveform: 'sawtooth2',
         for_sample: ( samp_set, i, a_point ) => {
-            samp_set.amplitude = 0.25 + 0.5 * a_point;
+            samp_set.low = -1 + 1.25 * a_point;
+            samp_set.high = 1;
+            const a_amp =  THREE.MathUtils.pingpong( a_point * 8, 1 );
+            samp_set.amplitude = 0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
             samp_set.frequency = 80 + 120 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
             return samp_set;
         },
@@ -139,7 +142,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 //-------- ----------
 // RENDER
 //-------- ----------
-const opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: getsamp_lossy_pingpong };
+const opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: getsamp_lossy_random };
 const opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: 'bytes' };
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sine = scene.userData.sine;

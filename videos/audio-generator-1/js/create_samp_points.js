@@ -15,9 +15,19 @@
     WAVE_FORM_FUNCTIONS.sin = (samp_set, i, a_point, wave_count, opt ) => {
         return Math.sin( Math.PI * 2 * wave_count * a_point )  * samp_set.amplitude;
     };
+    // sawtooth
     WAVE_FORM_FUNCTIONS.sawtooth = (samp_set, i, a_point, wave_count, opt ) => {
-        return -1 * samp_set.amplitude + 2 * (wave_count * a_point % 1) * samp_set.amplitude;
+        return -1 * samp_set.amplitude + 2 * ( wave_count * a_point % 1 ) * samp_set.amplitude;
     };
+    WAVE_FORM_FUNCTIONS.sawtooth2 = (samp_set, i, a_point, wave_count, opt ) => {
+        const low = samp_set.low === undefined ? -1 : samp_set.low;
+        const high = samp_set.high === undefined ? 1 : samp_set.high;
+        const alpha = wave_count * a_point % 1;
+        const low_start = low * samp_set.amplitude;
+        const high_end = ( Math.abs( low_start ) + high * samp_set.amplitude )  * alpha 
+        return low_start + high_end;
+    };
+
     //-------- ----------
     // HELPERS
     //-------- ----------
