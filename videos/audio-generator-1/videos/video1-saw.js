@@ -65,11 +65,15 @@ VIDEO.update = function(sm, scene, camera, per, bias){
         i_count : sine.bytes_per_frame,
         secs: sine.secs,
         mode: 'bytes'
+        //mode: 'int16'
     });
     // write data_samples array
     const clear = sm.frame === 0 ? true: false;
     const uri = videoAPI.pathJoin(sm.filePath, 'sampdata');
     return videoAPI.write(uri, new Uint8Array(data_samples), clear )
+
+    //return videoAPI.write(uri, new Int16Array(data_samples), clear )
+
 };
 //-------- ----------
 // RENDER

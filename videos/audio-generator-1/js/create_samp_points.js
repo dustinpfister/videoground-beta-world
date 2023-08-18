@@ -27,7 +27,6 @@
         const high_end = ( Math.abs( low_start ) + high * samp_set.amplitude )  * alpha 
         return low_start + high_end;
     };
-
     //-------- ----------
     // HELPERS
     //-------- ----------
@@ -37,6 +36,22 @@
             waveform = WAVE_FORM_FUNCTIONS[waveform];
         }
         return waveform;
+    };
+    const apply_mode = ( samp = 0, opt ) => {
+        if(opt.mode === 'bytes'){
+           let byte = Math.round( 127.5 + 128 * samp );
+           samp = THREE.MathUtils.clamp(byte, 0, 255);
+        }
+        if(opt.mode === 'int16'){
+            samp = ( samp + 1 ) / 2;
+            samp = THREE.MathUtils.clamp(samp, 0, 1);
+            samp = -32768 + (32768 + 32767) * samp;
+        }
+        if(opt.mode === 'normal'){
+            samp = ( samp + 1 ) / 2;
+            samp = THREE.MathUtils.clamp(samp, 0, 1);
+        }
+        return samp;
     };
     //-------- ----------
     // PUPLIC FUNCITON
@@ -61,14 +76,7 @@
             samp_set = for_sample(samp_set, i, a_point, opt);
             const wave_count = samp_set.frequency * opt.secs;
             let samp = waveform(samp_set, i, a_point, wave_count, opt);
-            if(mode === 'bytes'){
-                let byte = Math.round( 127.5 + 128 * samp );
-                samp = THREE.MathUtils.clamp(byte, 0, 255);
-            }
-            if(mode === 'normal'){
-                samp = ( samp + 1 ) / 2;
-                samp = THREE.MathUtils.clamp(samp, 0, 1);
-            }
+            samp = apply_mode(samp, opt);
             sine_points.push( parseFloat( samp.toFixed(2)) );
             i += step;
         }
