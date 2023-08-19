@@ -26,7 +26,7 @@ VIDEO.init = function(sm, scene, camera){
             samp_set.high = 1;
             const a_amp =  THREE.MathUtils.pingpong( a_point * 8, 1 );
             samp_set.amplitude = 0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
-            samp_set.frequency = 80 + 120 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
+            samp_set.frequency = 200 + 600 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
             return samp_set;
         },
         sample_rate: 44100,
@@ -51,7 +51,7 @@ VIDEO.init = function(sm, scene, camera){
         mode: 'raw'
     });
     sine.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_pingpong };
-    sine.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: 'int16' };
+    sine.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: 'bytes' };
     //!!! might not need to do anything with cameras if renderer dome element is not used in render process
     //camera.position.set(2, 2, 2);
     //camera.lookAt( 0, 0, 0 );
@@ -70,15 +70,16 @@ VIDEO.update = function(sm, scene, camera, per, bias){
         i_start : i_start,
         i_count : sine.bytes_per_frame,
         secs: sine.secs,
-        //mode: 'bytes'
-        mode: 'int16'
+        mode: 'bytes'
+        //mode: 'int16'
     });
     // write data_samples array
     const clear = sm.frame === 0 ? true: false;
     const uri = videoAPI.pathJoin(sm.filePath, 'sampdata');
-    //return videoAPI.write(uri, new Uint8Array(data_samples), clear )
 
-    return videoAPI.write(uri, new Int16Array(data_samples), clear )
+    return videoAPI.write(uri, new Uint8Array(data_samples), clear )
+
+    //return videoAPI.write(uri, new Int16Array(data_samples), clear )
 
 };
 //-------- ----------
