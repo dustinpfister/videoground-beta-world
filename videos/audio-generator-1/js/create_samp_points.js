@@ -37,23 +37,6 @@
         }
         return waveform;
     };
-    const apply_mode = ( samp = 0, opt ) => {
-        if(opt.mode === 'bytes'){
-           let byte = Math.round( 127.5 + 128 * samp );
-           samp = THREE.MathUtils.clamp(byte, 0, 255);
-        }
-        if(opt.mode === 'int16'){
-            samp = ( samp + 1 ) / 2;
-            samp = THREE.MathUtils.clamp(samp, 0, 1);
-            samp = -32768 + ( 32768 + 32767 ) * samp;
-            //samp = 32767 * samp;
-        }
-        if(opt.mode === 'normal'){
-            samp = ( samp + 1 ) / 2;
-            samp = THREE.MathUtils.clamp(samp, 0, 1);
-        }
-        return samp;
-    };
     //-------- ----------
     // PUPLIC FUNCITON
     //-------- ----------
@@ -77,7 +60,7 @@
             samp_set = for_sample(samp_set, i, a_point, opt);
             const wave_count = samp_set.frequency * opt.secs;
             let samp = waveform(samp_set, i, a_point, wave_count, opt);
-            samp = apply_mode(samp, opt);
+            samp = ST.raw_to_mode(samp, opt.mode);
             sine_points.push( parseFloat( samp.toFixed(2)) );
             i += step;
         }

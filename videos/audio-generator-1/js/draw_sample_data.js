@@ -46,14 +46,16 @@
             if(index_step > 1){
                samp = getsamp_lossy(sample_array, i, index_step);
             }
+/*
             if(mode === 'bytes'){
-                //samp = -1 + (samp / 255) * 2;
                 samp = ST.get_raw( samp, 0, 255 );
             }
             if(mode === 'int16'){
-                //samp = ( samp + 32768 ) / ( ( 32768 + 32767 ) * 2);
                 samp = ST.get_raw( samp, -32768,  32767 );
             }
+*/
+            samp = ST.mode_to_raw(samp, mode);
+
             const y = sy + disp_hh + samp * disp_hh;
             if(i === 0){
                 ctx.moveTo(x, y);
