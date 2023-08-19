@@ -72,21 +72,17 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     // write data_samples array
     const clear = sm.frame === 0 ? true: false;
     const uri = videoAPI.pathJoin(sm.filePath, 'sampdata');
-
     if( sound.mode === 'int16'){
         return videoAPI.write(uri, new Int16Array(data_samples), clear );
     }
-
     return videoAPI.write(uri, new Uint8Array(data_samples), clear );
-
-    //return videoAPI.write(uri, new Int16Array(data_samples), clear )
-
 };
 //-------- ----------
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sound = scene.userData.sound;
+    const alpha = sm.frame / ( sm.frameMax - 1);
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
@@ -102,8 +98,9 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'lime';
     ctx.font = '25px courier';
     ctx.textBaseline = 'top';
-    ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax, 5, 5);
-    ctx.fillText('sample rate : ' + sound.sample_rate , 5, 35);
-    ctx.fillText('bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
+    ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax + '  ( ' + (sound.secs * alpha ).toFixed(2) + ' / ' + sound.secs + ' ) ', 5, 5);
+    const sample_depth = sound.mode === 'bytes' ? '8bit' : '16bit';
+    ctx.fillText('sample depth@rate : ' +  sample_depth + ' @ ' + (sound.sample_rate / 1000).toFixed(3) + 'kHz' , 5, 35);
+    ctx.fillText('wavefrom : ' + sound.waveform + ', bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
 };
 
