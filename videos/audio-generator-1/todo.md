@@ -1,9 +1,22 @@
 # audio-generator-1
 
 <!-- ----------
-  JS FILES
+  samp_tools.js
 ----------- -->
 
-* (done) new sample tools js file
-* (done) fixed isshue with rendering of frame wave 
+<!-- ----------
+  samp_create.js
+----------- -->
+
+
+<!-- ----------
+  samp_draw.js
+----------- -->
+
+
+<!-- ----------
+  DONE
+----------- -->
+* ( done 08/19/2023 ) new sample tools js file
+* ( done 08/19/2023 ) fixed isshue with rendering of frame wave 
 

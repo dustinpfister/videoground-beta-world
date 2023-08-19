@@ -6,8 +6,8 @@
 //-------- ----------
 VIDEO.scripts = [
   '../js/samp_tools.js',
-  '../js/create_samp_points.js',
-  '../js/draw_sample_data.js'
+  '../js/samp_create.js',
+  '../js/samp_draw.js'
 ];
 //-------- ----------
 // INIT
