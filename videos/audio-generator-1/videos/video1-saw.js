@@ -5,6 +5,7 @@
 // SCRIPTS
 //-------- ----------
 VIDEO.scripts = [
+  '../js/samp_tools.js',
   '../js/create_samp_points.js',
   '../js/draw_sample_data.js'
 ];
@@ -12,6 +13,11 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+
+
+    console.log( ST.get_raw(0, -100, 100) );
+
+
     sm.renderer.setClearColor(0x000000, 0.25);
     const sine = scene.userData.sine = {
         waveform: 'sawtooth2',
@@ -19,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
             samp_set.low = -1 + 1.25 * a_point;
             samp_set.high = 1;
             const a_amp =  THREE.MathUtils.pingpong( a_point * 8, 1 );
-            samp_set.amplitude = 0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
+            samp_set.amplitude = 0; //0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
             samp_set.frequency = 80 + 120 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
             return samp_set;
         },
