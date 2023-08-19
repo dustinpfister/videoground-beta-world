@@ -17,11 +17,25 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = {
         waveform: 'table',
         for_sample: ( samp_set, i, a_point ) => {
-            return samp_set;
+
+            const a1 = THREE.MathUtils.pingpong( a_point, 4 ) / 4;
+
+            return [
+                {  waveform: 'sin', frequency: 320 - 160 * a1, amplitude: 0.25 },
+                {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
+                {  waveform: 'sin', frequency:  80, amplitude: 0.25 },
+                //{  waveform: 'sin', frequency: 160, amplitude: 0.75 },
+                //{  waveform: 'sin', frequency: 200, amplitude: 0.5 },
+
+                //{  waveform: 'sawtooth2', frequency: 20 + 180 * a_point, amplitude: 0.85 },
+                {  waveform: 'sin', frequency: 1000 - 500 * a1, amplitude: 0.25 },
+                //{  waveform: 'sin', frequency: 840, amplitude: 0.25 },
+                //{  waveform: 'sin', frequency: 880, amplitude: 0.25 }
+            ];
         },
         mode: 'int16', //  'int16' 'bytes',
         sample_rate: 44100,
-        secs: 1,
+        secs: 3,
         disp_offset: new THREE.Vector2(50, 200),
         disp_size: new THREE.Vector2( 1280 - 100, 200),
         array_disp: [],   // data for whole sound
