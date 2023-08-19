@@ -49,6 +49,9 @@
             if(mode === 'bytes'){
                 samp = -1 + (samp / 255) * 2;
             }
+            if(mode === 'int16'){
+                samp = (samp + 32768) / ( ( 32768 + 32767 ) * 2);
+            }
             const y = sy + disp_hh + samp * disp_hh;
             if(i === 0){
                 ctx.moveTo(x, y);
