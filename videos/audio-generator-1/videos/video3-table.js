@@ -1,5 +1,5 @@
-/*    video2-sin - for audio-generator-1 project
-          * Just using the sin wavefrom
+/*    video3-table - first video for audio-generator-1 project
+          * testing out the table waveform
  */
 //-------- ----------
 // SCRIPTS
@@ -14,13 +14,9 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-
     const sound = scene.userData.sound = {
-        waveform: 'sin',
+        waveform: 'table',
         for_sample: ( samp_set, i, a_point ) => {
-            const a_amp =  THREE.MathUtils.pingpong( a_point * 8, 1 );
-            samp_set.amplitude = 0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
-            samp_set.frequency = 200 + 1600 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
             return samp_set;
         },
         mode: 'int16', //  'int16' 'bytes',
