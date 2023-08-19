@@ -3,26 +3,27 @@
 <!-- ----------
   video3-table.js
 ----------- -->
-
 * () test out new table wavefrom feature
 
 <!-- ----------
   samp_tools.js
 ----------- -->
-
+* () clamp sample values to max and min
 <!-- ----------
   samp_create.js
 ----------- -->
-* () see about making a new wavefrom that is a not a wavefrom by itself, but rather a table of wavefroms
+* () tablewaveform : the samp set object should be an plain {} rather than an array
+* () tablewaveform : I will want to have a master amp setting for the sampe set object
 
 <!-- ----------
   samp_draw.js
 ----------- -->
-
+* () fix weird isshue with full sample display when using wave table
 
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/19/2023 ) see about making a new wavefrom that is a not a wavefrom by itself, but rather a table of wavefroms
 * ( done 08/19/2023 ) display wavefrom 
 * ( done 08/19/2023 ) new sample tools js file
 * ( done 08/19/2023 ) fixed isshue with rendering of frame wave
