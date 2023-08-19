@@ -45,7 +45,7 @@
         if(opt.mode === 'int16'){
             samp = ( samp + 1 ) / 2;
             samp = THREE.MathUtils.clamp(samp, 0, 1);
-            samp = -32768 + (32768 + 32767) * samp;
+            samp = -32768 + ( 32768 + 32767 ) * samp;
             //samp = 32767 * samp;
         }
         if(opt.mode === 'normal'){
