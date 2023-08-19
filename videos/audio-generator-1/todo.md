@@ -7,5 +7,3 @@
 * (done) new sample tools js file
 * (done) fixed isshue with rendering of frame wave 
 
-* () 
-* () create-sample-points : 
