@@ -1,14 +1,10 @@
 # audio-generator-1
 
 <!-- ----------
-  video1-saw.js
+  video3-table.js
 ----------- -->
 
-* () work out new sound before making final video for this one
-
-<!-- ----------
-  video2-table.js
------------ -->
+* () test out new table wavefrom feature
 
 <!-- ----------
   samp_tools.js
@@ -17,7 +13,7 @@
 <!-- ----------
   samp_create.js
 ----------- -->
-* () start a new table waveform where the aim so to use not one but two or more wavwforms
+* () see about making a new wavefrom that is a not a wavefrom by itself, but rather a table of wavefroms
 
 <!-- ----------
   samp_draw.js
