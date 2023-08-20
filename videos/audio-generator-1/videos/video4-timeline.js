@@ -1,5 +1,5 @@
-/*    video3-table - for audio-generator-1 project
-          * testing out the table waveform
+/*    video4-timeline - for audio-generator-1 project
+          * testing out a timeline feature, for making music
  */
 //-------- ----------
 // SCRIPTS
@@ -14,16 +14,27 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
+
+    const timeline = [ 1, 7, 1, 0, 0, 7, 6, 6, 6 ];
+
+
     const sound = scene.userData.sound = {
         waveform: 'table',
         for_sample: ( samp_set, i, a_point ) => {
+
+            const note = timeline[ Math.floor( timeline.length * a_point ) ];
+            const note_range = 8;
+
+            const a_amp = 1;
+            const a_note = note  / note_range;
+
             return {
-                amplitude: 4,
+                amplitude: a_amp * 4,
                 table: [
-                    {  waveform: 'sin', frequency: 320, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  80, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 1000, amplitude: 0.25 }
+                    {  waveform: 'sin', frequency: 320 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency: 160 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency:  80 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency: 1000 * a_note, amplitude: 0.25 }
                 ]
             };
         },
