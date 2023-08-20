@@ -22,18 +22,18 @@
 <!-- ----------
   samp_create.js
 ----------- -->
-* () tablewaveform : the samp set object should be an plain {} rather than an array
-* () tablewaveform : I will want to have a master amp setting for the sampe set object
-* () timeline: start a feature that caan be used to make music
+* () timeline: start a feature that can be used to make music
 
 <!-- ----------
   samp_draw.js
 ----------- -->
-* () fix weird isshue with full sample display when using wave table
+* () see about fixing weird isshue with pingpong method for drawing table wavefrom samples
 
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/20/2023 ) tablewaveform : the samp set object should be an plain {} rather than an array
+* ( done 08/20/2023 ) tablewaveform : I will want to have a master amp setting for the sampe set object
 * ( done 08/19/2023 ) see about making a new wavefrom that is a not a wavefrom by itself, but rather a table of wavefroms
 * ( done 08/19/2023 ) display wavefrom 
 * ( done 08/19/2023 ) new sample tools js file
