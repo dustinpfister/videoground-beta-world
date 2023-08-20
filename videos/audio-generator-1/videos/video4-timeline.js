@@ -15,7 +15,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const timeline = [ 1, 7, 1, 0, 0, 7, 6, 6, 6 ];
+    const timeline = [ 1, 0, 7,7,7,7, 0, 7,7,7,7, 0, 7, 6, 5, 4, 3, 2, 1,0 ];
 
 
     const sound = scene.userData.sound = {
