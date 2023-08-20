@@ -32,18 +32,17 @@
     };
     // table
     WAVE_FORM_FUNCTIONS.table = (samp_set, i, a_point, opt ) => {
-        const waveform_count = samp_set.length;
+        const table_count = samp_set.table.length;
         let i_wf = 0;
         let samp = 0;
-        while(i_wf < waveform_count ){
-            const wf = samp_set[i_wf];
+        while(i_wf < table_count ){
+            const wf = samp_set.table[i_wf];
             const wf_samp = WAVE_FORM_FUNCTIONS[wf.waveform](wf, i, a_point, opt)
             samp += wf_samp;
             i_wf += 1;
         }
-        return (samp /= waveform_count) * 4;
+        return (samp /= table_count) * samp_set.amplitude;
     };
-
     //-------- ----------
     // HELPERS
     //-------- ----------
