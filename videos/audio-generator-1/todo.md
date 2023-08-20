@@ -17,7 +17,9 @@
 <!-- ----------
   samp_tools.js
 ----------- -->
-* () clamp sample values to max and min
+* () clamp: sample values to max and min
+* () alphas: I will want to bake in some methods to help with alphas
+* () ST.raw\_to\_mode: use ST.get\_normal, and test output
 
 <!-- ----------
   samp_create.js

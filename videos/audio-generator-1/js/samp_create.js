@@ -8,7 +8,7 @@
         return samp_set;
     };
     //-------- ----------
-    // WAVE FORMS
+    // WAVE FORMS - return shoud be in what I am calling 'raw' mode ( -1 to 1 )
     //-------- ----------
     const WAVE_FORM_FUNCTIONS = {};
     // sin
@@ -43,6 +43,14 @@
         }
         return (samp /= table_count) * samp_set.amplitude;
     };
+
+//!!! testing out wavefroms here
+//let i = 0;
+//while(i < 20){
+//console.log( WAVE_FORM_FUNCTIONS.sin({ frequency: 80, amplitude: 1 }, 0, i / 19, { secs: 1 }) );
+//   i += 1;
+//}
+
     //-------- ----------
     // HELPERS
     //-------- ----------
