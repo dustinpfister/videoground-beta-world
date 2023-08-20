@@ -15,32 +15,66 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const timeline = [ 1, 0, 7,7,7,7, 0, 7,7,7,7, 0, 7, 6, 5, 4, 3, 2, 1,0 ];
+    const timeline_note = [
+        5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+        0,0,0,0,
+        7,7,7,7,7,7,7,7,
+        0,0,0,0,
+        7,7,7,7,7,7,7,7,
+        0,0,0,0,
+        6,6,6,6,6,6,6,6,
+        0,0,0,0,
+        6,6,6,6,6,6,6,6,
+        0,0,0,0,
+        5,5,5,5,5,5,5,5,
+        0,0,0,0,
+        4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4];
+
+    const timeline_amp = [
+        2,5,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,5,2,
+        0,0,0,0,
+        2,5,9,9,9,9,5,2,
+        0,0,0,0,
+        2,5,9,9,9,9,5,2,
+        0,0,0,0,
+        2,5,9,9,9,9,5,2,
+        0,0,0,0,
+        2,5,9,9,9,9,5,2,
+        0,0,0,0,
+        2,5,9,9,9,9,5,2,
+        0,0,0,0,
+        2,5,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,7,6,5,4,3,2,1];
 
 
     const sound = scene.userData.sound = {
         waveform: 'table',
         for_sample: ( samp_set, i, a_point ) => {
 
-            const note = timeline[ Math.floor( timeline.length * a_point ) ];
+            const note = timeline_note[ Math.floor( timeline_note.length * a_point ) ];
             const note_range = 8;
 
-            const a_amp = 1;
+            const amp = timeline_amp[ Math.floor( timeline_amp.length * a_point ) ];
+            const a_amp = amp / 9;
             const a_note = note  / note_range;
 
             return {
-                amplitude: a_amp * 4,
+                amplitude: a_amp * 6,
                 table: [
-                    {  waveform: 'sin', frequency: 320 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 160 * a_note, amplitude: 0.25 },
                     {  waveform: 'sin', frequency:  80 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 1000 * a_note, amplitude: 0.25 }
+                    {  waveform: 'sin', frequency:  100 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency:  120 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency:  200 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency:  800 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency:  500 * a_note, amplitude: 0.25 },
+
+                    {  waveform: 'sawtooth', frequency:  110 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sawtooth', frequency:  310 * a_note, amplitude: 0.25 },
                 ]
             };
         },
         mode: 'int16', //  'int16' 'bytes',
         sample_rate: 44100,
-        secs: 3,
+        secs: 4,
         disp_offset: new THREE.Vector2(50, 200),
         disp_size: new THREE.Vector2( 1280 - 100, 200),
         array_disp: [],   // data for whole sound
