@@ -45,7 +45,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: sound.secs,
         mode: 'raw'
     });
-    sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_pingpong };
+    sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_random };
     sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
     //!!! might not need to do anything with cameras if renderer dome element is not used in render process
     //camera.position.set(2, 2, 2);
