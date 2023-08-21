@@ -17,20 +17,21 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const timeline = {
+        freq_per_beat: 512,
         data_note : [
-            {  i_note: 4, count: 8 },
-            {  i_note: 0, count: 1 },
-            {  i_note: 7, count: 2 },
-            {  i_note: 0, count: 1 },
-            {  i_note: 7, count: 2 },
-            {  i_note: 0, count: 1 },
-            {  i_note: 6, count: 2 },
-            {  i_note: 0, count: 1 },
-            {  i_note: 6, count: 2 },
-            {  i_note: 0, count: 1 },
-            {  i_note: 4, count: 2 },
-            {  i_note: 0, count: 1 },
-            {  i_note: 3, count: 8 }
+            {  i_note: 4, beats: 8 },
+            {  i_note: 0, beats: 1 },
+            {  i_note: 7, beats: 2 },
+            {  i_note: 0, beats: 1 },
+            {  i_note: 7, beats: 2 },
+            {  i_note: 0, beats: 1 },
+            {  i_note: 6, beats: 2 },
+            {  i_note: 0, beats: 1 },
+            {  i_note: 6, beats: 2 },
+            {  i_note: 0, beats: 1 },
+            {  i_note: 4, beats: 2 },
+            {  i_note: 0, beats: 1 },
+            {  i_note: 3, beats: 8 }
 
         ]
     };
@@ -39,46 +40,41 @@ VIDEO.init = function(sm, scene, camera){
    const timeline_note = timeline.data_note.map( (obj_note) => {
          const array = [];
          let i_beat = 0;
-         while(i_beat < obj_note.count){
-             array.push( obj_note.i_note );
+         while(i_beat < obj_note.beats){
+             let i_freq = 0;
+             while(i_freq < timeline.freq_per_beat ){
+
+                     array.push(  obj_note.i_note );
+
+                 i_freq += 1;
+             }
              i_beat += 1;
          }
          return array;
     }).flat();
 
-/*
-    const timeline_note = [
-        4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4,
-        0,0,0,0,
-        7,7,7,7, 7,7,7,7,
-        0,0,0,0,
-        7,7,7,7, 7,7,7,7,
-        0,0,0,0,
-        6,6,6,6, 6,6,6,6,
-        0,0,0,0,
-        6,6,6,6, 6,6,6,6,
-        0,0,0,0,
-        4,4,4,4, 4,4,4,4,
-        0,0,0,0,
-        2,2,2,2, 2,2,2,2, 3,3,4,4, 5,5,6,6, 7,7,7,7, 7,7,7,7, 7,7,6,5, 4,3,2,1
-    ];
-*/
 
-    const timeline_amp = [
-        1,3,5,7, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 7,5,3,1,
-        0,0,0,0,
-        1,3,5,7, 7,5,3,1,
-        0,0,0,0,
-        1,3,5,7, 7,5,3,1,
-        0,0,0,0,
-        1,3,5,7, 7,5,3,1,
-        0,0,0,0,
-        1,3,5,7, 7,5,3,1,
-        0,0,0,0,
-        1,3,5,7, 7,5,3,1,
-        0,0,0,0,
-        1,3,5,7, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 7,5,3,1
-    ];
+    const timeline_amp = timeline.data_note.map( (obj_note) => {
+         const array = [];
+         let i_beat = 0;
+         while(i_beat < obj_note.beats){
+             let i_freq = 0;
+             while(i_freq < timeline.freq_per_beat ){
+                 const a_note = ( ( i_beat  + i_freq / timeline.freq_per_beat ) / obj_note.beats );
+
+array.push( Math.sin( Math.PI * a_note ) );
+
+
+                 i_freq += 1;
+             }
+             i_beat += 1;
+         }
+         return array;
+    }).flat()
+
+
+
+
 
 
     const sound = scene.userData.sound = {
@@ -89,15 +85,25 @@ VIDEO.init = function(sm, scene, camera){
             const note_range = 8;
 
             const amp = timeline_amp[ Math.floor( timeline_amp.length * a_point ) ];
-            const a_amp = amp / 9;
+            const a_amp = amp;
             const a_note = note  / note_range;
 
             return {
                 amplitude: a_amp * 1.05,
                 table: [
-                    {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1 },
-                    {  waveform: 'sin', frequency:  160 * a_note, amplitude: 1 },
-                    {  waveform: 'sin', frequency:  500 * a_note, amplitude: 0.75 }
+                    //{  waveform: 'sin', frequency:  300 * a_note, amplitude: 1.00 },
+                    //{  waveform: 'sin', frequency:  350 * a_note, amplitude: 1.00 },
+                    //{  waveform: 'sin', frequency:  400 * a_note, amplitude: 1.00 },
+                    //{  waveform: 'sin', frequency:  450 * a_note, amplitude: 1.00 },
+
+
+                    {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  100 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  120 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  160 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  500 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  1000 * a_note, amplitude: 0.50 }
+
                 ]
             };
         },
