@@ -15,35 +15,70 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
+
+    const timeline = {
+        data_note : [
+            {  i_note: 4, count: 8 },
+            {  i_note: 0, count: 1 },
+            {  i_note: 7, count: 2 },
+            {  i_note: 0, count: 1 },
+            {  i_note: 7, count: 2 },
+            {  i_note: 0, count: 1 },
+            {  i_note: 6, count: 2 },
+            {  i_note: 0, count: 1 },
+            {  i_note: 6, count: 2 },
+            {  i_note: 0, count: 1 },
+            {  i_note: 4, count: 2 },
+            {  i_note: 0, count: 1 },
+            {  i_note: 3, count: 8 }
+
+        ]
+    };
+
+
+   const timeline_note = timeline.data_note.map( (obj_note) => {
+         const array = [];
+         let i_beat = 0;
+         while(i_beat < obj_note.count){
+             array.push( obj_note.i_note );
+             i_beat += 1;
+         }
+         return array;
+    }).flat();
+
+/*
     const timeline_note = [
-        5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
+        4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4, 4,4,4,4,
         0,0,0,0,
-        7,7,7,7,7,7,7,7,
+        7,7,7,7, 7,7,7,7,
         0,0,0,0,
-        7,7,7,7,7,7,7,7,
+        7,7,7,7, 7,7,7,7,
         0,0,0,0,
-        6,6,6,6,6,6,6,6,
+        6,6,6,6, 6,6,6,6,
         0,0,0,0,
-        6,6,6,6,6,6,6,6,
+        6,6,6,6, 6,6,6,6,
         0,0,0,0,
-        5,5,5,5,5,5,5,5,
+        4,4,4,4, 4,4,4,4,
         0,0,0,0,
-        4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4];
+        2,2,2,2, 2,2,2,2, 3,3,4,4, 5,5,6,6, 7,7,7,7, 7,7,7,7, 7,7,6,5, 4,3,2,1
+    ];
+*/
 
     const timeline_amp = [
-        2,5,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,5,2,
+        1,3,5,7, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 7,5,3,1,
         0,0,0,0,
-        2,5,9,9,9,9,5,2,
+        1,3,5,7, 7,5,3,1,
         0,0,0,0,
-        2,5,9,9,9,9,5,2,
+        1,3,5,7, 7,5,3,1,
         0,0,0,0,
-        2,5,9,9,9,9,5,2,
+        1,3,5,7, 7,5,3,1,
         0,0,0,0,
-        2,5,9,9,9,9,5,2,
+        1,3,5,7, 7,5,3,1,
         0,0,0,0,
-        2,5,9,9,9,9,5,2,
+        1,3,5,7, 7,5,3,1,
         0,0,0,0,
-        2,5,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,7,6,5,4,3,2,1];
+        1,3,5,7, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 9,9,9,9, 7,5,3,1
+    ];
 
 
     const sound = scene.userData.sound = {
@@ -58,17 +93,11 @@ VIDEO.init = function(sm, scene, camera){
             const a_note = note  / note_range;
 
             return {
-                amplitude: a_amp * 6,
+                amplitude: a_amp * 1.05,
                 table: [
-                    {  waveform: 'sin', frequency:  80 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  100 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  120 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  200 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  800 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  500 * a_note, amplitude: 0.25 },
-
-                    {  waveform: 'sawtooth', frequency:  110 * a_note, amplitude: 0.25 },
-                    {  waveform: 'sawtooth', frequency:  310 * a_note, amplitude: 0.25 },
+                    {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1 },
+                    {  waveform: 'sin', frequency:  160 * a_note, amplitude: 1 },
+                    {  waveform: 'sin', frequency:  500 * a_note, amplitude: 0.75 }
                 ]
             };
         },
