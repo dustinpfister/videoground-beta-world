@@ -20,19 +20,19 @@ VIDEO.init = function(sm, scene, camera){
             const wave_count = samp_set.frequency * opt.secs;
             const a_wave = wave_count * a_point % 1;
             const a_d = ( a_wave - samp_set.duty ) / ( 1 - samp_set.duty);
-            const saw = 0.5;
-            const ma = a_d * saw;
+            const ma = a_d * samp_set.saw;
             if(a_wave < samp_set.duty){
-                return saw * -1 * samp_set.amplitude;
+                return  -1 * samp_set.amplitude;
             }
             return ma * samp_set.amplitude;
         },
         for_sample: ( samp_set, i, a_point ) => {
             const a2 = 1 - Math.abs(0.5 - a_point * 16 % 1) / 0.5;
-            //const a_amp = Math.sin( Math.PI * ( a_point * 4 % 1) );
-            samp_set.duty = 0.5 - 0.45 * a2;
-            samp_set.frequency = 120;
-            samp_set.amplitude = 0.5; //0.25 + 0.5 * a_amp;
+            const a3 = Math.sin( Math.PI * ( a_point * 4 % 1) );
+            samp_set.saw = a_point;
+            samp_set.duty = 0.25 + 0.65 * a_point; //0.7 - 0.25 * a3;
+            samp_set.frequency = 500 - 400 * a_point;
+            samp_set.amplitude = 0.25 + 0.70 * a_point; 
             return samp_set;
         },
         mode: 'int16', //  'int16' 'bytes',
