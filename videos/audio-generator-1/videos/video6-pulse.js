@@ -97,15 +97,9 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // draw disp
-    DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
+    DSD.draw( ctx, sound.array_disp, sound.opt_disp, alpha );
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
     // additional plain 2d overlay for status info
-    ctx.fillStyle = 'lime';
-    ctx.font = '25px courier';
-    ctx.textBaseline = 'top';
-    ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax + '  ( ' + (sound.secs * alpha ).toFixed(2) + ' / ' + sound.secs + ' ) ', 5, 5);
-    const sample_depth = sound.mode === 'bytes' ? '8bit' : '16bit';
-    ctx.fillText('sample depth@rate : ' +  sample_depth + ' @ ' + (sound.sample_rate / 1000).toFixed(3) + 'kHz' , 5, 35);
-    ctx.fillText('wavefrom : ' + sound.waveform + ', bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
+    DSD.draw_info(ctx, sound, sm);
 };
 

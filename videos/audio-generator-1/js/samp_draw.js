@@ -89,5 +89,20 @@
         DSD.draw_sample_box(ctx, opt, alpha );
     };
 
+    DSD.draw_info = (ctx, sound, sm) => {
+        const alpha = sm.frame / ( sm.frameMax - 1);
+        ctx.fillStyle = 'lime';
+        ctx.font = '25px courier';
+        ctx.textBaseline = 'top';
+        ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax + '  ( ' + (sound.secs * alpha ).toFixed(2) + ' / ' + sound.secs + ' ) ', 5, 5);
+        const sample_depth = sound.mode === 'bytes' ? '8bit' : '16bit';
+        ctx.fillText('sample depth@rate : ' +  sample_depth + ' @ ' + (sound.sample_rate / 1000).toFixed(3) + 'kHz' , 5, 35);
+        let waveform = sound.waveform;
+        if(typeof waveform === 'function'){
+            waveform = 'custom';
+        }
+        ctx.fillText('wavefrom : ' + waveform + ', bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
+    };
+
     window.DSD = DSD;
 }());

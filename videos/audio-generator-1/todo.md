@@ -54,9 +54,11 @@
 * () samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
 * () samp-draw.js : draw +1 and -1 lables for samp data disps
 
+
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/22/2023 ) samp-draw.js : draw 'custom' for a waveform if it is a function
 * ( done 08/22/2023 ) samp-draw.js : draw min line for samp data disp
 * ( done 08/22/2023 ) samp-draw.js : negative amp values should be drawn below mid line rather than above
 * ( done 08/22/2023 ) video5-square.js : start a video demoing a square waveform
