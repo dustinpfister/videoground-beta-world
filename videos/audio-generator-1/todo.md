@@ -52,11 +52,13 @@
   samp_draw.js
 ----------- -->
 * () samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
-* () samp-draw.js : negative amp values should be drawn below mid line rather than above
+* () samp-draw.js : draw +1 and -1 lables for samp data disps
 
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/22/2023 ) samp-draw.js : draw min line for samp data disp
+* ( done 08/22/2023 ) samp-draw.js : negative amp values should be drawn below mid line rather than above
 * ( done 08/22/2023 ) video5-square.js : start a video demoing a square waveform
 * ( done 08/21/2023 ) video4-timeline : smoothing out sound by adjusting amp over time
 * ( done 08/20/2023 ) samp-create.js : start a feature that can be used to make music

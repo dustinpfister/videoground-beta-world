@@ -88,14 +88,9 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
-    // update and draw dom element of renderer
-    // this might just be 2d, but for now I will keep this here
-    //sm.renderer.render(sm.scene, sm.camera);
-    //ctx.drawImage(sm.renderer.domElement, 0, 0, canvas.width, canvas.height);
-    DSD.draw_sample_data(ctx, sound.array_disp, sound.opt_disp );
-    DSD.draw_sample_box(ctx, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
-    DSD.draw_sample_data(ctx, sound.array_frame, sound.opt_frame );
-    DSD.draw_sample_box(ctx, sound.opt_frame, 0 );
+    // draw disp
+    DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
+    DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
     // additional plain 2d overlay for status info
     ctx.fillStyle = 'lime';
     ctx.font = '25px courier';

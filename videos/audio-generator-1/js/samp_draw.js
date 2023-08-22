@@ -46,17 +46,8 @@
             if(index_step > 1){
                samp = getsamp_lossy(sample_array, i, index_step);
             }
-/*
-            if(mode === 'bytes'){
-                samp = ST.get_raw( samp, 0, 255 );
-            }
-            if(mode === 'int16'){
-                samp = ST.get_raw( samp, -32768,  32767 );
-            }
-*/
             samp = ST.mode_to_raw(samp, mode);
-
-            const y = sy + disp_hh + samp * disp_hh;
+            const y = sy + disp_hh + samp * disp_hh * -1;
             if(i === 0){
                 ctx.moveTo(x, y);
             }
@@ -68,6 +59,18 @@
         ctx.lineWidth = 3;
         ctx.stroke();
     };
+
+    const draw_midline = (ctx, sx, sy, w, h) => {
+        // mid line
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 1;
+        const y = sy + h / 2;
+        ctx.beginPath();
+        ctx.moveTo(sx, y);
+        ctx.lineTo(sx + w, y);
+        ctx.stroke();
+    };
+
     DSD.draw_sample_box = (ctx, opt, alpha = 0) => {
         const sx = opt.sx === undefined ? 0 : opt.sx;
         const sy = opt.sy === undefined ? 0 : opt.sy;
@@ -79,5 +82,12 @@
         ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
         ctx.fillRect(sx, sy, w * alpha, h);
     };
+
+    DSD.draw = (ctx, sample_array, opt = {}, alpha = 0) => {
+        draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h);
+        DSD.draw_sample_data(ctx, sample_array, opt );
+        DSD.draw_sample_box(ctx, opt, alpha );
+    };
+
     window.DSD = DSD;
 }());
