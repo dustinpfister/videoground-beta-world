@@ -20,11 +20,19 @@
 <!-- ----------
   video5-square.js
 ----------- -->
-* () video5-square.js : use baked in squae wavefrom
-* () video5-square.js : adjust frequnecy and amp over time
+* () video5-square.js : use baked in square wavefrom
+* () video5-square.js : adjust frequency and amp over time
 
 <!-- ----------
-  video6-vertex.js
+  video6-pulse.js
+----------- -->
+
+<!-- ----------
+  video7-tri.js
+----------- -->
+
+<!-- ----------
+  video8-vertex.js
 ----------- -->
 * () video6-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
 

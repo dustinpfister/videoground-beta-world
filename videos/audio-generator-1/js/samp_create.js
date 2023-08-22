@@ -8,7 +8,7 @@
         return samp_set;
     };
     //-------- ----------
-    // WAVE FORMS - return shoud be in what I am calling 'raw' mode ( -1 to 1 )
+    // WAVE FORMS - return should be in what I am calling 'raw' mode ( -1 to 1 )
     //-------- ----------
     const WAVE_FORM_FUNCTIONS = {};
     // sin
@@ -42,6 +42,15 @@
             i_wf += 1;
         }
         return (samp /= table_count) * samp_set.amplitude;
+    };
+    // square
+    WAVE_FORM_FUNCTIONS.square = (samp_set, i, a_point, opt ) => {
+            const wave_count = samp_set.frequency * opt.secs;
+            const a_wave = wave_count * a_point % 1;
+            if(a_wave < 0.5){
+                return 0;
+            }
+            return  samp_set.amplitude;
     };
 
 //!!! testing out wavefroms here

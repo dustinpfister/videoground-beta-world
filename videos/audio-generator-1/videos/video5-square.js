@@ -16,27 +16,16 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const sound = scene.userData.sound = {
-        waveform: (samp_set, i, a_point, opt ) => {
-            const wave_count = samp_set.frequency * opt.secs;
-            const a_wave = wave_count * a_point % 1;
-            if(a_wave < samp_set.duty){
-                return 0;
-            }
-            //const a_d = ( a_wave - samp_set.duty ) / ( 1 - samp_set.duty) 
-            return  samp_set.amplitude;
-
-        },
+        waveform: 'square',
         for_sample: ( samp_set, i, a_point ) => {
-            const a2 = 1 - Math.abs(0.5 - a_point * 4 % 1) / 0.5;
-            const a_amp = Math.sin( Math.PI * ( a_point * 4 % 1) );
-            samp_set.duty = 0.5 - 0.45 * a2;
-            samp_set.frequency = 120;
-            samp_set.amplitude = 0.25 + 0.5 * a_amp;
+            const a_freq = Math.sin( Math.PI * ( a_point * 4 % 1) );
+            samp_set.frequency = 80 + 920 * a_freq;
+            samp_set.amplitude = 0.75;
             return samp_set;
         },
         mode: 'int16', //  'int16' 'bytes',
         sample_rate: 44100,
-        secs: 4,
+        secs: 10,
         disp_offset: new THREE.Vector2(50, 200),
         disp_size: new THREE.Vector2( 1280 - 100, 200),
         array_disp: [],   // data for whole sound
