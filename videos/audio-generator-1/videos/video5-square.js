@@ -18,9 +18,9 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = {
         waveform: 'square',
         for_sample: ( samp_set, i, a_point ) => {
-            const a_freq = Math.sin( Math.PI * ( a_point * 4 % 1) );
-            samp_set.frequency = 200 + 100 * a_freq;
-            samp_set.amplitude = 0.25;
+            const a_1 = Math.sin( Math.PI * ( a_point * 2 % 1) );
+            samp_set.frequency = 200 + 100 * a_1;
+            samp_set.amplitude = 0.25 + 0.5 * a_1;
             return samp_set;
         },
         mode: 'int16', //  'int16' 'bytes',
