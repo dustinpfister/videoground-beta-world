@@ -48,9 +48,9 @@
             const wave_count = samp_set.frequency * opt.secs;
             const a_wave = wave_count * a_point % 1;
             if(a_wave < 0.5){
-                return 0;
+                return -1 * samp_set.amplitude ;
             }
-            return  samp_set.amplitude;
+            return samp_set.amplitude;
     };
 
 //!!! testing out wavefroms here
