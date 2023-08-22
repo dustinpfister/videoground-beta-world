@@ -20,7 +20,8 @@
 <!-- ----------
   video5-square.js
 ----------- -->
-* () video5-square.js : start a video demoing square waveform
+* () video5-square.js : use baked in squae wavefrom
+* () video5-square.js : adjust frequnecy and amp over time
 
 <!-- ----------
   video6-vertex.js
@@ -37,16 +38,18 @@
 <!-- ----------
   samp_create.js
 ----------- -->
-* () samp-create.js :
+* () samp-create.js : have a baked in square wavefrom
 
 <!-- ----------
   samp_draw.js
 ----------- -->
-* () samp-draw.js: see about fixing weird isshue with pingpong method for drawing table wavefrom samples
+* () samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
+* () samp-draw.js : negative amp values should be drawn below mid line rather than above
 
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/22/2023 ) video5-square.js : start a video demoing a square waveform
 * ( done 08/21/2023 ) video4-timeline : smoothing out sound by adjusting amp over time
 * ( done 08/20/2023 ) samp-create.js : start a feature that can be used to make music
 * ( done 08/20/2023 ) tablewaveform : the samp set object should be an plain {} rather than an array
