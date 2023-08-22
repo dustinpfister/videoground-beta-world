@@ -61,21 +61,13 @@ VIDEO.init = function(sm, scene, camera){
              let i_freq = 0;
              while(i_freq < timeline.freq_per_beat ){
                  const a_note = ( ( i_beat  + i_freq / timeline.freq_per_beat ) / obj_note.beats );
-
-array.push( Math.sin( Math.PI * a_note ) );
-
-
+                 array.push( Math.sin( Math.PI * a_note ) );
                  i_freq += 1;
              }
              i_beat += 1;
          }
          return array;
     }).flat()
-
-
-
-
-
 
     const sound = scene.userData.sound = {
         waveform: 'table',
@@ -91,18 +83,12 @@ array.push( Math.sin( Math.PI * a_note ) );
             return {
                 amplitude: a_amp * 1.05,
                 table: [
-                    //{  waveform: 'sin', frequency:  300 * a_note, amplitude: 1.00 },
-                    //{  waveform: 'sin', frequency:  350 * a_note, amplitude: 1.00 },
-                    //{  waveform: 'sin', frequency:  400 * a_note, amplitude: 1.00 },
-                    //{  waveform: 'sin', frequency:  450 * a_note, amplitude: 1.00 },
-
-
                     {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  100 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  120 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  160 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  500 * a_note, amplitude: 1.00 },
-                    {  waveform: 'sin', frequency:  1000 * a_note, amplitude: 0.50 }
+                    {  waveform: 'square', frequency:  1000 * a_note, amplitude: 0.50 }
 
                 ]
             };
