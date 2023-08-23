@@ -88,7 +88,7 @@ VIDEO.init = function(sm, scene, camera){
                     {  waveform: 'sin', frequency:  120 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  160 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  500 * a_note, amplitude: 1.00 },
-                    {  waveform: 'square', frequency:  1000 * a_note, amplitude: 0.50 }
+                    {  waveform: 'pulse', frequency:  1000 * a_note, amplitude: 0.25 + 0.75 * a_note, duty: 0.25 + 0.5 * a_note }
 
                 ]
             };
