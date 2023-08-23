@@ -46,7 +46,8 @@
 <!-- ----------
   samp_create.js
 ----------- -->
-* () samp-create.js : have a baked in square wavefrom
+* () samp-create.js : default samp objects for each wave form
+
 
 <!-- ----------
   samp_draw.js
@@ -58,6 +59,8 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/23/2023 ) samp-create.js : have a baked in pause wavefrom
+* ( done 08/22/2023 ) samp-create.js : have a baked in square wavefrom
 * ( done 08/22/2023 ) samp-draw.js : draw 'custom' for a waveform if it is a function
 * ( done 08/22/2023 ) samp-draw.js : draw min line for samp data disp
 * ( done 08/22/2023 ) samp-draw.js : negative amp values should be drawn below mid line rather than above
