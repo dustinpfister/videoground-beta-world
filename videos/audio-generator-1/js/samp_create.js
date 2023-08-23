@@ -52,6 +52,16 @@
             }
             return samp_set.amplitude;
     };
+    // pulse ( like square only I can adjust duty )
+    WAVE_FORM_FUNCTIONS.pulse = (samp_set, i, a_point, opt ) => {
+        const duty = samp_set.duty === undefined ? 0.5 : samp_set.duty;
+        const wave_count = samp_set.frequency * opt.secs;
+        const a_wave = wave_count * a_point % 1;
+        if(a_wave < duty){
+            return  -1 * samp_set.amplitude;
+        }
+        return samp_set.amplitude
+    };
 
 //!!! testing out wavefroms here
 //let i = 0;

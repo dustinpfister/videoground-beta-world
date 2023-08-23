@@ -16,23 +16,12 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const sound = scene.userData.sound = {
-        waveform: (samp_set, i, a_point, opt ) => {
-            const wave_count = samp_set.frequency * opt.secs;
-            const a_wave = wave_count * a_point % 1;
-            const a_d = ( a_wave - samp_set.duty ) / ( 1 - samp_set.duty);
-            const ma = a_d * samp_set.saw;
-            if(a_wave < samp_set.duty){
-                return  -1 * samp_set.amplitude;
-            }
-            return ma * samp_set.amplitude;
-        },
+        waveform: 'pulse',
         for_sample: ( samp_set, i, a_point ) => {
-            const a2 = 1 - Math.abs(0.5 - a_point * 16 % 1) / 0.5;
-            const a3 = Math.sin( Math.PI * ( a_point * 4 % 1) );
-            samp_set.saw = a_point;
-            samp_set.duty = 0.25 + 0.65 * a_point; //0.7 - 0.25 * a3;
-            samp_set.frequency = 500 - 400 * a_point;
-            samp_set.amplitude = 0.25 + 0.70 * a_point; 
+            samp_set.saw = 0;
+            samp_set.duty = 0.05 + 0.95 * a_point;
+            samp_set.frequency = 80;
+            samp_set.amplitude = 0.50 
             return samp_set;
         },
         mode: 'int16', //  'int16' 'bytes',
