@@ -1,38 +1,7 @@
 # audio-generator-1
 
 <!-- ----------
-  video1-saw.js
------------ -->
-
-<!-- ----------
-  video2-sin.js
------------ -->
-
-<!-- ----------
-  video3-table.js
------------ -->
-
-<!-- ----------
-  video4-timeline.js
------------ -->
-* () video4-square.js : I will want to do adjust pitch and amp over time, but not by way of creating arrays first
-
-<!-- ----------
-  video5-square.js
------------ -->
-* () video5-square.js : use baked in square wavefrom
-* () video5-square.js : adjust frequency and amp over time
-
-<!-- ----------
-  video6-pulse.js
------------ -->
-
-<!-- ----------
-  video7-tri.js
------------ -->
-
-<!-- ----------
-  video8-vertex.js
+  VIDEO FILES
 ----------- -->
 * () video6-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
 
