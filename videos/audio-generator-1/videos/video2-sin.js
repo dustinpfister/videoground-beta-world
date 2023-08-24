@@ -25,9 +25,6 @@ VIDEO.init = function(sm, scene, camera){
         secs: 10
     });
 
-
-console.log( THREE.MathUtils.pingpong(1.25, 1) );
-
     sm.frameMax = sound.frames;
 
 };
@@ -36,14 +33,13 @@ console.log( THREE.MathUtils.pingpong(1.25, 1) );
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
-    const total_bytes = sound.sample_rate * sound.secs;
-    const i_start = sound.bytes_per_frame * sm.frame;
+    const i_start = Math.floor(sound.samples_per_frame * sm.frame);
     const data_samples =  sound.array_frame = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
-        i_size : total_bytes,
+        i_size : sound.total_samps,
         i_start : i_start,
-        i_count : sound.bytes_per_frame,
+        i_count : sound.samples_per_frame,
         secs: sound.secs,
         mode: sound.mode
     });

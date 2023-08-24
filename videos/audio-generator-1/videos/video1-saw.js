@@ -34,29 +34,19 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
-
-    //const total_samps = sound.sample_rate * sound.secs;
-
-    //const i_start = sound.bytes_per_frame * sm.frame;
-
     const i_start = Math.floor(sound.samples_per_frame * sm.frame);
-
     const data_samples =  sound.array_frame = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size : sound.total_samps,
         i_start : i_start,
-        i_count : sound.samples_per_frame, //sound.bytes_per_frame,
+        i_count : sound.samples_per_frame,
         secs: sound.secs,
         mode: sound.mode
     });
     // write data_samples array
     const clear = sm.frame === 0 ? true: false;
     const uri = videoAPI.pathJoin(sm.filePath, 'sampdata');
-
-//console.log(data_samples.length);
-
-
     if( sound.mode === 'int16'){
         return videoAPI.write(uri, new Int16Array(data_samples), clear );
     }
