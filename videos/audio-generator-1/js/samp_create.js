@@ -82,9 +82,11 @@
         return waveform;
     };
     //-------- ----------
-    // PUPLIC FUNCITON
+    // PUPLIC API
     //-------- ----------
-    const create_samp_points = ( opt = {} ) => {
+    const CSP = {};
+    // create an array of sample values
+    CSP.create_samp_points = ( opt = {} ) => {
         const i_size = opt.i_size === undefined ? 20 : opt.i_size;
         const i_start = opt.i_start === undefined ? 8 : opt.i_start;
         const i_count = opt.i_count === undefined ? 8 : opt.i_count;
@@ -109,5 +111,6 @@
         }
         return sine_points;
     };
-    window.create_samp_points = create_samp_points;
+    // append public api to window
+    window.CSP = CSP;
 }());

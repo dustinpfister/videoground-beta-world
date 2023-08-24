@@ -3,6 +3,8 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
+* () video1-saw.js : make use of create sound method of samp-create.js
+* () all-videos: make use of create sound method of samp-create.js
 * () video6-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
 
 <!-- ----------
@@ -15,6 +17,7 @@
 <!-- ----------
   samp_create.js
 ----------- -->
+* () samp-create.js : create sound method
 * () samp-create.js : default samp objects for each wave form
 
 
@@ -28,6 +31,8 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/24/2023 ) samp-create.js : CSP API Object rather than single funciton
+* ( done 08/24/2023 ) video1-saw.js : Fixed isshues with bytes per frame compared to samples per frame
 * ( done 08/23/2023 ) samp-create.js : have a baked in pause wavefrom
 * ( done 08/22/2023 ) samp-create.js : have a baked in square wavefrom
 * ( done 08/22/2023 ) samp-draw.js : draw 'custom' for a waveform if it is a function

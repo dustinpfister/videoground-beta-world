@@ -32,7 +32,7 @@ VIDEO.init = function(sm, scene, camera){
         frames: 0
     };
     sound.frames = 30 * sound.secs;
-
+    sound.total_samps = sound.sample_rate * sound.secs;
     sound.samples_per_frame = sound.sample_rate / 30;
     sound.bytes_per_frame = sound.samples_per_frame;
     if(sound.mode === 'int16'){
@@ -41,7 +41,7 @@ VIDEO.init = function(sm, scene, camera){
 
     sm.frameMax = sound.frames;
     const total_samps = sound.sample_rate * sound.secs;
-    sound.array_disp = create_samp_points({
+    sound.array_disp = CSP.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size: total_samps,
@@ -59,16 +59,16 @@ VIDEO.init = function(sm, scene, camera){
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
 
-    const total_samps = sound.sample_rate * sound.secs;
+    //const total_samps = sound.sample_rate * sound.secs;
 
     //const i_start = sound.bytes_per_frame * sm.frame;
 
     const i_start = Math.floor(sound.samples_per_frame * sm.frame);
 
-    const data_samples =  sound.array_frame = create_samp_points({
+    const data_samples =  sound.array_frame = CSP.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
-        i_size : total_samps,
+        i_size : sound.total_samps,
         i_start : i_start,
         i_count : sound.samples_per_frame, //sound.bytes_per_frame,
         secs: sound.secs,
