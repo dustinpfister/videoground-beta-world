@@ -31,6 +31,18 @@
         const high_end = ( Math.abs( low_start ) + high * samp_set.amplitude )  * alpha 
         return low_start + high_end;
     };
+    // tri
+    WAVE_FORM_FUNCTIONS.tri = (samp_set, i, a_point, opt) => {
+            const sc = samp_set.step_count === undefined ? 10 : samp_set.step_count;
+            const wave_count = samp_set.frequency * opt.secs;
+            const a_wave = wave_count * a_point % 1;
+            let a_bias = 1 - Math.abs( 0.5 - a_wave ) / 0.5;
+            if(sc >= 2){
+                a_bias = Math.floor( a_bias * sc) / sc;
+            }
+            const amp = samp_set.amplitude; 
+            return  amp * -1 + amp * 2 * a_bias;
+    };
     // table
     WAVE_FORM_FUNCTIONS.table = (samp_set, i, a_point, opt ) => {
         const table_count = samp_set.table.length;
@@ -142,7 +154,8 @@
             secs: sound.secs,
             mode: 'raw'
         });
-        sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_random };
+        const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_pingpong
+        sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: getsamp_lossy };
         sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
         return sound;
     };

@@ -3,7 +3,6 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-* () video7-tri : video in which I make a triangle waveform
 * () video8-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
 
 <!-- ----------
@@ -21,12 +20,15 @@
 <!-- ----------
   samp_draw.js
 ----------- -->
-* () samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
 * () samp-draw.js : draw +1 and -1 lables for samp data disps
 
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/24/2023 ) samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
+* ( done 08/24/2023 ) video7-tri : use baked in tri wavefrom
+* ( done 08/24/2023 ) samp-create.js : have a baked in tri waveform
+* ( done 08/24/2023 ) video7-tri: video in which I make a triangle waveform
 * ( done 08/24/2023 ) all-videos: make use of new draw info method
 * ( done 08/24/2023 ) samp-create.js : CSP.write\_frame\_samples method
 * ( done 08/24/2023 ) all-videos: make use of create sound method of samp-create.js

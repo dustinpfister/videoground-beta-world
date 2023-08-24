@@ -3,14 +3,14 @@
 //-------- ----------
 (function(){
     const DSD = {};
-    DSD.getsamp_lossy_random = (sample_array, i, index_step) => {
+    DSD.getsamp_lossy_random = (sample_array, i, index_step, c) => {
         const a = THREE.MathUtils.seededRandom(i);
         const i_delta = Math.floor(a * index_step);
         const samp = sample_array[i + i_delta];
         return samp;
     };
-    DSD.getsamp_lossy_pingpong = ( sample_array, i, index_step ) => {
-        const high = i % 2;
+    DSD.getsamp_lossy_pingpong = ( sample_array, i, index_step, c ) => {
+        const high = c % 2 === 0;
         const frame_samps = sample_array.slice( i, i + index_step );
         const a = Math.max.apply(null, frame_samps);
         const b = Math.min.apply(null, frame_samps);
@@ -36,7 +36,7 @@
         ctx.strokeStyle = 'lime';
         ctx.linewidth = 3;
         ctx.beginPath();
-        let i = 0;
+        let i = 0, c = 0;
         while(i < sample_count){
             const x = sx + w * ( i / sample_count );
             let samp = 0;
@@ -44,7 +44,7 @@
                samp = sample_array[ i ];
             }
             if(index_step > 1){
-               samp = getsamp_lossy(sample_array, i, index_step);
+               samp = getsamp_lossy(sample_array, i, index_step, c);
             }
             samp = ST.mode_to_raw(samp, mode);
             const y = sy + disp_hh + samp * disp_hh * -1;
@@ -55,6 +55,7 @@
                 ctx.lineTo(x, y);
             }
             i += index_step;
+            c += 1;
         }
         ctx.lineWidth = 3;
         ctx.stroke();
