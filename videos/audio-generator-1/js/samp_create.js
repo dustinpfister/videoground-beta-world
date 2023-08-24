@@ -111,6 +111,30 @@
         }
         return sine_points;
     };
+    // create sound object
+
+    CSP.create_sound = ( opt = {} ) => {
+        const sound = {
+            waveform: opt.wavefrom || 'sin',
+            for_sample: opt.for_sample || null,
+            mode: 'int16', //  'int16' 'bytes',
+            sample_rate: 44100,
+            secs: opt.secs === undefined ? 10 : opt.secs,
+            disp_offset: new THREE.Vector2(50, 200),
+            disp_size: new THREE.Vector2( 1280 - 100, 200),
+            array_disp: [],   // data for whole sound
+            array_frame: [],  // data for current frame
+            frames: 0
+        };
+        sound.frames = 30 * sound.secs;
+        sound.total_samps = sound.sample_rate * sound.secs;
+        sound.samples_per_frame = sound.sample_rate / 30;
+        sound.bytes_per_frame = sound.samples_per_frame;
+        if(sound.mode === 'int16'){
+            sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
+        }
+        return sound;
+    };
     // append public api to window
     window.CSP = CSP;
 }());

@@ -14,7 +14,7 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-
+/*
     const sound = scene.userData.sound = {
         waveform: 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
@@ -38,6 +38,20 @@ VIDEO.init = function(sm, scene, camera){
     if(sound.mode === 'int16'){
         sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
     }
+*/
+
+    const sound = scene.userData.sound = CSP.create_sound({
+        wavefrom : 'sawtooth',
+        for_sample: ( samp_set, i, a_point ) => {
+            samp_set.amplitude = 0.75 - 0.5 * a_point;
+            samp_set.frequency = 60 + 430 * a_point;
+            return samp_set;
+        },
+        secs: 30
+    });
+
+console.log(sound)
+
 
     sm.frameMax = sound.frames;
     const total_samps = sound.sample_rate * sound.secs;
