@@ -26,18 +26,8 @@ VIDEO.init = function(sm, scene, camera){
     });
 
     sm.frameMax = sound.frames;
-    const total_samps = sound.sample_rate * sound.secs;
-    sound.array_disp = CS.create_samp_points({
-        waveform: sound.waveform,
-        for_sample: sound.for_sample,
-        i_size: total_samps,
-        i_start: 0,
-        i_count: total_samps,
-        secs: sound.secs,
-        mode: 'raw'
-    });
-    sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_random };
-    sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
+
+
 };
 //-------- ----------
 // UPDATE

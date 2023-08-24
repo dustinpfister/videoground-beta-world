@@ -3,7 +3,6 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-
 * () all-videos: make use of create sound method of samp-create.js
 * () all-videos: make use of new draw info method
 * () video6-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
@@ -19,7 +18,7 @@
   samp_create.js
 ----------- -->
 
-* ( done 08/24/2023 ) samp-create.js : rename CSP to just CS
+
 * () samp-create.js : CSP.get\_frame\_samples method
 * () samp-create.js : CSP.get\_frame\_samples method
 * () samp-create.js : CSP.get\_disp\_samples method that will create a display array
@@ -31,10 +30,10 @@
 * () samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
 * () samp-draw.js : draw +1 and -1 lables for samp data disps
 
-
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/24/2023 ) samp-create.js : rename CSP to just CS
 * ( done 08/24/2023 ) video1-saw.js : make use of create sound method of samp-create.js
 * ( done 08/24/2023 ) samp-create.js : create sound method
 * ( done 08/24/2023 ) samp-create.js : CSP API Object rather than single funciton
