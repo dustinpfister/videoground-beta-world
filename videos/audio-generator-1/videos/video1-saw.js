@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = {
         waveform: 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
-            samp_set.amplitude = 0.75 - 0.5 * a_point;
+            samp_set.amplitude = 0.75;
             samp_set.frequency = 60 + 430 * a_point;
             return samp_set;
         },
@@ -38,13 +38,13 @@ VIDEO.init = function(sm, scene, camera){
     }
 
     sm.frameMax = sound.frames;
-    const total_bytes = sound.sample_rate * 2 * sound.secs;
+    const total_samps = sound.sample_rate * sound.secs;
     sound.array_disp = create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
-        i_size: total_bytes,
+        i_size: total_samps,
         i_start:0,
-        i_count: total_bytes,
+        i_count: total_samps,
         secs: sound.secs,
         mode: 'raw'
     });
