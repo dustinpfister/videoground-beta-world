@@ -19,7 +19,8 @@
     // sawtooth
     WAVE_FORM_FUNCTIONS.sawtooth = (samp_set, i, a_point, opt ) => {
         const wave_count = samp_set.frequency * opt.secs;
-        return -1 * samp_set.amplitude + 2 * ( wave_count * a_point % 1 ) * samp_set.amplitude;
+        const a_wave = ( wave_count * a_point % 1 );
+        return -1 * samp_set.amplitude + 2 * a_wave * samp_set.amplitude;
     };
     WAVE_FORM_FUNCTIONS.sawtooth2 = (samp_set, i, a_point, opt ) => {
         const wave_count = samp_set.frequency * opt.secs;

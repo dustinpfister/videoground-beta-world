@@ -16,18 +16,15 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const sound = scene.userData.sound = {
-        waveform: 'sawtooth2',
+        waveform: 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
-            samp_set.low = -1 + 1.25 * a_point;
-            samp_set.high = 1;
-            const a_amp =  THREE.MathUtils.pingpong( a_point * 8, 1 );
-            samp_set.amplitude = 0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
-            samp_set.frequency = 200 + 1600 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
+            samp_set.amplitude = 0.75 - 0.5 * a_point;
+            samp_set.frequency = 60 + 430 * a_point;
             return samp_set;
         },
         mode: 'int16', //  'int16' 'bytes',
         sample_rate: 44100,
-        secs: 1,
+        secs: 10,
         disp_offset: new THREE.Vector2(50, 200),
         disp_size: new THREE.Vector2( 1280 - 100, 200),
         array_disp: [],   // data for whole sound
@@ -49,9 +46,6 @@ VIDEO.init = function(sm, scene, camera){
     });
     sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_random };
     sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
-    //!!! might not need to do anything with cameras if renderer dome element is not used in render process
-    //camera.position.set(2, 2, 2);
-    //camera.lookAt( 0, 0, 0 );
 };
 //-------- ----------
 // UPDATE
@@ -86,10 +80,6 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
-    // update and draw dom element of renderer
-    // this might just be 2d, but for now I will keep this here
-    //sm.renderer.render(sm.scene, sm.camera);
-    //ctx.drawImage(sm.renderer.domElement, 0, 0, canvas.width, canvas.height);
     // draw disp
     DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
