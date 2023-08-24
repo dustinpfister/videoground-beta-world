@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = {
         waveform: 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
-            samp_set.amplitude = 0.75;
+            samp_set.amplitude = 0.75 - 0.5 * a_point;
             samp_set.frequency = 60 + 430 * a_point;
             return samp_set;
         },
@@ -33,6 +33,8 @@ VIDEO.init = function(sm, scene, camera){
     };
     sound.frames = 30 * sound.secs;
 
+    sound.samples_per_frame = sound.sample_rate / 30;
+    sound.bytes_per_frame = sound.samples_per_frame;
     if(sound.mode === 'int16'){
         sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
     }
@@ -56,20 +58,29 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
-    const total_bytes = sound.sample_rate * sound.secs;
-    const i_start = sound.bytes_per_frame * sm.frame;
+
+    const total_samps = sound.sample_rate * sound.secs;
+
+    //const i_start = sound.bytes_per_frame * sm.frame;
+
+    const i_start = Math.floor(sound.samples_per_frame * sm.frame);
+
     const data_samples =  sound.array_frame = create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
-        i_size : total_bytes,
+        i_size : total_samps,
         i_start : i_start,
-        i_count : sound.bytes_per_frame,
+        i_count : sound.samples_per_frame, //sound.bytes_per_frame,
         secs: sound.secs,
         mode: sound.mode
     });
     // write data_samples array
     const clear = sm.frame === 0 ? true: false;
     const uri = videoAPI.pathJoin(sm.filePath, 'sampdata');
+
+//console.log(data_samples.length);
+
+
     if( sound.mode === 'int16'){
         return videoAPI.write(uri, new Int16Array(data_samples), clear );
     }
