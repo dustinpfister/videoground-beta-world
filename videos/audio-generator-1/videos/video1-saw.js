@@ -45,7 +45,7 @@ VIDEO.init = function(sm, scene, camera){
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size: total_samps,
-        i_start:0,
+        i_start: 0,
         i_count: total_samps,
         secs: sound.secs,
         mode: 'raw'

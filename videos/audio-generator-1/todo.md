@@ -18,8 +18,10 @@
   samp_create.js
 ----------- -->
 * () samp-create.js : create sound method
+* () samp-create.js : CSP.get\_frame\_samples method
+* () samp-create.js : CSP.get\_frame\_samples method
+* () samp-create.js : CSP.get\_disp\_samples method that will create a display array
 * () samp-create.js : default samp objects for each wave form
-
 
 <!-- ----------
   samp_draw.js
