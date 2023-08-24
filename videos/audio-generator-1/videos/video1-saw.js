@@ -14,48 +14,20 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-/*
-    const sound = scene.userData.sound = {
-        waveform: 'sawtooth',
-        for_sample: ( samp_set, i, a_point ) => {
-            samp_set.amplitude = 0.75 - 0.5 * a_point;
-            samp_set.frequency = 60 + 430 * a_point;
-            return samp_set;
-        },
-        mode: 'int16', //  'int16' 'bytes',
-        sample_rate: 44100,
-        secs: 10,
-        disp_offset: new THREE.Vector2(50, 200),
-        disp_size: new THREE.Vector2( 1280 - 100, 200),
-        array_disp: [],   // data for whole sound
-        array_frame: [],  // data for current frame
-        frames: 0
-    };
-    sound.frames = 30 * sound.secs;
-    sound.total_samps = sound.sample_rate * sound.secs;
-    sound.samples_per_frame = sound.sample_rate / 30;
-    sound.bytes_per_frame = sound.samples_per_frame;
-    if(sound.mode === 'int16'){
-        sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
-    }
-*/
 
-    const sound = scene.userData.sound = CSP.create_sound({
+    const sound = scene.userData.sound = CS.create_sound({
         wavefrom : 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
             samp_set.amplitude = 0.75 - 0.5 * a_point;
             samp_set.frequency = 60 + 430 * a_point;
             return samp_set;
         },
-        secs: 30
+        secs: 10
     });
-
-console.log(sound)
-
 
     sm.frameMax = sound.frames;
     const total_samps = sound.sample_rate * sound.secs;
-    sound.array_disp = CSP.create_samp_points({
+    sound.array_disp = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size: total_samps,
@@ -79,7 +51,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 
     const i_start = Math.floor(sound.samples_per_frame * sm.frame);
 
-    const data_samples =  sound.array_frame = CSP.create_samp_points({
+    const data_samples =  sound.array_frame = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size : sound.total_samps,

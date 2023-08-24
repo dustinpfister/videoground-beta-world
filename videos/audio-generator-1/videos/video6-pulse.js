@@ -37,7 +37,7 @@ VIDEO.init = function(sm, scene, camera){
     sound.bytes_per_frame = Math.floor(sound.sample_rate / 30 );
     sm.frameMax = sound.frames;
     const total_bytes = sound.sample_rate * sound.secs;
-    sound.array_disp = CSP.create_samp_points({
+    sound.array_disp = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size: total_bytes,
@@ -59,7 +59,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
     const total_bytes = sound.sample_rate * sound.secs;
     const i_start = sound.bytes_per_frame * sm.frame;
-    const data_samples =  sound.array_frame = CSP.create_samp_points({
+    const data_samples =  sound.array_frame = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
         i_size : total_bytes,

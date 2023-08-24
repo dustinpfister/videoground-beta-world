@@ -19,7 +19,7 @@
   samp_create.js
 ----------- -->
 
-* () samp-create.js : rename CSP to just CS
+* ( done 08/24/2023 ) samp-create.js : rename CSP to just CS
 * () samp-create.js : CSP.get\_frame\_samples method
 * () samp-create.js : CSP.get\_frame\_samples method
 * () samp-create.js : CSP.get\_disp\_samples method that will create a display array

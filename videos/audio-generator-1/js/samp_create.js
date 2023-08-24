@@ -84,9 +84,9 @@
     //-------- ----------
     // PUPLIC API
     //-------- ----------
-    const CSP = {};
+    const CS = {};
     // create an array of sample values
-    CSP.create_samp_points = ( opt = {} ) => {
+    CS.create_samp_points = ( opt = {} ) => {
         const i_size = opt.i_size === undefined ? 20 : opt.i_size;
         const i_start = opt.i_start === undefined ? 8 : opt.i_start;
         const i_count = opt.i_count === undefined ? 8 : opt.i_count;
@@ -113,7 +113,7 @@
     };
     // create sound object
 
-    CSP.create_sound = ( opt = {} ) => {
+    CS.create_sound = ( opt = {} ) => {
         const sound = {
             waveform: opt.wavefrom || 'sin',
             for_sample: opt.for_sample || null,
@@ -136,5 +136,5 @@
         return sound;
     };
     // append public api to window
-    window.CSP = CSP;
+    window.CS = CS;
 }());
