@@ -1,5 +1,14 @@
 (function(){
     const ST = {};
+    //-------- ----------
+    // FOR_SAMPLE Methods to help with the for sample methods used in sound objects
+    //-------- ----------
+    ST.freq_step = (alpha=0, hz_start=1000, hz_step=50,  count_step=10, dir=1 ) => {
+        return hz_start + hz_step * Math.floor( alpha *  count_step ) * dir
+    };
+    //-------- ----------
+    // SAMP VALUES: Methods to help with sample values
+    //-------- ----------
     ST.get_range = (min, max) => {
         const v_min = new THREE.Vector2( min, 0);
         const v_max = new THREE.Vector2( max, 0);
