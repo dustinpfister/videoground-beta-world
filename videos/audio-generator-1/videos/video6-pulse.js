@@ -23,6 +23,7 @@ VIDEO.init = function(sm, scene, camera){
             samp_set.amplitude = 0.50 
             return samp_set;
         },
+        getsamp_lossy: DSD.getsamp_lossy_random,
         secs: 4
     });
     sm.frameMax = sound.frames;

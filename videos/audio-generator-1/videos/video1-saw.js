@@ -22,6 +22,7 @@ VIDEO.init = function(sm, scene, camera){
             samp_set.frequency = 60 + 430 * a_point;
             return samp_set;
         },
+        getsamp_lossy: DSD.getsamp_lossy_random,
         secs: 10
     });
 
