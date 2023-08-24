@@ -32,9 +32,13 @@ VIDEO.init = function(sm, scene, camera){
         frames: 0
     };
     sound.frames = 30 * sound.secs;
-    sound.bytes_per_frame = Math.floor(sound.sample_rate / 30 );
+
+    if(sound.mode === 'int16'){
+        sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
+    }
+
     sm.frameMax = sound.frames;
-    const total_bytes = sound.sample_rate * sound.secs;
+    const total_bytes = sound.sample_rate * 2 * sound.secs;
     sound.array_disp = create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,

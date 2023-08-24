@@ -102,8 +102,6 @@
         while(i < i_end){
             const a_point = i / i_size;
             samp_set = for_sample(samp_set, i, a_point, opt);
-            //const wave_count = samp_set.frequency * opt.secs;
-            //let samp = waveform(samp_set, i, a_point, wave_count, opt);
             let samp = waveform(samp_set, i, a_point, opt);
             samp = ST.raw_to_mode(samp, opt.mode);
             sine_points.push( parseFloat( samp.toFixed(2)) );
