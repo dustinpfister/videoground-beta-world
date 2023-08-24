@@ -112,7 +112,6 @@
         return sine_points;
     };
     // create sound object
-
     CS.create_sound = ( opt = {} ) => {
         const sound = {
             waveform: opt.wavefrom || 'sin',
@@ -133,8 +132,7 @@
         if(sound.mode === 'int16'){
             sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
         }
-
-
+        // sound display array
         sound.array_disp = CS.create_samp_points({
             waveform: sound.waveform,
             for_sample: sound.for_sample,
@@ -146,8 +144,27 @@
         });
         sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_random };
         sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
-
         return sound;
+    };
+    // get frame samples
+    CS.write_frame_samples = (sound, frame = 0, filePath ) => {
+        const i_start = Math.floor(sound.samples_per_frame * frame);
+        const data_samples =  sound.array_frame = CS.create_samp_points({
+            waveform: sound.waveform,
+            for_sample: sound.for_sample,
+            i_size : sound.total_samps,
+            i_start : i_start,
+            i_count : sound.samples_per_frame,
+            secs: sound.secs,
+            mode: sound.mode
+        });
+        // write data_samples array
+        const clear = frame === 0 ? true: false;
+        const uri = videoAPI.pathJoin(filePath, 'sampdata');
+        if( sound.mode === 'int16'){
+            return videoAPI.write(uri, new Int16Array(data_samples), clear );
+        }
+        return videoAPI.write(uri, new Uint8Array(data_samples), clear );
     };
     // append public api to window
     window.CS = CS;
