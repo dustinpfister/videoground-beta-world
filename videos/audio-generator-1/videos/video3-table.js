@@ -14,45 +14,6 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-/*
-    const sound = scene.userData.sound = {
-        waveform: 'table',
-        for_sample: ( samp_set, i, a_point ) => {
-            return {
-                amplitude: 4,
-                table: [
-                    {  waveform: 'sin', frequency: 320, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  80, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 1000, amplitude: 0.25 }
-                ]
-            };
-        },
-        mode: 'int16', //  'int16' 'bytes',
-        sample_rate: 44100,
-        secs: 3,
-        disp_offset: new THREE.Vector2(50, 200),
-        disp_size: new THREE.Vector2( 1280 - 100, 200),
-        array_disp: [],   // data for whole sound
-        array_frame: [],  // data for current frame
-        frames: 0
-    };
-    sound.frames = 30 * sound.secs;
-    sound.bytes_per_frame = Math.floor(sound.sample_rate / 30 );
-    sm.frameMax = sound.frames;
-    const total_bytes = sound.sample_rate * sound.secs;
-    sound.array_disp = CS.create_samp_points({
-        waveform: sound.waveform,
-        for_sample: sound.for_sample,
-        i_size: total_bytes,
-        i_start:0,
-        i_count: total_bytes,
-        secs: sound.secs,
-        mode: 'raw'
-    });
-    sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: DSD.getsamp_lossy_random };
-    sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
-*/
 
     const sound = scene.userData.sound = CS.create_sound({
         wavefrom : 'table',
@@ -71,11 +32,6 @@ VIDEO.init = function(sm, scene, camera){
     });
 
     sm.frameMax = sound.frames;
-
-
-    //!!! might not need to do anything with cameras if renderer dome element is not used in render process
-    //camera.position.set(2, 2, 2);
-    //camera.lookAt( 0, 0, 0 );
 };
 //-------- ----------
 // UPDATE

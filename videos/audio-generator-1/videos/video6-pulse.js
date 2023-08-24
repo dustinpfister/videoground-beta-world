@@ -14,7 +14,7 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-
+/*
     const sound = scene.userData.sound = {
         waveform: 'pulse',
         for_sample: ( samp_set, i, a_point ) => {
@@ -51,20 +51,33 @@ VIDEO.init = function(sm, scene, camera){
     //!!! might not need to do anything with cameras if renderer dome element is not used in render process
     //camera.position.set(2, 2, 2);
     //camera.lookAt( 0, 0, 0 );
+*/
+    const sound = scene.userData.sound = CS.create_sound({
+        wavefrom : 'pulse',
+        for_sample: ( samp_set, i, a_point ) => {
+            samp_set.saw = 0;
+            samp_set.duty = 0.05 + 0.95 * a_point;
+            samp_set.frequency = 80;
+            samp_set.amplitude = 0.50 
+            return samp_set;
+        },
+        secs: 4
+    });
+
+    sm.frameMax = sound.frames;
 };
 //-------- ----------
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
-    const total_bytes = sound.sample_rate * sound.secs;
-    const i_start = sound.bytes_per_frame * sm.frame;
+    const i_start = Math.floor(sound.samples_per_frame * sm.frame);
     const data_samples =  sound.array_frame = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
-        i_size : total_bytes,
+        i_size : sound.total_samps,
         i_start : i_start,
-        i_count : sound.bytes_per_frame,
+        i_count : sound.samples_per_frame,
         secs: sound.secs,
         mode: sound.mode
     });
