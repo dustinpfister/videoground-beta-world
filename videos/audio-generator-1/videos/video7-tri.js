@@ -16,15 +16,24 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
         wavefrom : (samp_set, i, a_point, opt) => {
+            const sc = samp_set.step_count === undefined ? 10 : samp_set.step_count;
             const wave_count = samp_set.frequency * opt.secs;
-            return Math.sin( Math.PI * 2 * wave_count * a_point )  * samp_set.amplitude;
+            const a_wave = wave_count * a_point % 1;
+            let a_bias = 1 - Math.abs( 0.5 - a_wave ) / 0.5;
+            if(sc >= 2){
+                a_bias = Math.floor( a_bias * sc) / sc;
+            }
+            const amp = samp_set.amplitude; 
+            return  amp * -1 + amp * 2 * a_bias;
         },
         for_sample: ( samp_set, i, a_point ) => {
-            samp_set.frequency = 80;
-            samp_set.amplitude = 0.50 
+            samp_set.step_count = 20 - 15 * a_point;
+            const a = Math.sin( Math.PI * (a_point * 2 % 1) );
+            samp_set.frequency = 1000 - 50 * Math.floor( a * 19 );
+            samp_set.amplitude = 0.25 + 0.5 * a_point; 
             return samp_set;
         },
-        secs: 1
+        secs: 10
     });
     sm.frameMax = sound.frames;
 };
