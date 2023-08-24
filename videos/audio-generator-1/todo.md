@@ -3,7 +3,8 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-* () video6-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
+* () video7-tri : video in which I make a triangle waveform
+* () video8-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
 
 <!-- ----------
   samp_tools.js
