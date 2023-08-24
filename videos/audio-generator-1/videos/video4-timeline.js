@@ -69,6 +69,7 @@ VIDEO.init = function(sm, scene, camera){
          return array;
     }).flat()
 
+/*
     const sound = scene.userData.sound = {
         waveform: 'table',
         for_sample: ( samp_set, i, a_point ) => {
@@ -120,20 +121,51 @@ VIDEO.init = function(sm, scene, camera){
     //!!! might not need to do anything with cameras if renderer dome element is not used in render process
     //camera.position.set(2, 2, 2);
     //camera.lookAt( 0, 0, 0 );
+*/
+
+    const sound = scene.userData.sound = CS.create_sound({
+        wavefrom : 'table',
+        for_sample: ( samp_set, i, a_point ) => {
+
+            const note = timeline_note[ Math.floor( timeline_note.length * a_point ) ];
+            const note_range = 8;
+
+            const amp = timeline_amp[ Math.floor( timeline_amp.length * a_point ) ];
+            const a_amp = amp;
+            const a_note = note  / note_range;
+
+            return {
+                amplitude: a_amp * 1.05,
+                table: [
+                    {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  100 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  120 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  160 * a_note, amplitude: 1.00 },
+                    {  waveform: 'sin', frequency:  500 * a_note, amplitude: 1.00 },
+                    {  waveform: 'pulse', frequency:  1000 * a_note, amplitude: 0.25 + 0.75 * a_note, duty: 0.25 + 0.5 * a_note }
+
+                ]
+            };
+        },
+        secs: 4
+    });
+
+    sm.frameMax = sound.frames;
+
+
 };
 //-------- ----------
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sound = scene.userData.sound;
-    const total_bytes = sound.sample_rate * sound.secs;
-    const i_start = sound.bytes_per_frame * sm.frame;
+    const i_start = Math.floor(sound.samples_per_frame * sm.frame);
     const data_samples =  sound.array_frame = CS.create_samp_points({
         waveform: sound.waveform,
         for_sample: sound.for_sample,
-        i_size : total_bytes,
+        i_size : sound.total_samps,
         i_start : i_start,
-        i_count : sound.bytes_per_frame,
+        i_count : sound.samples_per_frame,
         secs: sound.secs,
         mode: sound.mode
     });
