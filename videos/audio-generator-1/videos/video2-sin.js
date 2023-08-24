@@ -17,13 +17,16 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         wavefrom : 'sin',
         for_sample: ( samp_set, i, a_point ) => {
-            const a_amp =  THREE.MathUtils.pingpong( a_point * 4, 1 );
-            samp_set.amplitude = 0.25 + 0.50 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
-            samp_set.frequency = 200 + 1600 * THREE.MathUtils.smoothstep( a_point * 4 % 1, 0, 1 );
+            const a_amp =  THREE.MathUtils.pingpong( a_point * 32, 1 );
+            samp_set.amplitude = 0.10 + 0.65 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
+            samp_set.frequency = 80 + 920 * a_point;
             return samp_set;
         },
-        secs: 3
+        secs: 10
     });
+
+
+console.log( THREE.MathUtils.pingpong(1.25, 1) );
 
     sm.frameMax = sound.frames;
 
