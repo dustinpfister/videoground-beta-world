@@ -25,9 +25,9 @@ VIDEO.init = function(sm, scene, camera){
 
         for_sample: ( samp_set, i, a_point, opt ) => {
 
-samp_set.bps = 4;
-samp_set.amplitude = 0.75;
-samp_set.frequency = ST.freq_tune(a_point, [1,2,3,4]);
+            samp_set.bps = 4;
+            samp_set.amplitude = 0.75;
+            samp_set.frequency = ST.freq_tune(a_point, [1,2,3,4], 80, 200);
 
             return samp_set;
         },
