@@ -2,78 +2,78 @@
     //-------- ----------
     // DEFAULT FOR SAMPLE FUNCITON
     //-------- ----------
-    const DEFAULT_FOR_SAMPLE = ( samp_set, i, a_sound ) => {
-        samp_set.amplitude = 0.5;
-        samp_set.frequency = 160;
-        return samp_set;
+    const DEFAULT_FOR_SAMPLE = ( sampeset, i, a_sound ) => {
+        sampeset.amplitude = 0.5;
+        sampeset.frequency = 160;
+        return sampeset;
     };
     //-------- ----------
     // WAVE FORMS - return should be in what I am calling 'raw' mode ( -1 to 1 )
     //-------- ----------
     const WAVE_FORM_FUNCTIONS = {};
     // sin
-    WAVE_FORM_FUNCTIONS.sin = (samp_set, i, a_sound, opt ) => {
-        const wave_count = samp_set.frequency * opt.secs;
-        return Math.sin( Math.PI * 2 * wave_count * a_sound )  * samp_set.amplitude;
+    WAVE_FORM_FUNCTIONS.sin = (sampeset, i, a_sound, opt ) => {
+        const wave_count = sampeset.frequency * opt.secs;
+        return Math.sin( Math.PI * 2 * wave_count * a_sound )  * sampeset.amplitude;
     };
     // sawtooth
-    WAVE_FORM_FUNCTIONS.sawtooth = (samp_set, i, a_sound, opt ) => {
-        const wave_count = samp_set.frequency * opt.secs;
+    WAVE_FORM_FUNCTIONS.sawtooth = (sampeset, i, a_sound, opt ) => {
+        const wave_count = sampeset.frequency * opt.secs;
         const a_wave = ( wave_count * a_sound % 1 );
-        return -1 * samp_set.amplitude + 2 * a_wave * samp_set.amplitude;
+        return -1 * sampeset.amplitude + 2 * a_wave * sampeset.amplitude;
     };
-    WAVE_FORM_FUNCTIONS.sawtooth2 = (samp_set, i, a_sound, opt ) => {
-        const wave_count = samp_set.frequency * opt.secs;
-        const low = samp_set.low === undefined ? -1 : samp_set.low;
-        const high = samp_set.high === undefined ? 1 : samp_set.high;
+    WAVE_FORM_FUNCTIONS.sawtooth2 = (sampeset, i, a_sound, opt ) => {
+        const wave_count = sampeset.frequency * opt.secs;
+        const low = sampeset.low === undefined ? -1 : sampeset.low;
+        const high = sampeset.high === undefined ? 1 : sampeset.high;
         const alpha = wave_count * a_sound % 1;
-        const low_start = low * samp_set.amplitude;
-        const high_end = ( Math.abs( low_start ) + high * samp_set.amplitude )  * alpha 
+        const low_start = low * sampeset.amplitude;
+        const high_end = ( Math.abs( low_start ) + high * sampeset.amplitude )  * alpha 
         return low_start + high_end;
     };
     // tri
-    WAVE_FORM_FUNCTIONS.tri = (samp_set, i, a_sound, opt) => {
-            const sc = samp_set.step_count === undefined ? 10 : samp_set.step_count;
-            const wave_count = samp_set.frequency * opt.secs;
+    WAVE_FORM_FUNCTIONS.tri = (sampeset, i, a_sound, opt) => {
+            const sc = sampeset.step_count === undefined ? 10 : sampeset.step_count;
+            const wave_count = sampeset.frequency * opt.secs;
             const a_wave = wave_count * a_sound % 1;
             let a_bias = 1 - Math.abs( 0.5 - a_wave ) / 0.5;
             if(sc >= 2){
                 a_bias = Math.floor( a_bias * sc) / sc;
             }
-            const amp = samp_set.amplitude; 
+            const amp = sampeset.amplitude; 
             return  amp * -1 + amp * 2 * a_bias;
     };
     // table
-    WAVE_FORM_FUNCTIONS.table = (samp_set, i, a_sound, opt ) => {
-        const table_count = samp_set.table.length;
+    WAVE_FORM_FUNCTIONS.table = (sampeset, i, a_sound, opt ) => {
+        const table_count = sampeset.table.length;
         let i_wf = 0;
         let samp = 0;
         while(i_wf < table_count ){
-            const wf = samp_set.table[i_wf];
+            const wf = sampeset.table[i_wf];
             const wf_samp = WAVE_FORM_FUNCTIONS[wf.waveform](wf, i, a_sound, opt)
             samp += wf_samp;
             i_wf += 1;
         }
-        return (samp /= table_count) * samp_set.amplitude;
+        return (samp /= table_count) * sampeset.amplitude;
     };
     // square
-    WAVE_FORM_FUNCTIONS.square = (samp_set, i, a_sound, opt ) => {
-            const wave_count = samp_set.frequency * opt.secs;
+    WAVE_FORM_FUNCTIONS.square = (sampeset, i, a_sound, opt ) => {
+            const wave_count = sampeset.frequency * opt.secs;
             const a_wave = wave_count * a_sound % 1;
             if(a_wave < 0.5){
-                return -1 * samp_set.amplitude ;
+                return -1 * sampeset.amplitude ;
             }
-            return samp_set.amplitude;
+            return sampeset.amplitude;
     };
     // pulse ( like square only I can adjust duty )
-    WAVE_FORM_FUNCTIONS.pulse = (samp_set, i, a_sound, opt ) => {
-        const duty = samp_set.duty === undefined ? 0.5 : samp_set.duty;
-        const wave_count = samp_set.frequency * opt.secs;
+    WAVE_FORM_FUNCTIONS.pulse = (sampeset, i, a_sound, opt ) => {
+        const duty = sampeset.duty === undefined ? 0.5 : sampeset.duty;
+        const wave_count = sampeset.frequency * opt.secs;
         const a_wave = wave_count * a_sound % 1;
         if(a_wave < duty){
-            return  -1 * samp_set.amplitude;
+            return  -1 * sampeset.amplitude;
         }
-        return samp_set.amplitude
+        return sampeset.amplitude
     };
 
 //!!! testing out wavefroms here
@@ -107,16 +107,16 @@
         opt.secs === undefined ? 1 : opt.secs;
         // what to do for the sample settings object each time
         const for_sample = opt.for_sample || DEFAULT_FOR_SAMPLE;
-        // the expression to use with the samp_set object
+        // the expression to use with the sampeset object
         const waveform = parse_waveform(opt);
         const sine_points = [];
-        let samp_set = {};
+        let sampeset = {};
         const i_end = i_start + i_count;
         let i = i_start;
         while(i < i_end){
             const a_sound = i / i_size;
-            samp_set = for_sample(samp_set, i, a_sound, opt);
-            let samp = waveform(samp_set, i, a_sound, opt);
+            sampeset = for_sample(sampeset, i, a_sound, opt);
+            let samp = waveform(sampeset, i, a_sound, opt);
             samp = ST.raw_to_mode(samp, opt.mode);
             sine_points.push( parseFloat( samp.toFixed(2)) );
             i += step;
