@@ -9,15 +9,17 @@ $ cat /dev/random | aplay -d 3
 Playing raw data 'stdin' : Unsigned 8 bit, Rate 8000 Hz, Mono
 ```
 
-By default the data will be treated as 8bit Unsigned samples at a rate of 8 kHz, or in other words 8,000 bytes per second where each byte value is a sound sample. There are of course many options for changing the sample depth, and the sample rate, as well as the number of channels. However for this project at least, the focus is more so on writing code that has to do with generating sample data that will then be played back with a command such as this, or a similar tool such as arecord.
+By default the data will be treated as 8bit Unsigned samples at a rate of 8 kHz, or in other words 8,000 bytes per second where each byte value is a sound sample. There are of course many options for changing the sample depth, sample rate, as well as the number of channels and so forth.
+
+However the main focus with this project has to do with writing code that will generate data that can then be used with aplay, or a similar command. Regardless of what the sample depth and rate is there are things like waveforms, wave tables, harmonics, and so forth. I will then want to at least start some JavaScript files that contain code that I can use to create sounds. I am sure that I will not get every little detail solid with this project, but I have to start somewhere when it comes to this.
 
 ## What the main goals with audo-generator-1 are
 
-The goals with this first collection of videos should be to work out a first set of tools to make videos that have to do with audio synthesis, along with some demos videos that work on top of these tools. Nothing major or final this time around, just the first collection of  files to which I will then refine in future collections.
+The goals with this first collection of videos should be to work out a first set of tools to make videos that have to do with audio synthesis, along with some demos videos that work on top of these tools. Nothing major or final this time around, just the first collection of files to which I will then refine in future collections like this.
 
 ### JS files
 
-There are three main javascript files that I have thus far that include a file with javascript code that is used to create audio sample data, a file to draw sample data, and a common utility library that I use between the two as well as in the various video files.
+There are three main JavaScript files that I have thus far that include a file with JavaScript code that is used to create audio sample data, a file to draw sample data, and a common utility library that I use between the two as well as in the various video files.
 
 * have a samp\_tools.js file that will be a collection of common methods used by all libs of concern.
 * have a samp\_create.js file that contains code for generation of audio sample data by way of algorithms.
