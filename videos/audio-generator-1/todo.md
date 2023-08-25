@@ -8,7 +8,7 @@
 <!-- ----------
   samp_tools.js
 ----------- -->
-
+* () samp-tools.js : helper function that has to do with breaking down a sound into a fixed number of beats
 * () samp-tools.js : clamp - sample values to max and min
 * () samp-tools.js : alphas - I will want to bake in some methods to help with alphas
 * () samp-tools.js : ST.raw\_to\_mode: use ST.get\_normal, and test output

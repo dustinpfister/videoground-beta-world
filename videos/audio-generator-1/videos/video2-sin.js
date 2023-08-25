@@ -17,18 +17,19 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         //wavefrom : 'sin',
 
-waveform: (samp_set, i, a_point, opt) => {
-        const wave_count = samp_set.frequency * opt.secs;
-        return Math.sin( Math.PI  * 1 * wave_count * a_point )  * samp_set.amplitude;
-},
+        // custom sin waveform
+        waveform: (samp_set, i, a_point, opt) => {
+            const wave_count = samp_set.frequency * opt.secs;
+            return Math.sin( Math.PI  * 1 * wave_count * a_point )  * samp_set.amplitude;
+        },
 
         for_sample: ( samp_set, i, a_point ) => {
             //const a_amp =  THREE.MathUtils.pingpong( a_point * 32, 1 );
             //samp_set.amplitude = 0.10 + 0.65 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
             //samp_set.frequency = 80 + 920 * a_point;
 
-samp_set.amplitude = 0.75
-samp_set.frequency = ST.freq_tune(a_point)
+samp_set.amplitude = 0.75;
+samp_set.frequency = ST.freq_tune(a_point);
 
             return samp_set;
         },

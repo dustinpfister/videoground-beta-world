@@ -1,8 +1,11 @@
 (function(){
     const ST = {};
     //-------- ----------
-    // FOR_SAMPLE Methods to help with the for sample methods used in sound objects
+    // FOR_SAMPLE HELPER : to help with the for sample methods used in sound objects
     //-------- ----------
+    // simple tune frequency helper function, can pass an array of 'note index values'
+    // a note index of 0 means silence, while 1 to the max value in the array is the range
+    // what the range is can be set by a low and high frequency arguments
     ST.freq_tune = (alpha=0, tune=[ 1,0,1,1,0,7,0,6,0,5 ], hz_low=80, hz_high=1000 ) => {
         const i_high = Math.max.apply(null, tune);
         const note = tune[ Math.floor( tune.length * alpha * 0.99 ) ];
@@ -11,7 +14,8 @@
         }
         return hz_low + ( hz_high - hz_low ) * ( note / i_high );
     };
-
+    // step a frequency from a start frequency, by a step frequency, and count of times over an alpha
+    // value up or down depending on dir
     ST.freq_step = (alpha=0, hz_start=1000, hz_step=50,  count_step=10, dir=1 ) => {
         return hz_start + hz_step * Math.floor( alpha *  count_step ) * dir
     };
