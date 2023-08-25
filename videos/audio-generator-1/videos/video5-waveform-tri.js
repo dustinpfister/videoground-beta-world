@@ -1,5 +1,5 @@
-/*    video6-pulse - for audio-generator-1 project
-          * pulse wavefrom method
+/*    video5-waveform-tri - for audio-generator-1 project
+          * triangle wavefrom method
  */
 //-------- ----------
 // SCRIPTS
@@ -15,16 +15,16 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'pulse',
-        for_sample: ( samp_set, i, a_sound ) => {
-            samp_set.saw = 0;
-            samp_set.duty = 0.05 + 0.95 * a_sound;
-            samp_set.frequency = 80;
-            samp_set.amplitude = 0.50 
-            return samp_set;
+        waveform : 'tri',
+        for_sample: ( sampset, i, a_sound, opt ) => {
+            sampset.a_wave = a_sound;
+            sampset.step_count = 5;
+            sampset.frequency = 200 + 300 * a_sound;
+            sampset.amplitude = 0.5;
+            return sampset;
         },
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 4
+        secs: 5
     });
     sm.frameMax = sound.frames;
 };

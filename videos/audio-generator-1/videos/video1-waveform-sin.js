@@ -1,4 +1,4 @@
-/*    video2-sin - for audio-generator-1 project
+/*    video1-waveform-sin - for audio-generator-1 project
           * Just using the sin wavefrom
  */
 //-------- ----------
@@ -15,21 +15,12 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
-        //waveform : 'sin',
-
-        // custom sin waveform
-        waveform: (samp_set, i, a_sound, opt) => {
-            const a_beat = ST.get_beat_alpha(a_sound, opt.secs, samp_set.bps );
-            return Math.sin( Math.PI  * 2 * samp_set.frequency * a_beat )  * samp_set.amplitude;
-        },
-
-        for_sample: ( samp_set, i, a_sound, opt ) => {
-
-            samp_set.bps = 4;
-            samp_set.amplitude = 0.75;
-            samp_set.frequency = ST.freq_tune(a_sound, [1,2,3,4], 80, 200);
-
-            return samp_set;
+        waveform : 'sin',
+        for_sample: ( sampset, i, a_sound, opt ) => {
+            sampset.a_wave = a_sound;
+            sampset.amplitude = 0.75;
+            sampset.frequency = 80;
+            return sampset;
         },
         secs: 1
     });

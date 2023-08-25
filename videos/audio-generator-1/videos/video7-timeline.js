@@ -1,4 +1,4 @@
-/*    video4-timeline - for audio-generator-1 project
+/*    video7-timeline - for audio-generator-1 project
           * testing out a timeline feature, for making music
  */
 //-------- ----------
@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
-        for_sample: ( samp_set, i, a_sound ) => {
+        for_sample: ( samp_set, i, a_sound, opt ) => {
             const note = timeline_note[ Math.floor( timeline_note.length * a_sound ) ];
             const note_range = 8;
             const amp = timeline_amp[ Math.floor( timeline_amp.length * a_sound ) ];
@@ -79,6 +79,7 @@ VIDEO.init = function(sm, scene, camera){
             const a_note = note  / note_range;
             return {
                 amplitude: a_amp * 1.05,
+                a_wave: a_sound * opt.secs % 1,
                 table: [
                     {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1.00 },
                     {  waveform: 'sin', frequency:  100 * a_note, amplitude: 1.00 },

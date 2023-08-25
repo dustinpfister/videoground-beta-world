@@ -1,4 +1,4 @@
-/*    video3-table - for audio-generator-1 project
+/*    video6-waveform-table - for audio-generator-1 project
           * testing out the table waveform
  */
 //-------- ----------
@@ -17,9 +17,10 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
-        for_sample: ( samp_set, i, a_sound ) => {
+        for_sample: ( samp_set, i, a_sound, opt ) => {
             return {
                 amplitude: 4,
+                a_wave : a_sound * opt.secs % 1,
                 table: [
                     {  waveform: 'sin', frequency: 320, amplitude: 0.25 },
                     {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
