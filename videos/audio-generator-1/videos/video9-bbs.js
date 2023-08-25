@@ -41,9 +41,11 @@ VIDEO.init = function(sm, scene, camera){
             const bbs = 8; //data.length / 2;
             const i_wave = Math.floor( a_sound * opt.secs * bbs);
             sampset.a_wave = a_sound * opt.secs * bbs % 1;
+            const a_bias = 1 - Math.abs( 0.5 - sampset.a_wave ) / 0.5;
+
  
             const i_el = i_wave % ( data.length / 2 );
-            sampset.amplitude = data[i_el * 2] || 0;
+            sampset.amplitude = a_bias * data[i_el * 2];
             let f = data[i_el * 2 + 1];
             sampset.frequency = Math.floor(f / bbs);
             return sampset;
