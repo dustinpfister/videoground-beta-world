@@ -19,17 +19,15 @@ VIDEO.init = function(sm, scene, camera){
 
         // custom sin waveform
         waveform: (samp_set, i, a_point, opt) => {
-            const wave_count = samp_set.frequency * opt.secs;
-            return Math.sin( Math.PI  * 1 * wave_count * a_point )  * samp_set.amplitude;
+            const a_beat = ST.get_beat_alpha(a_point, opt.secs, samp_set.bps );
+            return Math.sin( Math.PI  * 2 * samp_set.frequency * a_beat )  * samp_set.amplitude;
         },
 
-        for_sample: ( samp_set, i, a_point ) => {
-            //const a_amp =  THREE.MathUtils.pingpong( a_point * 32, 1 );
-            //samp_set.amplitude = 0.10 + 0.65 * THREE.MathUtils.smoothstep( a_amp, 0, 1 );
-            //samp_set.frequency = 80 + 920 * a_point;
+        for_sample: ( samp_set, i, a_point, opt ) => {
 
+samp_set.bps = 4;
 samp_set.amplitude = 0.75;
-samp_set.frequency = ST.freq_tune(a_point);
+samp_set.frequency = ST.freq_tune(a_point, [1,2,3,4]);
 
             return samp_set;
         },
