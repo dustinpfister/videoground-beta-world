@@ -16,7 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const sound = scene.userData.sound = CS.create_sound({
-        wavefrom : 'sawtooth',
+        waveform : 'sawtooth',
         for_sample: ( samp_set, i, a_point ) => {
             samp_set.amplitude = 0.75 - 0.5 * a_point;
             samp_set.frequency = 60 + 430 * a_point;

@@ -15,7 +15,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
-        //wavefrom : 'sin',
+        //waveform : 'sin',
 
         // custom sin waveform
         waveform: (samp_set, i, a_point, opt) => {
