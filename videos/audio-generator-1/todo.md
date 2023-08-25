@@ -25,6 +25,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/25/2023 ) video7-waveform-array.js : array waveform demo
 * ( done 08/25/2023 ) samp-create.js : for-sample should be for-sampset
 * ( done 08/25/2023 ) samp-create.js : just a-wave for each waveform function
 * ( done 08/25/2023 ) samp-create.js : a\_point renamed to a\_sound
