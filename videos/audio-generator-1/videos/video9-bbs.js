@@ -16,33 +16,39 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    // https://pages.mtu.edu/~suits/notefreqs.html
+    // https://sheetmusic-free.com/good-king-wenceslas-sheet-music-christmas-carol/
     const data = [
-        0.75,100,
-        0.75,200,
-        0.75,400,
-        0.75,800,
-        0.75,1600,
         0.00,0,
-        0.75,400,
         0.00,0,
-        0.75,200,
-        0.00,0
+        0.00,0,
+        0.75,349,  // f
+        0.75,349,  // f
+        0.75,349,  // f
+        0.75,523,  // g
+        0.75,349,  // f
+        0.75,349,  // f
+        0.75, 65,  // c
+        0.75, 65,  // c
+        0.00, 0,
+        0.00, 0
     ];
 
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'sin',
+        waveform : 'tri',
         for_sampset: ( sampset, i, a_sound, opt ) => {
  
-            const bbs = 16; //data.length / 2;
+            const bbs = 8; //data.length / 2;
             const i_wave = Math.floor( a_sound * opt.secs * bbs);
             sampset.a_wave = a_sound * opt.secs * bbs % 1;
  
             const i_el = i_wave % ( data.length / 2 );
             sampset.amplitude = data[i_el * 2] || 0;
-            sampset.frequency = data[i_el * 2 + 1] || 0;
+            let f = data[i_el * 2 + 1];
+            sampset.frequency = Math.floor(f / bbs);
             return sampset;
         },
-        secs: 1
+        secs: 3
     });
     sm.frameMax = sound.frames;
 };
