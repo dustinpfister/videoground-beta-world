@@ -15,7 +15,45 @@ However the main focus with this project has to do with writing code that will g
 
 ## What the main goals with audo-generator-1 are
 
-The goals with this first collection of videos should be to work out a first set of tools to make videos that have to do with audio synthesis, along with some demos videos that work on top of these tools. Nothing major or final this time around, just the first collection of files to which I will then refine in future collections like this.
+The goals with this first collection of videos should be to work out a first set of tools to make videos that have to do with audio synthesis. After that I will want a few demo videos in which I am just testing out that these tools are working okay for a few use case examples. Nothing major or final this time around, just the first collection of files to which I will then refine in future collections like this.
+
+### waveform functions, for_sampset functions, and wave alphas
+
+The final format for this project will be that I will want to use a built in waveform function, or create a custom one. After that the other main function of interest is the for\_sampset function that is used to adjust settings that effect how this waveform function will create a final sample value. I am sure that there is a whole would of other ways of doing this sort of thing, but as far as this project is concerned that will be how it is done for better or worse.
+
+If you look at one of the video files such as the sin waveform video you will see something to this effect.
+
+```js
+    const sound = scene.userData.sound = CS.create_sound({
+        waveform : 'sin',
+        for_sampset: ( sampset, i, a_sound, opt ) => {
+            sampset.a_wave = a_sound * opt.secs % 1;
+            sampset.amplitude = 0.75;
+            sampset.frequency = 80;
+            return sampset;
+        },
+        secs: 10
+    });
+```
+
+I am using the built in sin waveform function, and with that I will want to set what the values are of the a\_wave value, along with amplitude and frequency. The expression that I am using for wave alpha value is actually what the default is, I am just making it explicit here. This expression will be what I would end up wanting for many of the videos that I will be making on top of the tools, but there might be a few exceptions. If I do go with some other way to set the alpha I will want to take care in how that will effect frequency, for example the bellow demo code will give the same end effect.
+
+
+```js
+    const sound = scene.userData.sound = CS.create_sound({
+        waveform : (sampset, a_wave ) => {
+            return Math.sin( Math.PI  * 2 * sampset.frequency * a_wave )  * sampset.amplitude;
+        },
+        for_sampset: ( sampset, i, a_sound, opt ) => {
+            sampset.a_wave = a_sound;
+            sampset.amplitude = 0.75;
+            sampset.frequency = 80 * opt.secs;
+            return sampset;
+        },
+        secs: 10
+    });
+```
+
 
 ### JS files
 

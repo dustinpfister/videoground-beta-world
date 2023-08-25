@@ -2,8 +2,8 @@
     //-------- ----------
     // DEFAULT FOR SAMPLE FUNCITON
     //-------- ----------
-    const DEFAULT_FOR_SAMPSET = ( sampeset, i, a_sound ) => {
-        sampeset.a_wave = a_sound * opt.secs % 1;
+    const DEFAULT_FOR_SAMPSET = ( sampeset, i, a_sound, opt ) => {
+        sampeset.a_wave = ST.get_wave_alpha_totalsecs( a_sound, opt.secs );
         sampeset.amplitude = 0.5;
         sampeset.frequency = 160;
         return sampeset;
@@ -87,7 +87,7 @@
         while(i < i_end){
             const a_sound = i / i_size;
             sampeset = for_sampset(sampeset, i, a_sound, opt);
-            const a_wave = sampeset.a_wave === undefined ? a_sound : sampeset.a_wave;
+            const a_wave = sampeset.a_wave === undefined ? ST.get_wave_alpha_totalsecs( a_sound, opt.secs ) : sampeset.a_wave;
             let samp = waveform(sampeset, a_wave);
             samp = ST.raw_to_mode(samp, opt.mode);
             sine_points.push( parseFloat( samp.toFixed(2)) );

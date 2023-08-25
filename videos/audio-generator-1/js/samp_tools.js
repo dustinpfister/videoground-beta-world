@@ -6,6 +6,9 @@
     ST.get_beat_alpha = ( alpha=0, total_secs=1, bps=4) => {
         return bps * total_secs * alpha % 1;
     };
+    ST.get_wave_alpha_totalsecs = (a_sound = 0, total_secs = 10) => {
+        return a_sound * total_secs % 1;
+    };
     // simple tune frequency helper function, can pass an array of 'note index values'
     // a note index of 0 means silence, while 1 to the max value in the array is the range
     // what the range is can be set by a low and high frequency arguments
