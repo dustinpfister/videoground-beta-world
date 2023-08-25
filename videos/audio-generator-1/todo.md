@@ -16,6 +16,7 @@
 <!-- ----------
   samp_create.js
 ----------- -->
+
 * () samp-create.js : default samp objects for each wave form
 
 <!-- ----------
@@ -26,6 +27,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/25/2023 ) samp-create.js : a\_point renamed to a\_sound
 * ( done 08/24/2023 ) samp-tools.js : freq_step method based on what I worked out in video7-tri
 * ( done 08/24/2023 ) samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
 * ( done 08/24/2023 ) video7-tri : use baked in tri wavefrom

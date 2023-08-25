@@ -18,16 +18,16 @@ VIDEO.init = function(sm, scene, camera){
         //waveform : 'sin',
 
         // custom sin waveform
-        waveform: (samp_set, i, a_point, opt) => {
-            const a_beat = ST.get_beat_alpha(a_point, opt.secs, samp_set.bps );
+        waveform: (samp_set, i, a_sound, opt) => {
+            const a_beat = ST.get_beat_alpha(a_sound, opt.secs, samp_set.bps );
             return Math.sin( Math.PI  * 2 * samp_set.frequency * a_beat )  * samp_set.amplitude;
         },
 
-        for_sample: ( samp_set, i, a_point, opt ) => {
+        for_sample: ( samp_set, i, a_sound, opt ) => {
 
             samp_set.bps = 4;
             samp_set.amplitude = 0.75;
-            samp_set.frequency = ST.freq_tune(a_point, [1,2,3,4], 80, 200);
+            samp_set.frequency = ST.freq_tune(a_sound, [1,2,3,4], 80, 200);
 
             return samp_set;
         },

@@ -71,10 +71,10 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
-        for_sample: ( samp_set, i, a_point ) => {
-            const note = timeline_note[ Math.floor( timeline_note.length * a_point ) ];
+        for_sample: ( samp_set, i, a_sound ) => {
+            const note = timeline_note[ Math.floor( timeline_note.length * a_sound ) ];
             const note_range = 8;
-            const amp = timeline_amp[ Math.floor( timeline_amp.length * a_point ) ];
+            const amp = timeline_amp[ Math.floor( timeline_amp.length * a_sound ) ];
             const a_amp = amp;
             const a_note = note  / note_range;
             return {

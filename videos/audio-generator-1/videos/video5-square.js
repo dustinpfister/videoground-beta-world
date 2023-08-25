@@ -16,8 +16,8 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'square',
-        for_sample: ( samp_set, i, a_point ) => {
-            const a_1 = Math.sin( Math.PI * ( a_point * 2 % 1) );
+        for_sample: ( samp_set, i, a_sound ) => {
+            const a_1 = Math.sin( Math.PI * ( a_sound * 2 % 1) );
             samp_set.frequency = 200 + 100 * a_1;
             samp_set.amplitude = 0.75; //0.25 + 0.5 * a_1;
             return samp_set;

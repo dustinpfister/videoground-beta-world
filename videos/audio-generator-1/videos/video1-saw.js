@@ -17,9 +17,9 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'sawtooth',
-        for_sample: ( samp_set, i, a_point ) => {
-            samp_set.amplitude = 0.75 - 0.5 * a_point;
-            samp_set.frequency = 60 + 430 * a_point;
+        for_sample: ( samp_set, i, a_sound ) => {
+            samp_set.amplitude = 0.75 - 0.5 * a_sound;
+            samp_set.frequency = 60 + 430 * a_sound;
             return samp_set;
         },
         getsamp_lossy: DSD.getsamp_lossy_random,

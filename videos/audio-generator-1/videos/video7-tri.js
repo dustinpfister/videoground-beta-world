@@ -16,16 +16,16 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'tri',
-        for_sample: ( samp_set, i, a_point ) => {
-            samp_set.step_count = 5; //20 - 5 * a_point;
-            const a_freq = Math.sin( Math.PI * (a_point * 2 % 1) );
+        for_sample: ( samp_set, i, a_sound ) => {
+            samp_set.step_count = 5; //20 - 5 * a_sound;
+            const a_freq = Math.sin( Math.PI * (a_sound * 2 % 1) );
 
             samp_set.frequency = 1000 - 50 * Math.floor( a_freq * 19 );
-            samp_set.frequency = ST.freq_tune(a_point);
+            samp_set.frequency = ST.freq_tune(a_sound);
 
-            samp_set.frequency = ST.freq_tune(a_point, [1,1,0,4,4,0,6,0,6,0,10,9,8,7,7,5,1], 80, 1000);
+            samp_set.frequency = ST.freq_tune(a_sound, [1,1,0,4,4,0,6,0,6,0,10,9,8,7,7,5,1], 80, 1000);
 
-            samp_set.amplitude = 0.5; //0.25 + 0.5 * a_point; 
+            samp_set.amplitude = 0.5; //0.25 + 0.5 * a_sound; 
             return samp_set;
         },
         getsamp_lossy: DSD.getsamp_lossy_random,
