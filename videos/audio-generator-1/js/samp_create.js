@@ -2,7 +2,7 @@
     //-------- ----------
     // DEFAULT FOR SAMPLE FUNCITON
     //-------- ----------
-    const DEFAULT_FOR_SAMPLE = ( sampeset, i, a_sound ) => {
+    const DEFAULT_FOR_SAMPSET = ( sampeset, i, a_sound ) => {
         sampeset.a_wave = a_sound * opt.secs % 1;
         sampeset.amplitude = 0.5;
         sampeset.frequency = 160;
@@ -77,7 +77,7 @@
         const step = opt.step === undefined ? 1 : opt.step;
         opt.secs === undefined ? 1 : opt.secs;
         // what to do for the sample settings object each time
-        const for_sample = opt.for_sample || DEFAULT_FOR_SAMPLE;
+        const for_sampset = opt.for_sampset || DEFAULT_FOR_SAMPSET;
         // the expression to use with the sampeset object
         const waveform = parse_waveform(opt);
         const sine_points = [];
@@ -86,7 +86,7 @@
         let i = i_start;
         while(i < i_end){
             const a_sound = i / i_size;
-            sampeset = for_sample(sampeset, i, a_sound, opt);
+            sampeset = for_sampset(sampeset, i, a_sound, opt);
             const a_wave = sampeset.a_wave === undefined ? a_sound : sampeset.a_wave;
             let samp = waveform(sampeset, a_wave);
             samp = ST.raw_to_mode(samp, opt.mode);
@@ -99,7 +99,7 @@
     CS.create_sound = ( opt = {} ) => {
         const sound = {
             waveform: opt.waveform || 'sin',
-            for_sample: opt.for_sample || null,
+            for_sampset: opt.for_sampset || null,
             mode: 'int16', //  'int16' 'bytes',
             sample_rate: 44100,
             secs: opt.secs === undefined ? 10 : opt.secs,
@@ -119,7 +119,7 @@
         // sound display array
         sound.array_disp = CS.create_samp_points({
             waveform: sound.waveform,
-            for_sample: sound.for_sample,
+            for_sampset: sound.for_sampset,
             i_size: sound.total_samps,
             i_start: 0,
             i_count: sound.total_samps,
@@ -136,7 +136,7 @@
         const i_start = Math.floor(sound.samples_per_frame * frame);
         const data_samples =  sound.array_frame = CS.create_samp_points({
             waveform: sound.waveform,
-            for_sample: sound.for_sample,
+            for_sampset: sound.for_sampset,
             i_size : sound.total_samps,
             i_start : i_start,
             i_count : sound.samples_per_frame,

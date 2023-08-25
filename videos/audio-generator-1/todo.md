@@ -3,7 +3,6 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-* () video8-vertex.js : video in which the position attribute of a geometry is being used to define amp and freq of wavefroms
 
 <!-- ----------
   samp_tools.js
@@ -16,8 +15,6 @@
 <!-- ----------
   samp_create.js
 ----------- -->
-* () samp-create.js : for-sample should be for-sampset
-* () samp-create.js : new for-sample method can be used to adjust sample values
 * () samp-create.js : default samp objects for each wave form
 
 <!-- ----------
@@ -28,6 +25,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/25/2023 ) samp-create.js : for-sample should be for-sampset
 * ( done 08/25/2023 ) samp-create.js : just a-wave for each waveform function
 * ( done 08/25/2023 ) samp-create.js : a\_point renamed to a\_sound
 * ( done 08/24/2023 ) samp-tools.js : freq_step method based on what I worked out in video7-tri

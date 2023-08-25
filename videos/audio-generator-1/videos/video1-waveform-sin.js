@@ -16,13 +16,13 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'sin',
-        for_sample: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound;
+        for_sampset: ( sampset, i, a_sound, opt ) => {
+            sampset.a_wave = a_sound * opt.secs % 1;
             sampset.amplitude = 0.75;
             sampset.frequency = 80;
             return sampset;
         },
-        secs: 1
+        secs: 10
     });
 
     sm.frameMax = sound.frames;

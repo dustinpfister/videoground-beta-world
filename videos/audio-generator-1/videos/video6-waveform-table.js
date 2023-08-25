@@ -17,7 +17,7 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
-        for_sample: ( samp_set, i, a_sound, opt ) => {
+        for_sampset: ( samp_set, i, a_sound, opt ) => {
             return {
                 amplitude: 4,
                 a_wave : a_sound * opt.secs % 1,
@@ -29,7 +29,7 @@ VIDEO.init = function(sm, scene, camera){
                 ]
             };
         },
-        secs: 3
+        secs: 10
     });
 
     sm.frameMax = sound.frames;

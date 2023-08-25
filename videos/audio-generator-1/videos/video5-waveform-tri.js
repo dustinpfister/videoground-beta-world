@@ -16,7 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'tri',
-        for_sample: ( sampset, i, a_sound, opt ) => {
+        for_sampset: ( sampset, i, a_sound, opt ) => {
             sampset.a_wave = a_sound;
             sampset.step_count = 5;
             sampset.frequency = 200 + 300 * a_sound;
@@ -24,7 +24,7 @@ VIDEO.init = function(sm, scene, camera){
             return sampset;
         },
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 5
+        secs: 10
     });
     sm.frameMax = sound.frames;
 };

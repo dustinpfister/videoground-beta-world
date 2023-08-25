@@ -31,7 +31,16 @@ VIDEO.init = function(sm, scene, camera){
             {  i_note: 0, beats: 1 },
             {  i_note: 4, beats: 2 },
             {  i_note: 0, beats: 1 },
-            {  i_note: 3, beats: 8 }
+            {  i_note: 3, beats: 8 },
+
+            {  i_note: 0, beats: 2 },
+            {  i_note: 7, beats: 8 },
+            {  i_note: 6, beats: 7 },
+            {  i_note: 5, beats: 6 },
+            {  i_note: 4, beats: 5 },
+            {  i_note: 3, beats: 4 },
+            {  i_note: 2, beats: 3 },
+            {  i_note: 1, beats: 8 }
 
         ]
     };
@@ -71,7 +80,7 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
-        for_sample: ( samp_set, i, a_sound, opt ) => {
+        for_sampset: ( samp_set, i, a_sound, opt ) => {
             const note = timeline_note[ Math.floor( timeline_note.length * a_sound ) ];
             const note_range = 8;
             const amp = timeline_amp[ Math.floor( timeline_amp.length * a_sound ) ];
@@ -90,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
                 ]
             };
         },
-        secs: 4
+        secs: 10
     });
 
     sm.frameMax = sound.frames;
