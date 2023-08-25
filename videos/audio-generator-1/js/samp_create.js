@@ -126,7 +126,7 @@
     // create sound object
     CS.create_sound = ( opt = {} ) => {
         const sound = {
-            waveform: opt.wavefrom || 'sin',
+            waveform: opt.waveform || 'sin',
             for_sample: opt.for_sample || null,
             mode: 'int16', //  'int16' 'bytes',
             sample_rate: 44100,
