@@ -19,7 +19,7 @@ VIDEO.init = function(sm, scene, camera){
 
 waveform: (samp_set, i, a_point, opt) => {
         const wave_count = samp_set.frequency * opt.secs;
-        return Math.sin( Math.PI  * wave_count * a_point )  * samp_set.amplitude;
+        return Math.sin( Math.PI  * 1 * wave_count * a_point )  * samp_set.amplitude;
 },
 
         for_sample: ( samp_set, i, a_point ) => {
@@ -28,7 +28,7 @@ waveform: (samp_set, i, a_point, opt) => {
             //samp_set.frequency = 80 + 920 * a_point;
 
 samp_set.amplitude = 0.75
-samp_set.frequency = 500 - 250 * a_point;
+samp_set.frequency = ST.freq_tune(a_point)
 
             return samp_set;
         },
