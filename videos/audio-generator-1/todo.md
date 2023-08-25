@@ -8,7 +8,7 @@
 <!-- ----------
   samp_tools.js
 ----------- -->
-* () samp-tools.js : freq_step method based on what I worked out in video7-tri
+
 * () samp-tools.js : clamp - sample values to max and min
 * () samp-tools.js : alphas - I will want to bake in some methods to help with alphas
 * () samp-tools.js : ST.raw\_to\_mode: use ST.get\_normal, and test output
@@ -26,6 +26,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/24/2023 ) samp-tools.js : freq_step method based on what I worked out in video7-tri
 * ( done 08/24/2023 ) samp-draw.js : see about fixing weird isshue with pingpong method for drawing table wavefrom samples
 * ( done 08/24/2023 ) video7-tri : use baked in tri wavefrom
 * ( done 08/24/2023 ) samp-create.js : have a baked in tri waveform

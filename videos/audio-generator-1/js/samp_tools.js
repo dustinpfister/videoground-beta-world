@@ -3,6 +3,15 @@
     //-------- ----------
     // FOR_SAMPLE Methods to help with the for sample methods used in sound objects
     //-------- ----------
+    ST.freq_tune = (alpha=0, tune=[ 1,0,1,1,0,7,0,6,0,5 ], hz_low=80, hz_high=1000 ) => {
+        const i_high = Math.max.apply(null, tune);
+        const note = tune[ Math.floor( tune.length * alpha * 0.99 ) ];
+        if(note === 0){
+            return 0;
+        }
+        return hz_low + ( hz_high - hz_low ) * ( note / i_high );
+    };
+
     ST.freq_step = (alpha=0, hz_start=1000, hz_step=50,  count_step=10, dir=1 ) => {
         return hz_start + hz_step * Math.floor( alpha *  count_step ) * dir
     };
