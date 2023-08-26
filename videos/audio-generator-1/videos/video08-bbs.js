@@ -84,18 +84,18 @@ VIDEO.init = function(sm, scene, camera){
                 a_wave : a_wave,
                 table: [
                     {  waveform: 'sin', frequency: Math.round( (f * 0.12) / bbs), amplitude: 0.1 },
-                    {  waveform: 'sawtooth', frequency: Math.round( (f * 0.15 ) / bbs), amplitude: 0.5 + 0.4 * distort1 },
+                    {  waveform: 'sawtooth', frequency: Math.round( (f * 0.15 ) / bbs), amplitude: 0.5 + 0.2 * distort1 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.18) / bbs), amplitude: 0.1 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.2) / bbs), amplitude: 0.21 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.3) / bbs), amplitude: 0.37 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 0.4) / bbs), amplitude: 0.83 + 0.4 * distort2},
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.4) / bbs), amplitude: 0.83 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.5) / bbs), amplitude: 0.52 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.6) / bbs), amplitude: 0.62 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.7) / bbs), amplitude: 0.75 },
                     {  waveform: 'tri', frequency: Math.round( f / bbs), amplitude: 1 },
                     {  waveform: 'sin', frequency: Math.round( (f * 1.02) / bbs), amplitude: 0.2},
                     {  waveform: 'sin', frequency: Math.round( (f * 1.04) / bbs) , amplitude: 0.1},
-                    {  waveform: 'sin', frequency: Math.round( (f * 1.08) / bbs) , amplitude: 0.25},
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.08) / bbs) , amplitude: 0.25 + 0.2 * distort2},
                     {  waveform: 'sin', frequency: Math.round( (f * 1.16) / bbs) , amplitude: 0.1},
                     {  waveform: 'sin', frequency: Math.round( (f * 1.32) / bbs) , amplitude: 0.15  },
                     {  waveform: 'sin', frequency: Math.round( (f * 1.64) / bbs) , amplitude: 0.1 },
@@ -103,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
                 ]
             };
         },
-        secs: 2
+        secs: 13
     });
     sm.frameMax = sound.frames;
 };
