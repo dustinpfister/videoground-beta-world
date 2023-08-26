@@ -30,23 +30,62 @@ VIDEO.init = function(sm, scene, camera){
         return 440 * Math.pow(2, a + b / 12);
     };
 
+    const note_freq = {
+        'c' : notefreq_by_indices(5, 0),
+        'f' : notefreq_by_indices(5, 5),
+        'g' : notefreq_by_indices(5, 7)
+    };
+/*
     const data = [
-        1, 0, notefreq_by_indices(5, 5),  // f
-        1, 1, notefreq_by_indices(5, 5),  // f
-        1, 2, notefreq_by_indices(5, 5),  // f
-        1, 3, notefreq_by_indices(5, 7),  // g
-        1, 4, notefreq_by_indices(5, 5),  // f
-        1, 5, notefreq_by_indices(5, 5),  // f
-        2, 6, notefreq_by_indices(5, 0)   // c
+        1, 0, note_freq.f,
+        1, 1, note_freq.f,
+        1, 2, note_freq.f,
+        1, 3, note_freq.g,
+        1, 4, note_freq.f,
+        1, 5, note_freq.f,
+        2, 6, note_freq.c
     ];
-
     const data_index = [ 0,1,2,3,4,5,6,6 ];
+*/
 
+    // start-beat-index, end-beat-index, freq
+    const note_data = [
+        0, 1, note_freq.f,
+        1, 2, note_freq.f,
+        2, 3, note_freq.f,
+        3, 4, note_freq.g,
+        4, 5, note_freq.f,
+        5, 7, note_freq.c
+        //8, 9, note_freq.f  // should be d
+    ];
+    const note_index = [ 0, 1, 2, 3, 4, 5, 5 ];
+    //const note_index = [ 0, 1, 2, 3, 4, 5, 6, 6 ];
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'tri',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            const bbs = 4;
+
+            // beat index should be solid
+            const bbs = 8;
+            const i_beat = Math.floor( a_sound * opt.secs * bbs);
+
+            // beat index can then be used to get a note index from the note_data array
+            const i_note = note_index[ i_beat ];
+
+            // with the note index I can now get a start and end beat index, as well as note frequency
+            const sbi = note_data[ i_note * 3 + 0 ];
+            const ebi = note_data[ i_note * 3 + 1 ];
+            const f = note_data[ i_note * 3 + 2 ];
+
+            // now that I have a start and end beat index I can figure out the beat length
+            // and also the alpha value for the wave of the current note
+            const beat_length = ebi - sbi;
+            const a_bbs = bbs / beat_length; 
+            sampset.a_wave = a_sound * opt.secs * bbs % 1;
+            //sampset.a_wave = a_sound * opt.secs * bbs; //( i_beat - sbi ) / beat_length;
+
+sampset.frequency = f / bbs;
+sampset.amplitude = sampset.a_wave;
 
 /*
             const i_note = Math.floor( a_sound * opt.secs * bbs);
@@ -56,11 +95,9 @@ VIDEO.init = function(sm, scene, camera){
             let f = data[i_el * 3 + 2];
 */
 
+/*
             const i_wave = Math.floor( a_sound * opt.secs * bbs);
             sampset.a_wave = a_sound * opt.secs * bbs % 1;
-
-
-            //const i_el = i_wave % ( data.length / 2 );
 
             const i_el = data_index[ i_wave % data_index.length ];
             let d = data[i_el * 3 + 0];
@@ -72,10 +109,11 @@ VIDEO.init = function(sm, scene, camera){
             const a_note = sampset.a_wave;
             const a_bias = 1 - Math.abs( 0.5 - a_note ) / 0.5;
             sampset.amplitude = a_bias * 0.75;
+*/
 
             return sampset;
         },
-        secs: 2
+        secs: 1
     });
     sm.frameMax = sound.frames;
 };
