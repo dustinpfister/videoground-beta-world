@@ -87,7 +87,7 @@ VIDEO.init = function(sm, scene, camera){
             //sampset.a_wave = a_sound * opt.secs * bbs; //( i_beat - sbi ) / beat_length;
 
 sampset.frequency = f / bbs;
-sampset.amplitude = a_beat;
+sampset.amplitude = THREE.MathUtils.smoothstep( 1 - Math.abs( 0.5 - a_beat) / 0.5, 0, 1 ) * 0.75;
 
 /*
             const i_note = Math.floor( a_sound * opt.secs * bbs);
