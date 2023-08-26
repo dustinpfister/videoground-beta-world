@@ -49,18 +49,50 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'tri',
+        //waveform : 'tri',
+
+        waveform : 'table',
+
         for_sampset: ( sampset, i, a_sound, opt ) => {
             const bbs = 4;
             const i_beat = Math.floor( a_sound * opt.secs * bbs);
             const f = note_data[ i_beat ];
+
+/*
             sampset.a_wave = a_sound * opt.secs * bbs % 1;
+            sampset.step_count = 0;
             sampset.frequency = f / bbs;
             sampset.amplitude = 0;
             if(sampset.frequency > 0){
-                sampset.amplitude = Math.sin( Math.PI * sampset.a_wave ) * 0.75;
+                sampset.amplitude = Math.sin( Math.PI * sampset.a_wave ) * 0.65;
             }
+
             return sampset;
+*/
+
+            const a_wave = a_sound * opt.secs * bbs % 1;
+            let amplitude = 0;
+            if(f > 0){
+                amplitude = 0.5; //0.25 + 0.5 * Math.sin( Math.PI * sampset.a_wave );
+            }
+
+            return {
+                amplitude: amplitude * 4,
+                a_wave : a_wave,
+                table: [
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.2) / bbs), amplitude: 0.2 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.3) / bbs), amplitude: 0.3 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.4) / bbs), amplitude: 0.4 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.5) / bbs), amplitude: 0.5 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.6) / bbs), amplitude: 0.7 },
+                    {  waveform: 'sin', frequency: Math.round( f / bbs), amplitude: 1 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.025) / bbs), amplitude: 0.25 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.05) / bbs) , amplitude: 0.20 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.075) / bbs) , amplitude: 0.15 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.100) / bbs) , amplitude: 0.10 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.125) / bbs) , amplitude: 0.05 }
+                ]
+            };
         },
         secs: 13
     });
