@@ -76,31 +76,34 @@ VIDEO.init = function(sm, scene, camera){
                 amplitude = 0.5; //0.25 + 0.5 * Math.sin( Math.PI * sampset.a_wave );
             }
 
+            const distort1 = THREE.MathUtils.seededRandom(i);
+            const distort2 = THREE.MathUtils.seededRandom(i * 10);
+
             return {
                 amplitude: amplitude * 4,
                 a_wave : a_wave,
                 table: [
                     {  waveform: 'sin', frequency: Math.round( (f * 0.12) / bbs), amplitude: 0.1 },
-                    {  waveform: 'sawtooth', frequency: Math.round( (f * 0.15) / bbs), amplitude: 0.5 },
+                    {  waveform: 'sawtooth', frequency: Math.round( (f * 0.15 ) / bbs), amplitude: 0.5 + 0.4 * distort1 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.18) / bbs), amplitude: 0.1 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.2) / bbs), amplitude: 0.21 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.3) / bbs), amplitude: 0.37 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 0.4) / bbs), amplitude: 0.83 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 0.4) / bbs), amplitude: 0.83 + 0.4 * distort2},
                     {  waveform: 'sin', frequency: Math.round( (f * 0.5) / bbs), amplitude: 0.52 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.6) / bbs), amplitude: 0.62 },
                     {  waveform: 'sin', frequency: Math.round( (f * 0.7) / bbs), amplitude: 0.75 },
                     {  waveform: 'tri', frequency: Math.round( f / bbs), amplitude: 1 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 1.02) / bbs), amplitude: 0.2 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 1.04) / bbs) , amplitude: 0.1 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 1.08) / bbs) , amplitude: 0.2 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 1.16) / bbs) , amplitude: 0.1 },
-                    {  waveform: 'sin', frequency: Math.round( (f * 1.32) / bbs) , amplitude: 0.15 },
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.02) / bbs), amplitude: 0.2},
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.04) / bbs) , amplitude: 0.1},
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.08) / bbs) , amplitude: 0.25},
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.16) / bbs) , amplitude: 0.1},
+                    {  waveform: 'sin', frequency: Math.round( (f * 1.32) / bbs) , amplitude: 0.15  },
                     {  waveform: 'sin', frequency: Math.round( (f * 1.64) / bbs) , amplitude: 0.1 },
                     {  waveform: 'sin', frequency: Math.round( (f * 2.28) / bbs) , amplitude: 0.05 },
                 ]
             };
         },
-        secs: 13
+        secs: 2
     });
     sm.frameMax = sound.frames;
 };
