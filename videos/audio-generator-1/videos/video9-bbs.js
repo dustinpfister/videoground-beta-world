@@ -55,10 +55,11 @@ VIDEO.init = function(sm, scene, camera){
         2, 3, note_freq.f,
         3, 4, note_freq.g,
         4, 5, note_freq.f,
-        5, 7, note_freq.c
-        //8, 9, note_freq.f  // should be d
+        5, 6, note_freq.c,
+        6, 7, note_freq.g,  // should be d
+        7, 8, note_freq.c
     ];
-    const note_index = [ 0, 1, 2, 3, 4, 5, 5 ];
+    const note_index = [ 0, 1, 2, 3, 4, 5, 6, 7 ];
     //const note_index = [ 0, 1, 2, 3, 4, 5, 6, 6 ];
 
     const sound = scene.userData.sound = CS.create_sound({
@@ -66,8 +67,9 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( sampset, i, a_sound, opt ) => {
 
             // beat index should be solid
-            const bbs = 8;
+            const bbs = 4;
             const i_beat = Math.floor( a_sound * opt.secs * bbs);
+            const a_beat = a_sound * opt.secs * bbs % 1;
 
             // beat index can then be used to get a note index from the note_data array
             const i_note = note_index[ i_beat ];
@@ -80,12 +82,12 @@ VIDEO.init = function(sm, scene, camera){
             // now that I have a start and end beat index I can figure out the beat length
             // and also the alpha value for the wave of the current note
             const beat_length = ebi - sbi;
-            const a_bbs = bbs / beat_length; 
+            //const a_bbs = bbs / beat_length; 
             sampset.a_wave = a_sound * opt.secs * bbs % 1;
             //sampset.a_wave = a_sound * opt.secs * bbs; //( i_beat - sbi ) / beat_length;
 
 sampset.frequency = f / bbs;
-sampset.amplitude = sampset.a_wave;
+sampset.amplitude = a_beat;
 
 /*
             const i_note = Math.floor( a_sound * opt.secs * bbs);
@@ -113,7 +115,7 @@ sampset.amplitude = sampset.a_wave;
 
             return sampset;
         },
-        secs: 1
+        secs: 2
     });
     sm.frameMax = sound.frames;
 };
