@@ -25,6 +25,8 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/26/2023 ) video09-bbs : full song for video
+* ( done 08/26/2023 ) samp-create.js : fixed bug with tri waveform
 * ( done 08/25/2023 ) video7-waveform-array.js : array waveform demo
 * ( done 08/25/2023 ) samp-create.js : for-sample should be for-sampset
 * ( done 08/25/2023 ) samp-create.js : just a-wave for each waveform function

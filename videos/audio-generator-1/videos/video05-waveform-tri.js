@@ -17,10 +17,10 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'tri',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound;
-            sampset.step_count = 5;
+            sampset.a_wave = a_sound * opt.secs % 1;
+            sampset.step_count = 6;
             sampset.frequency = 200 + 300 * a_sound;
-            sampset.amplitude = 0.5;
+            sampset.amplitude = 0.8;
             return sampset;
         },
         getsamp_lossy: DSD.getsamp_lossy_random,

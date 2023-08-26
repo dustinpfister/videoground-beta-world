@@ -37,7 +37,7 @@
         const a = sampeset.frequency * a_wave % 1;
         let a_bias = 1 - Math.abs( 0.5 - a ) / 0.5;
         if(sc >= 2){
-            a_bias = Math.floor( a_bias * sc) / sc;
+            a_bias = Math.floor( a_bias * sc) / (sc - 1);
         }
         const amp = sampeset.amplitude; 
         return  amp * -1 + amp * 2 * a_bias;
