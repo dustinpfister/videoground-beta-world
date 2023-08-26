@@ -31,26 +31,48 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const data = [
-        0.75,notefreq_by_indices(4, 5),  // f
-        0.75,notefreq_by_indices(4, 5),  // f
-        0.75,notefreq_by_indices(4, 5),  // f
-        0.75,notefreq_by_indices(5, 7),  // g
-        0.75,notefreq_by_indices(4, 5),  // f
-        0.75,notefreq_by_indices(4, 5),  // f
-        0.75,notefreq_by_indices(1, 0),  // c
-        0.75,notefreq_by_indices(1, 0)   // c
+        1, 0, notefreq_by_indices(5, 5),  // f
+        1, 1, notefreq_by_indices(5, 5),  // f
+        1, 2, notefreq_by_indices(5, 5),  // f
+        1, 3, notefreq_by_indices(5, 7),  // g
+        1, 4, notefreq_by_indices(5, 5),  // f
+        1, 5, notefreq_by_indices(5, 5),  // f
+        2, 6, notefreq_by_indices(5, 0)   // c
     ];
+
+    const data_index = [ 0,1,2,3,4,5,6,6 ];
+
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'tri',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            const bbs = 4; //data.length / 2;
+            const bbs = 4;
+
+/*
+            const i_note = Math.floor( a_sound * opt.secs * bbs);
+            const i_el = data_index[ i_wave % data_index.length ];
+            let d = data[i_el * 3 + 0];
+            let s = data[i_el * 3 + 1];
+            let f = data[i_el * 3 + 2];
+*/
+
             const i_wave = Math.floor( a_sound * opt.secs * bbs);
             sampset.a_wave = a_sound * opt.secs * bbs % 1;
-            const a_bias = 1 - Math.abs( 0.5 - sampset.a_wave ) / 0.5;
-            const i_el = i_wave % ( data.length / 2 );
-            sampset.amplitude = a_bias * data[i_el * 2];
-            let f = data[i_el * 2 + 1];
-            sampset.frequency = Math.floor(f / bbs);
+
+
+            //const i_el = i_wave % ( data.length / 2 );
+
+            const i_el = data_index[ i_wave % data_index.length ];
+            let d = data[i_el * 3 + 0];
+            let s = data[i_el * 3 + 1];
+            let f = data[i_el * 3 + 2];
+            sampset.frequency = Math.floor(f / ( bbs * d) );
+
+
+            const a_note = sampset.a_wave;
+            const a_bias = 1 - Math.abs( 0.5 - a_note ) / 0.5;
+            sampset.amplitude = a_bias * 0.75;
+
             return sampset;
         },
         secs: 2
