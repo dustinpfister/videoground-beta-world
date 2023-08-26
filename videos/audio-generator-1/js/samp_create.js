@@ -126,7 +126,7 @@
             secs: sound.secs,
             mode: 'raw'
         });
-        const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_pingpong
+        const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
         sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: getsamp_lossy };
         sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
         return sound;
