@@ -17,6 +17,12 @@ However the main focus with this project has to do with writing code that will g
 
 The goals with this first collection of videos should be to work out a first set of tools to make videos that have to do with audio synthesis. After that I will want a few demo videos in which I am just testing out that these tools are working okay for a few use case examples. Nothing major or final this time around, just the first collection of files to which I will then refine in future collections like this.
 
+### Harmonics
+
+Harmonics and Standing waves
+
+https://www.youtube.com/watch?v=0Rfushlee0U&pp=ygUJaGFybW9uaWNz
+
 ### waveform functions, for_sampset functions, and wave alphas
 
 The final format for this project will be that I will want to use a built in waveform function, or create a custom one. After that the other main function of interest is the for\_sampset function that is used to adjust settings that effect how this waveform function will create a final sample value. I am sure that there is a whole would of other ways of doing this sort of thing, but as far as this project is concerned that will be how it is done for better or worse.
