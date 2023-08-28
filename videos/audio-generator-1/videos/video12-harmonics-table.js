@@ -53,14 +53,14 @@ VIDEO.init = function(sm, scene, camera){
 
     // 0=C, 1=C#, 2=D, 3=D#, 4=E, 5=F, 6=F#,  7=G,  8=G#,  9=A, 10=A#, 11=B
     const nf = {
-        'c1' : notefreq_by_indices(6, 0),
-        'd1' : notefreq_by_indices(6, 2),
-        'e1' : notefreq_by_indices(6, 4),
-        'f1' : notefreq_by_indices(6, 5),
-        'g1' : notefreq_by_indices(6, 7),
-        'a1' : notefreq_by_indices(6, 9),
-        'b1' : notefreq_by_indices(6, 11),
-        'c2' : notefreq_by_indices(7, 0)
+        'c1' : notefreq_by_indices(5, 0),
+        'd1' : notefreq_by_indices(5, 2),
+        'e1' : notefreq_by_indices(5, 4),
+        'f1' : notefreq_by_indices(5, 5),
+        'g1' : notefreq_by_indices(5, 7),
+        'a1' : notefreq_by_indices(5, 9),
+        'b1' : notefreq_by_indices(5, 11),
+        'c2' : notefreq_by_indices(6, 0)
     };
 
     const tune = [
@@ -90,34 +90,25 @@ VIDEO.init = function(sm, scene, camera){
                     const secs = arange * opt.secs;
                     //sampset.a_wave = a_sound * opt.secs % 1;
                     a_wave = (a_sound - alow) / arange;
-                    frequency = Math.floor(freq * secs);
+                    frequency = freq * secs;
                     break;
                 }
                 id += 3;
             }
 
-            const amp = Math.sin( Math.PI * a_wave );
+            const amp_var = Math.sin( Math.PI * 1 * a_wave );
             return {
-                amplitude: 2.0,
+                amplitude: 0.75,
                 a_wave : a_wave,
                 table: [
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.1), amplitude: amp * 0.3 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.2), amplitude: amp * 0.7 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.3), amplitude: amp * 0.85 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.4), amplitude: amp * 0.5 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.5), amplitude: amp * 0.35 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.6), amplitude: amp * 0.4 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.7), amplitude: amp * 0.45 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 0.8), amplitude: amp * 0.5 },
-                    {  waveform: 'sin', frequency: frequency, amplitude: amp  },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 1.2), amplitude: amp * 0.3 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 1.4), amplitude: amp * 0.25 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 1.8), amplitude: amp * 0.2 },
-                    {  waveform: 'sin', frequency: Math.floor(frequency * 2.0), amplitude: amp * 0.15 }
+                    {  waveform: 'sin', frequency: frequency, amplitude:  1 * amp_var  },
+                    {  waveform: 'sin', frequency: frequency * 2, amplitude: 0.30 * amp_var   },
+                    {  waveform: 'sin', frequency: frequency * 4, amplitude: 0.60 * amp_var   },
+                    {  waveform: 'sin', frequency: frequency * 8, amplitude: 0.10 * amp_var   }
                 ]
             };
         },
-        secs: 20
+        secs: 30
     });
 
     sm.frameMax = sound.frames;
