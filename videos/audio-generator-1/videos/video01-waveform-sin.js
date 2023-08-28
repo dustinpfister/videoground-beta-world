@@ -1,4 +1,4 @@
-/*    video1-waveform-sin - for audio-generator-1 project
+/*    video01-waveform-sin - for audio-generator-1 project
           * Just using the sin wavefrom
  */
 //-------- ----------

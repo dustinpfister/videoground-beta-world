@@ -1,4 +1,4 @@
-/*    video9-bbs - for audio-generator-1 project
+/*    video10-tune-bbs - for audio-generator-1 project
           * beats per second
  */
 

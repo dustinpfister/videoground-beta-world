@@ -1,4 +1,4 @@
-/*    video2-waveform-saw - for audio-generator-1 project
+/*    video02-waveform-saw - for audio-generator-1 project
           * for this one I just want to try out the 'sawtooth' wavefrom method
  */
 //-------- ----------

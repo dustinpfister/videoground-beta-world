@@ -24,6 +24,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/27/2023 ) video12-harmonics-table-amp : 
 * ( done 08/28/2023 ) samp-create.js : update sin wavefrom to allow for adjustment of count of wavelengths per freq and default to 1 not 2
 * ( done 08/27/2023 ) video12-harmonics-table : 
 * ( done 08/26/2023 ) video09-bbs : full song for video

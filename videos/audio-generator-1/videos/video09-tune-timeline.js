@@ -1,4 +1,4 @@
-/*    video8-timeline - for audio-generator-1 project
+/*    video09-tune-timeline - for audio-generator-1 project
           * testing out a timeline feature, for making music
  */
 //-------- ----------

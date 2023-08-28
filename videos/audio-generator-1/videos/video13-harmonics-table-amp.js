@@ -1,5 +1,5 @@
-/*    video06-waveform-table - for audio-generator-1 project
-          * testing out the table waveform
+/*    video13-harmonics-table-amp - for audio-generator-1 project
+          * Simple demo of a table waveform, but with variable amp for one freq
  */
 //-------- ----------
 // SCRIPTS
@@ -17,22 +17,28 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
-        for_sampset: ( samp_set, i, a_sound, opt ) => {
+        for_sampset: ( sampset, i, a_sound, opt ) => {
+
+            //const a_wave = a_sound * opt.secs % 1;
+            const a_wave = a_sound;
+
+            const amp_var = Math.sin( Math.PI * 1 * a_wave);
+
             return {
-                amplitude: 4,
-                a_wave : a_sound * opt.secs % 1,
+                amplitude: 1.5,
+                a_wave : a_wave,
                 table: [
-                    {  waveform: 'sin', frequency: 320, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  80, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 1000, amplitude: 0.25 }
+                    {  waveform: 'sin', frequency:  200 * opt.secs, amplitude: 1.00 * amp_var  },
+                    {  waveform: 'sin', frequency:  400 * opt.secs, amplitude: 0.3}
                 ]
             };
+
         },
         secs: 10
     });
 
     sm.frameMax = sound.frames;
+
 };
 //-------- ----------
 // UPDATE

@@ -1,4 +1,4 @@
-/*    video3-waveform-square - for audio-generator-1 project
+/*    video03-waveform-square - for audio-generator-1 project
           * square wavefrom method
  */
 //-------- ----------
