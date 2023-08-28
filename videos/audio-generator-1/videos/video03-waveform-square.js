@@ -17,13 +17,13 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'square',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound * opt.secs % 1;
-            sampset.frequency = 80;
+            sampset.a_wave = a_sound; //a_sound * opt.secs % 1;
+            sampset.frequency = 80 + (12800 - 80) * a_sound;
             sampset.amplitude = 0.75;
             return sampset;
         },
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 10
+        secs: 30
     });
     sm.frameMax = sound.frames;
 };
