@@ -7,7 +7,6 @@
 <!-- ----------
   samp_tools.js
 ----------- -->
-* () samp-tools.js : helper function that has to do with breaking down a sound into a fixed number of beats
 * () samp-tools.js : clamp - sample values to max and min
 * () samp-tools.js : alphas - I will want to bake in some methods to help with alphas
 * () samp-tools.js : ST.raw\_to\_mode: use ST.get\_normal, and test output
@@ -25,6 +24,8 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 08/28/2023 ) samp-create.js : update sin wavefrom to allow for adjustment of count of wavelengths per freq and default to 1 not 2
+* ( done 08/27/2023 ) video12-harmonics-table : 
 * ( done 08/26/2023 ) video09-bbs : full song for video
 * ( done 08/26/2023 ) samp-create.js : fixed bug with tri waveform
 * ( done 08/25/2023 ) video7-waveform-array.js : array waveform demo

@@ -13,7 +13,12 @@
     //-------- ----------
     const WAVE_FORM_FUNCTIONS = {};
     WAVE_FORM_FUNCTIONS.sin = (sampset, a_wave ) => {
-        return Math.sin( Math.PI  * 2 * sampset.frequency * a_wave )  * sampset.amplitude;
+        const wavelength = sampset.wavelength === undefined ? 1 : sampset.wavelength;
+        const n = wavelength * Math.floor(sampset.frequency);
+        return Math.sin( Math.PI  * n * a_wave )  * sampset.amplitude;
+    };
+    WAVE_FORM_FUNCTIONS.sin2 = (sampset, a_wave ) => {
+        return Math.sin( Math.PI  * 2 * a_wave )  * sampset.amplitude;
     };
     WAVE_FORM_FUNCTIONS.sawtooth = (sampeset, a_wave ) => {
         const a = ( sampeset.frequency * a_wave % 1 );
@@ -21,7 +26,6 @@
     };
     WAVE_FORM_FUNCTIONS.pulse = (sampeset, a_wave ) => {
         const duty = sampeset.duty === undefined ? 0.5 : sampeset.duty;
-        //const wave_count = sampeset.frequency * opt.secs;
         const a = sampeset.frequency * a_wave % 1;
         if(a < duty){
             return  -1 * sampeset.amplitude;
