@@ -98,7 +98,7 @@ VIDEO.init = function(sm, scene, camera){
 
             const amp_var = Math.sin( Math.PI * 1 * a_wave );
             return {
-                amplitude: 0.75,
+                amplitude: 1.5,
                 a_wave : a_wave,
                 table: [
                     {  waveform: 'sin', frequency: frequency, amplitude:  1 * amp_var  },
