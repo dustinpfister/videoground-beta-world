@@ -18,7 +18,7 @@ VIDEO.init = function(sm, scene, camera){
         waveform : 'square',
         for_sampset: ( sampset, i, a_sound, opt ) => {
             sampset.a_wave = a_sound; //a_sound * opt.secs % 1;
-            sampset.frequency = 80 + (12800 - 80) * a_sound;
+            sampset.frequency = 80 + (20000 - 80) * a_sound;
             sampset.amplitude = 0.75;
             return sampset;
         },
