@@ -121,6 +121,7 @@
             sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
         }
         // sound display array
+
         sound.array_disp = CS.create_samp_points({
             waveform: sound.waveform,
             for_sampset: sound.for_sampset,
@@ -128,8 +129,10 @@
             i_start: 0,
             i_count: sound.total_samps,
             secs: sound.secs,
+            step: opt.disp_step === undefined ? sound.bytes_per_frame: opt.disp_step,
             mode: 'raw'
         });
+
         const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
         sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: getsamp_lossy };
         sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };

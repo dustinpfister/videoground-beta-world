@@ -23,7 +23,7 @@ VIDEO.init = function(sm, scene, camera){
             sampset.frequency = 160;
             return sampset;
         },
-        secs: 10
+        secs: 120
     });
 
     sm.frameMax = sound.frames;

@@ -23,7 +23,8 @@ VIDEO.init = function(sm, scene, camera){
             samp.amplitude = 0.50 
             return samp;
         },
-        getsamp_lossy: DSD.getsamp_lossy_random,
+        disp_step: 128,
+        getsamp_lossy: DSD.getsamp_lossy_pingpong,
         secs: 10
     });
     sm.frameMax = sound.frames;
