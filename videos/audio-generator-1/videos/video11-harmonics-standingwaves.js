@@ -114,7 +114,7 @@ VIDEO.init = function(sm, scene, camera){
 
             return sampset;
         },
-        secs: 20
+        secs: 30
     });
 
     sm.frameMax = sound.frames;
