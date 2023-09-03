@@ -23,6 +23,7 @@ VIDEO.init = function(sm, scene, camera){
             sampset.frequency = 160;
             return sampset;
         },
+        disp_step: 1000,
         secs: 120
     });
 
