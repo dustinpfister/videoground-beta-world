@@ -1,4 +1,4 @@
-/*    video06-waveform-table - for audio-generator-1 project
+/*    video01-06-waveform-table - for audio-generator-1 project
           * testing out the table waveform
  */
 //-------- ----------

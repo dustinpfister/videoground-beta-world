@@ -1,4 +1,4 @@
-/*    video07-waveform-array - for audio-generator-1 project
+/*    video01-07-waveform-array - for audio-generator-1 project
           * Just using the sin wavefrom
  */
 //-------- ----------

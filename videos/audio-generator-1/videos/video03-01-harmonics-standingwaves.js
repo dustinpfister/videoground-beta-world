@@ -1,4 +1,4 @@
-/*    video11-harmonics-standingwaves - for audio-generator-1 project
+/*    video03-01-harmonics-standingwaves - for audio-generator-1 project
           * just looking into what the deal is with 'standing waves'
  */
 //-------- ----------

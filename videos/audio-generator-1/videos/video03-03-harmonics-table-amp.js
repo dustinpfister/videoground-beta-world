@@ -1,4 +1,4 @@
-/*    video13-harmonics-table-amp - for audio-generator-1 project
+/*    video03-03-harmonics-table-amp - for audio-generator-1 project
           * Simple demo of a table waveform, but with variable amp for one freq
  */
 //-------- ----------

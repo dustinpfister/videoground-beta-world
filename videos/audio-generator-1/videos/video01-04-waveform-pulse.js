@@ -1,4 +1,4 @@
-/*    video04-waveform-pulse - for audio-generator-1 project
+/*    video01-04-waveform-pulse - for audio-generator-1 project
           * pulse wavefrom method
  */
 //-------- ----------

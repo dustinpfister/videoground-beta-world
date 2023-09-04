@@ -1,4 +1,4 @@
-/*    video05-waveform-tri - for audio-generator-1 project
+/*   video01-05-waveform-tri - for audio-generator-1 project
           * triangle wavefrom method
  */
 //-------- ----------

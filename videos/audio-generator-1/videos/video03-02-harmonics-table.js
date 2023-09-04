@@ -1,4 +1,4 @@
-/*    video12-harmonics-table - for audio-generator-1 project
+/*    video03-02-harmonics-table - for audio-generator-1 project
           * worked out some good code, I would now like to use the table with it
  */
 //-------- ----------
