@@ -14,15 +14,18 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-
-    // The Good King Song
+    // ROCK-A-BYE BABY
+    // https://noobnotes.net/rock-a-bye-baby-traditional/
     const tune = [
-        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
-        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
-        1,'c6',1,'b5',1,'a5',1,'g5',1,'a5',1,'g5',2,'f5',
-        1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
-        1,'c5',1,'c5',1,'d5',1,'e5',1,'f5',1,'f5',2,'g5',
-        1,'c6',1,'b5',1,'a5',1,'g5',2,'f5',2,'a5',4,'f5'
+        1,'e5',1,'g5',1,'e6',1,'d6', 1,'c6',
+        1,'e5',1,'g5',1,'c6',1,'b5',
+        1,'f5',1,'g5',1,'f6',1,'e6',
+        1,'d6',1,'d6',1,'c6',1,'a5',1,'g5',
+
+        1,'e5',1,'g5',1,'e6',1,'d6',
+        1,'c6',1,'e5',1,'g5',1,'c6',1,'b5',
+        1,'g5',1,'c6',1,'f6',1,'e6',1,'c6',
+        1,'d6',1,'a5',1,'b5',1,'c6'
     ];
     const nf = ST.create_nf();
     const data = ST.tune_to_alphas(tune, nf);
@@ -40,7 +43,7 @@ VIDEO.init = function(sm, scene, camera){
             return sampset;
         },
         disp_step: 1,
-        secs: 5
+        secs: 10
     });
 
     sm.frameMax = sound.frames;
