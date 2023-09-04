@@ -31,6 +31,58 @@
     //-------- ----------
     // ADVANCED TUNE TOOLS
     //-------- ----------
+    // https://pages.mtu.edu/~suits/notefreqs.html
+    // https://en.wikipedia.org/wiki/Musical_note
+    ST.notefreq_by_indices = ( i_scale = 4, i_note = 5 ) => {
+        const a = i_scale - 5;
+        const b = i_note + 3;
+        return 440 * Math.pow(2, a + b / 12);
+    };
+    ST.create_nf = () => {
+        // 0=C, 1=C#, 2=D, 3=D#, 4=E, 5=F, 6=F#, 7=G, 8=G#, 9=A, 10=A#, 11=B
+        const array_notes = 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'.split(',');
+        const nf = {};
+        let scale = 0;
+        while(scale < 8){
+            let ni = 0;
+            while(ni < 12){
+                const freq = ST.notefreq_by_indices(scale, ni);
+                const key = array_notes[ ni ] + scale;
+                nf[key] = freq;
+                ni += 1;
+            }
+            scale += 1;
+        }
+        return nf;
+    };
+    const get_beat_count = (tune) => {
+        let i = 0;
+        const len = tune.length;
+        let count = 0;
+        while(i < len ){
+            count += tune[i];
+            i += 2;
+        }
+        return count;
+    };
+    ST.tune_to_alphas = (tune, nf) => {
+        const beat_ct = get_beat_count(tune);
+        let a = 0;
+        let i = 0;
+        const len = tune.length;
+        const a_perbeat = 1 / beat_ct;
+        const data = [];
+        while(i < len ){
+            const beat_count = tune[i];
+            const note_key = tune[i + 1];
+            const freq = nf[ note_key ];
+            const d = a_perbeat * beat_count;
+            data.push(a, a + d, freq );
+            a += d;
+            i += 2;
+        }
+        return data;
+    }
     //-------- ----------
     // SAMP VALUES: Methods to help with sample values
     //-------- ----------

@@ -14,69 +14,18 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-
-    // note freq
-    // https://pages.mtu.edu/~suits/notefreqs.html
-    // https://en.wikipedia.org/wiki/Musical_note
-    const notefreq_by_indices = ( i_scale = 4, i_note = 5 ) => {
-        const a = i_scale - 5;
-        const b = i_note + 3;
-        return 440 * Math.pow(2, a + b / 12);
-    };
-
-    const get_beat_count = (tune) => {
-        let i = 0;
-        const len = tune.length;
-        let count = 0;
-        while(i < len ){
-            count += tune[i];
-            i += 2;
-        }
-        return count;
-    };
-
-    const tune_to_alphas = (tune, nf) => {
-        const beat_ct = get_beat_count(tune);
-        let a = 0;
-        let i = 0;
-        const len = tune.length;
-        const a_perbeat = 1 / beat_ct;
-        const data = [];
-        while(i < len ){
-            const beat_count = tune[i];
-            const note_key = tune[i + 1];
-            const freq = nf[ note_key ];
-            const d = a_perbeat * beat_count;
-            data.push(a, a + d, freq );
-            a += d;
-            i += 2;
-        }
-        return data;
-    }
-
-    // 0=C, 1=C#, 2=D, 3=D#, 4=E, 5=F, 6=F#,  7=G,  8=G#,  9=A, 10=A#, 11=B
-    const nf = {
-        'c1' : notefreq_by_indices(5, 0),
-        'd1' : notefreq_by_indices(5, 2),
-        'e1' : notefreq_by_indices(5, 4),
-        'f1' : notefreq_by_indices(5, 5),
-        'g1' : notefreq_by_indices(5, 7),
-        'a1' : notefreq_by_indices(5, 9),
-        'b1' : notefreq_by_indices(5, 11),
-        'c2' : notefreq_by_indices(6, 0)
-    };
-
+    // The Good King Song
     const tune = [
-        1,'f1',1,'f1',1,'f1',1,'g1',1,'f1',1,'f1',2,'c1',1,'d1',1,'c1',1,'d1',1,'e1',2,'f1',2,'f1',
-        1,'f1',1,'f1',1,'f1',1,'g1',1,'f1',1,'f1',2,'c1',1,'d1',1,'c1',1,'d1',1,'e1',2,'f1',2,'f1',
-        1,'c2',1,'b1',1,'a1',1,'g1',1,'a1',1,'g1',2,'f1',
-        1,'d1',1,'c1',1,'d1',1,'e1',2,'f1',2,'f1',
-        1,'c1',1,'c1',1,'d1',1,'e1',1,'f1',1,'f1',2,'g1',
-        1,'c2',1,'b1',1,'a1',1,'g1',2,'f1',2,'a1',4,'f1'
+        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',5,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'c6',1,'b5',1,'a5',1,'g5',1,'a5',1,'g5',2,'f5',
+        1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'c5',1,'c5',1,'d5',1,'e5',1,'f5',1,'f5',2,'g5',
+        1,'c6',1,'b5',1,'a5',1,'g5',2,'f5',2,'a5',4,'f5'
     ];
-
-    const data = tune_to_alphas(tune, nf);
-
+    const nf = ST.create_nf();
+    const data = ST.tune_to_alphas(tune, nf);
+    // sound object as always
     const sound = scene.userData.sound = CS.create_sound({
         // custom sin waveform in which integers of half waveforms are use
         waveform : 'table',
@@ -113,9 +62,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 30
     });
-
     sm.frameMax = sound.frames;
-
 };
 //-------- ----------
 // UPDATE
