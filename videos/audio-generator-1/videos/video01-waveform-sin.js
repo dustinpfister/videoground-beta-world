@@ -17,15 +17,23 @@ VIDEO.init = function(sm, scene, camera){
     // ROCK-A-BYE BABY
     // https://noobnotes.net/rock-a-bye-baby-traditional/
     const tune = [
-        1,'e5',1,'g5',1,'e6',1,'d6', 1,'c6',
-        1,'e5',1,'g5',1,'c6',1,'b5',
-        1,'f5',1,'g5',1,'f6',1,'e6',
-        1,'d6',1,'d6',1,'c6',1,'a5',1,'g5',
+        1,'e5',1,'g5',1,'e6',
+        2,'d6',1,'c6',
+        1,'e5',1,'g5',1,'c6',
+        3,'b5',
+        1,'f5',1,'g5',1,'f6',
+        2,'e6',1,'d6',
+        1,'d6',1,'c6',1,'a5',
+        3,'g5',
 
-        1,'e5',1,'g5',1,'e6',1,'d6',
-        1,'c6',1,'e5',1,'g5',1,'c6',1,'b5',
-        1,'g5',1,'c6',1,'f6',1,'e6',1,'c6',
-        1,'d6',1,'a5',1,'b5',1,'c6'
+        // when       the       bough      // breaks
+           1,'e5',    1,'g5',    1,'e6',    2,'d6',
+        // the        cradle            will      fall
+           1,'c6',    1,'e5',1,'g5',    1,'c6',   2,'b5',
+        // Down       will       come        // baby
+           1,'g5',    1,'c6',    1,'f6',1,   'e6',1,'c6',
+        // cradle            and        all
+           1,'d6',1,'a5',    1,'b5',    3,'c6'
     ];
     const nf = ST.create_nf();
     const data = ST.tune_to_alphas(tune, nf);
@@ -43,7 +51,7 @@ VIDEO.init = function(sm, scene, camera){
             return sampset;
         },
         disp_step: 1,
-        secs: 10
+        secs: 20
     });
 
     sm.frameMax = sound.frames;
