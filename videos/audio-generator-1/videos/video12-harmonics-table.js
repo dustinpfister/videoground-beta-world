@@ -17,7 +17,7 @@ VIDEO.init = function(sm, scene, camera){
     // The Good King Song
     const tune = [
         1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
-        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',5,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
         1,'c6',1,'b5',1,'a5',1,'g5',1,'a5',1,'g5',2,'f5',
         1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
         1,'c5',1,'c5',1,'d5',1,'e5',1,'f5',1,'f5',2,'g5',
@@ -30,33 +30,16 @@ VIDEO.init = function(sm, scene, camera){
         // custom sin waveform in which integers of half waveforms are use
         waveform : 'table',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            let frequency = 0;
-            let a_wave = a_sound;
-            let id = 0;
-            while(id < data.length){
-                const alow = data[id];
-                const ahi = data[id + 1];
-                const freq = data[id + 2];
-                if( a_sound >= alow && a_sound < ahi){
-                    const arange = alow - ahi;
-                    const secs = arange * opt.secs;
-                    //sampset.a_wave = a_sound * opt.secs % 1;
-                    a_wave = (a_sound - alow) / arange;
-                    frequency = freq * secs;
-                    break;
-                }
-                id += 3;
-            }
-
-            const amp_var = Math.sin( Math.PI * 1 * a_wave );
+            const obj = ST.get_tune_sampobj(data, a_sound, opt.secs);
+            const amp_var = Math.sin( Math.PI * 1 * obj.a_wave );
             return {
                 amplitude: 1.5,
-                a_wave : a_wave,
+                a_wave : obj.a_wave,
                 table: [
-                    {  waveform: 'sin', frequency: frequency, amplitude:  1 * amp_var  },
-                    {  waveform: 'sin', frequency: frequency * 2, amplitude: 0.30 * amp_var   },
-                    {  waveform: 'sin', frequency: frequency * 4, amplitude: 0.60 * amp_var   },
-                    {  waveform: 'sin', frequency: frequency * 8, amplitude: 0.10 * amp_var   }
+                    {  waveform: 'sin', frequency: obj.frequency, amplitude:  1 * amp_var  },
+                    {  waveform: 'sin', frequency: obj.frequency * 2, amplitude: 0.30 * amp_var   },
+                    {  waveform: 'sin', frequency: obj.frequency * 4, amplitude: 0.60 * amp_var   },
+                    {  waveform: 'sin', frequency: obj.frequency * 8, amplitude: 0.10 * amp_var   }
                 ]
             };
         },

@@ -15,16 +15,32 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    // The Good King Song
+    const tune = [
+        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'f5',1,'f5',1,'f5',1,'g5',1,'f5',1,'f5',2,'c5',1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'c6',1,'b5',1,'a5',1,'g5',1,'a5',1,'g5',2,'f5',
+        1,'d5',1,'c5',1,'d5',1,'e5',2,'f5',2,'f5',
+        1,'c5',1,'c5',1,'d5',1,'e5',1,'f5',1,'f5',2,'g5',
+        1,'c6',1,'b5',1,'a5',1,'g5',2,'f5',2,'a5',4,'f5'
+    ];
+    const nf = ST.create_nf();
+    const data = ST.tune_to_alphas(tune, nf);
+
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'sin',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound * opt.secs % 1;
-            sampset.amplitude = 0.75;
-            sampset.frequency = 160;
+
+            const obj = ST.get_tune_sampobj(data, a_sound, opt.secs);
+
+            sampset.a_wave = obj.a_wave; //a_sound * opt.secs % 1;
+            sampset.amplitude = Math.sin( Math.PI * obj.a_wave ) * 0.75;
+            sampset.frequency = obj.frequency; //160;
             return sampset;
         },
-        disp_step: 1000,
-        secs: 120
+        disp_step: 1,
+        secs: 5
     });
 
     sm.frameMax = sound.frames;

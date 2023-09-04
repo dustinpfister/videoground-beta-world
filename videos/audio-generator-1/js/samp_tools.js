@@ -82,7 +82,25 @@
             i += 2;
         }
         return data;
-    }
+    };
+    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=0 ) => {
+        let id = 0;
+        const obj = { a_wave: 0, frequency: 0 };
+        while(id < data.length){
+            const alow = data[id];
+            const ahi = data[id + 1];
+            const freq = data[id + 2];
+            if( a_sound >= alow && a_sound < ahi){
+                const arange = alow - ahi;
+                const s = arange * secs;
+                obj.a_wave = (a_sound - alow) / arange;
+                obj.frequency = freq * s;
+                break;
+            }
+            id += 3;
+        }
+        return obj;
+    };
     //-------- ----------
     // SAMP VALUES: Methods to help with sample values
     //-------- ----------
