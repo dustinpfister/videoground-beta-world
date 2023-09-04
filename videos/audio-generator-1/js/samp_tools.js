@@ -9,6 +9,9 @@
     ST.get_wave_alpha_totalsecs = (a_sound = 0, total_secs = 10) => {
         return a_sound * total_secs % 1;
     };
+    //-------- ----------
+    // BASIC TUNE TOOLS
+    //-------- ----------
     // simple tune frequency helper function, can pass an array of 'note index values'
     // a note index of 0 means silence, while 1 to the max value in the array is the range
     // what the range is can be set by a low and high frequency arguments
@@ -25,6 +28,9 @@
     ST.freq_step = (alpha=0, hz_start=1000, hz_step=50,  count_step=10, dir=1 ) => {
         return hz_start + hz_step * Math.floor( alpha *  count_step ) * dir
     };
+    //-------- ----------
+    // ADVANCED TUNE TOOLS
+    //-------- ----------
     //-------- ----------
     // SAMP VALUES: Methods to help with sample values
     //-------- ----------

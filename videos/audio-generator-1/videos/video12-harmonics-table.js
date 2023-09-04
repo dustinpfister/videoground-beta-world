@@ -35,7 +35,7 @@ VIDEO.init = function(sm, scene, camera){
         return count;
     };
 
-    const tune_to_alphas = (tune) => {
+    const tune_to_alphas = (tune, nf) => {
         const beat_ct = get_beat_count(tune);
         let a = 0;
         let i = 0;
@@ -43,8 +43,11 @@ VIDEO.init = function(sm, scene, camera){
         const a_perbeat = 1 / beat_ct;
         const data = [];
         while(i < len ){
-            const d = a_perbeat * tune[i]
-            data.push(a, a + d, tune[i + 1] );
+            const beat_count = tune[i];
+            const note_key = tune[i + 1];
+            const freq = nf[ note_key ];
+            const d = a_perbeat * beat_count;
+            data.push(a, a + d, freq );
             a += d;
             i += 2;
         }
@@ -64,15 +67,15 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const tune = [
-        1,nf.f1,1,nf.f1,1,nf.f1,1,nf.g1,1,nf.f1,1,nf.f1,2,nf.c1,1,nf.d1,1,nf.c1,1,nf.d1,1,nf.e1,2,nf.f1,2,nf.f1,
-        1,nf.f1,1,nf.f1,1,nf.f1,1,nf.g1,1,nf.f1,1,nf.f1,2,nf.c1,1,nf.d1,1,nf.c1,1,nf.d1,1,nf.e1,2,nf.f1,2,nf.f1,
-        1,nf.c2, 1,nf.b1, 1,nf.a1, 1,nf.g1, 1,nf.a1,1,nf.g1, 2,nf.f1,
-        1,nf.d1,1,nf.c1,1,nf.d1,1,nf.e1,2,nf.f1,2,nf.f1,
-        1,nf.c1,1,nf.c1,1,nf.d1,1,nf.e1,1,nf.f1,1,nf.f1,2,nf.g1,
-        1,nf.c2,1,nf.b1,1,nf.a1,1,nf.g1,2,nf.f1,2,nf.a1,4,nf.f1
+        1,'f1',1,'f1',1,'f1',1,'g1',1,'f1',1,'f1',2,'c1',1,'d1',1,'c1',1,'d1',1,'e1',2,'f1',2,'f1',
+        1,'f1',1,'f1',1,'f1',1,'g1',1,'f1',1,'f1',2,'c1',1,'d1',1,'c1',1,'d1',1,'e1',2,'f1',2,'f1',
+        1,'c2',1,'b1',1,'a1',1,'g1',1,'a1',1,'g1',2,'f1',
+        1,'d1',1,'c1',1,'d1',1,'e1',2,'f1',2,'f1',
+        1,'c1',1,'c1',1,'d1',1,'e1',1,'f1',1,'f1',2,'g1',
+        1,'c2',1,'b1',1,'a1',1,'g1',2,'f1',2,'a1',4,'f1'
     ];
 
-    const data = tune_to_alphas(tune);
+    const data = tune_to_alphas(tune, nf);
 
     const sound = scene.userData.sound = CS.create_sound({
         // custom sin waveform in which integers of half waveforms are use

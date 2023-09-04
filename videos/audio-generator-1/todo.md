@@ -3,10 +3,13 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
+* () video12 - use baked in tools now
+* () video1-wavefrom-sin - Make a final demo of this using a tune rather than a single tone
 
 <!-- ----------
   samp_tools.js
 ----------- -->
+* () samp-tools.js : new tune tools based on what I made for video 12
 * () samp-tools.js : clamp - sample values to max and min
 * () samp-tools.js : alphas - I will want to bake in some methods to help with alphas
 * () samp-tools.js : ST.raw\_to\_mode: use ST.get\_normal, and test output
@@ -24,6 +27,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/04/2023 ) video12 : new tune to alphas method that takes a tune and object of notes to use
 * ( done 09/03/2023 ) samp-create : option for setting display step 
 * ( done 08/27/2023 ) video12-harmonics-table-amp : 
 * ( done 08/28/2023 ) samp-create.js : update sin wavefrom to allow for adjustment of count of wavelengths per freq and default to 1 not 2
