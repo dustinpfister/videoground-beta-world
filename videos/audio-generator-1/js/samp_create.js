@@ -105,7 +105,7 @@
             waveform: opt.waveform || 'sin',
             for_sampset: opt.for_sampset || null,
             mode: 'int16', //  'int16' 'bytes',
-            sample_rate: 44100,
+            sample_rate: opt.sample_rate === undefined ? 44100 : opt.sample_rate,
             secs: opt.secs === undefined ? 10 : opt.secs,
             disp_offset: new THREE.Vector2(50, 200),
             disp_size: new THREE.Vector2( 1280 - 100, 200),
@@ -123,6 +123,7 @@
         // sound display array
 
         sound.array_disp = CS.create_samp_points({
+            sound: sound,
             waveform: sound.waveform,
             for_sampset: sound.for_sampset,
             i_size: sound.total_samps,
@@ -142,6 +143,7 @@
     CS.write_frame_samples = (sound, frame = 0, filePath ) => {
         const i_start = Math.floor(sound.samples_per_frame * frame);
         const data_samples =  sound.array_frame = CS.create_samp_points({
+            sound: sound,
             waveform: sound.waveform,
             for_sampset: sound.for_sampset,
             i_size : sound.total_samps,
