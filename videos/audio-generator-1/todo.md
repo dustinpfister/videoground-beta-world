@@ -24,6 +24,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/05/2023 ) samp-tools.js : freq adjust option for get\_tune\_sampobj
 * ( done 09/04/2023 ) samp-tools.js : create nf helper
 * ( done 09/04/2023 ) video12 - use baked in tools now
 * ( done 09/04/2023 ) samp-tools.js : new tune tools based on what I made for video 12
