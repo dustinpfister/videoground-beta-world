@@ -21,13 +21,13 @@ VIDEO.init = function(sm, scene, camera){
 
     // track 1
     const tune_1 = [
-        1,'a6',2,'a6',1,'a5',1,'f5'
+        1,'c6',1,'d6',1,'e6',1,'f6',1,'g6',1,'c7',1,'d7',1,'e7'
     ];
     const data_1 = ST.tune_to_alphas(tune_1, nf);
 
     // track 2
     const tune_2 = [
-        1,'a3',1,'a3',1,'a3',3,'g3'
+        1,'c3',1,'r',1,'c3',1,'r',1,'c3',1,'r',2,'c3' 
     ];
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
@@ -50,13 +50,13 @@ VIDEO.init = function(sm, scene, camera){
                 a_wave : a_sound,
                 table: [
                     {  waveform: 'sin', a_wave: obj_1.a_wave, frequency: obj_1.frequency * opt.secs, amplitude: a_tune1sin * 1.00 },
-                    {  waveform: 'sin', a_wave: obj_2.a_wave, frequency: obj_2.frequency * opt.secs, amplitude:  a_tune2sin * 0.00 }
+                    {  waveform: 'sawtooth', a_wave: obj_2.a_wave, frequency: obj_2.frequency * opt.secs, amplitude: a_tune2sin * 1.00 }
                 ]
             };
 
         },
         disp_step: 1,
-        secs: 1
+        secs: 3
     });
 
     sm.frameMax = sound.frames;

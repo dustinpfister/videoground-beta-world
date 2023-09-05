@@ -41,7 +41,10 @@
     ST.create_nf = () => {
         // 0=C, 1=C#, 2=D, 3=D#, 4=E, 5=F, 6=F#, 7=G, 8=G#, 9=A, 10=A#, 11=B
         const array_notes = 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'.split(',');
-        const nf = {};
+        const nf = {
+           r: 0,     // r for rest
+           rest: 0   // also just rest
+        };
         let scale = 0;
         while(scale < 8){
             let ni = 0;
