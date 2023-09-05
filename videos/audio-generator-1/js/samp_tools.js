@@ -83,7 +83,7 @@
         }
         return data;
     };
-    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=0 ) => {
+    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=true ) => {
         let id = 0;
         const obj = { a_wave: 0, frequency: 0 };
         while(id < data.length){
@@ -93,8 +93,11 @@
             if( a_sound >= alow && a_sound < ahi){
                 const arange = alow - ahi;
                 const s = arange * secs;
-                obj.a_wave = (a_sound - alow) / arange;
-                obj.frequency = freq * s;
+                obj.a_wave = ( a_sound - alow ) / arange;
+                obj.frequency = freq;
+                if(freq_adjust){
+                    obj.frequency = freq * s;
+                }
                 break;
             }
             id += 3;

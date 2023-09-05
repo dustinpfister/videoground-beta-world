@@ -15,55 +15,48 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
+
+    // common objects, settings, ect
     const nf = ST.create_nf();
-    // ROCK-A-BYE BABY
-    // https://noobnotes.net/rock-a-bye-baby-traditional/
-    const tune_rb = [
-        1,'e5',1,'g5',1,'e6',2,'d6',1,'c6',1,'e5',1,'g5',1,'c6',3,'b5',1,'f5',1,'g5',1,'f6',
-        2,'e6',1,'d6',1,'d6',1,'c6',1,'a5',3,'g5',
-        1,'e5',1,'g5',1,'e6',2,'d6',1,'c6',1,'e5',1,'g5',1,'c6',2,'b5',1,'g5',1,'c6',1,'f6',1,'e6',1,'c6',
-        1,'d6',1,'a5',1,'b5',3,'c6'
+
+    // track 1
+    const tune_1 = [
+        1,'a6',2,'a6',1,'a5',1,'f5'
     ];
-    const data_rb = ST.tune_to_alphas(tune_rb, nf);
-    // TUNE for tri wave
-    const tune_tri = [
-1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',
-1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',
-1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',
-1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',
-1,'c5',1,'c5',1,'c5',1,'c5',1,'c5',1,'c5'
-/*
-        1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',
-        1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',
-        1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',
-        1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6',1,'c5',1,'c6'
-*/
+    const data_1 = ST.tune_to_alphas(tune_1, nf);
+
+    // track 2
+    const tune_2 = [
+        1,'a3',1,'a3',1,'a3',3,'g3'
     ];
-    const data_tri = ST.tune_to_alphas(tune_tri, nf);
+    const data_2 = ST.tune_to_alphas(tune_2, nf);
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
         for_sampset: ( samp_set, i, a_sound, opt ) => {
-            // main alpha for table
-            const aw_2 = a_sound * opt.secs % 1;
-            // rb
-            const obj_rb = ST.get_tune_sampobj(data_rb, a_sound, opt.secs);
-            const a_wave_rb_sin = Math.sin(Math.PI * obj_rb.a_wave);
-            // tune tri
-            const obj_tri = ST.get_tune_sampobj(data_tri, a_sound, opt.secs);
-            const a_wave_tri_sin = Math.sin(Math.PI * obj_tri.a_wave);
+
+
+            // track 1
+            const obj_1 = ST.get_tune_sampobj(data_1, a_sound, opt.secs, false);
+            const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
+
+            // track 2
+            const obj_2 = ST.get_tune_sampobj(data_2, a_sound, opt.secs, false);
+            const a_tune2sin = Math.sin(Math.PI * obj_2.a_wave);
+
             // samp obj for table waveform
             return {
                 amplitude: 0.75,
-                a_wave : obj_rb.a_wave,
+                a_wave : a_sound,
                 table: [
-                    {  waveform: 'sin', a_wave: obj_rb.a_wave, frequency: obj_rb.frequency, amplitude: 0.25 },
-                    {  waveform: 'sin', a_wave: obj_tri.a_wave, frequency: obj_tri.frequency, amplitude:  0.25 }
+                    {  waveform: 'sin', a_wave: obj_1.a_wave, frequency: obj_1.frequency * opt.secs, amplitude: a_tune1sin * 1.00 },
+                    {  waveform: 'sin', a_wave: obj_2.a_wave, frequency: obj_2.frequency * opt.secs, amplitude:  a_tune2sin * 0.00 }
                 ]
             };
+
         },
         disp_step: 1,
-        secs: 10
+        secs: 1
     });
 
     sm.frameMax = sound.frames;
