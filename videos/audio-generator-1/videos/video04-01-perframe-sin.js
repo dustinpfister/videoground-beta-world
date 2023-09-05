@@ -22,17 +22,34 @@ VIDEO.init = function(sm, scene, camera){
             const frame = Math.floor(i / spf);
             const a_frame = (i % spf) / spf;
 
-            samp.a_wave = a_frame;
 
-            const a_sound2 = frame / opt.sound.frames;
-            samp.frequency = 2 + Math.round( 8 * a_sound2);
-            samp.amplitude = 0.65;
+            samp.a_wave = 0;
+
+            // squish effect
+            const a_sq = Math.sin( Math.PI * ( a_sound * 4 % 1) );
+            //const a_low = 0.25 * a_sq, a_hi = 1 - 0.25 * a_sq;
+const a_low = 0.25 - 0.25 * a_sq, a_hi = 0.75 + 0.25 * a_sq;
+            let freq = 0;
+            let amp = 0.75;
+            if( a_frame > a_low && a_frame < a_hi ){
+                samp.a_wave = (a_frame - a_low) / ( a_hi - a_low );
+                freq = 7;
+                amp = 0.75;
+            }
+
+            samp.frequency = freq;
+            samp.amplitude = amp;
+
+
+            //const a_sound3 = frame / opt.sound.frames;
+            //samp.frequency = 1; // + Math.round( 8 * a_sound2);
+            //samp.amplitude = 0.65;
 
             return samp;
         },
         //sample_rate: 1000,
         disp_step: 1,
-        secs: 3
+        secs: 1
     });
     sm.frameMax = sound.frames;
 };
