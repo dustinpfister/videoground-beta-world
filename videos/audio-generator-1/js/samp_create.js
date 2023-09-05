@@ -56,7 +56,7 @@
             samp += wf_samp;
             i_wf += 1;
         }
-        return ( samp /= table_count ) * sampeset.amplitude;
+        return ( samp / table_count ) * sampeset.amplitude;
     };
     //-------- ----------
     // HELPERS
