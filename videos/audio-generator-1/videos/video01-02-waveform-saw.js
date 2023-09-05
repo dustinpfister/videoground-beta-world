@@ -18,13 +18,14 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'sawtooth',
         for_sampset: ( samp, i, a_sound, opt ) => {
-            samp.a_wave = a_sound * opt.secs % 1;;
+            samp.a_wave = a_sound; //a_sound * opt.secs % 1;;
             samp.amplitude = 0.75;
-            samp.frequency = 100 + 430 * a_sound;
+            samp.frequency = 100 + 9900 * a_sound;
             return samp;
         },
+        disp_step: 10,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 10
+        secs: 60
     });
 
     sm.frameMax = sound.frames;
