@@ -1,5 +1,5 @@
 /*    video04-02-perframe-squish - for audio-generator-1 project
-          * 
+          * demo where I am 'squishing' a waveform up and down within the frame range
  */
 //-------- ----------
 // SCRIPTS
@@ -32,7 +32,7 @@ VIDEO.init = function(sm, scene, camera){
             if( a_frame > a_low && a_frame < a_hi ){
                 samp.a_wave = (a_frame - a_low) / ( a_hi - a_low );
                 const a_amp = Math.sin( Math.PI *  samp.a_wave );
-                freq = 8 + 2 * Math.round( 8 * i_sq );
+                freq = Math.round( 2 * ( i_sq + 1 ) );
                 amp = 0.75 * a_amp;
             }
 
@@ -43,7 +43,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         //sample_rate: 1000,
         disp_step: 1,
-        secs: 5
+        secs: 20
     });
     sm.frameMax = sound.frames;
 };
