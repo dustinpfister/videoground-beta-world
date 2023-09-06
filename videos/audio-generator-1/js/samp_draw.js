@@ -101,7 +101,7 @@
         if(typeof waveform === 'function'){
             waveform = 'custom';
         }
-        ctx.fillText('wavefrom : ' + waveform + ', bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
+        ctx.fillText('waveform : ' + waveform + ', bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
     };
 
     window.DSD = DSD;
