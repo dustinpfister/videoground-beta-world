@@ -1,5 +1,6 @@
-/*    video04-01-perframe-sin - for audio-generator-1 project
-          * going by alpha values on a frame by fram basis
+/*    video04-01-perframe-aframe - for audio-generator-1 project
+          * going by alpha values on a frame by frame basis
+          * just starting out with the a frame value and adjusting frequency
  */
 //-------- ----------
 // SCRIPTS
@@ -15,7 +16,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'tri',
+        waveform : 'sin',
         for_sampset: ( samp, i, a_sound, opt ) => {
 
             const spf = opt.sound.samples_per_frame;
@@ -23,27 +24,31 @@ VIDEO.init = function(sm, scene, camera){
             const a_frame = (i % spf) / spf;
 
 
-            samp.a_wave = 0;
+
 
             // squish effect
+/*
+            samp.a_wave = 0;
             const a_sq = Math.sin( Math.PI * ( a_sound * 4 % 1) );
             //const a_low = 0.25 * a_sq, a_hi = 1 - 0.25 * a_sq;
-const a_low = 0.25 - 0.25 * a_sq, a_hi = 0.75 + 0.25 * a_sq;
+            const a_low = 0.25 - 0.25 * a_sq, a_hi = 0.75 + 0.25 * a_sq;
             let freq = 0;
             let amp = 0.75;
             if( a_frame > a_low && a_frame < a_hi ){
                 samp.a_wave = (a_frame - a_low) / ( a_hi - a_low );
-                freq = 7;
+                freq = 10;
                 amp = 0.75;
             }
 
             samp.frequency = freq;
             samp.amplitude = amp;
+*/
 
+            samp.a_wave = a_frame;
 
-            //const a_sound3 = frame / opt.sound.frames;
-            //samp.frequency = 1; // + Math.round( 8 * a_sound2);
-            //samp.amplitude = 0.65;
+            const a_sound3 = frame / opt.sound.frames;
+            samp.frequency = 10 + 2 * Math.round( 4 * a_sound3);
+            samp.amplitude = 0.65;
 
             return samp;
         },
