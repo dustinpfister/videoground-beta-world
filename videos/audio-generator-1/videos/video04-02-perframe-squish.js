@@ -1,6 +1,5 @@
-/*    video04-01-perframe-aframe - for audio-generator-1 project
-          * going by alpha values on a frame by frame basis
-          * just starting out with the a frame value and adjusting frequency
+/*    video04-02-perframe-squish - for audio-generator-1 project
+          * 
  */
 //-------- ----------
 // SCRIPTS
@@ -20,19 +19,30 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, opt ) => {
 
             const spf = opt.sound.samples_per_frame;
-            const frame = Math.floor(i / spf);
+            //const frame = Math.floor(i / spf);
             const a_frame = (i % spf) / spf;
 
-            samp.a_wave = a_frame;
+            // squish effect
+            samp.a_wave = 0;
+            const i_sq = Math.floor( opt.secs * a_sound );
+            const a_sq = Math.sin( Math.PI * ( a_sound * opt.secs % 1) );
+            const a_low = 0.25 - 0.25 * a_sq, a_hi = 0.75 + 0.25 * a_sq;
+            let freq = 0;
+            let amp = 0.75;
+            if( a_frame > a_low && a_frame < a_hi ){
+                samp.a_wave = (a_frame - a_low) / ( a_hi - a_low );
+                const a_amp = Math.sin( Math.PI *  samp.a_wave );
+                freq = 8 + 2 * Math.round( 8 * i_sq );
+                amp = 0.75 * a_amp;
+            }
 
-            const a_sound3 = frame / opt.sound.frames;
-            samp.frequency = 10 + 2 * Math.round( 12 * a_sound3);
-            samp.amplitude = 0.65;
+            samp.frequency = freq;
+            samp.amplitude = amp;
 
             return samp;
         },
-        disp_step: 60,
-        getsamp_lossy: DSD.getsamp_lossy_random,
+        //sample_rate: 1000,
+        disp_step: 1,
         secs: 5
     });
     sm.frameMax = sound.frames;
