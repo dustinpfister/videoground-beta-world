@@ -111,7 +111,8 @@
             disp_size: new THREE.Vector2( 1280 - 100, 200),
             array_disp: [],   // data for whole sound
             array_frame: [],  // data for current frame
-            frames: 0
+            frames: 0,
+            ud: {}
         };
         sound.frames = 30 * sound.secs;
         sound.total_samps = sound.sample_rate * sound.secs;

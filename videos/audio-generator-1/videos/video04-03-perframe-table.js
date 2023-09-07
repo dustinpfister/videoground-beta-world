@@ -22,19 +22,24 @@ VIDEO.init = function(sm, scene, camera){
             const frame = Math.floor(i / spf);
             const a_frame = (i % spf) / spf;
 
+            const a_speed = 0.5;
             return {
                 amplitude: 0.75,
                 a_wave : a_frame,
                 table: [
-                    {  waveform: 'sin', frequency: 2, amplitude: 1.00 },
-                    {  waveform: 'sin', frequency: 8 + Math.floor(10 * a_sound), amplitude: 0.25 }
+                    {  waveform: 'sin', frequency: 4, amplitude: 1.40 * a_speed },
+                    {  waveform: 'pulse', frequency: 4 + 4 * a_speed, amplitude: 1.00 * a_speed  }
                 ]
             };
         },
         //sample_rate: 1000,
         disp_step: 1,
-        secs: 1
+        secs: 10
     });
+
+
+    console.log(sound);
+
     sm.frameMax = sound.frames;
 };
 //-------- ----------
