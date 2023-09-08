@@ -14,14 +14,28 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
+
+    const tune = [
+        1,'f2',1,'f2',1,'f2',1,'g2',1,'f2',1,'f2',2,'c2',1,'d2',1,'c2',1,'d2',1,'e2',2,'f2',2,'f2',
+        1,'f2',1,'f2',1,'f2',1,'g2',1,'f2',1,'f2',2,'c2',1,'d2',1,'c2',1,'d2',1,'e2',2,'f2',2,'f2',
+        1,'c3',1,'b2',1,'a2',1,'g2',1,'a2',1,'g2',2,'f2',
+        1,'d2',1,'c2',1,'d2',1,'e2',2,'f2',2,'f2',
+        1,'c2',1,'c2',1,'d2',1,'e2',1,'f2',1,'f2',2,'g2',
+        1,'c3',1,'b2',1,'a2',1,'g2',2,'f2',2,'a2',3,'f2'
+    ];
+    const nf = ST.create_nf();
+    const data = ST.tune_to_alphas(tune, nf);
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'square',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound; //a_sound * opt.secs % 1;
-            sampset.frequency = 80 + (40000 - 80) * a_sound;
-            sampset.amplitude = 0.75;
+            const obj = ST.get_tune_sampobj(data, a_sound, opt.secs);
+            sampset.a_wave = obj.a_wave; //a_sound * opt.secs % 1;
+            sampset.amplitude = Math.sin( Math.PI * obj.a_wave ) * 0.75;
+            sampset.frequency = obj.frequency; //160;
             return sampset;
         },
+        disp_step: 5,
         getsamp_lossy: DSD.getsamp_lossy_random,
         secs: 30
     });

@@ -14,6 +14,7 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'pulse',
         for_sampset: ( samp, i, a_sound, opt ) => {

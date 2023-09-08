@@ -25,7 +25,6 @@ VIDEO.init = function(sm, scene, camera){
         2,'e6',1,'d6',
         1,'d6',1,'c6',1,'a5',
         3,'g5',
-
         // when       the       bough      // breaks
            1,'e5',    1,'g5',    1,'e6',    2,'d6',
         // the        cradle            will      fall
@@ -42,9 +41,7 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'sin',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-
             const obj = ST.get_tune_sampobj(data, a_sound, opt.secs);
-
             sampset.a_wave = obj.a_wave; //a_sound * opt.secs % 1;
             sampset.amplitude = Math.sin( Math.PI * obj.a_wave ) * 0.75;
             sampset.frequency = obj.frequency; //160;
