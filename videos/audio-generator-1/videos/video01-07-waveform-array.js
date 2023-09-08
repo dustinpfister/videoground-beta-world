@@ -16,13 +16,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : (samp, a_wave ) => {
-
-            const a = (a_wave * samp.frequency % 1) * samp.array.length;
-            const i = Math.floor( a * 0.99 );
-            const n = samp.array[ i ];
-            return n * samp.amplitude;
-        },
+        waveform : 'array',
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * opt.secs % 1;
             samp.array = [
