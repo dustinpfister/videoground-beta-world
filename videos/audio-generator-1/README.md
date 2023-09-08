@@ -61,8 +61,35 @@ https://www.youtube.com/watch?v=0Rfushlee0U&pp=ygUJaGFybW9uaWNz
 Again at this time the goal here is to explore all sorts of ways to create sample data, such as by way of a frame by frame basis. What I mean by that is if we are taking about 30 FPS video and say a 44.1 kHz 16 bit sample rate then that should be 1470 samples per second \( or 2940 bytes per second if we are dealing with mono 16bit sample depth \). So then one way to work out the alpha \( 0 - 1 \) values to go by is to do so on a frame by frame basis. That is then what this set of videos is about then.
 
 
-### Harmonics and Standing waves
+## Audacity Sample Data and html sample data extorts
 
+Audacity has an option to export sample data in an html format. I can then open up the javaScript console and use a litle javaScritp code to get a string value of sample data.
+
+```js
+[].map.call(document.querySelectorAll('tr'), (tr)=>{
+    const a = ( parseFloat( tr.children[2].innerText ) + 1) / 2;
+    return parseFloat( a.toFixed(2) )
+}).slice(1, 1000).join(', ');
+```
+
+If We are just talking around 100 samples or so it will not take to long to do a little editing and then end up with a nice neat little array like this.
+
+```
+const data = [
+  0.48, 0.59, 0.37, 0.57, 0.46, 0.59, 0.51, 0.46, 0.55, 0.47,
+  0.52, 0.50, 0.46, 0.59, 0.36, 0.53, 0.63, 0.34, 0.56, 0.48,
+  0.49, 0.65, 0.27, 0.52, 0.71, 0.38, 0.49, 0.48, 0.54, 0.60,
+  0.30, 0.50, 0.72, 0.38, 0.47, 0.52, 0.52, 0.54, 0.42, 0.53,
+  0.59, 0.38, 0.49, 0.62, 0.47, 0.47, 0.46, 0.50, 0.56, 0.53,
+  0.49, 0.48, 0.46, 0.56, 0.53, 0.46, 0.52, 0.48, 0.46, 0.61,
+  0.39, 0.64, 0.30, 0.63, 0.43, 0.59, 0.48, 0.35, 0.73, 0.24,
+  0.86, 0.11, 0.81, 0.25, 0.69, 0.42, 0.42, 0.69, 0.22, 0.88,
+  0.12, 0.78, 0.31, 0.61, 0.50, 0.39, 0.65, 0.34, 0.67, 0.37,
+  0.57, 0.44, 0.53, 0.50, 0.47, 0.52, 0.49, 0.51, 0.49, 0.52
+];
+```
+
+This can then be used with the array waveform to get something interesting maybe?
 
 
 ## waveform functions, for_sampset functions, and wave alphas

@@ -1,5 +1,5 @@
 /*    video01-04-waveform-pulse - for audio-generator-1 project
-          * pulse wavefrom method
+          * pulse waveform method
  */
 //-------- ----------
 // SCRIPTS
@@ -20,13 +20,13 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * opt.secs % 1;
             samp.duty = 0.05 + 0.95 * a_sound;
-            samp.frequency = 80;
+            samp.frequency = 50;
             samp.amplitude = 0.50 
             return samp;
         },
-        disp_step: 128,
+        disp_step: 2000,
         getsamp_lossy: DSD.getsamp_lossy_pingpong,
-        secs: 10
+        secs: 30
     });
     sm.frameMax = sound.frames;
 };
