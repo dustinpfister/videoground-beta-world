@@ -16,11 +16,21 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // pic samp data
+    // samp data for array waveform
     const data_samp =  [
+    0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470,
 
- 0.47, 0.48, 0.50, 0.51, 0.515, 0.523, 0.525, 0.527, 0.53, 0.53, 0.52, 0.50, 0.49, 0.49, 0.48, 0.47, 0.47, 0.47,   
+    0.470, 0.475, 0.480, 0.490, 0.500, 0.505, 0.515, 0.523, 0.525, 0.527, 
+    0.530, 0.531, 0.532, 0.530, 0.520, 0.495, 0.485, 0.480, 0.480, 0.475,
+    0.490, 0.480, 0.473, 0.472, 0.478, 0.472, 0.471, 0.470, 0.470, 0.470,
 
+    0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470,
+    0.500, 0.500, 0.500, 0.500, 0.520, 0.520, 0.520, 0.520, 0.500, 0.500,
+    0.500, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470
+
+    //0.500, 0.490, 0.486, 0.471, 0.473, 0.471, 0.471, 0.470, 0.472, 0.482,
+    //0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470,
+    //0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470, 0.470
     ].map( (n) => {
         return ( n * 2 - 1 ) * 14;
     });
@@ -30,14 +40,15 @@ VIDEO.init = function(sm, scene, camera){
         waveform : 'array',
         for_sampset: ( samp, i, a_sound, opt ) => {
 
+
             const spf = opt.sound.samples_per_frame;
             const frame = Math.floor(i / spf);
             const a_frame = (i % spf) / spf;
 
-            samp.a_wave = a_frame;
+            samp.a_wave = a_frame; //obj.a_wave; //a_frame;
             samp.array = data_samp;
             samp.amplitude = 1;
-            samp.frequency = 4; //Math.floor( Math.pow(2, 4 * a_sound) );
+            samp.frequency = Math.floor( Math.pow(2, 8 * a_sound) );
 
             //samp.a_wave = a_sound;
             //samp.frequency = 1;
@@ -45,8 +56,8 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
 
         },
-        disp_step: 1,
-        secs: 1
+        disp_step: 5,
+        secs: 30
     });
 
 
