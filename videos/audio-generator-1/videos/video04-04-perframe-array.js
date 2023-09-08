@@ -16,13 +16,15 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // 8000 samps from an audio file of macho man randy savage
-    // saying 'Oh Yeah!' I kid you not. Why you might ask? I have no words.
+    // pic samp data
     const data_samp =  [
-        0,1,0,1,0,1
+
+ 0.47, 0.48, 0.50, 0.51, 0.515, 0.523, 0.525, 0.527, 0.53, 0.53, 0.52, 0.50, 0.49, 0.49, 0.48, 0.47, 0.47, 0.47,   
+
     ].map( (n) => {
-        return ( n * 2 - 1 ) * 1;
+        return ( n * 2 - 1 ) * 14;
     });
+
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
@@ -35,16 +37,16 @@ VIDEO.init = function(sm, scene, camera){
             samp.a_wave = a_frame;
             samp.array = data_samp;
             samp.amplitude = 1;
-            samp.frequency = 1; //Math.floor( Math.pow(2, 4 * a_sound) );
+            samp.frequency = 4; //Math.floor( Math.pow(2, 4 * a_sound) );
 
-            samp.a_wave = a_sound;
-            samp.frequency = 1;
+            //samp.a_wave = a_sound;
+            //samp.frequency = 1;
 
             return samp;
 
         },
         disp_step: 1,
-        secs: 0.5
+        secs: 1
     });
 
 
