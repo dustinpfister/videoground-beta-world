@@ -15,7 +15,20 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const tune1 = [20, 40, 20, 40, 60, 80, 20, 20]
+    const tune1 = [
+       10, 20, 30, 40, 50, 60, 70, 80, 80,
+       20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 80, 80, 80, 80,
+       20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 40, 40, 40, 40, 
+
+       20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 80, 80, 80, 80,
+
+       20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 40, 40, 40, 40, 40, 40, 40, 40, 80, 80, 80, 80, 80, 80, 80, 80,
+       20, 20, 80, 80, 20, 20, 80, 80, 20, 20, 80, 80, 40, 40, 40, 40, 60, 60, 60, 60, 80, 80, 60, 60, 80, 80,
+
+       10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 20, 20,
+
+       80, 70, 60, 50, 40, 30, 20, 10, 10,
+    ];
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : (samp, a_wave ) => {
@@ -46,8 +59,8 @@ VIDEO.init = function(sm, scene, camera){
             samp.frequency = tune1[ Math.floor( tune1.length * a_sound) ];  //20 + 80 * a_sound;
             return samp;
         },
-       disp_step: 10,
-       secs: 5
+       disp_step: 100,
+       secs: 20
     });
 
     sm.frameMax = sound.frames;
