@@ -16,10 +16,32 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'table',
+        waveform : (samp, a_wave ) => {
+
+            //const b = 2 * Math.random() * samp.amplitude;
+            //return b - samp.amplitude;;
+
+            samp.array = [];
+            let i2 = 0;
+            while(i2 < 20){
+                //const n = -1 + 2 * Math.random();
+                //const n = -1 + 2 * THREE.MathUtils.seededRandom( Math.floor( a_wave * 20 ) );
+
+                const n = -1 + 2 * THREE.MathUtils.seededRandom( i2 );
+
+                samp.array.push(n);
+                i2 += 1;
+            }
+
+            const a = (a_wave * samp.frequency % 1) * samp.array.length;
+            const i = Math.floor( a * 0.99 );
+            const n = samp.array[ i ];
+            return n * samp.amplitude;
+        },
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * opt.secs % 1;
-            samp.amplitude = a_sound;
+            samp.amplitude = 0.75;
+            samp.frequency = 20 + 80 * a_sound;
             return samp;
         },
        disp_step: 1,
