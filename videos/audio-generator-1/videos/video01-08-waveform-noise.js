@@ -20,8 +20,9 @@ VIDEO.init = function(sm, scene, camera){
 
             samp.array = [];
             let i2 = 0;
-            while(i2 < 10){
-                const n = -1 + 2 * Math.random();
+            while(i2 < 3){
+                //const n = -1 + 2 * Math.random();
+                const n = -1 + 2 * THREE.MathUtils.seededRandom( Math.floor( a_wave * 1000 ) );
                 samp.array.push(n);
                 i2 += 1;
             }
@@ -33,11 +34,12 @@ VIDEO.init = function(sm, scene, camera){
         },
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * opt.secs % 1;
-            samp.amplitude = 0.75 - 0.5 * a_sound;
-            samp.frequency = 119;
+            samp.amplitude = 0.75;
+            samp.frequency = 1;
             return samp;
         },
-        secs: 10
+       disp_step: 1,
+       secs: 1
     });
 
     sm.frameMax = sound.frames;
