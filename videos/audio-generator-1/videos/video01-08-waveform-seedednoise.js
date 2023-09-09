@@ -15,6 +15,8 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    const tune1 = [20, 40, 20, 40, 60, 80, 20, 20]
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : (samp, a_wave ) => {
 
@@ -23,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
 
             samp.array = [];
             let i2 = 0;
-            while(i2 < 20){
+            while(i2 < 40){
                 //const n = -1 + 2 * Math.random();
                 //const n = -1 + 2 * THREE.MathUtils.seededRandom( Math.floor( a_wave * 20 ) );
 
@@ -41,11 +43,11 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * opt.secs % 1;
             samp.amplitude = 0.75;
-            samp.frequency = 20 + 80 * a_sound;
+            samp.frequency = tune1[ Math.floor( tune1.length * a_sound) ];  //20 + 80 * a_sound;
             return samp;
         },
-       disp_step: 1,
-       secs: 1
+       disp_step: 10,
+       secs: 5
     });
 
     sm.frameMax = sound.frames;
