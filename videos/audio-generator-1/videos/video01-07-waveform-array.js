@@ -24,9 +24,10 @@ VIDEO.init = function(sm, scene, camera){
                 -0.42,  0.47, -0.32,  0.28, -0.13,  0.11, -0.05,  0.05,  0.00,  0.00,
                 -0.00,  0.00, -0.01,  0.05, -0.20,  0.13, -0.10,  0.10, -0.20,  0.50];
             samp.amplitude = 0.75 - 0.5 * a_sound;
-            samp.frequency = 119;
+            samp.frequency = Math.pow(2, 8 * a_sound);
             return samp;
         },
+        disp_step: 1,
         secs: 10
     });
 

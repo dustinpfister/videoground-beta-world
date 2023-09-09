@@ -18,9 +18,8 @@ VIDEO.init = function(sm, scene, camera){
     const sound = scene.userData.sound = CS.create_sound({
         waveform : (samp, a_wave ) => {
 
-            const b = 2 * Math.random() * samp.amplitude;
-
-            return b - samp.amplitude;;
+            //const b = 2 * Math.random() * samp.amplitude;
+            //return b - samp.amplitude;;
 
             samp.array = [];
             let i2 = 0;
@@ -31,7 +30,7 @@ VIDEO.init = function(sm, scene, camera){
                 i2 += 1;
             }
 
-            const a = (a_wave * samp.frequency % 1) * samp.array.length;
+            const a = a_wave * samp.array.length;
             const i = Math.floor( a * 0.99 );
             const n = samp.array[ i ];
             return n * samp.amplitude;
@@ -39,7 +38,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * opt.secs % 1;
             samp.amplitude = 0.75;
-            samp.frequency = 0.5;
+            samp.frequency = 10;
             return samp;
         },
        disp_step: 1,
