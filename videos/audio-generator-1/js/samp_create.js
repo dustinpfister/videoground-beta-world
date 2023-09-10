@@ -82,7 +82,9 @@
     //-------- ----------
     // PUPLIC API
     //-------- ----------
-    const CS = {};
+    const CS = {
+        WAVE_FORM_FUNCTIONS: WAVE_FORM_FUNCTIONS
+    };
     // create an array of sample values
     CS.create_samp_points = ( opt = {} ) => {
         const i_size = opt.i_size === undefined ? 20 : opt.i_size;
