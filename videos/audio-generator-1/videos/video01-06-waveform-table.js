@@ -24,12 +24,13 @@ VIDEO.init = function(sm, scene, camera){
                 table: [
                     {  waveform: 'sin', frequency: 320, amplitude: 0.25 },
                     {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  80, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 1000, amplitude: 0.25 }
+                    {  waveform: 'sin', frequency:  80, amplitude: 0.10 },
+                    {  waveform: 'noise', amplitude: 0.25 }
                 ]
             };
         },
-        secs: 10
+        disp_step: 1,
+        secs: 1
     });
 
     sm.frameMax = sound.frames;
@@ -38,7 +39,7 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
-    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath);
+    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
 };
 //-------- ----------
 // RENDER
