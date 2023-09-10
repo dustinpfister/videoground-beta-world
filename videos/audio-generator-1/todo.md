@@ -3,7 +3,7 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-* () video01-05-wavefrom-tri - publist final video
+
 * () video01-06-wavefrom-table - publist final video
 * () video01-07-wavefrom-array - publist final video
 * () video01-08-wavefrom-noise - publist final video
@@ -28,6 +28,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/10/2023 ) video01-05-wavefrom-tri - publist final video
 * ( done 09/05/2023 ) samp-tools.js : freq adjust option for get\_tune\_sampobj
 * ( done 09/04/2023 ) samp-tools.js : create nf helper
 * ( done 09/04/2023 ) video12 - use baked in tools now
