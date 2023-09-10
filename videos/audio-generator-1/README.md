@@ -105,7 +105,13 @@ https://ccrma.stanford.edu/courses/422-winter-2023/index.htm
 >This class integrates digital signal processing, psychoacoustics, rate/distortion optimization, and programming to provide the basis for understanding and building perceptual audio coding systems. We review the basic principles underlying all the core components of a perceptual audio codec and study the design choices applied in state-of-the-art audio coding schemes, e.g., AC-3 (Dolby Digital), Enhanced AC-3, AC-4; MPEG Layers I, II, and III (MP3); MPEG AAC; and MPEG-H. In-class demonstrations will allow students to hear the quality of state-of-the-art implementations at varying data rates and, as a final project, you will program your own simple perceptual audio coder.
 >
 
-Anyway I miht try this out as a way to render wav files
+Anyway I will want to try this out as a way to render wav files
+
+### What a frame is with wave files
+
+http://sporadic.stanford.edu/reference/misc/sage/media/wav.html
+
+A frame is not what you think it is compared to video. It is the sample rate * num of channels and then the total frame cound would be that times the number of seconds.
 
 ## Video files working on top of the tools
 

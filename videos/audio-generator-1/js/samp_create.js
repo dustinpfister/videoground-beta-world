@@ -151,8 +151,56 @@
         sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
         return sound;
     };
-    // get frame samples
-    CS.write_frame_samples = (sound, frame = 0, filePath ) => {
+
+
+// Build a Wave file buffer
+// base on what I found here
+//https://gist.github.com/also/900023
+//https://ccrma.stanford.edu/courses/422-winter-2023/index.htm
+CS.buildWaveHeader = (opts) => {
+    var numFrames = opts.numFrames || 0;     // default to 0 frames
+    var numChannels = opts.numChannels || 1; // default to 'mono' (dp edit)
+    var sampleRate = opts.sampleRate || 44100;
+    var bytesPerSample = opts.bytesPerSample || 2;
+    var blockAlign = numChannels * bytesPerSample;
+    var byteRate = sampleRate * blockAlign;
+    var dataSize = numFrames * blockAlign;
+    var buffer = new ArrayBuffer(44);
+    var dv = new DataView(buffer);
+    var p = 0;
+    function writeString(s) {
+        for (var i = 0; i < s.length; i++) {
+            dv.setUint8(p + i, s.charCodeAt(i));
+        }
+        p += s.length;
+    }
+    function writeUint32(d) {
+        dv.setUint32(p, d, true);
+        p += 4;
+    }
+    function writeUint16(d) {
+        dv.setUint16(p, d, true);
+        p += 2;
+    }
+    writeString('RIFF');              // ChunkID
+    writeUint32(dataSize + 36);       // ChunkSize
+    writeString('WAVE');              // Format
+    writeString('fmt ');              // Subchunk1ID
+    writeUint32(16);                  // Subchunk1Size
+    writeUint16(1);                   // AudioFormat
+    writeUint16(numChannels);         // NumChannels
+    writeUint32(sampleRate);          // SampleRate
+    writeUint32(byteRate);            // ByteRate
+    writeUint16(blockAlign);          // BlockAlign
+    writeUint16(bytesPerSample * 8);  // BitsPerSample
+    writeString('data');              // Subchunk2ID
+    writeUint32(dataSize);            // Subchunk2Size
+    return buffer;
+};
+
+
+    // write frame samples
+    CS.write_frame_samples = (sound, frame = 0, filePath, as_wave = false ) => {
         const i_start = Math.floor(sound.samples_per_frame * frame);
         const data_samples =  sound.array_frame = CS.create_samp_points({
             sound: sound,
@@ -166,11 +214,37 @@
         });
         // write data_samples array
         const clear = frame === 0 ? true: false;
-        const uri = videoAPI.pathJoin(filePath, 'sampdata');
+        const fn = as_wave ? 'video.wav' : 'sampdata';
+        const uri = videoAPI.pathJoin(filePath, fn);
+
+//!!! This will need to be adress in another way, just want to get this to work for now.
+if( frame === 0 && as_wave && sound.mode === 'int16' ){
+
+    // what a frame is:
+    // http://sporadic.stanford.edu/reference/misc/sage/media/wav.html
+    const numChannels = 1;
+    const array_header = CS.buildWaveHeader({
+        numFrames: sound.sample_rate * numChannels * sound.secs, // a frame is not what you think it is. see the link on this ^
+        numChannels: numChannels,        // going with mono alone for audo-generator-1 at least
+        sampleRate: sound.sample_rate,   // 44100 is the defualt anyway so just making this exsplisit
+        bytesPerSample: 2                // set on 16bit for this project at least
+    });
+
+    return videoAPI.write(uri, new Int16Array( array_header ), true )
+    .then(()=>{
+        return videoAPI.write(uri, new Int16Array(data_samples), false );
+    });
+    
+}else{
+
+
         if( sound.mode === 'int16'){
             return videoAPI.write(uri, new Int16Array(data_samples), clear );
         }
         return videoAPI.write(uri, new Uint8Array(data_samples), clear );
+
+}
+
     };
     // append public api to window
     window.CS = CS;
