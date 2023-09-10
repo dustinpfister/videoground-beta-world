@@ -20,11 +20,11 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( sampset, i, a_sound, opt ) => {
             sampset.a_wave = a_sound;
             sampset.amplitude = 0.65;
-            sampset.frequency = 120;
+            sampset.frequency = Math.pow(2, Math.floor( 7 + 7 * a_sound ))
             return sampset;
         },
         disp_step: 1,
-        secs: 1
+        secs: 3
     });
 
     sm.frameMax = sound.frames;
