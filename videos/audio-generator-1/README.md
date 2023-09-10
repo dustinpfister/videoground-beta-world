@@ -38,7 +38,76 @@ This stack overflow post brings up a lot of good points to keep in mind if I aim
 
 https://stackoverflow.com/questions/11677246/drawing-zoomable-audio-waveform-timeline-in-javascript
 
-### Video files working on top of the tools
+### Export as wave file?
+
+After playing around with aplay and wav files I have found that all I might need to do to render a wav file is to just add a header to the raw data. I will of course need to set the appropriate values for things like sample size, file size and so forth in the header, but that should be about it. So then I just need to find or author a way to create this kind of header, and when it comes to this I am sure that there is all ready a wealth of code on the Internet to do so.
+
+AFter googleing "javascript wave file header" I found this:
+
+https://gist.github.com/also/900023	
+
+```js
+// https://ccrma.stanford.edu/courses/422/projects/WaveFormat/
+function buildWaveHeader(opts) {
+    var numFrames = opts.numFrames;
+    var numChannels = opts.numChannels || 2;
+    var sampleRate = opts.sampleRate || 44100;
+    var bytesPerSample = opts.bytesPerSample || 2;
+    var blockAlign = numChannels * bytesPerSample;
+    var byteRate = sampleRate * blockAlign;
+    var dataSize = numFrames * blockAlign;
+    var buffer = new ArrayBuffer(44);
+    var dv = new DataView(buffer);
+    var p = 0;
+    function writeString(s) {
+        for (var i = 0; i < s.length; i++) {
+            dv.setUint8(p + i, s.charCodeAt(i));
+        }
+        p += s.length;
+    }
+    function writeUint32(d) {
+        dv.setUint32(p, d, true);
+        p += 4;
+    }
+    function writeUint16(d) {
+        dv.setUint16(p, d, true);
+        p += 2;
+    }
+    writeString('RIFF');              // ChunkID
+    writeUint32(dataSize + 36);       // ChunkSize
+    writeString('WAVE');              // Format
+    writeString('fmt ');              // Subchunk1ID
+    writeUint32(16);                  // Subchunk1Size
+    writeUint16(1);                   // AudioFormat
+    writeUint16(numChannels);         // NumChannels
+    writeUint32(sampleRate);          // SampleRate
+    writeUint32(byteRate);            // ByteRate
+    writeUint16(blockAlign);          // BlockAlign
+    writeUint16(bytesPerSample * 8);  // BitsPerSample
+    writeString('data');              // Subchunk2ID
+    writeUint32(dataSize);            // Subchunk2Size
+    return buffer;
+}
+```
+
+The link up top results in a 404, but back tracking I found this:
+
+https://ccrma.stanford.edu/courses/422-winter-2023/index.htm
+
+>
+>Perceptual Audio Coding
+>Music 422, Winter 2023
+>Instructor: Marina Bosi
+>
+>Course Description
+>Did you ever wonder how your MP3 files squeeze so much sound into such a small size file? What the difference is between MP3 and AAC? Or which multichannel audio coding format is best for your application? The need for significant reduction in data rate for wide-band digital audio signal transmission and storage has led to the development of psychoacoustics-based data compression techniques. By using this approach we can exploit the limitations of human hearing to remove inaudible components of audio signals. The degree of bit rate reduction achievable without sacrificing perceived quality using these methods greatly exceeds that possible using lossless techniques alone. Perceptual audio coders are currently used in many applications including digital radio and television, digital sound on film, multimedia/internet audio, mobile devices.
+>
+>This class integrates digital signal processing, psychoacoustics, rate/distortion optimization, and programming to provide the basis for understanding and building perceptual audio coding systems. We review the basic principles underlying all the core components of a perceptual audio codec and study the design choices applied in state-of-the-art audio coding schemes, e.g., AC-3 (Dolby Digital), Enhanced AC-3, AC-4; MPEG Layers I, II, and III (MP3); MPEG AAC; and MPEG-H. In-class demonstrations will allow students to hear the quality of state-of-the-art implementations at varying data rates and, as a final project, you will program your own simple perceptual audio coder.
+>
+
+Anyway I miht try this out as a way to render wav files
+
+## Video files working on top of the tools
 
 On top of making the basic tools I will also want to make a number of video files in which I am testing out the tools. These will include videos in which I am just testing out a kind of waveform such as sine wave, or a kind of use case on top of everything such as a kind of timeline system that can be used to create music.
 
