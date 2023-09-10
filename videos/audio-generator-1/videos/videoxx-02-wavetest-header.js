@@ -1,5 +1,5 @@
-/*    video01-01-waveform-sin - for audio-generator-1 project
-          * Just using the sin wavefrom
+/*    videoxx-02-wavetest-header - for audio-generator-1 project
+          * testing out a new feature where I can just dirrecly create a wav file rather than raw sample data
  */
 //-------- ----------
 // SCRIPTS
