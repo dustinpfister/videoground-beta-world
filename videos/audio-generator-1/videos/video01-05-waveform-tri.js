@@ -18,20 +18,15 @@ VIDEO.init = function(sm, scene, camera){
         0,   0,  0,  0,
         3,   6,  3,  12,
         0,   0,  0,  0,
-        3,   6,  3,  12
+        6,6,6,6,6,6,6,
+        6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
     ];
     const data_freq = [
         40, 80, 160, 320,
         40, 80, 160, 320,
         40, 80, 160, 320,
-        40, 80, 160, 320
-    ];
-    const data_amp = [
-        0.75,0.75,0.75,0.75,0.75, 0.75,0.75,0.75,0.75,0.75, 0.75,0.75,0.75,0.75,0.75, 0.75,0.75,0.75,0.75,0.75,
-        0.75,0.75,0.75,0.75,0.75, 0.75,0.75,0.75,0.75,0.75, 0.75,0.75,0.75,0.75,0.75, 0.75,0.75,0.75,0.75,0.75,
-
-        0.75,0.50,0.25,0.50,0.75, 0.75,0.50,0.25,0.50,0.75, 0.75,0.50,0.25,0.50,0.75, 0.75,0.50,0.25,0.50,0.75, 
-        0.75,0.50,0.25,0.50,0.75, 0.75,0.50,0.25,0.50,0.75, 0.75,0.50,0.25,0.50,0.75, 0.75,0.50,0.25,0.50,0.75
+        40, 80, 160, 320, 320, 320, 320,
+        300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20, 0, 0
     ];
 
     sm.renderer.setClearColor(0x000000, 0.25);
@@ -41,12 +36,12 @@ VIDEO.init = function(sm, scene, camera){
             sampset.a_wave = a_sound * opt.secs % 1;
             sampset.step_count = data_step[ Math.floor(data_step.length * a_sound ) ];
             sampset.frequency = data_freq[ Math.floor(data_freq.length * a_sound ) ];
-            sampset.amplitude = data_amp[ Math.floor(data_amp.length * a_sound ) ];
+            sampset.amplitude = 0.75;
             return sampset;
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 10
+        secs: 20
     });
     sm.frameMax = sound.frames;
 };
