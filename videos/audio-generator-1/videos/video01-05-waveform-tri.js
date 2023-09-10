@@ -16,27 +16,29 @@ VIDEO.init = function(sm, scene, camera){
 
     const data_step = [
         0,   0,  0,  0,
-        3,   6,  3,  12,
+        6,   8,  10,  12,
         0,   0,  0,  0,
         6,6,6,6,6,6,6,
         6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
     ];
     const data_freq = [
-        40, 80, 160, 320,
-        40, 80, 160, 320,
-        40, 80, 160, 320,
-        40, 80, 160, 320, 320, 320, 320,
-        300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20, 0, 0
+        60, 80, 100, 120,
+        60, 80, 100, 120,
+        60, 80, 100, 120,
+        60, 80, 100, 120, 120, 120, 120,
+        200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50, 40
     ];
 
     sm.renderer.setClearColor(0x000000, 0.25);
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'tri',
         for_sampset: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound * opt.secs % 1;
+            //sampset.a_wave = a_sound * opt.secs % 1;
+            sampset.a_wave = a_sound * data_freq.length % 1;
+
             sampset.step_count = data_step[ Math.floor(data_step.length * a_sound ) ];
             sampset.frequency = data_freq[ Math.floor(data_freq.length * a_sound ) ];
-            sampset.amplitude = 0.75;
+            sampset.amplitude = 0.50;
             return sampset;
         },
         disp_step: 100,
