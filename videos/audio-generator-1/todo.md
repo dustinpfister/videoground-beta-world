@@ -3,7 +3,11 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-* () video1-wavefrom-sin - Make a final demo of this using a tune rather than a single tone
+* () video01-05-wavefrom-tri - publist final video
+* () video01-06-wavefrom-table - publist final video
+* () video01-07-wavefrom-array - publist final video
+* () video01-08-wavefrom-noise - publist final video
+* () video01-09-wavefrom-seedednoise - publist final video
 <!-- ----------
   samp_tools.js
 ----------- -->
