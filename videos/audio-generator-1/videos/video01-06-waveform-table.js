@@ -17,9 +17,9 @@ VIDEO.init = function(sm, scene, camera){
 
     const freq_base_tune = [
         100, 200, 100, 200, 100, 200, 100, 200, 100, 200, 100, 200,
-        400, 200, 100, 400, 200, 100,
+        400, 400, 200, 200, 400, 400, 200, 200,
         100, 200, 100, 200, 100, 200, 100, 200, 100, 200, 100, 200,
-        400, 200, 100, 400, 200, 100
+        400, 400, 200, 200, 400, 400, 200, 200,
     ];
 
 
@@ -32,19 +32,23 @@ VIDEO.init = function(sm, scene, camera){
             const a_freq_base = Math.sin( Math.PI * ( a_sound * freq_base_tune.length % 1));
             const freq_base = freq_base_tune[ Math.floor( freq_base_tune.length * a_sound)  ];
 
+
+            const a_sin = Math.sin( Math.PI * ( 10 * a_sound % 1 ) );
+
             return {
-                amplitude: 0.75,
+                amplitude: 1.00,
                 frequency: 1,
                 a_wave : a_wave,
                 table: [
-                    //{  waveform: 'sin', frequency: 320, amplitude: 0.25 },
-                    //{  waveform: 'sin', frequency: 160, amplitude: 0.25 },
-                    {  waveform: 'tri', frequency:  freq_base, amplitude: a_freq_base }
+                    {  waveform: 'sin', frequency: 320, amplitude: a_sin },
+                    {  waveform: 'sin', frequency: 160, amplitude: a_sin },
+                    {  waveform: 'tri', frequency:  freq_base, amplitude: a_freq_base },
+                    {  waveform: 'noise', amplitude: a_sound }
 
                 ]
             };
         },
-        disp_step: 10,
+        disp_step: 100,
         secs: 10
     });
 
