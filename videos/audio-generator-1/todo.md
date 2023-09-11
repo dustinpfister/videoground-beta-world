@@ -3,9 +3,7 @@
 <!-- ----------
   VIDEO FILES
 ----------- -->
-* () video01-07-wavefrom-array - publist final video
-* () video01-08-wavefrom-noise - publist final video
-* () video01-09-wavefrom-seedednoise - publist final video
+
 <!-- ----------
   samp_tools.js
 ----------- -->
@@ -26,6 +24,9 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/11/2023 ) video01-07-wavefrom-array - publist final video
+* ( done 09/11/2023 ) video01-08-wavefrom-noise - publist final video
+* ( done 09/11/2023 ) video01-09-wavefrom-seedednoise - publist final video
 * ( done 09/11/2023 ) video01-06-wavefrom-table - publist final video
 * ( done 09/10/2023 ) video01-05-wavefrom-tri - publist final video
 * ( done 09/05/2023 ) samp-tools.js : freq adjust option for get\_tune\_sampobj
