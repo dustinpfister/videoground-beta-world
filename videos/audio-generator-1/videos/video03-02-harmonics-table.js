@@ -51,7 +51,7 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
-    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath);
+    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
 };
 //-------- ----------
 // RENDER
