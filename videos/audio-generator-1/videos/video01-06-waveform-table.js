@@ -15,22 +15,37 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    const freq_base_tune = [
+        100, 200, 100, 200, 100, 200, 100, 200, 100, 200, 100, 200,
+        400, 200, 100, 400, 200, 100,
+        100, 200, 100, 200, 100, 200, 100, 200, 100, 200, 100, 200,
+        400, 200, 100, 400, 200, 100
+    ];
+
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'table',
         for_sampset: ( samp_set, i, a_sound, opt ) => {
+
+            const a_wave = a_sound * opt.secs % 1;
+
+            const a_freq_base = Math.sin( Math.PI * ( a_sound * freq_base_tune.length % 1));
+            const freq_base = freq_base_tune[ Math.floor( freq_base_tune.length * a_sound)  ];
+
             return {
-                amplitude: 4,
-                a_wave : a_sound * opt.secs % 1,
+                amplitude: 0.75,
+                frequency: 1,
+                a_wave : a_wave,
                 table: [
-                    {  waveform: 'sin', frequency: 320, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency: 160, amplitude: 0.25 },
-                    {  waveform: 'sin', frequency:  80, amplitude: 0.10 },
-                    {  waveform: 'noise', amplitude: 0.25 }
+                    //{  waveform: 'sin', frequency: 320, amplitude: 0.25 },
+                    //{  waveform: 'sin', frequency: 160, amplitude: 0.25 },
+                    {  waveform: 'tri', frequency:  freq_base, amplitude: a_freq_base }
+
                 ]
             };
         },
-        disp_step: 1,
-        secs: 1
+        disp_step: 10,
+        secs: 10
     });
 
     sm.frameMax = sound.frames;

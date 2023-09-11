@@ -22,6 +22,8 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     const sound = scene.userData.sound = CS.create_sound({
+        waveform : 'table',
+/*
         waveform : (samp, a_wave ) => {
             const table_count = samp.table.length;
             const freq = samp.frequency === undefined ? 1 : samp.frequency;
@@ -35,6 +37,7 @@ VIDEO.init = function(sm, scene, camera){
             }
             return ( s / table_count ) * samp.amplitude;
         },
+*/
         for_sampset: ( samp, i, a_sound, opt ) => {
 
             const spf = opt.sound.samples_per_frame;
@@ -43,10 +46,11 @@ VIDEO.init = function(sm, scene, camera){
             const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
             return {
-                amplitude: 0.75,
+                amplitude: 1,
                 frequency: data_freq[ Math.floor( data_freq.length * a_sound2) ],
                 a_wave : a_frame,
                 table: [
+                    {  waveform: 'sawtooth', frequency: 2, amplitude: 0.75 },
                     {  waveform: 'sin', frequency: 2, amplitude: 1.5 },
                     {  waveform: 'sin', frequency: 8, amplitude: 0.5 }
                 ]

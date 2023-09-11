@@ -46,17 +46,18 @@
         const amp = sampeset.amplitude; 
         return  amp * -1 + amp * 2 * a_bias;
     };
-    WAVE_FORM_FUNCTIONS.table = (sampeset, a_wave ) => {
-        const table_count = sampeset.table.length;
+    WAVE_FORM_FUNCTIONS.table = (samp, a_wave ) => {
+        const table_count = samp.table.length;
+        const freq = samp.frequency === undefined ? 1 : samp.frequency;
         let i_wf = 0;
-        let samp = 0;
+        let s = 0;
         while(i_wf < table_count ){
-            const wf = sampeset.table[i_wf];
-            const wf_samp = WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave);
-            samp += wf_samp;
+            const wf = samp.table[i_wf];
+            const wf_samp = CS.WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave * freq % 1);
+            s += wf_samp;
             i_wf += 1;
         }
-        return ( samp / table_count ) * sampeset.amplitude;
+        return ( s / table_count ) * samp.amplitude;
     };
     WAVE_FORM_FUNCTIONS.array = (samp, a_wave ) => {
         const a = (a_wave * samp.frequency % 1) * samp.array.length;
@@ -68,7 +69,6 @@
         const b = 2 * Math.random() * samp.amplitude;
         return b - samp.amplitude;
     };
-
     //-------- ----------
     // HELPERS
     //-------- ----------
