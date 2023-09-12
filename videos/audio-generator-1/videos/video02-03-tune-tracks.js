@@ -52,7 +52,7 @@ VIDEO.init = function(sm, scene, camera){
                 a_wave : a_sound,
                 table: [
                     {  waveform: 'sin', a_wave: obj_1.a_wave, frequency: obj_1.frequency * opt.secs, amplitude: a_tune1sin * 1.00 },
-                    {  waveform: 'sin', a_wave: obj_2.a_wave, frequency: obj_2.frequency * opt.secs, amplitude: a_tune2sin * 0.00 }
+                    {  waveform: 'sin', a_wave: obj_2.a_wave, frequency: obj_2.frequency * opt.secs, amplitude: a_tune2sin * 1.00 }
                 ]
             };
 
