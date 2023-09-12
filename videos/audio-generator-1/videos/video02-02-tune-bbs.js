@@ -103,6 +103,7 @@ VIDEO.init = function(sm, scene, camera){
                 ]
             };
         },
+        disp_step: 10,
         secs: 13
     });
     sm.frameMax = sound.frames;

@@ -52,9 +52,7 @@ VIDEO.init = function(sm, scene, camera){
          while(i_beat < obj_note.beats){
              let i_freq = 0;
              while(i_freq < timeline.freq_per_beat ){
-
                      array.push(  obj_note.i_note );
-
                  i_freq += 1;
              }
              i_beat += 1;
@@ -87,7 +85,7 @@ VIDEO.init = function(sm, scene, camera){
             const a_amp = amp;
             const a_note = note  / note_range;
             return {
-                amplitude: a_amp * 1.05,
+                amplitude: a_amp * 0.75,
                 a_wave: a_sound * opt.secs % 1,
                 table: [
                     {  waveform: 'sin', frequency:  80 * a_note, amplitude: 1.00 },
@@ -99,6 +97,7 @@ VIDEO.init = function(sm, scene, camera){
                 ]
             };
         },
+        disp_step: 10,
         secs: 10
     });
 
@@ -109,7 +108,7 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
-    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
+    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, false);
 };
 //-------- ----------
 // RENDER
