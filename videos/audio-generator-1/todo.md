@@ -24,11 +24,13 @@
 <!-- ----------
   DONE
 ----------- -->
-* ( done 09/11/2023 ) video01-07-wavefrom-array - publist final video
-* ( done 09/11/2023 ) video01-08-wavefrom-noise - publist final video
-* ( done 09/11/2023 ) video01-09-wavefrom-seedednoise - publist final video
-* ( done 09/11/2023 ) video01-06-wavefrom-table - publist final video
-* ( done 09/10/2023 ) video01-05-wavefrom-tri - publist final video
+* ( done 09/12/2023 ) samp-create.js : seeded noise waveform is now baked in
+* ( done 09/12/2023 ) video01-07-wavefrom-array - publish final video
+* ( done 09/11/2023 ) video01-07-wavefrom-array - publish final video
+* ( done 09/11/2023 ) video01-08-wavefrom-noise - publish final video
+* ( done 09/11/2023 ) video01-09-wavefrom-seedednoise - publish final video
+* ( done 09/11/2023 ) video01-06-wavefrom-table - publish final video
+* ( done 09/10/2023 ) video01-05-wavefrom-tri - publish final video
 * ( done 09/05/2023 ) samp-tools.js : freq adjust option for get\_tune\_sampobj
 * ( done 09/04/2023 ) samp-tools.js : create nf helper
 * ( done 09/04/2023 ) video12 - use baked in tools now

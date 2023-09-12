@@ -69,6 +69,22 @@
         const b = 2 * Math.random() * samp.amplitude;
         return b - samp.amplitude;
     };
+    WAVE_FORM_FUNCTIONS.seedednoise = (samp, a_wave )=> {
+        samp.values_per_wave = samp.values_per_wave === undefined ? 40 : samp.values_per_wave
+        samp.array = [];
+        let i2 = 0;
+        while(i2 < samp.values_per_wave){
+            const n = -1 + 2 * THREE.MathUtils.seededRandom( i2 );
+            samp.array.push(n);
+            i2 += 1;
+        }
+        const a = (a_wave * samp.frequency % 1) * samp.array.length;
+        const i = Math.floor( a * 0.99 );
+        const n = samp.array[ i ];
+        return n * samp.amplitude;
+    };
+
+
     //-------- ----------
     // HELPERS
     //-------- ----------

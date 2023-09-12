@@ -19,41 +19,17 @@ VIDEO.init = function(sm, scene, camera){
        10, 20, 30, 40, 50, 60, 70, 80, 80,
        20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 80, 80, 80, 80,
        20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 40, 40, 40, 40, 
-
        20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 80, 80, 80, 80,
-
        20, 20, 40, 40, 20, 20, 40, 40, 60, 60, 40, 40, 40, 40, 40, 40, 40, 40, 80, 80, 80, 80, 80, 80, 80, 80,
        20, 20, 80, 80, 20, 20, 80, 80, 20, 20, 80, 80, 40, 40, 40, 40, 60, 60, 60, 60, 80, 80, 60, 60, 80, 80,
-
        10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20, 20, 20,
-
-       80, 70, 60, 50, 40, 30, 20, 10, 10,
+       80, 70, 60, 50, 40, 30, 20, 10, 10
     ];
 
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : (samp, a_wave ) => {
-
-            //const b = 2 * Math.random() * samp.amplitude;
-            //return b - samp.amplitude;;
-
-            samp.array = [];
-            let i2 = 0;
-            while(i2 < 40){
-                //const n = -1 + 2 * Math.random();
-                //const n = -1 + 2 * THREE.MathUtils.seededRandom( Math.floor( a_wave * 20 ) );
-
-                const n = -1 + 2 * THREE.MathUtils.seededRandom( i2 );
-
-                samp.array.push(n);
-                i2 += 1;
-            }
-
-            const a = (a_wave * samp.frequency % 1) * samp.array.length;
-            const i = Math.floor( a * 0.99 );
-            const n = samp.array[ i ];
-            return n * samp.amplitude;
-        },
+        waveform : 'seedednoise',
         for_sampset: ( samp, i, a_sound, opt ) => {
+            samp.values_per_wave = 40; //20 + Math.floor(80 * a_sound);
             samp.a_wave = a_sound * opt.secs % 1;
             samp.amplitude = 0.75;
             samp.frequency = tune1[ Math.floor( tune1.length * a_sound) ];  //20 + 80 * a_sound;
