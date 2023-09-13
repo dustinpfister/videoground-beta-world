@@ -1,6 +1,6 @@
 /*    video01-10-waveform-follinsaw - for audio-generator-1 project
-          * seeing about making a cool kind of sawwave based on what I see with a tim follin tune
-          * the tune is stage4 of "qhouls 'n' ghosts" for the commodore 64
+          * Seeing about making a cool kind of sawwave based on what I see with a Tim Follin tune
+          * The tune is stage4 of "ghouls 'n' ghosts" for the commodore 64
  */
 //-------- ----------
 // SCRIPTS
@@ -31,16 +31,16 @@ VIDEO.init = function(sm, scene, camera){
             return s  * samp.amplitude;
         },
         for_sampset: ( samp, i, a_sound, opt ) => {
-            samp.a_wave = a_sound * (opt.secs / 2) % 1;
+            samp.a_wave = a_sound * (opt.secs / 4) % 1;
             samp.duty = 0.25 + 0.75 * samp.a_wave; //0.25 + 0.75 * Math.sin( Math.PI * samp.a_wave);
-            samp.amplitude = 1;
+            samp.amplitude = samp.a_wave;
             samp.p1 = 0.85;
             samp.p2 = 0.15;
-            samp.frequency = 80 + 40 * Math.floor( (opt.secs / 2) * a_sound );
+            samp.frequency = 160 + 80 * Math.floor( (opt.secs / 4) * a_sound );
             return samp;
         },
-        disp_step: 10,
-        secs: 10
+        disp_step: 100,
+        secs: 16
     });
 
     sm.frameMax = sound.frames;
