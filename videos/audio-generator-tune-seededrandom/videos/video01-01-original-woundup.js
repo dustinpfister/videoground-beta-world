@@ -102,10 +102,28 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[8] = {
-        alpha: 60 / 60,
+        alpha: 43 / 60,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 20  + 80 * a_sound;
-            samp.frequency = 0.5;
+            samp.frequency = 0.5 + 1.5 * a_sound;
+            return samp;
+        }
+    };
+
+    sq.objects[9] = {
+        alpha: 53 / 60,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 100 - 90 * a_sound;
+            samp.frequency = tune[ Math.floor( tune.length  * a_object ) ] * 2;
+            return samp;
+        }
+    };
+
+    sq.objects[10] = {
+        alpha: 60 / 60,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 10 + 190 * a_sound;
+            samp.frequency = 1 + 9 * a_sound;
             return samp;
         }
     };
