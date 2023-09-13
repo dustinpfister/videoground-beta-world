@@ -33,14 +33,14 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, opt ) => {
             samp.a_wave = a_sound * (opt.secs / 4) % 1;
             samp.duty = 0.25 + 0.75 * samp.a_wave; //0.25 + 0.75 * Math.sin( Math.PI * samp.a_wave);
-            samp.amplitude = samp.a_wave;
+            samp.amplitude = 0.25 + 0.75 * Math.sin(Math.PI * samp.a_wave);
             samp.p1 = 0.85;
             samp.p2 = 0.15;
             samp.frequency = 160 + 80 * Math.floor( (opt.secs / 4) * a_sound );
             return samp;
         },
         disp_step: 100,
-        secs: 16
+        secs: 20
     });
 
     sm.frameMax = sound.frames;
