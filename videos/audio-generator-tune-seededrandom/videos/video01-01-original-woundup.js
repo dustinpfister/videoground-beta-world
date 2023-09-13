@@ -114,7 +114,7 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 53 / 60,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 100 - 90 * a_sound;
-            samp.frequency = tune[ Math.floor( tune.length  * a_object ) ] * 2;
+            samp.frequency = tune[ Math.floor( tune.length  * a_object ) ] * 1.25;
             return samp;
         }
     };
@@ -122,8 +122,9 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[10] = {
         alpha: 60 / 60,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.values_per_wave = 10 + 190 * a_sound;
-            samp.frequency = 1 + 9 * a_sound;
+            samp.values_per_wave = 10;
+            samp.frequency = 1;
+samp.amplitude = 1 - a_object;
             return samp;
         }
     };
@@ -165,7 +166,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 60
+        secs: 20
     });
     sm.frameMax = sound.frames;
 };
