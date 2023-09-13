@@ -124,7 +124,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 10;
             samp.frequency = 1;
-samp.amplitude = 1 - a_object;
+            samp.amplitude = 1 - a_object;
             return samp;
         }
     };
@@ -166,7 +166,7 @@ samp.amplitude = 1 - a_object;
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 20
+        secs: 60
     });
     sm.frameMax = sound.frames;
 };
