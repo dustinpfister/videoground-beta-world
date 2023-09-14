@@ -90,12 +90,18 @@
     };
 
     DSD.draw_info = (ctx, sound, sm) => {
-/*
+
         const alpha = sm.frame / ( sm.frameMax - 1);
-        ctx.fillStyle = 'lime';
-        ctx.font = '25px courier';
+        ctx.fillStyle = 'cyan';
+        ctx.font = '20px courier';
         ctx.textBaseline = 'top';
-        ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax + '  ( ' + (sound.secs * alpha ).toFixed(2) + ' / ' + sound.secs + ' ) ', 5, 5);
+        const str_frame = String(sm.frame).padStart(4, '0');
+        ctx.fillText('frame: ' + str_frame + ' / ' + sm.frameMax, 5 + 100, 420);
+        const str_secs = (sound.secs * alpha ).toFixed(2);
+        ctx.fillText(' ( ' + str_secs + ' / ' + sound.secs + ' )', 300 + 100, 420);
+
+// + '  ( ' + (sound.secs * alpha ).toFixed(2) + ' / ' + sound.secs + ' ) ', 5, 5);
+/*
         const sample_depth = sound.mode === 'bytes' ? '8bit' : '16bit';
         ctx.fillText('sample depth@rate : ' +  sample_depth + ' @ ' + (sound.sample_rate / 1000).toFixed(3) + 'kHz' , 5, 35);
         let waveform = sound.waveform;

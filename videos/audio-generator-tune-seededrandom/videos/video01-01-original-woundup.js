@@ -189,7 +189,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
     camera.position.set( 0, 0, 10);
-    camera.lookAt( 0, 0.5, 0 );
+    camera.lookAt( 0, 0.85, 0 );
 
 };
 //-------- ----------
@@ -198,7 +198,7 @@ VIDEO.init = function(sm, scene, camera){
 VIDEO.update = function(sm, scene, camera, per, bias){
 
     const poly = scene.userData.poly;
-    poly.rotation.y = Math.PI * 2 * sm.per;
+    poly.rotation.y = Math.PI * 2 * ( 8 * sm.per);
 
     return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
 };
