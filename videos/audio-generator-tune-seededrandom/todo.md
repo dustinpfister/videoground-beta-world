@@ -14,6 +14,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/14/2023 ) ST.applySQ method
 * ( done 09/14/2023 ) start a new CS.create\_frame\_samples method that can then be called in VIDEO.update
 * ( done 09/14/2023 ) update CS.write\_frame\_samples to take the returned result from CS.create\_frame\_samples
 * ( done 09/14/2023 ) - new layout for this collection of videos

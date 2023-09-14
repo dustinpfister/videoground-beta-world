@@ -129,7 +129,7 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-
+/*
     const applySQ = ( sq, samp, i, a_sound, opt ) => {
         let i2 = 0;
         const len = sq.objects.length;
@@ -144,7 +144,7 @@ VIDEO.init = function(sm, scene, camera){
             i2 += 1;
         }
     };
-
+*/
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'seedednoise',
@@ -161,7 +161,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.frequency = 1;
             samp.amplitude = 0.75;
 
-            applySQ(sq, samp, i, a_sound, opt);
+            ST.applySQ(sq, samp, i, a_sound, opt);
 
             return samp;
         },

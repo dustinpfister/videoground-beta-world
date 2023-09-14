@@ -1,6 +1,25 @@
 (function(){
     const ST = {};
     //-------- ----------
+    // APPLY SQ - methods that helper with 'SeQuence' Objects
+    //-------- ----------
+
+    ST.applySQ = ( sq, samp, i, a_sound, opt ) => {
+        let i2 = 0;
+        const len = sq.objects.length;
+        let a_base = 0;
+        while( i2 < len ){
+            const obj = sq.objects[i2];
+            if( a_sound <= obj.alpha ){
+                let a_object = ( a_sound - a_base ) /  ( obj.alpha - a_base );
+                return obj.for_sampset(samp, i, a_sound, opt, a_object, sq);
+            }
+            a_base = obj.alpha;
+            i2 += 1;
+        }
+    };
+
+    //-------- ----------
     // FOR_SAMPLE HELPER : to help with the for sample methods used in sound objects
     //-------- ----------
     ST.get_beat_alpha = ( alpha=0, total_secs=1, bps=4) => {
