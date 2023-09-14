@@ -14,12 +14,13 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    // the SQ Object
     const sq = {
         objects: []
     };
-
     sq.objects[0] = {
         alpha: 5 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -28,7 +29,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;  
         }
     };
-
     sq.objects[1] = {
         alpha: 7 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -37,7 +37,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[2] = {
         alpha: 10 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -46,7 +45,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[3] = {
         alpha: 15 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -55,7 +53,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[4] = {
         alpha: 20 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -64,7 +61,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[5] = {
         alpha: 27 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -73,7 +69,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[6] = {
         alpha: 30 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -82,8 +77,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
-
     const tune = [
         2.0, 1.0, 0.5, 2.0, 1.0, 0.5, 2.0, 2.0, 0.5, 0.5, 0.5, 0.5,
         2.0, 1.0, 0.5, 2.0, 1.0, 0.5, 2.0, 2.0, 0.5, 0.5, 0.5, 0.5,
@@ -92,7 +85,6 @@ VIDEO.init = function(sm, scene, camera){
         2.0, 1.0, 0.5, 2.0, 1.0, 0.5, 2.0, 2.0, 0.5, 0.5, 0.5, 0.5,
         2.0, 1.0, 0.5, 2.0, 1.0, 0.5, 2.0, 2.0, 0.5, 0.5, 0.5, 0.5
     ];
-
     sq.objects[7] = {
         alpha: 40 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -101,7 +93,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[8] = {
         alpha: 43 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -110,7 +101,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[9] = {
         alpha: 53 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -119,7 +109,6 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         }
     };
-
     sq.objects[10] = {
         alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -129,54 +118,29 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-/*
-    const applySQ = ( sq, samp, i, a_sound, opt ) => {
-        let i2 = 0;
-        const len = sq.objects.length;
-        let a_base = 0;
-        while( i2 < len ){
-            const obj = sq.objects[i2];
-            if( a_sound <= obj.alpha ){
-                let a_object = ( a_sound - a_base ) /  ( obj.alpha - a_base );
-                return obj.for_sampset(samp, i, a_sound, opt, a_object, sq);
-            }
-            a_base = obj.alpha;
-            i2 += 1;
-        }
-    };
-*/
-
+    // the sound object
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_sampset: ( samp, i, a_sound, opt ) => {
-
             const spf = opt.sound.samples_per_frame;
-            //const frame = Math.floor(i / spf);
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
-
-            //const a_sound3 = frame / opt.sound.frames;
-
             samp.values_per_wave = 40;
             samp.frequency = 1;
             samp.amplitude = 0.75;
-
             ST.applySQ(sq, samp, i, a_sound, opt);
-
             return samp;
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 5
+        secs: 55
     });
     sm.frameMax = sound.frames;
 
+    // poly mesh object
     const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x00ffff, wireframeLinewidth: 6 });
-
     const poly = scene.userData.poly = new THREE.Mesh( new THREE.IcosahedronGeometry(1.75, 0), material );
     scene.add(poly);
-
-
     camera.position.set( 0, 0, 10);
     camera.lookAt( 0, 0.85, 0 );
 
@@ -189,11 +153,30 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const poly = scene.userData.poly;
     poly.rotation.y = Math.PI * 2 * ( 8 * sm.per);
 
+    // create the data samples
     const data_samples = CS.create_frame_samples(scene.userData.sound, sm.frame );
+    
+    // mutate geometry with data samples
+    const geometry = poly.geometry;
+    const pos = geometry.getAttribute('position');
+    const samp_count = data_samples.length;
+    const samp_index_delta = Math.floor( samp_count / pos.count);
+    let i_vert = 0;
+    while(i_vert < pos.count){
+        const s = data_samples[  i_vert * samp_index_delta ];
+        const sn = ST.get_normal(s);
+        const x = pos.getX(i_vert);
+        const y = pos.getY(i_vert);
+        const z = pos.getZ(i_vert);
+        const v = new THREE.Vector3(x, y, z);
+        v.normalize().multiplyScalar(1.25 + 0.25 * sn);
+        pos.setXYZ(i_vert, v.x, v.y, v.z);
+        i_vert += 1;
+    };
+    pos.needsUpdate = true;
 
+    // write the data samples
     return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
-
-    //return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
 };
 //-------- ----------
 // RENDER

@@ -9,11 +9,12 @@
 <!-- ----------
   CS.create_frame_samples
 ----------- -->
-* () use frame sample data in VIDEO01 to update state of geometry
+
 
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/14/2023 ) use frame sample data in VIDEO01 to update state of geometry
 * ( done 09/14/2023 ) ST.applySQ method
 * ( done 09/14/2023 ) start a new CS.create\_frame\_samples method that can then be called in VIDEO.update
 * ( done 09/14/2023 ) update CS.write\_frame\_samples to take the returned result from CS.create\_frame\_samples
