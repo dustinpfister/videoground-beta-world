@@ -123,12 +123,23 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[10] = {
         alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 10 + 30 * a_sound;
+            samp.frequency = 0.625 + (1 - 0.625) * a_sound;
+            return samp;  
+        }
+    };
+
+/*
+    sq.objects[10] = {
+        alpha: 55 / 55,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 10;
             samp.frequency = 1;
             samp.amplitude = 1 - a_object;
             return samp;
         }
     };
+*/
 
     const applySQ = ( sq, samp, i, a_sound, opt ) => {
         let i2 = 0;
