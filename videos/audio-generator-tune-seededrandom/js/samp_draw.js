@@ -33,7 +33,7 @@
         if( sample_count >= w ){
             index_step = Math.floor( sample_count / w );
         }
-        ctx.strokeStyle = 'lime';
+        ctx.strokeStyle = 'cyan';
         ctx.lineWidth = 4;
         ctx.beginPath();
         let i = 0, c = 0;
@@ -76,7 +76,7 @@
         const sy = opt.sy === undefined ? 0 : opt.sy;
         const w = opt.w === undefined ? 100 : opt.w;
         const h = opt.h === undefined ? 25 : opt.h;
-        ctx.strokeStyle = 'lime';
+        ctx.strokeStyle = 'cyan';
         ctx.lineWidth = 6;
         ctx.strokeRect(sx, sy, w, h);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
