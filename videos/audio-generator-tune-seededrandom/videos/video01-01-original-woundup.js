@@ -1,6 +1,7 @@
 /*    video01-01-original-woundup - for audio-generator-tune-seededrandom project
           * First tune for the project
  */
+VIDEO.resmode = 6;
 //-------- ----------
 // SCRIPTS
 //-------- ----------
@@ -20,7 +21,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[0] = {
-        alpha: 5 / 60,
+        alpha: 5 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 40;
             samp.frequency = 1 + 4 * a_object;
@@ -29,7 +30,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[1] = {
-        alpha: 7 / 60,
+        alpha: 7 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 40;
             samp.frequency = 5;
@@ -38,7 +39,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[2] = {
-        alpha: 10 / 60,
+        alpha: 10 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 40 - 30 * a_object;
             samp.frequency = 5;
@@ -47,7 +48,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[3] = {
-        alpha: 15 / 60,
+        alpha: 15 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 10 + 90 * a_object;
             samp.frequency = 5;
@@ -56,7 +57,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[4] = {
-        alpha: 20 / 60,
+        alpha: 20 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 100 - 90 * Math.sin( Math.PI * ( a_object * 8 % 1 ) );
             samp.frequency = 5 - 4.5 * a_object;
@@ -65,7 +66,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[5] = {
-        alpha: 27 / 60,
+        alpha: 27 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 100 - 60 * a_object;
             samp.frequency = 0.5;
@@ -74,7 +75,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[6] = {
-        alpha: 30 / 60,
+        alpha: 30 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 40;
             samp.frequency = 0.5 + 0.5 * a_object;
@@ -93,7 +94,7 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     sq.objects[7] = {
-        alpha: 40 / 60,
+        alpha: 40 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 40 - 20 * a_sound;
             samp.frequency = tune[ Math.floor( tune.length  * a_object ) ];
@@ -102,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[8] = {
-        alpha: 43 / 60,
+        alpha: 43 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 20  + 80 * a_sound;
             samp.frequency = 0.5 + 1.5 * a_sound;
@@ -111,7 +112,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[9] = {
-        alpha: 53 / 60,
+        alpha: 53 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 100 - 90 * a_sound;
             samp.frequency = tune[ Math.floor( tune.length  * a_object ) ] * 1.25;
@@ -120,7 +121,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[10] = {
-        alpha: 60 / 60,
+        alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 10;
             samp.frequency = 1;
@@ -166,7 +167,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 60
+        secs: 55
     });
     sm.frameMax = sound.frames;
 };

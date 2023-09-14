@@ -134,8 +134,8 @@
             mode: 'int16', //  'int16' 'bytes',
             sample_rate: opt.sample_rate === undefined ? 44100 : opt.sample_rate,
             secs: opt.secs === undefined ? 10 : opt.secs,
-            disp_offset: new THREE.Vector2(50, 200),
-            disp_size: new THREE.Vector2( 1280 - 100, 200),
+            //disp_offset: new THREE.Vector2(50, 200),
+            //disp_size: new THREE.Vector2( 1280 - 100, 200),
             array_disp: [],   // data for whole sound
             array_frame: [],  // data for current frame
             frames: 0,
@@ -163,8 +163,8 @@
         });
 
         const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
-        sound.opt_disp = { w: 1280 - 50 * 2, h: 250, sy: 100, sx: 50, getsamp_lossy: getsamp_lossy };
-        sound.opt_frame = { w: 1280 - 50 * 2, h: 250, sy: 400, sx: 50, mode: sound.mode };
+        sound.opt_disp = { w: 700, h: 150, sy: 10, sx: 10, getsamp_lossy: getsamp_lossy };
+        sound.opt_frame = { w: 700, h: 150, sy: 180, sx: 10, mode: sound.mode };
         return sound;
     };
 

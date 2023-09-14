@@ -90,6 +90,7 @@
     };
 
     DSD.draw_info = (ctx, sound, sm) => {
+/*
         const alpha = sm.frame / ( sm.frameMax - 1);
         ctx.fillStyle = 'lime';
         ctx.font = '25px courier';
@@ -102,6 +103,7 @@
             waveform = 'custom';
         }
         ctx.fillText('waveform : ' + waveform + ', bytes_per_frame: ' + sound.bytes_per_frame, 5, 60);
+*/
     };
 
     window.DSD = DSD;
