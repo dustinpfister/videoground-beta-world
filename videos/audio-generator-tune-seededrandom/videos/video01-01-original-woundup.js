@@ -129,17 +129,6 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-/*
-    sq.objects[10] = {
-        alpha: 55 / 55,
-        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.values_per_wave = 10;
-            samp.frequency = 1;
-            samp.amplitude = 1 - a_object;
-            return samp;
-        }
-    };
-*/
 
     const applySQ = ( sq, samp, i, a_sound, opt ) => {
         let i2 = 0;
@@ -162,7 +151,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, opt ) => {
 
             const spf = opt.sound.samples_per_frame;
-            const frame = Math.floor(i / spf);
+            //const frame = Math.floor(i / spf);
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
 
@@ -178,7 +167,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 55
+        secs: 5
     });
     sm.frameMax = sound.frames;
 
@@ -200,7 +189,11 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const poly = scene.userData.poly;
     poly.rotation.y = Math.PI * 2 * ( 8 * sm.per);
 
-    return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
+    const data_samples = CS.create_frame_samples(scene.userData.sound, sm.frame );
+
+    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
+
+    //return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
 };
 //-------- ----------
 // RENDER
