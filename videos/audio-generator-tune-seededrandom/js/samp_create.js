@@ -161,8 +161,8 @@
             mode: 'raw'
         });
         const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
-        sound.opt_disp = { w: 720 - 160, h: 150, sy: 10 + 75, sx: 80, getsamp_lossy: getsamp_lossy };
-        sound.opt_frame = { w: 720 - 160, h: 150, sy: 180 + 75, sx: 80, mode: sound.mode };
+        sound.opt_disp = { w: 720 - 160, h: 150, sy: 10 + 105, sx: 80, getsamp_lossy: getsamp_lossy };
+        sound.opt_frame = { w: 720 - 160, h: 150, sy: 180 + 105, sx: 80, mode: sound.mode };
         return sound;
     };
     // Build a Wave file buffer

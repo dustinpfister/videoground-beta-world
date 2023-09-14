@@ -95,9 +95,9 @@
         ctx.font = '20px courier';
         ctx.textBaseline = 'top';
         const str_frame = String(sm.frame).padStart(4, '0');
-        ctx.fillText('frame: ' + str_frame + ' / ' + sm.frameMax, 5 + 70, 420);
+        ctx.fillText('frame: ' + str_frame + ' / ' + sm.frameMax, 5 + 70, 450);
         const str_secs = (sound.secs * alpha ).toFixed(2);
-        ctx.fillText(' ( ' + str_secs + ' / ' + sound.secs + ' )', 230 + 70, 420);
+        ctx.fillText(' ( ' + str_secs + ' / ' + sound.secs + ' )', 230 + 70, 450);
     };
 
     window.DSD = DSD;
