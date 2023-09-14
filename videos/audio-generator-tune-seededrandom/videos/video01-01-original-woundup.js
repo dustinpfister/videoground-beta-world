@@ -137,9 +137,17 @@ VIDEO.init = function(sm, scene, camera){
     });
     sm.frameMax = sound.frames;
 
+    //
+    const dl = new THREE.DirectionalLight( 0xffffff, 1 );
+    dl.position.set(1,1,1)
+    scene.add(dl);
+
     // poly mesh object
-    const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x00ffff, wireframeLinewidth: 6 });
-    const poly = scene.userData.poly = new THREE.Mesh( new THREE.IcosahedronGeometry(1.75, 0), material );
+    const geometry = new THREE.IcosahedronGeometry(1.75, 0);
+    const material_1 = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, transparent: true, opacity: 0.9, color: 0x00ffff });
+    const material_2 = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x00ffff, wireframeLinewidth: 6 });
+    const poly = scene.userData.poly = new THREE.Mesh( geometry, material_1 );
+    poly.add( new THREE.Mesh( geometry, material_2 )  );
     scene.add(poly);
     camera.position.set( 0, 0, 10);
     camera.lookAt( 0, 0.85, 0 );
@@ -169,11 +177,12 @@ VIDEO.update = function(sm, scene, camera, per, bias){
         const y = pos.getY(i_vert);
         const z = pos.getZ(i_vert);
         const v = new THREE.Vector3(x, y, z);
-        v.normalize().multiplyScalar(1.25 + 0.25 * sn);
+        v.normalize().multiplyScalar(1.5 + 0.25 * sn);
         pos.setXYZ(i_vert, v.x, v.y, v.z);
         i_vert += 1;
     };
     pos.needsUpdate = true;
+    geometry.computeVertexNormals();
 
     // write the data samples
     return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);

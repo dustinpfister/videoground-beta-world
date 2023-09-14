@@ -14,6 +14,7 @@
 <!-- ----------
   DONE
 ----------- -->
+* ( done 09/14/2023 ) cool effect for geometry
 * ( done 09/14/2023 ) use frame sample data in VIDEO01 to update state of geometry
 * ( done 09/14/2023 ) ST.applySQ method
 * ( done 09/14/2023 ) start a new CS.create\_frame\_samples method that can then be called in VIDEO.update
