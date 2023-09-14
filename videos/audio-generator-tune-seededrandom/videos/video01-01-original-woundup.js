@@ -138,13 +138,17 @@ VIDEO.init = function(sm, scene, camera){
     sm.frameMax = sound.frames;
 
     //
-    const dl = new THREE.DirectionalLight( 0xffffff, 1 );
-    dl.position.set(1,1,1)
+    const dl = new THREE.DirectionalLight( 0xffffff, 0.8 );
+    dl.position.set(1,1,1);
     scene.add(dl);
+    const al = new THREE.AmbientLight( 0xffffff, 0.2 );
+    scene.add(al);
 
     // poly mesh object
-    const geometry = new THREE.IcosahedronGeometry(1.75, 0);
-    const material_1 = new THREE.MeshPhongMaterial({ side: THREE.DoubleSide, transparent: true, opacity: 0.9, color: 0x00ffff });
+    const geometry_source = scene.userData.geometry_source = new THREE.IcosahedronGeometry(1.75, 0);
+    const geometry = geometry_source.clone();
+
+    const material_1 = new THREE.MeshPhongMaterial({ transparent: true, opacity: 0.80, side: THREE.DoubleSide, color: 0x00ffff });
     const material_2 = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x00ffff, wireframeLinewidth: 6 });
     const poly = scene.userData.poly = new THREE.Mesh( geometry, material_1 );
     poly.add( new THREE.Mesh( geometry, material_2 )  );
@@ -166,6 +170,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     
     // mutate geometry with data samples
     const geometry = poly.geometry;
+    const geometry_source = scene.userData.geometry_source;
+    const pos_source = geometry_source.getAttribute('position');
     const pos = geometry.getAttribute('position');
     const samp_count = data_samples.length;
     const samp_index_delta = Math.floor( samp_count / pos.count);
@@ -173,11 +179,12 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     while(i_vert < pos.count){
         const s = data_samples[  i_vert * samp_index_delta ];
         const sn = ST.get_normal(s);
-        const x = pos.getX(i_vert);
-        const y = pos.getY(i_vert);
-        const z = pos.getZ(i_vert);
+        const x = pos_source.getX(i_vert);
+        const y = pos_source.getY(i_vert);
+        const z = pos_source.getZ(i_vert);
         const v = new THREE.Vector3(x, y, z);
-        v.normalize().multiplyScalar(1.5 + 0.25 * sn);
+        const l = v.length();
+        v.normalize().multiplyScalar(1.50 + 0.50 * sn);
         pos.setXYZ(i_vert, v.x, v.y, v.z);
         i_vert += 1;
     };
