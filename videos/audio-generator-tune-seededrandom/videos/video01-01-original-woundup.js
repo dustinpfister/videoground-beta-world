@@ -170,11 +170,25 @@ VIDEO.init = function(sm, scene, camera){
         secs: 55
     });
     sm.frameMax = sound.frames;
+
+    const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x00ffff, wireframeLinewidth: 6 });
+
+    const poly = scene.userData.poly = new THREE.Mesh( new THREE.IcosahedronGeometry(1.75, 0), material );
+    scene.add(poly);
+
+
+    camera.position.set( 0, 0, 10);
+    camera.lookAt( 0, 0.5, 0 );
+
 };
 //-------- ----------
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
+
+    const poly = scene.userData.poly;
+    poly.rotation.y = Math.PI * 2 * sm.per;
+
     return CS.write_frame_samples(scene.userData.sound, sm.frame, sm.filePath, true);
 };
 //-------- ----------
@@ -186,6 +200,13 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
+
+   sm.renderer.render(sm.scene, sm.camera);
+   const dx = 0, dy = 0;
+   const dw = sm.canvas.width, dh = sm.canvas.height;
+   ctx.drawImage(sm.renderer.domElement, dx, dy, dw, dh);
+
+
     // draw disp
     DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
