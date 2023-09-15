@@ -70,11 +70,12 @@
         return b - samp.amplitude;
     };
     WAVE_FORM_FUNCTIONS.seedednoise = (samp, a_wave )=> {
-        samp.values_per_wave = samp.values_per_wave === undefined ? 40 : samp.values_per_wave
+        samp.values_per_wave = samp.values_per_wave === undefined ? 40 : samp.values_per_wave;
+        samp.int_shift = samp.int_shift === undefined ? 0 : samp.int_shift;
         samp.array = [];
         let i2 = 0;
         while(i2 < samp.values_per_wave){
-            const n = -1 + 2 * THREE.MathUtils.seededRandom( i2 );
+            const n = -1 + 2 * THREE.MathUtils.seededRandom( samp.int_shift + i2 );
             samp.array.push(n);
             i2 += 1;
         }
