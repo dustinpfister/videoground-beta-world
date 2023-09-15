@@ -25,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
             samp.int_shift = ( 500 * a_sound ) * opt.secs * a_sound;
-            samp.values_per_wave = 40 + 200 * Math.sin(Math.PI * (a_sound * (opt.secs * a_sound) % 1) );
+            samp.values_per_wave = 40 + 400 * Math.sin(Math.PI * (a_sound * (opt.secs * a_sound) % 1) );
             const fi = 1;
             samp.frequency = 4 / 8 * fi;
             samp.amplitude = 0.5 + 0.3 * a_sound;
@@ -33,7 +33,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 55
+        secs: 10
     });
     sm.frameMax = sound.frames;
 
