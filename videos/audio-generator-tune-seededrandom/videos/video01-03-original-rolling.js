@@ -1,5 +1,5 @@
-/*    video01-02-original-shift - for audio-generator-tune-seededrandom project
-          * Tetsing out the shift feature
+/*    video01-03-original-rolling - for audio-generator-tune-seededrandom project
+          * trying something out more with the shift feature
  */
 VIDEO.resmode = 6;
 //-------- ----------
@@ -17,40 +17,6 @@ VIDEO.init = function(sm, scene, camera){
 
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // the SQ Object
-    const sq = {
-        objects: []
-    };
-
-
-
-    let i2 = 0, s = 0;
-    const set_count = 9;
-    const total_secs = set_count * 6;
-console.log(total_secs)
-    while(i2 < 2 * set_count){
-        const shift = i2 % 2 != 0;
-        s += shift ? 1 : 5;
-
-        (function(i2, shift){
-            sq.objects[i2] = {
-                alpha: s / total_secs,
-                for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-                    samp.frequency = 1 + Math.round(7 * Math.sin( Math.PI * a_object ));
-                    const i_set = Math.floor(i2 / 2);
-                    samp.int_shift = 25 * i_set;
-                    if(shift){
-                         samp.frequency = 1;
-                         samp.int_shift = 25 * i_set + 25 * a_object;
-                    }
-                    return samp;  
-                }
-            };
-        }(i2, shift));
-        i2 += 1;
-    }
-
-
     // the sound object
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'seedednoise',
@@ -58,16 +24,16 @@ console.log(total_secs)
             const spf = opt.sound.samples_per_frame;
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
-            samp.int_shift = 0;
-            samp.values_per_wave = 25;
-            samp.frequency = 1;
-            samp.amplitude = 0.75;
-            ST.applySQ(sq, samp, i, a_sound, opt);
+            samp.int_shift = ( 500 * a_sound ) * opt.secs * a_sound;
+            samp.values_per_wave = 40 + 200 * Math.sin(Math.PI * (a_sound * (opt.secs * a_sound) % 1) );
+            const fi = 1;
+            samp.frequency = 4 / 8 * fi;
+            samp.amplitude = 0.5 + 0.3 * a_sound;
             return samp;
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: total_secs
+        secs: 55
     });
     sm.frameMax = sound.frames;
 
