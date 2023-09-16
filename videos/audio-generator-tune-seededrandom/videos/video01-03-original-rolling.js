@@ -17,6 +17,32 @@ VIDEO.init = function(sm, scene, camera){
 
     sm.renderer.setClearColor(0x000000, 0.25);
 
+
+    const sq = {
+        objects: []
+    };
+
+    sq.objects[0] = {
+        alpha: 5 / 55,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 20;
+            samp.int_shift = 20 * 5 * a_object;
+            samp.frequency = 1;
+            return samp;  
+        }
+    };
+
+    sq.objects[1] = {
+        alpha: 55 / 55,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 20;
+            samp.int_shift = 20 * 5 + 200 * a_object * 50 * a_object;
+            samp.frequency = 1;
+            return samp;  
+        }
+    };
+
+
     // the sound object
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'seedednoise',
@@ -24,16 +50,26 @@ VIDEO.init = function(sm, scene, camera){
             const spf = opt.sound.samples_per_frame;
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
-            samp.int_shift = ( 500 * a_sound ) * opt.secs * a_sound;
-            samp.values_per_wave = 40 + 400 * Math.sin(Math.PI * (a_sound * (opt.secs * a_sound) % 1) );
-            const fi = 1;
-            samp.frequency = 4 / 8 * fi;
-            samp.amplitude = 0.5 + 0.3 * a_sound;
+
+
+            //samp.int_shift = 20 * opt.secs * a_sound;
+            //samp.int_shift = ( 200 * a_sound ) * opt.secs * a_sound;
+            //samp.values_per_wave = 20; 
+//samp.frequency = 1.0;
+            //samp.frequency = 1 + 7 * Math.sin(Math.PI * (a_sound * (opt.secs * a_sound) % 1) );
+            //samp.amplitude = 0.5 + 0.3 * a_sound;
+
+samp.values_per_wave = 20; 
+samp.frequency = 1.0;
+samp.amplitude = 0.75;
+
+            ST.applySQ(sq, samp, i, a_sound, opt);
+
             return samp;
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 10
+        secs: 55
     });
     sm.frameMax = sound.frames;
 
