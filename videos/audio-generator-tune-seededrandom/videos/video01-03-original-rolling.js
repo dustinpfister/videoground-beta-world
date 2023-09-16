@@ -18,6 +18,11 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
 
+    const set_shift = ( i_start = 0, i_persec = 5, secs = 5, a_seq = 0, a_acc = 1 ) => {
+        return i_start + i_persec * a_acc * 5 * a_seq;
+    };
+
+
     const sq = {
         objects: []
     };
@@ -26,18 +31,38 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 5 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 20;
-            samp.int_shift = 20 * 5 * a_object;
             samp.frequency = 1;
+            samp.int_shift = set_shift(0, 10, 5, a_object, 1);
             return samp;  
         }
     };
 
     sq.objects[1] = {
+        alpha: 10 / 55,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 20;
+            samp.frequency = 1;
+            samp.int_shift = set_shift(50, 400, 5, a_object, a_object);
+            return samp;  
+        }
+    };
+
+    sq.objects[2] = {
+        alpha: 20 / 55,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.values_per_wave = 20;
+            samp.frequency = 1;
+            samp.int_shift = set_shift(2050, 400, 10, a_object, 1);
+            return samp;  
+        }
+    };
+
+    sq.objects[3] = {
         alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 20;
-            samp.int_shift = 20 * 5 + 200 * a_object * 50 * a_object;
             samp.frequency = 1;
+            samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - a_object);
             return samp;  
         }
     };
