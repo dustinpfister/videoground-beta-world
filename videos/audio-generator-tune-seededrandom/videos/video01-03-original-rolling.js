@@ -30,8 +30,12 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const tune_1 = [
-        1,'c6',1,'d6',1,'e6',1,'f6',1,'g6',1,'c7',1,'d7',1,'e7',
-        1,'c5',1,'d5',1,'e5',1,'f5',1,'g5',1,'c6',1,'d6',1,'e6'
+        0.5,'c1', 0.5,'c1', 0.5,'c1', 0.5,'c1', 1,'e1',    3,'c1',  1.5,'rest',
+        0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1',   1,'c2', 3,'c2',  2, 'rest',
+        0.5,'c1', 0.5,'c1', 0.5,'c1', 0.5,'c1', 1,'e1',    3,'c1',  1.5,'rest',
+        0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1',   1,'c2', 3,'c2',  2, 'rest',
+        0.5,'c1', 0.5,'c1', 0.5,'c1', 0.5,'c1', 1,'e1',    3,'c1',  1.5,'rest',
+        0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1',   1,'c2', 3,'c2',  2, 'rest'
     ];
     const data_1 = ST.tune_to_alphas(tune_1, nf);
 
@@ -39,11 +43,17 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 5 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
 
-            const obj_1 = ST.get_tune_sampobj(data_1, a_sound, opt.secs, false);
-            const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
+            //const obj_1 = ST.get_tune_sampobj(data_1, a_sound, opt.secs, false);
+            //const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
 
             samp.values_per_wave = 20;
-            samp.frequency = bj_1.frequency / 30;
+            samp.frequency = 1; // + obj_1.frequency / 30;
+
+            samp.amplitude =  0.75;
+            if(samp.frequency != 0){
+            //    samp.amplitude = 0.75 + 0.25 * a_tune1sin;
+            }
+
             samp.int_shift = set_shift(0, 10, 5, a_object, 1);
             return samp;  
         }
@@ -72,9 +82,21 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[3] = {
         alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+
+            const obj_1 = ST.get_tune_sampobj(data_1, a_sound, opt.secs, false);
+            const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
+
+            samp.frequency = 1 + obj_1.frequency / 30;
+
+            samp.amplitude =  0.75;
+            if(samp.frequency != 0){
+                samp.amplitude = 0.75 + 0.25 * a_tune1sin;
+            }
+
+
             samp.values_per_wave = 20;
             samp.frequency = 1;
-            samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - (a_object * 0.5));
+            samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - (a_object * 0.45));
             return samp;  
         }
     };
@@ -90,7 +112,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
 samp.values_per_wave = 20; 
-samp.frequency = 1.0;
+samp.frequency = 1;
 samp.amplitude = 0.75;
 
             ST.applySQ(sq, samp, i, a_sound, opt);
