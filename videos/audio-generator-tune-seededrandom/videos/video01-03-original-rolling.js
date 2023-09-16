@@ -17,6 +17,7 @@ VIDEO.init = function(sm, scene, camera){
 
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    const nf = ST.create_nf();
 
     const set_shift = ( i_start = 0, i_persec = 5, secs = 5, a_seq = 0, a_acc = 1 ) => {
         return i_start + i_persec * a_acc * 5 * a_seq;
@@ -27,11 +28,22 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
 
+
+    const tune_1 = [
+        1,'c6',1,'d6',1,'e6',1,'f6',1,'g6',1,'c7',1,'d7',1,'e7',
+        1,'c5',1,'d5',1,'e5',1,'f5',1,'g5',1,'c6',1,'d6',1,'e6'
+    ];
+    const data_1 = ST.tune_to_alphas(tune_1, nf);
+
     sq.objects[0] = {
         alpha: 5 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+
+            const obj_1 = ST.get_tune_sampobj(data_1, a_sound, opt.secs, false);
+            const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
+
             samp.values_per_wave = 20;
-            samp.frequency = 1;
+            samp.frequency = bj_1.frequency / 30;
             samp.int_shift = set_shift(0, 10, 5, a_object, 1);
             return samp;  
         }
@@ -76,13 +88,6 @@ VIDEO.init = function(sm, scene, camera){
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
 
-
-            //samp.int_shift = 20 * opt.secs * a_sound;
-            //samp.int_shift = ( 200 * a_sound ) * opt.secs * a_sound;
-            //samp.values_per_wave = 20; 
-//samp.frequency = 1.0;
-            //samp.frequency = 1 + 7 * Math.sin(Math.PI * (a_sound * (opt.secs * a_sound) % 1) );
-            //samp.amplitude = 0.5 + 0.3 * a_sound;
 
 samp.values_per_wave = 20; 
 samp.frequency = 1.0;
