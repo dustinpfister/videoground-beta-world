@@ -62,7 +62,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.values_per_wave = 20;
             samp.frequency = 1;
-            samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - a_object);
+            samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - (a_object * 0.5));
             return samp;  
         }
     };
