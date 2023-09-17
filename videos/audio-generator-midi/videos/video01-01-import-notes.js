@@ -30,13 +30,31 @@ VIDEO.init = function(sm, scene, camera){
 
     sm.frameMax = sound.frames;
 
-console.log( MidiParser );
+//console.log( MidiParser );
 
     const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes.mid')
-    return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
+    return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
+        const midi_json = MidiParser.Uint8(data);
+        const track = midi_json.track[0];
+        const event =  track.event;
+
+        const arr_noteon = event.reduce( (acc, obj) => {
+            if(obj.type === 9){
+               acc.push(obj);
+            }
+            return acc;
+        },[]);
+
+        console.log( 'full json' );
+        console.log( midi_json );
 
 
+        console.log( 'events' );
+        console.log( event );
+
+        console.log( 'type 9: ' );
+        console.log( arr_noteon )
 
     });
 
