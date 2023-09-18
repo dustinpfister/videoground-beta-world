@@ -16,27 +16,15 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'sin',
-        for_sampset: ( sampset, i, a_sound, opt ) => {
-            sampset.a_wave = a_sound;
-            sampset.amplitude = 0.75;
-            sampset.frequency = 80;
-            return sampset;
-        },
-        disp_step: 1,
-        secs: 1
-    });
 
-    sm.frameMax = sound.frames;
 
 //console.log( MidiParser );
 
     const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes.mid')
     return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
-        const midi_json = MidiParser.Uint8(data);
-        const track = midi_json.track[0];
+        const midi = MidiParser.Uint8(data);
+        const track = midi.track[0];
         const event =  track.event;
 
         const arr_noteon = event.reduce( (acc, obj) => {
@@ -46,15 +34,72 @@ VIDEO.init = function(sm, scene, camera){
             return acc;
         },[]);
 
-        console.log( 'full json' );
-        console.log( midi_json );
+        //console.log( 'full midi object' );
+        //console.log( midi );
 
 
-        console.log( 'events' );
-        console.log( event );
+        //console.log( 'events' );
+        //console.log( event );
 
-        console.log( 'type 9: ' );
-        console.log( arr_noteon )
+        //console.log( 'type 9: ' );
+        //console.log( arr_noteon );
+
+        let t = 0;
+        let a = 0;
+        let alphas = [];
+        arr_noteon.forEach( (obj, i) => {
+            t += obj.deltaTime;
+            a = t / midi.timeDivision;
+            alphas.push(a);
+
+
+
+        });
+
+
+alphas = alphas.map( (n) => {
+   return n / a;
+});
+
+// can then create that weird format that I started with the alphas array
+
+//console.log(alphas);
+
+let i_a =  0;
+const data2 = [];
+while(i_a < alphas.length){
+
+   data2.push(alphas[i_a], alphas[i_a + 1], 20);
+  
+  i_a += 2;
+}
+
+console.log(data2)
+
+
+const obj = ST.get_tune_sampobj(data2, 0.2, 1, false);
+
+console.log(obj);
+
+
+    const sound = scene.userData.sound = CS.create_sound({
+        waveform : 'sin',
+        for_sampset: ( sampset, i, a_sound, opt ) => {
+
+            const obj = ST.get_tune_sampobj(data2, a_sound, opt.secs, false);
+
+            sampset.a_wave = obj.a_wave;
+            sampset.amplitude = 0.75
+            sampset.frequency = obj.frequency;  //80;
+            return sampset;
+        },
+        disp_step: 1,
+        secs: 1
+    });
+
+    sm.frameMax = sound.frames;
+
+
 
     });
 

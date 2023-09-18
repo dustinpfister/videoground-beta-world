@@ -183,7 +183,13 @@
                 MIDI.timeDivision    = [];
                 MIDI.timeDivision[0] = timeDivisionByte1 - 128;                     // frames per second MODE  (1st byte)
                 MIDI.timeDivision[1] = timeDivisionByte2;                           // ticks in each frame     (2nd byte)
-            }else MIDI.timeDivision  = (timeDivisionByte1 * 256) + timeDivisionByte2;// else... ticks per beat MODE  (2 bytes value)
+
+
+
+            }else{
+                // else... ticks per beat MODE  (2 bytes value)
+                MIDI.timeDivision  = (timeDivisionByte1 * 256) + timeDivisionByte2;
+            }
 
             //  ** read TRACK CHUNK
             for(let t=1; t <= MIDI.tracks; t++){

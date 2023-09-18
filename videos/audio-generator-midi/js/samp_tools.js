@@ -94,7 +94,8 @@
             const ahi = data[id + 1];
             const freq = data[id + 2];
             if( a_sound >= alow && a_sound < ahi){
-                const arange = alow - ahi;
+                // fixed a bug where I was getting -range
+                const arange = ahi - alow;
                 const s = arange * secs;
                 obj.a_wave = ( a_sound - alow ) / arange;
                 obj.frequency = freq;
