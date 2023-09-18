@@ -55,7 +55,7 @@ VIDEO.init = function(sm, scene, camera){
             alphas.push(a);
             if(i % 2 === 0){
                 const note_index = obj.data[0];
-                const freq_per_index = 12.7;
+                const freq_per_index = 0.5;  // will want this to be low if using seedednoise wavform
                 arr_freq.push( ( note_index + 1) * freq_per_index);
             }
         });
@@ -78,17 +78,24 @@ VIDEO.init = function(sm, scene, camera){
         // create sound object as ushual, but
         // I now have a data2 array to use with ST.get_tune_sampobj
         //-------- ----------
+        const shift_values = [0, 1000];
         const sound = scene.userData.sound = CS.create_sound({
-            waveform : 'sin',
+            waveform : 'seedednoise',
             for_sampset: ( sampset, i, a_sound, opt ) => {
-                const obj = ST.get_tune_sampobj(data2, a_sound, opt.secs, false);
+                const spf = opt.sound.samples_per_frame;
+                const frame = Math.floor(i / spf);
+
+
+                const obj = ST.get_tune_sampobj(data2, a_sound, opt.secs, true);
                 sampset.a_wave = obj.a_wave;
-                sampset.amplitude = 0.75
+                sampset.values_per_wave = 40 + 1000 * a_sound;
+                sampset.int_shift = 0; //shift_values[ (frame * 2) %  shift_values.length ];
+                sampset.amplitude = 0.75; //Math.sin(Math.PI * obj.a_wave );
                 sampset.frequency = obj.frequency;
                 return sampset;
             },
-            disp_step: 1,
-            secs: 3
+            disp_step: 100,
+            secs: 6
         });
         sm.frameMax = sound.frames;
     });
