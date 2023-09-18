@@ -47,12 +47,19 @@ VIDEO.init = function(sm, scene, camera){
         let t = 0;
         let a = 0;
         let alphas = [];
+        let arr_freq = []
         arr_noteon.forEach( (obj, i) => {
             t += obj.deltaTime;
             a = t / midi.timeDivision;
             alphas.push(a);
 
+if(i % 2 === 0){
 
+    const note_index = obj.data[0];
+    const freq_per_index = 12.7;
+    
+    arr_freq.push( ( note_index + 1) * freq_per_index);
+}
 
         });
 
@@ -69,7 +76,7 @@ let i_a =  0;
 const data2 = [];
 while(i_a < alphas.length){
 
-   data2.push(alphas[i_a], alphas[i_a + 1], 20);
+   data2.push(alphas[i_a], alphas[i_a + 1], arr_freq[ Math.floor(i_a / 2) ]);
   
   i_a += 2;
 }
@@ -94,7 +101,7 @@ console.log(obj);
             return sampset;
         },
         disp_step: 1,
-        secs: 1
+        secs: 3
     });
 
     sm.frameMax = sound.frames;
