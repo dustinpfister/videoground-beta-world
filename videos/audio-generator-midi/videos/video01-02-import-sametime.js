@@ -35,24 +35,8 @@ VIDEO.init = function(sm, scene, camera){
         });
         return t / midi.timeDivision;
     };
-
-
-    //-------- ----------
-    // READ MIDI FILE
-    //-------- ----------
-    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid')
-    return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
-    .then( (data) => {
-        //-------- ----------       
-        // midi object, noton array, total_time
-        //-------- ----------
-        const midi = MidiParser.Uint8(data);
-        const arr_noteon = get_type9_array(midi, 0);
-        const total_time = compute_total_midi_time(midi);
-        //-------- ----------
-        // work out a way to find a current set of samp objects to use with a table
-        //-------- ----------
-        const a_sound = 0.25;
+    // get track table data
+    const get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0 ) => {
         const samp_current = [];
         let t = 0;
         arr_noteon.forEach( (obj, i, arr) => {
@@ -63,53 +47,69 @@ VIDEO.init = function(sm, scene, camera){
                 const note_index = obj.data[0];
                 const a_start = parseFloat( (sec / total_time).toFixed(2));
                 // get a_end value
-                let i2 = i;
+                let i2 = i + 1;
                 let t2 = t;
                 let a_end = a_start;
                 while(i2 < arr.length){
                     const obj2 = arr[i2];
                     t2 += obj2.deltaTime;
                     if(obj2.data[0] === obj.data[0] && obj2.data[1] === 0){
+
                         const sec = t2 / midi.timeDivision;
                         a_end = parseFloat( (sec / total_time).toFixed(2));
                         break;
                     }
                     i2 += 1;
                 }
-                console.log( t, a_start,a_end, note_start, note_index );
+                //console.log( t, a_start,a_end, note_start, note_index );
                 if( a_sound >= a_start && a_sound <= a_end){
+                    const a_wave = (a_sound - a_start) / (a_end - a_start);
                     samp_current.push({
-                        a_wave: (a_sound - a_start) / (a_end - a_start),
                         ni: note_index,
-                        frequency: 10 * note_index,
-                        amplitude: 1.00
+                        a_wave: a_wave,
+                        frequency: note_index * 0.25,
+                        amplitude: 1.00,
+                        waveform: 'seedednoise',
+                        values_per_wave: 20,
+                        int_shift: 0
                     });
                 }
             }
         });
+        return samp_current;
+    };
 
 
-
-
-
-
+    //-------- ----------
+    // READ MIDI FILE
+    //-------- ----------
+    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid')
+    return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
+    .then( (data) => {
+        //-------- ----------       
+        // midi object, noteon array, total_time
+        //-------- ----------
+        const midi = MidiParser.Uint8(data);
+        const arr_noteon = get_type9_array(midi, 0);
+        const total_time = compute_total_midi_time(midi);
         //-------- ----------
         // create sound object as ushual, but
         // I now have a data2 array to use with ST.get_tune_sampobj
         //-------- ----------
-        const shift_values = [0, 1000];
         const sound = scene.userData.sound = CS.create_sound({
-            waveform : 'seedednoise',
+            waveform : 'table',
             for_sampset: ( sampset, i, a_sound, opt ) => {
-                sampset.a_wave = a_sound;
-                sampset.values_per_wave = 40;
-                sampset.int_shift = 0; 
-                sampset.amplitude = 0.75;
-                sampset.frequency = 30;
-                return sampset;
+                const table = get_track_table_data(midi, arr_noteon, total_time, a_sound);
+                const a_wave = a_sound * opt.secs % 1;
+                return {
+                   amplitude: 0.75 + 0.20 * (table.length - 1),
+                   a_wave: a_wave,
+                   frequency: 1,
+                   table: table
+                }
             },
             disp_step: 100,
-            secs: 3
+            secs: Math.round(total_time)
         });
         sm.frameMax = sound.frames;
     });
