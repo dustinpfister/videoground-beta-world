@@ -36,8 +36,9 @@ VIDEO.init = function(sm, scene, camera){
         return t / midi.timeDivision;
     };
     // get track table data
-    const get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0 ) => {
+    const get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0) => {
         const samp_current = [];
+        let i_table=0;
         let t = 0;
         arr_noteon.forEach( (obj, i, arr) => {
             t += obj.deltaTime;
@@ -45,7 +46,7 @@ VIDEO.init = function(sm, scene, camera){
             const note_start = obj.data[1] != 0;
             if(note_start){
                 const note_index = obj.data[0];
-                const a_start = parseFloat( (sec / total_time).toFixed(2));
+                const a_start = sec / total_time
                 // get a_end value
                 let i2 = i + 1;
                 let t2 = t;
@@ -54,28 +55,39 @@ VIDEO.init = function(sm, scene, camera){
                     const obj2 = arr[i2];
                     t2 += obj2.deltaTime;
                     if(obj2.data[0] === obj.data[0] && obj2.data[1] === 0){
-
                         const sec = t2 / midi.timeDivision;
-                        a_end = parseFloat( (sec / total_time).toFixed(2));
+                        a_end = sec / total_time;
                         break;
                     }
                     i2 += 1;
                 }
                 //console.log( t, a_start,a_end, note_start, note_index );
-                if( a_sound >= a_start && a_sound <= a_end){
+                if( a_sound >= a_start && a_sound < a_end ){
                     const a_wave = (a_sound - a_start) / (a_end - a_start);
-                    samp_current.push({
+                    samp_current[i_table] = {
                         ni: note_index,
                         a_wave: a_wave,
-                        frequency: note_index * 0.25,
-                        amplitude: 1.00,
-                        waveform: 'seedednoise',
+                        frequency: Math.floor(note_index * 12),
+                        amplitude: 0.75 * Math.sin(Math.PI * a_wave),
+                        waveform: 'sin', //'square', //'sin', //'seedednoise',
                         values_per_wave: 20,
                         int_shift: 0
-                    });
+                    };
+                    i_table += 1;
                 }
             }
         });
+
+        // if we have nothing?
+        if(samp_current.length === 0){
+            samp_current[i_table] = {
+                ni: 0,
+                a_wave: 0,
+                frequency: 0,
+                amplitude: 0,
+                waveform: 'sin'
+            };
+        }
         return samp_current;
     };
 
@@ -102,14 +114,14 @@ VIDEO.init = function(sm, scene, camera){
                 const table = get_track_table_data(midi, arr_noteon, total_time, a_sound);
                 const a_wave = a_sound * opt.secs % 1;
                 return {
-                   amplitude: 0.75 + 0.20 * (table.length - 1),
+                   amplitude: 0.75,
                    a_wave: a_wave,
                    frequency: 1,
                    table: table
                 }
             },
             disp_step: 100,
-            secs: Math.round(total_time)
+            secs: Math.ceil(total_time)
         });
         sm.frameMax = sound.frames;
     });
