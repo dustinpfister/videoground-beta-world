@@ -42,7 +42,7 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         },
         //sample_rate: 1000,
-        disp_step: 1,
+        disp_step: 10,
         secs: 20
     });
     sm.frameMax = sound.frames;

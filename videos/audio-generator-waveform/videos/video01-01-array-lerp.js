@@ -1,6 +1,5 @@
-/*    video04-01-perframe-aframe - for audio-generator-1 project
-          * going by alpha values on a frame by frame basis
-          * just starting out with the a frame value and adjusting frequency
+/*    video01-01-array-lerp - for audio-generator-waveform project
+          * lerp from one waveform to another
  */
 //-------- ----------
 // SCRIPTS
@@ -15,25 +14,34 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
+    let array_wave = [];
     const sound = scene.userData.sound = CS.create_sound({
-        waveform : 'sin',
+        waveform : 'array',
         for_sampset: ( samp, i, a_sound, opt ) => {
-
             const spf = opt.sound.samples_per_frame;
             const frame = Math.floor(i / spf);
+            const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
-
+            array_wave = scene.userData.array_wave = [];
+            let i2 = 0;
+            const len = 100;
+            while(i2 < len){
+                const samp_sin = { frequency: 2, amplitude: 0.50 };
+                const samp_tri = { frequency: 1, amplitude: 0.50, step_count: 4 };
+                const s1 = CS. WAVE_FORM_FUNCTIONS.sin(samp_sin, i2 / len );
+                const s2 = CS. WAVE_FORM_FUNCTIONS.seedednoise(samp_tri, i2 / len );
+                array_wave.push( THREE.MathUtils.lerp(s1, s2, a_sound) );
+                i2 += 1;
+            }
+            samp.array = array_wave;
             samp.a_wave = a_frame;
-
-            const a_sound3 = frame / opt.sound.frames;
-            samp.frequency = 2 + 2 * Math.round( 350 * a_sound3);
-            samp.amplitude = 0.65;
-
+            samp.amplitude = 0.75;
+            const a_bias = Math.sin( Math.PI * (a_sound2 * 8 % 1) );
+            samp.frequency = 2 * Math.floor(1 + 8 * a_bias) ;
             return samp;
         },
-        disp_step: 20,
-        getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 30
+        disp_step: 100,
+        secs: 10
     });
     sm.frameMax = sound.frames;
 };
@@ -55,6 +63,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // draw disp
     DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
+    DSD.draw( ctx, scene.userData.array_wave, sound.opt_wave, 0 );
     // additional plain 2d overlay for status info
     DSD.draw_info(ctx, sound, sm);
 };
