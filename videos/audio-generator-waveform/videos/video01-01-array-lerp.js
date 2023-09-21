@@ -26,7 +26,7 @@ VIDEO.init = function(sm, scene, camera){
                 const samp_sin = { frequency: 2, amplitude: 0.50 };
                 const samp_tri = { frequency: 1, amplitude: 0.50, step_count: 4 };
                 const s1 = CS. WAVE_FORM_FUNCTIONS.sin(samp_sin, i2 / len );
-                const s2 = CS. WAVE_FORM_FUNCTIONS.tri(samp_tri, i2 / len );
+                const s2 = CS. WAVE_FORM_FUNCTIONS.seedednoise(samp_tri, i2 / len );
                 fs.array_wave.push( THREE.MathUtils.lerp(s1, s2, a_sound2 ) );
                 i2 += 1;
             }
@@ -46,7 +46,7 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         },
         disp_step: 100,
-        secs: 10
+        secs: 30
     });
     sm.frameMax = sound.frames;
 };
@@ -54,10 +54,8 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
-
     // create the data samples
     const data_samples = CS.create_frame_samples(scene.userData.sound, sm.frame, sm.frameMax );
-
     return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
 };
 //-------- ----------

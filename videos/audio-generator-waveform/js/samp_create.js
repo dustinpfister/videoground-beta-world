@@ -180,7 +180,7 @@
         const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
         sound.opt_disp = { w: 1280 - 50 * 2, h: 100, sy: 80, sx: 50, getsamp_lossy: getsamp_lossy };
         sound.opt_frame = { w: 1280 - 50 * 2, h: 100, sy: 200, sx: 50, mode: sound.mode };
-        sound.opt_wave = { w: 1280 - 50 * 2, h: 230, sy: 340, sx: 50, mode: 'raw' };
+        sound.opt_wave = { w: 1280 - 50 * 2, h: 340, sy: 340, sx: 50, mode: 'raw' };
         return sound;
     };
 
