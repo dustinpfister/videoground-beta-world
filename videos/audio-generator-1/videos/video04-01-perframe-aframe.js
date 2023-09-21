@@ -26,14 +26,14 @@ VIDEO.init = function(sm, scene, camera){
             samp.a_wave = a_frame;
 
             const a_sound3 = frame / opt.sound.frames;
-            samp.frequency = 10 + 2 * Math.round( 12 * a_sound3);
+            samp.frequency = 2 + 2 * Math.round( 350 * a_sound3);
             samp.amplitude = 0.65;
 
             return samp;
         },
-        disp_step: 60,
+        disp_step: 20,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 5
+        secs: 100
     });
     sm.frameMax = sound.frames;
 };
