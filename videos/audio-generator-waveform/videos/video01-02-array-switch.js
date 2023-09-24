@@ -16,15 +16,82 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const array_options = [
-        [ 0.00, 0.10, -0.10, -0.20, -0.10, 0, 0.75, 0.00 ],
-        [ 0.25, 0.10, -0.30, -0.50, -0.20, 0, 0.15, 0.37 ]
+        [ 0.00 ],
+        [
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+
+         -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50,
+         -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50,
+         -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50,
+         -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50, -0.50,
+
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,
+          0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50,  0.50
+        ],
+        [
+          0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,
+         -0.39,  0.10,  0.74,  0.12, -0.28,  0.44,  0.09,  0.80,
+          0.43, -0.27,  0.45, -0.04, -0.39,  0.54, -0.88, -0.72,
+          0.11, -0.31,  0.38,  0.14, -0.33,  0.28, -0.10,  0.22,
+          0.13,  0.24, -0.05,  0.16,  0.00,  0.00,  0.00,  0.00,
+          0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00
+        ],
+        [ 0.00,  0.50,  0.50,  0.00, -0.50, -0.50,  0.00,  0.00 ],
+        [ 0.00,  0.25, -0.75,  0.75,  0.75, -0.75,  0.25,  0.00 ]
+
     ];
+
+    const indices = [
+        1,1,2,2,3,3,4,4, 1,1,2,2,3,3,4,4, 1,1,2,2,3,3,4,4, 1,1,2,2,3,3,4,4,
+    ];
+
+    const sq = {
+        objects: []
+    };
+
+    sq.objects[0] = {
+        alpha: 5 / 20,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.frequency = 3;
+            return samp;  
+        }
+    };
+
+    sq.objects[1] = {
+        alpha: 10 / 20,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.frequency = 3 + 3 * a_object;
+            return samp;  
+        }
+    };
+
+    sq.objects[2] = {
+        alpha: 20 / 20,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.frequency = 6;
+            return samp;  
+        }
+    };
+
+    sq.objects[2] = {
+        alpha: 20 / 20,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.frequency = 6;
+            return samp;  
+        }
+    };
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
         // called once per frame
         for_frame : (fs, frame, max_frame, a_sound2 ) => {
-            fs.array_wave = scene.userData.array_wave = array_options[ Math.floor( array_options.length * a_sound2 ) ];
+            const i_a1 = indices[ Math.floor( indices.length * (a_sound2 * 4 % 1) ) ];
+            fs.array_wave = scene.userData.array_wave = array_options[ i_a1 ];
             return fs;
         },
         // called for each sample ( so yeah this is a hot path )
@@ -41,10 +108,12 @@ VIDEO.init = function(sm, scene, camera){
 
             samp.frequency = Math.floor( 100 / 30 );
 
+            ST.applySQ(sq, samp, i, a_sound, opt);
+
             return samp;
         },
         disp_step: 100,
-        secs: 1
+        secs: 20
     });
     sm.frameMax = sound.frames;
 };
