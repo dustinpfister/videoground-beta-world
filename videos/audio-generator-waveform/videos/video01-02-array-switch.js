@@ -65,23 +65,30 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[1] = {
         alpha: 10 / 20,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.frequency = 3 + 3 * a_object;
+            //samp.frequency = 3 + 3 * a_object;
+            //samp.frequency = 3 + 3 * ( Math.pow(2, a_object) / 2 );
+            //samp.frequency = 3 + Math.pow(2, Math.log(3 * a_object ) / Math.log(2) );
+            //samp.frequency = 3 + 3 * ( Math.floor( 30 / 2 * a_object) * 2 );
+            //samp.frequency = 3 + 3 * ( Math.floor( 100 * a_object / 2) * 2 / 100 );
+
+samp.frequency = 3 + 3 * Math.pow(2, 1 * a_object ) / Math.pow(2, 1);
+
             return samp;  
         }
     };
 
     sq.objects[2] = {
-        alpha: 20 / 20,
+        alpha: 15 / 20,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.frequency = 6;
             return samp;  
         }
     };
 
-    sq.objects[2] = {
+    sq.objects[3] = {
         alpha: 20 / 20,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.frequency = 6;
+            samp.frequency = 6 - 6 * Math.pow(2, 1 * a_object ) / Math.pow(2, 1);
             return samp;  
         }
     };
