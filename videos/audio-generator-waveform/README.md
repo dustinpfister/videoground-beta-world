@@ -8,5 +8,5 @@ I am thinking that this whole collection of videos might involve the use of the 
 
 ### video01-01-array-lerp
 
-For thi video I am 'lerping' from one waveform to another waveform.
+For this video I am 'lerping' from one waveform to another waveform.
 

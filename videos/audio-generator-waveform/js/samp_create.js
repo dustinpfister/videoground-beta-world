@@ -124,7 +124,7 @@
         // of this revision of samp_create.js
         if(opt.frame > -1){
             const a_sound2 = opt.frame / opt.max_frame;
-            for_frame(frameset, opt.frame, opt.max_frame, a_sound2);
+            for_frame(frameset, opt.frame, opt.max_frame, a_sound2, opt);
         }
 
         const i_end = i_start + i_count;
@@ -139,7 +139,7 @@
                 frame2 = f;
                 frameset = {};
                 const a_sound2 = frame2 / opt.max_frame;
-                for_frame(frameset, frame2, opt.max_frame, a_sound2);
+                for_frame(frameset, frame2, opt.max_frame, a_sound2, opt);
             }
             sampeset = for_sampset(sampeset, i, a_sound, frameset, opt);
             const a_wave = sampeset.a_wave === undefined ? ST.get_wave_alpha_totalsecs( a_sound, opt.secs ) : sampeset.a_wave;
