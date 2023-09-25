@@ -22,6 +22,10 @@ VIDEO.init = function(sm, scene, camera){
 
     sq.objects[0] = {
         alpha: 2 / 5,
+        for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+            fs.i_obj = 0;
+            return fs;
+        },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.amplitude = 1;
             samp.frequency = 2;
@@ -31,6 +35,10 @@ VIDEO.init = function(sm, scene, camera){
 
     sq.objects[1] = {
         alpha: 5 / 5,
+        for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+            fs.i_obj = 1;
+            return fs;
+        },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.amplitude = 1;
             samp.frequency = 3;
@@ -51,7 +59,15 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
-        for_frame : (fs, frame, max_frame, a_sound2 ) => {
+        for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+
+
+            ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
+
+            console.log('0: ' + frame);
+            console.log(fs);
+            console.log('');
+
             const a_note = a_sound2 * 10 % 1;
             const array_wave = [];
             let i_h = 0;

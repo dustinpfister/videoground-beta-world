@@ -3,6 +3,24 @@
     //-------- ----------
     // APPLY SQ - methods that helper with 'SeQuence' Objects
     //-------- ----------
+    ST.applySQFrame = (sq, fs, frame, max_frame, a_sound2, opt) => {
+        let i2 = 0;
+        const len = sq.objects.length;
+        let a_base = 0;
+        while( i2 < len ){
+            const obj = sq.objects[i2];
+            if( a_sound2 <= obj.alpha ){
+                let a_object = ( a_sound2 - a_base ) /  ( obj.alpha - a_base );
+                if(!obj.for_frame){
+                    return;
+                }
+                return obj.for_frame(fs, frame, max_frame, a_sound2, opt, a_object, sq);
+            }
+            a_base = obj.alpha;
+            i2 += 1;
+        }
+    };
+
     ST.applySQ = ( sq, samp, i, a_sound, opt ) => {
         let i2 = 0;
         const len = sq.objects.length;
