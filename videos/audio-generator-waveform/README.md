@@ -18,3 +18,7 @@ This is a video in which I have an array of arrays of sample data and I am just 
 ### video01-03-array-sin
 
 This is a video in which I am trying to work out a new kind of waveform that is not just one but several sin waves but with amplitudes and offsets that change over time.
+
+### video01-04-array-trishift
+
+Idea for a wave where I have a trianglewave and I adjust from there
