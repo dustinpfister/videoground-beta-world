@@ -16,30 +16,25 @@ VIDEO.init = function(sm, scene, camera){
 
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const v2_start = new THREE.Vector2(0, -1);
-    const v2_end = new THREE.Vector2(1, -1);
-    const v2_c1 = new THREE.Vector2(0.25, 1.5);
-    const v2_c2 = new THREE.Vector2(0.5, 1.5);
-
-    const curve = new THREE.CubicBezierCurve(v2_start, v2_c1, v2_c2, v2_end);
-
-console.log( curve.getPoint(0.5) );
-
-    const create_tri_shift_array = (count_tri=21, a=0.5) => {
+    const create_tri_shift_array = (count_tri=21, adjust1=1, adjust2=1) => {
         let i_tri = 0;
         const data_tri = []
         while(i_tri < count_tri){
             const a_wave = i_tri  / count_tri;
             const a_bias = 1 - Math.abs(0.5 - a_wave) / 0.5;
             const samp_tri = -1 + 2 * a_bias;
-            //const a_shift = Math.sin( Math.PI * a * ( 1 - a_wave ) )
+            
+            const v2 = new THREE.Vector2(samp_tri, 0);
+            const diff = v2.distanceTo( new THREE.Vector2(1, 0) );
 
-            const v2 = curve.getPoint(a_wave) 
-
-            //data_tri.push( v2.y ); 
-
-            const i = Math.floor( v2.x * count_tri );
-            data_tri[i] = (v2.y + samp_tri) / 2; 
+            let samp_adjusted = samp_tri + diff * (a_bias * adjust1); 
+            if(a_wave >= 0.5 ){
+                samp_adjusted = samp_tri - diff * (a_bias * adjust2);
+                 
+            }
+            samp_adjusted = samp_adjusted > 1 ? 1 : samp_adjusted;
+            samp_adjusted = samp_adjusted < -1 ? -1 : samp_adjusted;
+            data_tri.push(  samp_adjusted );
 
             i_tri += 1;
         }
@@ -49,8 +44,12 @@ console.log( curve.getPoint(0.5) );
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
-            fs.array_wave = scene.userData.array_wave = create_tri_shift_array(23, a_sound2);
+            let a1 = 0, a2 = 0;
+            a1 = 2 * a_sound2;
+            a2 = 3 * a_sound2;
+            const array = create_tri_shift_array(80, a1, a2);
+            fs.array_wave = scene.userData.array_wave = array;
+            fs.a_freq = Math.sin(Math.PI * ( a_sound2 * (opt.secs / 3) % 1 ) );
 
             return fs;
         },
@@ -62,13 +61,14 @@ console.log( curve.getPoint(0.5) );
             const a_frame = (i % spf) / spf;
             samp.array = fs.array_wave;
             samp.a_wave = a_frame;
-            samp.amplitude = 1;
-            samp.frequency = 4;
+            samp.amplitude = 0.65;
+            
+            samp.frequency = 2 + Math.round(4 * fs.a_freq);
             return samp;
         },
         getsamp_lossy: DSD.getsamp_lossy_pingpong,
-        disp_step: 1,
-        secs: 1
+        disp_step: 100,
+        secs: 9
     });
 
     sm.frameMax = sound.frames;
