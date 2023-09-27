@@ -1,5 +1,5 @@
-/*    video01-04-array-trishift - for audio-generator-waveform project
-          * triangle idea
+/*    video01-01-array-lerp - for audio-generator-waveform project
+          * lerp from one waveform to another
  */
 //-------- ----------
 // SCRIPTS
@@ -13,64 +13,60 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
-
     sm.renderer.setClearColor(0x000000, 0.25);
+    let array_wave = [];
 
-    const create_tri_shift_array = (count_tri=21, adjust1=1, adjust2=1) => {
-        let i_tri = 0;
-        const data_tri = []
-        while(i_tri < count_tri){
-            const a_wave = i_tri  / count_tri;
-            const a_bias = 1 - Math.abs(0.5 - a_wave) / 0.5;
-            const samp_tri = -0.50 + 1.00 * a_bias;
-            
-            const v2 = new THREE.Vector2(samp_tri, 0);
-            const diff = v2.distanceTo( new THREE.Vector2(1, 0) );
+    const tune = [
+        1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,
+        2,2,2,2,
+        4,4,4,4,
+        2,2,3,3,2,2,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,
 
-            let samp_adjusted = samp_tri + diff * (a_bias * adjust1); 
-            if(a_wave >= 0.5 ){
-                samp_adjusted = samp_tri - diff * (a_bias * adjust2);
-                 
-            }
-            samp_adjusted = samp_adjusted > 1 ? 1 : samp_adjusted;
-            samp_adjusted = samp_adjusted < -1 ? -1 : samp_adjusted;
-            data_tri.push(  samp_adjusted );
+        2,3,2,3,2,3,2,3,5,5,5,5,6,6,7,7,7,7,7,
+        2,3,2,3,2,3,2,3,5,5,5,5,6,6,1,1,1,1,1,
 
-            i_tri += 1;
-        }
-        return data_tri
-    }
+        2,2,2,2,
+        4,4,4,4,
+        2,2,3,3,2,2,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,6,5,4,3,2,1,1,1,1,1
+
+    ];
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
+        // called once per frame
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            let a1 = 0, a2 = 0;
-            a1 = 2 * a_sound2;
-            a2 = 3 * a_sound2;
-            const array = create_tri_shift_array(80, a1, a2);
-            fs.array_wave = scene.userData.array_wave = array;
-            fs.a_freq = Math.sin(Math.PI * ( a_sound2 * (opt.secs / 4) % 1 ) );
+            fs.array_wave = scene.userData.array_wave = [];
+            let i2 = 0;
+            const len = 100;
+            const a_duty = 0.95 - 0.9 * a_sound2;
+            const samp_pulse = { frequency: 2, amplitude: 0.50, duty: a_duty };
+            const samp_saw = { frequency: 1, amplitude: 0.50 };
+            while(i2 < len){
 
+                const s1 = CS. WAVE_FORM_FUNCTIONS.pulse(samp_pulse, i2 / len );
+                const s2 = CS. WAVE_FORM_FUNCTIONS.sawtooth(samp_saw, i2 / len );
+                const a_trans = a_sound2 * opt.secs % 1;
+                const a_trans_sin = Math.sin(Math.PI * a_trans);
+
+                fs.array_wave.push( THREE.MathUtils.lerp(s1, s2, a_trans_sin ) );
+                i2 += 1;
+            }
+            fs.freq = tune[ Math.floor( tune.length * a_sound2) ];
             return fs;
         },
         // called for each sample ( so yeah this is a hot path )
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             const spf = opt.sound.samples_per_frame;
-            const frame = Math.floor(i / spf);
-            const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
             samp.array = fs.array_wave;
             samp.a_wave = a_frame;
-            samp.amplitude = 0.65;
-            
-            samp.frequency = 2 + Math.round(4 * fs.a_freq);
+            samp.amplitude = 0.75;
+            samp.frequency = fs.freq;
             return samp;
         },
-        getsamp_lossy: DSD.getsamp_lossy_pingpong,
         disp_step: 100,
-        secs: 12
+        secs: 30
     });
-
     sm.frameMax = sound.frames;
 };
 //-------- ----------
