@@ -1,5 +1,5 @@
-/*    video01-01-lerp-pulse-to-sawtooth - for audio-generator-waveform project
-          * lerp from one waveform to another
+/*    video01-02-lerp-pulse-to-sawtooth-2 - for audio-generator-waveform project
+          * same as the first one, but I am adjusting duty cycle, trans cycle, ect
  */
 //-------- ----------
 // SCRIPTS
@@ -17,14 +17,7 @@ VIDEO.init = function(sm, scene, camera){
     let array_wave = [];
 
     const tune = [
-        1,1,2,2,3,3,
-        4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-        5,5,5,5,5,5,5,5,2,2,2,2,2,3,3,3,3,3,3,3,
-        4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-        5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,
-        5,5,5,5,5,5,4,3,2,1,1,1
 
-/*
         1,2,1,2,3,2,3,2,3,4,3,4,4,5,4,5,6,5,6,5,6,7,6,7,7,7,6,5,
         1,2,1,2,
         4,3,4,3,
@@ -36,8 +29,15 @@ VIDEO.init = function(sm, scene, camera){
         2,2,2,2,
         4,4,4,4,
         2,2,3,3,2,2,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,6,5,4,3,2,1,1,1,1,1
-*/
 
+/*
+        1,1,2,2,3,3,
+        4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+        5,5,5,5,5,5,5,5,2,2,2,2,2,3,3,3,3,3,3,3,
+        4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+        5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,
+        5,5,5,5,5,5,4,3,2,1,1,1
+*/
     ];
 
     const sound = scene.userData.sound = CS.create_sound({
@@ -47,18 +47,20 @@ VIDEO.init = function(sm, scene, camera){
             fs.array_wave = scene.userData.array_wave = [];
             let i2 = 0;
             const len = 100;
-            const a_duty = 0.95 - 0.9 * (a_sound2 * opt.secs * 2 % 1);
-            const a_duty_sin = Math.sin(Math.PI * a_duty);
-            const samp_pulse = { frequency: 2, amplitude: 0.50, duty: a_duty_sin };
+
+            const a_duty = 0.05 + 0.90 * a_sound2;
+
+
+            const samp_pulse = { frequency: 2, amplitude: 0.50, duty: a_duty };
             const samp_saw = { frequency: 1, amplitude: 0.50 };
             while(i2 < len){
 
                 const s1 = CS. WAVE_FORM_FUNCTIONS.pulse(samp_pulse, i2 / len );
                 const s2 = CS. WAVE_FORM_FUNCTIONS.sawtooth(samp_saw, i2 / len );
-                const a_trans = a_sound2 * (opt.secs * 8 ) % 1;
-                const a_trans_sin = Math.sin(Math.PI * a_trans);
 
-                fs.array_wave.push( THREE.MathUtils.lerp(s1, s2, a_trans_sin ) );
+                const a_trans = Math.sin( Math.PI * a_sound2);
+
+                fs.array_wave.push( THREE.MathUtils.lerp(s1, s2, a_trans ) );
                 i2 += 1;
             }
             fs.freq = tune[ Math.floor( tune.length * a_sound2) ];
