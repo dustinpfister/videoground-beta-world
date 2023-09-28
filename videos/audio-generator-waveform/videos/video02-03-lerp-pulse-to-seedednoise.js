@@ -29,7 +29,7 @@ VIDEO.init = function(sm, scene, camera){
             const samp_pulse = {
                 frequency: 1,
                 amplitude: 1.00,
-                duty: 0.05 + 0.90 * Math.sin( Math.PI * (a_sound2 * (opt.secs / 2.5) % 1) )
+                duty: 0.05 + 0.90 * Math.sin( Math.PI * (a_sound2 * (opt.secs * 2.5) % 1) )
             };
             const samp_seedednoise = {
                 frequency: 1,
@@ -62,7 +62,7 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         },
         disp_step: 10,
-        secs: 30
+        secs: 15
     });
     sm.frameMax = sound.frames;
 };
