@@ -88,12 +88,10 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     sm.renderer.setClearColor(0x000000, 0.25);
-    
-    sm.frameMax = 30;
+    sm.frameMax = 30 * 10;
     sud.total_secs = sm.frameMax / 30;
     sud.sample_rate = 9990;
     sud.samples_per_frame = sud.sample_rate / 30;
-
 
 };
 //-------- ----------
@@ -101,22 +99,18 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
-
-    const data_samples = [];
+    sud.data_samples = [];
+    sud.data_samples_int16 = [];
     let i_sample = 0;
     while(i_sample < sud.samples_per_frame ){
         const a_frame = i_sample / sud.samples_per_frame;
-
-        //const samp = Math.floor( Math.random() * 2 );
-        const freq = 1;
+        const freq = 1 + 99 * per;
         const samp = pulse({ frequency: freq, amplitude: 1, duty: 0.5 }, a_frame);
-
-        data_samples.push(  normal_to_int16( 0.1 + 0.8 * samp )  );
+        sud.data_samples.push(samp);
+        sud.data_samples_int16.push(  normal_to_int16( 0.1 + 0.8 * samp )  );
         i_sample += 1;
     };
-
-    return write_frame_samples(data_samples, sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
-
+    return write_frame_samples(sud.data_samples_int16, sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
 };
 //-------- ----------
 // RENDER
@@ -127,5 +121,22 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
+
+    // info
+    ctx.fillStyle = 'lime';
+    ctx.font = '30px courier';
+    ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax, 50, 50);
+    ctx.fillText('samples_per_frame: ' + sud.samples_per_frame, 50, 80);
+
+    let i_sample = 0;
+    while(i_sample < sud.samples_per_frame ){
+        const samp = sud.data_samples[i_sample];
+        const x = 50 + i_sample;
+        const y = 300;
+        ctx.fillRect(x, y, 1, 100 * samp);
+        i_sample += 1;
+    };
+
+
 };
 
