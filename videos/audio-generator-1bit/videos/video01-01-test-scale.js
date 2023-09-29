@@ -90,7 +90,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     sm.frameMax = 30 * 10;
     sud.total_secs = sm.frameMax / 30;
-    sud.sample_rate = 9990;
+    sud.sample_rate = 44100;
     sud.samples_per_frame = sud.sample_rate / 30;
 
 };
@@ -104,7 +104,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     let i_sample = 0;
     while(i_sample < sud.samples_per_frame ){
         const a_frame = i_sample / sud.samples_per_frame;
-        const freq = 1 + 99 * per;
+        const freq = 256 * per; //Math.pow(2, Math.floor(8 * per ) );
         const samp = pulse({ frequency: freq, amplitude: 1, duty: 0.5 }, a_frame);
         sud.data_samples.push(samp);
         sud.data_samples_int16.push(  normal_to_int16( 0.1 + 0.8 * samp )  );
@@ -128,13 +128,16 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax, 50, 50);
     ctx.fillText('samples_per_frame: ' + sud.samples_per_frame, 50, 80);
 
+    const x = 50, y = 300;
+    ctx.fillStyle = '#8a8a8a';
+    ctx.fillRect(x, y, sud.samples_per_frame / 2, 100);
+    ctx.fillStyle = 'rgba(0,255,0,0.75)';
     let i_sample = 0;
     while(i_sample < sud.samples_per_frame ){
         const samp = sud.data_samples[i_sample];
-        const x = 50 + i_sample;
-        const y = 300;
-        ctx.fillRect(x, y, 1, 100 * samp);
-        i_sample += 1;
+        const dx = (i_sample) / 2;
+        ctx.fillRect(x + dx, y, 1, 100 * samp);
+        i_sample += 2;
     };
 
 
