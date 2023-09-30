@@ -26,14 +26,15 @@ const array_import = "0.52, 0.51, 0.5, 0.49, 0.49, 0.5, 0.51, 0.51, 0.51, 0.51, 
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
             fs.array_wave = scene.userData.array_wave = [];
             let i2 = 0;
-            const frames_per_meow = 30; //7.5;
+            const frames_per_meow = 60 - 45 * a_sound2;
+            const i_meow = Math.floor(frame / frames_per_meow );
             const len = Math.floor( array_import.length / frames_per_meow );
             while(i2 < len){
                 const i_import = Math.floor( (frame % frames_per_meow) * len + i2 );
-                fs.array_wave.push( -0.50 + 1.0 * array_import[i_import] );
+                fs.array_wave.push( -0.75 + 1.5 * array_import[i_import] );
                 i2 += 1;
             }
-            fs.freq = 8 * a_sound2;
+            fs.freq = 0.25 + 2.75 * a_sound2;
             fs.a_amp = 1; Math.sin(Math.PI * (frame % frames_per_meow) / frames_per_meow);
             return fs;
         },
