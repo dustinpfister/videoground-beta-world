@@ -4,7 +4,7 @@
     // WAV IMPORT
     //-------- ----------
     // get an object that contains easily readabule wav feild data, DataView Objects and so forth
-    ST.getWAVobj = ( data=[] ) => {
+    ST.get_wav_obj = ( data=[] ) => {
         const header_uint8 = data.slice(0, 44);
         const header_buff = header_uint8.buffer;
         const header_dv = new DataView(header_buff);
@@ -20,21 +20,50 @@
         wav.sample_rate = header_dv.getUint32(24, true);
         wav.byte_rate = header_dv.getUint32(28, true);
         // other info
-        wav.num_channels = header_dv.getUint16(22, true); 
+        wav.num_channels = header_dv.getUint16(22, true);
+        wav.sub_chunk1_size = header_dv.getUint32(16, true);
         wav.chunk_size = header_dv.getUint32(4, true);
         wav.format = header_dv.getUint16(20, true); 
-        // debug info
-        console.log('**********');
-        console.log('wav info: ');
-        console.log( 'chunk_size  : ' + wav.chunk_size   );
-        console.log( 'sample rate : ' + wav.sample_rate  );
-        console.log( 'channels    : ' + wav.num_channels );
-        console.log( 'format      : ' + wav.format );
-        console.log( 'byte rate   : ' + wav.byte_rate );
-        console.log('**********');
         return wav;
     };
-
+    //
+    ST.get_wav_samp_array = ( wav={}  ) => {
+        const array_import = [];
+        let i_byte = 0;
+        const i_delta = Math.floor(wav.sub_chunk1_size / 8);
+        const len = wav.data_uint8.length;
+        while(i_byte < len){
+            const samp = wav.data_dv.getInt16(i_byte, true);
+            const samp_raw = ST.mode_to_raw(samp, 'int16');
+            array_import.push(samp_raw);
+            i_byte += i_delta;
+        }
+        return array_import;
+    };
+    // log wav debug info
+    ST.log_wav_info = ( wav={} ) => {
+        console.log('**********');
+        console.log('wav info: ');
+        console.log( 'chunk_size   : ' + wav.chunk_size   );
+        console.log( 'sample rate  : ' + wav.sample_rate  );
+        console.log( 'channels     : ' + wav.num_channels );
+        console.log( 'format       : ' + wav.format );
+        console.log( 'Sample Depth : ' + wav.sub_chunk1_size );
+        console.log( 'byte rate    : ' + wav.byte_rate );
+        console.log('**********');
+    };
+    // get a wavefrom array
+    ST.get_waveform_array = (array_import, frames_per_import=30, frame=0 ) => {
+        const array_wave = [];
+        let i2 = 0;
+        const len = Math.floor( array_import.length / frames_per_import );
+        while(i2 < len){
+            const i_import = Math.floor( (frame % frames_per_import) * len + i2 );
+            array_wave.push( array_import[i_import] );
+            i2 += 1;
+        }
+        return array_wave;
+    };
     //-------- ----------
     // APPLY SQ - methods that helper with 'SeQuence' Objects
     //-------- ----------
@@ -55,7 +84,6 @@
             i2 += 1;
         }
     };
-
     ST.applySQ = ( sq, samp, i, a_sound, opt ) => {
         let i2 = 0;
         const len = sq.objects.length;
