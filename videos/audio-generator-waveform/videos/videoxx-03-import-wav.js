@@ -23,7 +23,7 @@ VIDEO.init = function(sm, scene, camera){
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
                 fs.array_wave = scene.userData.array_wave = [];
                 let i2 = 0;
-                const frames_per_meow = 30; //60 - 45 * a_sound2;
+                const frames_per_meow = 5; //60 - 45 * a_sound2;
                 const i_meow = Math.floor(frame / frames_per_meow );
                 const len = Math.floor( array_import.length / frames_per_meow );
                 while(i2 < len){
@@ -51,12 +51,15 @@ fs.array_wave.push( array_import[i_import] )
             disp_step: 100,
             //sample_rate: 8000,
             //secs: 0.65,
-            secs: 3
+            secs: 30
         });
         sm.frameMax = sound.frames;
     };
 
-    const uri_file = videoAPI.pathJoin(sm.filePath, '../sampwav/meow.wav');
+    //const uri_file = videoAPI.pathJoin(sm.filePath, '../sampwav/meow.wav');
+
+const uri_file = videoAPI.pathJoin(sm.filePath, '../sampwav/quack.wav');
+
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1, encoding:'binary'} )
     .then( (data) => {
 
