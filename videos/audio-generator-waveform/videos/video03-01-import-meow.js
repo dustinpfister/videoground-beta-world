@@ -53,8 +53,9 @@ VIDEO.init = function(sm, scene, camera){
 
     const uri_file = videoAPI.pathJoin(sm.filePath, '../sampdata/meow.json');
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
-    .then( (text) => {
-        const array_import = text.split(',').map((str) => {
+    .then( (str_json) => {
+        const obj = JSON.parse(str_json);
+        const array_import = obj.sampdata.split(',').map((str) => {
             return parseFloat(str);
         });
         sound_setup(array_import);
