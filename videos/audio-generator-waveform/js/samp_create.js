@@ -228,19 +228,19 @@
             dv.setUint16(p, d, true);
             p += 2;
         }
-        writeString('RIFF');              // ChunkID
-        writeUint32(dataSize + 36);       // ChunkSize
-        writeString('WAVE');              // Format
-        writeString('fmt ');              // Subchunk1ID
-        writeUint32(16);                  // Subchunk1Size
-        writeUint16(1);                   // AudioFormat
-        writeUint16(numChannels);         // NumChannels
-        writeUint32(sampleRate);          // SampleRate
-        writeUint32(byteRate);            // ByteRate
-        writeUint16(blockAlign);          // BlockAlign
-        writeUint16(bytesPerSample * 8);  // BitsPerSample
-        writeString('data');              // Subchunk2ID
-        writeUint32(dataSize);            // Subchunk2Size
+        writeString('RIFF');              // ChunkID         00-03
+        writeUint32(dataSize + 36);       // ChunkSize       04-07
+        writeString('WAVE');              // Format          08-11
+        writeString('fmt ');              // Subchunk1ID     12-15
+        writeUint32(16);                  // Subchunk1Size   16-19
+        writeUint16(1);                   // AudioFormat     20-21
+        writeUint16(numChannels);         // NumChannels     22-23
+        writeUint32(sampleRate);          // SampleRate      24-27
+        writeUint32(byteRate);            // ByteRate        28-31
+        writeUint16(blockAlign);          // BlockAlign      32-33
+        writeUint16(bytesPerSample * 8);  // BitsPerSample   34-35
+        writeString('data');              // Subchunk2ID     36-39
+        writeUint32(dataSize);            // Subchunk2Size   40-43
         return buffer;
     };
 
