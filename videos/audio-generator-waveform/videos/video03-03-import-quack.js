@@ -86,7 +86,7 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[4] = {
         alpha: 1,
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-            const fpi = 5 + Math.round(55 * a_object);
+            const fpi = 5 + Math.round(25 * a_object);
             fs.array_wave = scene.userData.array_wave = ST.get_waveform_array(fs.array_import, fpi, frame );
             return fs;
         },
