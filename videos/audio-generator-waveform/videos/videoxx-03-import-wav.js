@@ -58,52 +58,26 @@ fs.array_wave.push( array_import[i_import] )
 
     //const uri_file = videoAPI.pathJoin(sm.filePath, '../sampwav/meow.wav');
 
-const uri_file = videoAPI.pathJoin(sm.filePath, '../sampwav/quack.wav');
-
+    const uri_file = videoAPI.pathJoin(sm.filePath, '../sampwav/quack.wav');
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1, encoding:'binary'} )
     .then( (data) => {
-
-
-const header_uint8 = data.slice(0, 44);
-const header_buff = header_uint8.buffer;
-const header_dv = new DataView(header_buff);
-const data_uint8 = data.slice(44, data.length);
-const data_dv = new DataView( data_uint8.buffer );
-
-
-const chunk_size = header_dv.getUint32(4, true);
-const format = header_dv.getUint16(20, true); 
-const num_channels = header_dv.getUint16(22, true); 
-const sample_rate = header_dv.getUint32(24, true);
-const byte_rate = header_dv.getUint32(28, true);
-
-
-console.log('**********');
-console.log('read file: ' + uri_file);
-
-console.log( 'chunk_size  : ' + chunk_size   );
-console.log( 'sample rate : ' + sample_rate  );
-console.log( 'channels    : ' + num_channels );
-console.log( 'format      : ' + format );
-console.log( 'byte rate   : ' + byte_rate );
+        const wav = ST.getWAVobj(data);
 
 
 
 
 
 console.log('**********');
-console.log('**********');
-
 console.log('creating import array from wav file...');
 
 const array_import = [];
 let i_byte = 0;
-const len = data_uint8.length; 
+const len = wav.data_uint8.length; 
 while(i_byte < len){
-    const samp = data_dv.getInt16(i_byte, true);
+    const samp = wav.data_dv.getInt16(i_byte, true);
     const samp_raw = ST.mode_to_raw(samp, 'int16');
 
-array_import.push(samp_raw);
+    array_import.push(samp_raw);
 
     i_byte += 2;
 }

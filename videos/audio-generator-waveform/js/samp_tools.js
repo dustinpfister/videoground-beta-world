@@ -1,6 +1,41 @@
 (function(){
     const ST = {};
     //-------- ----------
+    // WAV IMPORT
+    //-------- ----------
+    // get an object that contains easily readabule wav feild data, DataView Objects and so forth
+    ST.getWAVobj = ( data=[] ) => {
+        const header_uint8 = data.slice(0, 44);
+        const header_buff = header_uint8.buffer;
+        const header_dv = new DataView(header_buff);
+        const data_uint8 = data.slice(44, data.length);
+        const data_dv = new DataView( data_uint8.buffer );
+        const wav = {
+            header_dv: header_dv,
+            data_dv: data_dv,
+            header_uint8: header_uint8,
+            data_uint8: data_uint8
+        };
+        // maybe the two most imporaent feilds in the header, sample rate, and byte
+        wav.sample_rate = header_dv.getUint32(24, true);
+        wav.byte_rate = header_dv.getUint32(28, true);
+        // other info
+        wav.num_channels = header_dv.getUint16(22, true); 
+        wav.chunk_size = header_dv.getUint32(4, true);
+        wav.format = header_dv.getUint16(20, true); 
+        // debug info
+        console.log('**********');
+        console.log('wav info: ');
+        console.log( 'chunk_size  : ' + wav.chunk_size   );
+        console.log( 'sample rate : ' + wav.sample_rate  );
+        console.log( 'channels    : ' + wav.num_channels );
+        console.log( 'format      : ' + wav.format );
+        console.log( 'byte rate   : ' + wav.byte_rate );
+        console.log('**********');
+        return wav;
+    };
+
+    //-------- ----------
     // APPLY SQ - methods that helper with 'SeQuence' Objects
     //-------- ----------
     ST.applySQFrame = (sq, fs, frame, max_frame, a_sound2, opt) => {
