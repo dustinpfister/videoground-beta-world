@@ -51,9 +51,10 @@ const apply_wave = (wp, i_track=0, freq=1, amp=0.5 ) => {
     pos.needsUpdate = true;
 };
 // gen sample data for the current state of the wp object
-const gen_sampdata_tracks = (wp, sample_count=100, int16=true) => {
+const gen_sampdata_tracks = (wp, sample_count=100, int16=true, mix_amp=1) => {
     const pos = wp.geometry.getAttribute('position');
     const samp_tracks = [];
+    const mixed = [];
     let i_samp = 0;
     while(i_samp < sample_count){
         const a_samp = i_samp / sample_count;
@@ -67,11 +68,24 @@ const gen_sampdata_tracks = (wp, sample_count=100, int16=true) => {
             }
             samp_tracks[i_tp] = samp_tracks[i_tp] === undefined ? [] : samp_tracks[i_tp];
             samp_tracks[i_tp][i_samp] = n;
+            if(i_tp === wp.track_points - 1){
+                let i_tp2 = 0;
+                let n2 = 0;
+                while(i_tp2 < wp.track_points ){
+                    n2 += samp_tracks[i_tp2][i_samp];
+                    i_tp2 += 1;
+                }
+                mixed.push( n2 / wp.track_points * mix_amp );
+            }
+
             i_tp += 1;
         }
         i_samp += 1;
     }
-    return samp_tracks;
+    return {
+        tracks: samp_tracks,
+        mixed: mixed
+    };
 };
 
 //-------- ----------
@@ -178,7 +192,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 
     const sampdata_tracks = gen_sampdata_tracks(wp, sud.samples_per_frame);
 
-    return write_frame_samples(sampdata_tracks[1], sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
+    return write_frame_samples(sampdata_tracks.mixed, sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
 
 };
 //-------- ----------
