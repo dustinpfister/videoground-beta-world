@@ -10,11 +10,12 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const wp = sud.wp = {
-
+        samp_points: 10,
+        freq_points: 2
     };
 
     // geometry
-    wp.geometry = new THREE.PlaneGeometry(10, 10, 9, 9);
+    wp.geometry = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.freq_points - 1);
     wp.geometry.rotateX(Math.PI * 1.5);
     // add colors attribute
     const pos = wp.geometry.getAttribute('position');
@@ -30,7 +31,7 @@ VIDEO.init = function(sm, scene, camera){
     }
     wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
     // material, mesh
-    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide } );
+    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 6 } );
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
     scene.add(wp.mesh);
 
