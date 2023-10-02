@@ -8,7 +8,7 @@
 
 const create_wp = () => {
     const wp = {
-        samp_points: 20,
+        samp_points: 100,
         track_points: 2
     };
     // geometry
@@ -51,7 +51,7 @@ const apply_wave = (wp, i_track=0, freq=1, amp=0.5 ) => {
     pos.needsUpdate = true;
 };
 // gen sample data for the current state of the wp object
-const gen_sampdata_tracks = (wp, sample_count=100) => {
+const gen_sampdata_tracks = (wp, sample_count=100, int16=true) => {
     const pos = wp.geometry.getAttribute('position');
     const samp_tracks = [];
     let i_samp = 0;
@@ -62,6 +62,9 @@ const gen_sampdata_tracks = (wp, sample_count=100) => {
             const i_sp = Math.floor( a_samp * wp.samp_points);
             const i_pos = i_tp * wp.samp_points + i_sp;
             let n = parseFloat( pos.getY(i_pos).toFixed(2)  );
+            if(int16){
+                n = normal_to_int16( (n + 1) / 2 );
+            }
             samp_tracks[i_tp] = samp_tracks[i_tp] === undefined ? [] : samp_tracks[i_tp];
             samp_tracks[i_tp][i_samp] = n;
             i_tp += 1;
@@ -150,8 +153,8 @@ VIDEO.init = function(sm, scene, camera){
 
     const wp = sud.wp = create_wp();
     scene.add(wp.mesh);
-    apply_wave(wp, 0, 2, 1);
-    apply_wave(wp, 1, 1, 1);
+    apply_wave(wp, 0, 16, 0.65);
+    apply_wave(wp, 1, 4, 0.25);
 
     const sampdata_tracks = gen_sampdata_tracks(wp, 100);
 
@@ -171,19 +174,11 @@ console.log(sampdata_tracks);
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
+    const wp = sud.wp;
 
-    sud.data_samples = [];
-    sud.data_samples_int16 = [];
-    let i_sample = 0;
-    while(i_sample < sud.samples_per_frame ){
-        const a_frame = i_sample / sud.samples_per_frame;
+    const sampdata_tracks = gen_sampdata_tracks(wp, sud.samples_per_frame);
 
-        let samp = Math.sin( Math.PI * 100 * per );
-        sud.data_samples.push(samp);
-        sud.data_samples_int16.push(  normal_to_int16( 0.1 + 0.8 * samp )  );
-        i_sample += 1;
-    };
-    return write_frame_samples(sud.data_samples_int16, sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
+    return write_frame_samples(sampdata_tracks[1], sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
 
 };
 //-------- ----------
