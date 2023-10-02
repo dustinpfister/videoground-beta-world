@@ -8,7 +8,7 @@
 
 const create_wp = () => {
     const wp = {
-        samp_points: 40,
+        samp_points: 20,
         track_points: 2
     };
     // geometry
@@ -43,12 +43,32 @@ const apply_wave = (wp, i_track=0, freq=1, amp=0.5 ) => {
         const gx = i % wp.samp_points;
         const gy = Math.floor(i / wp.samp_points);
         const a_wave = gx / wp.samp_points;
-        console.log(i, gx, gy, a_wave.toFixed(2) );
-        const y = Math.sin( Math.PI * (freq * a_wave) ) * amp;
+        let y = Math.sin( Math.PI * (freq * a_wave) ) * amp;
+        y = THREE.MathUtils.clamp(y, -1, 1);
         pos.setY(i, y);
         i += 1;
     }
     pos.needsUpdate = true;
+};
+// gen sample data for the current state of the wp object
+const gen_sampdata_tracks = (wp, sample_count=100) => {
+    const pos = wp.geometry.getAttribute('position');
+    const samp_tracks = [];
+    let i_samp = 0;
+    while(i_samp < sample_count){
+        const a_samp = i_samp / sample_count;
+        let i_tp = 0;
+        while(i_tp < wp.track_points ){
+            const i_sp = Math.floor( a_samp * wp.samp_points);
+            const i_pos = i_tp * wp.samp_points + i_sp;
+            let n = parseFloat( pos.getY(i_pos).toFixed(2)  );
+            samp_tracks[i_tp] = samp_tracks[i_tp] === undefined ? [] : samp_tracks[i_tp];
+            samp_tracks[i_tp][i_samp] = n;
+            i_tp += 1;
+        }
+        i_samp += 1;
+    }
+    return samp_tracks;
 };
 
 //-------- ----------
@@ -60,10 +80,14 @@ VIDEO.init = function(sm, scene, camera){
 
     const wp = sud.wp = create_wp();
     scene.add(wp.mesh);
-    apply_wave(wp, 0, 4, 1);
+    apply_wave(wp, 0, 2, 1);
     apply_wave(wp, 1, 1, 1);
+
+
+    const sampdata = gen_sampdata_tracks(wp, 100);
+
     // start state for camera
-    camera.position.set( 10, 5, 10);
+    camera.position.set( 5, 5, 15);
     camera.lookAt(0,-1,0);
     // work out number of frames
     sm.frameMax = 30;
