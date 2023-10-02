@@ -8,7 +8,7 @@
 
 const create_wp = () => {
     const wp = {
-        samp_points: 20,
+        samp_points: 40,
         track_points: 2
     };
     // geometry
@@ -29,28 +29,27 @@ const create_wp = () => {
     }
     wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
     // material, mesh
-    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 6 } );
+    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 3 } );
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
     return wp;
 };
-
-const apply_wave = (wp, i_track=0, freq=1, amp=1 ) => {
+// apply a wave for a track in the plain by giving a track index, along with frequency, amplitude
+const apply_wave = (wp, i_track=0, freq=1, amp=0.5 ) => {
     const pos = wp.geometry.getAttribute('position');
     const i_start = wp.samp_points * i_track;
     const i_end = wp.samp_points * (i_track + 1);
     let i = i_start;
     while(i < i_end){
-        const x = i % wp.samp_points;
-        const y = Math.floor(i / wp.samp_points);
-        const a_wave = x / wp.samp_points;
-
-        console.log(i, x, y, a_wave.toFixed(2) );
-
+        const gx = i % wp.samp_points;
+        const gy = Math.floor(i / wp.samp_points);
+        const a_wave = gx / wp.samp_points;
+        console.log(i, gx, gy, a_wave.toFixed(2) );
+        const y = Math.sin( Math.PI * (freq * a_wave) ) * amp;
+        pos.setY(i, y);
         i += 1;
     }
-
+    pos.needsUpdate = true;
 };
-
 
 //-------- ----------
 // INIT
@@ -60,18 +59,14 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const wp = sud.wp = create_wp();
-
     scene.add(wp.mesh);
-
-    apply_wave(wp, 0, 10, 1);
-
+    apply_wave(wp, 0, 4, 1);
+    apply_wave(wp, 1, 1, 1);
     // start state for camera
     camera.position.set( 10, 5, 10);
     camera.lookAt(0,-1,0);
-
     // work out number of frames
     sm.frameMax = 30;
-
 };
 //-------- ----------
 // UPDATE
