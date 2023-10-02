@@ -9,10 +9,10 @@
 const create_wp = () => {
     const wp = {
         samp_points: 20,
-        freq_points: 2
+        track_points: 2
     };
     // geometry
-    wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.freq_points - 1);
+    wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.track_points - 1);
     wp.geometry_source.rotateX(Math.PI * 1.5);
     wp.geometry = wp.geometry_source.clone();
     // add colors attribute
@@ -34,6 +34,23 @@ const create_wp = () => {
     return wp;
 };
 
+const apply_wave = (wp, i_track=0, freq=1, amp=1 ) => {
+    const pos = wp.geometry.getAttribute('position');
+    const i_start = wp.samp_points * i_track;
+    const i_end = wp.samp_points * (i_track + 1);
+    let i = i_start;
+    while(i < i_end){
+        const x = i % wp.samp_points;
+        const y = Math.floor(i / wp.samp_points);
+        const a_wave = x / wp.samp_points;
+
+        console.log(i, x, y, a_wave.toFixed(2) );
+
+        i += 1;
+    }
+
+};
+
 
 //-------- ----------
 // INIT
@@ -46,6 +63,7 @@ VIDEO.init = function(sm, scene, camera){
 
     scene.add(wp.mesh);
 
+    apply_wave(wp, 0, 10, 1);
 
     // start state for camera
     camera.position.set( 10, 5, 10);
