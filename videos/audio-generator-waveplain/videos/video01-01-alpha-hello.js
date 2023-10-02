@@ -3,20 +3,18 @@
  */
 
 //-------- ----------
-// INIT
+// WP OBJECT
 //-------- ----------
-VIDEO.init = function(sm, scene, camera){
-    const sud = scene.userData;
-    sm.renderer.setClearColor(0x000000, 0.25);
 
-    const wp = sud.wp = {
-        samp_points: 10,
+const create_wp = () => {
+    const wp = {
+        samp_points: 20,
         freq_points: 2
     };
-
     // geometry
-    wp.geometry = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.freq_points - 1);
-    wp.geometry.rotateX(Math.PI * 1.5);
+    wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.freq_points - 1);
+    wp.geometry_source.rotateX(Math.PI * 1.5);
+    wp.geometry = wp.geometry_source.clone();
     // add colors attribute
     const pos = wp.geometry.getAttribute('position');
     const data_color = [];
@@ -33,6 +31,19 @@ VIDEO.init = function(sm, scene, camera){
     // material, mesh
     wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 6 } );
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
+    return wp;
+};
+
+
+//-------- ----------
+// INIT
+//-------- ----------
+VIDEO.init = function(sm, scene, camera){
+    const sud = scene.userData;
+    sm.renderer.setClearColor(0x000000, 0.25);
+
+    const wp = sud.wp = create_wp();
+
     scene.add(wp.mesh);
 
 
