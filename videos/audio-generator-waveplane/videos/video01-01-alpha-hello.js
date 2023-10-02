@@ -9,7 +9,7 @@
 const create_wp = () => {
     const wp = {
         samp_points: 100,
-        track_points: 2
+        track_points: 3
     };
     // geometry
     wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.track_points - 1);
@@ -29,7 +29,9 @@ const create_wp = () => {
     }
     wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
     // material, mesh
-    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 3 } );
+    //wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 2 } );
+    wp.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
     return wp;
 };
@@ -43,12 +45,13 @@ const apply_wave = (wp, i_track=0, freq=1, amp=0.5 ) => {
         const gx = i % wp.samp_points;
         const gy = Math.floor(i / wp.samp_points);
         const a_wave = gx / wp.samp_points;
-        let y = Math.sin( Math.PI * (freq * a_wave) ) * amp;
+        let y = Math.sin( Math.PI * ( freq * a_wave ) ) * amp;
         y = THREE.MathUtils.clamp(y, -1, 1);
         pos.setY(i, y);
         i += 1;
     }
     pos.needsUpdate = true;
+    wp.geometry.computeVertexNormals();
 };
 // gen sample data for the current state of the wp object
 const gen_sampdata_tracks = (wp, sample_count=100, int16=true, mix_amp=1) => {
@@ -77,7 +80,6 @@ const gen_sampdata_tracks = (wp, sample_count=100, int16=true, mix_amp=1) => {
                 }
                 mixed.push( n2 / wp.track_points * mix_amp );
             }
-
             i_tp += 1;
         }
         i_samp += 1;
@@ -167,18 +169,17 @@ VIDEO.init = function(sm, scene, camera){
 
     const wp = sud.wp = create_wp();
     scene.add(wp.mesh);
-    apply_wave(wp, 0, 16, 0.65);
-    apply_wave(wp, 1, 4, 0.25);
+
 
     const sampdata_tracks = gen_sampdata_tracks(wp, 100);
 
 console.log(sampdata_tracks);
 
     // start state for camera
-    camera.position.set( 5, 5, 15);
-    camera.lookAt(0,-1,0);
+    camera.position.set( 10, 8, 10);
+    camera.lookAt(0,-2.0,0);
     // work out number of frames
-    sm.frameMax = 30 * 1;
+    sm.frameMax = 30 * 5;
     sud.total_secs = sm.frameMax / 30;
     sud.sample_rate = 44100;
     sud.samples_per_frame = sud.sample_rate / 30;
@@ -190,25 +191,29 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
     const wp = sud.wp;
 
-    const sampdata_tracks = gen_sampdata_tracks(wp, sud.samples_per_frame);
+    const a1 = Math.sin( Math.PI * (32 * per % 1) );
+    const a2 = Math.sin( Math.PI * (16 * per % 1) );
+    const a3 = Math.sin( Math.PI * (8 * per % 1) );
 
+    apply_wave(wp, 0,   8, a1);
+    apply_wave(wp, 1,  16, a2);
+    apply_wave(wp, 2,  32, a3);
+
+    const mix_amp = 1.0;
+
+    const sampdata_tracks = gen_sampdata_tracks(wp, sud.samples_per_frame, true, mix_amp);
     return write_frame_samples(sampdata_tracks.mixed, sm.frame, sm.filePath, sud.total_secs, sud.sample_rate );
-
 };
 //-------- ----------
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
-
     const sud = scene.userData;
-
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
-
     // render threejs scene object
     sm.renderer.render(sm.scene, sm.camera);
     ctx.drawImage(sm.renderer.domElement, 0, 0, canvas.width, canvas.height);
-
 };
 
