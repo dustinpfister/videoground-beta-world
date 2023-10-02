@@ -6,18 +6,34 @@
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+    const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // geometry, material, mesh
-    const geometry = new THREE.PlaneGeometry(10, 10, 10, 10);
-    geometry.rotateX(Math.PI * 1.5)
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    const wp = sud.wp = {
 
-    // grid
-    //const grid = new THREE.GridHelper(10, 10);
-    //scene.add(grid);
+    };
+
+    // geometry
+    wp.geometry = new THREE.PlaneGeometry(10, 10, 9, 9);
+    wp.geometry.rotateX(Math.PI * 1.5);
+    // add colors attribute
+    const pos = wp.geometry.getAttribute('position');
+    const data_color = [];
+    let i = 0;
+    while(i < pos.count){
+        const a_count = i / pos.count;
+        const r = 0;
+        const g = a_count;
+        const b = i % 2 === 0 ? 0.5 : 0.25;
+        data_color.push( r, g, b);
+        i += 1;
+    }
+    wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
+    // material, mesh
+    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide } );
+    wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
+    scene.add(wp.mesh);
+
 
     // start state for camera
     camera.position.set( 10, 5, 10);
@@ -31,14 +47,15 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
- 
+    const sud = scene.userData;
 };
 //-------- ----------
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
-    const sound = scene.userData.sound;
-    const alpha = sm.frame / ( sm.frameMax - 1);
+
+    const sud = scene.userData;
+
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
