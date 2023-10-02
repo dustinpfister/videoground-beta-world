@@ -1,4 +1,4 @@
-/*    video01-01-alpha-hello - for audio-generator-waveplain project
+/*    video01-01-alpha-hello - for audio-generator-waveplane project
           * Just Getting the core idea of what I want working
  */
 
