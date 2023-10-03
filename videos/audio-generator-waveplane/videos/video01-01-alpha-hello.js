@@ -21,6 +21,8 @@ VIDEO.init = function(sm, scene, camera){
     });
     scene.add(wp.mesh);
 
+
+
     //const sampdata_tracks = gen_sampdata_tracks(wp, 100);
     //console.log(sampdata_tracks);
 
@@ -86,7 +88,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sud = scene.userData;
     // background
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = '#2a2a2a';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // render threejs scene object
     sm.renderer.render(sm.scene, sm.camera);

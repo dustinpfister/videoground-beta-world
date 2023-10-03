@@ -9,10 +9,10 @@ WP.create_wp = (opt = {} ) => {
         samp_points: opt.samp_points || 800,
         track_points: opt.track_points || 2
     };
-    // geometry
     wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.track_points - 1);
     wp.geometry_source.rotateX(Math.PI * 1.5);
     wp.geometry = wp.geometry_source.clone();
+/*
     // add colors attribute
     const pos = wp.geometry.getAttribute('position');
     const data_color = [];
@@ -26,11 +26,36 @@ WP.create_wp = (opt = {} ) => {
         i += 1;
     }
     wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
-    // material, mesh
-    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 2 } );
-    //wp.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+*/
+    //wp.material = new THREE.MeshBasicMaterial( { side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 2 } );
 
+    const size = 32;
+    const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
+    canvas.width = size; canvas.height = size;
+    ctx.lineWidth = 1;
+    const len = size * size;
+    let i = 0;
+    while(i < len){
+        const x = i % size;
+        const y = Math.floor(i / size);
+        ctx.fillStyle = 'rgba(0, ' + Math.floor(255 * THREE.MathUtils.seededRandom(i) ) + ', 0, 1)';
+        ctx.fillRect(x, y, 1, 1);
+        i += 1;
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
+
+    wp.material = new THREE.MeshPhongMaterial( { side: THREE.DoubleSide, map: texture } );
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
+
+    // light
+    const dl = new THREE.DirectionalLight(0xffffff, 0.65);
+    dl.position.set( 3, 1, 0);
+    wp.mesh.add( dl );
+    const al = new THREE.AmbientLight(0xffffff, 0.15);
+    wp.mesh.add(al);
+
     return wp;
 };
 // apply a wave for a track in the plain by giving a track index, along with frequency, amplitude
