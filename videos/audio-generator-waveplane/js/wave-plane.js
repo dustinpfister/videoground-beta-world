@@ -2,14 +2,12 @@
 //-------- ----------
 // SAMP DATA
 //-------- ----------
-
 var WP ={};
-
-
-WP.create_wp = () => {
+// create a wave plane object
+WP.create_wp = (opt = {} ) => {
     const wp = {
-        samp_points: 800,
-        track_points: 2
+        samp_points: opt.samp_points || 800,
+        track_points: opt.track_points || 2
     };
     // geometry
     wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.track_points - 1);
@@ -29,8 +27,8 @@ WP.create_wp = () => {
     }
     wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
     // material, mesh
-    //wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 2 } );
-    wp.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+    wp.material = new THREE.MeshBasicMaterial( { vertexColors: true,side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 2 } );
+    //wp.material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
 
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
     return wp;
