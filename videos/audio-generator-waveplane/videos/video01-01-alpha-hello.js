@@ -16,7 +16,8 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const wp = sud.wp = WP.create_wp({
-        samp_points: 1024
+        samp_points: 1024,
+        track_points: 3
     });
     scene.add(wp.mesh);
 
@@ -36,27 +37,43 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 
-    const array_freq = [
-        1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 
-       11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-       21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-       31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-       41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-       51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
-       61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
-       71, 72, 73, 74, 75, 76, 77, 78, 79, 80
-    ];
+const tune_0 = [
+    1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 
+   11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+   21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+   31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+   41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+   51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+   61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+   71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+   81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+   91, 92, 93, 94, 95, 96, 97, 98, 99,100,
+  101,102,103,104,105,106,107,108,109,110
+];
+
+const tune_1 = [ 10, 20, 10, 5, 15, 20, 2 ];
+
+const tune_2 = [
+    2,4,2,4,2,4,2,4,2,4,2,4,
+    5,6,5,6,5,6,5,6,5,6,5,6,
+    2,4,2,4,2,4,2,4,2,4,2,4
+];
+
+const get_freq = (tune, alpha) => {
+    const i_freq = Math.floor( tune.length * 0.999 * alpha );
+    return 2 * tune[ i_freq ]
+};
 
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
     const wp = sud.wp;
 
 
-
-    const a1 = per;
-    const i_freq = Math.floor( array_freq.length * a1 );
-    WP.apply_wave(wp, 0,   2 * array_freq[ i_freq ], 1.0);
-    WP.apply_wave(wp, 1,   8, 1.0);
+    const a1 = Math.sin( Math.PI * (1 * per % 1) );
+    const a2 = Math.sin( Math.PI * (16 * per % 1) );
+    WP.apply_wave(wp, 0,   get_freq(tune_0, a1) , 0.25);
+    WP.apply_wave(wp, 1,   get_freq(tune_1, per), 1 - a2);
+    WP.apply_wave(wp, 2,   get_freq(tune_2, per), 1.0);
 
     const mix_amp = 1.0;
 
