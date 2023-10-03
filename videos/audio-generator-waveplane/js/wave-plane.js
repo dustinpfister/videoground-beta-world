@@ -3,13 +3,13 @@
 // SAMP DATA
 //-------- ----------
 
-const WP ={};
+var WP ={};
 
 
 WP.create_wp = () => {
     const wp = {
-        samp_points: 100,
-        track_points: 3
+        samp_points: 800,
+        track_points: 2
     };
     // geometry
     wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.track_points - 1);

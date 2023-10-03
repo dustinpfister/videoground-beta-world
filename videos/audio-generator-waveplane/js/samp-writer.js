@@ -3,7 +3,7 @@
 // SAMP DATA
 //-------- ----------
 
-const SW ={};
+var SW ={};
 
 SW.normal_to_int16 = ( samp = 0 ) => {
     return -32768 + 65535 * THREE.MathUtils.clamp(samp, 0, 1);
