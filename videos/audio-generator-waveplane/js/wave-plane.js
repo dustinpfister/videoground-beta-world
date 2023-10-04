@@ -12,24 +12,8 @@ WP.create_wp = (opt = {} ) => {
     wp.geometry_source = new THREE.PlaneGeometry(10, 10, wp.samp_points - 1, wp.track_points - 1);
     wp.geometry_source.rotateX(Math.PI * 1.5);
     wp.geometry = wp.geometry_source.clone();
-/*
-    // add colors attribute
-    const pos = wp.geometry.getAttribute('position');
-    const data_color = [];
-    let i = 0;
-    while(i < pos.count){
-        const a_count = i / pos.count;
-        const r = 0;
-        const g = a_count;
-        const b = i % 2 === 0 ? 0.5 : 0.25;
-        data_color.push( r, g, b);
-        i += 1;
-    }
-    wp.geometry.setAttribute('color', new THREE.BufferAttribute( new Float32Array(data_color), 3 ) );
-*/
-    //wp.material = new THREE.MeshBasicMaterial( { side: THREE.DoubleSide, wireframe: true, wireframeLinewidth: 2 } );
 
-    const size = 32;
+    const size = 256;
     const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d');
     canvas.width = size; canvas.height = size;
     ctx.lineWidth = 1;
@@ -37,8 +21,19 @@ WP.create_wp = (opt = {} ) => {
     let i = 0;
     while(i < len){
         const x = i % size;
-        const y = Math.floor(i / size);
-        ctx.fillStyle = 'rgba(0, ' + Math.floor(255 * THREE.MathUtils.seededRandom(i) ) + ', 0, 1)';
+        const y = Math.floor( i / size );
+        const a = (0.25 + 0.75 * THREE.MathUtils.seededRandom(i)).toFixed(2)
+        const r = 0;//Math.floor( 255 * ( i / len ) );
+        const g = Math.floor( 255 * ( y / size ) );
+        const b = Math.floor( 255 * ( x / size ) );
+        ctx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+
+        //ctx.fillStyle = '#ffffff';
+        const n = Math.floor(size / (wp.track_points - 1));
+        if( y % n > n - 3 || y % n < 2 ){
+            ctx.fillStyle = 'rgba(255,255,255,1)';
+        }
+
         ctx.fillRect(x, y, 1, 1);
         i += 1;
     }
@@ -46,7 +41,11 @@ WP.create_wp = (opt = {} ) => {
     texture.magFilter = THREE.NearestFilter;
     texture.minFilter = THREE.NearestFilter;
 
-    wp.material = new THREE.MeshPhongMaterial( { side: THREE.DoubleSide, map: texture } );
+    wp.material = new THREE.MeshBasicMaterial({
+         side: THREE.DoubleSide,
+         map: texture,
+         transparent: true, opacity: 1
+    });
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
 
     // light
