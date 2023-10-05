@@ -16,15 +16,27 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     let array_wave = [];
 
+    const v_start = new THREE.Vector2(0, 0);
+    const v_end = new THREE.Vector2(1, 0);
+    const v_c1 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,-1) );
+    const v_c2 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1) );
+    const curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
+
     const sq = {
         objects: []
     };
 
-    const total_secs = 3;
+    const total_secs = 20;
 
     sq.objects[0] = {
-        alpha: 1,
+        alpha: 0.20,
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            curve.v1.x = 0.25 + 6.75 * a_object;
+            curve.v2.x = 0.25 + 3.75 * a_object;
+            curve.v1.y = -1;
+            curve.v2.y = 1 + 1.5 * a_object;
+            fs.freq = 4; 
+            fs.count = 25;
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -32,12 +44,55 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-    const v_start = new THREE.Vector2(0, 0);
-    const v_end = new THREE.Vector2(1, 0);
-    const v_c1 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,-1) );
-    const v_c2 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1) );
+    sq.objects[1] = {
+        alpha: 0.4,
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            curve.v1.x = 7;
+            curve.v2.x = 4;
+            curve.v1.y = -1;
+            curve.v2.y = 2.5;
+            fs.freq = 4; 
+            fs.count = Math.floor( 25 + 475 * a_object);
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
 
-    const curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
+    sq.objects[2] = {
+        alpha: 0.6,
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            curve.v1.x = 7 - 7 * a_object;
+            curve.v2.x = 4;
+            curve.v1.y = -1 + 1 * a_object;
+            curve.v2.y = 2.5 - 2 * a_object;
+            fs.freq = 4; 
+            fs.count = 500;
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+    sq.objects[3] = {
+        alpha: 1,
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            curve.v1.x = 0 + 0.5 + a_object;
+            curve.v2.x = 4;
+            curve.v1.y = 0 + 2.25 * a_object;
+            curve.v2.y = 0.5 - 3.0 * a_object;
+            fs.freq = 4; 
+            fs.count = 500;
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+
 
     const sound_setup = (array_import) => {
         const sound = scene.userData.sound = CS.create_sound({
@@ -46,24 +101,26 @@ VIDEO.init = function(sm, scene, camera){
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
                 fs.array_wave = scene.userData.array_wave = [];
 
-                curve.v1.x = 0.25 + 6.75 * a_sound2;
-                curve.v2.x = 0.25 + 3.75 * a_sound2;
-                curve.v2.y = 1 + 1.5 * a_sound2;
+
+
+                // frequency and amplitude defaults for frame
+                fs.freq = 2; 
+                fs.a_amp = 1;
+
+                // apply anything for the current sequence object
+                ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
 
                 let i = 0;
-                const count = 200;
+                const count = fs.count || 50;
                 while(i < count){
                     const v2 = curve.getPoint(i / count);
                     fs.array_wave.push( v2.y * Math.sin(Math.PI * v2.x) );
                     i += 1;
                 }
 
-                // frequency and amplitude
-                fs.freq = 2;  // * Math.floor(1 + 8 * a_sound2);
-                fs.a_amp = 1;
 
-                // apply anything for the current sequence object
-                ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
+
+
 
                 return fs;
             },
