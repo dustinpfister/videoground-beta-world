@@ -36,8 +36,8 @@ VIDEO.init = function(sm, scene, camera){
 
     const v_start = new THREE.Vector2(0, 0);
     const v_end = new THREE.Vector2(1, 0);
-    const v_c1 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1) );
-    const v_c2 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1) );
+    const v_c1 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1.5) );
+    const v_c2 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0.25,-0.75) );
 
     const curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
 
@@ -46,19 +46,26 @@ VIDEO.init = function(sm, scene, camera){
             waveform : 'array',
             // called once per frame
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-                fs.array_wave = scene.userData.array_wave = [
-0,0
-                ];
+                fs.array_wave = scene.userData.array_wave = [];
 
                 let i = 0;
-                while(i < 100){
-//fs.array_wave.push( curve.getPoint(i).y )
-i += 1;
-}
+                const count = 1000;
+                while(i < count){
+                    const v2 = curve.getPoint(i / count);                 
+                    const i2 = Math.floor(v2.x * count);
+                    
+                    fs.array_wave[ i2 ] = v2.y;
+                    if(fs.array_wave[ i ] === undefined){
+                        fs.array_wave[ i ] = v2.y;
+                    }
+
+                    i += 1;
+                }
+
 
                 // frequency and amplitude
-                fs.freq = 1;
-                fs.a_amp = 1;
+                fs.freq = 15
+               fs.a_amp = 1;
 
                 // apply anything for the current sequence object
                 ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
