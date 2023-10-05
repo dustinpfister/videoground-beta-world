@@ -27,6 +27,28 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const total_secs = 20;
+    const tune = [
+        9,8,7,6,
+        5,4,3,2,
+        1,1,1,1,
+        1,1,1,1,
+        2,2,1,1,
+        2,2,1,1,
+        2,2,1,1,
+        2,1,2,1,
+        2,1,2,1,
+        7,7,1,1,
+        2,2,7,7,
+        6,6,6,6,
+        7,6,5,4,
+        3,2,1,1,
+        1,2,1,4,
+        1,2,1,4,
+        1,2,1,8,
+        1,2,1,8,
+        8,5,5,5,
+        1,1,1,1
+    ];
 
     sq.objects[0] = {
         alpha: 0.20,
@@ -35,8 +57,6 @@ VIDEO.init = function(sm, scene, camera){
             curve.v2.x = 0.25 + 3.75 * a_object;
             curve.v1.y = -1;
             curve.v2.y = 1 + 1.5 * a_object;
-            fs.freq = 4; 
-            fs.count = 25;
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -51,8 +71,6 @@ VIDEO.init = function(sm, scene, camera){
             curve.v2.x = 4;
             curve.v1.y = -1;
             curve.v2.y = 2.5;
-            fs.freq = 4; 
-            fs.count = Math.floor( 25 + 475 * a_object);
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -67,8 +85,6 @@ VIDEO.init = function(sm, scene, camera){
             curve.v2.x = 4;
             curve.v1.y = -1 + 1 * a_object;
             curve.v2.y = 2.5 - 2 * a_object;
-            fs.freq = 4; 
-            fs.count = 500;
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -83,16 +99,14 @@ VIDEO.init = function(sm, scene, camera){
             curve.v2.x = 4;
             curve.v1.y = 0 + 2.25 * a_object;
             curve.v2.y = 0.5 - 3.0 * a_object;
-            fs.freq = 4; 
-            fs.count = 500;
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             return samp;  
         }
     };
-
-
+ 
+    
 
     const sound_setup = (array_import) => {
         const sound = scene.userData.sound = CS.create_sound({
@@ -104,8 +118,9 @@ VIDEO.init = function(sm, scene, camera){
 
 
                 // frequency and amplitude defaults for frame
-                fs.freq = 2; 
+                fs.freq = 2 * tune[ Math.floor( tune.length * 0.999 * a_sound2) ]; 
                 fs.a_amp = 1;
+                fs.count = 500;
 
                 // apply anything for the current sequence object
                 ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
