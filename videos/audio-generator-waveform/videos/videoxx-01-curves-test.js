@@ -1,5 +1,5 @@
-/*    video03-04-import-b17 - for audio-generator-waveform project
-
+/*    videoxx-01-curves-test - for audio-generator-waveform project
+      * a Start for using Curves to help with the formation of a waveform
  */
 //-------- ----------
 // SCRIPTS
@@ -20,13 +20,11 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
 
-    const total_secs = 1;
+    const total_secs = 3;
 
     sq.objects[0] = {
         alpha: 1,
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-
-
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -36,12 +34,10 @@ VIDEO.init = function(sm, scene, camera){
 
     const v_start = new THREE.Vector2(0, 0);
     const v_end = new THREE.Vector2(1, 0);
-    const v_c1 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1.5) );
-    const v_c2 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0.25,-0.75) );
+    const v_c1 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1) );
+    const v_c2 = v_start.clone().lerp(v_end, 0.5).add( new THREE.Vector2(0,1) );
 
     const curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
-
-console.log(curve);
 
     const sound_setup = (array_import) => {
         const sound = scene.userData.sound = CS.create_sound({
@@ -50,25 +46,38 @@ console.log(curve);
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
                 fs.array_wave = scene.userData.array_wave = [];
 
-curve.v1.x = 0.8 - 0.8 * a_sound2;
+                curve.v1.x = 0.5 - 0.5 * a_sound2;
+                curve.v2.x = 0.5 - 0.5 * a_sound2;
+                curve.v2.y = 1 - 2 * a_sound2;
 
                 let i = 0;
-                const count = 1000;
+                const count = 200;
                 while(i < count){
-                    const v2 = curve.getPoint(i / count);                 
+                    const v2 = curve.getPoint(i / count);
+
+
+                    let y = v2.y;
+const a1 = (1 - Math.abs((0.5 - v2.x) / 0.5));
+const a2 = Math.sin(Math.PI * v2.x);
+                    y = y * a2;
+
+fs.array_wave.push(y);
+
+/*
                     const i2 = Math.floor(v2.x * count);
                     
                     fs.array_wave[ i2 ] = v2.y;
+
                     if(fs.array_wave[ i ] === undefined){
                         fs.array_wave[ i ] = v2.y;
                     }
-
+*/
                     i += 1;
                 }
 
 
                 // frequency and amplitude
-                fs.freq = 15
+                fs.freq = 6;
                fs.a_amp = 1;
 
                 // apply anything for the current sequence object
