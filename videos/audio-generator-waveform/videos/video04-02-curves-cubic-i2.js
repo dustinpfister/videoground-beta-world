@@ -1,5 +1,5 @@
-/*    videoxx-01-curves-test - for audio-generator-waveform project
-      * a Start for using Curves to help with the formation of a waveform
+/*    video04-02-curves-cubici2 - for audio-generator-waveform project
+      * other system for using x values of curves
  */
 //-------- ----------
 // SCRIPTS
@@ -42,25 +42,33 @@ VIDEO.init = function(sm, scene, camera){
     const sound_setup = (array_import) => {
         const sound = scene.userData.sound = CS.create_sound({
             waveform : 'array',
-            // called once per frame
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
                 fs.array_wave = scene.userData.array_wave = [];
 
-                curve.v1.x = 0.25 + 6.75 * a_sound2;
-                curve.v2.x = 0.25 + 3.75 * a_sound2;
-                curve.v2.y = 1 + 1.5 * a_sound2;
+                curve.v1.x = 0.25 + 1.75 * a_sound2;
+                curve.v2.x = 0.75 - 1.75 * a_sound2;
+                //curve.v2.y = 1 - 2 * a_sound2;
 
                 let i = 0;
                 const count = 200;
                 while(i < count){
                     const v2 = curve.getPoint(i / count);
-                    fs.array_wave.push( v2.y * Math.sin(Math.PI * v2.x) );
+
+                    const i2 = Math.floor(v2.x * count);
+                    
+                    fs.array_wave[ i2 ] = v2.y;
+
+                    if(fs.array_wave[ i ] === undefined){
+                        fs.array_wave[ i ] = v2.y;
+                    }
+
                     i += 1;
                 }
 
+
                 // frequency and amplitude
-                fs.freq = 2;  // * Math.floor(1 + 8 * a_sound2);
-                fs.a_amp = 1;
+                fs.freq = 6;
+               fs.a_amp = 1;
 
                 // apply anything for the current sequence object
                 ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
