@@ -41,12 +41,16 @@ VIDEO.init = function(sm, scene, camera){
 
     const curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
 
+console.log(curve);
+
     const sound_setup = (array_import) => {
         const sound = scene.userData.sound = CS.create_sound({
             waveform : 'array',
             // called once per frame
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
                 fs.array_wave = scene.userData.array_wave = [];
+
+curve.v1.x = 0.8 - 0.8 * a_sound2;
 
                 let i = 0;
                 const count = 1000;
