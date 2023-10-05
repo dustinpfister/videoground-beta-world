@@ -57,8 +57,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
                     let y = v2.y;
-const a1 = (1 - Math.abs((0.5 - v2.x) / 0.5));
-const a2 = Math.sin(Math.PI * v2.x);
+                    const a2 = Math.sin(Math.PI * v2.x);
                     y = y * a2;
 
 fs.array_wave.push(y);
