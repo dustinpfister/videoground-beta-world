@@ -15,3 +15,7 @@ A bunch of videos in which I am exploring the subject of transitioning from one 
 ## video03-xx-import-* - Import sample data as wavefrom
 
 With this set of videos I am exploring the topic of setting, updating, and transitioning a waveform by way of importing sample data. Thus far there are two general ways of doing this, one of which is to import data by way of a text JSON text from that I have started, and the other is by just directly reading a wav file that I want to use to do so.
+
+## video04-xx-curves - Using curves to create waveforms
+
+I wanted to try out a few videos where I am using curves to create an update a waveform
