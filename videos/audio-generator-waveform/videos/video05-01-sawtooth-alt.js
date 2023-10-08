@@ -1,5 +1,5 @@
 /*    video05-01-sawfrom-alt - for audio-generator-waveform project
-          * alternating sawtooth idea
+          * trying out an alternating sawtooth idea
  */
 //-------- ----------
 // SCRIPTS
@@ -14,35 +14,86 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
-    let array_wave = [];
+
+    const tune = [
+       4,4,4,4,
+       4,4,4,4,
+       4,4,4,4,
+       4,4,4,4,
+       6,6,6,6,
+       6,6,6,6,
+       6,6,6,6,
+       6,6,6,6,
+       4,4,4,4,
+       4,4,4,4,
+       4,4,4,4,
+       4,4,4,4,
+       8,8,8,8,
+       8,8,8,8,
+       6,6,6,6,
+       6,6,6,6,
+       4,4,4,4,
+       4,4,4,4,
+       8,6,8,6,
+       8,6,4,4
+    ];
+
+    const saw_samps = ( array, count=100, alpha=0, per_alpha=1, invert=false, offset = 0.15 ) => {
+        const a1 = alpha * per_alpha % 1;
+        //const a2 = Math.sin( Math.PI * a1  );
+        const s1 = 1 - 2 * a1;
+        const s2 = -1 + 2 * a1;
+        let i = 0;
+        while(i < count){
+            const a_count = i / count;
+            const a_lerp = invert ? 1 - a_count : a_count;
+            array.push( THREE.MathUtils.lerp(s1, s2, (a_lerp * 0.99999 + offset) % 1 ) );
+            i += 1;
+        }
+    };
+
+    const sq = {
+        objects: []
+    };
+
+
+
+    sq.objects[0] = {
+        alpha: 1,
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            const pa_1 = 2 * opt.secs;
+            const pa_2 = 2 * opt.secs;
+            saw_samps(fs.array_wave, 100, a_sound2, pa_1, false);
+            saw_samps(fs.array_wave, 100, a_sound2, pa_2, true);
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+
+
+
+
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
         // called once per frame
-        for_frame : (fs, frame, max_frame, a_sound2 ) => {
+        for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const a = a_sound2 * 15 % 1;
-            const b = Math.sin( Math.PI * a  )
-            const c = b * 2;
+            fs.freq = 0.25 * 2 * tune[ Math.floor(tune.length * a_sound2) % tune.length];
+            fs.amp = 0.75;
 
-            const pad_len = Math.round(0)
-            const pad = new Array(pad_len).fill('0');
+            fs.array_wave = [];
 
-            const count = 100;
-            let array = [];
-            let i = 0;
-            while(i < count){
+            // apply anything for the current sequence object
+            ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
 
-                 const a_count = i / count;
-                 const a_count2 = Math.sin(Math.PI * a_count);
-                 const d = c * a_count2;
 
-                 array = array.concat(pad, [1 - d, 0, -1 + d],pad );
 
-                 i += 1;
-            }
-            fs.array_wave = scene.userData.array_wave = array;
-            fs.freq = 2;
-            fs.amp = 1;
+
+            scene.userData.array_wave = fs.array_wave;
+
             return fs;
         },
         // called for each sample ( so yeah this is a hot path )
@@ -55,11 +106,12 @@ VIDEO.init = function(sm, scene, camera){
             samp.a_wave = a_frame;
             samp.amplitude = fs.amp;
             samp.frequency = fs.freq;
+            ST.applySQ(sq, samp, i, a_sound, opt);
             return samp;
         },
         disp_step: 100,
-        secs: 1
-    });
+        secs: 20
+ });
     sm.frameMax = sound.frames;
 };
 //-------- ----------
