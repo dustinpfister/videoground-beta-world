@@ -59,7 +59,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
   
 
-            const obj_1 = ST.get_tune_sampobj(data_1, a_sound, opt.secs, false);
+            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 10, false);
             const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
 
             samp.frequency = 1 + obj_1.frequency / 30;
@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
 
             samp.int_shift = set_shift(2050, 400, 10, a_object, 1);
 
-            samp.values_per_wave = 10 + Math.floor(290 * a_object);
+            samp.values_per_wave = 10;
             return samp;  
         }
     };
@@ -80,7 +80,7 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - (a_object * 0.45));
-            samp.values_per_wave = 300 - Math.floor(300 * a_object);
+            samp.values_per_wave = 10 + Math.floor(90 * a_object);;
             return samp;  
         }
     };
