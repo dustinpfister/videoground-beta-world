@@ -68,7 +68,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
   
 
-            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 10, false);
+            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 20, false);
             const a_tune1sin = Math.sin(Math.PI * obj_1.a_wave);
 
             samp.frequency = 1 + obj_1.frequency / 30;
