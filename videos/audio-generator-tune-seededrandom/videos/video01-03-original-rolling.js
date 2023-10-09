@@ -211,10 +211,10 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-   sm.renderer.render(sm.scene, sm.camera);
-   const dx = 0, dy = 0;
-   const dw = sm.canvas.width, dh = sm.canvas.height;
-   ctx.drawImage(sm.renderer.domElement, dx, dy, dw, dh);
+    sm.renderer.render(sm.scene, sm.camera);
+    const dx = 0, dy = 0;
+    const dw = sm.canvas.width, dh = sm.canvas.height;
+    ctx.drawImage(sm.renderer.domElement, dx, dy, dw, dh);
 
 
     // draw disp

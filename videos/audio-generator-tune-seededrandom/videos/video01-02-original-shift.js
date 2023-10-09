@@ -3,6 +3,19 @@
  */
 VIDEO.resmode = 6;
 //-------- ----------
+// THUM
+//-------- ----------
+VIDEO.thum_frame = 0;
+VIDEO.thum_overlay = (sm, canvas, ctx) => {
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.font = '100px arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.strokeText('SHIFT', canvas.width / 2, canvas.height / 2);
+    ctx.fillText('SHIFT', canvas.width / 2, canvas.height / 2);
+};
+//-------- ----------
 // SCRIPTS
 //-------- ----------
 VIDEO.scripts = [

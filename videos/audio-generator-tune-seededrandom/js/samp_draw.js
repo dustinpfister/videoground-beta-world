@@ -93,6 +93,7 @@
         const alpha = sm.frame / ( sm.frameMax - 1);
         ctx.fillStyle = 'cyan';
         ctx.font = '20px courier';
+        ctx.textAlign = 'left';
         ctx.textBaseline = 'top';
         const str_frame = String(sm.frame).padStart(4, '0');
         ctx.fillText('frame: ' + str_frame + ' / ' + sm.frameMax, 5 + 70, 450);
