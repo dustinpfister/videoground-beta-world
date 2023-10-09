@@ -58,7 +58,7 @@ VIDEO.init = function(sm, scene, camera){
     const data_1 = ST.tune_to_alphas(tune_1, nf);
 
     sq.objects[0] = {
-        alpha: 5 / 55,
+        alpha: 3 / 30,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){ 
             samp.int_shift = set_shift(0, 10, 5, a_object, 1);
             samp.values_per_wave = 100 - Math.floor(90 * a_object);
@@ -67,7 +67,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[1] = {
-        alpha: 10 / 55,
+        alpha: 6 / 30,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = set_shift(50, 400, 5, a_object, a_object);
             samp.values_per_wave = 10;
@@ -77,7 +77,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
     sq.objects[2] = {
-        alpha: 30 / 55,
+        alpha: 26 / 30,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
   
 
@@ -99,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[3] = {
-        alpha: 55 / 55,
+        alpha: 30 / 30,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - (a_object * 0.45));
             samp.values_per_wave = 300 - Math.floor(200 * a_object);
@@ -127,7 +127,7 @@ samp.amplitude = 0.75;
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 55
+        secs: 30
     });
     sm.frameMax = sound.frames;
 
