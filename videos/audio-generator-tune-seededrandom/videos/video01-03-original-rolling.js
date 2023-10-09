@@ -30,6 +30,15 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const tune_1 = [
+        0.5,'c1', 0.5,'c1', 0.5,'c1', 0.5,'c1', 1,'e1',    3,'c1',  1.5,'rest',
+        0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1',   1,'c2', 3,'c2',  2, 'rest',
+
+        0.5,'c2', 0.5,'c2', 0.5,'c2', 0.5,'c2', 1,'e2',    3,'c2',  1.5,'rest',
+        0.5,'b2', 0.5,'b2', 0.5,'b2', 0.5,'b2', 0.5,'b2',   1,'c3', 3,'c3',  2, 'rest',
+
+        0.5,'c1', 0.5,'c1', 0.5,'c1', 0.5,'c1', 1,'e1',    3,'c1',  1.5,'rest',
+        0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1', 0.5,'b1',   1,'c2', 3,'c2',  2, 'rest',
+
         0.5,'c2', 0.5,'c2', 0.5,'c2', 0.5,'c2', 1,'e2',    3,'c2',  1.5,'rest',
         0.5,'b2', 0.5,'b2', 0.5,'b2', 0.5,'b2', 0.5,'b2',   1,'c3', 3,'c3',  2, 'rest'
     ];
@@ -55,7 +64,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
     sq.objects[2] = {
-        alpha: 20 / 55,
+        alpha: 30 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
   
 
@@ -71,7 +80,7 @@ VIDEO.init = function(sm, scene, camera){
 
             samp.int_shift = set_shift(2050, 400, 10, a_object, 1);
 
-            samp.values_per_wave = 10;
+            samp.values_per_wave = 10 + Math.floor(290 * a_object);
             return samp;  
         }
     };
@@ -80,7 +89,7 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 55 / 55,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = set_shift(6050, 400, 35, a_object, 1 - (a_object * 0.45));
-            samp.values_per_wave = 10 + Math.floor(90 * a_object);;
+            samp.values_per_wave = 300 - Math.floor(200 * a_object);
             return samp;  
         }
     };
