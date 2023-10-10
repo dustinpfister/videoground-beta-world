@@ -159,7 +159,7 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     sq.objects[0] = {
-        alpha: 3 / 20,
+        alpha: 3 / 18,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0;
             samp.values_per_wave = 200 - Math.round( 160 * a_object );
@@ -172,7 +172,7 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[1] = {
-        alpha: 15 / 20,
+        alpha: 15 / 18,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0;
             samp.values_per_wave = 40;
