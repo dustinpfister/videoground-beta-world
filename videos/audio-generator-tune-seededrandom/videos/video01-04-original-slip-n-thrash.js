@@ -177,9 +177,14 @@ VIDEO.init = function(sm, scene, camera){
             samp.int_shift = 0;
             samp.values_per_wave = 40;
 
-            samp.frequency = tune[ Math.floor( tune.length  * a_object) ];
+            const ti = tune[ Math.floor( tune.length  * a_object) ];
+            samp.frequency = ti;
+            samp.amplitude = 0.0;
+            if(ti > 0){      
+                samp.amplitude = 0.75;
+            }
 
-            samp.amplitude = 0.75;
+
             return samp;  
         }
     };
