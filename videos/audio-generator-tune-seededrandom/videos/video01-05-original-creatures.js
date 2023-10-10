@@ -60,11 +60,28 @@ VIDEO.init = function(sm, scene, camera){
         0,4,4,4,4,4,4,4,4,0
     ];
 
+
+    const tune_2 = [
+        0,1,1,1,1,1,1,1,1,0,
+        0,1,1,1,1,0,
+        0,2,2,2,2,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,3,3,3,3,0,
+        0,2,2,2,2,2,2,2,2,0,
+        0,3,3,3,3,0,
+        0,3,3,3,3,3,3,3,3,0,
+        0,2,2,2,2,2,2,2,2,0,
+        0,1,1,1,1,1,1,1,1,0
+    ];
+
+    const total_secs = 10; //22;
+
+
     sq.objects[0] = {
-        alpha: 12 / 12,
+        alpha: 12 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = Math.floor(100 * a_object);
-            samp.values_per_wave = 20;
+            samp.int_shift = 0; //Math.floor(100 * a_object);
+            samp.values_per_wave = 60;
 
             const ti = tune_1[ Math.floor( tune_1.length  * (a_object * 4 % 1) ) ];
             samp.frequency = ti;
@@ -77,6 +94,25 @@ VIDEO.init = function(sm, scene, camera){
             return samp;  
         }
     };
+
+    sq.objects[1] = {
+        alpha: 22 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0; //Math.floor(100 * a_object);
+            samp.values_per_wave = 60;
+
+            const ti = tune_2[ Math.floor( tune_2.length  * (a_object * 2 % 1) ) ];
+            samp.frequency = ti;
+            samp.amplitude = 0.0;
+            if(ti > 0){      
+                samp.amplitude = 0.75;
+            }
+
+
+            return samp;  
+        }
+    };
+
 
 
 
@@ -99,7 +135,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 12
+        secs: total_secs
     });
     sm.frameMax = sound.frames;
 
