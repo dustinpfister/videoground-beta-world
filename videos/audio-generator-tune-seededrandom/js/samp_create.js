@@ -227,7 +227,7 @@
     };
 
     CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, as_wave = false, is_export=true ) => {
-        if(!is_export){
+        if(!is_export || !filePath){
             return;
         }
         // write data_samples array

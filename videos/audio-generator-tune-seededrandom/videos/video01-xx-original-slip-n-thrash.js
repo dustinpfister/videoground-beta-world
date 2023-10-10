@@ -73,7 +73,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 3
+        secs: 1
     });
     sm.frameMax = sound.frames;
 
@@ -132,7 +132,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     geometry.computeVertexNormals();
 
     // write the data samples
-    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true, sm.isExport);
+    //return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true, sm.isExport);
+    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.imageFolder, true, sm.isExport);
 };
 //-------- ----------
 // RENDER

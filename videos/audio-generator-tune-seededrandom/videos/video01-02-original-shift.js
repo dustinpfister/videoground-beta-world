@@ -139,7 +139,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     geometry.computeVertexNormals();
 
     // write the data samples
-    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
+    //return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
+    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.imageFolder, true, sm.isExport);
 };
 //-------- ----------
 // RENDER
