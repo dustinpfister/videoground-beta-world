@@ -1,5 +1,5 @@
-/*    video01-04-original-slip-n-thrash - for audio-generator-tune-seededrandom project
-          * slip and then thrash brah
+/*    video01-05-original-creatures - for audio-generator-tune-seededrandom project
+          * I just want to name this one creatures
  */
 VIDEO.resmode = 6;
 //-------- ----------
@@ -12,8 +12,8 @@ VIDEO.thum_overlay = (sm, canvas, ctx) => {
     ctx.font = '80px arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.strokeText('SLIP-N-THRASH', canvas.width / 2, canvas.height / 2);
-    ctx.fillText('SLIP-N-THRASH', canvas.width / 2, canvas.height / 2);
+    ctx.strokeText('CREATURES', canvas.width / 2, canvas.height / 2);
+    ctx.fillText('CREATURES', canvas.width / 2, canvas.height / 2);
 };
 //-------- ----------
 // SCRIPTS
@@ -36,148 +36,37 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
 
-    //const tune_1 = [
-    //    1,'e2', 1,'e2', 1,'e3', 1,'e2', 1,'e2', 1,'e3', 1,'e2', 1,'e2', 3,'c3'
-    //];
-    //const data_1 = ST.tune_to_alphas(tune_1, nf);
 
-    const tune = [
-
+    const tune_1 = [
         0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
         0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
         0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
+        0,2,2,2,2,0,
         0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
+        0,2,2,0,
         0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-
-        0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,0,
-
-
-        0,8,8,8,8,8,8,8,8,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,6,6,6,6,6,6,6,6,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,6,6,6,6,6,6,6,6,0,
-        0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,
-
-        0,8,8,8,8,8,8,8,8,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,5,5,5,5,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,6,6,6,6,6,6,6,6,0,
-        0,8,8,8,8,8,8,8,8,0,
-        0,6,6,6,6,6,6,6,6,0,
-        0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,
-
-        0,8,8,8,8,7,7,7,7,6,6,6,6,5,5,5,5,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,1,0,
-
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,1,1,1,1,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,4,4,4,4,4,4,4,4,0,
-        0,2,2,2,2,2,2,2,2,0,
-        0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-
+        0,2,2,0,
+        0,4,4,4,4,4,4,4,4,0
     ];
 
     sq.objects[0] = {
-        alpha: 3 / 18,
+        alpha: 12 / 12,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = 0;
-            samp.values_per_wave = 200 - Math.round( 160 * a_object );
+            samp.int_shift = Math.floor(100 * a_object);
+            samp.values_per_wave = 20;
 
-            samp.frequency = 1;
-
-            samp.amplitude = 0.75;
-            return samp;  
-        }
-    };
-
-    sq.objects[1] = {
-        alpha: 15 / 18,
-        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = 0;
-            samp.values_per_wave = 40;
-
-            const ti = tune[ Math.floor( tune.length  * a_object) ];
+            const ti = tune_1[ Math.floor( tune_1.length  * (a_object * 4 % 1) ) ];
             samp.frequency = ti;
             samp.amplitude = 0.0;
             if(ti > 0){      
@@ -189,18 +78,6 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-    sq.objects[2] = {
-        alpha: 18 / 18,
-        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = 0;
-            samp.values_per_wave = 40 + Math.round( 160 * a_object );
-
-            samp.frequency = 1;
-
-            samp.amplitude = 0.75;
-            return samp;  
-        }
-    };
 
 
     // the sound object
@@ -212,7 +89,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.a_wave = a_frame;
 
 
-            samp.values_per_wave = 10; 
+            samp.values_per_wave = 60; 
             samp.frequency = 1;
             samp.amplitude = 0.75;
 
@@ -222,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 100,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: 18
+        secs: 12
     });
     sm.frameMax = sound.frames;
 
