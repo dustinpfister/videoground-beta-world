@@ -226,7 +226,10 @@
         return data_samples;
     };
 
-    CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, as_wave = false ) => {
+    CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, as_wave = false, is_export=true ) => {
+        if(!is_export){
+            return;
+        }
         // write data_samples array
         const clear = frame === 0 ? true: false;
         const fn = as_wave ? 'video.wav' : 'sampdata';
