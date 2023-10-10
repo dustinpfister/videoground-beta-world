@@ -74,7 +74,39 @@ VIDEO.init = function(sm, scene, camera){
         0,1,1,1,1,1,1,1,1,0
     ];
 
-    const total_secs = 10; //22;
+
+    const tune_3 = [
+        0,2,2,2,2,0,
+        0,4,4,4,4,0,
+        0,2,2,2,2,0,
+        0,4,4,4,4,0,
+        0,4,4,4,4,0,
+
+        0,2,2,2,2,0,
+        0,4,4,4,4,0,
+        0,2,2,2,2,0,
+        0,4,4,4,4,0,
+        0,4,4,4,4,0,
+
+        0,2,2,2,2,0,
+        0,4,4,4,4,0,
+        0,2,2,2,2,0,
+        0,4,4,4,4,0,
+        0,4,4,4,4,0,
+
+        0,4,4,0,
+        0,4,4,0,
+        0,4,4,0,
+        0,4,4,0,
+
+        0,5,5,0,
+        0,5,5,0,
+        0,5,5,0,
+        0,5,5,0,
+
+    ];
+
+    const total_secs = 35; //22;
 
 
     sq.objects[0] = {
@@ -82,15 +114,12 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0; //Math.floor(100 * a_object);
             samp.values_per_wave = 60;
-
             const ti = tune_1[ Math.floor( tune_1.length  * (a_object * 4 % 1) ) ];
             samp.frequency = ti;
             samp.amplitude = 0.0;
             if(ti > 0){      
                 samp.amplitude = 0.75;
             }
-
-
             return samp;  
         }
     };
@@ -100,21 +129,30 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0; //Math.floor(100 * a_object);
             samp.values_per_wave = 60;
-
             const ti = tune_2[ Math.floor( tune_2.length  * (a_object * 2 % 1) ) ];
             samp.frequency = ti;
             samp.amplitude = 0.0;
             if(ti > 0){      
                 samp.amplitude = 0.75;
             }
-
-
             return samp;  
         }
     };
 
-
-
+    sq.objects[2] = {
+        alpha: 35 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0; //Math.floor(100 * a_object);
+            samp.values_per_wave = 60;
+            const ti = tune_3[ Math.floor( tune_3.length  * (a_object * 2 % 1) ) ];
+            samp.frequency = ti;
+            samp.amplitude = 0.0;
+            if(ti > 0){      
+                samp.amplitude = 0.75;
+            }
+            return samp;  
+        }
+    };
 
     // the sound object
     const sound = scene.userData.sound = CS.create_sound({
