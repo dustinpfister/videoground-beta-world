@@ -108,8 +108,20 @@ VIDEO.init = function(sm, scene, camera){
 
     const total_secs = 30; //22;
 
+
     sq.objects[0] = {
-        alpha: 12 / total_secs,
+        alpha: 1 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0;
+            samp.values_per_wave = 60 - 30 * Math.sin( Math.PI * (a_object * 2 % 1) );
+            samp.frequency = 5;
+            samp.amplitude = 0.75;
+            return samp;  
+        }
+    };
+
+    sq.objects[1] = {
+        alpha: 13 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0;
             samp.values_per_wave = 60;
@@ -123,19 +135,22 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-    sq.objects[1] = {
-    //sq.objects[0] = {
-        alpha: 22 / total_secs,
-        //alpha:1,
+    sq.objects[2] = {
+        alpha: 14 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-
-            //const shifts = [0, 1000];
-            //const i_shift = Math.floor( (a_object * 40 % 1) * shifts.length);
-            ///samp.int_shift = shifts[i_shift];
-
             samp.int_shift = 0;
+            samp.values_per_wave = 60 - 20 * a_object;
+            samp.frequency = 4;
+            samp.amplitude = 0.75;
+            return samp;  
+        }
+    };
 
-            samp.values_per_wave = 60;
+    sq.objects[3] = {
+        alpha: 22 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0;
+            samp.values_per_wave = 40;
             const ti = 1 * tune_2[ Math.floor( tune_2.length  * (a_object * 2 % 1) ) ];
             samp.frequency = ti;
             samp.amplitude = 0.0;
@@ -146,8 +161,19 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-    sq.objects[2] = {
-        alpha: 30 / total_secs,
+    sq.objects[4] = {
+        alpha: 23 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0;
+            samp.values_per_wave = 40 + 20 * a_object;
+            samp.frequency = 4;
+            samp.amplitude = 0.75;
+            return samp;  
+        }
+    };
+
+    sq.objects[5] = {
+        alpha: 29 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0;
             samp.values_per_wave = 60;
@@ -157,6 +183,17 @@ VIDEO.init = function(sm, scene, camera){
             if(ti > 0){      
                 samp.amplitude = 0.75;
             }
+            return samp;  
+        }
+    };
+
+    sq.objects[6] = {
+        alpha: 30 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0;
+            samp.values_per_wave = 60 - 30 * Math.sin( Math.PI * (a_object * 2 % 1) );
+            samp.frequency = 5;
+            samp.amplitude = 0.75;
             return samp;  
         }
     };
