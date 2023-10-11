@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
         0,3,3,3,3,0,
         0,3,3,3,3,3,3,3,3,0,
         0,2,2,2,2,2,2,2,2,0,
-        0,1,1,1,1,1,1,1,1,0
+        0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0
     ];
 
 
@@ -108,11 +108,10 @@ VIDEO.init = function(sm, scene, camera){
 
     const total_secs = 30; //22;
 
-
     sq.objects[0] = {
         alpha: 12 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = 0; //Math.floor(100 * a_object);
+            samp.int_shift = 0;
             samp.values_per_wave = 60;
             const ti = tune_1[ Math.floor( tune_1.length  * (a_object * 4 % 1) ) ];
             samp.frequency = ti;
@@ -125,11 +124,19 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     sq.objects[1] = {
+    //sq.objects[0] = {
         alpha: 22 / total_secs,
+        //alpha:1,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+
+            //const shifts = [0, 1000];
+            //const i_shift = Math.floor( (a_object * 40 % 1) * shifts.length);
+            ///samp.int_shift = shifts[i_shift];
+
             samp.int_shift = 0;
-            samp.values_per_wave = 40;
-            const ti = tune_2[ Math.floor( tune_2.length  * (a_object * 2 % 1) ) ];
+
+            samp.values_per_wave = 60;
+            const ti = 1 * tune_2[ Math.floor( tune_2.length  * (a_object * 2 % 1) ) ];
             samp.frequency = ti;
             samp.amplitude = 0.0;
             if(ti > 0){      
