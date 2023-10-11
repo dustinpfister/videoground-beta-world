@@ -23,17 +23,14 @@ WP.create_wp = (opt = {} ) => {
         const x = i % size;
         const y = Math.floor( i / size );
         const a = (0.25 + 0.75 * THREE.MathUtils.seededRandom(i)).toFixed(2)
-        const r = 0;//Math.floor( 255 * ( i / len ) );
+        const r = 0;
         const g = Math.floor( 255 * ( y / size ) );
         const b = Math.floor( 255 * ( x / size ) );
         ctx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
-
-        //ctx.fillStyle = '#ffffff';
         const n = Math.floor(size / (wp.track_points - 1));
         if( y % n > n - 3 || y % n < 2 ){
             ctx.fillStyle = 'rgba(255,255,255,1)';
         }
-
         ctx.fillRect(x, y, 1, 1);
         i += 1;
     }
@@ -44,7 +41,9 @@ WP.create_wp = (opt = {} ) => {
     wp.material = new THREE.MeshBasicMaterial({
          side: THREE.DoubleSide,
          map: texture,
-         transparent: true, opacity: 1
+         transparent: true, opacity: 1,
+         wireframe:true,
+         wireframeLinewidth: 2
     });
     wp.mesh = new THREE.Mesh(wp.geometry, wp.material);
 

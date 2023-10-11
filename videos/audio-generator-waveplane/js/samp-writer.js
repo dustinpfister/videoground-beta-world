@@ -53,6 +53,9 @@ SW.build_wave_header = (opts) => {
 
 SW.write_frame_samples = ( data_samples = [], frame=0, filePath, total_secs=5, sample_rate=8000 ) => {
     const clear = frame === 0 ? true: false;
+    if(!filePath){
+        return;
+    }
     const fn = 'video.wav';
     const uri = videoAPI.pathJoin(filePath, fn);
     if( frame === 0 ){
