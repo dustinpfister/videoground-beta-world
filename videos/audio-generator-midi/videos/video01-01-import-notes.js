@@ -105,7 +105,7 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const data_samples = CS.create_frame_samples(scene.userData.sound, sm.frame );
-    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
+    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.imageFolder, true);
 };
 //-------- ----------
 // RENDER

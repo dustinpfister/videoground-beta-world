@@ -227,47 +227,11 @@
     };
 
     CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, as_wave = false ) => {
-        // write data_samples array
-        const clear = frame === 0 ? true: false;
-        const fn = as_wave ? 'video.wav' : 'sampdata';
-        const uri = videoAPI.pathJoin(filePath, fn);
-        //!!! This will need to be adress in another way, just want to get this to work for now.
-        if( frame === 0 && as_wave && sound.mode === 'int16' ){
-            // what a frame is:
-            // http://sporadic.stanford.edu/reference/misc/sage/media/wav.html
-            const numChannels = 1;
-            const array_header = CS.buildWaveHeader({
-                numFrames: sound.sample_rate * numChannels * sound.secs, // a frame is not what you think it is. see the link on this ^
-                numChannels: numChannels,        // going with mono alone for audo-generator-1 at least
-                sampleRate: sound.sample_rate,   // 44100 is the defualt anyway so just making this exsplisit
-                bytesPerSample: 2                // set on 16bit for this project at least
-            });
-            return videoAPI.write(uri, new Int16Array( array_header ), true )
-            .then(()=>{
-                return videoAPI.write(uri, new Int16Array(data_samples), false );
-            });
-        }else{
-            if( sound.mode === 'int16'){
-                return videoAPI.write(uri, new Int16Array(data_samples), clear );
-            }
-            return videoAPI.write(uri, new Uint8Array(data_samples), clear );
-        }
-    };
 
-    // write frame samples
-/*
-    CS.write_frame_samples = (sound, frame = 0, filePath, as_wave = false ) => {
-        const i_start = Math.floor(sound.samples_per_frame * frame);
-        const data_samples =  sound.array_frame = CS.create_samp_points({
-            sound: sound,
-            waveform: sound.waveform,
-            for_sampset: sound.for_sampset,
-            i_size : sound.total_samps,
-            i_start : i_start,
-            i_count : sound.samples_per_frame,
-            secs: sound.secs,
-            mode: sound.mode
-        });
+        if(!filePath){
+            return;
+        }
+
         // write data_samples array
         const clear = frame === 0 ? true: false;
         const fn = as_wave ? 'video.wav' : 'sampdata';
@@ -294,7 +258,6 @@
             return videoAPI.write(uri, new Uint8Array(data_samples), clear );
         }
     };
-*/
     // append public api to window
     window.CS = CS;
 }());

@@ -69,7 +69,7 @@ VIDEO.init = function(sm, scene, camera){
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
                         amplitude: 0.75 * Math.sin(Math.PI * a_wave),
-                        waveform: 'sin', //'square', //'sin', //'seedednoise',
+                        waveform: 'seedednoise', //'square', //'sin', //'seedednoise',
                         values_per_wave: 20,
                         int_shift: 0
                     };
@@ -131,7 +131,7 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const data_samples = CS.create_frame_samples(scene.userData.sound, sm.frame );
-    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.filePath, true);
+    return CS.write_frame_samples(scene.userData.sound, data_samples, sm.frame, sm.imageFolder, true);
 };
 //-------- ----------
 // RENDER
