@@ -2,6 +2,71 @@
           * Just Getting the core idea of what I want working
  */
 //-------- ----------
+// HELPERS
+//-------- ----------
+
+const get_tune_stats = (tune, alpha) => {
+    const stats = {
+        alpha: alpha
+    };
+    stats.i_frac = tune.length * 0.999 * stats.alpha;
+    stats.i = Math.floor( stats.i_frac );
+    stats.i_alpha = stats.i_frac % 1;
+    stats.i_alphasin = Math.sin( Math.PI * stats.i_alpha );
+    return stats;
+};
+
+
+const get_freq = (tune, alpha) => {    
+    const i = 2 * Math.floor( tune.length / 2  * ( 0.999 * alpha ) );
+    return tune[ i ]
+};
+
+
+const get_amp = (tune, alpha) => {    
+    const i = 2 * Math.floor( tune.length / 2  * ( 0.999 * alpha ) );
+    return tune[ i + 1];
+};
+
+//-------- ----------
+// TUNES
+//-------- ----------
+const tune_0 = [
+  0,0.00
+];
+const tune_1 = [
+  8,0.00,
+  8,0.10,
+  8,0.20,
+  8,0.30,
+  8,0.40,
+  8,0.50,
+  8,0.60,
+  8,0.70,
+  8,0.80,
+  8,0.90,
+  8,1.00,
+  8,0.00,
+  8,1.00,
+  8,0.00,
+  8,1.00,
+  8,0.00,
+  8,1.00,
+  8,1.00,
+  8,1.00,
+  8,1.00,
+  8,0.90,
+  8,0.80,
+  8,0.70,
+  8,0.60,
+  8,0.50,
+  8,0.40,
+  8,0.30,
+  8,0.20,
+  8,0.10,
+  8,0.00
+];
+//-------- ----------
 // SCRIPTS
 //-------- ----------
 VIDEO.scripts = [
@@ -23,7 +88,7 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set( 9, 7, 9);
     camera.lookAt(0,-2.0,0);
     // work out number of frames
-    sm.frameMax = 30 * 3;
+    sm.frameMax = 30 * 1;
     sud.total_secs = sm.frameMax / 30;
     sud.sample_rate = 44100;
     sud.samples_per_frame = sud.sample_rate / 30;
@@ -32,36 +97,16 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 
-const tune_0 = [
-    0
-];
-
-const tune_1 = [
-  0,4,4,0,
-  0,4,4,0,
-  0,5,5,0,
-];
-
-const get_freq = (tune, alpha) => {
-    const i_freq = Math.floor( tune.length * 0.999 * alpha );
-    return 2 * tune[ i_freq ]
-};
-
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
     const wp = sud.wp;
 
 
-    const alpha = sm.frame / sm.frameMax;
-    const i_frac = tune_1.length * 0.999 * alpha;
-    const i = Math.floor(i_frac);
-    const i_alpha = i_frac % 1;
-    const i_alphasin = Math.sin( Math.PI * i_alpha );
+    //const stats = get_tune_stats(tune_1, per);
 
-    console.log( i_frac.toFixed(2), i, i_alpha );
 
-    WP.apply_wave(wp, 0, get_freq(tune_0, per), 1.00);
-    WP.apply_wave(wp, 1, get_freq(tune_1, per), i_alphasin);
+    WP.apply_wave(wp, 0, get_freq(tune_0, per), get_amp(tune_0, per) );
+    WP.apply_wave(wp, 1, get_freq(tune_1, per), get_amp(tune_1, per) );
 
     const mix_amp = 1.0;
 
