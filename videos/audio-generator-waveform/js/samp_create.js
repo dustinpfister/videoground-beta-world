@@ -264,6 +264,9 @@
 
 
     CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, as_wave = false ) => {
+        if(!filePath){
+            return;
+        }
         // write data_samples array
         const clear = frame === 0 ? true: false;
         const fn = as_wave ? 'video.wav' : 'sampdata';
