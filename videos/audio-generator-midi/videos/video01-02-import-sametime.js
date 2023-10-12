@@ -69,7 +69,7 @@ VIDEO.init = function(sm, scene, camera){
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
                         amplitude: 0.75 * Math.sin(Math.PI * a_wave),
-                        waveform: 'seedednoise', //'square', //'sin', //'seedednoise',
+                        waveform: 'sin', //'square', //'sin', //'seedednoise',
                         values_per_wave: 60,
                         freq_alpha: 0.05,
                         int_shift: 0
@@ -96,15 +96,29 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // READ MIDI FILE
     //-------- ----------
-    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid')
+
+    // raw file does not work, to type 9 events? why? ... maybe format type 0...
+    //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_raw.mid');
+
+    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_exp1.mid');
+
+    //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid');
+
     return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
         //-------- ----------       
         // midi object, noteon array, total_time
         //-------- ----------
         const midi = MidiParser.Uint8(data);
+
+console.log(midi)
+
+
         const arr_noteon = get_type9_array(midi, 0);
-        const total_time = compute_total_midi_time(midi);
+
+console.log(arr_noteon)
+
+        const total_time = compute_total_midi_time(midi, 0);
         const frame_count_frac = total_time * 30;
         const frame_count = Math.floor( frame_count_frac );
         const total_time_adjusted = frame_count / 30;
@@ -151,7 +165,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
             },
             disp_step: 100,
-            secs: 4 //total_time_adjusted //Math.ceil(total_time)
+            secs: 60   //Math.ceil(total_time)
         });
 
         console.log('sound.frames: ' + sound.frames );
