@@ -1,4 +1,4 @@
-/*    video01-02-import-sametime - for audio-generator-1 project
+/*    video01-02-import-sametime - for audio-generator-midi project
           * work like to have a way to play two notes at once
  */
 //-------- ----------
@@ -68,7 +68,7 @@ VIDEO.init = function(sm, scene, camera){
                         ni: note_index,
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
-                        amplitude: 0.75 * Math.sin(Math.PI * a_wave),
+                        amplitude: 1, //0.75 * Math.sin(Math.PI * a_wave),
                         waveform: 'sawtooth', // 'sawtooth' 'square', //'sin', //'seedednoise',
                         values_per_wave: 60,
                         freq_alpha: 1.00,
@@ -166,7 +166,7 @@ VIDEO.init = function(sm, scene, camera){
 //}
 
                 return {
-                   amplitude: 5,
+                   amplitude: 3,
                    a_wave: a_wave,
                    frequency: 1,
                    table: table
