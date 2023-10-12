@@ -5,6 +5,7 @@
 // HELPERS
 //-------- ----------
 
+/*
 const get_tune_stats = (tune, alpha) => {
     const stats = {
         alpha: alpha
@@ -15,56 +16,92 @@ const get_tune_stats = (tune, alpha) => {
     stats.i_alphasin = Math.sin( Math.PI * stats.i_alpha );
     return stats;
 };
+*/
 
-
-const get_freq = (tune, alpha) => {    
-    const i = 2 * Math.floor( tune.length / 2  * ( 0.999 * alpha ) );
-    return tune[ i ]
+const get_freq = (tune, alpha, i_track=0) => {    
+    const i_rec = 4 * Math.floor( tune.length / 4  * ( 0.999 * alpha ) );
+    return tune[ i_rec + i_track * 2 ];
 };
 
 
-const get_amp = (tune, alpha) => {    
-    const i = 2 * Math.floor( tune.length / 2  * ( 0.999 * alpha ) );
-    return tune[ i + 1];
+const get_amp = (tune, alpha, i_track=0) => {    
+    const i_rec = 4 * Math.floor( tune.length / 4  * ( 0.999 * alpha ) );
+    return tune[ i_rec + i_track * 2 + 1];
 };
 
 //-------- ----------
 // TUNES
 //-------- ----------
-const tune_0 = [
-  0,0.00
-];
 const tune_1 = [
-  8,0.00,
-  8,0.10,
-  8,0.20,
-  8,0.30,
-  8,0.40,
-  8,0.50,
-  8,0.60,
-  8,0.70,
-  8,0.80,
-  8,0.90,
-  8,1.00,
-  8,0.00,
-  8,1.00,
-  8,0.00,
-  8,1.00,
-  8,0.00,
-  8,1.00,
-  8,1.00,
-  8,1.00,
-  8,1.00,
-  8,0.90,
-  8,0.80,
-  8,0.70,
-  8,0.60,
-  8,0.50,
-  8,0.40,
-  8,0.30,
-  8,0.20,
-  8,0.10,
-  8,0.00
+
+  8,0.00, 4,0.00,
+  8,0.05, 4,0.12,
+  8,0.10, 4,0.35,
+  8,0.15, 4,0.75,
+  8,0.20, 4,0.75,
+  8,0.25, 4,0.35,
+  8,0.30, 4,0.12,
+  8,0.35, 4,0.00,
+
+  8,0.40, 4,0.00,
+  8,0.45, 4,0.12,
+  8,0.50, 4,0.35,
+  8,0.50, 4,0.75,
+  8,0.50, 4,0.75,
+  8,0.50, 4,0.35,
+  8,0.50, 4,0.12,
+
+  8,0.40, 4,0.00,
+  8,0.40, 4,0.12,
+  8,0.40, 4,0.35,
+  8,0.40, 4,0.75,
+  8,0.30, 4,0.75,
+  8,0.30, 4,0.35,
+  8,0.30, 4,0.12,
+  8,0.30, 4,0.00,
+
+  8,0.30, 4,0.00,
+  8,0.20, 4,0.12,
+  8,0.20, 4,0.35,
+  8,0.20, 4,0.75,
+  8,0.10, 4,0.75,
+  8,0.10, 4,0.35,
+  8,0.00, 4,0.12,
+
+  8,0.00, 4,0.00,
+  8,0.05, 4,0.12,
+  8,0.10, 4,0.35,
+  8,0.15, 4,0.75,
+  8,0.20, 4,0.75,
+  8,0.25, 4,0.35,
+  8,0.30, 4,0.12,
+  8,0.35, 4,0.00,
+
+  8,0.40, 4,0.00,
+  8,0.45, 4,0.12,
+  8,0.50, 4,0.35,
+  8,0.50, 4,0.75,
+  8,0.50, 4,0.75,
+  8,0.50, 4,0.35,
+  8,0.50, 4,0.12,
+
+  8,0.40, 4,0.00,
+  8,0.40, 4,0.12,
+  8,0.40, 4,0.35,
+  8,0.40, 4,0.75,
+  8,0.30, 4,0.75,
+  8,0.30, 4,0.35,
+  8,0.30, 4,0.12,
+  8,0.30, 4,0.00,
+
+  8,0.30, 4,0.00,
+  8,0.20, 4,0.12,
+  8,0.20, 4,0.35,
+  8,0.20, 4,0.75,
+  8,0.10, 4,0.75,
+  8,0.10, 4,0.35,
+  8,0.00, 4,0.12,
+
 ];
 //-------- ----------
 // SCRIPTS
@@ -80,7 +117,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
     const wp = sud.wp = WP.create_wp({
-        samp_points: 256,
+        samp_points: 1024,
         track_points: 2
     });
     scene.add(wp.mesh);
@@ -88,7 +125,7 @@ VIDEO.init = function(sm, scene, camera){
     camera.position.set( 9, 7, 9);
     camera.lookAt(0,-2.0,0);
     // work out number of frames
-    sm.frameMax = 30 * 1;
+    sm.frameMax = 30 * 2;
     sud.total_secs = sm.frameMax / 30;
     sud.sample_rate = 44100;
     sud.samples_per_frame = sud.sample_rate / 30;
@@ -105,8 +142,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     //const stats = get_tune_stats(tune_1, per);
 
 
-    WP.apply_wave(wp, 0, get_freq(tune_0, per), get_amp(tune_0, per) );
-    WP.apply_wave(wp, 1, get_freq(tune_1, per), get_amp(tune_1, per) );
+    WP.apply_wave(wp, 0, get_freq(tune_1, per, 0), get_amp(tune_1, per, 0) );
+    WP.apply_wave(wp, 1, get_freq(tune_1, per, 1), get_amp(tune_1, per, 1) );
 
     const mix_amp = 1.0;
 
