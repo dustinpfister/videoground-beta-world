@@ -70,7 +70,8 @@ VIDEO.init = function(sm, scene, camera){
                         frequency: Math.floor(note_index * 12),
                         amplitude: 0.75 * Math.sin(Math.PI * a_wave),
                         waveform: 'seedednoise', //'square', //'sin', //'seedednoise',
-                        values_per_wave: 20,
+                        values_per_wave: 60,
+                        freq_alpha: 0.05,
                         int_shift: 0
                     };
                     i_table += 1;
@@ -95,7 +96,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // READ MIDI FILE
     //-------- ----------
-    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same_scale.mid')
+    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid')
     return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
         //-------- ----------       
@@ -104,6 +105,17 @@ VIDEO.init = function(sm, scene, camera){
         const midi = MidiParser.Uint8(data);
         const arr_noteon = get_type9_array(midi, 0);
         const total_time = compute_total_midi_time(midi);
+        const frame_count_frac = total_time * 30;
+        const frame_count = Math.floor( frame_count_frac );
+        const total_time_adjusted = frame_count / 30;
+
+        /// getting a target count of frames
+        console.log('total time: ' + total_time );
+        console.log('frame count frac : ' + frame_count_frac );
+        console.log('frame count : ' + frame_count );
+        console.log('total time adjusted: ' + total_time_adjusted );
+
+
         //-------- ----------
         // create sound object as ushual, but
         // I now have a data2 array to use with ST.get_tune_sampobj
@@ -127,9 +139,9 @@ VIDEO.init = function(sm, scene, camera){
                 const table = get_track_table_data(midi, arr_noteon, total_time, a_sound);
                 const a_wave = a_sound * opt.secs % 1;
 
-if(i % 10000 === 0){
-    console.log(i, table.length)
-}
+//if(i % 10000 === 0){
+//    console.log(i, table.length)
+//}
 
                 return {
                    amplitude: 0.75,
@@ -139,8 +151,11 @@ if(i % 10000 === 0){
                 }
             },
             disp_step: 100,
-            secs: Math.ceil(total_time)
+            secs: 4 //total_time_adjusted //Math.ceil(total_time)
         });
+
+        console.log('sound.frames: ' + sound.frames );
+
         sm.frameMax = sound.frames;
     });
 };
