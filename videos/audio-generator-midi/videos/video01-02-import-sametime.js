@@ -100,7 +100,7 @@ VIDEO.init = function(sm, scene, camera){
     // raw file does not work, to type 9 events? why? ... maybe format type 0...
     //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_raw.mid');
 
-    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_exp1.mid');
+    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_exp2.mid');
 
     //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid');
 
@@ -113,12 +113,12 @@ VIDEO.init = function(sm, scene, camera){
 
 console.log(midi)
 
-
-        const arr_noteon = get_type9_array(midi, 0);
+        const track_index = 3;
+        const arr_noteon = get_type9_array(midi, track_index);
 
 console.log(arr_noteon)
 
-        const total_time = compute_total_midi_time(midi, 0);
+        const total_time = compute_total_midi_time(midi, track_index);
         const frame_count_frac = total_time * 30;
         const frame_count = Math.floor( frame_count_frac );
         const total_time_adjusted = frame_count / 30;
