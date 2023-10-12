@@ -95,7 +95,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // READ MIDI FILE
     //-------- ----------
-    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid')
+    const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same_scale.mid')
     return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
         //-------- ----------       
@@ -109,10 +109,28 @@ VIDEO.init = function(sm, scene, camera){
         // I now have a data2 array to use with ST.get_tune_sampobj
         //-------- ----------
         const sound = scene.userData.sound = CS.create_sound({
-            waveform : 'table',
+            waveform : (samp, a_wave ) => {
+                const table_count = samp.table.length;
+                const freq = samp.frequency === undefined ? 1 : samp.frequency;
+                let i_wf = 0;
+                let s = 0;
+                while(i_wf < table_count ){
+                    const wf = samp.table[i_wf];
+                    const wf_samp = CS.WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave * freq % 1);
+                    s += wf_samp;
+                    i_wf += 1;
+                }
+                //return ( s / table_count ) * samp.amplitude;
+                return s * ( 1 / 8 );
+            },
             for_sampset: ( sampset, i, a_sound, opt ) => {
                 const table = get_track_table_data(midi, arr_noteon, total_time, a_sound);
                 const a_wave = a_sound * opt.secs % 1;
+
+if(i % 10000 === 0){
+    console.log(i, table.length)
+}
+
                 return {
                    amplitude: 0.75,
                    a_wave: a_wave,
