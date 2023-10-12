@@ -36,7 +36,7 @@ VIDEO.init = function(sm, scene, camera){
         return t / midi.timeDivision;
     };
     // get track table data
-    const get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0) => {
+    const get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0, note_index_shift=0) => {
         const samp_current = [];
         let i_table=0;
         let t = 0;
@@ -45,7 +45,7 @@ VIDEO.init = function(sm, scene, camera){
             const sec = t / midi.timeDivision;
             const note_start = obj.data[1] != 0;
             if(note_start){
-                const note_index = obj.data[0];
+                const note_index = obj.data[0] + note_index_shift;
                 const a_start = sec / total_time
                 // get a_end value
                 let i2 = i + 1;
@@ -69,9 +69,9 @@ VIDEO.init = function(sm, scene, camera){
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
                         amplitude: 0.75 * Math.sin(Math.PI * a_wave),
-                        waveform: 'sin', //'square', //'sin', //'seedednoise',
+                        waveform: 'sawtooth', // 'sawtooth' 'square', //'sin', //'seedednoise',
                         values_per_wave: 60,
-                        freq_alpha: 0.05,
+                        freq_alpha: 1.00,
                         int_shift: 0
                     };
                     i_table += 1;
@@ -101,6 +101,9 @@ VIDEO.init = function(sm, scene, camera){
     //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_raw.mid');
 
     const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_exp2.mid');
+    const track_index = 1;
+    const note_index_shift = -30;
+
 
     //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_same.mid');
 
@@ -111,19 +114,23 @@ VIDEO.init = function(sm, scene, camera){
         //-------- ----------
         const midi = MidiParser.Uint8(data);
 
-console.log(midi)
 
-        const track_index = 3;
+
+
         const arr_noteon = get_type9_array(midi, track_index);
 
-console.log(arr_noteon)
+
 
         const total_time = compute_total_midi_time(midi, track_index);
         const frame_count_frac = total_time * 30;
         const frame_count = Math.floor( frame_count_frac );
         const total_time_adjusted = frame_count / 30;
 
-        /// getting a target count of frames
+        console.log('midi: ');
+        console.log(midi);
+
+        console.log('arr_noteon: ');
+        console.log(arr_noteon)
         console.log('total time: ' + total_time );
         console.log('frame count frac : ' + frame_count_frac );
         console.log('frame count : ' + frame_count );
@@ -142,15 +149,16 @@ console.log(arr_noteon)
                 let s = 0;
                 while(i_wf < table_count ){
                     const wf = samp.table[i_wf];
-                    const wf_samp = CS.WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave * freq % 1);
+                    const freq_final = wf.freq_alpha * freq;
+                    const wf_samp = CS.WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave * freq_final % 1);
                     s += wf_samp;
                     i_wf += 1;
                 }
                 //return ( s / table_count ) * samp.amplitude;
-                return s * ( 1 / 8 );
+                return s * ( 1 / 8 ) * samp.amplitude;
             },
             for_sampset: ( sampset, i, a_sound, opt ) => {
-                const table = get_track_table_data(midi, arr_noteon, total_time, a_sound);
+                const table = get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift);
                 const a_wave = a_sound * opt.secs % 1;
 
 //if(i % 10000 === 0){
@@ -158,7 +166,7 @@ console.log(arr_noteon)
 //}
 
                 return {
-                   amplitude: 0.75,
+                   amplitude: 5,
                    a_wave: a_wave,
                    frequency: 1,
                    table: table
