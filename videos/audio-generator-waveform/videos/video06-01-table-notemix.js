@@ -105,7 +105,7 @@ VIDEO.init = function(sm, scene, camera){
 
             // gen array
             let i2 = 0;
-            const len = 500; //1470;
+            const len = 1470;
             while(i2 < len){
                 const a_frame = i2 / len;
                 const s1 = table_step(samp_table, a_frame );
