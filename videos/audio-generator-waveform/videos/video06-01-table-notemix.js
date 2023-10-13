@@ -79,7 +79,7 @@ VIDEO.init = function(sm, scene, camera){
             const max_notes = notes.length;
             while(i3 < max_notes){
                 const arr_note = notes[i3];
-                const amp_index = arr_note[ Math.floor( arr_note.length * (a_sound2 * (8 * a_sound2) % 1) ) ];
+                const amp_index = arr_note[ Math.floor( arr_note.length * (a_sound2 * (32 * a_sound2) % 1) ) ];
                 const amp = amp_index / 10;
                 if(amp === 0){
                     i3 += 1;
