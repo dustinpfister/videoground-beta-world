@@ -27,19 +27,20 @@ VIDEO.init = function(sm, scene, camera){
             fs.amp = 1;
 
             // 'seedednoise' options
+            const a_sin = Math.sin( Math.PI * a_sound2 );
             const amp_sn = a_sound2;
             const freq_sn = 1;
-            const values_per_wave = 60;
+            const values_per_wave = 20 + 480 * a_sin;
             const int_shift = 0;
 
             // 'follinsaw' options
-            const freq_fs = 4;
+            const das = 0.25 + 3.75 * a_sound2;
+            const a_sin2 = Math.sin( Math.PI * ( das * opt.secs * a_sound2 % 1 ) );
+            const freq_fs = 2 + 2 * Math.floor( 8 * a_sound2 ) ;
             const amp_fs = 1;
-            const das = 1;
-            const a_sin = 0.5 * Math.sin( Math.PI * ( das * opt.secs * a_sound2 % 1 ) );
-            const p1 = 0.75 - a_sin;
+            const p1 = 0.75 - 0.5 * a_sin2;
             const p2 = 0.25;
-            const duty = 0.5 + 0.45 * a_sin;
+            const duty = 0.5 + 0.45 * a_sin2;
 
 
             // table samp object
@@ -82,8 +83,8 @@ VIDEO.init = function(sm, scene, camera){
             samp.frequency = fs.freq;
             return samp;
         },
-        disp_step: 100,
-        secs: 10
+        disp_step: 2500,
+        secs: 30
  });
     sm.frameMax = sound.frames;
 };
