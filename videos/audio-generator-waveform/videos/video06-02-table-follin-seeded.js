@@ -26,6 +26,22 @@ VIDEO.init = function(sm, scene, camera){
             fs.freq = 1;
             fs.amp = 1;
 
+            // 'seedednoise' options
+            const amp_sn = a_sound2;
+            const freq_sn = 1;
+            const values_per_wave = 60;
+            const int_shift = 0;
+
+            // 'follinsaw' options
+            const freq_fs = 4;
+            const amp_fs = 1;
+            const das = 1;
+            const a_sin = 0.5 * Math.sin( Math.PI * ( das * opt.secs * a_sound2 % 1 ) );
+            const p1 = 0.75 - a_sin;
+            const p2 = 0.25;
+            const duty = 0.5 + 0.45 * a_sin;
+
+
             // table samp object
             const samp_table = {
                 amplitude: 1.00,
@@ -33,8 +49,10 @@ VIDEO.init = function(sm, scene, camera){
                 maxch: 2,
                 a_wave : a_sound2,
                 table: [
-                    { waveform: 'seedednoise', frequency: 1, amplitude: 1 },
-                    { waveform: 'follinsaw', frequency: 4, amplitude: 1 },
+                    { waveform: 'seedednoise', frequency: freq_sn, amplitude: amp_sn,
+                      values_per_wave: values_per_wave, int_shift: int_shift },
+                    { waveform: 'follinsaw',   frequency: freq_fs, amplitude: amp_fs,
+                      duty: duty, p1: p1, p2: p2 },
                 ]
             };
 
@@ -65,7 +83,7 @@ VIDEO.init = function(sm, scene, camera){
             return samp;
         },
         disp_step: 100,
-        secs: 1
+        secs: 10
  });
     sm.frameMax = sound.frames;
 };
