@@ -115,7 +115,8 @@
             if( a_sound >= alow && a_sound < ahi){
                 const arange = alow - ahi;
                 const s = arange * secs;
-                obj.a_wave = ( a_sound - alow ) / arange;
+                obj.a_wave = Math.abs( ( a_sound - alow ) / arange);
+                obj.a_wavesin = Math.sin( Math.PI * obj.a_wave );
                 obj.frequency = freq;
                 if(freq_adjust){
                     obj.frequency = freq * s;
