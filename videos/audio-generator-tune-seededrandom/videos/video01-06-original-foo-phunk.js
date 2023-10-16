@@ -36,17 +36,11 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
 
-/*
-    const tune_1 = [
-      0,1,1,1,1,1,1,1,1,0,
-      0,1,0, 0,1,0, 0,2,2,0, 0,1,1,1,1,1,1,1,1,0
-
-    ];
-*/
-
     const tune_2 = [
         1,'c1',0.25,'rest',
-        0.25,'c1',0.25,'c1',0.5,'d1',1,'c1'
+        0.25,'c1',0.25,'c1',0.5,'e1',1,'c1',
+        1,'c1',0.25,'rest',
+        0.25,'c1',0.25,'c1',0.50,'e1',0.25,'f1',1,'g1'
     ];
 
     const nf = ST.create_nf();
@@ -56,11 +50,13 @@ VIDEO.init = function(sm, scene, camera){
 
 
 
+
+
     sq.objects[0] = {
         alpha: 1,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0;
-            samp.values_per_wave = 60;
+            samp.values_per_wave = 40;
 
             //const ti = 0.25 * tune_1[ Math.floor( tune_1.length  * a_object ) ];
             //samp.frequency = ti;
