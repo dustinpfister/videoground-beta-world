@@ -1,6 +1,19 @@
 (function(){
     const ST = {};
     //-------- ----------
+    // ALPHA VLAUES
+    //-------- ----------
+    ST.get_alpha = (a=0, b=1, count=1) => {
+        const n = THREE.MathUtils.euclideanModulo(a, b);
+        const a1 = n / b;
+        const a2 = a1 * count % 1;
+        return a2;
+    };
+    ST.get_alpha_sin = (a=0, b=1, count=1) => {
+        const alpha2 = ST.get_alpha(a, b, count);
+        return Math.sin( Math.PI * alpha2 );
+    };
+    //-------- ----------
     // WAV IMPORT
     //-------- ----------
     // get an object that contains easily readabule wav feild data, DataView Objects and so forth
