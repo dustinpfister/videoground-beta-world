@@ -5,6 +5,7 @@ VIDEO.resmode = 6;
 //-------- ----------
 // THUM
 //-------- ----------
+VIDEO.name = 'FOO-PHUNK';
 VIDEO.thum_frame = 0;
 VIDEO.thum_overlay = (sm, canvas, ctx) => {
     ctx.fillStyle = 'white';
@@ -12,8 +13,8 @@ VIDEO.thum_overlay = (sm, canvas, ctx) => {
     ctx.font = '80px arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.strokeText('CREATURES', canvas.width / 2, canvas.height / 2);
-    ctx.fillText('CREATURES', canvas.width / 2, canvas.height / 2);
+    ctx.strokeText(VIDEO.name, canvas.width / 2, canvas.height / 2);
+    ctx.fillText(VIDEO.name, canvas.width / 2, canvas.height / 2);
 };
 //-------- ----------
 // SCRIPTS
@@ -37,36 +38,32 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const tune_2 = [
-        1,'c1',0.25,'rest',
-        0.25,'c1',0.25,'c1',0.5,'e1',1,'c1',
-        1,'c1',0.25,'rest',
-        0.25,'c1',0.25,'c1',0.50,'e1',0.25,'f1',1,'g1'
+        1,'c4',1,'rest',
+        0.50,'c4',  0.50,'c4',  1,'e4',  1,'c4',  1,'rest',
+
+        1,'c4',1,'rest',
+        0.50,'c4',  0.50,'c4',  1,'e4',  1,'f4', 1,'g4',   0.5,'a4', 0.5,'b4'
+
     ];
 
     const nf = ST.create_nf();
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
-    const total_secs = 5; 
+    const total_secs = 15; 
+    const playback_secs = 15;
 
 
 
 
 
     sq.objects[0] = {
-        alpha: 1,
+        alpha: 15 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             samp.int_shift = 0;
-            samp.values_per_wave = 40;
+            samp.values_per_wave = 80;
 
-            //const ti = 0.25 * tune_1[ Math.floor( tune_1.length  * a_object ) ];
-            //samp.frequency = ti;
-            //samp.amplitude = 0.0;
-            //if(ti > 0){      
-            //    samp.amplitude = 0.75;
-            //}
-
-            const obj_1 = ST.get_tune_sampobj(data_2, a_object, 5, false);
-            samp.frequency = obj_1.frequency / 30;
+            const obj_1 = ST.get_tune_sampobj(data_2, (a_object * 4 % 1), 15, false);
+            samp.frequency = ( 0.10 * obj_1.frequency ) / 30;
 
             if(samp.frequency > 0){
                 samp.amplitude = 0.75;
@@ -107,7 +104,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         disp_step: 200,
         getsamp_lossy: DSD.getsamp_lossy_random,
-        secs: total_secs
+        secs: playback_secs
     });
     sm.frameMax = sound.frames;
 
@@ -190,5 +187,17 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
     // additional plain 2d overlay for status info
     DSD.draw_info(ctx, sound, sm);
+
+
+    // title disp
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '100px courier';
+    ctx.fillStyle = 'white';
+    ctx.fillText(VIDEO.name, canvas.width / 2, canvas.height / 2);
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 3;
+    ctx.strokeText(VIDEO.name, canvas.width / 2, canvas.height / 2);
+
 };
 
