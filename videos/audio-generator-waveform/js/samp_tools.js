@@ -77,6 +77,19 @@
         }
         return array_wave;
     };
+    ST.get_waveform_array2 = (array_import, frame_start=0, samples_per_frame=1470 ) => {
+        const array_wave = [];
+        let si = frame_start * samples_per_frame;
+        const len = si + samples_per_frame;
+        while(si < len){
+           let s = array_import[si];
+           array_wave.push( s );
+           si += 1;
+        }
+        return array_wave;
+    };
+
+
     //-------- ----------
     // APPLY SQ - methods that helper with 'SeQuence' Objects
     //-------- ----------
