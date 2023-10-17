@@ -49,8 +49,8 @@ VIDEO.init = function(sm, scene, camera){
     const nf = ST.create_nf();
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
-    const total_secs = 15; 
-    const playback_secs = 15;
+    const total_secs = 30; 
+    const playback_secs = 30;
 
 
 
@@ -64,6 +64,35 @@ VIDEO.init = function(sm, scene, camera){
 
             const obj_1 = ST.get_tune_sampobj(data_2, (a_object * 4 % 1), 15, false);
             samp.frequency = ( 0.10 * obj_1.frequency ) / 30;
+
+            if(samp.frequency > 0){
+                samp.amplitude = 0.75;
+                if(obj_1.a_wave < 0.10){
+                    const a = obj_1.a_wave / 0.10;
+                    samp.amplitude = 0.75 * a;
+                }
+                if(obj_1.a_wave > 0.90){
+                    const a = 1 - (obj_1.a_wave - 0.90) / 0.10;
+                    samp.amplitude = 0.75 * a;
+                }
+            }
+            if(samp.frequency === 0){
+                samp.frequency = 0;
+                samp.amplitude = 0;
+            }
+
+            return samp;  
+        }
+    };
+
+    sq.objects[1] = {
+        alpha: 30 / total_secs,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            samp.int_shift = 0;
+            samp.values_per_wave = 80;
+
+            const obj_1 = ST.get_tune_sampobj(data_2, (a_object * 8 % 1), 15, false);
+            samp.frequency = ( (0.10 + 0.9 * a_object) * obj_1.frequency ) / 30;
 
             if(samp.frequency > 0){
                 samp.amplitude = 0.75;
