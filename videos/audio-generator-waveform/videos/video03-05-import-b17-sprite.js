@@ -20,26 +20,41 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
 
-    const total_secs = 3;
-    const playback_secs = 3;
+    const total_secs = 8.3;
+    const playback_secs = 8.5;
+
 
     sq.objects[0] = {
-        alpha: 1,
+        alpha: 2.8 / total_secs,  // 2.8
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-            const fpi = 486;
+
+            const fi = 0 + Math.floor( ( 84 - 0 ) * a_object);
+            fs.array_wave = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi, 1470 );
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+    sq.objects[1] = {
+        alpha: 5.3 / total_secs,  // 2.5
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+
+            const fi = 85 + Math.floor( ( 160 - 85 ) * a_object);
+            fs.array_wave = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi, 1470 );
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+    sq.objects[2] = {
+        alpha: 8.3 / total_secs,  // 3.0
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
             const fi = 160 + Math.floor( ( 253 - 160 ) * a_object);
             fs.array_wave = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi, 1470 );
-
-if( frame < 10){
-    console.log(fs.array_wave.length);
-}
-
-            // some additional values I might want to work with...maybe
-            //const i_if = Math.floor(frame / fpi );
-            //const a_if = (frame % fpi) / fpi;
-            //const a_if2 = Math.sin( Math.PI * a_if );
-            fs.a_amp = 1;
-
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -72,12 +87,6 @@ if( frame < 10){
                 samp.amplitude = fs.a_amp;
                 samp.frequency = fs.freq;
                 ST.applySQ(sq, samp, i, a_sound, opt);
-
-
-if( i < 10){
-    //console.log(i, opt.sound.samples_per_frame);
-}
-
                 return samp;
             },
             disp_step: 100,
