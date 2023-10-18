@@ -16,19 +16,22 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     let array_wave = [];
 
+    const getFI = (fstart, fend, a_object) => {
+        return fstart + Math.floor( ( fend - fstart ) * a_object);
+    };
+
     const sq = {
         objects: []
     };
 
-    const total_secs = 8.3;
-    const playback_secs = 8.5;
+    const total_secs = 24;
+    const playback_secs = 24;
 
 
     sq.objects[0] = {
         alpha: 2.8 / total_secs,  // 2.8
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-
-            const fi = 0 + Math.floor( ( 84 - 0 ) * a_object);
+            const fi = getFI(0, 84, a_object);
             fs.array_wave = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi, 1470 );
             return fs;
         },
@@ -40,8 +43,7 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[1] = {
         alpha: 5.3 / total_secs,  // 2.5
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-
-            const fi = 85 + Math.floor( ( 160 - 85 ) * a_object);
+            const fi = getFI(85, 160, a_object);
             fs.array_wave = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi, 1470 );
             return fs;
         },
@@ -53,8 +55,40 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[2] = {
         alpha: 8.3 / total_secs,  // 3.0
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-            const fi = 160 + Math.floor( ( 253 - 160 ) * a_object);
+            const fi = getFI(160, 253, a_object);
             fs.array_wave = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi, 1470 );
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+    sq.objects[3] = {
+        alpha: 23.3 / total_secs,  // 3.0 * 4
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            const a = a_object * 4 % 1;
+            const fi1 = getFI(85, 160, a);
+            const array1 = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi1, 1470 );
+            const fi2 = getFI(160, 253, a);
+            const array2 = scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi2, 1470 );
+            fs.array_wave = array1.map( (n, i) => {
+                 return ( n + array2[i]) / 2;
+            });
+            fs.freq = 1 + 8 * a_object;
+            return fs;
+        },
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
+            return samp;  
+        }
+    };
+
+    sq.objects[4] = {
+        alpha: 24 / total_secs, //0.7
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            const fi1 = getFI(260, 287, a_object);
+            fs.array_wave =  scene.userData.array_wave = ST.get_waveform_array2(fs.array_import, fi1, 1470 );;
+            fs.freq = 1;
             return fs;
         },
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
