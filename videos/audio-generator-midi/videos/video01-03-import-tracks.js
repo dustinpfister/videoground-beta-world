@@ -10,7 +10,7 @@ VIDEO.scripts = [
   '../js/samp_tools_midi/samp_tools_midi.js',
   '../js/samp_create/samp_create.js',
   '../js/samp_create/waveforms/table_maxch.js',
-  //'../js/samp_create/waveforms/sawtooth.js',
+  '../js/samp_create/waveforms/sawtooth.js',
   '../js/samp_create/waveforms/seedednoise.js',
   '../js/samp_draw/samp_draw.js'
 ];
@@ -36,20 +36,23 @@ VIDEO.init = function(sm, scene, camera){
         const track_times = [];
         const track_noteon = [];
         while(track_index < midi.tracks){
-
             track_noteon.push( STM.get_type9_array(midi, track_index) );
             track_times.push( STM.compute_total_midi_time(midi, track_index) );
             track_index += 1;
         }
         const total_time = Math.max.apply(null, track_times);
 
-        
-
         const frame_count_frac = total_time * 30;
         const frame_count = Math.floor( frame_count_frac );
         const total_time_adjusted = frame_count / 30;
 
 
+        const samp_tracks =[
+            { waveform:'sawtooth' },
+            { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.20 },
+            { waveform:'sin', values_per_wave: 40, freq_alpha: 0.20 },
+            { waveform:'sin', values_per_wave: 40, freq_alpha: 0.20 }
+        ];
 
         //-------- ----------
         // create sound object as ushual, but
@@ -58,43 +61,29 @@ VIDEO.init = function(sm, scene, camera){
         const sound = scene.userData.sound = CS.create_sound({
             waveform: 'table_maxch',
             for_sampset: ( sampset, i, a_sound, opt ) => {
-  
- 
                 const a_wave = a_sound * opt.secs % 1;
                 const table_tracks = [];
                 let ti = 0;
-
                 while(ti < midi.tracks ){
-
-                const arr_noteon = track_noteon[ti];
-     
-
-                const opt_track = STM.get_track_table_options({
-                    amp_mode: 2,
-                    amp_max: 1,
-                    amp_pad: 0.10,
-                    note_index_shift: -30,
-                    samp: { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.3 }
-                });
-
-                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, opt_track);
-
-
-
-                table_tracks.push({
-                   amplitude: 3,
-                   waveform: 'table_maxch',
-                   a_wave: a_wave,
-                   frequency: 1,
-                   maxch: 8,
-                   table: table
-                });
-
-ti += 1;
-
-}
-
-
+                    const arr_noteon = track_noteon[ti];
+                    const opt_track = STM.get_track_table_options({
+                        amp_mode: 2,
+                        amp_max: 1,
+                        amp_pad: 0.10,
+                        note_index_shift: -30,
+                        samp: samp_tracks[ti]
+                    });
+                    const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, opt_track);
+                    table_tracks.push({
+                        amplitude: 3,
+                        waveform: 'table_maxch',
+                        a_wave: a_wave,
+                        frequency: 1,
+                        maxch: 8,
+                        table: table
+                    });
+                    ti += 1;
+                }
                 return {
                    amplitude: 1,
                    a_wave: a_wave,
@@ -102,9 +91,6 @@ ti += 1;
                    maxch: midi.tracks,
                    table: table_tracks
                 };
-
-
-
             },
             disp_step: 1000,
             secs: 60
