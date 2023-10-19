@@ -10,32 +10,6 @@
         return a_sound * total_secs % 1;
     };
     //-------- ----------
-    // BASIC TUNE TOOLS
-    //-------- ----------
-    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=true ) => {
-        let id = 0;
-        const obj = { a_wave: 0, frequency: 0 };
-        while(id < data.length){
-            const alow = data[id];
-            const ahi = data[id + 1];
-            const freq = data[id + 2];
-            if( a_sound >= alow && a_sound < ahi){
-                // fixed a bug where I was getting -range
-                const arange = ahi - alow;
-                const s = arange * secs;
-                obj.a_wave = ( a_sound - alow ) / arange;
-                obj.frequency = freq;
-                if(freq_adjust){
-                    obj.frequency = freq * s;
-                }
-                break;
-            }
-            id += 3;
-        }
-        return obj;
-    };
-
-    //-------- ----------
     // SAMP VALUES: Methods to help with sample values
     //-------- ----------
     ST.get_range = (min, max) => {

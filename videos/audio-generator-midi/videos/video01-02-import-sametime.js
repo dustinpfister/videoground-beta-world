@@ -10,7 +10,7 @@ VIDEO.scripts = [
   '../js/samp_tools_midi/samp_tools_midi.js',
   '../js/samp_create/samp_create.js',
   '../js/samp_create/waveforms/table_maxch.js',
-  '../js/samp_create/waveforms/sawtooth.js',
+  //'../js/samp_create/waveforms/sawtooth.js',
   '../js/samp_create/waveforms/seedednoise.js',
   '../js/samp_draw/samp_draw.js'
 ];
@@ -41,9 +41,7 @@ VIDEO.init = function(sm, scene, camera){
         const frame_count = Math.floor( frame_count_frac );
         const total_time_adjusted = frame_count / 30;
 
-
-
-
+/*
         console.log('midi: ');
         console.log(midi);
         console.log('arr_noteon: ');
@@ -52,6 +50,7 @@ VIDEO.init = function(sm, scene, camera){
         console.log('frame count frac : ' + frame_count_frac );
         console.log('frame count : ' + frame_count );
         console.log('total time adjusted: ' + total_time_adjusted );
+*/
 
         //-------- ----------
         // create sound object as ushual, but
