@@ -8,6 +8,7 @@ VIDEO.scripts = [
   '../js/midi-parser-js/main.js',
   '../js/samp_tools/samp_tools.js',
   '../js/samp_create/samp_create.js',
+  '../js/samp_create/waveforms/sawtooth.js',
   '../js/samp_draw/samp_draw.js'
 ];
 //-------- ----------

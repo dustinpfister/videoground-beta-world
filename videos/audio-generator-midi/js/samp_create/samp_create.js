@@ -17,75 +17,8 @@
         const n = wavelength * Math.floor(sampset.frequency);
         return Math.sin( Math.PI  * n * a_wave )  * sampset.amplitude;
     };
-    WAVE_FORM_FUNCTIONS.sin2 = (sampset, a_wave ) => {
-        return Math.sin( Math.PI  * 2 * a_wave )  * sampset.amplitude;
-    };
-    WAVE_FORM_FUNCTIONS.sawtooth = (sampeset, a_wave ) => {
-        const a = ( sampeset.frequency * a_wave % 1 );
-        return -1 * sampeset.amplitude + 2 * a * sampeset.amplitude;
-    };
-    WAVE_FORM_FUNCTIONS.pulse = (sampeset, a_wave ) => {
-        const duty = sampeset.duty === undefined ? 0.5 : sampeset.duty;
-        const a = sampeset.frequency * a_wave % 1;
-        if(a < duty){
-            return  -1 * sampeset.amplitude;
-        }
-        return sampeset.amplitude
-    };
-    WAVE_FORM_FUNCTIONS.square = (sampset, a_wave ) => {
-        sampset.duty = 0.5;
-        return WAVE_FORM_FUNCTIONS.pulse(sampset, a_wave);
-    };
-    WAVE_FORM_FUNCTIONS.tri = (sampeset, a_wave ) => {
-        const sc = sampeset.step_count === undefined ? 10 : sampeset.step_count;
-        const a = sampeset.frequency * a_wave % 1;
-        let a_bias = 1 - Math.abs( 0.5 - a ) / 0.5;
-        if(sc >= 2){
-            a_bias = Math.floor( a_bias * sc) / (sc - 1);
-        }
-        const amp = sampeset.amplitude; 
-        return  amp * -1 + amp * 2 * a_bias;
-    };
-    WAVE_FORM_FUNCTIONS.table = (samp, a_wave ) => {
-        const table_count = samp.table.length;
-        const freq = samp.frequency === undefined ? 1 : samp.frequency;
-        let i_wf = 0;
-        let s = 0;
-        while(i_wf < table_count ){
-            const wf = samp.table[i_wf];
-            const wf_samp = CS.WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave * freq % 1);
-            s += wf_samp;
-            i_wf += 1;
-        }
-        return ( s / table_count ) * samp.amplitude;
-    };
-    WAVE_FORM_FUNCTIONS.array = (samp, a_wave ) => {
-        const a = (a_wave * samp.frequency % 1) * samp.array.length;
-        const i = Math.floor( a * 0.99 );
-        const n = samp.array[ i ];
-        return n * samp.amplitude;
-    };
-    WAVE_FORM_FUNCTIONS.noise = (samp, a_wave ) => {
-        const b = 2 * Math.random() * samp.amplitude;
-        return b - samp.amplitude;
-    };
-    WAVE_FORM_FUNCTIONS.seedednoise = (samp, a_wave )=> {
-        samp.values_per_wave = samp.values_per_wave === undefined ? 40 : samp.values_per_wave;
-        samp.int_shift = samp.int_shift === undefined ? 0 : samp.int_shift;
-        samp.freq_alpha = samp.freq_alpha === undefined ? 1 : samp.freq_alpha;
-        samp.array = [];
-        let i2 = 0;
-        while(i2 < samp.values_per_wave){
-            const n = -1 + 2 * THREE.MathUtils.seededRandom( samp.int_shift + i2 );
-            samp.array.push(n);
-            i2 += 1;
-        }
-        const freq_raw = samp.frequency;
-        const freq = freq_raw * samp.freq_alpha;
-        const a = ( a_wave * freq % 1 ) * samp.array.length;
-        const i = Math.floor( a * 0.99 );
-        const n = samp.array[ i ];
-        return n * samp.amplitude;
+    WAVE_FORM_FUNCTIONS.sin2 = (samp, a_wave ) => {
+        return Math.sin( Math.PI  * 2 * ( samp.frequency * a_wave ) )  * samp.amplitude;
     };
     //-------- ----------
     // HELPERS

@@ -17,8 +17,8 @@
         const n = wavelength * Math.floor(sampset.frequency);
         return Math.sin( Math.PI  * n * a_wave )  * sampset.amplitude;
     };
-    WAVE_FORM_FUNCTIONS.sin2 = (sampset, a_wave ) => {
-        return Math.sin( Math.PI  * 2 * a_wave )  * sampset.amplitude;
+    WAVE_FORM_FUNCTIONS.sin2 = (samp, a_wave ) => {
+        return Math.sin( Math.PI  * 2 * ( samp.frequency * a_wave ) )  * samp.amplitude;
     };
     WAVE_FORM_FUNCTIONS.sawtooth = (sampeset, a_wave ) => {
         const a = ( sampeset.frequency * a_wave % 1 );
