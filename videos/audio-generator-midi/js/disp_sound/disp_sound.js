@@ -71,6 +71,9 @@
             mode: 'int16', //  'int16' 'bytes',
             sample_rate: opt.sample_rate === undefined ? 44100 : opt.sample_rate,
             secs: opt.secs === undefined ? 10 : opt.secs,
+            //disp_offset: new THREE.Vector2(50, 200),
+            //disp_size: new THREE.Vector2( 1280 - 100, 200),
+            array_disp: [],   // data for whole sound
             array_frame: [],  // data for current frame
             frames: 0,
             ud: {}
@@ -82,7 +85,24 @@
         if(sound.mode === 'int16'){
             sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
         }
+/*
+        // sound display array
+        sound.array_disp = CS.create_samp_points({
+            sound: sound,
+            waveform: sound.waveform,
+            for_sampset: sound.for_sampset,
+            i_size: sound.total_samps,
+            i_start: 0,
+            i_count: sound.total_samps,
+            secs: sound.secs,
+            step: opt.disp_step === undefined ? sound.bytes_per_frame: opt.disp_step,
+            mode: 'raw'
+        });
+        const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
+        sound.opt_disp = { w: 720 - 160, h: 150, sy: 10 + 105, sx: 80, getsamp_lossy: getsamp_lossy };
+*/
         sound.opt_frame = { w: 720 - 160, h: 150, sy: 180 + 105, sx: 80, mode: sound.mode };
+
         return sound;
     };
     // Build a Wave file buffer
@@ -129,6 +149,7 @@
         writeUint32(dataSize);            // Subchunk2Size
         return buffer;
     };
+
     CS.create_frame_samples = (sound, frame = 0) => {
         const i_start = Math.floor(sound.samples_per_frame * frame);
         const data_samples =  sound.array_frame = CS.create_samp_points({
@@ -143,10 +164,13 @@
         });
         return data_samples;
     };
+
     CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, as_wave = false ) => {
+
         if(!filePath){
             return;
         }
+
         // write data_samples array
         const clear = frame === 0 ? true: false;
         const fn = as_wave ? 'video.wav' : 'sampdata';
