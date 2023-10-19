@@ -1,5 +1,5 @@
 /*    video01-01-import-notes - for audio-generator-1 project
-          * Just want to work out the process of importing notes
+          * Just want to work out the process of importing notes from MIDI files
  */
 //-------- ----------
 // SCRIPTS
@@ -95,7 +95,7 @@ VIDEO.init = function(sm, scene, camera){
                 return sampset;
             },
             disp_step: 100,
-            secs: 6
+            secs: 12
         });
         sm.frameMax = sound.frames;
     });
