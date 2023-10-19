@@ -56,7 +56,11 @@ VIDEO.init = function(sm, scene, camera){
         const sound = scene.userData.sound = CS.create_sound({
             waveform: 'table_maxch',
             for_sampset: ( sampset, i, a_sound, opt ) => {
-                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift, 2);
+                //const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift, 2);
+
+
+                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound);
+
                 const a_wave = a_sound * opt.secs % 1;
                 return {
                    amplitude: 3,

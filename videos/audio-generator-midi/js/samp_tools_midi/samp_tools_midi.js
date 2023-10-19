@@ -23,24 +23,40 @@
     //-------- ----------
     // get a table array that should work with table, and table_maxch waveforms
     //-------- ----------
-    const get_amp = (a_wave, amp_mode) => {
-        let amp = 1; // mode 0
-         if(amp_mode === 1){
-            amp = Math.sin( Math.PI * a_wave );
-         }
-         if(amp_mode === 2){
-             if(a_wave < 0.10){
-                 const a = a_wave / 0.10;
-                 amp = 1.00 * a;
-             }
-             if(a_wave > 0.90){
-                 const a = 1 - (a_wave - 0.90) / 0.10;
-                 amp = 1.00 * a;
-             }
-         }
-         return amp;
+    // get amp helper method
+    const get_amp = (a_wave, opt) => {
+        const amp_mode = opt.amp_mode;
+        const amp_max = opt.amp_max === undefined ? 1 : opt.amp_max;
+        const amp_pad = opt.amp_pad === undefined ? 0.1 : opt.amp_pad;
+        let amp = amp_max; // mode 0
+        if(amp_mode === 1){
+           amp = amp_max * Math.sin( Math.PI * a_wave );
+        }
+        if(amp_mode === 2){
+            if(a_wave < amp_pad){
+                const a = a_wave / amp_pad;
+                amp = amp_max * a;
+            }
+            const b = 1 - amp_pad;
+            if(a_wave > b){
+                const a = 1 - (a_wave - b) / amp_pad;
+                amp = amp_max * a;
+            }
+        }
+        return amp;
     };
-    STM.get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0, note_index_shift=0, amp_mode=2, samp_opt = {} ) => {
+    // get options object
+    STM.get_track_table_options = () => {
+        const opt = {
+            amp_mode: 2,
+            amp_max: 1,
+            amp_pad: 0.15,
+            note_index_shift: 0
+        };
+        return opt;
+    };
+    // get the table array
+    STM.get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0, opt=STM.get_track_table_options() ) => {
         const table = [];
         let i_table=0;
         let t = 0;
@@ -49,7 +65,7 @@
             const sec = t / midi.timeDivision;
             const note_start = obj.data[1] != 0;
             if(note_start){
-                const note_index = obj.data[0] + note_index_shift;
+                const note_index = obj.data[0] + opt.note_index_shift;
                 const a_start = sec / total_time
                 // get a_end value
                 let i2 = i + 1;
@@ -65,10 +81,9 @@
                     }
                     i2 += 1;
                 }
-                //console.log( t, a_start,a_end, note_start, note_index );
                 if( a_sound >= a_start && a_sound < a_end ){
                     const a_wave = (a_sound - a_start) / (a_end - a_start);
-                    const amp = get_amp(a_wave, amp_mode);
+                    const amp = get_amp(a_wave, opt);
                     // set element for table
                     table[i_table] = {
                         ni: note_index,
