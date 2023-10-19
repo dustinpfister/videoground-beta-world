@@ -12,80 +12,6 @@
     //-------- ----------
     // BASIC TUNE TOOLS
     //-------- ----------
-    // simple tune frequency helper function, can pass an array of 'note index values'
-    // a note index of 0 means silence, while 1 to the max value in the array is the range
-    // what the range is can be set by a low and high frequency arguments
-    ST.freq_tune = (alpha=0, tune=[ 1,0,1,1,0,7,0,6,0,5 ], hz_low=80, hz_high=1000 ) => {
-        const i_high = Math.max.apply(null, tune);
-        const note = tune[ Math.floor( tune.length * alpha * 0.99 ) ];
-        if(note === 0){
-            return 0;
-        }
-        return hz_low + ( hz_high - hz_low ) * ( note / i_high );
-    };
-    // step a frequency from a start frequency, by a step frequency, and count of times over an alpha
-    // value up or down depending on dir
-    ST.freq_step = (alpha=0, hz_start=1000, hz_step=50,  count_step=10, dir=1 ) => {
-        return hz_start + hz_step * Math.floor( alpha *  count_step ) * dir
-    };
-    //-------- ----------
-    // ADVANCED TUNE TOOLS
-    //-------- ----------
-    // https://pages.mtu.edu/~suits/notefreqs.html
-    // https://en.wikipedia.org/wiki/Musical_note
-    ST.notefreq_by_indices = ( i_scale = 4, i_note = 5 ) => {
-        const a = i_scale - 5;
-        const b = i_note + 3;
-        return 440 * Math.pow(2, a + b / 12);
-    };
-    ST.create_nf = () => {
-        // 0=C, 1=C#, 2=D, 3=D#, 4=E, 5=F, 6=F#, 7=G, 8=G#, 9=A, 10=A#, 11=B
-        const array_notes = 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'.split(',');
-        const nf = {
-           r: 0,     // r for rest
-           rest: 0   // also just rest
-        };
-        let scale = 0;
-        while(scale < 8){
-            let ni = 0;
-            while(ni < 12){
-                const freq = ST.notefreq_by_indices(scale, ni);
-                const key = array_notes[ ni ] + scale;
-                nf[key] = freq;
-                ni += 1;
-            }
-            scale += 1;
-        }
-        return nf;
-    };
-    const get_beat_count = (tune) => {
-        let i = 0;
-        const len = tune.length;
-        let count = 0;
-        while(i < len ){
-            count += tune[i];
-            i += 2;
-        }
-        return count;
-    };
-    ST.tune_to_alphas = (tune, nf) => {
-        const beat_ct = get_beat_count(tune);
-        let a = 0;
-        let i = 0;
-        const len = tune.length;
-        const a_perbeat = 1 / beat_ct;
-        const data = [];
-        while(i < len ){
-            const beat_count = tune[i];
-            const note_key = tune[i + 1];
-            const freq = nf[ note_key ];
-            const d = a_perbeat * beat_count;
-            data.push(a, a + d, freq );
-            a += d;
-            i += 2;
-        }
-        return data;
-    };
     ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=true ) => {
         let id = 0;
         const obj = { a_wave: 0, frequency: 0 };
@@ -108,6 +34,7 @@
         }
         return obj;
     };
+
     //-------- ----------
     // SAMP VALUES: Methods to help with sample values
     //-------- ----------
