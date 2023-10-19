@@ -85,6 +85,7 @@
         if(sound.mode === 'int16'){
             sound.bytes_per_frame = Math.floor( sound.sample_rate * 2 / 30 );
         }
+/*
         // sound display array
         sound.array_disp = CS.create_samp_points({
             sound: sound,
@@ -99,7 +100,9 @@
         });
         const getsamp_lossy = opt.getsamp_lossy || DSD.getsamp_lossy_random;
         sound.opt_disp = { w: 720 - 160, h: 150, sy: 10 + 105, sx: 80, getsamp_lossy: getsamp_lossy };
+*/
         sound.opt_frame = { w: 720 - 160, h: 150, sy: 180 + 105, sx: 80, mode: sound.mode };
+
         return sound;
     };
     // Build a Wave file buffer

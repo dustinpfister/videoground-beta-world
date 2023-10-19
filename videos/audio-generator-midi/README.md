@@ -20,7 +20,7 @@ What has been done thus far:
 
 The goals of audo-generator-midi are then:
 
-<!-- disp-array js file -->
+<!-- disp-wholesound js file -->
 * () sound.array\_disp should not be part of a sound object, it should be its own thing
 
 <!-- vishual look -->

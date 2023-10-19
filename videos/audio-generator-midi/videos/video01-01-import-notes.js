@@ -118,7 +118,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // draw disp
-    DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
+    //DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
     // additional plain 2d overlay for status info
     DSD.draw_info(ctx, sound, sm);
