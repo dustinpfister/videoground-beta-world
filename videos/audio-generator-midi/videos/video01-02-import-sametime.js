@@ -6,9 +6,9 @@
 //-------- ----------
 VIDEO.scripts = [
   '../js/midi-parser-js/main.js',
-  '../js/samp_tools.js',
-  '../js/samp_create.js',
-  '../js/samp_draw.js'
+  '../js/samp_tools/samp_tools.js',
+  '../js/samp_create/samp_create.js',
+  '../js/samp_draw/samp_draw.js'
 ];
 //-------- ----------
 // INIT

@@ -13,15 +13,21 @@ The goals of audo-generator-midi are then:
 * (done) I will want to play two notes at the same time in a midi file
 
 <!-- clean up, readability -->
-* () clean up all files, removing code that will not be used in this project
+* () have folders for each javascript file in main js folder for the project folder
 * () have waveforms as additional files outside of samp-create js file
-* () sound.array\_disp should not be part of a sound object, it should be its one file
+* () only built in waveform for samp-create.js is sin
+
 * () I will want a samp\_tools_midi js file in which I will part all code I will want to use from one video file to the next
+* () clean up all files, removing code that will not be used in this project
+* () sound.array\_disp should not be part of a sound object, it should be its one file
 
 <!-- tracks, tables, mixing -->
 * () I will want to have more than one table waveform, or at least one good one that will work well with more than one note
 * () I seem to have note mixing working okay, but now I need to figure out track mixing
 * () I will want to be able to play more than one track
+
+<!-- temo -->
+* () I will want to be able to read what the temo is for a midi file, and use that as a way to set the length of the video
 
 <!-- vishual look -->
 * () I will want to have some kind of cool vishual look for this project, maybe make use of threejs features for this
