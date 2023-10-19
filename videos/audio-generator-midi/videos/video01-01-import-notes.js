@@ -9,7 +9,8 @@ VIDEO.scripts = [
   '../js/samp_tools/samp_tools.js',
   '../js/samp_create/samp_create.js',
   '../js/samp_create/waveforms/seedednoise.js',
-  '../js/samp_draw/samp_draw.js'
+  '../js/samp_draw/samp_draw.js',
+  '../js/disp_sound/disp_sound.js'
 ];
 //-------- ----------
 // INIT
@@ -85,8 +86,6 @@ VIDEO.init = function(sm, scene, camera){
             for_sampset: ( sampset, i, a_sound, opt ) => {
                 const spf = opt.sound.samples_per_frame;
                 const frame = Math.floor(i / spf);
-
-
                 const obj = ST.get_tune_sampobj(data2, a_sound, opt.secs, true);
                 sampset.a_wave = obj.a_wave;
                 sampset.values_per_wave = 40;  //+ 1000 * a_sound;
@@ -98,6 +97,10 @@ VIDEO.init = function(sm, scene, camera){
             disp_step: 100,
             secs: 12
         });
+
+        // whole sound display
+        scene.userData.array_disp = DS.create_array_disp(sound, { disp_step: 2000 });
+        scene.userData.array_disp_opt = DS.create_disp_opt({});
         sm.frameMax = sound.frames;
     });
 };
@@ -112,13 +115,14 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
-    const sound = scene.userData.sound;
+    const sud = scene.userData;
+    const sound = sud.sound;
     const alpha = sm.frame / ( sm.frameMax - 1);
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // draw disp
-    //DSD.draw( ctx, sound.array_disp, sound.opt_disp, sm.frame / ( sm.frameMax - 1 ) );
+    DSD.draw( ctx, sud.array_disp, sud.array_disp_opt, sm.frame / ( sm.frameMax - 1 ) );
     DSD.draw( ctx, sound.array_frame, sound.opt_frame, 0 );
     // additional plain 2d overlay for status info
     DSD.draw_info(ctx, sound, sm);
