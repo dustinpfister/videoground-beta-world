@@ -12,6 +12,8 @@ VIDEO.scripts = [
   '../js/samp_create/waveforms/table_maxch.js',
   '../js/samp_create/waveforms/sawtooth.js',
   '../js/samp_create/waveforms/seedednoise.js',
+  '../js/samp_create/waveforms/pulse.js',
+  '../js/samp_create/waveforms/tri.js',
   '../js/samp_draw/samp_draw.js'
 ];
 //-------- ----------
@@ -47,12 +49,16 @@ VIDEO.init = function(sm, scene, camera){
         const total_time_adjusted = frame_count / 30;
 
 
-        const samp_tracks =[
+        const tracks_samp =[
             { waveform:'sawtooth' },
             { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.20 },
-            { waveform:'sin', values_per_wave: 40, freq_alpha: 0.20 },
-            { waveform:'sin', values_per_wave: 40, freq_alpha: 0.20 }
+            { waveform:'tri', },
+            { waveform:'square' }
         ];
+
+        const tracks_nis = [ -30, -30, -20, -30 ];
+
+        const tracks_amp = [ 1.00, 1.00, 1.25, 1.00 ];
 
         //-------- ----------
         // create sound object as ushual, but
@@ -68,10 +74,10 @@ VIDEO.init = function(sm, scene, camera){
                     const arr_noteon = track_noteon[ti];
                     const opt_track = STM.get_track_table_options({
                         amp_mode: 2,
-                        amp_max: 1,
+                        amp_max: tracks_amp[ti],
                         amp_pad: 0.10,
-                        note_index_shift: -30,
-                        samp: samp_tracks[ti]
+                        note_index_shift: tracks_nis[ti],
+                        samp: tracks_samp[ti]
                     });
                     const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, opt_track);
                     table_tracks.push({
