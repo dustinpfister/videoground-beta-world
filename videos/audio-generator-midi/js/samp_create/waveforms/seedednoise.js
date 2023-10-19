@@ -12,7 +12,7 @@ CS.WAVE_FORM_FUNCTIONS.seedednoise = (samp, a_wave )=> {
     const freq_raw = samp.frequency;
     const freq = freq_raw * samp.freq_alpha;
     const a = ( a_wave * freq % 1 ) * samp.array.length;
-    const i = Math.floor( a * 0.99 );
+    const i = Math.floor( a * 0.99999999 );
     const n = samp.array[ i ];
     return n * samp.amplitude;
 };

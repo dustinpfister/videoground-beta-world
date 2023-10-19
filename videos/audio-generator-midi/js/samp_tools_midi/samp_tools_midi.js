@@ -46,14 +46,17 @@
         return amp;
     };
     // get options object
-    STM.get_track_table_options = () => {
-        const opt = {
+    STM.get_track_table_options = (opt={}) => {
+        const opt_track = Object.assign({
             amp_mode: 2,
             amp_max: 1,
             amp_pad: 0.15,
-            note_index_shift: 0
-        };
-        return opt;
+            note_index_shift: 0,
+            samp: {
+                waveform: 'sin'
+            }
+        }, opt);
+        return opt_track;
     };
     // get the table array
     STM.get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0, opt=STM.get_track_table_options() ) => {
@@ -85,16 +88,16 @@
                     const a_wave = (a_sound - a_start) / (a_end - a_start);
                     const amp = get_amp(a_wave, opt);
                     // set element for table
-                    table[i_table] = {
+                    table[i_table] = Object.assign({
                         ni: note_index,
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
                         amplitude: amp, 
-                        waveform: 'sin',
+                        //waveform: 'sin',
                         //values_per_wave: 60,
                         //freq_alpha: 1.00,
                         //int_shift: 0
-                    };
+                    }, opt.samp );
                     i_table += 1;
                 }
             }

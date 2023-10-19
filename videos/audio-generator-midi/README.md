@@ -17,6 +17,8 @@ What has been done thus far:
 * (done) remove methods that are not being used
 * (done) I will want a samp\_tools_midi js file in which I will park all code I will want to use from one video file to the next
 * (done) sound.array\_disp should not be part of a sound object, it should be its own thing
+* (done) I will want more refined options for the STM.get\_track\_table\_data method
+* (done) new options should allow for setting what waveform to use for the track
 
 
 The goals of audo-generator-midi are then:
@@ -25,8 +27,7 @@ The goals of audo-generator-midi are then:
 * () it would be cool to have a disp-midi file that will display the current state of notes
 
 <!-- samp-tools-midi js file -->
-* () I will want more refined options for the STM.get\_track\_table\_data method
-* () new options should allow for setting what waveform to use for the track
+* () I will want a method to help create a table of tables for all tracks of midi file
 
 <!-- tracks, tables, mixing -->
 * () I will want to have more than one table waveform, or at least one good one that will work well with more than one note

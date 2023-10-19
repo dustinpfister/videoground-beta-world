@@ -11,6 +11,7 @@ VIDEO.scripts = [
   '../js/samp_create/samp_create.js',
   '../js/samp_create/waveforms/table_maxch.js',
   '../js/samp_create/waveforms/sawtooth.js',
+  '../js/samp_create/waveforms/seedednoise.js',
   '../js/samp_draw/samp_draw.js'
 ];
 //-------- ----------
@@ -40,6 +41,9 @@ VIDEO.init = function(sm, scene, camera){
         const frame_count = Math.floor( frame_count_frac );
         const total_time_adjusted = frame_count / 30;
 
+
+
+
         console.log('midi: ');
         console.log(midi);
         console.log('arr_noteon: ');
@@ -59,7 +63,15 @@ VIDEO.init = function(sm, scene, camera){
                 //const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift, 2);
 
 
-                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound);
+                const opt_track = STM.get_track_table_options({
+                    amp_mode: 2,
+                    amp_max: 1,
+                    amp_pad: 0.15,
+                    note_index_shift: -30,
+                    samp: { waveform:'seedednoise', values_per_wave: 20, freq_alpha: 0.25 + 0.75 * a_sound }
+                });
+
+                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, opt_track);
 
                 const a_wave = a_sound * opt.secs % 1;
                 return {
@@ -71,7 +83,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
             },
             disp_step: 1000,
-            secs: 30
+            secs: 60
         });
         console.log('sound.frames: ' + sound.frames );
         sm.frameMax = sound.frames;
