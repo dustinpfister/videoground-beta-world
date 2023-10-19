@@ -16,18 +16,13 @@ What has been done thus far:
 * (done) only built in waveform for samp-create.js is sin and sin2
 * (done) remove methods that are not being used
 * (done) I will want a samp\_tools_midi js file in which I will park all code I will want to use from one video file to the next
+* (done) sound.array\_disp should not be part of a sound object, it should be its own thing
 
 
 The goals of audo-generator-midi are then:
 
-<!-- disp-wholesound js file -->
-* () sound.array\_disp should not be part of a sound object, it should be its own thing
-
-<!-- vishual look -->
-* () I will want to have some kind of cool visual look for this project, maybe make use of threejs features for this
-* () One idea I have is to have a collection of mesh objects where each one is a note that is going to be played and then slide down over a plane.
-
-
+<!-- disp_midi -->
+* () it would be cool to have a disp-midi file that will display the current state of notes
 
 <!-- samp-tools-midi js file -->
 * () I will want more refined options for the STM.get\_track\_table\_data method
