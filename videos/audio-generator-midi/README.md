@@ -15,11 +15,14 @@ What has been done thus far:
 * (done) have waveforms as additional files outside of samp-create js file
 * (done) only built in waveform for samp-create.js is sin and sin2
 * (done) remove methods that are not being used
+* (done) I will want a samp\_tools_midi js file in which I will park all code I will want to use from one video file to the next
+
 
 The goals of audo-generator-midi are then:
 
 <!-- samp-tools-midi js file -->
-* () I will want a samp\_tools_midi js file in which I will park all code I will want to use from one video file to the next
+* () I will want more refined options for the STM.get\_track\_table\_data method
+* () new options should allow for setting what waveform to use for the track
 
 <!-- disp-array js file -->
 * () sound.array\_disp should not be part of a sound object, it should be its own thing
