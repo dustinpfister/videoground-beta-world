@@ -20,12 +20,18 @@ What has been done thus far:
 
 The goals of audo-generator-midi are then:
 
+<!-- disp-array js file -->
+* () sound.array\_disp should not be part of a sound object, it should be its own thing
+
+<!-- vishual look -->
+* () I will want to have some kind of cool visual look for this project, maybe make use of threejs features for this
+* () One idea I have is to have a collection of mesh objects where each one is a note that is going to be played and then slide down over a plane.
+
+
+
 <!-- samp-tools-midi js file -->
 * () I will want more refined options for the STM.get\_track\_table\_data method
 * () new options should allow for setting what waveform to use for the track
-
-<!-- disp-array js file -->
-* () sound.array\_disp should not be part of a sound object, it should be its own thing
 
 <!-- tracks, tables, mixing -->
 * () I will want to have more than one table waveform, or at least one good one that will work well with more than one note
@@ -35,6 +41,3 @@ The goals of audo-generator-midi are then:
 <!-- temo -->
 * () I will want to be able to read what the tempo is for a midi file, and use that as a way to set the length of the video
 
-<!-- vishual look -->
-* () I will want to have some kind of cool visual look for this project, maybe make use of threejs features for this
-* () One idea I have is to have a collection of mesh objects where each one is a note that is going to be played and then slide down over a plane.

@@ -79,7 +79,7 @@ VIDEO.init = function(sm, scene, camera){
                    table: table
                 }
             },
-            disp_step: 100,
+            disp_step: 1000,
             secs: 60
         });
         console.log('sound.frames: ' + sound.frames );
