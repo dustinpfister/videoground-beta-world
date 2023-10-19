@@ -20,8 +20,8 @@
         });
         return t / midi.timeDivision;
     };
-    // get track table data
-    STM.get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0, note_index_shift=0) => {
+    // get a table array that should work with table, and table_maxch waveforms
+    STM.get_track_table_data = (midi, arr_noteon, total_time=10, a_sound=0, note_index_shift=0, amp_mode=0, samp_opt = {} ) => {
         const table = [];
         let i_table=0;
         let t = 0;
@@ -49,15 +49,31 @@
                 //console.log( t, a_start,a_end, note_start, note_index );
                 if( a_sound >= a_start && a_sound < a_end ){
                     const a_wave = (a_sound - a_start) / (a_end - a_start);
+                    let amp = 1; // amp mode 0
+                    if(amp_mode === 1){ // amp mode 1
+                        amp = a_wave_sin = Math.sin( Math.PI * a_wave );
+                    }
+                    if(amp_mode === 2){
+                        if(a_wave < 0.10){
+                            const a = a_wave / 0.10;
+                            amp = 1.00 * a;
+                        }
+                        if(a_wave > 0.90){
+                            const a = 1 - (a_wave - 0.90) / 0.10;
+                            amp = 1.00 * a;
+                        }
+                    }
+
+                    // set element for table
                     table[i_table] = {
                         ni: note_index,
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
-                        amplitude: 1, //0.75 * Math.sin(Math.PI * a_wave),
-                        waveform: 'sawtooth', // 'sawtooth' 'square', //'sin', //'seedednoise',
-                        values_per_wave: 60,
-                        freq_alpha: 1.00,
-                        int_shift: 0
+                        amplitude: amp, 
+                        waveform: 'sin',
+                        //values_per_wave: 60,
+                        //freq_alpha: 1.00,
+                        //int_shift: 0
                     };
                     i_table += 1;
                 }

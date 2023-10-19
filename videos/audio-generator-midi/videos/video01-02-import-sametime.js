@@ -26,7 +26,7 @@ VIDEO.init = function(sm, scene, camera){
     //const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_raw.mid');
     const uri_file = videoAPI.pathJoin(sm.filePath, '../midi/notes_doom_e1m1_exp2.mid');
     const track_index = 1;
-    const note_index_shift = -30;
+    const note_index_shift = 0; //-30;
 
     return videoAPI.read( uri_file, { encoding: 'binary', alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
@@ -56,7 +56,7 @@ VIDEO.init = function(sm, scene, camera){
         const sound = scene.userData.sound = CS.create_sound({
             waveform: 'table_maxch',
             for_sampset: ( sampset, i, a_sound, opt ) => {
-                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift);
+                const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift, 2);
                 const a_wave = a_sound * opt.secs % 1;
                 return {
                    amplitude: 3,
@@ -67,7 +67,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
             },
             disp_step: 1000,
-            secs: 60
+            secs: 30
         });
         console.log('sound.frames: ' + sound.frames );
         sm.frameMax = sound.frames;
