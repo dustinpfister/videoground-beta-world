@@ -9,6 +9,7 @@ VIDEO.scripts = [
   '../js/samp_tools/samp_tools.js',
   '../js/samp_tools_midi/samp_tools_midi.js',
   '../js/samp_create/samp_create.js',
+  '../js/samp_create/waveforms/table_maxch.js',
   '../js/samp_create/waveforms/sawtooth.js',
   '../js/samp_draw/samp_draw.js'
 ];
@@ -33,7 +34,6 @@ VIDEO.init = function(sm, scene, camera){
         // midi object, noteon array, total_time
         //-------- ----------
         const midi = MidiParser.Uint8(data);
-
         const arr_noteon = STM.get_type9_array(midi, track_index);
         const total_time = STM.compute_total_midi_time(midi, track_index);
         const frame_count_frac = total_time * 30;
@@ -54,21 +54,7 @@ VIDEO.init = function(sm, scene, camera){
         // I now have a data2 array to use with ST.get_tune_sampobj
         //-------- ----------
         const sound = scene.userData.sound = CS.create_sound({
-            waveform : (samp, a_wave ) => {
-                const table_count = samp.table.length;
-                const freq = samp.frequency === undefined ? 1 : samp.frequency;
-                let i_wf = 0;
-                let s = 0;
-                while(i_wf < table_count ){
-                    const wf = samp.table[i_wf];
-                    const freq_final = wf.freq_alpha * freq;
-                    const wf_samp = CS.WAVE_FORM_FUNCTIONS[wf.waveform](wf, a_wave * freq_final % 1);
-                    s += wf_samp;
-                    i_wf += 1;
-                }
-                //return ( s / table_count ) * samp.amplitude;
-                return s * ( 1 / 8 ) * samp.amplitude;
-            },
+            waveform: 'table_maxch',
             for_sampset: ( sampset, i, a_sound, opt ) => {
                 const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, note_index_shift);
                 const a_wave = a_sound * opt.secs % 1;
@@ -76,6 +62,7 @@ VIDEO.init = function(sm, scene, camera){
                    amplitude: 3,
                    a_wave: a_wave,
                    frequency: 1,
+                   maxch: 8,
                    table: table
                 }
             },

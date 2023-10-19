@@ -80,25 +80,25 @@ VIDEO.init = function(sm, scene, camera){
         // create sound object as ushual, but
         // I now have a data2 array to use with ST.get_tune_sampobj
         //-------- ----------
-        const shift_values = [0, 1000];
         const sound = scene.userData.sound = CS.create_sound({
             waveform : 'seedednoise',
             for_sampset: ( sampset, i, a_sound, opt ) => {
-                const spf = opt.sound.samples_per_frame;
-                const frame = Math.floor(i / spf);
+
+
                 const obj = ST.get_tune_sampobj(data2, a_sound, opt.secs, true);
                 sampset.a_wave = obj.a_wave;
-                sampset.values_per_wave = 40;  //+ 1000 * a_sound;
-                sampset.int_shift = 0; //shift_values[ (frame * 2) %  shift_values.length ];
-                sampset.amplitude = 0.75; //Math.sin(Math.PI * obj.a_wave );
+
+                sampset.values_per_wave = 40;
+                sampset.int_shift = 0;
+                sampset.amplitude = 0.75; 
                 sampset.frequency = obj.frequency;
                 return sampset;
             },
-            disp_step: 100,
             secs: 12
         });
-
-        // whole sound display
+        //-------- ----------
+        // WHOLE SOUND DISP
+        //-------- ----------
         scene.userData.array_disp = DS.create_array_disp(sound, { disp_step: 2000 });
         scene.userData.array_disp_opt = DS.create_disp_opt({});
         sm.frameMax = sound.frames;
