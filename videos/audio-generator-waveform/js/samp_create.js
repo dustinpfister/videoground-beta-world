@@ -77,8 +77,12 @@
         return s * ( 1 / maxch ) * samp.amplitude;
     };
     WAVE_FORM_FUNCTIONS.array = (samp, a_wave ) => {
-        const a = (a_wave * samp.frequency % 1) * samp.array.length;
-        const i = Math.floor( a * 0.999999999999 );
+        //const a = (a_wave * samp.frequency % 1) * samp.array.length;
+      //const i = Math.floor( a * 0.999999999999 );
+        //const i = Math.floor( a * 0.9999999999999999 );
+
+        const a = (a_wave * samp.frequency % 1) * (samp.array.length - 1);
+        const i = Math.round( a );
         const n = samp.array[ i ];
         return n * samp.amplitude;
     };
