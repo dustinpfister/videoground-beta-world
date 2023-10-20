@@ -67,7 +67,7 @@ VIDEO.init = function(sm, scene, camera){
                     amp_max: 1,
                     amp_pad: 0.15,
                     note_index_shift: -30,
-                    samp: { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.5  }
+                    samp: { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 1.0  }
                 });
 
                 const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, opt_track);
@@ -82,7 +82,7 @@ VIDEO.init = function(sm, scene, camera){
                 }
             },
             disp_step: 1000,
-            secs: 60
+            secs: 80
         });
         console.log('sound.frames: ' + sound.frames );
         sm.frameMax = sound.frames;
