@@ -50,16 +50,13 @@ VIDEO.init = function(sm, scene, camera){
 
 
         const tracks_samp =[
-            { waveform:'sawtooth' },
             { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.20 },
-            { waveform:'tri', },
-            { waveform:'square' }
+            { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.20 },
+            { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.20, },
+            { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.20 }
         ];
-
         const tracks_nis = [ -30, -30, -20, -30 ];
-
-        const tracks_amp = [ 1.00, 1.00, 1.25, 1.00 ];
-
+        const tracks_amp = [ 1.00, 1.00, 1.00, 1.00 ];
         //-------- ----------
         // create sound object as ushual, but
         // I now have a data2 array to use with ST.get_tune_sampobj
@@ -67,6 +64,7 @@ VIDEO.init = function(sm, scene, camera){
         const sound = scene.userData.sound = CS.create_sound({
             waveform: 'table_maxch',
             for_sampset: ( sampset, i, a_sound, opt ) => {
+
                 const a_wave = a_sound * opt.secs % 1;
                 const table_tracks = [];
                 let ti = 0;
@@ -98,7 +96,7 @@ VIDEO.init = function(sm, scene, camera){
                    table: table_tracks
                 };
             },
-            disp_step: 1000,
+            //disp_step: 1000,
             secs: 60
         });
         console.log('sound.frames: ' + sound.frames );

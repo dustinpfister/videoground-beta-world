@@ -55,7 +55,7 @@ VIDEO.init = function(sm, scene, camera){
                     amp_max: 1,
                     amp_pad: 0.05,
                     note_index_shift: 0,
-                    samp: { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.040 + 0.1 * a_sound}
+                    samp: { waveform:'seedednoise', values_per_wave: 40, freq_alpha: 0.040 }
                 });
 
                 const table = STM.get_track_table_data(midi, arr_noteon, total_time, a_sound, opt_track);

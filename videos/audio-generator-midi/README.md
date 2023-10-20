@@ -19,15 +19,18 @@ What has been done thus far:
 * (done) sound.array\_disp should not be part of a sound object, it should be its own thing
 * (done) I will want more refined options for the STM.get\_track\_table\_data method
 * (done) new options should allow for setting what waveform to use for the track
+* (done) STM.get\_track\_table\_data is too slow, fix by not using array for each
 
 
 The goals of audo-generator-midi are then:
 
+<!-- samp-tools-midi js file -->
+* () I will want a method to help create a table of tables for all tracks of midi file
+
 <!-- disp_midi -->
 * () it would be cool to have a disp-midi file that will display the current state of notes
 
-<!-- samp-tools-midi js file -->
-* () I will want a method to help create a table of tables for all tracks of midi file
+
 
 <!-- tracks, tables, mixing -->
 * () I will want to have more than one table waveform, or at least one good one that will work well with more than one note

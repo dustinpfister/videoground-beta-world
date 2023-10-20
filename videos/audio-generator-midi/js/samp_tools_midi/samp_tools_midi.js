@@ -63,7 +63,16 @@
         const table = [];
         let i_table=0;
         let t = 0;
-        arr_noteon.forEach( (obj, i, arr) => {
+
+let end_ct = 0;
+
+        //!!! this is bad news for preformance
+//        arr_noteon.forEach( (obj, i, arr) => {
+        let i = 0;
+        const len = arr_noteon.length;
+        while(i < len){
+            const obj = arr_noteon[i];
+
             t += obj.deltaTime;
             const sec = t / midi.timeDivision;
             const note_start = obj.data[1] != 0;
@@ -74,12 +83,15 @@
                 let i2 = i + 1;
                 let t2 = t;
                 let a_end = a_start;
-                while(i2 < arr.length){
-                    const obj2 = arr[i2];
+                while(i2 < len){
+                    const obj2 = arr_noteon[i2];
                     t2 += obj2.deltaTime;
                     if(obj2.data[0] === obj.data[0] && obj2.data[1] === 0){
                         const sec = t2 / midi.timeDivision;
                         a_end = sec / total_time;
+
+end_ct += 1;
+
                         break;
                     }
                     i2 += 1;
@@ -92,16 +104,20 @@
                         ni: note_index,
                         a_wave: a_wave,
                         frequency: Math.floor(note_index * 12),
-                        amplitude: amp, 
-                        //waveform: 'sin',
-                        //values_per_wave: 60,
-                        //freq_alpha: 1.00,
-                        //int_shift: 0
+                        amplitude: amp
                     }, opt.samp );
                     i_table += 1;
+                    break;
+                }
+                if(a_sound < a_start){
+                    break;
                 }
             }
-        });
+
+            i += 1;
+        }
+//        });
+
         // if we have nothing?
         if(table.length === 0){
             table[i_table] = {
@@ -112,6 +128,13 @@
                 waveform: 'sin'
             };
         }
+
+if(a_sound === 0){
+
+    console.log('zero')
+console.log(end_ct);
+}
+
         return table;
     };
     window.STM = STM;
