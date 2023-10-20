@@ -78,7 +78,14 @@ let end_ct = 0;
             const note_start = obj.data[1] != 0;
             if(note_start){
                 const note_index = obj.data[0] + opt.note_index_shift;
-                const a_start = sec / total_time
+                const a_start = sec / total_time;
+
+                // continue if a_start is greater than a_sound
+                if(a_start > a_sound){
+                    i += 1;
+                    continue;
+                }
+
                 // get a_end value
                 let i2 = i + 1;
                 let t2 = t;
@@ -107,10 +114,6 @@ end_ct += 1;
                         amplitude: amp
                     }, opt.samp );
                     i_table += 1;
-                    break;
-                }
-                if(a_sound < a_start){
-                    break;
                 }
             }
 
