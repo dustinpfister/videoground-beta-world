@@ -32,7 +32,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
 
-    const get_shift = (i, samp_count=44100, shifts = [0,1,2,1,0] ) => {
+    const get_shift = (i, samp_count=44100, shifts = [0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1,0] ) => {
         const a = ( i % samp_count ) / samp_count;
         return shifts[ Math.floor( shifts.length * a) ];
 
@@ -62,8 +62,8 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[0] = {
         alpha: 20 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = get_shift(i, Math.floor(44100 / (8 * a_object)));
-            samp.values_per_wave = 30;
+            samp.int_shift = get_shift(i, Math.floor(44100));
+            samp.values_per_wave = 20;
 
             const obj_1 = ST.get_tune_sampobj(data_1, a_object, 20, false);
             samp.frequency = ( obj_1.frequency ) / 30;
