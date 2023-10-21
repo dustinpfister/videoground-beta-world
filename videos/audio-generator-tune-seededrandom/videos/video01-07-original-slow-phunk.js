@@ -13,8 +13,8 @@ VIDEO.thum_overlay = (sm, canvas, ctx) => {
     ctx.font = '80px arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.strokeText(VIDEO.name, canvas.width / 2, canvas.height / 2);
-    ctx.fillText(VIDEO.name, canvas.width / 2, canvas.height / 2);
+    //ctx.strokeText(VIDEO.name, canvas.width / 2, canvas.height / 2);
+    //ctx.fillText(VIDEO.name, canvas.width / 2, canvas.height / 2);
 };
 //-------- ----------
 // SCRIPTS
@@ -32,8 +32,11 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
 
-    const get_shift = (i) => {
-        return i % 44100 > 22050 ? 1000: 0;
+    const get_shift = (i, samp_count=44100, shifts = [0,1,2,1,0] ) => {
+        const a = ( i % samp_count ) / samp_count;
+        return shifts[ Math.floor( shifts.length * a) ];
+
+        //return i % samp_count > samp_count / 2 ? 1000: 0;
     };
 
 
@@ -42,28 +45,28 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const tune_1 = [
-        1,'e1',1,'d1',1,'e1',1,'d1',1,'e1',1,'d1',0.5,'d1',0.5,'d1',2,'c1'
+        1,'g1',1,'d1',1,'g1',1,'d1',1,'g1',1,'d1',0.5,'d1',0.5,'d1',2,'c1'
 
     ];
 
     const nf = ST.create_nf();
     const data_1 = ST.tune_to_alphas(tune_1, nf);
 
-    const total_secs = 10; 
-    const playback_secs = 10;
+    const total_secs = 20; 
+    const playback_secs = 20;
 
 
 
 
 
     sq.objects[0] = {
-        alpha: 10 / total_secs,
+        alpha: 20 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = get_shift(i);
-            samp.values_per_wave = 40;
+            samp.int_shift = get_shift(i, Math.floor(44100 / (8 * a_object)));
+            samp.values_per_wave = 30;
 
-            const obj_1 = ST.get_tune_sampobj(data_1, (a_object * 1 % 1), 15, false);
-            samp.frequency = ( 0.25 * obj_1.frequency ) / 30;
+            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 20, false);
+            samp.frequency = ( obj_1.frequency ) / 30;
 
 
             if(samp.frequency > 0){
@@ -81,6 +84,7 @@ VIDEO.init = function(sm, scene, camera){
                 samp.frequency = 0;
                 samp.amplitude = 0;
             }
+
 
             return samp;  
         }
