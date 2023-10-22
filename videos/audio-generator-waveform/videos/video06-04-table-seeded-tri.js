@@ -18,28 +18,71 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const tune_1 = [
-        1,'g1',1,'d1',1,'g1',1,'d1',1,'g1',1,'d1',0.5,'d1',0.5,'d1',2,'c1'
+        1,'c1',  1,'c1', 1,'c1', 0.5,'c1',  0.5,'c1',  1,'c1',
+        1,'c1',  1,'c1', 1,'c1', 0.5,'c1',  0.5,'c1',  1,'c1',
+        1,'b1',  1,'b1', 1,'b1', 0.5,'b1',  0.5,'b1',  1,'b1',
+        1,'b1',  1,'b1', 1,'b1', 0.5,'b1',  0.5,'b1',  1,'b1',
 
+        1,'c1',  1,'c1', 1,'c1', 0.5,'c1',  0.5,'c1',  1,'c1',
+        1,'c1',  1,'c1', 1,'c1', 0.5,'c1',  0.5,'c1',  1,'c1',
+        1,'b1',  1,'b1', 1,'b1', 0.5,'b1',  0.5,'b1',  1,'b1',
+        1,'b1',  1,'b1', 1,'b1', 0.5,'b1',  0.5,'b1',  1,'b1'
     ];
+    const tune_2 = [
+        20,'rest',
+        3,'g4',  1,'c4',  1,'rest',
+        3,'g4',  0.5,'c4',  0.5,'c4',  1,'rest',
+        3,'g4',  1,'c4',  1,'rest',
+        3,'g4',  0.5,'c4',  0.5,'c4',  1,'rest'
+    ];
+
+
+
     const nf = ST.create_nf();
     const data_1 = ST.tune_to_alphas(tune_1, nf);
-
+    const data_2 = ST.tune_to_alphas(tune_2, nf);
     const sq = {
         objects: []
     };
 
-    const total_secs = 5;
-    const playback_secs = 5;
+    const total_secs = 20;
+    const playback_secs = 20;
 
     sq.objects[0] = {
-        alpha: 5 / total_secs,
+        alpha: 10 / total_secs,
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 5, false);
+            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 10, false);
+            const obj_2 = ST.get_tune_sampobj(data_2, a_object, 10, false);
+
             fs.freq_sn = ( obj_1.frequency ) / 30;
-            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.25, 0.75);          
+            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.15, 0.50);
+            //const a = ST.get_alpha_sin(obj_1.a_wave, 1, 1);
+            const a = obj_1.a_wave;
+            fs.values_per_wave = Math.round(70 - 30 * a);
+
+            fs.freq_tri = ( obj_2.frequency ) / 30;
+            fs.amp_tri = ST.get_tune_amp(fs.freq_sn, obj_2.a_wave, 0.15, 0.75);       
             return fs;
         }
     };
+
+    sq.objects[1] = {
+        alpha: 20 / total_secs,
+        for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
+            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 10, false);
+            const obj_2 = ST.get_tune_sampobj(data_2, a_object * 4 % 1, 10, false);
+
+            fs.freq_sn = ( obj_1.frequency ) / 30;
+            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.15, 0.50);
+            const a = ST.get_alpha_sin(obj_1.a_wave, 1, 1);
+            fs.values_per_wave = Math.round(70 - 30 * a);
+
+            fs.freq_tri = ( obj_2.frequency ) / 30;
+            fs.amp_tri = ST.get_tune_amp(fs.freq_sn, obj_2.a_wave, 0.15, 0.75);       
+            return fs;
+        }
+    };
+
 
     const sound = scene.userData.sound = CS.create_sound({
         waveform : 'array',
@@ -53,11 +96,12 @@ VIDEO.init = function(sm, scene, camera){
 
             fs.amp_sn = 1;
             fs.freq_sn = 1;
-            fs.values_per_wave = 40;
+            fs.values_per_wave = 80;
             fs.int_shift = 0;
 
             fs.freq_tri = 4;
             fs.amp_tri = 1;
+            fs.step_count = 100;
 
             // apply logic for current frame
             ST.applySQFrame(sq, fs, frame, max_frame, a_sound2, opt);
@@ -77,7 +121,8 @@ VIDEO.init = function(sm, scene, camera){
                     },
                     { waveform: 'tri',
                       frequency: fs.freq_tri,
-                      amplitude: fs.amp_tri
+                      amplitude: fs.amp_tri,
+                      step_count: fs.step_count
                     },
                 ]
             };
