@@ -235,33 +235,11 @@
         }
         return obj;
     };
-	/*
-    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=true ) => {
-        let id = 0;
-        const obj = { a_wave: 0, frequency: 0 };
-        while(id < data.length){
-            const alow = data[id];
-            const ahi = data[id + 1];
-            const freq = data[id + 2];
-            if( a_sound >= alow && a_sound < ahi){
-                const arange = alow - ahi;
-                const s = arange * secs;
-                obj.a_wave = ( a_sound - alow ) / arange;
-                obj.frequency = freq;
-                if(freq_adjust){
-                    obj.frequency = freq * s;
-                }
-                break;
-            }
-            id += 3;
-        }
-        return obj;
-    };
-	*/
+    // get tune amplitude helper for notes that are all on the same frequency
     ST.get_tune_amp = (freq=0, a_note=0, pad=0.05, max_amp=0.75) => {
         let amp = 0;
         if(freq === 0){
-            return 0;
+            return amp;
         }
         if(freq > 0){
             amp = max_amp;

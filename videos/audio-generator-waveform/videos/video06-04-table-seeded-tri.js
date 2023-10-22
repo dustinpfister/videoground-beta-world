@@ -30,10 +30,10 @@ VIDEO.init = function(sm, scene, camera){
     ];
     const tune_2 = [
         20,'rest',
-        3,'g4',  1,'c4',  1,'rest',
-        3,'g4',  0.5,'c4',  0.5,'c4',  1,'rest',
-        3,'g4',  1,'c4',  1,'rest',
-        3,'g4',  0.5,'c4',  0.5,'c4',  1,'rest'
+        5,'f2',
+        5,'f3',
+        2.5,'f2',2.5,'f2', 
+        1,'b3',1,'a3',1,'g3',1,'f3',1,'e3'
     ];
 
 
@@ -55,13 +55,15 @@ VIDEO.init = function(sm, scene, camera){
             const obj_2 = ST.get_tune_sampobj(data_2, a_object, 10, false);
 
             fs.freq_sn = ( obj_1.frequency ) / 30;
-            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.15, 0.50);
-            //const a = ST.get_alpha_sin(obj_1.a_wave, 1, 1);
+            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.05, 0.25);
+
+
             const a = obj_1.a_wave;
-            fs.values_per_wave = Math.round(70 - 30 * a);
+            fs.values_per_wave = Math.round(10 + 60 * a);
 
             fs.freq_tri = ( obj_2.frequency ) / 30;
-            fs.amp_tri = ST.get_tune_amp(fs.freq_sn, obj_2.a_wave, 0.15, 0.75);       
+            fs.amp_tri = ST.get_tune_amp(fs.freq_tri, obj_2.a_wave, 0.25, 0.75);
+
             return fs;
         }
     };
@@ -69,16 +71,20 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[1] = {
         alpha: 20 / total_secs,
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 10, false);
-            const obj_2 = ST.get_tune_sampobj(data_2, a_object * 4 % 1, 10, false);
+
+            const a_times = a_object * 2 % 1;
+
+            const obj_1 = ST.get_tune_sampobj(data_1, a_times, 10, false);
+            const obj_2 = ST.get_tune_sampobj(data_2, a_times, 10, false);
 
             fs.freq_sn = ( obj_1.frequency ) / 30;
-            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.15, 0.50);
+            fs.amp_sn = ST.get_tune_amp(fs.freq_sn, obj_1.a_wave, 0.05, 0.25);
             const a = ST.get_alpha_sin(obj_1.a_wave, 1, 1);
+
             fs.values_per_wave = Math.round(70 - 30 * a);
 
             fs.freq_tri = ( obj_2.frequency ) / 30;
-            fs.amp_tri = ST.get_tune_amp(fs.freq_sn, obj_2.a_wave, 0.15, 0.75);       
+            fs.amp_tri = ST.get_tune_amp(fs.freq_tri, obj_2.a_wave, 0.25, 0.75);       
             return fs;
         }
     };
