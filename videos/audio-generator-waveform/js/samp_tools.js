@@ -16,7 +16,7 @@
     //-------- ----------
     // WAV IMPORT
     //-------- ----------
-    // get an object that contains easily readabule wav feild data, DataView Objects and so forth
+    // get an object that contains easily readable wav field data, DataView Objects and so forth
     ST.get_wav_obj = ( data=[] ) => {
         const header_uint8 = data.slice(0, 44);
         const header_buff = header_uint8.buffer;
@@ -29,7 +29,7 @@
             header_uint8: header_uint8,
             data_uint8: data_uint8
         };
-        // maybe the two most imporaent feilds in the header, sample rate, and byte
+        // maybe the two most important fields in the header, sample rate, and byte
         wav.sample_rate = header_dv.getUint32(24, true);
         wav.byte_rate = header_dv.getUint32(28, true);
         // other info
@@ -117,6 +117,9 @@
         while( i2 < len ){
             const obj = sq.objects[i2];
             if( a_sound <= obj.alpha ){
+                if(!obj.for_sampset){
+                    break;
+                }
                 let a_object = ( a_sound - a_base ) /  ( obj.alpha - a_base );
                 return obj.for_sampset(samp, i, a_sound, opt, a_object, sq);
             }
@@ -220,6 +223,29 @@
             if( a_sound >= alow && a_sound < ahi){
                 const arange = alow - ahi;
                 const s = arange * secs;
+                obj.a_wave = Math.abs( ( a_sound - alow ) / arange);
+                obj.a_wavesin = Math.sin( Math.PI * obj.a_wave );
+                obj.frequency = freq;
+                if(freq_adjust){
+                    obj.frequency = freq * s;
+                }
+                break;
+            }
+            id += 3;
+        }
+        return obj;
+    };
+	/*
+    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=true ) => {
+        let id = 0;
+        const obj = { a_wave: 0, frequency: 0 };
+        while(id < data.length){
+            const alow = data[id];
+            const ahi = data[id + 1];
+            const freq = data[id + 2];
+            if( a_sound >= alow && a_sound < ahi){
+                const arange = alow - ahi;
+                const s = arange * secs;
                 obj.a_wave = ( a_sound - alow ) / arange;
                 obj.frequency = freq;
                 if(freq_adjust){
@@ -230,6 +256,26 @@
             id += 3;
         }
         return obj;
+    };
+	*/
+    ST.get_tune_amp = (freq=0, a_note=0, pad=0.05, max_amp=0.75) => {
+        let amp = 0;
+        if(freq === 0){
+            return 0;
+        }
+        if(freq > 0){
+            amp = max_amp;
+            const pad2 = 1 - pad;
+            if(a_note < pad){
+                const a = a_note / pad;
+                amp = max_amp * a;
+            }
+            if(a_note > pad2){
+                const a = 1 - (a_note - pad2) / pad;
+                amp = max_amp * a;
+            }
+        }
+        return amp;
     };
     //-------- ----------
     // SAMP VALUES: Methods to help with sample values
