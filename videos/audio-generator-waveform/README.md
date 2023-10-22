@@ -1,6 +1,6 @@
 # audo-generator-waveform
 
-Now that the audo-generator-1 project is more or less done, I should now start to work on more projects in which I continue to build on what I have done thus far. I have a lot of ideas for what this might mean, but as far as this project is concerned the focus will be on waveforms. When I first starting out with writing my own software for creating audio sample data there is starting out with just a simple sine wave, but even with that there are a lot of ways to create even that kind of waveform. When doing so should I do a full waveform for a frequency of 1, or a half wave? Should the amplitude for the wave start a zero and then go to 1 if it is a half wave or should it go from -1 to 1 if the amplitude value is 1? Concerns like this only go up as I start to get into more complex methods of creating waveforms so I started this collection of content in an effort to work some of this stuff out for myself.
+Now that the audo-generator-1 project is more or less done, I should now start to work on more projects in which I continue to build on what I have done thus far. I have a lot of ideas for what this might mean, but as far as this project is concerned the focus will be on waveforms. When I first starting out with writing my own software for creating audio sample data I just had a simple, typical sine wave, but even with that there are a lot of ways to create that kind of waveform. When doing so should I do a full waveform for a frequency of 1, or a half wave? Should the amplitude for the wave start a zero and then go to 1 if it is a half wave or should it go from -1 to 1 if the amplitude value is 1 for such a kind of wave? Concerns like this only go up as I start to get into more complex methods of creating waveforms so I started this collection of content in an effort to work some of this stuff out for myself.
 
 ## video01-xx-array-* - Array Waveform
 
@@ -74,4 +74,8 @@ Trying to work out a number of ways to go about having sawtooth and sawtooth lik
         video05-02-sawtooth-alt-offset
     </p>
 </div>
+
+## video06-xx-table-*
+
+For this set of videos I am looking more into my 'table' waveform, and in the process have found some issues with it that have lead to me making another 'table_maxch' waveform that allows for me to set the max number of 'channels' for the table rather than just leaving that to the length of the table array that might vary in some use cases. I am also just starting to work out a few more videos to just gain a sense of what I might want to focus more so on moving forward with other projects like this. Just about any kind of interesting video that has to do with music will need to involve at least a few 'tracks', 'channels' or whatever you might call them that are mixed together into one and that is more or less what this kind of waveform is all about.
 
