@@ -69,7 +69,62 @@ VIDEO.init = function(sm, scene, camera){
 
     const playback_secs = 30;
 
+    sq.objects[0] = {
+        alpha: 1,
+        for_sampset: function(samp, i, a_sound, opt, a_object, sq){
 
+            // ping pong bass
+            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 0, false);
+            samp.frequency = ( obj_1.frequency ) / 30;
+            samp.amplitude = ST.get_tune_amp(samp.frequency, obj_1.a_wave, 0.10, 0.70);
+            samp.int_shift = 0;           
+            const a_vpw= ST.get_alpha_sin(obj_1.a_wave, 1, 2 );
+            samp.values_per_wave = 15 + 5 * a_vpw;
+
+            return samp;  
+        }
+    };
+
+    // the sound object
+    const sound = scene.userData.sound = CS.create_sound({
+        waveform : 'table_maxch',
+        for_sampset: ( samp, i, a_sound, opt ) => {
+            const spf = opt.sound.samples_per_frame;
+            const a_frame = (i % spf) / spf;
+
+            samp.a_wave = a_frame;
+            samp.values_per_wave = 60; 
+            samp.frequency = 1;
+            samp.amplitude = 0.75;
+            ST.applySQ(sq, samp, i, a_sound, opt);
+
+            const a_track2 = ST.get_alpha_sin(a_sound, 1, 4 + 8 * a_sound);
+            return {
+               a_wave: a_frame,
+               amplitude: 0.75,
+               frequency: 1,
+               maxch: 1,
+               table: [
+                   Object.assign({ waveform: 'seedednoise' }, samp),
+                   { waveform: 'seedednoise',
+                     int_shift: Math.floor(1000 * a_sound),
+                     frequency: 2 * 8 * a_track2, 
+                     amplitude: 0.1 + 0.4 * a_track2,
+                     a_wave: a_frame
+                   }
+               ]
+
+            };
+
+
+        },
+        disp_step: 200,
+        getsamp_lossy: DSD.getsamp_lossy_random,
+        secs: playback_secs
+    });
+
+
+/*
     sq.objects[0] = {
         alpha: 1,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
@@ -103,6 +158,7 @@ VIDEO.init = function(sm, scene, camera){
         getsamp_lossy: DSD.getsamp_lossy_random,
         secs: playback_secs
     });
+*/
     sm.frameMax = sound.frames;
 
     //
