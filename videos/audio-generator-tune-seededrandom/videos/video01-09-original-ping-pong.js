@@ -74,15 +74,13 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 1,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
 
+            // ping pong bass
             const obj_1 = ST.get_tune_sampobj(data_1, a_object, 0, false);
-
             samp.frequency = ( obj_1.frequency ) / 30;
-            samp.amplitude = ST.get_tune_amp(samp.frequency, obj_1.a_wave, 0.20, 0.75);
-
-            samp.int_shift = 0;
-            
-            const a_vpw= ST.get_alpha(obj_1.a_wave, 1, 1 );
-            samp.values_per_wave = 40;
+            samp.amplitude = ST.get_tune_amp(samp.frequency, obj_1.a_wave, 0.10, 0.50);
+            samp.int_shift = 0;           
+            const a_vpw= ST.get_alpha_sin(obj_1.a_wave, 1, 2 );
+            samp.values_per_wave = 15 + 5 * a_vpw;
 
             return samp;  
         }
@@ -95,14 +93,10 @@ VIDEO.init = function(sm, scene, camera){
             const spf = opt.sound.samples_per_frame;
             const a_frame = (i % spf) / spf;
             samp.a_wave = a_frame;
-
-
             samp.values_per_wave = 60; 
             samp.frequency = 1;
             samp.amplitude = 0.75;
-
             ST.applySQ(sq, samp, i, a_sound, opt);
-
             return samp;
         },
         disp_step: 200,
