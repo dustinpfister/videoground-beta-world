@@ -32,11 +32,9 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
 
-    const get_shift = (i, samp_count=44100, shifts = [0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1,0] ) => {
+    const get_shift = (i, samp_count=44100, shifts = [0,1000] ) => {
         const a = ( i % samp_count ) / samp_count;
         return shifts[ Math.floor( shifts.length * a) ];
-
-        //return i % samp_count > samp_count / 2 ? 1000: 0;
     };
 
 
@@ -45,46 +43,33 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const tune_1 = [
-        1,'g1',1,'d1',1,'g1',1,'d1',1,'g1',1,'d1',0.5,'d1',0.5,'d1',2,'c1'
+        2,'e2',2,'d1',    2,'e2',2,'d1',    2,'e2',2,'d1',    0.25,'e2',0.25,'e2',1,'e2',1,'c1'
 
     ];
 
     const nf = ST.create_nf();
     const data_1 = ST.tune_to_alphas(tune_1, nf);
 
-    const total_secs = 20; 
-    const playback_secs = 20;
-
-
-
+    const total_secs = 50; 
+    const playback_secs = 50;
 
 
     sq.objects[0] = {
-        alpha: 20 / total_secs,
+        alpha: 30 / total_secs,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            samp.int_shift = get_shift(i, Math.floor(44100));
-            samp.values_per_wave = 20;
 
-            const obj_1 = ST.get_tune_sampobj(data_1, a_object, 20, false);
+            const patt_count = 3;
+            const i_patt = Math.floor(patt_count * a_object );
+            const a_patt = a_object * patt_count % 1;
+
+            const obj_1 = ST.get_tune_sampobj(data_1, a_patt, 0, false);
             samp.frequency = ( obj_1.frequency ) / 30;
+            samp.amplitude = 0.25 + ST.get_tune_amp(samp.frequency, obj_1.a_wave, 0.25, 0.50);
 
-
-            if(samp.frequency > 0){
-                samp.amplitude = 0.75;
-                if(obj_1.a_wave < 0.05){
-                    const a = obj_1.a_wave / 0.05;
-                    samp.amplitude = 0.75 * a;
-                }
-                if(obj_1.a_wave > 0.95){
-                    const a = 1 - (obj_1.a_wave - 0.95) / 0.05;
-                    samp.amplitude = 0.75 * a;
-                }
-            }
-            if(samp.frequency === 0){
-                samp.frequency = 0;
-                samp.amplitude = 0;
-            }
-
+            samp.int_shift = 0;
+            
+            const a_vpw= ST.get_alpha(obj_1.a_wave, 1, Math.pow(2, i_patt) );
+            samp.values_per_wave = 10 + 40 * a_vpw;
 
             return samp;  
         }

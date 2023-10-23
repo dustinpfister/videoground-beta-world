@@ -1,9 +1,61 @@
 (function(){
     const ST = {};
     //-------- ----------
-    // APPLY SQ - methods that helper with 'SeQuence' Objects
+    // SEEDED RANDOM ADDITIONS - methods that came up while playing with the seeded random waveform
     //-------- ----------
-
+    // get tune amplitude helper for notes that are all on the same frequency
+    ST.get_tune_amp = (freq=0, a_note=0, pad=0.05, max_amp=0.75) => {
+        let amp = 0;
+        if(freq === 0){
+            return amp;
+        }
+        if(freq > 0){
+            amp = max_amp;
+            const pad2 = 1 - pad;
+            if(a_note < pad){
+                const a = a_note / pad;
+                amp = max_amp * a;
+            }
+            if(a_note > pad2){
+                const a = 1 - (a_note - pad2) / pad;
+                amp = max_amp * a;
+            }
+        }
+        return amp;
+    };
+    //-------- ----------
+    // ALPHA VLAUES
+    //-------- ----------
+    ST.get_alpha = (a=0, b=1, count=1) => {
+        const n = THREE.MathUtils.euclideanModulo(a, b);
+        const a1 = n / b;
+        const a2 = a1 * count % 1;
+        return a2;
+    };
+    ST.get_alpha_sin = (a=0, b=1, count=1) => {
+        const alpha2 = ST.get_alpha(a, b, count);
+        return Math.sin( Math.PI * alpha2 );
+    };
+    //-------- ----------
+    // APPLY SQ SQFrame - methods that helper with 'SeQuence' Objects
+    //-------- ----------
+    ST.applySQFrame = (sq, fs, frame, max_frame, a_sound2, opt) => {
+        let i2 = 0;
+        const len = sq.objects.length;
+        let a_base = 0;
+        while( i2 < len ){
+            const obj = sq.objects[i2];
+            if( a_sound2 <= obj.alpha ){
+                let a_object = ( a_sound2 - a_base ) /  ( obj.alpha - a_base );
+                if(!obj.for_frame){
+                    return;
+                }
+                return obj.for_frame(fs, frame, max_frame, a_sound2, opt, a_object, sq);
+            }
+            a_base = obj.alpha;
+            i2 += 1;
+        }
+    };
     ST.applySQ = ( sq, samp, i, a_sound, opt ) => {
         let i2 = 0;
         const len = sq.objects.length;
@@ -18,7 +70,6 @@
             i2 += 1;
         }
     };
-
     //-------- ----------
     // FOR_SAMPLE HELPER : to help with the for sample methods used in sound objects
     //-------- ----------
@@ -105,7 +156,7 @@
         }
         return data;
     };
-    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=true ) => {
+    ST.get_tune_sampobj = ( data=[], a_sound=0, secs=1, freq_adjust=false ) => {
         let id = 0;
         const obj = { a_wave: 0, frequency: 0 };
         while(id < data.length){
@@ -113,7 +164,7 @@
             const ahi = data[id + 1];
             const freq = data[id + 2];
             if( a_sound >= alow && a_sound < ahi){
-                const arange = alow - ahi;
+                const arange = Math.abs(alow - ahi);
                 const s = arange * secs;
                 obj.a_wave = Math.abs( ( a_sound - alow ) / arange);
                 obj.a_wavesin = Math.sin( Math.PI * obj.a_wave );

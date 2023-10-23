@@ -88,8 +88,6 @@
         }
         return array_wave;
     };
-
-
     //-------- ----------
     // APPLY SQ - methods that helper with 'SeQuence' Objects
     //-------- ----------
