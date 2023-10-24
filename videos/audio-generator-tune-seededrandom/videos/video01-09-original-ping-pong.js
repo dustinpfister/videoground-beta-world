@@ -109,8 +109,8 @@ VIDEO.init = function(sm, scene, camera){
                    {
                      waveform: 'seedednoise',
                      int_shift: Math.floor(1000 * a_sound),
-                     frequency: 2 * 8 * a_track2, 
-                     amplitude: 0.1 + 0.4 * a_track2,
+                     frequency: 2 * 7 * a_track2, 
+                     amplitude: 0.1 + 0.2 * a_track2,
                      a_wave: a_frame
                    }
                ]
