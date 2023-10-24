@@ -37,19 +37,11 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const patt_bass_1 = [
-        1,'f1',  0.25,'c1',  0.25,'c1',  1,'c1',  1,'f1',  0.25,'c1',  0.25,'c1',  1,'c1',
-        1,'f1',  0.25,'c1',  0.25,'c1',  1,'c1',  1.25,'f1',  1.25,'b1',
-        1,'f1',  0.25,'c1',  0.25,'c1',  1,'c1',  1,'f1',  0.25,'c1',  0.25,'c1',  1,'c1',
-        1,'f1',  0.25,'c1',  0.25,'c1',  1,'c1',  1.25,'f1',  1.25,'b1',
-    ];
-
-
-    const patt_slap_1 = [
-        20,'rest'     
+        1,'c1',1,'c1',1,'c1',1,'c1'
     ];
 
     const patt_slap_2 = [
-        1,'f3',1,'f3',1,'f3',1,'f3',1,'f3'
+        1,'f3',1,'f3',1,'f3',1,'f3'
     ];
 
 
@@ -57,11 +49,11 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const tune_1 = [
-        patt_bass_1, patt_bass_1, patt_bass_1
+        patt_bass_1,
     ].flat();
 
     const tune_2 = [
-        patt_slap_1, patt_slap_2, patt_slap_2,
+        patt_slap_2,
     ].flat();
 
     const nf = ST.create_nf();
@@ -69,7 +61,7 @@ VIDEO.init = function(sm, scene, camera){
     const data_1 = ST.tune_to_alphas(tune_1, nf);
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
-    const playback_secs = 15;
+    const playback_secs = 1;
 
     sq.objects[0] = {
         alpha: 1,
@@ -86,9 +78,9 @@ VIDEO.init = function(sm, scene, camera){
             const obj_2 = ST.get_tune_sampobj(data_2, a_object, 0, false);
             samp2.frequency = ( obj_2.frequency ) / 30;
             samp2.amplitude = ST.get_tune_amp(samp2.frequency, obj_1.a_wave, 0.10, 0.75);
-            samp2.int_shift = 0;           
-            const a_vpw= ST.get_alpha_sin(obj_1.a_wave, 1, 1 );
-            samp.values_per_wave = 20 + 60 * a_vpw;
+            samp2.int_shift = 0;
+            const a_vpw= ST.get_alpha_sin(obj_1.a_wave, 1, 2 );
+            samp2.values_per_wave = 15 + 35 * a_vpw;        
 
 
             samp.samp1 = samp1;
@@ -112,7 +104,7 @@ VIDEO.init = function(sm, scene, camera){
                a_wave: a_frame,
                amplitude: 0.50,
                frequency: 1,
-               maxch: 1,
+               maxch: 2,
                table: [
                    Object.assign({ waveform: 'seedednoise', a_wave: a_frame }, samp.samp1),
                    Object.assign({ waveform: 'seedednoise', a_wave: a_frame }, samp.samp2),
