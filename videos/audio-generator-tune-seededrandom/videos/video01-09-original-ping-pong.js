@@ -98,7 +98,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.amplitude = 0.75;
             ST.applySQ(sq, samp, i, a_sound, opt);
 
-            const a_track2 = ST.get_alpha_sin(a_sound, 1, 4 + 8 * a_sound);
+            const a_track2 = ST.get_alpha_sin(a_sound, 1, 1);
             return {
                a_wave: a_frame,
                amplitude: 0.75,
@@ -106,7 +106,8 @@ VIDEO.init = function(sm, scene, camera){
                maxch: 1,
                table: [
                    Object.assign({ waveform: 'seedednoise' }, samp),
-                   { waveform: 'seedednoise',
+                   {
+                     waveform: 'seedednoise',
                      int_shift: Math.floor(1000 * a_sound),
                      frequency: 2 * 8 * a_track2, 
                      amplitude: 0.1 + 0.4 * a_track2,
