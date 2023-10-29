@@ -37,9 +37,25 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const patt_bass_1 = [
-        8,'c1',
-        8,'g1',
-        8,'c1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+
+        1,'c1',1,'c1',0.5,'e1',0.5,'f1',0.5,'g1',0.5,'a1',
+
+        1,'f1',1,'f1',1,'a1',1,'a1',
+        1,'f1',1,'f1',1,'a1',1,'a1',
+        1,'f1',1,'f1',1,'a1',1,'a1',
+        1,'f1',1,'f1',1,'a1',1,'a1',
+
+        1.50,'a1',0.50,'g1',0.50,'f1',0.50,'e1',0.50,'d1',0.50,'c1',
+
+        1,'c1',1,'c1',1,'e1',1,'e1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+        1,'c1',1,'c1',1,'e1',1,'e1',
+
     ];
 
     const patt_slap_2 = [
@@ -58,7 +74,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const tune_1 = [
-        patt_bass_1,
+        patt_bass_1, patt_bass_1
     ].flat();
 
     const tune_2 = [
@@ -70,7 +86,7 @@ VIDEO.init = function(sm, scene, camera){
     const data_1 = ST.tune_to_alphas(tune_1, nf);
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
-    const playback_secs = 6;
+    const playback_secs = 28;
 
     sq.objects[0] = {
         alpha: 1,
@@ -86,7 +102,7 @@ VIDEO.init = function(sm, scene, camera){
 
             const obj_2 = ST.get_tune_sampobj(data_2, a_object, 0, false);
             samp2.frequency = ( obj_2.frequency ) / 30;
-            samp2.amplitude = ST.get_tune_amp(samp2.frequency, obj_1.a_wave, 0.10, 1.00);
+            samp2.amplitude = ST.get_tune_amp(samp2.frequency, obj_1.a_wave, 0.10, 0.00);
             samp2.int_shift = 0;
             const a_vpw= ST.get_alpha_sin(obj_1.a_wave, 1, 2 );
             samp2.values_per_wave = 10 + 50 * a_vpw;        
