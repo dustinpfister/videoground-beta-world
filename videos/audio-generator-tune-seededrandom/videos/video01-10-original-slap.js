@@ -37,11 +37,20 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const patt_bass_1 = [
-        1,'c1',1,'c1',1,'c1',1,'c1'
+        8,'c1',
+        8,'g1',
+        8,'c1',
     ];
 
     const patt_slap_2 = [
-        1,'f3',1,'f3',1,'f3',1,'f3'
+        1,'c2',1,'r',1,'c2',1,'r',
+        1,'c2',1,'r',1,'c2',1,'r',
+
+        1,'c2',1,'f2',1,'c2',1,'f2',
+        1,'c2',1,'f2',1,'c2',1,'f2',
+
+        1,'c2',1,'r',1,'c2',1,'r',
+        1,'c2',1,'r',1,'c2',1,'r',
     ];
 
 
@@ -61,7 +70,7 @@ VIDEO.init = function(sm, scene, camera){
     const data_1 = ST.tune_to_alphas(tune_1, nf);
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
-    const playback_secs = 1;
+    const playback_secs = 6;
 
     sq.objects[0] = {
         alpha: 1,
@@ -71,16 +80,16 @@ VIDEO.init = function(sm, scene, camera){
   
             const obj_1 = ST.get_tune_sampobj(data_1, a_object, 0, false);
             samp1.frequency = ( obj_1.frequency ) / 30;
-            samp1.amplitude = ST.get_tune_amp(samp1.frequency, obj_1.a_wave, 0.10, 0.75);
+            samp1.amplitude = ST.get_tune_amp(samp1.frequency, obj_1.a_wave, 0.10, 1.00);
             samp1.int_shift = 0;           
             samp1.values_per_wave = 40;
 
             const obj_2 = ST.get_tune_sampobj(data_2, a_object, 0, false);
             samp2.frequency = ( obj_2.frequency ) / 30;
-            samp2.amplitude = ST.get_tune_amp(samp2.frequency, obj_1.a_wave, 0.10, 0.75);
+            samp2.amplitude = ST.get_tune_amp(samp2.frequency, obj_1.a_wave, 0.10, 1.00);
             samp2.int_shift = 0;
             const a_vpw= ST.get_alpha_sin(obj_1.a_wave, 1, 2 );
-            samp2.values_per_wave = 15 + 35 * a_vpw;        
+            samp2.values_per_wave = 10 + 50 * a_vpw;        
 
 
             samp.samp1 = samp1;
@@ -102,7 +111,7 @@ VIDEO.init = function(sm, scene, camera){
             const a_track2 = ST.get_alpha_sin(a_sound, 1, 1);
             return {
                a_wave: a_frame,
-               amplitude: 0.50,
+               amplitude: 1.00,
                frequency: 1,
                maxch: 2,
                table: [
