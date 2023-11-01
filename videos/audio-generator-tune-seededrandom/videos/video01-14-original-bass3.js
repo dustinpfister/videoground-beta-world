@@ -5,7 +5,7 @@ VIDEO.resmode = 6;
 //-------- ----------
 // THUM
 //-------- ----------
-VIDEO.name = 'BASS2';
+VIDEO.name = 'BASS3';
 VIDEO.thum_frame = 0;
 VIDEO.thum_overlay = (sm, canvas, ctx) => {
     ctx.fillStyle = 'white';
@@ -44,22 +44,32 @@ VIDEO.init = function(sm, scene, camera){
         2,'c1',2,'c1',2,'c1',2,'d1',4,'e1',2,'r'
     ];
 
+    const patt_bass1_3 = [
+        6,'c1',2,'d1',6,'e1',6,'f1',
+    ];
+
     const patt_bass2_1 = [
         6,'g1',2,'a1',6,'b1',2,'r'
     ];
     const patt_bass2_2 = [
         2,'g1',2,'g1',2,'g1',2,'a1',6,'b1',2,'r'
     ];
+    const patt_bass2_3 = [
+        6,'g1',2,'a1',6,'b1',6,'c2'
+    ];
 
 
 
 
     const tune_1 = [
-       patt_bass1_1, patt_bass1_1, patt_bass1_2
+       patt_bass1_1, patt_bass1_1, patt_bass1_2, patt_bass1_2,
+       patt_bass1_1, patt_bass1_3
     ].flat();
 
     const tune_2 = [
-        patt_bass2_1, patt_bass2_1, patt_bass2_2
+        patt_bass2_1, patt_bass2_1, patt_bass2_2, patt_bass2_2,
+        patt_bass2_1, patt_bass2_3
+
     ].flat();
 
     const nf = ST.create_nf();
@@ -67,27 +77,32 @@ VIDEO.init = function(sm, scene, camera){
     const data_1 = ST.tune_to_alphas(tune_1, nf);
     const data_2 = ST.tune_to_alphas(tune_2, nf);
 
-    const playback_secs = 10;
+    const playback_secs = 25.5;
 
     sq.objects[0] = {
         alpha: 1,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
 
             let samp1 = {}, samp2 = {};
+
+            const a_freq = 0.10 + 0.9 * a_object;
   
             const obj_1 = ST.get_tune_sampobj(data_1, a_object, 0, false);
-            samp1.frequency = obj_1.frequency  / 30;
+            samp1.frequency = obj_1.frequency  / 30 * a_freq;
             samp1.amplitude = ST.get_tune_amp(samp1.frequency, obj_1.a_wave, 0.25, 0.75);
             samp1.int_shift = 0;
-            samp1.values_per_wave = 10    
+
+            const a_vpw1 = ST.get_alpha_sin(obj_1.a_wave, 1, 1 );
+            const vpw1 = 10 + Math.floor(10 * a_vpw1);
+            samp1.values_per_wave = vpw1;   
             samp.samp1 = samp1;
 
 
             const obj_2 = ST.get_tune_sampobj(data_2, a_object, 0, false);
-            samp2.frequency = obj_2.frequency / 30;
+            samp2.frequency = obj_2.frequency / 30 * a_freq;
             samp2.amplitude = ST.get_tune_amp(samp2.frequency, obj_2.a_wave, 0.25, 0.75);
             samp2.int_shift = 0;
-            samp2.values_per_wave = 10;      
+            samp2.values_per_wave = vpw1;      
             samp.samp2 = samp2;
 
             return samp
