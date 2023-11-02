@@ -1,8 +1,6 @@
 /*    video01-17-original-bass6 - for audio-generator-tune-seededrandom project
-          * I would like to have three tracks (bass, tri, and a shift track)
-          * The main focus should still be on the bass line
-          * see about having another set of patterns for the tri track
-          * use the shift track for additional effect
+          * I would like to havetwo tracks (bass, and tri)
+          * The main focus should still be on the bass line which should be hot over tri
  */
 VIDEO.resmode = 6;
 //-------- ----------
@@ -87,7 +85,7 @@ VIDEO.init = function(sm, scene, camera){
         alpha: 1.00,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
             const a_freq = 1.00;
-            const vpw = 12;
+            const vpw = 20;
             const space = 0.95;
             const amp = 0.50;
             samp.samp1 = get_samp(data_1, a_object, vpw, a_freq, space, amp);
@@ -121,7 +119,7 @@ VIDEO.init = function(sm, scene, camera){
                maxch: 1,
                table: [
                    Object.assign({ waveform: 'seedednoise', a_wave: a_frame }, samp.samp1),
-                   Object.assign({ waveform: 'pulse', a_wave: a_frame }, samp.samp2)
+                   Object.assign({ waveform: 'tri', a_wave: a_frame }, samp.samp2)
                ]
 
             };
