@@ -88,8 +88,8 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[1] = {
         alpha: 1.00,
         for_sampset: function(samp, i, a_sound, opt, a_object, sq){
-            const a_freq = 1.00;
-            const vpw = 12;
+            const a_freq = 1.00 - 0.75 * a_object;
+            const vpw = 12 - 6 * a_object;
             const space = 0.95;
             const amp = 0.65
             samp.samp1 = get_samp(data_1, a_object * 2 % 1, vpw, a_freq, space, amp);
