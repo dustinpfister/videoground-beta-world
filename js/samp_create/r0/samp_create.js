@@ -9,6 +9,12 @@
         sampeset.frequency = 160;
         return sampeset;
     };
+    const DEFAULT_FOR_FRAME = (frameset, frame, frame_max) => {
+
+        console.log('DEFAULT!!!????');
+
+        return frameset;
+    };
     //-------- ----------
     // WAVE FORMS - return should be in what I am calling 'raw' mode ( -1 to 1 )
     //-------- ----------
@@ -45,15 +51,49 @@
         const mode = opt.mode === undefined ? 'bytes' : opt.mode;
         const step = opt.step === undefined ? 1 : opt.step;
         opt.secs === undefined ? 1 : opt.secs;
+
         const for_sampset = opt.for_sampset || DEFAULT_FOR_SAMPSET;
+        const for_frame = opt.for_frame || DEFAULT_FOR_FRAME;
+
         const waveform = parse_waveform(opt);
         const sine_points = [];
         let sampeset = {};
+        let frameset = {};
+        // the use of -1 for opt.frame can be used to adress an isshue with the for_frame feature
+        // of this revision of samp_create.js
+/*
+        if(opt.frame > -1){
+            const a_sound2 = opt.frame / opt.max_frame;
+            for_frame(frameset, opt.frame, opt.max_frame, a_sound2, opt);
+        }
+*/
+
+
+        console.log('yes this is getting called at least');
+        const a_sound2 = opt.frame / opt.max_frame;
+        for_frame(frameset, opt.frame, opt.max_frame, a_sound2, opt);
+
         const i_end = i_start + i_count;
         let i = i_start;
+        //let frame2 = -1;
         while(i < i_end){
             const a_sound = i / i_size;
-            sampeset = for_sampset(sampeset, i, a_sound, opt);
+            //!!! This is a duck tap solution for the for frame retro fit.
+            // to get it to just work with the 'sound.array_disp'
+/*
+            const f = Math.floor(opt.max_frame * a_sound);
+            if(opt.frame === -1 && frame2 != f ){
+                frame2 = f;
+                frameset = {};
+                const a_sound2 = frame2 / opt.max_frame;
+                for_frame(frameset, frame2, opt.max_frame, a_sound2, opt);
+            }
+*/
+
+//            const f = Math.floor(opt.max_frame * a_sound);
+//console.log(opt.frame)
+
+            sampeset = for_sampset(sampeset, i, a_sound, frameset, opt);
             const a_wave = sampeset.a_wave === undefined ? ST.get_wave_alpha_totalsecs( a_sound, opt.secs ) : sampeset.a_wave;
             let samp = waveform(sampeset, a_wave);
             samp = ST.raw_to_mode(samp, opt.mode);
@@ -67,6 +107,7 @@
         const sound = {
             waveform: opt.waveform || 'sin',
             for_sampset: opt.for_sampset || null,
+            for_frame: opt.for_frame,
             mode: 'int16', //  16-bit only for r0
             sample_rate: opt.sample_rate === undefined ? 44100 : opt.sample_rate,
             secs: opt.secs === undefined ? 10 : opt.secs,
@@ -125,6 +166,25 @@
         writeUint32(dataSize);            // Subchunk2Size
         return buffer;
     };
+
+    CS.create_frame_samples = (sound, frame = 0, max_frame = 30) => {
+        const i_start = Math.floor(sound.samples_per_frame * frame);
+        const data_samples =  sound.array_frame = CS.create_samps({
+            frame: frame, max_frame: max_frame,
+            sound: sound,
+            waveform: sound.waveform,
+            for_frame: sound.for_frame,
+            for_sampset: sound.for_sampset,
+            i_size : sound.total_samps,
+            i_start : i_start,
+            i_count : sound.samples_per_frame,
+            secs: sound.secs,
+            mode: sound.mode
+        });
+        return data_samples;
+    };
+
+/*
     CS.create_frame_samples = (sound, frame = 0) => {
         const i_start = Math.floor(sound.samples_per_frame * frame);
         const data_samples =  sound.array_frame = CS.create_samps({
@@ -139,6 +199,7 @@
         });
         return data_samples;
     };
+*/
     CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, isExport=false ) => {
         if(!isExport || !filePath){ return; }
         const fn = 'video.wav';
