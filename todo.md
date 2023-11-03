@@ -2,53 +2,11 @@
 
 <!-- WHATS NEXT -->
 
-<!-- 'aplay' projects -->
+<!-- waveforms -->
 
-## () aplay-frames-sinone - video2
-* () start a video2 for this project
-
-<!-- 'breathing' projects -->
-
-## (  ) - breathing-basic - five minute video
-* () make a five minute video using video3
-
-<!-- 'n64rip' projects -->
-
-## ( ) - n64rip-basic - start the project
-* () look into ripping geometry from quest64 rom if possible
-* () expand DAE folder if progress is made
-
-<!-- 'timer' projects -->
-
-## ( ) - timer-train - make a 10 sec video
-* () make a 10 second video with video5-transnums.js
-
-## ( ) - timer-hiit - 1:1 5 minue video, start video6
-* () start video6 js file
-* () make a new video with video5-cdr1.js that is also 5 minutes but with a 1:1 ratio
-
-## ( ) - timer-basic - make a 3 second video
-* () make a 3 seconds video with video3.js
-
-## ( ) - timer-hum - make a 10 sec video
-* () make a 10 second video with timer hum
-
-<!-- The 'guy1' project -->
-
-## ( ) - guy1 - start video folder
-* (done) wrap up video1 for temp5, leave a lot for video2 and move on
-* (done) start a guy1 video folder based off of template5 video1
-* (done) work out seq objects for the script
-* () texture for walls
-* () body textures
-
-<!-- 'FRINK' video projects using audio sample data -->
-
-## ( ) - frink5
-* () have more than one layer like with the text plane project
-* () make all textures animated
-* () glaven points helper improved with unit length and range ranges
-* () new path worked out for camera position making use of new glaven points helper
+## () - start r0 of samp-create.js
+* () I will want to make more audio generator projects, but I will now want a main js folder
+* () I can just start with what I worked out for audio-generator-midi
 
 <!-- DONE -->
 
