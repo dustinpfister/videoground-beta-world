@@ -10,9 +10,6 @@
         return sampeset;
     };
     const DEFAULT_FOR_FRAME = (frameset, frame, frame_max) => {
-
-        console.log('DEFAULT!!!????');
-
         return frameset;
     };
     //-------- ----------
@@ -68,8 +65,6 @@
         }
 */
 
-
-        console.log('yes this is getting called at least');
         const a_sound2 = opt.frame / opt.max_frame;
         for_frame(frameset, opt.frame, opt.max_frame, a_sound2, opt);
 

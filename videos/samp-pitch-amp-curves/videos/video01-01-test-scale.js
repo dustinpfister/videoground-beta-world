@@ -17,6 +17,13 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
+
+
+    const v_start = new THREE.Vector2(0,0);
+    const v_end = new THREE.Vector2(1,0);
+    const v_control = new THREE.Vector2(0.10,0.99);
+    const curve = new THREE.QuadraticBezierCurve(v_start, v_control, v_end);
+
     const sq = {
         objects: []
     };
@@ -24,12 +31,19 @@ VIDEO.init = function(sm, scene, camera){
     sq.objects[0] = {
         alpha: 1,
         for_frame: (fs, frame, max_frame, a_sound2, opt, a_object, sq) => {
-            fs.freq = 90 / 30;
+
+            const v2 = curve.getPoint(a_object);
+
+
+            fs.amp = 0.75;
+            fs.freq = (2 * Math.floor(20 * v2.y));
+
+
             return fs;
         }
     };
     const sound = sud.sound = CS.create_sound({
-        waveform : 'sin',
+        waveform : 'sin2',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
             fs.freq = 1;
             fs.amp = 1;
