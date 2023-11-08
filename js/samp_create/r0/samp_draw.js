@@ -104,7 +104,7 @@
             const v1 = curve.getPoint(i / ( len - 1 ));
             const v2 = curve.getPoint(v1.x);
             const x = (opt.sx ) + (v2.x * opt.w);
-            const y = (opt.sy + opt.h) - (v1.y * opt.h);
+            const y = (opt.sy + opt.h) - (v2.y * opt.h);
             if(i === 0){
                 ctx.moveTo(x, y);
             }
@@ -118,7 +118,7 @@
         const v1 = curve.getPoint(alpha);
         const v2 = curve.getPoint(v1.x);
         const x = (opt.sx ) + (v2.x * opt.w),
-        y = (opt.sy + opt.h) - (v1.y * opt.h);
+        y = (opt.sy + opt.h) - (v2.y * opt.h);
         ctx.beginPath();
         ctx.arc( x, y, 10, 0, Math.PI * 2 );
         ctx.stroke();

@@ -31,7 +31,7 @@ VIDEO.init = function(sm, scene, camera){
             const v2_sa = curve.getPoint(a_sound2);
             const v2_ca = curve.getPoint(v2_sa.x);
             fs.amp = 1.00;
-            fs.freq = ( 2 * Math.floor( 20 * v2_ca.y ) );
+            fs.freq = ( 2 * Math.floor( 10 * v2_ca.y ) );
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -66,12 +66,12 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sud = scene.userData;
     const sound = sud.sound;
-    const alpha = sm.frame / ( sm.frameMax - 1);
+    //const alpha = sm.frame / ( sm.frameMax - 1);
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // curve
-    DSD.draw_curve( ctx, sud.curve, alpha, sud.opt_curve );
+    DSD.draw_curve( ctx, sud.curve, sm.per, sud.opt_curve );
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0 );
     DSD.draw_info(ctx, sound, sm);
