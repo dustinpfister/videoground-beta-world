@@ -31,7 +31,6 @@ VIDEO.init = function(sm, scene, camera){
             const v2_sa = curve.getPoint(a_sound2);
             const v2_ca = curve.getPoint(v2_sa.x);
             fs.amp = 1.00;
-
             fs.freq = ( 2 * Math.floor( 20 * v2_ca.y ) );
             return fs;
         },

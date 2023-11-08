@@ -101,9 +101,10 @@
         const len = opt.len === undefined ? 100: opt.len;
         let i = 0; 
         while(i < len){
-            const v2 = curve.getPoint(i / ( len - 1 ));
+            const v1 = curve.getPoint(i / ( len - 1 ));
+            const v2 = curve.getPoint(v1.x);
             const x = (opt.sx ) + (v2.x * opt.w);
-            const y = (opt.sy + opt.h) - (v2.y * opt.h);
+            const y = (opt.sy + opt.h) - (v1.y * opt.h);
             if(i === 0){
                 ctx.moveTo(x, y);
             }
@@ -114,9 +115,10 @@
         }
         ctx.stroke();
         ctx.strokeStyle = 'white';
-        const v2 = curve.getPoint(alpha);
+        const v1 = curve.getPoint(alpha);
+        const v2 = curve.getPoint(v1.x);
         const x = (opt.sx ) + (v2.x * opt.w),
-        y = (opt.sy + opt.h) - (v2.y * opt.h);
+        y = (opt.sy + opt.h) - (v1.y * opt.h);
         ctx.beginPath();
         ctx.arc( x, y, 10, 0, Math.PI * 2 );
         ctx.stroke();
