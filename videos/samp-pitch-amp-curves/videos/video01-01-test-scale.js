@@ -12,6 +12,14 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_draw.js'
 ];
 //-------- ----------
+// CURVE HELPERS
+//-------- ----------
+const get_curve_v2ca = (curve, alpha=0) => {
+    const v2_sa = curve.getPoint(alpha);
+    const v2_ca = curve.getPoint(v2_sa.x);
+    return v2_ca;
+};
+//-------- ----------
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
@@ -19,21 +27,30 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     // curve for setting pitch over time
 
-    const v_start = new THREE.Vector2(0, 0.1);
-    const v_end = new THREE.Vector2(1, 0.1);
-    const v_c1 = new THREE.Vector2(0.70, 0.20);
-    const v_c2 = new THREE.Vector2(0.95, 1.90);
-    const curve = sud.curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
+    let v_start = new THREE.Vector2(0, 0.1);
+    let v_end = new THREE.Vector2(1, 0.1);
+    let v_c1 = new THREE.Vector2(0.70, 0.20);
+    let v_c2 = new THREE.Vector2(0.95, 1.90);
+    const curve_freq = sud.curve_freq = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
+
+    v_start = new THREE.Vector2(0, 1);
+    v_end = new THREE.Vector2(1, 0.1);
+    v_c1 = new THREE.Vector2(0.25,-1.00);
+    v_c2 = new THREE.Vector2(0.55, 2.20);
+    const curve_param = sud.curve_param = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            const v2_sa = curve.getPoint(a_sound2);
-            const v2_ca = curve.getPoint(v2_sa.x);
-            fs.amp = 1.00;
-            //fs.freq = ( 2 * Math.floor( 10 * v2_ca.y ) );
 
-            fs.freq = 4;
+
+
+            fs.amp = 1.00;
+
+            let v2_ca = get_curve_v2ca(curve_freq, a_sound2);
+            fs.freq = ( 2 * Math.floor( 10 * v2_ca.y ) );
+
+            v2_ca = get_curve_v2ca(curve_param, a_sound2);
             fs.values_per_wave = 10 + 190 * v2_ca.y;
 
             return fs;
@@ -52,7 +69,8 @@ VIDEO.init = function(sm, scene, camera){
         secs: 10
     });
     sud.opt_frame = { w: 1200, h: 150, sy: 500, sx: 40, mode: sound.mode };
-    sud.opt_curve = { w: 1200, h: 150, sy: 200, sx: 40 };
+    sud.opt_curve_freq = { w: 1200, h: 100, sy: 100, sx: 40 };
+    sud.opt_curve_param = { w: 1200, h: 100, sy: 225, sx: 40 };
     sm.frameMax = sound.frames;
 };
 //-------- ----------
@@ -75,7 +93,8 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // curve
-    DSD.draw_curve( ctx, sud.curve, sm.per, sud.opt_curve );
+    DSD.draw_curve( ctx, sud.curve_freq, sm.per, sud.opt_curve_freq );
+    DSD.draw_curve( ctx, sud.curve_param, sm.per, sud.opt_curve_param );
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0 );
     DSD.draw_info(ctx, sound, sm);
