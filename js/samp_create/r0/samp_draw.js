@@ -92,8 +92,9 @@
         ctx.fillStyle = 'lime';
         ctx.font = '25px courier';
         ctx.textBaseline = 'top';
-        ctx.fillText('frame: ' + sm.frame + '/' + sm.frameMax + '  ( ' + (sound.secs * alpha ).toFixed(2) + ' / ' + sound.secs + ' ) ', 10, 10);
-
+        const disp_frame = sm.frame + '/' + sm.frameMax;
+        const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
+        ctx.fillText('frame: ' + disp_frame + ', seconds: ' + disp_time, 10, 10);
     };
 
     window.DSD = DSD;
