@@ -18,9 +18,12 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
     // curve for setting pitch over time
-    const v_start = new THREE.Vector2(0,0.1);
-    const v_end = new THREE.Vector2(1,0.1);
-    const v_control = new THREE.Vector2(0.90, 1.49);
+
+    const v_start = new THREE.Vector2(0, 0);
+    const v_end = new THREE.Vector2(1, 0);
+
+    const v_control = new THREE.Vector2(0.90, 1.80);
+
     const curve = sud.curve = new THREE.QuadraticBezierCurve(v_start, v_control, v_end);
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
