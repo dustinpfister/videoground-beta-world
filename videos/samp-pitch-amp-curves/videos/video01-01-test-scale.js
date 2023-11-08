@@ -31,7 +31,11 @@ VIDEO.init = function(sm, scene, camera){
             const v2_sa = curve.getPoint(a_sound2);
             const v2_ca = curve.getPoint(v2_sa.x);
             fs.amp = 1.00;
-            fs.freq = ( 2 * Math.floor( 10 * v2_ca.y ) );
+            //fs.freq = ( 2 * Math.floor( 10 * v2_ca.y ) );
+
+            fs.freq = 4;
+            fs.values_per_wave = 10 + 190 * v2_ca.y;
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -39,10 +43,10 @@ VIDEO.init = function(sm, scene, camera){
             const frame = Math.floor(i / spf);
             const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
-            samp.array = fs.array_wave;
             samp.a_wave = a_frame;
             samp.amplitude = fs.amp;
             samp.frequency = fs.freq;
+            samp.values_per_wave = fs.values_per_wave;
             return samp;
         },
         secs: 10
