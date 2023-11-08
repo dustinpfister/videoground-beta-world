@@ -19,12 +19,12 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     // curve for setting pitch over time
 
-    const v_start = new THREE.Vector2(0, 0);
-    const v_end = new THREE.Vector2(1, 0);
+    const v_start = new THREE.Vector2(0, 0.1);
+    const v_end = new THREE.Vector2(1, 0.1);
+    const v_c1 = new THREE.Vector2(0.70, 0.20);
+    const v_c2 = new THREE.Vector2(0.95, 1.90);
+    const curve = sud.curve = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
 
-    const v_control = new THREE.Vector2(0.90, 1.80);
-
-    const curve = sud.curve = new THREE.QuadraticBezierCurve(v_start, v_control, v_end);
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
@@ -50,9 +50,6 @@ VIDEO.init = function(sm, scene, camera){
     });
     sud.opt_frame = { w: 1200, h: 150, sy: 500, sx: 40, mode: sound.mode };
     sud.opt_curve = { w: 1200, h: 150, sy: 200, sx: 40 };
-    //sud.arr_curve = sud.curve.getPoints(sud.opt_curve.w).map(( v )=> {
-    //    return sud.curve.getPoint(v.x).y;
-    //});
     sm.frameMax = sound.frames;
 };
 //-------- ----------
@@ -74,9 +71,8 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
-
+    // curve
     DSD.draw_curve( ctx, sud.curve, alpha, sud.opt_curve );
-
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0 );
     DSD.draw_info(ctx, sound, sm);

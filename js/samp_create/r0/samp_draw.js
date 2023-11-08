@@ -98,10 +98,10 @@
         set_box_opt(opt);
         ctx.lineWidth = 6;
         ctx.strokeStyle = 'lime';
-        const len = 100;
+        const len = opt.len === undefined ? 100: opt.len;
         let i = 0; 
         while(i < len){
-            const v2 = curve.getPoint(i / len);
+            const v2 = curve.getPoint(i / ( len - 1 ));
             const x = (opt.sx ) + (v2.x * opt.w);
             const y = (opt.sy + opt.h) - (v2.y * opt.h);
             if(i === 0){
