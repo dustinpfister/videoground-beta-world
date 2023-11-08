@@ -69,22 +69,57 @@
         ctx.stroke();
     };
 
-    DSD.draw_sample_box = (ctx, opt, alpha = 0) => {
-        const sx = opt.sx === undefined ? 0 : opt.sx;
-        const sy = opt.sy === undefined ? 0 : opt.sy;
-        const w = opt.w === undefined ? 100 : opt.w;
-        const h = opt.h === undefined ? 25 : opt.h;
+    const set_box_opt = (opt) => {
+        opt.sx === undefined ? 0 : opt.sx;
+        opt.sy === undefined ? 0 : opt.sy;
+        opt.w === undefined ? 100 : opt.w;
+        opt.h === undefined ? 25 : opt.h;
+    };
+
+    DSD.draw_box = (ctx, opt, alpha=0 ) => {
+        set_box_opt(opt);
         ctx.strokeStyle = 'lime';
         ctx.lineWidth = 6;
-        ctx.strokeRect(sx, sy, w, h);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-        ctx.fillRect(sx, sy, w * alpha, h);
+        ctx.strokeRect(opt.sx, opt.sy, opt.w, opt.h);
+        if(alpha){
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+            ctx.fillRect(opt.sx, opt.sy, opt.w * alpha, opt.h);
+        }
     };
 
     DSD.draw = (ctx, sample_array, opt = {}, alpha = 0) => {
         draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h);
         DSD.draw_sample_data(ctx, sample_array, opt );
-        DSD.draw_sample_box(ctx, opt, alpha );
+        DSD.draw_box(ctx, opt, alpha );
+    };
+
+    DSD.draw_curve = (ctx, curve, alpha=0, opt={}) => {
+        DSD.draw_box(ctx, opt, 0);
+        set_box_opt(opt);
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = 'lime';
+        const len = 100;
+        let i = 0; 
+        while(i < len){
+            const v2 = curve.getPoint(i / len);
+            const x = (opt.sx + opt.w) - (v2.x * opt.w);
+            const y = (opt.sy + opt.h) - (v2.y * opt.h);
+            if(i === 0){
+                ctx.moveTo(x, y);
+            }
+            if(i > 0){
+                ctx.lineTo(x, y);
+            }
+            i += 1;
+        }
+        ctx.stroke();
+        ctx.strokeStyle = 'white';
+        const v2 = curve.getPoint(1 - alpha);
+        const x = (opt.sx + opt.w) - (v2.x * opt.w),
+        y = (opt.sy + opt.h) - (v2.y * opt.h);
+        ctx.beginPath();
+        ctx.arc( x, y, 10, 0, Math.PI * 2 );
+        ctx.stroke();
     };
 
     DSD.draw_info = (ctx, sound, sm) => {

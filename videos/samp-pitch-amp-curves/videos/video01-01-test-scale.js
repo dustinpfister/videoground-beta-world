@@ -47,9 +47,9 @@ VIDEO.init = function(sm, scene, camera){
     });
     sud.opt_frame = { w: 1200, h: 150, sy: 500, sx: 40, mode: sound.mode };
     sud.opt_curve = { w: 1200, h: 150, sy: 200, sx: 40 };
-    sud.arr_curve = sud.curve.getPoints(sud.opt_curve.w).map(( v )=> {
-        return sud.curve.getPoint(v.x).y;
-    });
+    //sud.arr_curve = sud.curve.getPoints(sud.opt_curve.w).map(( v )=> {
+    //    return sud.curve.getPoint(v.x).y;
+    //});
     sm.frameMax = sound.frames;
 };
 //-------- ----------
@@ -72,7 +72,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-    DSD.draw( ctx, sud.arr_curve, sud.opt_curve, alpha );
+    DSD.draw_curve( ctx, sud.curve, alpha, sud.opt_curve );
 
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0 );
