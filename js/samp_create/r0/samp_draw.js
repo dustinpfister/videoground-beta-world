@@ -98,8 +98,9 @@
         set_box_opt(opt);
         ctx.lineWidth = 6;
         ctx.strokeStyle = 'lime';
+        ctx.beginPath();
         const len = opt.len === undefined ? 100: opt.len;
-        let i = 0; 
+        let i = 0;
         while(i < len){
             const v1 = curve.getPoint(i / ( len - 1 ));
             const v2 = curve.getPoint(v1.x);
@@ -114,11 +115,11 @@
             i += 1;
         }
         ctx.stroke();
-        ctx.strokeStyle = 'white';
         const v1 = curve.getPoint(alpha);
         const v2 = curve.getPoint(v1.x);
         const x = (opt.sx ) + (v2.x * opt.w),
         y = (opt.sy + opt.h) - (v2.y * opt.h);
+        ctx.strokeStyle = 'white';
         ctx.beginPath();
         ctx.arc( x, y, 10, 0, Math.PI * 2 );
         ctx.stroke();
