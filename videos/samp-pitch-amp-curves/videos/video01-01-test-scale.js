@@ -36,13 +36,15 @@ VIDEO.init = function(sm, scene, camera){
     // curve for setting pitch over time
 
     const curve_freq = sud.curve_freq = get_bzcubic(0.20, 1.60, 0.30, 0.60, 0.10, 0.00);
+    const curve_amp = sud.curve_amp = get_bzcubic(0.60, 1.00, 0.50, 0.70, 0.30, 0.10);
     const curve_param = sud.curve_param = get_bzcubic(0.25, -1.50, 0.55, 2.40, 1);
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            fs.amp = 0.60;
-            let v2_ca = get_curve_v2ca(curve_freq, a_sound2);
+            let v2_ca = get_curve_v2ca(curve_amp, a_sound2);
+            fs.amp = v2_ca.y;
+            v2_ca = get_curve_v2ca(curve_freq, a_sound2);
             fs.freq = 0.10 * 2 * Math.floor( 1 + 49 * v2_ca.y );
             v2_ca = get_curve_v2ca(curve_param, a_sound2);
             fs.values_per_wave = 5 + 95 * v2_ca.y;
@@ -61,9 +63,10 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 30
     });
-    sud.opt_frame = { w: 1200, h: 150, sy: 500, sx: 40, mode: sound.mode };
+    sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
     sud.opt_curve_freq = { w: 1200, h: 100, sy: 100, sx: 40 };
-    sud.opt_curve_param = { w: 1200, h: 100, sy: 225, sx: 40 };
+    sud.opt_curve_amp = { w: 1200, h: 100, sy: 220, sx: 40 };
+    sud.opt_curve_param = { w: 1200, h: 100, sy: 340, sx: 40 };
     sm.frameMax = sound.frames;
 };
 //-------- ----------
@@ -87,6 +90,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // curve
     DSD.draw_curve( ctx, sud.curve_freq, sm.per, sud.opt_curve_freq );
+    DSD.draw_curve( ctx, sud.curve_amp, sm.per, sud.opt_curve_amp );
     DSD.draw_curve( ctx, sud.curve_param, sm.per, sud.opt_curve_param );
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0 );
