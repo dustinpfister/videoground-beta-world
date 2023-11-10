@@ -42,17 +42,11 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
-
-
-            fs.amp = 1.00;
-
+            fs.amp = 0.70;
             let v2_ca = get_curve_v2ca(curve_freq, a_sound2);
-            fs.freq = ( 2 * Math.floor( 10 * v2_ca.y ) );
-
+            fs.freq = 2 * Math.floor( 1 + 4 * v2_ca.y );
             v2_ca = get_curve_v2ca(curve_param, a_sound2);
             fs.values_per_wave = 10 + 190 * v2_ca.y;
-
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -66,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.values_per_wave = fs.values_per_wave;
             return samp;
         },
-        secs: 10
+        secs: 60
     });
     sud.opt_frame = { w: 1200, h: 150, sy: 500, sx: 40, mode: sound.mode };
     sud.opt_curve_freq = { w: 1200, h: 100, sy: 100, sx: 40 };
