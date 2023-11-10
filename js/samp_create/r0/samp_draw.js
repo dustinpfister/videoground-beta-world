@@ -76,6 +76,19 @@
         opt.h === undefined ? 25 : opt.h;
     };
 
+    const draw_desc = (ctx, desc, opt) => {
+        const overlay_alpha = opt.overlay_alpha === undefined ? 0.5 : opt.overlay_alpha; 
+        ctx.fillStyle = 'rgba(0,0,0,' + overlay_alpha + ')';
+        ctx.fillRect(opt.sx,opt.sy,opt.w, opt.h);
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'left';
+        ctx.font = opt.font || '40px courier';
+        ctx.fillStyle = opt.fill || '#ffffff';
+        let padx = opt.padx === undefined ? 10: opt.padx;
+        let pady = opt.pady === undefined ? 10: opt.pady;
+        ctx.fillText(desc, opt.sx + padx, opt.sy + pady);
+    };
+
     DSD.draw_box = (ctx, opt, alpha=0 ) => {
         set_box_opt(opt);
         ctx.strokeStyle = 'lime';
@@ -87,13 +100,14 @@
         }
     };
 
-    DSD.draw = (ctx, sample_array, opt = {}, alpha = 0) => {
+    DSD.draw = (ctx, sample_array, opt = {}, alpha = 0, desc='') => {
         draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h);
         DSD.draw_sample_data(ctx, sample_array, opt );
         DSD.draw_box(ctx, opt, alpha );
+        draw_desc(ctx, desc, opt);
     };
 
-    DSD.draw_curve = (ctx, curve, alpha=0, opt={}) => {
+    DSD.draw_curve = (ctx, curve, alpha=0, desc='', opt={}) => {
         DSD.draw_box(ctx, opt, 0);
         set_box_opt(opt);
         ctx.lineWidth = 6;
@@ -119,10 +133,14 @@
         const v2 = curve.getPoint(v1.x);
         const x = (opt.sx ) + (v2.x * opt.w),
         y = (opt.sy + opt.h) - (v2.y * opt.h);
-        ctx.strokeStyle = 'white';
+        ctx.strokeStyle = '#7f7f7f';
+        ctx.lineWidth = 3;
+        ctx.fillStyle = '#efefef';
         ctx.beginPath();
         ctx.arc( x, y, 10, 0, Math.PI * 2 );
+        ctx.fill();
         ctx.stroke();
+        draw_desc(ctx, desc, opt);
     };
 
     DSD.draw_info = (ctx, sound, sm) => {

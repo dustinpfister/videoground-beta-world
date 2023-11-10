@@ -73,11 +73,11 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // curve
-    DSD.draw_curve( ctx, sud.curve_freq, sm.per, sud.opt_curve_freq );
-    DSD.draw_curve( ctx, sud.curve_amp, sm.per, sud.opt_curve_amp );
-    DSD.draw_curve( ctx, sud.curve_param, sm.per, sud.opt_curve_param );
+    DSD.draw_curve( ctx, sud.curve_freq, sm.per, 'freq', sud.opt_curve_freq );
+    DSD.draw_curve( ctx, sud.curve_amp, sm.per, 'amp', sud.opt_curve_amp );
+    DSD.draw_curve( ctx, sud.curve_param, sm.per, 'param ( values per wave ) ', sud.opt_curve_param );
     // draw frame disp, and info
-    DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0 );
+    DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'sample data ( current frame )' );
     DSD.draw_info(ctx, sound, sm);
 };
 
