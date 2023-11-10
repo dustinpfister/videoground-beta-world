@@ -12,22 +12,6 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_draw.js'
 ];
 //-------- ----------
-// CURVE HELPERS
-//-------- ----------
-const get_curve_v2ca = (curve, alpha=0) => {
-    const v2_sa = curve.getPoint(alpha);
-    const v2_ca = curve.getPoint(v2_sa.x);
-    return v2_ca;
-};
-// just a THREE.CubicBezierCurve abstraction
-const get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, ) => {
-    const v_start = new THREE.Vector2(0, sy),
-    v_end = new THREE.Vector2(1, ey),
-    v_c1 = new THREE.Vector2(c1x, c1y),
-    v_c2 = new THREE.Vector2(c2x, c2y);
-    return new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
-};
-//-------- ----------
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
@@ -35,18 +19,18 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     // curve for setting pitch over time
 
-    const curve_freq = sud.curve_freq = get_bzcubic(0.20, 1.60, 0.30, 0.60, 0.10, 0.00);
-    const curve_amp = sud.curve_amp = get_bzcubic(0.60, 1.00, 0.50, 0.70, 0.30, 0.10);
-    const curve_param = sud.curve_param = get_bzcubic(0.25, -1.50, 0.55, 2.40, 1);
+    const curve_freq = sud.curve_freq = ST.get_bzcubic(0.20, 1.60, 0.30, 0.60, 0.10, 0.00);
+    const curve_amp = sud.curve_amp = ST.get_bzcubic(0.60, 1.00, 0.50, 0.70, 0.30, 0.10);
+    const curve_param = sud.curve_param = ST.get_bzcubic(0.25, -1.50, 0.55, 2.40, 1);
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            let v2_ca = get_curve_v2ca(curve_amp, a_sound2);
+            let v2_ca = ST.get_curve_v2ca(curve_amp, a_sound2);
             fs.amp = v2_ca.y;
-            v2_ca = get_curve_v2ca(curve_freq, a_sound2);
+            v2_ca = ST.get_curve_v2ca(curve_freq, a_sound2);
             fs.freq = 0.10 * 2 * Math.floor( 1 + 49 * v2_ca.y );
-            v2_ca = get_curve_v2ca(curve_param, a_sound2);
+            v2_ca = ST.get_curve_v2ca(curve_param, a_sound2);
             fs.values_per_wave = 5 + 95 * v2_ca.y;
             return fs;
         },

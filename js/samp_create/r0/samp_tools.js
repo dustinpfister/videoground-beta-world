@@ -2,6 +2,22 @@
 (function(){
     const ST = {};
     //-------- ----------
+    // CURVE HELPERS
+    //-------- ----------
+    ST.get_curve_v2ca = (curve, alpha=0) => {
+        const v2_sa = curve.getPoint(alpha);
+        const v2_ca = curve.getPoint(v2_sa.x);
+        return v2_ca;
+    };
+    // just a THREE.CubicBezierCurve abstraction
+    ST.get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, ) => {
+        const v_start = new THREE.Vector2(0, sy),
+        v_end = new THREE.Vector2(1, ey),
+        v_c1 = new THREE.Vector2(c1x, c1y),
+        v_c2 = new THREE.Vector2(c2x, c2y);
+        return new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
+    };
+    //-------- ----------
     // ALPHA VLAUES
     //-------- ----------
     ST.get_alpha = (a=0, b=1, count=1) => {
