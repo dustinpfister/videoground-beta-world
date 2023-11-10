@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.values_per_wave = fs.values_per_wave;
             return samp;
         },
-        secs: 60
+        secs: 30
     });
     sud.opt_frame = { w: 1200, h: 150, sy: 500, sx: 40, mode: sound.mode };
     sud.opt_curve_freq = { w: 1200, h: 100, sy: 100, sx: 40 };
