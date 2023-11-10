@@ -29,8 +29,8 @@ VIDEO.init = function(sm, scene, camera){
 
     let v_start = new THREE.Vector2(0, 0.1);
     let v_end = new THREE.Vector2(1, 0.1);
-    let v_c1 = new THREE.Vector2(0.70, 0.20);
-    let v_c2 = new THREE.Vector2(0.95, 1.90);
+    let v_c1 = new THREE.Vector2(0.20, 1.60);
+    let v_c2 = new THREE.Vector2(0.60, 0.10);
     const curve_freq = sud.curve_freq = new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
 
     v_start = new THREE.Vector2(0, 1);
@@ -42,11 +42,11 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            fs.amp = 0.70;
+            fs.amp = 0.60;
             let v2_ca = get_curve_v2ca(curve_freq, a_sound2);
-            fs.freq = 2 * Math.floor( 1 + 4 * v2_ca.y );
+            fs.freq = 0.10 * 2 * Math.floor( 1 + 49 * v2_ca.y );
             v2_ca = get_curve_v2ca(curve_param, a_sound2);
-            fs.values_per_wave = 10 + 190 * v2_ca.y;
+            fs.values_per_wave = 5 + 95 * v2_ca.y;
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
