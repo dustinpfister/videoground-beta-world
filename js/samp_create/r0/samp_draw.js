@@ -77,12 +77,12 @@
     };
 
     const draw_desc = (ctx, desc, opt) => {
-        const overlay_alpha = opt.overlay_alpha === undefined ? 0.5 : opt.overlay_alpha; 
+        const overlay_alpha = opt.overlay_alpha === undefined ? 0.3 : opt.overlay_alpha; 
         ctx.fillStyle = 'rgba(0,0,0,' + overlay_alpha + ')';
         ctx.fillRect(opt.sx,opt.sy,opt.w, opt.h);
         ctx.textBaseline = 'top';
         ctx.textAlign = 'left';
-        ctx.font = opt.font || '40px courier';
+        ctx.font = opt.font || '25px courier';
         ctx.fillStyle = opt.fill || '#ffffff';
         let padx = opt.padx === undefined ? 10: opt.padx;
         let pady = opt.pady === undefined ? 10: opt.pady;

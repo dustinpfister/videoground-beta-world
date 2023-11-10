@@ -18,11 +18,9 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
     // curve for setting pitch over time
-
     const curve_freq = sud.curve_freq = ST.get_bzcubic(0.20, 1.60, 0.30, 0.60, 0.10, 0.00);
     const curve_amp = sud.curve_amp = ST.get_bzcubic(0.60, 1.00, 0.50, 0.70, 0.30, 0.10);
     const curve_param = sud.curve_param = ST.get_bzcubic(0.25, -1.50, 0.55, 2.40, 1);
-
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
