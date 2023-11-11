@@ -51,7 +51,7 @@
         const for_sampset = opt.for_sampset || DEFAULT_FOR_SAMPSET;
         const for_frame = opt.for_frame || DEFAULT_FOR_FRAME;
         const waveform = parse_waveform(opt);
-        const sine_points = [];
+        const samps = [];
         let sampeset = {};
         let frameset = {};
         const a_sound2 = opt.frame / opt.max_frame;
@@ -64,10 +64,10 @@
             const a_wave = sampeset.a_wave === undefined ? ST.get_wave_alpha_totalsecs( a_sound, opt.secs ) : sampeset.a_wave;
             let samp = waveform(sampeset, a_wave);
             samp = ST.raw_to_mode(samp, opt.mode);
-            sine_points.push( parseFloat( samp.toFixed(2)) );
+            samps.push( parseFloat( samp.toFixed(2)) );
             i += step;
         }
-        return sine_points;
+        return samps;
     };
     // create sound object
     CS.create_sound = ( opt = {} ) => {
