@@ -133,6 +133,8 @@
         writeUint32(dataSize);            // Subchunk2Size
         return buffer;
     };
+    // create an array of samples for a given frame relative to the given max frame
+   // this will also update the array_frame array of the given sound object
     CS.create_frame_samples = (sound, frame = 0, max_frame = 30) => {
         const i_start = Math.floor(sound.samples_per_frame * frame);
         const data_samples =  sound.array_frame = CS.create_samps({
@@ -149,6 +151,8 @@
         });
         return data_samples;
     };
+    // use the video ground API to write then given data_samples created with CS.create_frame_samples
+    // to a given video.wav file at the given path
     CS.write_frame_samples = (sound, data_samples, frame = 0, filePath, isExport=false ) => {
         if(!isExport || !filePath){ return; }
         const fn = 'video.wav';
