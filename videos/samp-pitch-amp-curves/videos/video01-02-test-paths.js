@@ -17,18 +17,15 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // curve for setting pitch over time
+    // curve path for setting pitch over time
     const curve = new THREE.CurvePath();
-
     curve.add( ST.get_bzcubic(0.05, 1.00, 0.25, 0.20, 0.50, 0.50, 0.00, 0.50) );
     curve.add( ST.get_bzcubic(0.80, 1.40, 0.95, 0.00, 0.50, 0.50, 0.50, 1.00) );
-
-    //curve.add( ST.get_bzcubic(0.20, 1.60, 0.30, 0.60, 0.10, 0.00) );
     const curve_freq = sud.curve_freq = curve;
 
     // other curves
-    const curve_amp = sud.curve_amp = ST.get_bzcubic(0.50, 0.50, 0.50, 0.50, 0.50, 0.50);
-    const curve_param = sud.curve_param = ST.get_bzcubic(0.50, 0.50, 0.50, 0.50, 0.50, 0.50);
+    const curve_amp = sud.curve_amp = ST.get_bzcubic(0.25, 0.90, 0.50, 0.50, 0.70, 0.10, 0.00, 1.00);
+    const curve_param = sud.curve_param = ST.get_bzcubic(0.25, 0.20, 0.80, 1.00, 0.20, 0.20, 0.00, 1.00);
 
 
     const sound = sud.sound = CS.create_sound({
