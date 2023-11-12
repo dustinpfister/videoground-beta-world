@@ -5,14 +5,41 @@
     // CURVE HELPERS
     //-------- ----------
     ST.get_curve_v2ca = (curve, alpha=0) => {
+
         const v2_sa = curve.getPoint(alpha);
         const v2_ca = curve.getPoint(v2_sa.x);
+
+        //return v2_sa;
+
         return v2_ca;
+
+        //return new THREE.Vector2(alpha, v2_ca.y);
+
+//        let table = curve.userData;
+        //if(!table){
+        //    return new THREE.Vector2(alpha, v2_sa.y);
+        //}
+/*
+        let i = 0;
+        let sa = 0;
+        const len = table.length;
+        while(i < len){
+            sa = table[i][0];
+            ea = table[i + 1] ? table[i + 1][0] : 1;
+            if(alpha < ea){
+                break;
+            }
+            i += 1;
+        }
+        i = i >= len ? i - 1: i;
+        return curve.curves[i].getPoint(sa);
+*/
     };
     // just a THREE.CubicBezierCurve abstraction
     ST.get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, sx=0, ex=1 ) => {
         const v_start = new THREE.Vector2(sx, sy),
         v_end = new THREE.Vector2(ex, ey),
+
         v_c1 = new THREE.Vector2(c1x, c1y),
         v_c2 = new THREE.Vector2(c2x, c2y);
         return new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);

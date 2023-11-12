@@ -116,8 +116,10 @@
         const len = opt.len === undefined ? 100: opt.len;
         let i = 0;
         while(i < len){
-            const v1 = curve.getPoint(i / ( len - 1 ));
-            const v2 = curve.getPoint(v1.x);
+            //const v1 = curve.getPoint(i / ( len - 1 ));
+            //const v2 = curve.getPoint(v1.x);
+            const a = i / ( len - 1 );
+            const v2 = ST.get_curve_v2ca(curve, a);
             const x = (opt.sx ) + (v2.x * opt.w);
             const y = (opt.sy + opt.h) - (v2.y * opt.h);
             if(i === 0){
@@ -129,8 +131,11 @@
             i += 1;
         }
         ctx.stroke();
-        const v1 = curve.getPoint(alpha);
-        const v2 = curve.getPoint(v1.x);
+        //const v1 = curve.getPoint(alpha);
+        //const v2 = curve.getPoint(v1.x);
+
+        const v2 = ST.get_curve_v2ca(curve, alpha);
+
         const x = (opt.sx ) + (v2.x * opt.w),
         y = (opt.sy + opt.h) - (v2.y * opt.h);
         ctx.strokeStyle = '#7f7f7f';
