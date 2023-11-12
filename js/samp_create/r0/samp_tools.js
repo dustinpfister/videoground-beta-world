@@ -11,29 +11,37 @@
 
         //return v2_sa;
 
-        return v2_ca;
+        //return v2_ca;
 
-        //return new THREE.Vector2(alpha, v2_ca.y);
+        //return new THREE.Vector2(v2_ca.x, v2_sa.y);
 
-//        let table = curve.userData;
-        //if(!table){
-        //    return new THREE.Vector2(alpha, v2_sa.y);
-        //}
-/*
+
+        //return curve.getSpacedPoints(100)[ Math.floor(100 * alpha) ]
+
+        let table = curve.userData;
+        if(!table){
+            return v2_sa;
+            //return new THREE.Vector2(alpha, v2_sa.y);
+        }
+
         let i = 0;
-        let sa = 0;
+        let a = 0;
         const len = table.length;
         while(i < len){
             sa = table[i][0];
             ea = table[i + 1] ? table[i + 1][0] : 1;
             if(alpha < ea){
-                break;
+                a = (alpha - sa) / (ea - sa);
+                //break;
+                const c = curve.curves[i].getPoint(a);
+                return new THREE.Vector2(alpha, c.y);
             }
             i += 1;
         }
         i = i >= len ? i - 1: i;
-        return curve.curves[i].getPoint(sa);
-*/
+        //return curve.curves[i].getPoint(a);
+        return v2_sa;
+
     };
     // just a THREE.CubicBezierCurve abstraction
     ST.get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, sx=0, ex=1 ) => {

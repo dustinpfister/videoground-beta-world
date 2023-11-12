@@ -103,7 +103,7 @@ console.log('');
     });
     sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
     sud.opt_curve_freq = { w: 1200, h: 100, sy: 100, sx: 40 };
-    sud.opt_curve_amp = { w: 1200, h: 100, sy: 220, sx: 40, len:500 };
+    sud.opt_curve_amp = { w: 1200, h: 100, sy: 220, sx: 40, len:100 };
     sud.opt_curve_param = { w: 1200, h: 100, sy: 340, sx: 40 };
     sm.frameMax = sound.frames;
 };
