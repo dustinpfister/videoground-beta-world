@@ -10,9 +10,9 @@
         return v2_ca;
     };
     // just a THREE.CubicBezierCurve abstraction
-    ST.get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, ) => {
-        const v_start = new THREE.Vector2(0, sy),
-        v_end = new THREE.Vector2(1, ey),
+    ST.get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, sx=0, ex=1 ) => {
+        const v_start = new THREE.Vector2(sx, sy),
+        v_end = new THREE.Vector2(ex, ey),
         v_c1 = new THREE.Vector2(c1x, c1y),
         v_c2 = new THREE.Vector2(c2x, c2y);
         return new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);
