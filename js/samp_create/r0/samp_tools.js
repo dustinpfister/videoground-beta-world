@@ -5,25 +5,12 @@
     // CURVE HELPERS
     //-------- ----------
     ST.get_curve_v2ca = (curve, alpha=0) => {
-
         const v2_sa = curve.getPoint(alpha);
         const v2_ca = curve.getPoint(v2_sa.x);
-
-        //return v2_sa;
-
-        //return v2_ca;
-
-        //return new THREE.Vector2(v2_ca.x, v2_sa.y);
-
-
-        //return curve.getSpacedPoints(100)[ Math.floor(100 * alpha) ]
-
         let table = curve.userData;
         if(!table){
             return v2_sa;
-            //return new THREE.Vector2(alpha, v2_sa.y);
         }
-
         let i = 0;
         let a = 0;
         const len = table.length;
@@ -41,13 +28,26 @@
         i = i >= len ? i - 1: i;
         //return curve.curves[i].getPoint(a);
         return v2_sa;
-
+    };
+    ST.get_curve_path = (table=[[]]) => {
+        const curve_path = new THREE.CurvePath();
+        curve_path.userData = table;
+        table.forEach( (data, i, arr) => {
+            const a_start = data[0];
+            let a_end = 1;
+            const data_next = arr[ i + 1];
+            if(data_next){
+               a_end = data_next[0];
+            }
+            const curve_child = ST.get_bzcubic(data[1], data[2], data[3], data[4], data[5], data[6], a_start, a_end);
+            curve_path.add( curve_child );
+        });
+        return curve_path;
     };
     // just a THREE.CubicBezierCurve abstraction
     ST.get_bzcubic = (c1x=0.5, c1y=0.5, c2x=0.5, c2y=0.5, sy=0.1, ey=0.1, sx=0, ex=1 ) => {
         const v_start = new THREE.Vector2(sx, sy),
         v_end = new THREE.Vector2(ex, ey),
-
         v_c1 = new THREE.Vector2(c1x, c1y),
         v_c2 = new THREE.Vector2(c2x, c2y);
         return new THREE.CubicBezierCurve(v_start, v_c1, v_c2, v_end);

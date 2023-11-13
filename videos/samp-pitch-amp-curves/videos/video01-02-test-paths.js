@@ -11,42 +11,18 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_draw.js'
 ];
 //-------- ----------
-// CURVE HELPERS
-//-------- ----------
-
-const get_curve_path = (table=[[]]) => {
-    const curve_path = new THREE.CurvePath();
-    curve_path.userData = table;
-    table.forEach( (data, i, arr) => {
-        const a_start = data[0];
-        let a_end = 1;
-        const data_next = arr[ i + 1];
-        if(data_next){
-           a_end = data_next[0];
-        }
-        const curve_child = ST.get_bzcubic(data[1], data[2], data[3], data[4], data[5], data[6], a_start, a_end);
-        curve_path.add( curve_child );
-    });
-    return curve_path;
-};
-
-
-
-//-------- ----------
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
-
-    // curve path for setting pitch over time
-    const curve_freq = sud.curve_freq = get_curve_path([ 
+    // curve paths
+    const curve_freq = sud.curve_freq = ST.get_curve_path([ 
         [0.00, 0.10, 0.90, 0.20, 0.10, 0.00, 1.00],
         [0.25, 0.37, 1.00, 0.37, 1.00, 1.00, 1.00],
         [0.50, 0.50, 0.60, 0.90, 0.40, 1.00, 0.20]
     ]);
-
-    const curve_amp = sud.curve_amp = get_curve_path([ 
+    const curve_amp = sud.curve_amp = ST.get_curve_path([ 
         [0.00, 0.12, 0.50, 0.12, 0.50, 0.50, 0.50],
         [0.25, 0.27, 1.00, 0.27, 0.00, 0.50, 0.50],
         [0.30, 0.32, 0.00, 0.32, 1.00, 0.50, 0.50],
@@ -55,14 +31,11 @@ VIDEO.init = function(sm, scene, camera){
         [0.45, 0.47, 1.00, 0.47, 0.00, 0.50, 0.50],
         [0.50, 0.75, 0.50, 0.75, 0.50, 0.50, 0.20]
     ]);
-
-    const curve_param = sud.curve_param = get_curve_path([ 
+    const curve_param = sud.curve_param = ST.get_curve_path([ 
         [0.00, 0.25, 0.20, 0.25, 0.20, 0.20, 0.20],
         [0.50, 0.70, 0.75, 0.90, 0.50, 0.20, 1.00],
     ]);
-
-
-
+    // main sound object
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
