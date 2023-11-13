@@ -71,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
             v2_ca = ST.get_curve_v2ca(curve_amp, a_sound2);
             fs.amp = v2_ca.y;
             v2_ca = ST.get_curve_v2ca(curve_param, a_sound2);
-            fs.values_per_wave = 5 + 95 * v2_ca.y;
+            fs.values_per_wave = 5 + 195 * v2_ca.y;
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
