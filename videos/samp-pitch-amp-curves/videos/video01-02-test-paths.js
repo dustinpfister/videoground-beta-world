@@ -10,15 +10,19 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/waveforms/seedednoise.js',
   '../../../js/samp_create/r0/samp_draw.js'
 ];
+
 //-------- ----------
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+
+
+
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
     // curve paths
     const curve_freq = sud.curve_freq = ST.get_curve_path([ 
-        [0.00, 0.10, 0.90, 0.20, 0.10, 0.00, 1.00],
+        [0.00, 0.10, 0.90, 0.20, 0.10, 0.15, 1.00],
         [0.25, 0.37, 1.00, 0.37, 1.00, 1.00, 1.00],
         [0.50, 0.50, 0.60, 0.90, 0.40, 1.00, 0.20]
     ]);
