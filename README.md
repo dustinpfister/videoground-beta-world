@@ -1,8 +1,8 @@
 # VideoGround Beta world video files
 
-I have made an electron.js powered program that I aim to use to make little video projects that for now I am just simply calling [videoground](https://github.com/dustinpfister/videoground). So then I should start making some content with this programe then, rather than putting this off until a later revision is done that might not even come.
+I have made an electron.js powered program that I aim to use to make little video projects that for now I am just simply calling [videoground](https://github.com/dustinpfister/videoground). So then I should start making some content with this program then, rather than putting this off until a later revision is done that might not even come.
 
-This is then a collection of files to use with videoground to create frames that can then be used with a program like ffmpeg to create a final video file. Additional tools like [espeak](https://en.wikipedia.org/wiki/ESpeak), [audacity](https://en.wikipedia.org/wiki/Audacity_%28audio_editor%29), [musescore](https://en.wikipedia.org/wiki/MuseScore) and so forth can then be used to create audio tracks for a finished product as well. Also as of late revisions of videoground \( R10+ \)I can now both read and write additional data on a frame by frame basis which includes audio sample data.
+This is then a collection of files to use with videoground to create frames that can then be used with a program like ffmpeg to create a final video file. Additional tools like [espeak](https://en.wikipedia.org/wiki/ESpeak), [audacity](https://en.wikipedia.org/wiki/Audacity_%28audio_editor%29), [musescore](https://en.wikipedia.org/wiki/MuseScore) and so forth can then be used to create audio tracks for a finished product as well. Also as of late revisions of videoground \( R10+ \) I can now both read and write additional data on a frame by frame basis which includes audio sample data.
 
 
 <div align="center">
@@ -10,16 +10,14 @@ This is then a collection of files to use with videoground to create frames that
         <img src="https://img.youtube.com/vi/zI2Ou8bq_Eo/0.jpg" style="width:50%;">
     </a><br>
     <p>
-        Seeded Random Noise Waveform
+        Seeded Random Noise Waveform from the audio-generator-1 video project folder
     </p>
 </div>
 
 
-## The current idea of 'Beta World' is *experimentation*, and *content over tools*
+## The current idea of 'Beta World' is *experimentation*
 
 The current idea for this beta world collection of content is to just use this is a place to park experimental content to gain a better sense of what I like to make with videoground. I have a lot of general ideas for content and as such I just need a place to park what I have together with these ideas. If something works in terms of intrinsic value, or external interest maybe I will start a stand alone collection for that, otherwise it will remain here.
-
-Thus far my other collection of content on Github has to do with making little demos videos for my various blog posts on threejs. So these are videos that just demo threejs feature in the core of the librray, as well as my various javaScript projects that built on top of threejs. So the focus is on the tools that are made to create content rather than on content itself.
 
 <div align="center">
     <a href="https://www.youtube.com/watch?v=67j1q73byqc">
@@ -32,7 +30,7 @@ Thus far my other collection of content on Github has to do with making little d
 
 ## The Original general idea of 'Beta World'
 
-The term Beta is a reference to Beta Software, so in other words the Beta World is a world that is feature complete, but will contain a lot of problems, or for on reason or another does not feel like a finished product. 
+The term Beta is in reference to Beta Software, so in other words the Beta World is a world that is feature complete, but will contain a lot of problems, or for on reason or another does not feel like a finished product just yet. 
 
 The original idea for beta world was to make a series of skit like videos where there are just two characters, 'guy1', and 'guy2' and a world of objects in which they can interact with. All of the various assets should be in place when I start the very first video, and each video would just be another project where I am just playing around with assets that are all ready in place. 
 
