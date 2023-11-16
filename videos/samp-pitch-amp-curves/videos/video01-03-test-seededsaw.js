@@ -77,7 +77,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.saw_effect = fs.saw_effect;
             return samp;
         },
-        secs: 10
+        secs: 30
     });
     sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
     sud.opt_curve_freq = { w: 1200, h: 100, sy: 100, sx: 40 };
