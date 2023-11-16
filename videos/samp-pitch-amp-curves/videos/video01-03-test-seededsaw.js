@@ -44,7 +44,7 @@ VIDEO.init = function(sm, scene, camera){
 
             fs.values_per_wave = Math.round(180 * v2_ca.y);
             v2_ca = ST.get_curve_v2ca(curve_param2, a_sound2);
-            fs.saw_effect = Math.floor( 16 * v2_ca.y) / 16;
+            fs.saw_effect = Math.round( 16 * v2_ca.y) / 16;
             fs.amp = 0.75;
             return fs;
         },
