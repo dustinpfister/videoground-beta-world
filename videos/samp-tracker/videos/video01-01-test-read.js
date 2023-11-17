@@ -17,13 +17,6 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    let BBS = 8;
-
-    const data = '' +
-    '2 0 2 e3\n' +
-    '2 0 2 e3\n' +
-    '2 0 4 c3\n';
-
     const data_to_event_array = (data) => {
         return data.trim().split(/\n|\r\n/).map((e)=>{
             return e.trim().split(' ');
@@ -32,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
 
     const get_total_secs = (event_array) => {
         if(typeof event_array === 'string'){
-            event_array = data_to_event_array(event_array)
+            event_array = data_to_event_array(event_array);
         }
         let secs = 0;
         let i = 0;
@@ -40,6 +33,9 @@ VIDEO.init = function(sm, scene, camera){
         let bbs = 8;
         while(i < len){
            const e = event_array[i];
+           if(parseInt(e[0]) === 0){
+              bbs = parseInt(e[2]);
+           }
            if(parseInt(e[0]) === 2){
               secs += parseInt(e[2]) / bbs;
            }
@@ -48,7 +44,18 @@ VIDEO.init = function(sm, scene, camera){
         return secs;
     };
 
-console.log(get_total_secs(data));
+
+    let BBS = 8;
+
+    const data = '' +
+    '0 0 8\n' +
+    '2 0 2 e3\n' +
+    '2 0 2 e3\n' +
+    '2 0 4 c3\n';
+
+    const event_array = data_to_event_array(data);
+
+console.log(event_array)
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
@@ -66,7 +73,7 @@ console.log(get_total_secs(data));
             samp.values_per_wave = fs.values_per_wave;
             return samp;
         },
-        secs: 30
+        secs: get_total_secs(data)
     });
 
     sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
