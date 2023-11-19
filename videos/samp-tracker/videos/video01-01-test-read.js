@@ -17,26 +17,40 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const data_to_event_array = (data) => {
+    // parse string data to event array, or just return if object
+    const parse_data = (data) => {
+        if(typeof data === 'object'){
+            return data;
+        }
         return data.trim().split(/\n|\r\n/).map((e)=>{
             return e.trim().split(' ');
         });
     };
 
-    const get_total_secs = (event_array) => {
-        if(typeof event_array === 'string'){
-            event_array = data_to_event_array(event_array);
+    // loop events
+    const loop_events = (data, for_event ) => {
+        const event_array = parse_data(data);
+        let i = 0;
+        const len = event_array.length;
+        while(i < len){
+           const e = event_array[i];
+           const r = for_event(e, e[0], event_array);
+           if(r){
+              break;
+           }
+           i += 1;
         }
+    };
+
+    const get_total_secs = (data) => {
+        const event_array = parse_data(data);
         let secs = 0;
         let i = 0;
         const len = event_array.length;
         let bbs = 8;
         while(i < len){
            const e = event_array[i];
-           if(parseInt(e[0]) === 0){
-              bbs = parseInt(e[2]);
-           }
-           if(parseInt(e[0]) === 2){
+           if(parseInt(e[0]) === 9){
               secs += parseInt(e[2]) / bbs;
            }
            i += 1;
@@ -48,12 +62,11 @@ VIDEO.init = function(sm, scene, camera){
     let BBS = 8;
 
     const data = '' +
-    '0 0 8\n' +
-    '2 0 2 e3\n' +
-    '2 0 2 e3\n' +
-    '2 0 4 c3\n';
+    '9 0 2 e3\n' +
+    '9 0 2 e3\n' +
+    '9 0 4 c3\n';
 
-    const event_array = data_to_event_array(data);
+    const event_array = parse_data(data);
 
 console.log(event_array)
 
