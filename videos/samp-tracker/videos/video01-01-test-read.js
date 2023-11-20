@@ -55,14 +55,105 @@ VIDEO.init = function(sm, scene, camera){
         return roll.length / BBS;
     };
 
+    const note_index_to_freq = (note_index) => {
+
+        if(note_index === ''){
+            return 0;
+        }
+
+        if(typeof note_index === 'string'){
+            const NOTES = 'c-,c#,d-,d#,e-,f-,f#,g-,g#,a-,a#,b-'.split(',');
+            const ni = NOTES.findIndex( (str) => { 
+                return str === note_index.substr(0,2);
+            });
+            return ST.notefreq_by_indices( parseInt(note_index.substr(2,1))  , ni);
+        }
+        return 0;
+    };
+
+
+    //console.log( note_index_to_freq('c-5') );
 
     let BBS = 4;
 
     const data = '' +
-    'c3 0 1\n' +
-    'd3 0 1\n' +
-    'e3 0 1\n' +
-    'f3 0 1\n';
+    'c-0 9 1\n' +
+    'c#0 0 1\n' +
+    'd-0 0 1\n' +
+    'd#0 0 1\n' +
+    'e-0 9 1\n' +
+    'f-0 0 1\n' +
+    'f#0 0 1\n' +
+    'g-0 0 1\n' +
+    'g#0 9 1\n' +
+    'a-0 0 1\n' +
+    'a#0 0 1\n' +
+    'b-0 0 1\n' +
+
+    'c-1 9 1\n' +
+    'c#1 0 1\n' +
+    'd-1 0 1\n' +
+    'd#1 0 1\n' +
+    'e-1 9 1\n' +
+    'f-1 0 1\n' +
+    'f#1 0 1\n' +
+    'g-1 0 1\n' +
+    'g#1 9 1\n' +
+    'a-1 0 1\n' +
+    'a#1 0 1\n' +
+    'b-1 0 1\n' +
+
+    'c-2 9 1\n' +
+    'c#2 0 1\n' +
+    'd-2 0 1\n' +
+    'd#2 0 1\n' +
+    'e-2 9 1\n' +
+    'f-2 0 1\n' +
+    'f#2 0 1\n' +
+    'g-2 0 1\n' +
+    'g#2 9 1\n' +
+    'a-2 0 1\n' +
+    'a#2 0 1\n' +
+    'b-2 0 1\n' +
+
+    'c-3 9 1\n' +
+    'c#3 0 1\n' +
+    'd-3 0 1\n' +
+    'd#3 0 1\n' +
+    'e-3 9 1\n' +
+    'f-3 0 1\n' +
+    'f#3 0 1\n' +
+    'g-3 0 1\n' +
+    'g#3 9 1\n' +
+    'a-3 0 1\n' +
+    'a#3 0 1\n' +
+    'b-3 0 1\n' +
+
+    'c-4 9 1\n' +
+    'c#4 0 1\n' +
+    'd-4 0 1\n' +
+    'd#4 0 1\n' +
+    'e-4 9 1\n' +
+    'f-4 0 1\n' +
+    'f#4 0 1\n' +
+    'g-4 0 1\n' +
+    'g#4 9 1\n' +
+    'a-4 0 1\n' +
+    'a#4 0 1\n' +
+    'b-4 0 1\n' +
+
+    'c-5 9 1\n' +
+    'c#5 0 1\n' +
+    'd-5 0 1\n' +
+    'd#5 0 1\n' +
+    'e-5 9 1\n' +
+    'f-5 0 1\n' +
+    'f#5 0 1\n' +
+    'g-5 0 1\n' +
+    'g#5 9 1\n' +
+    'a-5 0 1\n' +
+    'a#5 0 1\n' +
+    'b-5 0 1\n';
 
     const roll = parse_data(data);
     //console.log(roll)
@@ -70,11 +161,12 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
             const line = roll[ Math.floor( roll.length * a_sound2 ) ];
-
-console.log(line[0])
-
+            const freq = note_index_to_freq(line[0]);
+            if(freq > 0){
+                fs.freq = freq / 30;
+            }
+            fs.amp = 1;
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
