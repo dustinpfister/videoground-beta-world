@@ -71,10 +71,21 @@ VIDEO.init = function(sm, scene, camera){
         return 0;
     };
 
+    const get_current_line_by_alpha = (data, BBS=4, alpha=0, indices=false, count=1) => {
+        const roll = parse_data(data);
+        const i = Math.floor( roll.length * alpha);
+        if(count > 1){
+            const arr = roll.slice(i, i+ count);
+            return indices ? arr.map((l, li)=>{ return i + li}) : arr;
+        }
+        return indices ? i : roll[i];
+        
+    };
+
 
     //console.log( note_index_to_freq('c-5') );
 
-    let BBS = 4;
+    let BBS = 8;
 
     const data = '' +
     'c-0 9 1\n' +
@@ -156,12 +167,13 @@ VIDEO.init = function(sm, scene, camera){
     'b-5 0 1\n';
 
     const roll = parse_data(data);
-    //console.log(roll)
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            const line = roll[ Math.floor( roll.length * a_sound2 ) ];
+
+            const line = get_current_line_by_alpha(roll, BBS, a_sound2, false, 1)
+    
             const freq = note_index_to_freq(line[0]);
             if(freq > 0){
                 fs.freq = freq / 30;
