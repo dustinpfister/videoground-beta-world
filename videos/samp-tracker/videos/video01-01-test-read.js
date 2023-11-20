@@ -11,12 +11,8 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_draw.js'
 ];
 //-------- ----------
-// INIT
+// TRACKER
 //-------- ----------
-VIDEO.init = function(sm, scene, camera){
-    const sud = scene.userData;
-    sm.renderer.setClearColor(0x000000, 0.25);
-
     // parse string data to roll array, or just return if object
     const parse_data = (data, BBS=4) => {
         if(typeof data === 'object'){
@@ -70,7 +66,6 @@ VIDEO.init = function(sm, scene, camera){
         }
         return 0;
     };
-
     const get_current_line_by_alpha = (data, BBS=4, alpha=0, indices=false, count=1) => {
         const roll = parse_data(data);
         const i = Math.floor( roll.length * alpha);
@@ -81,11 +76,19 @@ VIDEO.init = function(sm, scene, camera){
         return indices ? i : roll[i];
         
     };
+//-------- ----------
+// INIT
+//-------- ----------
+VIDEO.init = function(sm, scene, camera){
+    const sud = scene.userData;
+    sm.renderer.setClearColor(0x000000, 0.25);
+
+
 
 
     //console.log( note_index_to_freq('c-5') );
 
-    let BBS = 8;
+    let BBS = sud.BBS = 8;
 
     const data = '' +
     'c-0 9 1\n' +
@@ -166,13 +169,13 @@ VIDEO.init = function(sm, scene, camera){
     'a#5 0 1\n' +
     'b-5 0 1\n';
 
-    const roll = parse_data(data);
+    const roll = sud.roll = parse_data(data);
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const line = get_current_line_by_alpha(roll, BBS, a_sound2, false, 1)
+            const line = get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
     
             const freq = note_index_to_freq(line[0]);
             if(freq > 0){
@@ -217,6 +220,21 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
+    // draw current tracker data
+    const arr_lines = get_current_line_by_alpha(sud.roll, sud.BBS, sm.per, false, 8);
+
+    ctx.font = '40px monospace';
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+    arr_lines.forEach((line, i) => {
+       ctx.fillStyle = 'lime';
+       if(i === 0){
+           ctx.fillStyle = 'white';
+       }
+       ctx.fillText(line[0], 100, 100 + 40 * i);
+    });
+
+
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'sample data ( current frame )' );
     DSD.draw_info(ctx, sound, sm);
