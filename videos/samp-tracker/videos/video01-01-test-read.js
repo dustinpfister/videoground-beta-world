@@ -17,24 +17,32 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // parse string data to event array, or just return if object
-    const parse_data = (data) => {
+    // parse string data to roll array, or just return if object
+    const parse_data = (data, BBS=4) => {
         if(typeof data === 'object'){
             return data;
         }
-        return data.trim().split(/\n|\r\n/).map((e)=>{
+        const roll = data.split(/\n|\r\n/).map((e)=>{
             return e.trim().split(' ');
         });
+        const push_count = BBS - roll.length % BBS;
+        let i = 0;
+        while(i < push_count && push_count != BBS){
+           roll.push([''])
+           i += 1;
+        }
+
+        return roll;
     };
 
-    // loop events
-    const loop_events = (data, for_event ) => {
-        const event_array = parse_data(data);
+    // loop all lines of roll
+    const loop_lines = (data, for_line ) => {
+        const roll = parse_data(data);
         let i = 0;
-        const len = event_array.length;
+        const len = roll.length;
         while(i < len){
-           const e = event_array[i];
-           const r = for_event(e, e[0], event_array);
+           const e = roll[i];
+           const r = for_line(e[0], e[1], e[2], e[3] || '', e);
            if(r){
               break;
            }
@@ -42,37 +50,31 @@ VIDEO.init = function(sm, scene, camera){
         }
     };
 
-    const get_total_secs = (data) => {
-        const event_array = parse_data(data);
-        let secs = 0;
-        let i = 0;
-        const len = event_array.length;
-        let bbs = 8;
-        while(i < len){
-           const e = event_array[i];
-           if(parseInt(e[0]) === 9){
-              secs += parseInt(e[2]) / bbs;
-           }
-           i += 1;
-        }
-        return secs;
+    const get_total_secs = (data, BBS=4) => {
+        const roll = parse_data(data);
+        return roll.length / BBS;
     };
 
 
-    let BBS = 8;
+    let BBS = 4;
 
     const data = '' +
-    '9 0 2 e3\n' +
-    '9 0 2 e3\n' +
-    '9 0 4 c3\n';
+    'c3 0 1\n' +
+    'd3 0 1\n' +
+    'e3 0 1\n' +
+    'f3 0 1\n';
 
-    const event_array = parse_data(data);
-
-console.log(event_array)
+    const roll = parse_data(data);
+    //console.log(roll)
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+
+            const line = roll[ Math.floor( roll.length * a_sound2 ) ];
+
+console.log(line[0])
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -86,7 +88,7 @@ console.log(event_array)
             samp.values_per_wave = fs.values_per_wave;
             return samp;
         },
-        secs: get_total_secs(data)
+        secs: get_total_secs(data, BBS)
     });
 
     sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
