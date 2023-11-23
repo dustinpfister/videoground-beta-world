@@ -12,6 +12,8 @@
         }
         const roll = data.split(/\n|\r\n/).map((e)=>{
             return e.trim().split(' ');
+        }).filter((line)=>{
+            return line[0][0] != '#';
         });
         const push_count = BBS - roll.length % BBS;
         let i = 0;

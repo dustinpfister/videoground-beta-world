@@ -20,6 +20,8 @@ VIDEO.init = function(sm, scene, camera){
     //console.log( note_index_to_freq('c-5') );
     let BBS = sud.BBS = 8;
     const data = '' +
+    '#foo\n' +
+    '# foo\n' +
     'c-0 9 1\n' +
     'c#0 0 1\n' +
     'd-0 0 1\n' +
@@ -32,7 +34,7 @@ VIDEO.init = function(sm, scene, camera){
     'a-0 0 1\n' +
     'a#0 0 1\n' +
     'b-0 0 1\n' +
-
+    '# foo\n' +
     'c-1 9 1\n' +
     'c#1 0 1\n' +
     'd-1 0 1\n' +
