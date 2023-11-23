@@ -22,6 +22,12 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const BBS = sud.BBS = 8;
+	
+	const WAVEFORM_MAP = [
+	   ['sin2', {} ],
+	   ['seedednoise', {}],
+	   ['array', { array:[0,0.25,1,0]}]
+	];
 
     const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-read.txt');
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
@@ -36,6 +42,10 @@ VIDEO.init = function(sm, scene, camera){
                 if(freq > 0){
                     fs.freq = freq / 30;
                 }
+
+                fs.wf_index = parseInt(line[1]) || 0;
+                console.log(fs.wf_index);
+
                 fs.amp = 1;
                 return fs;
             },
@@ -58,8 +68,9 @@ VIDEO.init = function(sm, scene, camera){
                     a_wave: samp.a_wave,
                     frequency: 1,
                     amplitude: 1,
+                    maxch: 1,
                     table: [
-                        { waveform: 'seedednoise', frequency: fs.freq, amplitude: 1}
+                        { waveform: WAVEFORM_MAP[fs.wf_index][0], frequency: fs.freq, amplitude: 1}
                     ]
                 }
 
