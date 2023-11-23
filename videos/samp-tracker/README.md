@@ -2,11 +2,13 @@
 
 This is my first take at making a music tracker program working on top of R0 of my samp-create javaScript module in the main JavaScript folder of this beta world collection of video content. For this project at least the aim is to not just jump into anything to complex, as even when it comes to the core basics there are a whole lot of little details I am going to want to get solid first. So then I am not going to worry so much about things like mixing up to 24 notes per track, waveform parameter tables, so forth and so on. This will then just be used to make a few projects that make use of one waveform function, one note at a time, single track, with a fixed set of waveform parameters. In other words, simply put, I just want to have a 'hello world example of a music tracker program' if that makes any sense.
 
-* I will just want a basic music roll format to start with
-* Just a single main roll of data rather than patterns
-* store the music roll in an external file format
-* just one channel
-* fixed values for waveform options, and common options
+* (done) I will just want a basic music roll format to start with
+* (done) Just a single main roll of data rather than patterns
+* (done) store the music roll in an external file format
+* (done) just one channel
+* (done) fixed values for waveform options, and common options
+* () I will then want look ahead and look back methods to find out what the wave alpha values should be for a line
+* () blank lines can be used to carry a note
 
 ## Music roll format
 
