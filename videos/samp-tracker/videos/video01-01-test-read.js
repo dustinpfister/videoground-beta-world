@@ -8,6 +8,7 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+  '../../../js/samp_create/r0/waveforms/table_maxch.js',
   '../../../js/samp_create/r0/waveforms/array.js',
   '../../../js/samp_create/r0/waveforms/seedednoise.js',
   '../../../js/samp_create/r0/samp_draw.js',
@@ -27,7 +28,7 @@ VIDEO.init = function(sm, scene, camera){
     .then( (data) => {
         const roll = sud.roll = STRACK.parse_data(data);
         const sound = sud.sound = CS.create_sound({
-            waveform : 'array',
+            waveform : 'table_maxch', //'seedednoise',
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
                 // get current line data
                 const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
@@ -36,9 +37,6 @@ VIDEO.init = function(sm, scene, camera){
                     fs.freq = freq / 30;
                 }
                 fs.amp = 1;
-
-                fs.array = [-1,0,-1,0];
-
                 return fs;
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -53,11 +51,18 @@ VIDEO.init = function(sm, scene, camera){
                 samp.array = fs.array;
 
                 samp.values_per_wave = fs.values_per_wave;
-                //return CS.WAVE_FORM_FUNCTIONS['seedednoise'](samp, samp.a_wave)
 
+                //return samp;
 
-                //samp.values_per_wave = fs.values_per_wave;
-                return samp;
+                return {
+                    a_wave: samp.a_wave,
+                    frequency: 1,
+                    amplitude: 1,
+                    table: [
+                        { waveform: 'seedednoise', frequency: fs.freq, amplitude: 1}
+                    ]
+                }
+
             },
             secs: STRACK.get_total_secs(data, BBS)
         });
