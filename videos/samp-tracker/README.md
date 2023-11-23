@@ -7,7 +7,9 @@ This is my first take at making a music tracker program working on top of R0 of 
 * (done) store the music roll in an external file format
 * (done) just one channel
 * (done) fixed values for waveform options, and common options
-* () get waveform index values working
+* (done) get waveform index values working by having a map for waveform functions
+* () get amp values working
+* () display waveform and amp values
 * () I will then want look ahead and look back methods to find out what the wave alpha values should be for a line
 * () blank lines can be used to carry a note
 
