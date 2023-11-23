@@ -1,5 +1,6 @@
 /*    video01-01-test-read - for samp-tracker
           * first test video for samp-tracker where I just want to read a file
+          * I want to get the waveform index values working
  */
 //-------- ----------
 // SCRIPTS
@@ -7,6 +8,7 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+  '../../../js/samp_create/r0/waveforms/array.js',
   '../../../js/samp_create/r0/waveforms/seedednoise.js',
   '../../../js/samp_create/r0/samp_draw.js',
   '../js/samp-tracker.js'
@@ -25,14 +27,18 @@ VIDEO.init = function(sm, scene, camera){
     .then( (data) => {
         const roll = sud.roll = STRACK.parse_data(data);
         const sound = sud.sound = CS.create_sound({
-            waveform : 'seedednoise',
+            waveform : 'array',
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+                // get current line data
                 const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
                 const freq = STRACK.note_index_to_freq(line[0]);
                 if(freq > 0){
                     fs.freq = freq / 30;
                 }
                 fs.amp = 1;
+
+                fs.array = [-1,0,-1,0];
+
                 return fs;
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -43,7 +49,14 @@ VIDEO.init = function(sm, scene, camera){
                 samp.a_wave = a_frame;
                 samp.amplitude = fs.amp;
                 samp.frequency = fs.freq;
+
+                samp.array = fs.array;
+
                 samp.values_per_wave = fs.values_per_wave;
+                //return CS.WAVE_FORM_FUNCTIONS['seedednoise'](samp, samp.a_wave)
+
+
+                //samp.values_per_wave = fs.values_per_wave;
                 return samp;
             },
             secs: STRACK.get_total_secs(data, BBS)
