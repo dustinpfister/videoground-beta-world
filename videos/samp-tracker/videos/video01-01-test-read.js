@@ -8,88 +8,17 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
   '../../../js/samp_create/r0/waveforms/seedednoise.js',
-  '../../../js/samp_create/r0/samp_draw.js'
+  '../../../js/samp_create/r0/samp_draw.js',
+  '../js/samp-tracker.js'
 ];
-//-------- ----------
-// TRACKER
-//-------- ----------
-    // parse string data to roll array, or just return if object
-    const parse_data = (data, BBS=4) => {
-        if(typeof data === 'object'){
-            return data;
-        }
-        const roll = data.split(/\n|\r\n/).map((e)=>{
-            return e.trim().split(' ');
-        });
-        const push_count = BBS - roll.length % BBS;
-        let i = 0;
-        while(i < push_count && push_count != BBS){
-           roll.push([''])
-           i += 1;
-        }
-
-        return roll;
-    };
-
-    // loop all lines of roll
-    const loop_lines = (data, for_line ) => {
-        const roll = parse_data(data);
-        let i = 0;
-        const len = roll.length;
-        while(i < len){
-           const e = roll[i];
-           const r = for_line(e[0], e[1], e[2], e[3] || '', e);
-           if(r){
-              break;
-           }
-           i += 1;
-        }
-    };
-
-    const get_total_secs = (data, BBS=4) => {
-        const roll = parse_data(data);
-        return roll.length / BBS;
-    };
-
-    const note_index_to_freq = (note_index) => {
-
-        if(note_index === ''){
-            return 0;
-        }
-
-        if(typeof note_index === 'string'){
-            const NOTES = 'c-,c#,d-,d#,e-,f-,f#,g-,g#,a-,a#,b-'.split(',');
-            const ni = NOTES.findIndex( (str) => { 
-                return str === note_index.substr(0,2);
-            });
-            return ST.notefreq_by_indices( parseInt(note_index.substr(2,1))  , ni);
-        }
-        return 0;
-    };
-    const get_current_line_by_alpha = (data, BBS=4, alpha=0, indices=false, count=1) => {
-        const roll = parse_data(data);
-        const i = Math.floor( roll.length * alpha);
-        if(count > 1){
-            const arr = roll.slice(i, i+ count);
-            return indices ? arr.map((l, li)=>{ return i + li}) : arr;
-        }
-        return indices ? i : roll[i];
-        
-    };
 //-------- ----------
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
-
-
-
-
     //console.log( note_index_to_freq('c-5') );
-
     let BBS = sud.BBS = 8;
-
     const data = '' +
     'c-0 9 1\n' +
     'c#0 0 1\n' +
@@ -169,15 +98,15 @@ VIDEO.init = function(sm, scene, camera){
     'a#5 0 1\n' +
     'b-5 0 1\n';
 
-    const roll = sud.roll = parse_data(data);
+    const roll = sud.roll = STRACK.parse_data(data);
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'seedednoise',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const line = get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
+            const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
     
-            const freq = note_index_to_freq(line[0]);
+            const freq = STRACK.note_index_to_freq(line[0]);
             if(freq > 0){
                 fs.freq = freq / 30;
             }
@@ -195,7 +124,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.values_per_wave = fs.values_per_wave;
             return samp;
         },
-        secs: get_total_secs(data, BBS)
+        secs: STRACK.get_total_secs(data, BBS)
     });
 
     sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
@@ -221,7 +150,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // draw current tracker data
-    const arr_lines = get_current_line_by_alpha(sud.roll, sud.BBS, sm.per, false, 8);
+    const arr_lines = STRACK.get_current_line_by_alpha(sud.roll, sud.BBS, sm.per, false, 8);
 
     ctx.font = '40px monospace';
     ctx.textBaseline = 'top';
