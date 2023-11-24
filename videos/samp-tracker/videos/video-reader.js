@@ -104,6 +104,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // draw current tracker data
     const arr_lines = STRACK.get_current_line_by_alpha(sud.roll, sud.BBS, sm.per, false, 8);
+    const i_line = STRACK.get_current_line_by_alpha(sud.roll, sud.BBS, sm.per, true, 1);
     ctx.font = '40px monospace';
     ctx.textBaseline = 'top';
     ctx.textAlign = 'left';
@@ -112,7 +113,11 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
        if(i === 0){
            ctx.fillStyle = 'white';
        }
-       ctx.fillText(line[0], 100, 100 + 40 * i);
+       const i2 = String(i_line + i).padStart(4, '.');
+       const a = line[0] === undefined ? '---' : line[0].padStart(3,'-');
+       const b = line[1] === undefined ? '---' : line[1].padStart(3,'-');
+       const c = line[2] === undefined ? '---' : line[2].padStart(3,'-');
+       ctx.fillText(i2 + ' ' + a + ' ' + b + ' ' + c, 80, 100 + 40 * i);
     });
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'sample data ( current frame )' );

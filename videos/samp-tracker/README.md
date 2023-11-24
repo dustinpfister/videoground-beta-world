@@ -9,7 +9,7 @@ This is my first take at making a music tracker program working on top of R0 of 
 * (done) fixed values for waveform options, and common options
 * (done) get waveform index values working by having a map for waveform functions
 * (done) blank lines can be used to carry a note
-* () get amp values working
+* (done) get amp values working
 * () display waveform and amp values
 
 ## Music roll format
