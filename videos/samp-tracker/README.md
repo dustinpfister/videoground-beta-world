@@ -10,7 +10,10 @@ This is my first take at making a music tracker program working on top of R0 of 
 * (done) get waveform index values working by having a map for waveform functions
 * (done) blank lines can be used to carry a note
 * (done) get amp values working
-* () display waveform and amp values
+* (done) display waveform and amp values
+
+* () I might want at least one common param that is used to set the waveform alpha
+* () I will want a better form or notation other than empty string when I want to carry a note
 
 ## Music roll format
 
