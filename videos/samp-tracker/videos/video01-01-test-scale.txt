@@ -1,4 +1,4 @@
-# video01-01-test-read music roll for samp-tracker
+# video01-01-test-scale music roll for samp-tracker
 c-0 0 1.00
 c#0 0 1.00
 d-0 0 1.00

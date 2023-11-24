@@ -29,7 +29,7 @@ VIDEO.init = function(sm, scene, camera){
         ['array', { array:[0,0.25,1,0]}]
     ];
 
-    const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-read.txt');
+    const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-scale.txt');
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
         const roll = sud.roll = STRACK.parse_data(data);
