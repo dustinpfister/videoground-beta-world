@@ -59,7 +59,8 @@ VIDEO.init = function(sm, scene, camera){
                     fs.freq = freq / 30;
                 }
                 fs.wf_index = parseInt(line[1]) || 0;
-                fs.amp = 1;
+                const amp = parseFloat(line[2]);
+                fs.amp = String(amp) === 'NaN' ? 0 : amp;
                 return fs;
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
