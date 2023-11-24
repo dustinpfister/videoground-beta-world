@@ -1,6 +1,6 @@
 /*    video01-01-test-read - for samp-tracker
           * first test video for samp-tracker where I just want to read a file
-          * I want to get the waveform index values working
+          * I want to get note,waveform index, and amp values working
  */
 //-------- ----------
 // SCRIPTS
@@ -22,12 +22,12 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     const BBS = sud.BBS = 8;
-	
-	const WAVEFORM_MAP = [
-	   ['sin2', {} ],
-	   ['seedednoise', {}],
-	   ['array', { array:[0,0.25,1,0]}]
-	];
+
+    const WAVEFORM_MAP = [
+        ['sin2', {} ],
+        ['seedednoise', {}],
+        ['array', { array:[0,0.25,1,0]}]
+    ];
 
     const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-read.txt');
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
@@ -42,46 +42,31 @@ VIDEO.init = function(sm, scene, camera){
                 if(freq > 0){
                     fs.freq = freq / 30;
                 }
-
                 fs.wf_index = parseInt(line[1]) || 0;
                 console.log(fs.wf_index);
-
                 fs.amp = 1;
                 return fs;
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
                 const spf = opt.sound.samples_per_frame;
                 const frame = Math.floor(i / spf);
-                const a_sound2 = frame / (opt.secs * 30);
+                //const a_sound2 = frame / (opt.secs * 30);
                 const a_frame = (i % spf) / spf;
-                samp.a_wave = a_frame;
-                samp.amplitude = fs.amp;
-                samp.frequency = fs.freq;
-
-                samp.array = fs.array;
-
-                samp.values_per_wave = fs.values_per_wave;
-
-                //return samp;
-
                 return {
-                    a_wave: samp.a_wave,
+                    a_wave: a_frame,
                     frequency: 1,
                     amplitude: 1,
                     maxch: 1,
                     table: [
-                        { waveform: WAVEFORM_MAP[fs.wf_index][0], frequency: fs.freq, amplitude: 1}
+                        { waveform: WAVEFORM_MAP[fs.wf_index][0], frequency: fs.freq, amplitude: fs.amp}
                     ]
                 }
-
             },
             secs: STRACK.get_total_secs(data, BBS)
         });
         sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
         sm.frameMax = sound.frames;
     });
-
-
 };
 //-------- ----------
 // UPDATE
@@ -103,7 +88,6 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillRect(0,0, canvas.width, canvas.height);
     // draw current tracker data
     const arr_lines = STRACK.get_current_line_by_alpha(sud.roll, sud.BBS, sm.per, false, 8);
-
     ctx.font = '40px monospace';
     ctx.textBaseline = 'top';
     ctx.textAlign = 'left';
@@ -114,8 +98,6 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
        }
        ctx.fillText(line[0], 100, 100 + 40 * i);
     });
-
-
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'sample data ( current frame )' );
     DSD.draw_info(ctx, sound, sm);
