@@ -21,6 +21,10 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
+
+
+
+
     const BBS = sud.BBS = 8;
 
     const WAVEFORM_MAP = [
@@ -29,21 +33,32 @@ VIDEO.init = function(sm, scene, camera){
         ['array', { array:[0,0.25,1,0]}]
     ];
 
-    const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-scale.txt');
+    //const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-scale.txt');
+    const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-02-test-hold.txt');
+
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
+
+
+
         const roll = sud.roll = STRACK.parse_data(data);
+
+
+
+
         const sound = sud.sound = CS.create_sound({
             waveform : 'table_maxch', //'seedednoise',
             for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-                // get current line data
-                const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
+                // get current param data
+                //const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
+
+                const line = STRACK.get_current_params(roll, BBS, a_sound2);
+
                 const freq = STRACK.note_index_to_freq(line[0]);
                 if(freq > 0){
                     fs.freq = freq / 30;
                 }
                 fs.wf_index = parseInt(line[1]) || 0;
-                console.log(fs.wf_index);
                 fs.amp = 1;
                 return fs;
             },

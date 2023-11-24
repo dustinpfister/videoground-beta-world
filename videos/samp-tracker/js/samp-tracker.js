@@ -53,6 +53,7 @@
         }
         return 0;
     };
+    // get a current line array, index, or array of such things
     STRACK.get_current_line_by_alpha = (data, BBS=4, alpha=0, indices=false, count=1) => {
         const roll = STRACK.parse_data(data);
         const i = Math.floor( roll.length * alpha);
@@ -61,7 +62,22 @@
             return indices ? arr.map((l, li)=>{ return i + li}) : arr;
         }
         return indices ? i : roll[i];
-        
+    };
+    // get current params or array with empty string if there is nothing to get
+    STRACK.get_current_params = (roll, BBS=4, alpha=0) => {
+        const a = STRACK.get_current_line_by_alpha(roll, BBS, alpha, false, 1);
+        if(a[0] === ''){
+            let i = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
+            while(i--){
+                const b = roll[i];
+                if(b[0] != ''){
+                    return b;
+                }
+            }
+        }else{
+            return a
+        }
+        return [''];
     };
     window.STRACK = STRACK;
 }());
