@@ -12,8 +12,14 @@ This is my first take at making a music tracker program working on top of R0 of 
 * (done) get amp values working
 * (done) display waveform and amp values
 
+* () have a fixed 0-99 scale for amplitude
+* () have a fixed 0-99 scale for waveform index
+* () '' and '--- -- --' strings having the same meaning
+* () '--- -- -0' in place of lines like 'b-3 1 0.00' but both should still work
+
 * () I might want at least one common param that is used to set the waveform alpha
-* () I will want a better form or notation other than empty string when I want to carry a note
+
+* () I will still want a header to set BBM, and what the waveform map should be for a music roll
 
 ## Music roll format
 
