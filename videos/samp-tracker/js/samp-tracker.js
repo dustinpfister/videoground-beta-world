@@ -66,6 +66,12 @@
     // get current params or array with empty string if there is nothing to get
     STRACK.get_current_params = (roll, BBS=4, alpha=0) => {
         const a = STRACK.get_current_line_by_alpha(roll, BBS, alpha, false, 1);
+		
+		// ['']  <=== loop back to get all params 
+		// ['---', '--', '--'] <=== loop back to get all params 
+		// ['---', '--', '-0'] <=== set amplitude to 0, loop back to get all other params 
+		// ['c-3', '-0', '99'] <=== sets all, no need for loop back
+
         if(a[0] === ''){
             let i = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
             while(i--){
