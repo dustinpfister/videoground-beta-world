@@ -66,3 +66,7 @@ a-0 0 1.00
 a#0 0 1.00
 b-0 0 1.00
 ```
+
+### common parameters
+
+I said that I will not be getting into anything to advanced with waveform parameters with this project, however I think that I am still going to want a few common parameters for things like setting how long a note should play for if no updated data is given for a line.
