@@ -64,7 +64,7 @@ VIDEO.init = function(sm, scene, camera){
                    // for now I can just to a parseInt though for 0
                    p_value = parseInt(p[1])
                 }
-                console.log(line[0], p_value);
+                console.log(line[0], p_value, a_sound2 * opt.secs);
 
 
 
