@@ -53,18 +53,20 @@ VIDEO.init = function(sm, scene, camera){
 
 
                 const line_param = line.slice(4, line.length);
+                let p = [];
+                let p_index = 0;
+                let p_value = 1;
                 if(line_param.length > 0){
-
-                   console.log('additional params');
                    // get the param index, and then values after ':'
-                   const p = line_param[0].split(':');
-                   const p_index = parseInt(p[0]);
-
+                   p = line_param[0].split(':');
+                   p_index = parseInt(p[0]);
                    // how values after ':' are treated will depend on the index
                    // for now I can just to a parseInt though for 0
-                   const p_value = parseInt(p[1]);
-
+                   p_value = parseInt(p[1])
                 }
+                console.log(line[0], p_value);
+
+
 
                 const freq = STRACK.note_index_to_freq(line[1]);
                 if(freq > 0){
