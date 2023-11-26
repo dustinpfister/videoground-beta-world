@@ -57,11 +57,23 @@
     STRACK.get_current_line_by_alpha = (data, BBS=4, alpha=0, indices=false, count=1) => {
         const roll = STRACK.parse_data(data);
         const i = Math.floor( roll.length * alpha);
+        let arr = [];
         if(count > 1){
-            const arr = roll.slice(i, i+ count);
+            arr = roll.slice(i, i + count);
+            if(!indices){
+                arr.map((line)=>{
+                    const a = line.slice(0, line.length);
+                    a.unshift(i + count);
+                    return a;
+                });
+            }
             return indices ? arr.map((l, li)=>{ return i + li}) : arr;
         }
-        return indices ? i : roll[i];
+        arr = roll[i].slice(0, roll[i].length);
+        if(!indices){
+           arr.unshift(i);
+        }
+        return indices ? i : arr;
     };
     // get current params or array with empty string if there is nothing to get
     STRACK.get_current_params = (roll, BBS=4, alpha=0) => {

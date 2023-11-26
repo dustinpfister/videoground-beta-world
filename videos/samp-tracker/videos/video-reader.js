@@ -50,7 +50,9 @@ VIDEO.init = function(sm, scene, camera){
 
                 const line = STRACK.get_current_params(roll, BBS, a_sound2);
 
-                const line_param = line.slice(3, line.length);
+
+
+                const line_param = line.slice(4, line.length);
                 if(line_param.length > 0){
 
                    console.log('additional params');
@@ -61,16 +63,15 @@ VIDEO.init = function(sm, scene, camera){
                    // how values after ':' are treated will depend on the index
                    // for now I can just to a parseInt though for 0
                    const p_value = parseInt(p[1]);
-                   console.log( p_index, p_value );
 
                 }
 
-                const freq = STRACK.note_index_to_freq(line[0]);
+                const freq = STRACK.note_index_to_freq(line[1]);
                 if(freq > 0){
                     fs.freq = freq / 30;
                 }
-                fs.wf_index = parseInt(line[1]) || 0;
-                const amp = parseFloat(line[2]);
+                fs.wf_index = parseInt(line[2]) || 0;
+                const amp = parseFloat(line[3]);
                 fs.amp = String(amp) === 'NaN' ? 0 : amp;
                 return fs;
             },
@@ -125,9 +126,9 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
            ctx.fillStyle = 'white';
        }
        const i2 = String(i_line + i).padStart(4, '.');
-       const a = line[0] === undefined ? '---' : line[0].padStart(3,'-');
-       const b = line[1] === undefined ? '---' : line[1].padStart(3,'-');
-       const c = line[2] === undefined ? '---' : line[2].padStart(3,'-');
+       const a = line[1] === undefined ? '---' : line[1].padStart(3,'-');
+       const b = line[2] === undefined ? '---' : line[2].padStart(3,'-');
+       const c = line[3] === undefined ? '---' : line[3].padStart(3,'-');
        ctx.fillText(i2 + ' ' + a + ' ' + b + ' ' + c, 80, 100 + 40 * i);
     });
     // draw frame disp, and info
