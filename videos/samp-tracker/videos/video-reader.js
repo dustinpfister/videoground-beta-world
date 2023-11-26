@@ -1,6 +1,6 @@
-/*    video01-01-test-read - for samp-tracker
-          * first test video for samp-tracker where I just want to read a file
-          * I want to get note,waveform index, and amp values working
+/*    video-reader - for samp-tracker
+          * This is a common 'reader' video to read a music roll file
+          * I want to get note, waveform index, and amp values working
  */
 //-------- ----------
 // SCRIPTS
@@ -21,20 +21,16 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-
-
-
-
     const BBS = sud.BBS = 8;
 
     const WAVEFORM_MAP = [
         ['sin2', {} ],
         ['seedednoise', {}],
-        ['array', { array:[0,0.25,1,0]}]
+        ['array', { array:[0,0.25,1,0] }]
     ];
 
     //const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-01-test-scale.txt');
-    const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-02-test-hold.txt');
+    const uri_file = videoAPI.pathJoin(sm.filePath, 'video01-04-test-awave.txt');
 
     return videoAPI.read( uri_file, { alpha: 0, buffer_size_alpha: 1} )
     .then( (data) => {
@@ -53,6 +49,21 @@ VIDEO.init = function(sm, scene, camera){
                 //const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
 
                 const line = STRACK.get_current_params(roll, BBS, a_sound2);
+
+                const line_param = line.slice(3, line.length);
+                if(line_param.length > 0){
+
+                   console.log('additional params');
+                   // get the param index, and then values after ':'
+                   const p = line_param[0].split(':');
+                   const p_index = parseInt(p[0]);
+
+                   // how values after ':' are treated will depend on the index
+                   // for now I can just to a parseInt though for 0
+                   const p_value = parseInt(p[1]);
+                   console.log( p_index, p_value );
+
+                }
 
                 const freq = STRACK.note_index_to_freq(line[0]);
                 if(freq > 0){

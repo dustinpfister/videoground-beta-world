@@ -1,0 +1,28 @@
+# video01-04-test-awave music roll for samp-tracker
+# I will want to at least start a system for addtional params
+# for now it will just be common params, starting with values to adjust the 'awave' value
+# 
+#
+c-0 0 1.00 0:10
+
+
+
+
+
+
+
+
+
+#
+f-3 1 1.00 0:1
+
+
+
+
+
+
+
+
+
+
+#
