@@ -80,21 +80,36 @@
     //-------- ----------
     const loop_back = (roll, i_line, i_col) => {
         let i = i_line;
-        while(i_line--){
-            const b = roll[i_line];
-            if(b[i_col - 1] != ''){
-                if(typeof b[i_col] === 'string'){
-                    const m = b[i_col].match(/-/g);
+        while(i--){
+            const b = roll[i];
+            const c = b[i_col - 1];
+            if(c != ''){
+                if(typeof c === 'string'){
+                    const m = c.match(/-/g);
                     if(m){
-                        if(m.length === b[i_col.length]){
+                        if(m.length === c.length){
                             continue;
                         }
                     }
                 }
-                if(typeof b[i_col] === 'undefined'){
+                if(typeof c === 'undefined'){
                     continue;
                 }
-                return b[i_col - 1];
+                // if this is common params
+                if(i_col === 4){
+                    //!!! assuming param 0 always for now,
+                    // as long as this is the only common param this is not a problem
+                    const e = c.split(':');
+                    const linect = parseInt(e[1]);
+                    const f = i_line - i;
+                    let this_line = THREE.MathUtils.euclideanModulo(linect - f, linect) + 1;
+
+                    //if(this_line < linect){
+                    //    this_line = (linect - Math.abs(this_line)) % linect
+                    //}
+                    return '0:' + this_line;
+                }
+                return c;
             }
         }
         return '';
@@ -114,10 +129,10 @@
                 i_col += 1;
                 continue;
             }
+            // if string is contains only '-', loop back
             if(typeof a[i_col] === 'string'){
                 const m = a[i_col].match(/-/g);
                 if(m){
-                    // if string is contains only '-', loop back
                     if(m.length === a[i_col.length]){
                         params[i_col] = loop_back(roll, i, i_col);
                         i_col += 1;
@@ -125,6 +140,7 @@
                     }
                 }
             }
+            // if we make it this far just set the value
             params[i_col] = a[i_col];
             i_col += 1;
         }

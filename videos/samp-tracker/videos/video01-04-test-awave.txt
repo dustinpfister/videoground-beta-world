@@ -3,7 +3,7 @@
 # for now it will just be common params, starting with values to adjust the 'awave' value
 # 
 #
-c-0 0 1.00 0:10
+c-0 0 1.00 0:5
 
 
 
