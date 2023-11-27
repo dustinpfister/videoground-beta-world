@@ -76,27 +76,59 @@
         return indices ? i : arr;
     };
     //-------- ----------
-    // GET CURRENT PARAMS
+    // STRACK.get_current_params method and helper functions
     //-------- ----------
+    const loop_back = (roll, i_line, i_col) => {
+        let i = i_line;
+        while(i_line--){
+            const b = roll[i_line];
+            if(b[i_col - 1] != ''){
+                if(typeof b[i_col] === 'string'){
+                    const m = b[i_col].match(/-/g);
+                    if(m){
+                        if(m.length === b[i_col.length]){
+                            continue;
+                        }
+                    }
+                }
+                if(typeof b[i_col] === 'undefined'){
+                    continue;
+                }
+                return b[i_col - 1];
+            }
+        }
+        return '';
+    };
     // get current params or array with empty string if there is nothing to get
     STRACK.get_current_params = (roll, BBS=4, alpha=0) => {
         const a = STRACK.get_current_line_by_alpha(roll, BBS, alpha, false, 1);
+        let i = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
         // [0, '']  <=== loop back to get all params
-        // [0, 'c-3', '0', '1.00'] <=== sets all, no need for loop back
-        if(a[1] === ''){
-            let i = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
-            let n = i;
-            while(i--){
-                const b = roll[i];
-                if(b[0] != ''){
-                    const params = [n].concat(b);
-                    return params;
+        // [0, 'c-3', '0', '1.00', '0:10'] <=== sets all, no need for loop back
+        const params = [ a[0] ];
+        let i_col = 1;
+        while(i_col < 5){
+            // if we have an empty string, or undefined, loop back
+            if(a[i_col] === '' || a[i_col] === undefined){
+                params[i_col] = loop_back(roll, i, i_col);
+                i_col += 1;
+                continue;
+            }
+            if(typeof a[i_col] === 'string'){
+                const m = a[i_col].match(/-/g);
+                if(m){
+                    // if string is contains only '-', loop back
+                    if(m.length === a[i_col.length]){
+                        params[i_col] = loop_back(roll, i, i_col);
+                        i_col += 1;
+                        continue;
+                    }
                 }
             }
-        }else{
-            return a
+            params[i_col] = a[i_col];
+            i_col += 1;
         }
-        return [''];
+        return params;
     };
     window.STRACK = STRACK;
 }());

@@ -40,7 +40,7 @@ VIDEO.init = function(sm, scene, camera){
         const roll = sud.roll = STRACK.parse_data(data);
 
         console.log('**********');
-        const a = STRACK.get_current_params(roll, BBS, 0.24);
+        const a = STRACK.get_current_params(roll, BBS, 0.00);
         console.log(a);
         console.log('**********');
 
