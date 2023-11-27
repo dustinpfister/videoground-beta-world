@@ -75,21 +75,22 @@
         }
         return indices ? i : arr;
     };
+    //-------- ----------
+    // GET CURRENT PARAMS
+    //-------- ----------
     // get current params or array with empty string if there is nothing to get
     STRACK.get_current_params = (roll, BBS=4, alpha=0) => {
         const a = STRACK.get_current_line_by_alpha(roll, BBS, alpha, false, 1);
-		
-		// ['']  <=== loop back to get all params 
-		// ['---', '--', '--'] <=== loop back to get all params 
-		// ['---', '--', '-0'] <=== set amplitude to 0, loop back to get all other params 
-		// ['c-3', '-0', '99'] <=== sets all, no need for loop back
-
-        if(a[0] === ''){
+        // [0, '']  <=== loop back to get all params
+        // [0, 'c-3', '0', '1.00'] <=== sets all, no need for loop back
+        if(a[1] === ''){
             let i = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
+            let n = i;
             while(i--){
                 const b = roll[i];
                 if(b[0] != ''){
-                    return b;
+                    const params = [n].concat(b);
+                    return params;
                 }
             }
         }else{

@@ -39,8 +39,10 @@ VIDEO.init = function(sm, scene, camera){
 
         const roll = sud.roll = STRACK.parse_data(data);
 
-
-
+        console.log('**********');
+        const a = STRACK.get_current_params(roll, BBS, 0.24);
+        console.log(a);
+        console.log('**********');
 
         const sound = sud.sound = CS.create_sound({
             waveform : 'table_maxch', //'seedednoise',
@@ -64,7 +66,7 @@ VIDEO.init = function(sm, scene, camera){
                    // for now I can just to a parseInt though for 0
                    p_value = parseInt(p[1])
                 }
-                console.log(line[0], p_value, a_sound2 * opt.secs);
+                //console.log(line[0], p_value, a_sound2 * opt.secs);
 
 //!!! In order to get any valid value at all for awave I am going to need a starting line number value
 //!!! I would like to avoid having to do this by punching in a parameter for that, but that would work
@@ -129,9 +131,9 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
            ctx.fillStyle = 'white';
        }
        const i2 = String(i_line + i).padStart(4, '.');
-       const a = line[1] === undefined ? '---' : line[1].padStart(3,'-');
-       const b = line[2] === undefined ? '---' : line[2].padStart(3,'-');
-       const c = line[3] === undefined ? '---' : line[3].padStart(3,'-');
+       const a = line[0] === undefined ? '---' : line[0].padStart(3,'-');
+       const b = line[1] === undefined ? '---' : line[1].padStart(3,'-');
+       const c = line[2] === undefined ? '----' : line[2].padStart(4,'-');
        ctx.fillText(i2 + ' ' + a + ' ' + b + ' ' + c, 80, 100 + 40 * i);
     });
     // draw frame disp, and info
