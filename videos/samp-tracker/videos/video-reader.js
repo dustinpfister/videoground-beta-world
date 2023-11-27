@@ -58,21 +58,23 @@ VIDEO.init = function(sm, scene, camera){
                 let p = [];
                 let p_index = 0;
                 let p_value = 1;
+                let p_total = 1;
                 if(line_param.length > 0){
                    // get the param index, and then values after ':'
                    p = line_param[0].split(':');
+                   const e = p[1].split(',');
                    p_index = parseInt(p[0]);
                    // how values after ':' are treated will depend on the index
                    // for now I can just to a parseInt though for 0
-                   p_value = parseInt(p[1])
+                   p_value = parseInt(e[0]);
+                   p_total = parseInt(e[1]);
                 }
+                const p_alpha = 1 - p_value /p_total;
+                //!!! geting a 'p_alpha' value now, but this will need to be adjusted for a frame by frame value
+                console.log(p_alpha);
 
-console.log(line);
 
-                //console.log(line[0], p_value);
 
-//!!! In order to get any valid value at all for awave I am going to need a starting line number value
-//!!! I would like to avoid having to do this by punching in a parameter for that, but that would work
 
                 const freq = STRACK.note_index_to_freq(line[1]);
                 if(freq > 0){

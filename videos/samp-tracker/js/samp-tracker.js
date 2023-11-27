@@ -100,14 +100,18 @@
                     //!!! assuming param 0 always for now,
                     // as long as this is the only common param this is not a problem
                     const e = c.split(':');
-                    const linect = parseInt(e[1]);
-                    const f = i_line - i;
-                    let this_line = THREE.MathUtils.euclideanModulo(linect - f, linect) + 1;
+                    const f = e[1].split(',')
+                    const linect = parseInt(f[0]);
+                    const h = i_line - i;
+                    let this_line = THREE.MathUtils.euclideanModulo(linect - h, linect);
+                    if(this_line <= 0){
+                        this_line = parseInt(f[1]);
+                    }
 
                     //if(this_line < linect){
                     //    this_line = (linect - Math.abs(this_line)) % linect
                     //}
-                    return '0:' + this_line;
+                    return '0:' + this_line + ',' + f[1];
                 }
                 return c;
             }
