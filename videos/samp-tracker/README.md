@@ -11,8 +11,9 @@ This is my first take at making a music tracker program working on top of R0 of 
 * (done) blank lines can be used to carry a note
 * (done) get amp values working
 * (done) display waveform and amp values
+* (done) I want at least one common param that is used to set the waveform alpha
 
-* () I might want at least one common param that is used to set the waveform alpha
+* () I want to get the final wave alphas to be in sync with per second, rather than per set of lines
 
 <!-- maybe? -->
 * () have a fixed 0-99 scale for amplitude

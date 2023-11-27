@@ -24,7 +24,7 @@ VIDEO.init = function(sm, scene, camera){
     const BBS = sud.BBS = 8;
 
     const WAVEFORM_MAP = [
-        ['sin2', {} ],
+        ['sin', {} ],
         ['seedednoise', {}],
         ['array', { array:[0,0.25,1,0] }]
     ];
@@ -70,15 +70,22 @@ VIDEO.init = function(sm, scene, camera){
                    p_total = parseInt(e[1]);
                 }
                 const p_alpha = 1 - p_value /p_total;
-                //!!! geting a 'p_alpha' value now, but this will need to be adjusted for a frame by frame value
-                console.log(p_alpha);
 
+
+                //!!! geting a 'p_alpha' value now, but this will need to be adjusted for a frame by frame value
+                const fpa = 30 / BBS;
+                const p_alpha_adjust = frame % fpa / fpa / p_total;
+                console.log(p_alpha + p_alpha_adjust);
+
+                fs.p_alpha = p_alpha + p_alpha_adjust;
 
 
 
                 const freq = STRACK.note_index_to_freq(line[1]);
                 if(freq > 0){
                     fs.freq = freq / 30;
+                    //fs.freq = freq;
+                    //fs.freq = 1;
                 }
                 fs.wf_index = parseInt(line[2]) || 0;
                 const amp = parseFloat(line[3]);
@@ -91,7 +98,21 @@ VIDEO.init = function(sm, scene, camera){
                 //const a_sound2 = frame / (opt.secs * 30);
                 const a_frame = (i % spf) / spf;
                 return {
+
+                    //!!! trying out fs.p_alpha for this
+                    // what I need to do now is figure out how to set a final a_wave value for each sample
+                    //a_wave: (fs.p_alpha + a_frame) % 1,
+
+                    //!!! this expression works to set things to the number of lines
+                    // but will not be in sync with per second which is not what I want
+                    a_wave: (fs.p_alpha + a_frame) / 2,
+
+
+                    //a_wave: (fs.p_alpha + a_frame) % 1,
+
+
                     a_wave: a_frame,
+
                     frequency: 1,
                     amplitude: 1,
                     maxch: 1,
