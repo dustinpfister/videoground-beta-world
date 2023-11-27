@@ -133,7 +133,7 @@
             if(typeof a[i_col] === 'string'){
                 const m = a[i_col].match(/-/g);
                 if(m){
-                    if(m.length === a[i_col.length]){
+                    if(m.length === a[i_col].length){
                         params[i_col] = loop_back(roll, i, i_col);
                         i_col += 1;
                         continue;

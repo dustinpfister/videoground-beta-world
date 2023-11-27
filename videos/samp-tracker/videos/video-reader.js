@@ -66,7 +66,10 @@ VIDEO.init = function(sm, scene, camera){
                    // for now I can just to a parseInt though for 0
                    p_value = parseInt(p[1])
                 }
-                console.log(line[0], p_value, a_sound2 * opt.secs);
+
+console.log(line);
+
+                //console.log(line[0], p_value);
 
 //!!! In order to get any valid value at all for awave I am going to need a starting line number value
 //!!! I would like to avoid having to do this by punching in a parameter for that, but that would work
