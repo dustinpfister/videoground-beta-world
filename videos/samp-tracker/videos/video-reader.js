@@ -24,7 +24,7 @@ VIDEO.init = function(sm, scene, camera){
     const BBS = sud.BBS = 8;
 
     const WAVEFORM_MAP = [
-        ['sin', {} ],
+        ['sin2', {} ],
         ['seedednoise', {}],
         ['array', { array:[0,0.25,1,0] }]
     ];
