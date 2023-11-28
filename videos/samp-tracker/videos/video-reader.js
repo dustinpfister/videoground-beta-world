@@ -24,7 +24,7 @@ VIDEO.init = function(sm, scene, camera){
     const BBS = sud.BBS = 8;
 
     const WAVEFORM_MAP = [
-        ['sin2', {} ],
+        ['sin', {} ],
         ['seedednoise', {}],
         ['array', { array:[0,0.25,1,0] }]
     ];
@@ -51,8 +51,6 @@ VIDEO.init = function(sm, scene, camera){
                 //const line = STRACK.get_current_line_by_alpha(roll, BBS, a_sound2, false, 1);
 
                 const line = STRACK.get_current_params(roll, BBS, a_sound2);
-
-
 
                 const line_param = line.slice(4, line.length);
                 let p = [];
@@ -85,8 +83,8 @@ console.log(fs.p_alpha_adjusted);
                 const freq = STRACK.note_index_to_freq(line[1]);
                 if(freq > 0){
                     //fs.freq = freq / 30;
-                    //fs.freq = 1;
-                    fs.freq = freq;
+                    fs.freq = 1;
+                    //fs.freq = freq;
                 }
                 fs.wf_index = parseInt(line[2]) || 0;
                 const amp = parseFloat(line[3]);
@@ -98,20 +96,24 @@ console.log(fs.p_alpha_adjusted);
                 const spf = opt.sound.samples_per_frame;
                 const frame = Math.floor(i / spf);
 
-const i2 = i - 44100 * frame;
-
-const a2 = i2 / 44100;
-const a3 = 0.03333 * a2; 
+//const i2 = i - 44100 * frame;
+//const a2 = i2 / 44100;
+//const a3 = 0.03333 * a2; 
 
                 //const a_sound2 = frame / (opt.secs * 30);
                 //const a_frame = (i % spf) / spf;
 
+                const total_secs = opt.max_frame / 30;
+
                 return {
 
+                    //!!! I might want to go with an expression such as this for a_wave
+                    // and then use fs.alpha to adjust other things
+                    a_wave: a_sound * total_secs % 1,
 
                     //!!! This is starting to look good but I will need to refine things still
                     // as this is not tied to secs
-                    a_wave: fs.p_alpha_adjusted + a3,
+                    //a_wave: fs.p_alpha_adjusted + a3,
 
                     //!!! trying out fs.p_alpha for this
                     // what I need to do now is figure out how to set a final a_wave value for each sample
