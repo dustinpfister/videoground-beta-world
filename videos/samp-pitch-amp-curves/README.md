@@ -7,5 +7,5 @@ So then the bullet points with this are
 * (done) Use curves as a way to set pitch, amplitude
 * (done) Use curves to set the values of a waveform option like values\_per\_wave of seedednoise over time
 * (done) see about using curve paths composed of two or more cubic bezier curves
-* test out and finish R0 at least of samp\_create module in the root js folder
+* (done) test out and finish R0 at least of samp\_create module in the root js folder
 

@@ -4,7 +4,7 @@ CS.WAVE_FORM_FUNCTIONS.pulse = (sampeset, a_wave ) => {
     if(a < duty){
         return  -1 * sampeset.amplitude;
     }
-    return sampeset.amplitude
+    return sampeset.amplitude;
 };
 CS.WAVE_FORM_FUNCTIONS.square = (sampset, a_wave ) => {
     sampset.duty = 0.5;

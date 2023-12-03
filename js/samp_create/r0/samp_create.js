@@ -45,7 +45,7 @@
         const i_size = opt.i_size === undefined ? 20 : opt.i_size;
         const i_start = opt.i_start === undefined ? 8 : opt.i_start;
         const i_count = opt.i_count === undefined ? 8 : opt.i_count;
-        const mode = opt.mode === undefined ? 'bytes' : opt.mode;
+        const mode = opt.mode === undefined ? 'int16' : opt.mode;
         const step = opt.step === undefined ? 1 : opt.step;
         opt.secs === undefined ? 1 : opt.secs;
         const for_sampset = opt.for_sampset || DEFAULT_FOR_SAMPSET;
@@ -64,7 +64,8 @@
             const a_wave = sampeset.a_wave === undefined ? ST.get_wave_alpha_totalsecs( a_sound, opt.secs ) : sampeset.a_wave;
             let samp = waveform(sampeset, a_wave);
             samp = ST.raw_to_mode(samp, opt.mode);
-            samps.push( parseFloat( samp.toFixed(2)) );
+            //samps.push( parseFloat( samp.toFixed(8) ) );
+            samps.push( samp );
             i += step;
         }
         return samps;

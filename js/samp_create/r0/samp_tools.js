@@ -332,6 +332,7 @@
             samp = ( samp + 1 ) / 2;
             samp = THREE.MathUtils.clamp(samp, 0, 1);
             samp = -32768 + ( 32768 + 32767 ) * samp;
+            samp = Math.floor(samp);
         }
         if(mode === 'normal'){
             samp = ( samp + 1 ) / 2;
