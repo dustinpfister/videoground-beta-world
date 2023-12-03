@@ -17,15 +17,90 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    const note_index_to_freq = (ni) => {
+        if(ni === 0){
+           return 0;
+        }
+        return 1 + ni / 30
+    };
+
+
     // Trying out a system where I div up a frame into slots and tracks
     const SLOTS_PER_FRAME = 4;
     const TRACKS_PER_SLOT = 3;
+    const BBS = 8;
+
+    const roll = '' +
+
+    '30 05 01\n'  +
+    '30 06 01\n'  +
+    '00 07 00\n'  +
+    '00 08 00\n'  +
+    '00 09 01\n'  +
+    '00 10 01\n'  +
+    '00 10 00\n'  +
+    '00 10 00\n'  +
+
+    '30 00 01\n'  +
+    '20 10 01\n'  +
+    '00 05 00\n'  +
+    '00 10 00\n'  +
+    '00 05 01\n'  +
+    '00 10 01\n'  +
+    '00 05 00\n'  +
+    '00 10 00\n'  +
+
+    '00 00 01\n'  +
+    '00 05 00\n'  +
+    '00 00 01\n'  +
+    '00 05 00\n'  +
+    '00 00 01\n'  +
+    '00 05 00\n'  +
+    '00 05 01\n'  +
+    '00 05 00\n'  +
+
+    '30 00 01\n'  +
+    '30 05 01\n'  +
+    '00 00 00\n'  +
+    '00 05 00\n'  +
+    '00 00 01\n'  +
+    '00 05 01\n'  +
+    '00 05 00\n'  +
+    '00 05 00\n'  +
+
+    '30 10 01\n'  +
+    '20 09 01\n'  +
+    '00 08 00\n'  +
+    '00 07 00\n'  +
+    '00 06 01\n'  +
+    '00 05 01\n'  +
+    '00 05 00\n'  +
+    '00 05 00\n'  +
+
+    '00 00 01\n'  +
+    '00 05 00\n'  +
+    '00 05 01\n'  +
+    '00 00 00\n'  +
+    '00 05 01\n'  +
+    '00 05 00\n'  +
+    '00 00 01\n'  +
+    '00 00 00\n';
+
+    const roll_lines = roll.split(/\n|\r\n/).map((arr) => {
+        return arr.split(' ');
+    });
+
+
+    const total_secs = Math.floor( roll_lines.length / BBS );
+
+
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'pulse',
         sample_rate: 44100,
-        secs: 10,
+        secs: total_secs,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+            fs.line = roll_lines[ Math.floor(roll_lines.length * a_sound2) ];
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -48,19 +123,23 @@ VIDEO.init = function(sm, scene, camera){
             samp.duty = 0.50;
 
             if(i_track === 0){
-                const ni = Math.floor(24 * a_sound);
-                samp.frequency = ST.notefreq_by_indices( 3, ni) / 30;
+                //samp.duty = 0.90;
+                const ni = parseInt(fs.line[0]);
+                samp.frequency = note_index_to_freq( ni );
             }
 
             if(i_track === 1){
-                const ni = Math.floor(12 * a_sound)
-                samp.frequency = ST.notefreq_by_indices( 1, ni ) / 30;
+                //samp.duty = 0.20;
+                const ni = parseInt(fs.line[1]);
+                samp.frequency = note_index_to_freq( ni );
             }
 
-            const fi = frame % 7;
-            if(i_track === 2 &&  fi <= 0){
-                const ni = Math.floor(48 * a_sound);
-                samp.frequency = ST.notefreq_by_indices( 2, ni ) / 30;
+            //const fi = frame % 7;
+            //if(i_track === 2 &&  fi <= 0){
+            if(i_track === 2){
+                //samp.duty = 0.20;
+                const ni = parseInt(fs.line[2]);
+                samp.frequency = note_index_to_freq( ni );
             }
 
             return samp;
