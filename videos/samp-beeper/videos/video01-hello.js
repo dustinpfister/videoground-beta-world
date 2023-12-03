@@ -86,12 +86,16 @@ VIDEO.init = function(sm, scene, camera){
     '00 00 01\n'  +
     '00 00 00\n';
 
+
+
     const roll_lines = roll.split(/\n|\r\n/).map((arr) => {
+        if(arr === ''){
+            return ['00', '00', '00' ];
+        }
         return arr.split(' ');
     });
 
-
-    const total_secs = Math.floor( roll_lines.length / BBS );
+    const total_secs = Math.ceil(roll_lines.length / BBS);
 
 
 
@@ -101,6 +105,8 @@ VIDEO.init = function(sm, scene, camera){
         secs: total_secs,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
             fs.line = roll_lines[ Math.floor(roll_lines.length * a_sound2) ];
+
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
