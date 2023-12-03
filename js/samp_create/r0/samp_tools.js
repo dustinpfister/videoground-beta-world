@@ -208,9 +208,12 @@
     //-------- ----------
     // ADVANCED TUNE TOOLS
     //-------- ----------
+    ST.notefreq = ( index=0 ) => {
+        return 16.35 * Math.pow(2, index / 12);
+    };
     // https://pages.mtu.edu/~suits/notefreqs.html
     // https://en.wikipedia.org/wiki/Musical_note
-    ST.notefreq_by_indices = ( i_scale = 4, i_note = 5 ) => {
+    ST.notefreq_by_indices = ( i_scale=4, i_note=5 ) => {
         const a = i_scale - 5;
         const b = i_note + 3;
         return 440 * Math.pow(2, a + b / 12);
