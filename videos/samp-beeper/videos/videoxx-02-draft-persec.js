@@ -1,5 +1,6 @@
 /*    videoxx-02-draft-persec - for samp-pitch-amp-curves
           * trying to work out a per second system
+          * new bit waveform
  */
 //-------- ----------
 // SCRIPTS
@@ -17,17 +18,20 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    // div_count 
-    const roll = '' +
-    '07 04 00 00 00'
-
 
     const get_lines = (roll='') => {
         const roll_lines = roll.split(/\n|\r\n/).map((arr) => {
             if(arr === ''){
-                return ['00', '00', '00' ];
+                return ['00'];
             }
-            return arr.split(' ');
+            return arr.split(' ').map((str)=>{
+                let b = str;
+                const c = str.split(':');
+                if(c.length > 1){
+                    b = c;
+                }
+                return b;
+            });
         });
         return roll_lines;
     };
@@ -35,6 +39,15 @@ VIDEO.init = function(sm, scene, camera){
     const get_total_secs = (roll_lines=[]) => {
         return roll_lines.length;
     };
+
+
+    // total_div_count track_div_count:pitch:duty 
+    const roll = '' +
+    '07 06:03:50 01:01:90';
+
+    const roll_lines = get_lines(roll);
+
+    console.log(roll_lines);
 
 
     const sound = sud.sound = CS.create_sound({
@@ -45,13 +58,36 @@ VIDEO.init = function(sm, scene, camera){
             return n;
         },
         sample_rate: 44100,
-        secs: 10,
+        secs: get_total_secs(roll_lines),
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+
+            fs.line = roll_lines[ Math.floor( roll_lines.length * a_sound2 ) ];
+            fs.div_count = parseInt(fs.line[0]);
+
+            fs.tracks = [];
+            let ti = 1, a=0;
+            while(ti < fs.line.length){
+                a += parseInt(fs.line[ti][0]) / fs.div_count;
+                fs.tracks.push( a )
+                ti += 1;
+            }
+
+console.log(fs.tracks);
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-            const a = 210 - 2 * Math.floor(10 * a_sound)
-            samp.bit = i % a <= 50 ? 0 : 1;
+
+            const a_sec = i % 44100 / 44100;
+
+            //const a = 210 - 2 * Math.floor(10 * a_sound)
+            //samp.bit = i % a <= 50 ? 0 : 1;
+
+            samp.bit = 0;
+            if(a_sec < 0.75){
+                samp.bit = 1;
+            }
+
             return samp;
         }
     });
