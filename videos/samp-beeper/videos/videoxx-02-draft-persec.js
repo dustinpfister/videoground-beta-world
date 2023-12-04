@@ -1,6 +1,5 @@
-/*    videoxx-01-draft-slots - for samp-pitch-amp-curves
-          * Just trying to work out a core idea for beeper music
-          * this way I am thinking in terms of breaking each frame down into slots
+/*    videoxx-02-draft-persec - for samp-pitch-amp-curves
+          * trying to work out a per second system
  */
 //-------- ----------
 // SCRIPTS
@@ -17,6 +16,10 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
+
+    // div_count 
+    const roll = '' +
+    '07 04 00 00 00'
 
 
     const get_lines = (roll='') => {
