@@ -13,4 +13,4 @@ The first draft video that I started for this collection had to do with working 
 
 ## videoxx-02-draft-persec
 
-The next draft video idea is to break away from frame by frame in favor of second by second processing of music roll data. Also I want to do away with a fixed number of slots and tracks per frame in favor of a variable number of sections on a second by second basis. This should allow for a greater deal of freedom that I will need to get things to sound right.
+The next draft video idea is to break away from frame by frame in favor of second by second processing of music roll data. Also I want to do away with a fixed number of slots and tracks per frame in favor of a variable number of sections. This should allow for a greater deal of freedom that I will need to get things to sound right.
