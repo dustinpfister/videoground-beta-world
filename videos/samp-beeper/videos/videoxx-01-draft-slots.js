@@ -1,5 +1,6 @@
-/*    video01-hello - for samp-pitch-amp-curves
-          * Just work out the core idea for beeper music
+/*    videoxx-01-draft-slots - for samp-pitch-amp-curves
+          * Just trying to work out a core idea for beeper music
+          * this way I am thinking in terms of breaking each frame down into slots
  */
 //-------- ----------
 // SCRIPTS
@@ -124,7 +125,7 @@ VIDEO.init = function(sm, scene, camera){
             const a_track = a_slot * TRACKS_PER_SLOT % 1;
 
             samp.a_wave = a_track;
-            samp.amplitude = 0.65;
+            samp.amplitude = 0.45;
             samp.frequency = 0;
             samp.duty = 0.50;
 
