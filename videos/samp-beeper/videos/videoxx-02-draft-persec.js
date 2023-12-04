@@ -64,11 +64,17 @@ VIDEO.init = function(sm, scene, camera){
             fs.line = roll_lines[ Math.floor( roll_lines.length * a_sound2 ) ];
             fs.div_count = parseInt(fs.line[0]);
 
+            //!!! I will not want to do this, but rather find out what the current
+            // pitch and duty values should be
             fs.tracks = [];
             let ti = 1, a=0;
             while(ti < fs.line.length){
                 a += parseInt(fs.line[ti][0]) / fs.div_count;
-                fs.tracks.push( a )
+                fs.tracks.push( {
+                    a: a,
+                    pitch: parseInt(fs.line[ti][1]),
+                    duty: parseInt(fs.line[ti][2])
+                });
                 ti += 1;
             }
 
