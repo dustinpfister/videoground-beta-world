@@ -1,6 +1,7 @@
 /*    videoxx-02-draft-persec - for samp-pitch-amp-curves
           * trying to work out a per second system
           * new bit waveform
+          * as of 12/05/2023 this draft is not done, and might not ever be as I now favor other ideas for this.
  */
 //-------- ----------
 // SCRIPTS
@@ -8,8 +9,8 @@
 VIDEO.scripts = [
     '../../../js/samp_create/r0/samp_tools.js',
     '../../../js/samp_create/r0/samp_create.js',
-    //'../../../js/samp_create/r0/waveforms/pulse.js',
-    '../../../js/samp_create/r0/samp_draw.js'
+    '../../../js/samp_create/r0/samp_draw.js',
+    '../js/waveform-bit.js',
 ];
 //-------- ----------
 // INIT
@@ -51,12 +52,7 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const sound = sud.sound = CS.create_sound({
-        waveform : (samp, a_wave) => {
-            samp.amp = samp.amp === undefined ? 0.45 : samp.amp;
-            samp.bit = samp.bit === undefined ? 0 : samp.bit;
-            const n = samp.amp * (samp.bit === 0 ? -1 : 1);
-            return n;
-        },
+        waveform : 'bit',
         sample_rate: 44100,
         secs: get_total_secs(roll_lines),
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
@@ -78,7 +74,7 @@ VIDEO.init = function(sm, scene, camera){
                 ti += 1;
             }
 
-console.log(fs.tracks);
+            console.log(fs.tracks);
 
             return fs;
         },
