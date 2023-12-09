@@ -29,3 +29,13 @@ The next draft video idea is to break away from frame by frame in favor of secon
 
 One simple way to go about having more than one track would be to just merge down. What is nice about this is that it makes things far more simple in the sense that I can just work out what each track should be and then merge down into one. The down side of this is that we are talking 1 bit sound, so if I have say three tracks I can not just add them up and average or do whatever to mix as there is just not enough amplitude for that. Things will not sound so bad if I am just careful as to what track will be the top most track, I am thinking that percussion should be that.
 
+## videoxx-04-draft-roll-format
+
+The goal here is to just work out a simple music roll format, working on top of the merge down idea when it comes to mixing tracks. For now I can just bake the roll format into the js file as the focus will not be on display, or reading any kind of final external file format just yet as that might be what I will want to work out for the final reader video.
+
+* (done) I want to start a samp-tracker-1bit.js file based on what started in the samp-tracker project
+* () I will want to do away with amplitude values for each line as they are not needed for this application
+* () I will want to allow for more than one track per line
+
+
+
