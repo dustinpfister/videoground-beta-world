@@ -32,6 +32,10 @@ const roll = sud.roll = STRACK.parse_data(data);
 
 console.log(roll);
 
+const line = STRACK.get_current_params(roll, BBS, 0.5);
+
+console.log(line)
+
 
     const sound = sud.sound = CS.create_sound({
         waveform : 'bit_merge',

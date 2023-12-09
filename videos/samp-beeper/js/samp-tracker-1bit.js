@@ -122,7 +122,7 @@
     // get current params or array with empty string if there is nothing to get
     STRACK.get_current_params = (roll, BBS=4, alpha=0) => {
         const a = STRACK.get_current_line_by_alpha(roll, BBS, alpha, false, 1);
-        let i = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
+        let i_line = STRACK.get_current_line_by_alpha(roll, BBS, alpha, true, 1);
         // [0, '']  <=== loop back to get all params
         // [0, 'c-3', '0', '1.00', '0:10'] <=== sets all, no need for loop back
         const params = [ a[0] ];
@@ -130,7 +130,7 @@
         while(i_col < 5){
             // if we have an empty string, or undefined, loop back
             if(a[i_col] === '' || a[i_col] === undefined){
-                params[i_col] = loop_back(roll, i, i_col);
+                params[i_col] = loop_back(roll, i_line, i_col);
                 i_col += 1;
                 continue;
             }
@@ -139,7 +139,7 @@
                 const m = a[i_col].match(/-/g);
                 if(m){
                     if(m.length === a[i_col].length){
-                        params[i_col] = loop_back(roll, i, i_col);
+                        params[i_col] = loop_back(roll, i_line, i_col);
                         i_col += 1;
                         continue;
                     }
