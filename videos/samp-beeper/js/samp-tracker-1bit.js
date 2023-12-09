@@ -24,20 +24,6 @@
         }
         return roll;
     };
-    // loop all lines of roll
-    STRACK.loop_lines = (data, for_line ) => {
-        const roll = STRACK.parse_data(data);
-        let i = 0;
-        const len = roll.length;
-        while(i < len){
-           const e = roll[i];
-           const r = for_line(e[0], e[1], e[2], e[3] || '', e);
-           if(r){
-              break;
-           }
-           i += 1;
-        }
-    };
     STRACK.get_total_secs = (data, BBS=4) => {
         const roll = STRACK.parse_data(data);
         return roll.length / BBS;
@@ -48,7 +34,7 @@
         }
         if(typeof note_index === 'string'){
             const ni = NOTES.findIndex( (str) => { 
-                return str === note_index.substr(0,2);
+                return str === note_index.substr(0, 2);
             });
             return ST.notefreq_by_indices( parseInt(note_index.substr(2,1))  , ni);
         }

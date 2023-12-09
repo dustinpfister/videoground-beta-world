@@ -23,10 +23,10 @@ VIDEO.init = function(sm, scene, camera){
 
 
 const data = '' +
-'c-0 0 1.00\n' +
-'c-0 0 1.00\n'
-'c-0 0 1.00\n'
-'c-0 0 1.00\n'
+'c-0 c-0 c-0\n' +
+'c-0 c-0 c-3\n'
+'c-0 c-0 ---\n'
+'c-0 c-0 ---\n'
 
 const roll = sud.roll = STRACK.parse_data(data);
 
