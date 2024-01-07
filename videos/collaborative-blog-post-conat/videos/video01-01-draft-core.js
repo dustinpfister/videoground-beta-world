@@ -3,6 +3,7 @@
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
+   '../js/lines-sphere-circles-r1.js',
    '../js/video-codes.js'
 ];
 // init
