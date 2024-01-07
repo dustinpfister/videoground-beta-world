@@ -1,7 +1,9 @@
 // video01-01-draft-core from collaborative-blog-post-conat
 // scripts
 VIDEO.scripts = [
-   '../../../js/sequences-hooks/r2/sequences-hooks.js'
+   '../../../js/sequences-hooks/r2/sequences-hooks.js',
+   '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
+   '../js/video-codes.js'
 ];
 // init
 VIDEO.init = function(sm, scene, camera){ 
@@ -9,6 +11,18 @@ VIDEO.init = function(sm, scene, camera){
     // BACKGROUND
     //-------- ----------
     scene.background = new THREE.Color('#2a2a2a');
+
+
+    const state = vc.states['examples_object_grid_wrap']
+
+    state.init(sm, state.scene);
+
+    state.scene.visible = true;
+
+    scene.add(state.scene)
+
+
+
     //-------- ----------
     // GRID
     //-------- ----------
@@ -32,11 +46,13 @@ VIDEO.init = function(sm, scene, camera){
     };
     // SEQ 0 - ...
     opt_seq.objects[0] = {
-        secs: 3,
+        secs: 30,
         update: function(seq, partPer, partBias){
 
 camera.position.x = 8 - 16 * partPer;
 camera.lookAt(0,0,0);
+
+state.update(sm, state.scene, camera, partPer, partBias)
 
         }
     };
