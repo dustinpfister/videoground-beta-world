@@ -74,6 +74,9 @@ VIDEO.init = function(sm, scene, camera){
                     sud.alpha = 1 - ( partPer - 0.85 ) / 0.15;
                 }
 
+                sud.alpha = sud.alpha < 0 ? 0 : sud.alpha;
+                sud.alpha = sud.alpha > 1 ? 1 : sud.alpha;
+
                 // camera
                 camera.position.set(8, 8, 8);
                 camera.lookAt(0,0,0);

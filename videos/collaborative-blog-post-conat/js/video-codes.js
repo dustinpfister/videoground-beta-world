@@ -6,7 +6,7 @@ window.vc = {
 
 //-------- ----------
 // threejs-examples-object-grid-wrap
-// https://github.com/dustinpfister/videoground-blog-posts/tree/master/videos/threejs-examples-object-grid-wrap
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-examples-object-grid-wrap/videos/video1.js
 //-------- ----------
 vc.states['examples_object_grid_wrap'] = {
     scene: new THREE.Scene(),
@@ -57,7 +57,7 @@ vc.states['examples_object_grid_wrap'] = {
 
 //-------- ----------
 // buffer_geometry_set_from_points
-// https://github.com/dustinpfister/videoground-blog-posts/tree/master/videos/threejs-buffer-geometry-set-from-points
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-buffer-geometry-set-from-points/videos/video1-position.js
 //-------- ----------
 vc.states['buffer_geometry_set_from_points'] = {
     scene: new THREE.Scene(),
@@ -258,7 +258,7 @@ vc.states['examples_lines_sphere_circles_video2'] = {
 
 //-------- ----------
 // threejs-curve-geometry-from
-// https://
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-curve-geometry-from/videos/video1.js
 //-------- ----------
 vc.states['curve_geometry_from_video1'] = {
     scene: new THREE.Scene(),
@@ -409,6 +409,155 @@ vc.states['curve_geometry_from_video1'] = {
             sud.QBC3(sud.c2_start, sud.c2_control, sud.c2_end),
             50
         );
+    }
+};
+
+
+//-------- ----------
+// threejs-vector3-apply-euler
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-vector3-apply-euler/videos/video1.js
+//-------- ----------
+vc.states['vector3_apply_euler'] = {
+    scene: new THREE.Scene(),
+    init : (sm, scene, camera) => {
+        // HELPERS
+        // Vector from angles method
+        const vectorFromAngles = function (a, b, len) {
+            a = a === undefined ? 0 : a;
+            b = b === undefined ? 0 : b;
+            len = len === undefined ? 1 : len;
+            const startVec = new THREE.Vector3(1, 0, 0);
+            const e = new THREE.Euler(
+                    0,
+                    THREE.MathUtils.degToRad(a),
+                    THREE.MathUtils.degToRad(-90 + b));
+            return startVec.applyEuler(e).normalize().multiplyScalar(len);
+        };
+        // create a cube
+        const CUBE_GEO = new THREE.BoxGeometry(1, 1, 1);
+        const CUBE_MATERIAL = new THREE.MeshNormalMaterial();
+        const createCube = function(pos){
+            const cube = new THREE.Mesh(
+                CUBE_GEO,
+                CUBE_MATERIAL);
+            cube.position.copy( pos || new THREE.Vector3() );
+            cube.lookAt(0, 0, 0);
+            return cube;
+        };
+        // create a group
+        const createGroup = (len) => {
+            const group = new THREE.Group();
+            let i = 0;
+            while(i < len){
+                group.add( createCube(null) );
+                i += 1;
+            }
+            return group;
+        };
+        // set a group
+        const setGroup = (group, aCount, unitLength, vd, vlt, alpha) => {
+            aCount = aCount === undefined ? 1 : aCount;
+            unitLength = unitLength === undefined ? 1 : unitLength;
+            vd = vd === undefined ? new THREE.Vector3() : vd;       // vector delta for each object effected by i / len
+            vlt = vlt === undefined ? new THREE.Vector3() : vlt;    // vector to lerp to for each mesh positon
+            alpha = alpha === undefined ? 0 : alpha;
+            let len = group.children.length;
+            let i = 0;
+            while(i < len){
+                const p = i / len;
+                const a = 360 * aCount * p;
+                // using my vector from angles method
+                const v = vectorFromAngles(a, 180 * p, unitLength);
+                // adding another Vector
+                v.add( vd.clone().multiplyScalar(p) );
+                const cube = group.children[i];
+                cube.position.copy(v.lerp(vlt, alpha));
+                cube.lookAt(0, 0, 0);
+                const s = 1 - 0.95 * p;
+                cube.scale.set(s, s, s);
+                i += 1;
+            }
+        };
+        // MESH
+        const group = createGroup(1600);
+        scene.add(group);
+
+        const sphere = new THREE.Mesh( 
+            new THREE.SphereGeometry(30, 30, 30), 
+            new THREE.MeshBasicMaterial({ wireframe: true, wireframeLinewidth: 4, transparent: true, opacity: 0.15}) )
+        scene.add(sphere);
+        // A MAIN SEQ OBJECT
+        const seq = scene.userData.seq = seqHooks.create({
+            fps: 30,
+            beforeObjects: function(seq){
+            },
+            afterObjects: function(seq){
+            },
+            objects: [
+                {
+                    secs: 3,
+                    update: function(seq, partPer, partBias){
+                        // set group
+                        setGroup(group, 0, 4);
+                    }
+                },
+                {
+                    secs: 5,
+                    update: function(seq, partPer, partBias){
+                        // set group
+                        setGroup(group, 4 * partPer, 4);
+                    }
+                },
+                {
+                    secs: 2,
+                    update: function(seq, partPer, partBias){
+                        // set group
+                        setGroup(group, 4, 4);
+                    }
+                },
+                {
+                    secs: 4,
+                    update: function(seq, partPer, partBias){
+                        setGroup(group, 4 - 8 * partPer, 4);
+                    }
+                },
+                {
+                    secs: 5,
+                    update: function(seq, partPer, partBias){
+                        vd = new THREE.Vector3(20 * partBias,0, 0);
+                        setGroup(group, -4 + 8 * partPer, 4, vd);
+                    }
+                },
+                {
+                    secs: 5,
+                    update: function(seq, partPer, partBias){
+                        vd = new THREE.Vector3();
+                        vlt = new THREE.Vector3(0,0,0)
+                        setGroup(group, 4, 4, vd, vlt, partPer);
+                    }
+                },
+                {
+                    secs: 3,
+                    update: function(seq, partPer, partBias){
+                        vd = new THREE.Vector3();
+                        vlt = new THREE.Vector3(0,0,0)
+                        setGroup(group, 4, 4, vd, vlt, 1);
+                    }
+                },
+                {
+                    secs: 3,
+                    update: function(seq, partPer, partBias){
+                        vd = new THREE.Vector3();
+                        vlt = new THREE.Vector3(0,0,0)
+                        setGroup(group, 24 * partPer, 12, vd, vlt, 1 - partPer);
+                    }
+                }
+            ]
+        });
+    },
+    update: (sm, scene, camera, per, bias) => {
+        const seq = scene.userData.seq;
+        seqHooks.setFrame(seq, Math.floor(10000 * per), 10000);
     }
 };
 
