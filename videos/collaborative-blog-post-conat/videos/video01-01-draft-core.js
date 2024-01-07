@@ -6,21 +6,27 @@ VIDEO.scripts = [
    '../js/video-codes.js'
 ];
 // init
-VIDEO.init = function(sm, scene, camera){ 
+VIDEO.init = function(sm, scene, camera){
+    const sud = scene.userData;
     //-------- ----------
     // BACKGROUND
     //-------- ----------
     scene.background = new THREE.Color('#2a2a2a');
 
+    Object.keys(vc.states).forEach( (video_name) => {
+        console.log('setting up: ' + video_name);
+        const state = vc.states[video_name];
+        state.init(sm, state.scene);
+        state.scene.visible = true;
+        //scene.add(state.scene);
+    });
 
-    const state = vc.states['examples_object_grid_wrap']
-
+/*
+    const state = vc.states['buffer_geometry_set_from_points'];
     state.init(sm, state.scene);
-
-    state.scene.visible = true;
-
-    scene.add(state.scene)
-
+    state.scene.visible = false;
+    scene.add(state.scene);
+*/
 
 
     //-------- ----------
@@ -45,17 +51,36 @@ VIDEO.init = function(sm, scene, camera){
         objects: []
     };
     // SEQ 0 - ...
-    opt_seq.objects[0] = {
-        secs: 30,
-        update: function(seq, partPer, partBias){
 
-camera.position.x = 8 - 16 * partPer;
-camera.lookAt(0,0,0);
+    Object.keys(vc.states).forEach( (video_name) => {
 
-state.update(sm, state.scene, camera, partPer, partBias)
+        opt_seq.objects.push({
+            secs: 30,
+            update: function(seq, partPer, partBias){
+ 
+                // current video codes state object
+                const state = sud.state = vc.states[video_name];
 
-        }
-    };
+                // update current state
+                state.update(sm, state.scene, camera, partPer, partBias);
+
+                // set alpha effect
+                sud.alpha = 1;
+                if(partPer < 0.25){
+                    sud.alpha = partPer / 0.25;
+                }
+                if(partPer > 0.75){
+                    sud.alpha = 1 - ( partPer - 0.75 ) / 0.25;
+                }
+
+                // camera
+                camera.position.set(8, 8, 8);
+                camera.lookAt(0,0,0);
+
+            }
+        });
+
+    });
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
     console.log('frameMax for main seq: ' + seq.frameMax);
     sm.frameMax = seq.frameMax;
@@ -64,5 +89,28 @@ state.update(sm, state.scene, camera, partPer, partBias)
 VIDEO.update = function(sm, scene, camera, per, bias){
     const seq = scene.userData.seq;
     seqHooks.setFrame(seq, sm.frame, sm.frameMax);
+};
+
+//-------- ----------
+// RENDER
+//-------- ----------
+VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
+    const sud = scene.userData;
+    const sound = sud.sound;
+
+    // background
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0,0, canvas.width, canvas.height);
+
+    // draw the current video scene object
+    renderer.render(sud.state.scene, camera);
+
+    ctx.globalAlpha = sud.alpha;
+    ctx.drawImage(renderer.domElement, 0, 0);
+
+
+    //sud.state.scene.visible = false;
+
 };
  
