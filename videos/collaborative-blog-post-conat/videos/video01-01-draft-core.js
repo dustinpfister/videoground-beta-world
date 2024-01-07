@@ -66,11 +66,11 @@ VIDEO.init = function(sm, scene, camera){
 
                 // set alpha effect
                 sud.alpha = 1;
-                if(partPer < 0.25){
-                    sud.alpha = partPer / 0.25;
+                if(partPer < 0.15){
+                    sud.alpha = partPer / 0.15;
                 }
-                if(partPer > 0.75){
-                    sud.alpha = 1 - ( partPer - 0.75 ) / 0.25;
+                if(partPer > 0.85){
+                    sud.alpha = 1 - ( partPer - 0.85 ) / 0.15;
                 }
 
                 // camera

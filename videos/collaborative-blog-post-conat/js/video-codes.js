@@ -137,3 +137,80 @@ vc.states['buffer_geometry_set_from_points'] = {
         updateGeometry(geometry, sec_count, rotation_count, y_mag, radius);
     }
 };
+
+//-------- ----------
+// threejs-vector3-wrap
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-vector3-wrap/videos/video2-s5-1-loop-wraplength.js
+//-------- ----------
+vc.states['vector3_wrap_video2_wraplength'] = {
+    scene: new THREE.Scene(),
+    init : (sm, scene, camera) => {
+        // ---------- ---------- ----------
+        // CONST
+        // ---------- ---------- ----------
+        const TOTAL_LENGTH = 200;
+        const MAX_LENGTH = 10;
+        const COUNT = 400;
+        const SIN_LOOP_RANGE = [0, 64];
+        const Y_ROTATION_COUNT = 2;
+        const Y_ROTATION_OFFSET = 60;
+        const X_DEG = 8;
+        // ---------- ---------- ----------
+        // OBJECTS
+        // ---------- ---------- ----------
+        const group = scene.userData.group = new THREE.Group();
+        scene.add(group);
+        let i = 0;
+        while(i < COUNT){
+            const a_index = i / COUNT;
+            const color = new THREE.Color();
+            color.r = 0.1 + 0.9 * a_index;
+            color.g = 1 - a_index;
+            color.b = Math.random();
+            const mesh = new THREE.Mesh(
+                new THREE.BoxGeometry(0.5, 0.5, 0.5),
+                new THREE.MeshNormalMaterial({transparent: true, opacity: 0.5})
+            );
+            group.add(mesh);
+            i += 1;
+        }
+
+        const updateGroup = scene.userData.updateGroup = function(a1, group){
+            group.children.forEach( (mesh, i, arr) => {
+                const a2 = i / arr.length;
+                const a3 = a1 + 1 / (TOTAL_LENGTH * 2.5) * i;
+                const sin_loops = SIN_LOOP_RANGE[0] + (SIN_LOOP_RANGE[1] - SIN_LOOP_RANGE[0]) * a1;
+                const a4 = Math.sin(Math.PI * sin_loops * (a2 * 1 % 1));
+                let unit_length = TOTAL_LENGTH * a3;
+                unit_length = THREE.MathUtils.euclideanModulo(unit_length, MAX_LENGTH);
+                const e = new THREE.Euler();
+                const yfc = Y_ROTATION_OFFSET;
+                const degY = ( yfc * -1 + yfc * 2 * a2) + (360 * Y_ROTATION_COUNT ) * a1;
+                const xd = X_DEG;
+                const degX = xd * -1 + xd * 2 * a4;
+                e.y = THREE.MathUtils.degToRad( degY);
+                e.x = THREE.MathUtils.degToRad(degX);
+                mesh.position.set(1, 0, 0).normalize().applyEuler(e).multiplyScalar(0.5 + unit_length);
+                mesh.lookAt(0,0,0);
+                mesh.rotation.y = Math.PI * 2 * ( (a2 + a2) * 64 % 1);
+            });
+        };
+    },
+    update: (sm, scene, camera, per, bias) => {
+        scene.userData.updateGroup( per, scene.userData.group );
+    }
+};
+
+/*
+//-------- ----------
+// threejs-
+// https://
+//-------- ----------
+vc.states['examples_object_grid_wrap'] = {
+    scene: new THREE.Scene(),
+    init : (sm, scene, camera) => {
+    },
+    update: (sm, scene, camera, per, bias) => {
+    }
+};
+*/
