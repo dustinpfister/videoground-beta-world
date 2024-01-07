@@ -56,7 +56,7 @@ VIDEO.init = function(sm, scene, camera){
     Object.keys(vc.states).forEach( (video_name) => {
 
         opt_seq.objects.push({
-            secs: 30,
+            secs: 3,
             update: function(seq, partPer, partBias){
  
                 // current video codes state object

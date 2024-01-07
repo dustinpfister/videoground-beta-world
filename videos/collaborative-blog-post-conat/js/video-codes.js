@@ -256,6 +256,161 @@ vc.states['examples_lines_sphere_circles_video2'] = {
     }
 };
 
+//-------- ----------
+// threejs-curve-geometry-from
+// https://
+//-------- ----------
+vc.states['curve_geometry_from_video1'] = {
+    scene: new THREE.Scene(),
+    init : (sm, scene, camera) => {
+        const sud = scene.userData;
+
+        // HELPERS
+        // get position data array helper
+        const getCurvePosData = (curve1, curve2, points_per_line) => {
+            const pos_data = [];
+            let pi = 0;
+            while(pi < points_per_line){
+                const a1 = pi / (points_per_line - 1);
+                const v1 = curve1.getPoint(a1);
+                const v2 = curve2.getPoint(a1);
+                pos_data.push(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z);
+                pi += 1;
+           }
+           return pos_data;
+        };
+        // get uv data array helper
+        const getCurveUVData = (curve1, curve2, points_per_line) => {
+            const uv_data = [];
+            let pi = 0;
+            while(pi < points_per_line){
+                const a1 = pi / (points_per_line - 1);
+                uv_data.push(a1, 0, a1, 1);
+                pi += 1;
+           }
+           return uv_data;
+        };
+        // set index
+        const setCurveGeoIndex = (geo, points_per_line) => {
+            const data_index = [];
+            let pi2 = 0;
+            while(pi2 < points_per_line - 1){
+                const a = pi2 * 2;
+                const b = a + 1;
+                const c = a + 2;
+                const d = a + 3;
+                data_index.push(b, c, d, c, b, a);
+                pi2 += 1;
+            }
+            geo.setIndex(data_index);
+        };
+        // create curve geo
+        const createCurveGeo = (curve1, curve2, points_per_line) => {
+            const geo = new THREE.BufferGeometry();
+            const uv_data = getCurveUVData(curve1, curve2, points_per_line);
+            // position/index
+            const pos_data = getCurvePosData(curve1, curve2, points_per_line);
+            geo.setAttribute('position', new THREE.Float32BufferAttribute( pos_data, 3 ) );
+            setCurveGeoIndex(geo, points_per_line);
+            // uv
+            geo.setAttribute('uv', new THREE.Float32BufferAttribute( uv_data, 2 ) );
+            // normal
+            geo.computeVertexNormals();
+            return geo;
+        };
+        const updateCurveGeo = sud.updateCurveGeo = (geo, curve1, curve2, points_per_line) => {
+            const pos_data = getCurvePosData(curve1, curve2, points_per_line);
+            const pos = geo.getAttribute('position');
+            pos.array = pos.array.map((n, i) => { return pos_data[i] });
+            pos.needsUpdate = true;
+            // normal
+            geo.computeVertexNormals();
+            return geo;
+        };
+        const QBC3 = sud.QBC3 = (c1_start, c1_control, c1_end) => {
+            return new THREE.QuadraticBezierCurve3(c1_start, c1_control, c1_end);
+        };
+        // LIGHT
+        const dl = new THREE.DirectionalLight(0xffffff, 1);
+        dl.position.set(0, 1, -5);
+        scene.add(dl);
+        const al = new THREE.AmbientLight(0xffffff, 0.25);
+        scene.add(al);
+        // CURVES
+        const c1_start = sud.c1_start = new THREE.Vector3(-5,0,5), 
+        c1_control = sud.c1_control = new THREE.Vector3(0, 10, 0), 
+        c1_end = sud.c1_end = new THREE.Vector3(5,0,5),
+        c2_start = sud.c2_start = new THREE.Vector3(-5,0,-5), 
+        c2_control = sud.c2_control = new THREE.Vector3(0, -5, 0), 
+        c2_end = sud.c2_end = new THREE.Vector3(5,0,-5);
+        const curve1 = new THREE.QuadraticBezierCurve3(c1_start, c1_control, c1_end);
+        const curve2 = new THREE.QuadraticBezierCurve3(c2_start, c2_control, c2_end);
+        // GEO POSITION / UV
+        const geo = sud.geo = createCurveGeo(
+            QBC3(c1_start, c1_control, c1_end),
+            QBC3(c2_start, c2_control, c2_end),
+            50
+        );
+        // TEXTURE
+        // USING THREE DATA TEXTURE To CREATE A RAW DATA TEXTURE
+        const width = 128, height = 128;
+        const size = width * height;
+        const data = new Uint8Array( 4 * size );
+        for ( let i = 0; i < size; i ++ ) {
+            const stride = i * 4;
+            // x and y pos
+            const xi = i % width;
+            const yi = Math.floor(i / width);
+            const v2 = new THREE.Vector2(xi, yi);
+            // alphas
+            const a_rnd1 = THREE.MathUtils.seededRandom();
+            const a_rnd2 = THREE.MathUtils.seededRandom();
+            const a_rnd3 = THREE.MathUtils.seededRandom();
+            let a_dist = v2.distanceTo( new THREE.Vector2( width * 0.25, height * 0.75) ) / (width / 16);
+            a_dist = a_dist % 1;
+            const a_x = xi / width;
+            const a_y = yi / height;
+            const cv = 255 * (a_dist);
+            // red, green, blue, alpha
+            data[ stride ] = cv;
+            data[ stride + 1 ] = 0;
+            data[ stride + 2 ] = 255 - cv;
+            data[ stride + 3 ] = 255;
+        }
+        const texture = new THREE.DataTexture( data, width, height );
+        texture.needsUpdate = true;
+        // MATERIAL AND MESH
+        const material = new THREE.MeshPhongMaterial({ map: texture, wireframe: false, side: THREE.DoubleSide});
+        const mesh = new THREE.Mesh(geo, material);
+        scene.add(mesh);
+        // internal get bias method
+        const getBias = function(per){
+            return 1 - Math.abs( 0.5 - per ) / 0.5;
+        };
+        // get sin bias helper
+        const getSinBias = sud.getSinBias = function(per){
+            const b = getBias(per);
+            return Math.sin( Math.PI * 0.5 * b );
+        };
+    },
+    update: (sm, scene, camera, per, bias) => {
+        const sud = scene.userData;
+        const a1 = sud.getSinBias(12 * per % 1);
+        const a2 = sud.getSinBias(6 * per % 1);
+        sud.c1_start.set(-5 - 15 * per, 0, 5);
+        sud.c1_end.set(5, 0, 5);
+        sud.c1_control.set(5 * per,-5 + 10 * a1, 0);
+        sud.c2_start.set(-5 + 4 * per, 0, -5);
+        sud.c2_end.set(5 - 4 * per, 0, -5);
+        sud.c2_control.set(0, 2.5 - 6 * a2, 0);
+        sud.updateCurveGeo(
+            sud.geo,
+            sud.QBC3(sud.c1_start, sud.c1_control, sud.c1_end),
+            sud.QBC3(sud.c2_start, sud.c2_control, sud.c2_end),
+            50
+        );
+    }
+};
 
 
 /*
