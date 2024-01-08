@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ OBJECTS FOR EACH VIDEO
     Object.keys(vc.states).forEach( (video_name) => {
         opt_seq.objects.push({
-            secs: 30,
+            secs: 5,
             update: function(seq, partPer, partBias){
                 // current video codes state object
                 const state = sud.state = vc.states[video_name];

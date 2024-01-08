@@ -1,10 +1,21 @@
 // video-codes-r1.js
-// * remove curve-line-group video
-// * add video1 from example line-sphere-circles
 
-window.vc = {
-   states : {}
-};
+// * (done) remove curve-line-group video
+// * (done) add video1 from example line-sphere-circles
+
+// * () examples_object_grid_wrap : new materials for objects that are not mesh normal material
+// * () examples_object_grid_wrap : get opacity effect working
+// * () vector3_wrap_video2_wraplength : new material for objects that is not mesh normal material
+// * () vector3_apply_euler : new material for objects that is not mesh normal material
+// * () vector3_multiply_scalar_video1 : new material for objects that is not mesh normal material
+
+(function(){
+
+    window.vc = {
+        states : {}
+    };
+
+}());
 
 
 //-------- ----------
