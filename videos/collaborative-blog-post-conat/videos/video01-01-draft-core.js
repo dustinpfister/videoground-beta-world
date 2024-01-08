@@ -4,11 +4,11 @@
 //-------- ----------
 VIDEO.scripts = [
 
-   '../../../js/threejs/r140/line2/LineSegmentsGeometry.js',
-   '../../../js/threejs/r140/line2/LineGeometry.js',
-   '../../../js/threejs/r140/line2/LineMaterial.js',
-   '../../../js/threejs/r140/line2/LineSegments2.js',
-   '../../../js/threejs/r140/line2/Line2.js',
+   '../../../js/threejs/r146/line2/LineSegmentsGeometry.js',
+   '../../../js/threejs/r146/line2/LineGeometry.js',
+   '../../../js/threejs/r146/line2/LineMaterial.js',
+   '../../../js/threejs/r146/line2/LineSegments2.js',
+   '../../../js/threejs/r146/line2/Line2.js',
 
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
@@ -101,7 +101,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
 
     // background
     ctx.globalAlpha = 1;
-    ctx.fillStyle = '#ff0000';
+    ctx.fillStyle = '#2a2a2a';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
     // draw the current video scene object
