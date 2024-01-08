@@ -31,6 +31,12 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearAlpha(0);
     sm.renderer.setClearColor(null, 0);
     //-------- ----------
+    // CAMERA 2
+    //-------- ----------
+    const camera2 = sud.camera2 = new THREE.PerspectiveCamera(60, 16 / 9);
+    camera2.position.set(-10, 5, 10);
+    camera2.lookAt(0,0,0);
+    //-------- ----------
     // VIDEO STATES
     //-------- ----------
     Object.keys(vc.states).forEach( (video_name) => {
@@ -94,8 +100,16 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
-    const seq = scene.userData.seq;
-    seqHooks.setFrame(seq, sm.frame, sm.frameMax);
+    const sud = scene.userData;
+
+    seqHooks.setFrame(sud.seq, sm.frame, sm.frameMax);
+
+    const e = new THREE.Euler();
+    e.y = Math.PI * 2 * 10 * per;
+
+    sud.camera2.position.set(0, 1, 1).applyEuler(e).multiplyScalar(7);
+    sud.camera2.lookAt(0,0,0);
+
 };
 //-------- ----------
 // RENDER
@@ -116,6 +130,20 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     renderer.render(sud.state.scene, camera);
     ctx.globalAlpha = sud.alpha;
     ctx.drawImage(renderer.domElement, 0, 0);
+
+
+    const x = 900, y = 500, w = 320, h = 180;
+
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#2a2a2a';
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeRect(x, y, w, h);
+
+    renderer.render(scene, sud.camera2);
+    ctx.drawImage(renderer.domElement, x, y, w, h);
+
+    renderer.render(sud.state.scene, sud.camera2);
+    ctx.drawImage(renderer.domElement, x, y, w, h);
 
 
 };
