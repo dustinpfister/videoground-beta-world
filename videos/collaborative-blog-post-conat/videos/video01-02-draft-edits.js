@@ -1,6 +1,8 @@
 // video01-02-draft-edits from collaborative-blog-post-conat
 // * use r1 of video-codes.js that will have some changes
 // * see about adding opacity2 effect
+// * fixed main camera pos at 10, 10, 10
+// * grid for main scene object, and draw main scene object below the other
 //-------- ----------
 // SCRIPTS
 //-------- ----------
@@ -41,7 +43,7 @@ VIDEO.init = function(sm, scene, camera){
     //-------- ----------
     // GRID
     //-------- ----------
-    const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#ffffff', '#00afaf');
+    const grid = scene.userData.grid = new THREE.GridHelper(10, 10, '#8a8a8a', '#ffffff');
     grid.material.linewidth = 3;
     scene.add( grid );
     //-------- ----------
@@ -68,7 +70,7 @@ VIDEO.init = function(sm, scene, camera){
                 const state = sud.state = vc.states[video_name];
                 // update current state
                 state.update(sm, state.scene, camera, partPer, partBias);
-                // set alpha effect
+                // ALPHA EFFECT
                 sud.alpha = 1;
                 if(partPer < 0.15){
                     sud.alpha = partPer / 0.15;
@@ -78,9 +80,9 @@ VIDEO.init = function(sm, scene, camera){
                 }
                 sud.alpha = sud.alpha < 0 ? 0 : sud.alpha;
                 sud.alpha = sud.alpha > 1 ? 1 : sud.alpha;
-                // camera
-                camera.position.set(8, 8, 8);
-                camera.lookAt(0,0,0);
+                // MAIN CAMERA POS
+                camera.position.set(10, 10, 10);
+                camera.lookAt(0,-1,0);
             }
         });
     });
@@ -100,21 +102,21 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sud = scene.userData;
-    const sound = sud.sound;
 
     // background
     ctx.globalAlpha = 1;
     ctx.fillStyle = '#2a2a2a';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-    // draw the current video scene object
-    renderer.render(sud.state.scene, camera);
+    // draw the main scene object with main camera
+    renderer.render(scene, camera);
+    ctx.drawImage(renderer.domElement, 0, 0);
 
+    // draw the current video scene object with main camera
+    renderer.render(sud.state.scene, camera);
     ctx.globalAlpha = sud.alpha;
     ctx.drawImage(renderer.domElement, 0, 0);
 
-
-    //sud.state.scene.visible = false;
 
 };
  
