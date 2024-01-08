@@ -3,6 +3,13 @@
 // SCRIPTS
 //-------- ----------
 VIDEO.scripts = [
+
+   '../../../js/threejs/r140/line2/LineSegmentsGeometry.js',
+   '../../../js/threejs/r140/line2/LineGeometry.js',
+   '../../../js/threejs/r140/line2/LineMaterial.js',
+   '../../../js/threejs/r140/line2/LineSegments2.js',
+   '../../../js/threejs/r140/line2/Line2.js',
+
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
    '../js/lines-sphere-circles-r1.js',
@@ -14,6 +21,11 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     //-------- ----------
+    // BACKGROUND
+    //-------- ----------
+    sm.renderer.setClearAlpha(0);
+    sm.renderer.setClearColor(null, 0);
+    //-------- ----------
     // VIDEO STATES
     //-------- ----------
     Object.keys(vc.states).forEach( (video_name) => {
@@ -23,10 +35,6 @@ VIDEO.init = function(sm, scene, camera){
         state.scene.visible = true;
         //scene.add(state.scene);
     });
-    //-------- ----------
-    // BACKGROUND
-    //-------- ----------
-    scene.background = new THREE.Color('#2a2a2a');
     //-------- ----------
     // GRID
     //-------- ----------
@@ -51,7 +59,7 @@ VIDEO.init = function(sm, scene, camera){
     // SEQ OBJECTS FOR EACH VIDEO
     Object.keys(vc.states).forEach( (video_name) => {
         opt_seq.objects.push({
-            secs: 30,
+            secs: 2,
             update: function(seq, partPer, partBias){
                 // current video codes state object
                 const state = sud.state = vc.states[video_name];
@@ -93,7 +101,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
 
     // background
     ctx.globalAlpha = 1;
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = '#ff0000';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
     // draw the current video scene object
