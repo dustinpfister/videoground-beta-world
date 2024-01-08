@@ -2,9 +2,9 @@
 
 // * (done) remove curve-line-group video
 // * (done) add video1 from example line-sphere-circles
+// * (done) examples_object_grid_wrap : new materials for objects that are not mesh normal material
+// * (done) examples_object_grid_wrap : get opacity effect working
 
-// * () examples_object_grid_wrap : new materials for objects that are not mesh normal material
-// * () examples_object_grid_wrap : get opacity effect working
 // * () vector3_wrap_video2_wraplength : new material for objects that is not mesh normal material
 // * () vector3_apply_euler : new material for objects that is not mesh normal material
 // * () vector3_multiply_scalar_video1 : new material for objects that is not mesh normal material
@@ -258,20 +258,37 @@ vc.states['examples_object_grid_wrap'] = {
     init : (sm, scene, camera) => {
         const tw = 12,
         th = 12,
-        space = 1.25;
+        space = 1.50;
         // source objects
-        const mkBox = function(h){
+        const mkBox = (h, r=0, g=1, b=0) =>{
             const box = new THREE.Group();
+            const geometry = new THREE.BoxGeometry( 1, h, 0.50, 8, 8, 32);
+
+            const len = geometry.getAttribute('position').count;
+            const color_array = [];
+            let i = 0;
+            while(i < len){
+                const a1 = i / len;
+                color_array.push(r * a1, g * a1, b * a1);
+                i += 1;
+            }
+            const color_attribute = new THREE.BufferAttribute(new Float32Array(color_array), 3);
+            geometry.setAttribute('color', color_attribute);
+
             const mesh = new THREE.Mesh(
-                new THREE.BoxGeometry( 1, h, 0.25 + 0.25),
-                new THREE.MeshNormalMaterial() );
+                geometry,
+                new THREE.MeshBasicMaterial({ vertexColors: true }) );
             mesh.position.y = h / 2;
             mesh.rotation.y = Math.PI / 180 * 20 * -1;
             box.add(mesh)  
             return box;
         };
         const array_source_objects = [
-            mkBox(0.5), mkBox(1), mkBox(1.5), mkBox(2), mkBox(2.5)
+            mkBox(0.5, 1, 0, 0),
+            mkBox(1, 0, 1, 0),
+            mkBox(1.5, 0, 0, 1),
+            mkBox(2, 0, 1, 1),
+            mkBox(2.5, 1, 0, 1)
         ];
         const array_oi = [],
         len = tw * th;
@@ -282,10 +299,11 @@ vc.states['examples_object_grid_wrap'] = {
         }
         // CREATE GRID
         const gw = scene.userData.gw = ObjectGridWrap.create({
+            effects: ['opacity2'],
             space: space,
             tw: tw,
             th: th,
-            aOpacity: 1.25,
+            //aOpacity: 1.25,
             sourceObjects: array_source_objects,
             objectIndices: array_oi
         });

@@ -1,5 +1,6 @@
 // video01-02-draft-edits from collaborative-blog-post-conat
 // * use r1 of video-codes.js that will have some changes
+// * see about adding opacity2 effect
 //-------- ----------
 // SCRIPTS
 //-------- ----------
@@ -13,6 +14,7 @@ VIDEO.scripts = [
 
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
+   '../../../js/object-grid-wrap/r2/effects/opacity2.js',
    '../js/lines-sphere-circles-r1.js',
    '../js/video-codes-r1.js'
 ];
