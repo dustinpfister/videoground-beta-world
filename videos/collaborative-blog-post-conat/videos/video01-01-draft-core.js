@@ -1,19 +1,21 @@
 // video01-01-draft-core from collaborative-blog-post-conat
-// scripts
+//-------- ----------
+// SCRIPTS
+//-------- ----------
 VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
    '../js/lines-sphere-circles-r1.js',
-   '../js/video-codes.js'
+   '../js/video-codes-r0.js'
 ];
-// init
+//-------- ----------
+// INIT
+//-------- ----------
 VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     //-------- ----------
-    // BACKGROUND
+    // VIDEO STATES
     //-------- ----------
-    scene.background = new THREE.Color('#2a2a2a');
-
     Object.keys(vc.states).forEach( (video_name) => {
         console.log('setting up: ' + video_name);
         const state = vc.states[video_name];
@@ -21,15 +23,10 @@ VIDEO.init = function(sm, scene, camera){
         state.scene.visible = true;
         //scene.add(state.scene);
     });
-
-/*
-    const state = vc.states['buffer_geometry_set_from_points'];
-    state.init(sm, state.scene);
-    state.scene.visible = false;
-    scene.add(state.scene);
-*/
-
-
+    //-------- ----------
+    // BACKGROUND
+    //-------- ----------
+    scene.background = new THREE.Color('#2a2a2a');
     //-------- ----------
     // GRID
     //-------- ----------
@@ -51,20 +48,15 @@ VIDEO.init = function(sm, scene, camera){
         },
         objects: []
     };
-    // SEQ 0 - ...
-
+    // SEQ OBJECTS FOR EACH VIDEO
     Object.keys(vc.states).forEach( (video_name) => {
-
         opt_seq.objects.push({
-            secs: 3,
+            secs: 30,
             update: function(seq, partPer, partBias){
- 
                 // current video codes state object
                 const state = sud.state = vc.states[video_name];
-
                 // update current state
                 state.update(sm, state.scene, camera, partPer, partBias);
-
                 // set alpha effect
                 sud.alpha = 1;
                 if(partPer < 0.15){
@@ -73,28 +65,25 @@ VIDEO.init = function(sm, scene, camera){
                 if(partPer > 0.85){
                     sud.alpha = 1 - ( partPer - 0.85 ) / 0.15;
                 }
-
                 sud.alpha = sud.alpha < 0 ? 0 : sud.alpha;
                 sud.alpha = sud.alpha > 1 ? 1 : sud.alpha;
-
                 // camera
                 camera.position.set(8, 8, 8);
                 camera.lookAt(0,0,0);
-
             }
         });
-
     });
     const seq = scene.userData.seq = seqHooks.create(opt_seq);
     console.log('frameMax for main seq: ' + seq.frameMax);
     sm.frameMax = seq.frameMax;
 };
-// update method for the video
+//-------- ----------
+// UPDATE
+//-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const seq = scene.userData.seq;
     seqHooks.setFrame(seq, sm.frame, sm.frameMax);
 };
-
 //-------- ----------
 // RENDER
 //-------- ----------
