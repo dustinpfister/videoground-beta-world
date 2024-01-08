@@ -1,5 +1,5 @@
-// video01-01-draft-core from collaborative-blog-post-conat
-// * just want to get the core idea working
+// video01-02-draft-edits from collaborative-blog-post-conat
+// * use r1 of video-codes.js that will have some changes
 //-------- ----------
 // SCRIPTS
 //-------- ----------
@@ -14,7 +14,7 @@ VIDEO.scripts = [
    '../../../js/sequences-hooks/r2/sequences-hooks.js',
    '../../../js/object-grid-wrap/r2/object-grid-wrap.js',
    '../js/lines-sphere-circles-r1.js',
-   '../js/video-codes-r0.js'
+   '../js/video-codes-r1.js'
 ];
 //-------- ----------
 // INIT
