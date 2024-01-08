@@ -8,140 +8,6 @@ window.vc = {
 
 
 //-------- ----------
-// threejs-examples-lines-sphere-circles
-// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-examples-lines-sphere-circles/videos/video1.js
-//-------- ----------
-vc.states['examples_lines_sphere_circles_video1'] = {
-    scene: new THREE.Scene(),
-    init : (sm, scene, camera) => {
-        const sud = scene.userData;
-        // opt1 is plain sphere
-        var opt0 = sud.opt0 = { 
-            maxRadius: 30, pointsPerCircle: 40, circleCount: 60, linewidth: 8,
-            colors: [ 0x606060, 0x505050, 0x404040  ]
-        }
-        var g0 = sud.g0 = LinesSphereCircles.create(opt0);
-        g0.position.set(0, 0, 0)
-        scene.add(g0);
-        // opt1 is plain sphere
-        var opt1 = sud.opt1 = { 
-            maxRadius: 4, pointsPerCircle: 20, linewidth: 8,
-            forOpt: function(opt, per, bias, frame, frameMax){
-                var a = per * 10 % 1,
-                b = 1 - Math.abs(0.5 - a) / 0.5;
-                opt.maxRadius = 3 + 1 * b;
-            }
-        }
-        var g1 = sud.g1 = LinesSphereCircles.create(opt1);
-        g1.position.set(-10, -2, 0)
-        scene.add(g1);
-        // seeded random
-        var opt2 = sud.opt2 = { 
-            maxRadius: 8, 
-            forPoint: 'seededRandom', 
-            linewidth: 8}
-        var g2 = sud.g2 = LinesSphereCircles.create(opt2);
-        g2.position.set(-5,-10,-25)
-        scene.add(g2);
-        // seashell
-        var opt3 = sud.opt3 = {
-            circleCount: 20,
-            maxRadius: 4,
-            pointsPerCircle: 30,
-            colors: [0x004444, 0x00ffff],
-            linewidth: 8,
-            forPoint: 'seaShell',
-            forOpt: function(opt, per, bias, frame, frameMax){
-                var a = per * 6 % 1,
-                b = 1 - Math.abs(0.5 - a) / 0.5;
-                opt.minRadius = 1 + 3 * b;
-            }
-        };
-        var g3 = sud.g3 = LinesSphereCircles.create(opt3);
-        scene.add(g3);
-        // g4 is plain sphere but with r1 changes over time
-        var opt4 = sud.opt4 = { 
-            maxRadius: 4, pointsPerCircle: 20, linewidth: 8,
-            forOpt: function(opt, per, bias, frame, frameMax){
-                var a = per * 6 % 1,
-                b = 1 - Math.abs(0.5 - a) / 0.5;
-                opt.r1 = 1 * b;
-            }
-        }
-        var g4 = sud.g4 = LinesSphereCircles.create(opt4);
-        g4.position.set(-10, -2, -10)
-        scene.add(g4);
-    },
-    update: (sm, scene, camera, per, bias) => {
-        const sud = scene.userData;
-const frameMax = 10000;
-const frame = Math.floor(frameMax * per);
-
-        LinesSphereCircles.setByFrame(sud.g1, frame, frameMax, sud.opt1);
-        //LinesSphereCircles.setByFrame(sud.g2, frame, frameMax, sud.opt2);
-        sud.g2.rotation.y = Math.PI * 4 * per;
-        LinesSphereCircles.setByFrame(sud.g3, frame, frameMax, sud.opt3);
-        LinesSphereCircles.setByFrame(sud.g4, frame, frameMax, sud.opt4);
-
-    }
-};
-
-//-------- ----------
-// threejs-examples-lines-sphere-circles
-// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-examples-lines-sphere-circles/videos/video2.js
-//-------- ----------
-vc.states['examples_lines_sphere_circles_video2'] = {
-    scene: new THREE.Scene(),
-    init : (sm, scene, camera) => {
-        const sud = scene.userData;
-        // LINES
-        const opt = {
-            maxRadius: 4,
-            pointsPerCircle: 100,
-            circleCount: 20,
-            linewidth: 15,
-            colors: new Array(20).fill('.').map((e, i, arr) => {
-                const color = new THREE.Color(0, 0, 0);
-                const a1 = i / arr.length;
-                color.g = 1 - a1;
-                color.b = a1;
-                return color.getStyle();
-            }),
-            forPoint: function(v, s, opt){
-                v.x = v.x + -0.25 + 0.5 * Math.random();
-                v.z = v.z + -0.25 + 0.5 * Math.random();
-                return v;
-            }
-        }
-        const g1 = sud.g1 = LinesSphereCircles.create(opt);
-        scene.add(g1);
-        const update = sud.update = function(frame, frameMax){
-            const a1 = frame / frameMax * 2 % 1;
-            const a2 = 1 - Math.abs( 0.5 - a1 * 4 % 1 ) / 0.5;
-            g1.children.forEach( (line, i, arr) => {
-                // rotate
-                const count = Math.floor(i + 1);
-                line.rotation.z = Math.PI * 2 * count * a1;
-                // scale
-                const s = 1 - (i / arr.length * 0.5 * a2);
-                line.scale.set(s, s, s);
-                // material
-                const m = line.material;
-                m.transparent = true;
-                m.opacity = 0.85 - 0.80 * ( i / arr.length);
-            });
-            LinesSphereCircles.setByFrame(g1, frame, frameMax, opt);
-            g1.rotation.y = Math.PI * 2 * a1;
-        };
-    },
-    update: (sm, scene, camera, per, bias) => {
-        const frame = Math.floor(10000 * per);
-        scene.userData.update(frame, 10000);
-    }
-};
-
-
-//-------- ----------
 // threejs-fat-width
 // https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-line-fat-width/videos/video1.js
 //-------- ----------
@@ -240,6 +106,137 @@ vc.states['line-fat-width'] = {
     }
 };
 
+//-------- ----------
+// threejs-examples-lines-sphere-circles
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-examples-lines-sphere-circles/videos/video1.js
+//-------- ----------
+vc.states['examples_lines_sphere_circles_video1'] = {
+    scene: new THREE.Scene(),
+    init : (sm, scene, camera) => {
+        const sud = scene.userData;
+        // opt1 is plain sphere
+        var opt0 = sud.opt0 = { 
+            maxRadius: 30, pointsPerCircle: 40, circleCount: 60, linewidth: 8,
+            colors: [ 0x606060, 0x505050, 0x404040  ]
+        }
+        var g0 = sud.g0 = LinesSphereCircles.create(opt0);
+        g0.position.set(0, 0, 0)
+        scene.add(g0);
+        // opt1 is plain sphere
+        var opt1 = sud.opt1 = { 
+            maxRadius: 4, pointsPerCircle: 20, linewidth: 8,
+            forOpt: function(opt, per, bias, frame, frameMax){
+                var a = per * 10 % 1,
+                b = 1 - Math.abs(0.5 - a) / 0.5;
+                opt.maxRadius = 3 + 1 * b;
+            }
+        }
+        var g1 = sud.g1 = LinesSphereCircles.create(opt1);
+        g1.position.set(-10, -2, 0)
+        scene.add(g1);
+        // seeded random
+        var opt2 = sud.opt2 = { 
+            maxRadius: 8, 
+            forPoint: 'seededRandom', 
+            linewidth: 8}
+        var g2 = sud.g2 = LinesSphereCircles.create(opt2);
+        g2.position.set(-5,-10,-25)
+        scene.add(g2);
+        // seashell
+        var opt3 = sud.opt3 = {
+            circleCount: 20,
+            maxRadius: 4,
+            pointsPerCircle: 30,
+            colors: [0x004444, 0x00ffff],
+            linewidth: 8,
+            forPoint: 'seaShell',
+            forOpt: function(opt, per, bias, frame, frameMax){
+                var a = per * 6 % 1,
+                b = 1 - Math.abs(0.5 - a) / 0.5;
+                opt.minRadius = 1 + 3 * b;
+            }
+        };
+        var g3 = sud.g3 = LinesSphereCircles.create(opt3);
+        scene.add(g3);
+        // g4 is plain sphere but with r1 changes over time
+        var opt4 = sud.opt4 = { 
+            maxRadius: 4, pointsPerCircle: 20, linewidth: 8,
+            forOpt: function(opt, per, bias, frame, frameMax){
+                var a = per * 6 % 1,
+                b = 1 - Math.abs(0.5 - a) / 0.5;
+                opt.r1 = 1 * b;
+            }
+        }
+        var g4 = sud.g4 = LinesSphereCircles.create(opt4);
+        g4.position.set(-10, -2, -10)
+        scene.add(g4);
+    },
+    update: (sm, scene, camera, per, bias) => {
+        const sud = scene.userData;
+        const frameMax = 10000;
+        const frame = Math.floor(frameMax * per);
+        LinesSphereCircles.setByFrame(sud.g1, frame, frameMax, sud.opt1);
+        //LinesSphereCircles.setByFrame(sud.g2, frame, frameMax, sud.opt2);
+        sud.g2.rotation.y = Math.PI * 4 * per;
+        LinesSphereCircles.setByFrame(sud.g3, frame, frameMax, sud.opt3);
+        LinesSphereCircles.setByFrame(sud.g4, frame, frameMax, sud.opt4);
+
+    }
+};
+
+//-------- ----------
+// threejs-examples-lines-sphere-circles
+// https://github.com/dustinpfister/videoground-blog-posts/blob/master/videos/threejs-examples-lines-sphere-circles/videos/video2.js
+//-------- ----------
+vc.states['examples_lines_sphere_circles_video2'] = {
+    scene: new THREE.Scene(),
+    init : (sm, scene, camera) => {
+        const sud = scene.userData;
+        // LINES
+        const opt = {
+            maxRadius: 4,
+            pointsPerCircle: 100,
+            circleCount: 20,
+            linewidth: 15,
+            colors: new Array(20).fill('.').map((e, i, arr) => {
+                const color = new THREE.Color(0, 0, 0);
+                const a1 = i / arr.length;
+                color.g = 1 - a1;
+                color.b = a1;
+                return color.getStyle();
+            }),
+            forPoint: function(v, s, opt){
+                v.x = v.x + -0.25 + 0.5 * Math.random();
+                v.z = v.z + -0.25 + 0.5 * Math.random();
+                return v;
+            }
+        }
+        const g1 = sud.g1 = LinesSphereCircles.create(opt);
+        scene.add(g1);
+        const update = sud.update = function(frame, frameMax){
+            const a1 = frame / frameMax * 2 % 1;
+            const a2 = 1 - Math.abs( 0.5 - a1 * 4 % 1 ) / 0.5;
+            g1.children.forEach( (line, i, arr) => {
+                // rotate
+                const count = Math.floor(i + 1);
+                line.rotation.z = Math.PI * 2 * count * a1;
+                // scale
+                const s = 1 - (i / arr.length * 0.5 * a2);
+                line.scale.set(s, s, s);
+                // material
+                const m = line.material;
+                m.transparent = true;
+                m.opacity = 0.85 - 0.80 * ( i / arr.length);
+            });
+            LinesSphereCircles.setByFrame(g1, frame, frameMax, opt);
+            g1.rotation.y = Math.PI * 2 * a1;
+        };
+    },
+    update: (sm, scene, camera, per, bias) => {
+        const frame = Math.floor(10000 * per);
+        scene.userData.update(frame, 10000);
+    }
+};
 
 //-------- ----------
 // threejs-examples-object-grid-wrap
